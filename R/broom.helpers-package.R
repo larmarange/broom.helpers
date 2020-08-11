@@ -2,3 +2,7 @@
 #' @importFrom lifecycle deprecate_soft
 ## usethis namespace: end
 NULL
+
+#' @importFrom dplyr `%>%`
+#' @export
+dplyr::`%>%`
