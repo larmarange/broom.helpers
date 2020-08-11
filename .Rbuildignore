@@ -1,3 +1,4 @@
 ^broom\.helpers\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$
+^\.travis\.yml$
