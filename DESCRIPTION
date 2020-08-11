@@ -17,3 +17,5 @@ Imports:
     broom,
     dplyr,
     labelled
+Suggests: 
+    testthat
