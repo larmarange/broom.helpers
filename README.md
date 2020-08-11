@@ -1,2 +1,3 @@
-# broom_helpers
-A set of functions to facilitate manipulation of tibbles produced by broom
+# broom.helpers
+
+A set of functions to facilitate manipulation of tibbles produced by `broom`
