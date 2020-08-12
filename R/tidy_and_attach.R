@@ -13,6 +13,7 @@
 #' @param x a tibble of model terms
 #' @param tidy_fun option to specify a custom tidier function
 #' @param ... other arguments passed to `tidy_fun()`
+#' @family tidy_helpers
 #' @examples
 #' mod <- lm(Sepal.Length ~ Sepal.Width + Species, data = iris)
 #' tt <- mod %>%

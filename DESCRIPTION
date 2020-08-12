@@ -17,7 +17,11 @@ Imports:
     broom,
     dplyr,
     labelled,
-    lifecycle
+    lifecycle,
+    stats,
+    purrr,
+    tibble,
+    stringr
 Suggests: 
     testthat
 RdMacros: lifecycle
