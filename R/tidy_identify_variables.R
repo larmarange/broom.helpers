@@ -29,7 +29,13 @@
 tidy_identify_variables <- function(x, model = tidy_get_model(x)) {
   if (is.null(model))
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
-  model_identify_variables(model) %>%
+
+  variables_list <- model_identify_variables(model)
+
+  # clean unconventional variable names
+  x$term <- .clean_backtips(x$term, variables_list$variable)
+
+  variables_list %>%
     dplyr::right_join(x, by = "term") %>%
     dplyr::select(.data$term, dplyr::everything()) %>%
     dplyr::mutate(

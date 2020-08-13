@@ -66,8 +66,12 @@ test_that("tidy_identify_variables() works with variables having non standard na
   res <- mod %>% tidy_and_attach() %>% tidy_identify_variables()
   expect_equivalent(
     res$variable,
-    c(NA, "marker", "`grade of kids`", "`grade of kids`", "marker:`grade of kids`",
-      "marker:`grade of kids`")
+    c(NA, "marker", "grade of kids", "grade of kids", "marker:grade of kids",
+      "marker:grade of kids")
+  )
+  expect_equivalent(
+    res$var_class,
+    c(NA, "numeric", "factor", "factor", NA, NA)
   )
   expect_error(mod %>% tidy_and_attach() %>% tidy_identify_variables(), NA)
 })

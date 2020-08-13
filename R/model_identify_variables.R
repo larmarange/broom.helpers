@@ -38,7 +38,8 @@ model_identify_variables.default <- function(model) {
 
   assign <- attr(model_matrix, "assign")
   assign[assign == 0] <- NA
-  term_labels <- attr(model_terms, "term.labels")
+  variable_names <- attr(model_terms, "term.labels") %>%
+    .clean_backtips()
   dataClasses <- attr(model_terms, "dataClasses")
 
   if (is.null(dataClasses)) {
@@ -46,9 +47,12 @@ model_identify_variables.default <- function(model) {
     dataClasses <- purrr::map(model_frame, stats::.MFclass) %>% unlist()
   }
 
+  coef_list <- colnames(model_matrix) %>%
+    .clean_backtips(variable_names = variable_names)
+
   tibble::tibble(
-    term = colnames(model_matrix),
-    variable = term_labels[assign]
+    term = coef_list,
+    variable = variable_names[assign]
   ) %>%
     .add_var_class(dataClasses) %>%
     .compute_var_type()
@@ -101,4 +105,5 @@ model_identify_variables.lavaan <- function(model) {
       )
   )
 }
+
 
