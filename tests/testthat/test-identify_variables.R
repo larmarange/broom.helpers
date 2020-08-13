@@ -50,7 +50,6 @@ test_that("model_identify_variables() works with different contrasts", {
 test_that("model_identify_variables() works with stats::poly()", {
   mod <- lm(Sepal.Length ~ poly(Sepal.Width, 3) + poly(Petal.Length, 2), iris)
   res <- mod %>% model_identify_variables()
-  res <- mod %>% model_identify_variables()
   expect_equivalent(
     res$variable,
     c(NA, "poly(Sepal.Width, 3)", "poly(Sepal.Width, 3)", "poly(Sepal.Width, 3)",
