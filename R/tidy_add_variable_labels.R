@@ -55,12 +55,22 @@ tidy_add_variable_labels <- function(x,
 
   var_labels <- unique(na.omit(x$variable))
   names(var_labels) <- var_labels
+
+  # check if all elements of labels are in x
+  # show a message otherwise
+  not_found <- setdiff(names(labels), names(var_labels))
+  if (length(not_found) > 0)
+    message(paste0(
+      paste0('"', not_found, '"', collapse = ", "),
+      " have not been found in \"x\"."
+    ))
+
   var_labels <- var_labels %>%
-    .update_vector(unlist(labelled::var_label(model.frame(model)))) %>%
+    .update_vector(unlist(labelled::var_label(model_get_model_frame(model)))) %>%
     .update_vector(labels)
 
   # management of interaction terms
-  interaction_terms <- x$variable[x$var_type == "interaction"]
+  interaction_terms <- x$variable[!is.na(x$var_type) & x$var_type == "interaction"]
   # do not treat those specified in labels
   interaction_terms <- setdiff(interaction_terms, names(labels))
   names(interaction_terms) <- interaction_terms

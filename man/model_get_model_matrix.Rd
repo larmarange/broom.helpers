@@ -28,6 +28,7 @@ with the same structure as \code{\link[stats:model.matrix]{stats::model.matrix.d
 \code{\link[stats:model.matrix]{stats::model.matrix()}}
 
 Other model_helpers: 
+\code{\link{model_get_model_frame}()},
 \code{\link{model_identify_variables}()}
 }
 \concept{model_helpers}

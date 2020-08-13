@@ -47,6 +47,7 @@ iris \%>\%
 \code{\link[=tidy_identify_variables]{tidy_identify_variables()}}
 
 Other model_helpers: 
+\code{\link{model_get_model_frame}()},
 \code{\link{model_get_model_matrix}()}
 }
 \concept{model_helpers}
