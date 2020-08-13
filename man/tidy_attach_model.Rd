@@ -45,6 +45,7 @@ tidy_get_model(tt)
 }
 \seealso{
 Other tidy_helpers: 
+\code{\link{tidy_add_variable_labels}()},
 \code{\link{tidy_identify_variables}()}
 }
 \concept{tidy_helpers}

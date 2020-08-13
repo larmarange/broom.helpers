@@ -1,0 +1,102 @@
+#' Add variable labels
+#'
+#' Will add variable labels in a `var_label` column, based on:
+#' 1. labels provided in `labels` argument if provided;
+#' 2. variable labels defined in the original data frame with
+#'    the `label` attribute (cf. [labelled::var_label()]);
+#' 3. variable name otherwise.
+#'
+#' @details
+#' If the `variable` column is not yet available in `x`,
+#' [tidy_identify_variables()] will be automatically applied.
+#'
+#' It is possible to pass a custom label for an interaction
+#' term in `labels` (see examples).
+#' @param x a tidy tibble
+#' @param labels an optional named list or named vector of
+#' custom variable labels
+#' @param interaction_sep separator for interaction terms
+#' @param model the corresponding model, if not attached to `x`
+#' @export
+#' @family tidy_helpers
+#' @examples
+#' df <- Titanic %>%
+#'   dplyr::as_tibble() %>%
+#'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes"))) %>%
+#'   labelled::set_variable_labels(
+#'     Class = "Passenger's class",
+#'     Sex = "Sex"
+#'   )
+#'
+#' df %>%
+#'   glm(Survived ~ Class * Age * Sex, data = ., weights = .$n, family = binomial) %>%
+#'   tidy_and_attach() %>%
+#'   tidy_add_variable_labels(
+#'     labels = list(Sex = "Gender", "Class:Age" = "Custom label")
+#'   )
+tidy_add_variable_labels <- function(x,
+                                     labels = NULL,
+                                     interaction_sep = " * ",
+                                     model = tidy_get_model(x)
+                                     ) {
+  if (is.null(model))
+    stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
+
+  if (is.list(labels))
+    labels <- unlist(labels)
+
+  if (!"variable" %in% names(x))
+    x <- x %>% tidy_identify_variables(model)
+
+  # if variable is NA, use term
+  variable_is_na <- is.na(x$variable)
+  # temporarily copy term in variable
+  x$variable[variable_is_na] <- x$term[variable_is_na]
+
+  var_labels <- unique(na.omit(x$variable))
+  names(var_labels) <- var_labels
+  var_labels <- var_labels %>%
+    .update_vector(unlist(labelled::var_label(model.frame(model)))) %>%
+    .update_vector(labels)
+
+  # management of interaction terms
+  interaction_terms <- x$variable[x$var_type == "interaction"]
+  # do not treat those specified in labels
+  interaction_terms <- setdiff(interaction_terms, names(labels))
+  names(interaction_terms) <- interaction_terms
+  var_labels <-
+    var_labels %>%
+    .update_vector(
+      strsplit(interaction_terms, ":") %>%
+        lapply(function(x){paste(var_labels[x], collapse = interaction_sep)}) %>%
+        unlist()
+    )
+
+  x %>%
+    dplyr::left_join(
+      tibble::tibble(
+        variable = names(var_labels),
+        var_label = var_labels
+      ),
+      by = "variable"
+    ) %>%
+    # restore missing values in variable
+    dplyr::mutate(variable = dplyr::if_else(variable_is_na, NA_character_, .data$variable)) %>%
+    tidy_attach_model(model)
+}
+
+# update named vectors, y values overriding x values if common name
+.update_vector <- function(x, y) {
+  if (is.null(y))
+    return(x)
+  if (is.null(names(y)) || any(names(y) == ""))
+    stop("All elements of y should be named.")
+  for (i in names(y)) {
+    if (hasName(x, i)) {
+      x[i] <- y[i]
+    } else {
+      x <- c(x, y[i])
+    }
+  }
+  x
+}
