@@ -108,6 +108,19 @@ test_that("tidy_add_variable_labels() works with variables having non standard n
 })
 
 
+test_that("tidy_add_variable_labels() works with stats::poly()", {
+  df <- iris %>% labelled::set_variable_labels(Petal.Length = "Length of petal")
+  mod <- lm(Sepal.Length ~ poly(Sepal.Width, 3) + poly(Petal.Length, 2), df)
+  res <- mod %>% tidy_and_attach() %>%
+    tidy_add_variable_labels(labels = c(Sepal.Width = "Width of sepal"))
+  expect_equivalent(
+    res$var_label,
+    c("(Intercept)", "Width of sepal", "Width of sepal", "Width of sepal",
+      "Petal.Length", "Petal.Length")
+  )
+})
+
+
 test_that("tidy_add_variable_labels() works with lme4::lmer", {
   mod <- lme4::lmer(Reaction ~ Days + (Days | Subject), lme4::sleepstudy)
   expect_error(mod %>% tidy_and_attach(tidy_fun = broom.mixed::tidy) %>% tidy_add_variable_labels(), NA)
