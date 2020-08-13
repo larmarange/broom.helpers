@@ -46,6 +46,7 @@ tidy_get_model(tt)
 \seealso{
 Other tidy_helpers: 
 \code{\link{tidy_add_contrasts}()},
+\code{\link{tidy_add_reference_rows}()},
 \code{\link{tidy_add_variable_labels}()},
 \code{\link{tidy_identify_variables}()}
 }

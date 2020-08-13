@@ -41,6 +41,7 @@ tidy_identify_variables()
 
 Other tidy_helpers: 
 \code{\link{tidy_add_contrasts}()},
+\code{\link{tidy_add_reference_rows}()},
 \code{\link{tidy_add_variable_labels}()},
 \code{\link{tidy_attach_model}()}
 }
