@@ -28,6 +28,11 @@ tidy_add_reference_rows <- function(x, model = tidy_get_model(x)) {
   if (is.null(model))
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
 
+  if ("reference_row" %in% names(x)) {
+    warning("tidy_add_reference_rows() has already been applied. x has been returned unchanged.")
+    return(x)
+  }
+
   if (!"contrasts" %in% names(x))
     x <- x %>% tidy_add_contrasts(model)
 

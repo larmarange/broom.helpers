@@ -30,6 +30,12 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x)) {
   if (is.null(model))
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
 
+  if ("variable" %in% names(x)) {
+    warning("tidy_identify_variables() has already been applied. x has been returned unchanged.")
+    return(x)
+  }
+
+
   variables_list <- model_identify_variables(model)
 
   # clean unconventional variable names
