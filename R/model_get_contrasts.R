@@ -17,7 +17,7 @@ model_get_contrasts.default <- function(model) {
 #' @export
 #' @rdname model_get_contrasts
 model_get_contrasts.lmerMod <- function(model) {
-  attr(model.matrix(model), "contrasts")
+  attr(stats::model.matrix(model), "contrasts")
 }
 
 

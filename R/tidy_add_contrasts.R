@@ -45,15 +45,15 @@ tidy_add_contrasts <- function(x, model = tidy_get_model(x)) {
 
       if (is.character(model_contrasts[[i]]) & length(is.character(model_contrasts[[i]]) == 1))
         contrasts_list$contrasts[[i]] <- model_contrasts[[i]]
-      else if (all(model_contrasts[[i]] == contr.treatment(n_levels)))
+      else if (all(model_contrasts[[i]] == stats::contr.treatment(n_levels)))
         contrasts_list$contrasts[[i]] <- "contr.treatment"
-      else if (all(model_contrasts[[i]] == contr.sum(n_levels)))
+      else if (all(model_contrasts[[i]] == stats::contr.sum(n_levels)))
         contrasts_list$contrasts[[i]] <- "contr.sum"
-      else if (all(model_contrasts[[i]] == contr.helmert(n_levels)))
+      else if (all(model_contrasts[[i]] == stats::contr.helmert(n_levels)))
         contrasts_list$contrasts[[i]] <- "contr.helmert"
-      else if (all(model_contrasts[[i]] == contr.poly(n_levels)))
+      else if (all(model_contrasts[[i]] == stats::contr.poly(n_levels)))
         contrasts_list$contrasts[[i]] <- "contr.poly"
-      else if (all(model_contrasts[[i]] == contr.SAS(n_levels)))
+      else if (all(model_contrasts[[i]] == stats::contr.SAS(n_levels)))
         contrasts_list$contrasts[[i]] <- "contr.SAS"
       else
         contrasts_list$contrasts[[i]] <- "custom"

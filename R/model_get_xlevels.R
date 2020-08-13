@@ -17,7 +17,7 @@ model_get_xlevels.default <- function(model) {
 #' @export
 #' @rdname model_get_xlevels
 model_get_xlevels.lmerMod <- function(model) {
-  xlevels <- model.frame(model) %>% lapply(levels)
+  xlevels <- stats::model.frame(model) %>% lapply(levels)
   selection <- ! (xlevels %>% lapply(is.null) %>% unlist())
   xlevels[selection] # keep only not null
 }
