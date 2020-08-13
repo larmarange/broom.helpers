@@ -54,7 +54,30 @@ model_identify_variables.default <- function(model) {
     .compute_var_type()
 }
 
-## model_identify_variables() helpers
+
+#' @rdname model_identify_variables
+#' @export
+model_identify_variables.lavaan <- function(model) {
+  tibble::tibble(
+    term = paste(model@ParTable$lhs, model@ParTable$op, model@ParTable$rhs),
+    variable = model@ParTable$lhs
+  ) %>%
+    dplyr::left_join(
+      tibble::tibble(
+        variable = model@Data@ov$name,
+        var_class = model@Data@ov$type
+      ),
+      by = "variable"
+    ) %>%
+    dplyr::mutate(
+      var_class = dplyr::if_else(.data$var_class == "ordered", "factor", .data$var_class)
+    ) %>%
+    .compute_var_type()
+}
+
+
+
+## model_identify_variables() helpers --------------------------
 
 .add_var_class <- function(x, dataClasses) {
   x %>%
@@ -78,3 +101,4 @@ model_identify_variables.default <- function(model) {
       )
   )
 }
+

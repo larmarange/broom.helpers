@@ -34,5 +34,7 @@ Suggests:
     MASS,
     geepack,
     gee,
-    datasets
+    datasets,
+    gam,
+    lavaan
 RdMacros: lifecycle

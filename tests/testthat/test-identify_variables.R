@@ -189,3 +189,44 @@ test_that("model_identify_variables() works with geepack::geeglm", {
 })
 
 
+test_that("model_identify_variables() works with gam::gam", {
+  data(kyphosis, package = "gam")
+  mod <- gam::gam(Kyphosis ~ gam::s(Age,4) + Number, family = binomial, data = kyphosis)
+  res <- mod %>% model_identify_variables()
+  expect_equivalent(
+    res$variable,
+    c(NA, "gam::s(Age, 4)", "Number")
+  )
+  expect_error(mod %>% tidy_and_attach() %>% tidy_identify_variables(), NA)
+
+  mod <- suppressWarnings(gam::gam(
+    Ozone^(1/3) ~ gam::lo(Solar.R) + gam::lo(Wind, Temp),
+    data = datasets::airquality, na = gam::na.gam.replace
+  ))
+  res <- mod %>% model_identify_variables()
+  expect_equivalent(
+    res$variable,
+    c(NA, "gam::lo(Solar.R)", "gam::lo(Wind, Temp)", "gam::lo(Wind, Temp)")
+  )
+  expect_error(mod %>% tidy_and_attach() %>% tidy_identify_variables(), NA)
+})
+
+
+test_that("model_identify_variables() works with lavaan::lavaan", {
+  df <- lavaan::HolzingerSwineford1939
+  df$grade <- factor(df$grade, ordered = TRUE)
+  HS.model <- 'visual  =~ x1 + x2 + x3
+               textual =~ x4 + x5 + x6 + grade
+               speed   =~ x7 + x8 + x9 '
+  mod <- lavaan::lavaan(HS.model, data = df,
+                        auto.var = TRUE, auto.fix.first = TRUE,
+                        auto.cov.lv.x = TRUE)
+  res <- mod %>% model_identify_variables()
+  expect_equivalent(
+    res$variable,
+    mod@ParTable$lhs
+  )
+  expect_error(mod %>% tidy_and_attach() %>% tidy_identify_variables(), NA)
+})
+
+
