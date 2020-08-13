@@ -181,7 +181,9 @@ test_that("model_identify_variables() works with geepack::geeglm", {
   df <- geepack::dietox
   df$Cu     <- as.factor(df$Cu)
   mf <- formula(Weight ~ Cu * Time)
-  mod <- geepack::geeglm(mf, data = df, id = Pig, family = poisson("identity"), corstr = "ar1")
+  suppressWarnings(
+    mod <- geepack::geeglm(mf, data = df, id = Pig, family = poisson("identity"), corstr = "ar1")
+  )
 
   res <- mod %>% model_identify_variables()
   expect_equivalent(
