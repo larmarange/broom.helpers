@@ -1,6 +1,6 @@
 #' Add contrasts type for categorical variables
 #'
-#' Add a `contrasts` column corcontrasts_listponding to the type of contrasts
+#' Add a `contrasts` column corresponding to the type of contrasts
 #'
 #' @details
 #' If the `variable` column is not yet available in `x`,
