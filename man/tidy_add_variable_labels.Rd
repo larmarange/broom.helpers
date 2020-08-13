@@ -55,6 +55,7 @@ df \%>\%
 }
 \seealso{
 Other tidy_helpers: 
+\code{\link{tidy_add_contrasts}()},
 \code{\link{tidy_attach_model}()},
 \code{\link{tidy_identify_variables}()}
 }

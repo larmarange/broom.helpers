@@ -40,6 +40,7 @@ tidy_identify_variables()
 \code{\link[=model_identify_variables]{model_identify_variables()}}
 
 Other tidy_helpers: 
+\code{\link{tidy_add_contrasts}()},
 \code{\link{tidy_add_variable_labels}()},
 \code{\link{tidy_attach_model}()}
 }

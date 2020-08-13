@@ -26,7 +26,9 @@ to compute model frame from \code{model}.
 \code{\link[stats:model.frame]{stats::model.frame()}}
 
 Other model_helpers: 
+\code{\link{model_get_contrasts}()},
 \code{\link{model_get_model_matrix}()},
+\code{\link{model_get_xlevels}()},
 \code{\link{model_identify_variables}()}
 }
 \concept{model_helpers}
