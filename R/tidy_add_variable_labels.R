@@ -53,7 +53,7 @@ tidy_add_variable_labels <- function(x,
   # temporarily copy term in variable
   x$variable[variable_is_na] <- x$term[variable_is_na]
 
-  var_labels <- unique(na.omit(x$variable))
+  var_labels <- unique(stats::na.omit(x$variable))
   names(var_labels) <- var_labels
 
   # check if all elements of labels are in x
@@ -95,18 +95,4 @@ tidy_add_variable_labels <- function(x,
     tidy_attach_model(model)
 }
 
-# update named vectors, y values overriding x values if common name
-.update_vector <- function(x, y) {
-  if (is.null(y))
-    return(x)
-  if (is.null(names(y)) || any(names(y) == ""))
-    stop("All elements of y should be named.")
-  for (i in names(y)) {
-    if (hasName(x, i)) {
-      x[i] <- y[i]
-    } else {
-      x <- c(x, y[i])
-    }
-  }
-  x
-}
+
