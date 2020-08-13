@@ -26,7 +26,7 @@ dplyr::`%>%`
   if (is.null(names(y)) || any(names(y) == ""))
     stop("All elements of y should be named.")
   for (i in names(y)) {
-    if (stats::hasName(x, i)) {
+    if (utils::hasName(x, i)) {
       x[i] <- y[i]
     } else {
       x <- c(x, y[i])
