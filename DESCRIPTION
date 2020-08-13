@@ -23,5 +23,16 @@ Imports:
     tibble,
     stringr
 Suggests: 
-    testthat
+    testthat,
+    gtsummary,
+    lme4,
+    broom.mixed,
+    survival,
+    nnet,
+    ordinal,
+    survey,
+    MASS,
+    geepack,
+    gee,
+    datasets
 RdMacros: lifecycle

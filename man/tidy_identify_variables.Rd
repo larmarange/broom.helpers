@@ -2,7 +2,7 @@
 % Please edit documentation in R/tidy_identify_variables.R
 \name{tidy_identify_variables}
 \alias{tidy_identify_variables}
-\title{Identify the variable corresponding to each model term}
+\title{Identify the variable corresponding to each model coefficient}
 \usage{
 tidy_identify_variables(x, model = tidy_get_model(x))
 }
