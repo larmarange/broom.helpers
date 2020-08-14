@@ -51,6 +51,25 @@ test_that("tidy_add_reference_rows() works with different values of base in cont
   )
 })
 
+test_that("tidy_add_reference_rows() use var_label if available", {
+  mod <- glm(
+    response ~ stage + grade * trt,
+    gtsummary::trial,
+    family = binomial
+  )
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_add_variable_labels() %>%
+    tidy_add_reference_rows()
+
+  expect_equivalent(
+    res$var_label,
+    c("(Intercept)", "T Stage", "T Stage", "T Stage", "T Stage",
+      "Grade", "Grade", "Grade", "Chemotherapy Treatment", "Chemotherapy Treatment",
+      "Grade * Chemotherapy Treatment", "Grade * Chemotherapy Treatment")
+  )
+})
+
 test_that("tidy_add_reference_rows() works with nnet::multinom", {
   mod <- nnet::multinom(grade ~ stage + marker + age, data = gtsummary::trial, trace = FALSE)
   res <- mod %>% tidy_and_attach() %>% tidy_add_reference_rows()

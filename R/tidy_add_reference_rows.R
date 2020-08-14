@@ -58,6 +58,10 @@ tidy_add_reference_rows <- function(x, model = tidy_get_model(x)) {
   if (!"contrasts" %in% names(x))
     x <- x %>% tidy_add_contrasts()
 
+  has_var_label <- "var_label" %in% names(x)
+  if (!has_var_label)
+    x$var_label <- NA_character_ # temporary populate it
+
   x <- x %>%
     dplyr::mutate(
       reference_row = dplyr::if_else(
@@ -83,6 +87,7 @@ tidy_add_reference_rows <- function(x, model = tidy_get_model(x)) {
         dplyr::summarise(
           var_class = dplyr::first(.data$var_class),
           var_type = dplyr::first(.data$var_type),
+          var_label = dplyr::last(.data$var_label),
           contrasts = dplyr::first(.data$contrasts),
           rank = min(.data$rank) - .25,
           .groups = "drop_last"
@@ -108,6 +113,7 @@ tidy_add_reference_rows <- function(x, model = tidy_get_model(x)) {
         dplyr::summarise(
           var_class = dplyr::last(.data$var_class),
           var_type = dplyr::last(.data$var_type),
+          var_label = dplyr::last(.data$var_label),
           contrasts = dplyr::last(.data$contrasts),
           rank = max(.data$rank) + .25,
           .groups = "drop_last"
@@ -129,6 +135,7 @@ tidy_add_reference_rows <- function(x, model = tidy_get_model(x)) {
         dplyr::summarise(
           var_class = dplyr::first(.data$var_class),
           var_type = dplyr::first(.data$var_type),
+          var_label = dplyr::last(.data$var_label),
           contrasts = dplyr::first(.data$contrasts),
           rank = min(.data$rank) - .25,
           .groups = "drop_last"
@@ -154,6 +161,7 @@ tidy_add_reference_rows <- function(x, model = tidy_get_model(x)) {
         dplyr::summarise(
           var_class = dplyr::last(.data$var_class),
           var_type = dplyr::last(.data$var_type),
+          var_label = dplyr::last(.data$var_label),
           contrasts = dplyr::last(.data$contrasts),
           rank = max(.data$rank) + .25,
           .groups = "drop_last"
@@ -166,6 +174,9 @@ tidy_add_reference_rows <- function(x, model = tidy_get_model(x)) {
         dplyr::bind_rows(ref_rows_after)
     }
   }
+
+  if (!has_var_label)
+    x <- x %>% dplyr::select(-.data$var_label)
 
   x %>%
     dplyr::arrange(.data$rank) %>%
