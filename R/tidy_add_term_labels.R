@@ -42,6 +42,7 @@ tidy_add_term_labels <- function(x,
                                      ) {
   if (is.null(model))
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
+  x <- x %>% tidy_attach_model(model) # in case not already attached
 
   if ("label" %in% names(x))
     x <- x %>% dplyr::select(-.data$label)
@@ -50,15 +51,15 @@ tidy_add_term_labels <- function(x,
     labels <- unlist(labels)
 
   if (!"var_label" %in% names(x))
-    x <- x %>% tidy_add_variable_labels(model = model)
+    x <- x %>% tidy_add_variable_labels()
   if (!"contrasts" %in% names(x))
-    x <- x %>% tidy_add_contrasts(model = model)
+    x <- x %>% tidy_add_contrasts()
 
   # reference rows required for naming correctly categorical variables
   # will be removed eventually at the end
   with_reference_rows <- "reference_row" %in% names(x)
   if (!with_reference_rows)
-    x <- x %>% tidy_add_reference_rows(model = model)
+    x <- x %>% tidy_add_reference_rows()
 
   # start with term names
   term_labels <- unique(stats::na.omit(x$term))
@@ -135,8 +136,7 @@ tidy_add_term_labels <- function(x,
       dplyr::filter(is.na(.data$reference_row) | !.data$reference_row) %>%
       dplyr::select(-.data$reference_row)
 
-  x %>%
-    tidy_attach_model(model)
+  x
 }
 
 
