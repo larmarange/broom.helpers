@@ -10,7 +10,9 @@ tidy_plus_plus(
   conf.int = TRUE,
   variable_labels = NULL,
   term_labels = NULL,
+  intercept = FALSE,
   add_reference_rows = TRUE,
+  keep_model = FALSE,
   ...
 )
 }
@@ -25,7 +27,11 @@ tidy_plus_plus(
 
 \item{term_labels}{a named list or a named vector of custom term labels}
 
+\item{intercept}{should the intercept(s) be included?}
+
 \item{add_reference_rows}{should reference rows be added?}
+
+\item{keep_model}{should the model be kept as an attribute of the final result?}
 
 \item{...}{other arguments passed to \code{tidy_fun()}}
 }
@@ -38,6 +44,7 @@ This function will apply sequentially:
 \item \code{\link[=tidy_add_reference_rows]{tidy_add_reference_rows()}}
 \item \code{\link[=tidy_add_variable_labels]{tidy_add_variable_labels()}}
 \item \code{\link[=tidy_add_term_labels]{tidy_add_term_labels()}}
+\item \code{\link[=tidy_remove_intercept]{tidy_remove_intercept()}}
 \item \code{\link[=tidy_detach_model]{tidy_detach_model()}}
 }
 }
@@ -83,6 +90,7 @@ Other tidy_helpers:
 \code{\link{tidy_add_term_labels}()},
 \code{\link{tidy_add_variable_labels}()},
 \code{\link{tidy_attach_model}()},
-\code{\link{tidy_identify_variables}()}
+\code{\link{tidy_identify_variables}()},
+\code{\link{tidy_remove_intercept}()}
 }
 \concept{tidy_helpers}

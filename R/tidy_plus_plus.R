@@ -7,6 +7,7 @@
 #' * [tidy_add_reference_rows()]
 #' * [tidy_add_variable_labels()]
 #' * [tidy_add_term_labels()]
+#' * [tidy_remove_intercept()]
 #' * [tidy_detach_model()]
 #'
 #' @param model a model to be attached/tidied
@@ -15,6 +16,8 @@
 #' @param variable_labels a named list or a named vector of custom variable labels
 #' @param term_labels a named list or a named vector of custom term labels
 #' @param add_reference_rows should reference rows be added?
+#' @param intercept should the intercept(s) be included?
+#' @param keep_model should the model be kept as an attribute of the final result?
 #' @param ... other arguments passed to `tidy_fun()`
 #' @family tidy_helpers
 #' @examples
@@ -58,7 +61,9 @@ tidy_plus_plus <- function(
   conf.int = TRUE,
   variable_labels = NULL,
   term_labels = NULL,
+  intercept = FALSE,
   add_reference_rows = TRUE,
+  keep_model = FALSE,
   ...
 ) {
   res <- model %>%
@@ -69,7 +74,10 @@ tidy_plus_plus <- function(
     res <- res %>% tidy_add_reference_rows()
   res <- res %>%
     tidy_add_variable_labels(labels = variable_labels) %>%
-    tidy_add_term_labels(labels = term_labels) %>%
-    tidy_detach_model()
+    tidy_add_term_labels(labels = term_labels)
+  if(!intercept)
+    res <- res %>% tidy_remove_intercept()
+  if (!keep_model)
+    res <- res %>% tidy_detach_model()
   res
 }
