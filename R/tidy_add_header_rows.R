@@ -78,7 +78,7 @@ tidy_add_header_rows <- function(x, show_single_row = NULL, model = tidy_get_mod
     variables_to_simplify <- xx %>%
       dplyr::filter(.data$variable %in% show_single_row) %>%
       dplyr::count(.data$variable) %>%
-      dplyr::filter(n == 2) %>%
+      dplyr::filter(.data$n == 2) %>%
       `[[`("variable")
     if (length(variables_to_simplify) > 0) {
       x <- x %>%
