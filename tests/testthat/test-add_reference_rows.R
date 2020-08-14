@@ -50,3 +50,13 @@ test_that("tidy_add_reference_rows() works with different values of base in cont
       NA, NA)
   )
 })
+
+test_that("tidy_add_reference_rows() works with nnet::multinom", {
+  mod <- nnet::multinom(grade ~ stage + marker + age, data = gtsummary::trial, trace = FALSE)
+  res <- mod %>% tidy_and_attach() %>% tidy_add_reference_rows()
+  expect_equivalent(
+    res$reference_row,
+    c(NA, TRUE, FALSE, FALSE, FALSE, NA, NA, NA, TRUE, FALSE, FALSE,
+      FALSE, NA, NA)
+  )
+})
