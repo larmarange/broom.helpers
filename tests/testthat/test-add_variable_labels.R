@@ -138,6 +138,19 @@ test_that("tidy_add_variable_labels() works with survival::coxph", {
   df <- survival::lung %>% dplyr::mutate(sex = factor(sex))
   mod <- survival::coxph(survival::Surv(time, status) ~ ph.ecog + age + sex, data = df)
   expect_error(mod %>% tidy_and_attach() %>% tidy_add_variable_labels(), NA)
+
+
+  # check that label attribute in original dataset is preserved
+  mod <- survival::coxph(survival::Surv(ttdeath, death) ~ grade, gtsummary::trial)
+    res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_identify_variables() %>%
+    tidy_add_reference_rows() %>%
+    tidy_add_variable_labels()
+  expect_equivalent(
+    res$var_label,
+    c("Grade", "Grade", "Grade")
+  )
 })
 
 test_that("tidy_add_variable_labels() works with survival::survreg", {

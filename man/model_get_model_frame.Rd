@@ -3,12 +3,15 @@
 \name{model_get_model_frame}
 \alias{model_get_model_frame}
 \alias{model_get_model_frame.default}
+\alias{model_get_model_frame.coxph}
 \alias{model_get_model_frame.lavaan}
 \title{Get the model frame of a model}
 \usage{
 model_get_model_frame(model)
 
 \method{model_get_model_frame}{default}(model)
+
+\method{model_get_model_frame}{coxph}(model)
 
 \method{model_get_model_frame}{lavaan}(model)
 }
