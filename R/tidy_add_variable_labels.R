@@ -79,13 +79,12 @@ tidy_add_variable_labels <- function(x,
   # do not treat those specified in labels
   interaction_terms <- setdiff(interaction_terms, names(labels))
   names(interaction_terms) <- interaction_terms
-  var_labels <-
-    var_labels %>%
-    .update_vector(
-      strsplit(interaction_terms, ":") %>%
-        lapply(function(x){paste(var_labels[x], collapse = interaction_sep)}) %>%
-        unlist()
-    )
+  # compute labels for interaction terms
+  interaction_terms <- interaction_terms %>%
+    strsplit(":") %>%
+    lapply(function(x){paste(var_labels[x], collapse = interaction_sep)}) %>%
+    unlist()
+  var_labels <- var_labels %>% .update_vector(interaction_terms)
 
   x %>%
     dplyr::left_join(
