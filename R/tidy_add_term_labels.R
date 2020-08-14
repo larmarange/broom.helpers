@@ -1,6 +1,6 @@
 #' Add term labels
 #'
-#' Will add term labels in a `var_label` column, based on:
+#' Will add term labels in a `label` column, based on:
 #' 1. labels provided in `labels` argument if provided;
 #' 2. factor levels for categorical variables coded with
 #'    treatment, SAS or sum contrasts;
@@ -43,6 +43,9 @@ tidy_add_term_labels <- function(x,
   if (is.null(model))
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
   x <- x %>% tidy_attach_model(model) # in case not already attached
+
+  if ("header_row" %in% names(x))
+    stop("`tidy_add_term_labels()` cannot be applied after `tidy_add_header_rows().`")
 
   if ("label" %in% names(x))
     x <- x %>% dplyr::select(-.data$label)

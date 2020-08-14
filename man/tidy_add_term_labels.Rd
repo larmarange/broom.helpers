@@ -22,7 +22,7 @@ custom term labels}
 \item{model}{the corresponding model, if not attached to \code{x}}
 }
 \description{
-Will add term labels in a \code{var_label} column, based on:
+Will add term labels in a \code{label} column, based on:
 \enumerate{
 \item labels provided in \code{labels} argument if provided;
 \item factor levels for categorical variables coded with
@@ -57,6 +57,7 @@ df \%>\%
 \seealso{
 Other tidy_helpers: 
 \code{\link{tidy_add_contrasts}()},
+\code{\link{tidy_add_header_rows}()},
 \code{\link{tidy_add_reference_rows}()},
 \code{\link{tidy_add_variable_labels}()},
 \code{\link{tidy_attach_model}()},

@@ -7,6 +7,7 @@
 #' * [tidy_add_reference_rows()]
 #' * [tidy_add_variable_labels()]
 #' * [tidy_add_term_labels()]
+#' * [tidy_add_header_rows()]
 #' * [tidy_remove_intercept()]
 #' * [tidy_detach_model()]
 #'
@@ -16,6 +17,10 @@
 #' @param variable_labels a named list or a named vector of custom variable labels
 #' @param term_labels a named list or a named vector of custom term labels
 #' @param add_reference_rows should reference rows be added?
+#' @param add_header_rows should header rows be added?
+#' @param show_single_row a vector indicating the names of binary
+#' variables that should be displayed on a single row, when
+#' `add_header_rows` is `TRUE`
 #' @param intercept should the intercept(s) be included?
 #' @param keep_model should the model be kept as an attribute of the final result?
 #' @param ... other arguments passed to `tidy_fun()`
@@ -40,7 +45,7 @@
 #'   data = df, weights = df$n,
 #'   family = binomial
 #' ) %>%
-#'   tidy_plus_plus()
+#'   tidy_plus_plus(exponentiate = TRUE)
 #' ex2
 #'
 #' if(requireNamespace("gtsummary")) {
@@ -51,7 +56,14 @@
 #'     contrasts = list(stage = contr.treatment(4, base = 3),
 #'                      grade = contr.sum)
 #'   ) %>%
-#'     tidy_plus_plus(variable_labels = c(age = "Age (in years)"))
+#'     tidy_plus_plus(
+#'       exponentiate = TRUE,
+#'       variable_labels = c(age = "Age (in years)"),
+#'       add_header_rows = TRUE,
+#'       show_single_row = "trt",
+#'       term_labels = c("poly(age, 3)3" = "Cubic age"),
+#'       keep_model = TRUE
+#'     )
 #'   ex3
 #' }
 #' @export
@@ -61,8 +73,10 @@ tidy_plus_plus <- function(
   conf.int = TRUE,
   variable_labels = NULL,
   term_labels = NULL,
-  intercept = FALSE,
   add_reference_rows = TRUE,
+  add_header_rows = FALSE,
+  show_single_row = NULL,
+  intercept = FALSE,
   keep_model = FALSE,
   ...
 ) {
@@ -75,6 +89,9 @@ tidy_plus_plus <- function(
   res <- res %>%
     tidy_add_variable_labels(labels = variable_labels) %>%
     tidy_add_term_labels(labels = term_labels)
+  if (add_header_rows)
+    res <- res %>%
+      tidy_add_header_rows(show_single_row = show_single_row)
   if(!intercept)
     res <- res %>% tidy_remove_intercept()
   if (!keep_model)

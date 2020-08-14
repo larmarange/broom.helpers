@@ -43,6 +43,9 @@ tidy_add_variable_labels <- function(x,
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
   x <- x %>% tidy_attach_model(model) # in case not already attached
 
+  if ("header_row" %in% names(x))
+    stop("`tidy_add_variable_labels()` cannot be applied after `tidy_add_header_rows().`")
+
   if ("var_label" %in% names(x))
     x <- x %>% dplyr::select(-.data$var_label)
 

@@ -10,8 +10,10 @@ tidy_plus_plus(
   conf.int = TRUE,
   variable_labels = NULL,
   term_labels = NULL,
-  intercept = FALSE,
   add_reference_rows = TRUE,
+  add_header_rows = FALSE,
+  show_single_row = NULL,
+  intercept = FALSE,
   keep_model = FALSE,
   ...
 )
@@ -27,9 +29,15 @@ tidy_plus_plus(
 
 \item{term_labels}{a named list or a named vector of custom term labels}
 
-\item{intercept}{should the intercept(s) be included?}
-
 \item{add_reference_rows}{should reference rows be added?}
+
+\item{add_header_rows}{should header rows be added?}
+
+\item{show_single_row}{a vector indicating the names of binary
+variables that should be displayed on a single row, when
+\code{add_header_rows} is \code{TRUE}}
+
+\item{intercept}{should the intercept(s) be included?}
 
 \item{keep_model}{should the model be kept as an attribute of the final result?}
 
@@ -44,6 +52,7 @@ This function will apply sequentially:
 \item \code{\link[=tidy_add_reference_rows]{tidy_add_reference_rows()}}
 \item \code{\link[=tidy_add_variable_labels]{tidy_add_variable_labels()}}
 \item \code{\link[=tidy_add_term_labels]{tidy_add_term_labels()}}
+\item \code{\link[=tidy_add_header_rows]{tidy_add_header_rows()}}
 \item \code{\link[=tidy_remove_intercept]{tidy_remove_intercept()}}
 \item \code{\link[=tidy_detach_model]{tidy_detach_model()}}
 }
@@ -68,7 +77,7 @@ ex2 <- glm(
   data = df, weights = df$n,
   family = binomial
 ) \%>\%
-  tidy_plus_plus()
+  tidy_plus_plus(exponentiate = TRUE)
 ex2
 
 if(requireNamespace("gtsummary")) {
@@ -79,13 +88,21 @@ if(requireNamespace("gtsummary")) {
     contrasts = list(stage = contr.treatment(4, base = 3),
                      grade = contr.sum)
   ) \%>\%
-    tidy_plus_plus(variable_labels = c(age = "Age (in years)"))
+    tidy_plus_plus(
+      exponentiate = TRUE,
+      variable_labels = c(age = "Age (in years)"),
+      add_header_rows = TRUE,
+      show_single_row = "trt",
+      term_labels = c("poly(age, 3)3" = "Cubic age"),
+      keep_model = TRUE
+    )
   ex3
 }
 }
 \seealso{
 Other tidy_helpers: 
 \code{\link{tidy_add_contrasts}()},
+\code{\link{tidy_add_header_rows}()},
 \code{\link{tidy_add_reference_rows}()},
 \code{\link{tidy_add_term_labels}()},
 \code{\link{tidy_add_variable_labels}()},

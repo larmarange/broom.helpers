@@ -19,6 +19,11 @@ or a sum contrast (\code{\link[stats:contrast]{stats::contr.sum()}}), add a refe
 \details{
 If the \code{contrasts} column is not yet available in \code{x},
 \code{\link[=tidy_add_contrasts]{tidy_add_contrasts()}} will be automatically applied.
+
+\code{tidy_add_reference_rows()} will not populate the label
+of the reference term. It is therefore better to apply
+\code{\link[=tidy_add_term_labels]{tidy_add_term_labels()}} after \code{tidy_add_reference_rows()}
+rather than before.
 }
 \examples{
 df <- Titanic \%>\%
@@ -50,6 +55,7 @@ if(requireNamespace("gtsummary")) {
 \seealso{
 Other tidy_helpers: 
 \code{\link{tidy_add_contrasts}()},
+\code{\link{tidy_add_header_rows}()},
 \code{\link{tidy_add_term_labels}()},
 \code{\link{tidy_add_variable_labels}()},
 \code{\link{tidy_attach_model}()},

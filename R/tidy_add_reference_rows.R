@@ -7,6 +7,11 @@
 #' @details
 #' If the `contrasts` column is not yet available in `x`,
 #' [tidy_add_contrasts()] will be automatically applied.
+#'
+#' `tidy_add_reference_rows()` will not populate the label
+#' of the reference term. It is therefore better to apply
+#' [tidy_add_term_labels()] after `tidy_add_reference_rows()`
+#' rather than before.
 #' @param x a tidy tibble
 #' @param model the corresponding model, if not attached to `x`
 #' @export
@@ -41,6 +46,9 @@ tidy_add_reference_rows <- function(x, model = tidy_get_model(x)) {
   if (is.null(model))
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
   x <- x %>% tidy_attach_model(model) # in case not already attached
+
+  if ("header_row" %in% names(x))
+    stop("`tidy_add_reference_rows()` cannot be applied after `tidy_add_header_rows().`")
 
   if ("reference_row" %in% names(x)) {
     warning("tidy_add_reference_rows() has already been applied. x has been returned unchanged.")
