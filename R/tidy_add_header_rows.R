@@ -101,7 +101,6 @@ tidy_add_header_rows <- function(x, show_single_row = NULL, model = tidy_get_mod
 
   x <- x %>%
     dplyr::mutate(
-      header_row = FALSE,
       rank = 1:dplyr::n() # for sorting table at the end
     )
 
@@ -120,8 +119,6 @@ tidy_add_header_rows <- function(x, show_single_row = NULL, model = tidy_get_mod
       dplyr::filter(.data$var_nrow >= 2) %>%
       dplyr::select(-.data$var_nrow) %>%
       dplyr::mutate(header_row = TRUE)
-    x <- x %>%
-      dplyr::bind_rows(header_rows)
   } else {
     header_rows <- x %>%
       dplyr::filter(!is.na(.data$variable)) %>%
@@ -140,11 +137,13 @@ tidy_add_header_rows <- function(x, show_single_row = NULL, model = tidy_get_mod
         header_row = TRUE,
         label = .data$var_label
       )
-    x <- x %>%
-      dplyr::bind_rows(header_rows)
   }
 
   x %>%
+    dplyr::mutate(
+      header_row = dplyr::if_else(.data$variable %in% header_rows$variable, FALSE, NA)
+    ) %>%
+    dplyr::bind_rows(header_rows) %>%
     dplyr::arrange(.data$rank) %>%
     dplyr::select(-.data$rank)
 }
