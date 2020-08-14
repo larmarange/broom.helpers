@@ -42,10 +42,8 @@ tidy_add_variable_labels <- function(x,
   if (is.null(model))
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
 
-  if ("var_label" %in% names(x)) {
-    warning("tidy_add_variable_labels() has already been applied. x has been returned unchanged.")
-    return(x)
-  }
+  if ("var_label" %in% names(x))
+    x <- x %>% dplyr::select(-.data$var_label)
 
   if (is.list(labels))
     labels <- unlist(labels)
