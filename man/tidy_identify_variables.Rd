@@ -44,6 +44,7 @@ Other tidy_helpers:
 \code{\link{tidy_add_reference_rows}()},
 \code{\link{tidy_add_term_labels}()},
 \code{\link{tidy_add_variable_labels}()},
-\code{\link{tidy_attach_model}()}
+\code{\link{tidy_attach_model}()},
+\code{\link{tidy_plus_plus}()}
 }
 \concept{tidy_helpers}
