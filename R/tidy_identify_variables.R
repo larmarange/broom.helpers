@@ -29,7 +29,6 @@
 tidy_identify_variables <- function(x, model = tidy_get_model(x)) {
   if (is.null(model))
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
-  x <- x %>% tidy_attach_model(model) # in case not already attached
 
   if ("variable" %in% names(x))
     x <- dplyr::select(-.data$variable, -.data$var_class, -.data$var_type)
@@ -50,7 +49,8 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x)) {
       ),
       # specific case of plynomial terms defined with poly()
       variable = stringr::str_replace(.data$variable, "^poly\\((.*),(.*)\\)$", "\\1")
-    )
+    ) %>%
+    tidy_attach_model(model)
 
 }
 

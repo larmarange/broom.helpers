@@ -34,7 +34,7 @@ df \%>\%
   tidy_and_attach() \%>\%
   tidy_add_reference_rows()
 
-if(requireNamespace(gtsummary)) {
+if(requireNamespace("gtsummary")) {
   glm(
     response ~ stage + grade * trt,
     gtsummary::trial,
