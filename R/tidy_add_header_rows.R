@@ -70,7 +70,7 @@ tidy_add_header_rows <- function(x, show_single_row = NULL, model = tidy_get_mod
     any(x$variable %in% show_single_row)
   ) {
     xx <- x
-    if ("y.level" %in% x) { # specific case for multinom
+    if ("y.level" %in% names(x)) { # specific case for multinom
       xx <- xx %>%
         dplyr::filter(.data$y.level == x$y.level[1])
     }
