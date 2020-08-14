@@ -49,7 +49,7 @@ tidy_add_variable_labels <- function(x,
     labels <- unlist(labels)
 
   if (!"variable" %in% names(x))
-    x <- x %>% tidy_identify_variables(model)
+    x <- x %>% tidy_identify_variables(model = model)
 
   # if variable is NA, use term
   variable_is_na <- is.na(x$variable)

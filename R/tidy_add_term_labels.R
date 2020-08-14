@@ -50,15 +50,15 @@ tidy_add_term_labels <- function(x,
     labels <- unlist(labels)
 
   if (!"var_label" %in% names(x))
-    x <- x %>% tidy_add_variable_labels(model)
+    x <- x %>% tidy_add_variable_labels(model = model)
   if (!"contrasts" %in% names(x))
-    x <- x %>% tidy_add_contrasts(model)
+    x <- x %>% tidy_add_contrasts(model = model)
 
   # reference rows required for naming correctly categorical variables
   # will be removed eventually at the end
   with_reference_rows <- "reference_row" %in% names(x)
   if (!with_reference_rows)
-    x <- x %>% tidy_add_reference_rows()
+    x <- x %>% tidy_add_reference_rows(model = model)
 
   # start with term names
   term_labels <- unique(stats::na.omit(x$term))

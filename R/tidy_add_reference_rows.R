@@ -47,7 +47,7 @@ tidy_add_reference_rows <- function(x, model = tidy_get_model(x)) {
   }
 
   if (!"contrasts" %in% names(x))
-    x <- x %>% tidy_add_contrasts(model)
+    x <- x %>% tidy_add_contrasts(model = model)
 
   x <- x %>%
     dplyr::mutate(

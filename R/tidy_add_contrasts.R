@@ -31,7 +31,7 @@ tidy_add_contrasts <- function(x, model = tidy_get_model(x)) {
     x <- x %>% dplyr::select(-.data$contrasts)
 
   if (!"variable" %in% names(x))
-    x <- x %>% tidy_identify_variables(model)
+    x <- x %>% tidy_identify_variables(model = model)
 
   model_contrasts <- model_get_contrasts(model)
 
