@@ -24,6 +24,19 @@
 #'   ) %>%
 #'   tidy_and_attach() %>%
 #'   tidy_add_reference_rows()
+#'
+#' if(requireNamespace(gtsummary)) {
+#'   glm(
+#'     response ~ stage + grade * trt,
+#'     gtsummary::trial,
+#'     family = binomial,
+#'     contrasts = list(stage = contr.treatment(4, base = 3),
+#'                      grade = contr.treatment(3, base = 2),
+#'                      trt = contr.treatment(2, base = 2))
+#'   ) %>%
+#'     tidy_and_attach() %>%
+#'     tidy_add_reference_rows()
+#' }
 tidy_add_reference_rows <- function(x, model = tidy_get_model(x)) {
   if (is.null(model))
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
@@ -43,13 +56,19 @@ tidy_add_reference_rows <- function(x, model = tidy_get_model(x)) {
         FALSE,
         NA
       ),
+      reference_row = dplyr::if_else(
+        .data$contrasts %>% stringr::str_starts("contr.treatment"),
+        FALSE,
+        .data$reference_row
+      ),
       rank = 1:dplyr::n() # for sorting table at the end
     )
 
   # contr.treatment -> add reference row before
-  if (any(!is.na(x$contrasts) & x$contrasts == "contr.treatment")) {
+  # base term needs to be taken into account
+  if (any(!is.na(x$contrasts) & stringr::str_starts(x$contrasts, "contr.treatment"))) {
     ref_rows_before <- x %>%
-      dplyr::filter(.data$contrasts == "contr.treatment") %>%
+      dplyr::filter(.data$contrasts %>% stringr::str_starts("contr.treatment")) %>%
       dplyr::group_by(.data$variable) %>%
       dplyr::summarise(
         var_class = dplyr::first(.data$var_class),
@@ -59,9 +78,14 @@ tidy_add_reference_rows <- function(x, model = tidy_get_model(x)) {
         .groups = "drop_last"
       ) %>%
       dplyr::mutate(
+        contr_base = stringr::str_replace(.data$contrasts, "contr.treatment\\(base=([0-9]+)\\)", "\\1"),
+        contr_base = stringr::str_replace(.data$contr_base, "contr.treatment", "1"),
+        contr_base = as.integer(.data$contr_base),
+        rank = .data$rank + .data$contr_base - 1, # update position based on rank
         term = paste0(.data$variable, "_ref"),
         reference_row = TRUE
-      )
+      ) %>%
+      dplyr::select(-.data$contr_base)
     x <- x %>%
       dplyr::bind_rows(ref_rows_before)
   }
