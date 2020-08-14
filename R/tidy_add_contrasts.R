@@ -60,7 +60,15 @@ tidy_add_contrasts <- function(x, model = tidy_get_model(x)) {
         contrasts_list$contrasts[[i]] <- "contr.poly"
       else if (all(model_contrasts[[i]] == stats::contr.SAS(n_levels)))
         contrasts_list$contrasts[[i]] <- "contr.SAS"
-      else
+      else {
+        for (j in 2:n_levels) { # testing treatment coding width different value for base variable
+          if (all(model_contrasts[[i]] == stats::contr.treatment(n_levels, base = j)))
+            contrasts_list$contrasts[[i]] <- paste0("contr.treatment(base=", j, ")")
+        }
+      }
+
+      # if still not found, just indicate custom contrast
+      if (is.na(contrasts_list$contrasts[[i]]))
         contrasts_list$contrasts[[i]] <- "custom"
     }
     x <- x %>%
