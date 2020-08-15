@@ -25,7 +25,7 @@ test_that("tidy_add_term_labels() works for basic models", {
     tidy_add_term_labels(
       labels = list(
         "(Intercept)" = "the intercept",
-        trt_ref = "the reference term",
+        "trtDrug A" = "the reference term",
         gradeIII = "third grade"
       )
     )
