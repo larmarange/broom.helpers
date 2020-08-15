@@ -17,7 +17,10 @@ model_get_model_frame <- function(model) {
 #' @export
 #' @rdname model_get_model_frame
 model_get_model_frame.default <- function(model) {
-  stats::model.frame(model)
+  tryCatch(
+    stats::model.frame(model),
+    error = function(e) {NULL}
+  )
 }
 
 #' @export
@@ -26,10 +29,3 @@ model_get_model_frame.coxph <- function(model) {
   stats::model.frame.default(model)
 }
 
-
-# It does not seems possible to get it from the model object
-#' @export
-#' @rdname model_get_model_frame
-model_get_model_frame.lavaan <- function(model) {
-  NULL
-}

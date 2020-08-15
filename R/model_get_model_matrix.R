@@ -16,7 +16,15 @@ model_get_model_matrix <- function(model) {
 #' @export
 #' @rdname model_get_model_matrix
 model_get_model_matrix.default <- function(model) {
-  stats::model.matrix(model)
+  tryCatch(
+    stats::model.matrix(model),
+    error = function(e) {
+      tryCatch( # test second approach
+        stats::model.matrix(stats::terms(model), model$model),
+        error = function(e) {NULL}
+      )
+    }
+  )
 }
 
 #' @export
@@ -25,8 +33,3 @@ model_get_model_matrix.clm <- function(model) {
   stats::model.matrix(model)[[1]]
 }
 
-#' @export
-#' @rdname model_get_model_matrix
-model_get_model_matrix.clmm <- function(model) {
-  stats::model.matrix(stats::terms(model), model$model)
-}

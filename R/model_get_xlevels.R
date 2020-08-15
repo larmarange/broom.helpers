@@ -10,7 +10,10 @@ model_get_xlevels <- function(model) {
 #' @export
 #' @rdname model_get_xlevels
 model_get_xlevels.default <- function(model) {
-  model$xlevels
+  tryCatch(
+    model$xlevels,
+    error = function(e) {NULL}
+  )
 }
 
 
@@ -28,8 +31,3 @@ model_get_xlevels.lmerMod <- function(model) {
 model_get_xlevels.glmerMod <- model_get_xlevels.lmerMod
 
 
-#' @export
-#' @rdname model_get_contrasts
-model_get_xlevels.lavaan <- function(model) {
-  NULL
-}
