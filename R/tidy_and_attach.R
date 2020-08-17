@@ -22,8 +22,25 @@
 #' tidy_get_model(tt)
 #' @export
 tidy_attach_model <- function(x, model) {
-  attr(x, "model") <- model
+  if (inherits(model, "mipo")) attr(x, "model") <- get_model_mipo(model)
+  else attr(x, "model") <- model
   x
+}
+
+# this helper function grabs the first model from multiple imputation model
+get_model_mipo <- function(model) {
+  tryCatch(
+    # getting 1st model estimated
+    as.list(model$call) %>%
+      purrr::pluck("object") %>%
+      # this eval fails in more complex situations
+      # (e.g. inputs not directly available in search path)
+      eval() %>%
+      purrr::pluck("analyses", 1),
+    error = function(e) {
+      stop("Unable to extract model from mipo object.", .call = FALSE)
+    }
+  )
 }
 
 #' @rdname tidy_attach_model
