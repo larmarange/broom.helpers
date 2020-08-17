@@ -176,11 +176,11 @@ tidy_add_reference_rows <- function(x, model = tidy_get_model(x)) {
   }
 
   if (!has_var_label)
-    x <- x %>% dplyr::select(-.data$var_label)
+    x[["var_label"]] <- NULL
 
-  x %>%
-    dplyr::arrange(.data$rank) %>%
-    dplyr::select(-.data$rank)
+  x <- dplyr::arrange(x, .data$rank)
+  x[["rank"]] <- NULL
+  x
 }
 
 
