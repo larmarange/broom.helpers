@@ -2,7 +2,7 @@
 % Please edit documentation in R/tidy_plus_plus.R
 \name{tidy_plus_plus}
 \alias{tidy_plus_plus}
-\title{Tidy a model and add compute additional informations}
+\title{Tidy a model and add compute additional information}
 \usage{
 tidy_plus_plus(
   model,
