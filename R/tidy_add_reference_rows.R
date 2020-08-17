@@ -81,6 +81,7 @@ tidy_add_reference_rows <- function(x, model = tidy_get_model(x)) {
     # contr.treatment -> add reference row before
     # base term needs to be taken into account
     if (any(!is.na(x$contrasts) & stringr::str_starts(x$contrasts, "contr.treatment"))) {
+      xlevels <- model_get_xlevels(model)
       ref_rows_before <- x %>%
         dplyr::filter(.data$contrasts %>% stringr::str_starts("contr.treatment")) %>%
         dplyr::group_by(.data$variable, .data$y.level) %>%
@@ -97,9 +98,11 @@ tidy_add_reference_rows <- function(x, model = tidy_get_model(x)) {
           contr_base = stringr::str_replace(.data$contr_base, "contr.treatment", "1"),
           contr_base = as.integer(.data$contr_base),
           rank = .data$rank + .data$contr_base - 1, # update position based on rank
-          term = paste0(.data$variable, "_ref"),
+          #term = paste0(.data$variable, "_ref"),
           reference_row = TRUE
         ) %>%
+        dplyr::rowwise() %>%
+        dplyr::mutate(term = paste0(.data$variable, xlevels[[.data$variable]][.data$contr_base])) %>%
         dplyr::select(-.data$contr_base)
       x <- x %>%
         dplyr::bind_rows(ref_rows_before)
@@ -116,12 +119,14 @@ tidy_add_reference_rows <- function(x, model = tidy_get_model(x)) {
           var_label = dplyr::last(.data$var_label),
           contrasts = dplyr::last(.data$contrasts),
           rank = max(.data$rank) + .25,
+          n_levels = dplyr::n(),
           .groups = "drop_last"
         ) %>%
         dplyr::mutate(
-          term = paste0(.data$variable, "_ref"),
+          term = paste0(.data$variable, .data$n_levels),
           reference_row = TRUE
-        )
+        ) %>%
+        dplyr::select(-.data$n_levels)
       x <- x %>%
         dplyr::bind_rows(ref_rows_after)
     }
@@ -129,6 +134,7 @@ tidy_add_reference_rows <- function(x, model = tidy_get_model(x)) {
     # contr.treatment -> add reference row before
     # base term needs to be taken into account
     if (any(!is.na(x$contrasts) & stringr::str_starts(x$contrasts, "contr.treatment"))) {
+      xlevels <- model_get_xlevels(model)
       ref_rows_before <- x %>%
         dplyr::filter(.data$contrasts %>% stringr::str_starts("contr.treatment")) %>%
         dplyr::group_by(.data$variable) %>%
@@ -145,9 +151,11 @@ tidy_add_reference_rows <- function(x, model = tidy_get_model(x)) {
           contr_base = stringr::str_replace(.data$contr_base, "contr.treatment", "1"),
           contr_base = as.integer(.data$contr_base),
           rank = .data$rank + .data$contr_base - 1, # update position based on rank
-          term = paste0(.data$variable, "_ref"),
+          #term = paste0(.data$variable, "_ref"),
           reference_row = TRUE
         ) %>%
+        dplyr::rowwise() %>%
+        dplyr::mutate(term = paste0(.data$variable, xlevels[[.data$variable]][.data$contr_base])) %>%
         dplyr::select(-.data$contr_base)
       x <- x %>%
         dplyr::bind_rows(ref_rows_before)
@@ -164,12 +172,14 @@ tidy_add_reference_rows <- function(x, model = tidy_get_model(x)) {
           var_label = dplyr::last(.data$var_label),
           contrasts = dplyr::last(.data$contrasts),
           rank = max(.data$rank) + .25,
+          n_levels = dplyr::n(),
           .groups = "drop_last"
         ) %>%
         dplyr::mutate(
-          term = paste0(.data$variable, "_ref"),
+          term = paste0(.data$variable, .data$n_levels + 1),
           reference_row = TRUE
-        )
+        ) %>%
+        dplyr::select(-.data$n_levels)
       x <- x %>%
         dplyr::bind_rows(ref_rows_after)
     }

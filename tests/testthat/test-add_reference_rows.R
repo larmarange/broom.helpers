@@ -8,8 +8,8 @@ test_that("tidy_add_reference_rows() works as expected", {
   res <- mod %>% tidy_and_attach() %>% tidy_add_reference_rows()
   expect_equivalent(
     res$term,
-    c("(Intercept)", "stage_ref", "stage2", "stage3", "stage4", "grade1",
-      "grade2", "grade_ref", "trt1", "trt_ref", "grade1:trt1", "grade2:trt1")
+    c("(Intercept)", "stageT1", "stage2", "stage3", "stage4", "grade1",
+      "grade2", "grade3", "trt1", "trt2", "grade1:trt1", "grade2:trt1")
   )
   expect_equivalent(
     res$reference_row,
@@ -41,8 +41,8 @@ test_that("tidy_add_reference_rows() works with different values of base in cont
   res <- mod %>% tidy_and_attach() %>% tidy_add_reference_rows()
   expect_equivalent(
     res$term,
-    c("(Intercept)", "stage1", "stage2", "stage_ref", "stage4", "grade1",
-      "grade_ref", "grade3", "trt1", "trt_ref", "grade1:trt1", "grade3:trt1")
+    c("(Intercept)", "stage1", "stage2", "stageT3", "stage4", "grade1",
+      "gradeII", "grade3", "trt1", "trt2", "grade1:trt1", "grade3:trt1")
   )
   expect_equivalent(
     res$reference_row,
