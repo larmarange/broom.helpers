@@ -33,3 +33,9 @@ model_get_model_matrix.clm <- function(model) {
   stats::model.matrix(model)[[1]]
 }
 
+#' @export
+#' @rdname model_get_model_matrix
+model_get_model_matrix.mipo <- function(model) {
+  get_model_mipo(model) %>% model_get_model_matrix()
+}
+

@@ -3,11 +3,14 @@
 \name{model_get_contrasts}
 \alias{model_get_contrasts}
 \alias{model_get_contrasts.default}
+\alias{model_get_contrasts.mipo}
 \title{Get contrasts used in the model}
 \usage{
 model_get_contrasts(model)
 
 \method{model_get_contrasts}{default}(model)
+
+\method{model_get_contrasts}{mipo}(model)
 }
 \arguments{
 \item{model}{a model object}

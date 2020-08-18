@@ -23,3 +23,9 @@ model_get_contrasts.default <- function(model) {
     }
   )
 }
+
+#' @export
+#' @rdname model_get_contrasts
+model_get_contrasts.mipo <- function(model) {
+  get_model_mipo(model) %>% model_get_contrasts()
+}

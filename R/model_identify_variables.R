@@ -79,6 +79,12 @@ model_identify_variables.lavaan <- function(model) {
     .compute_var_type()
 }
 
+#' @rdname model_identify_variables
+#' @export
+model_identify_variables.mipo <- function(model) {
+  get_model_mipo(model) %>% model_identify_variables()
+}
+
 
 
 ## model_identify_variables() helpers --------------------------

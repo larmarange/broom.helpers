@@ -4,6 +4,7 @@
 \alias{model_identify_variables}
 \alias{model_identify_variables.default}
 \alias{model_identify_variables.lavaan}
+\alias{model_identify_variables.mipo}
 \title{Identify for each coefficient of a model the corresponding variable}
 \usage{
 model_identify_variables(model)
@@ -11,6 +12,8 @@ model_identify_variables(model)
 \method{model_identify_variables}{default}(model)
 
 \method{model_identify_variables}{lavaan}(model)
+
+\method{model_identify_variables}{mipo}(model)
 }
 \arguments{
 \item{model}{a model object}

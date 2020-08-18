@@ -29,3 +29,12 @@ model_get_model_frame.coxph <- function(model) {
   stats::model.frame.default(model)
 }
 
+#' @export
+#' @rdname model_get_model_frame
+model_get_model_frame.mipo <- function(model) {
+  get_model_mipo(model) %>% model_get_model_frame()
+}
+
+
+
+
