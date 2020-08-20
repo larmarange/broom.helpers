@@ -41,7 +41,6 @@ tidy_add_variable_labels <- function(x,
                                      ) {
   if (is.null(model))
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
-  x <- x %>% tidy_attach_model(model) # in case not already attached
 
   if ("header_row" %in% names(x))
     stop("`tidy_add_variable_labels()` cannot be applied after `tidy_add_header_rows().`")
@@ -53,7 +52,7 @@ tidy_add_variable_labels <- function(x,
     labels <- unlist(labels)
 
   if (!"variable" %in% names(x))
-    x <- x %>% tidy_identify_variables()
+    x <- x %>% tidy_identify_variables(model = model)
 
   # if variable is NA, use term
   variable_is_na <- is.na(x$variable)
@@ -97,7 +96,10 @@ tidy_add_variable_labels <- function(x,
       by = "variable"
     ) %>%
     # restore missing values in variable
-    dplyr::mutate(variable = dplyr::if_else(variable_is_na, NA_character_, .data$variable))
+    dplyr::mutate(
+      variable = dplyr::if_else(variable_is_na, NA_character_, .data$variable)
+    ) %>%
+    tidy_attach_model(model = model)
 }
 
 

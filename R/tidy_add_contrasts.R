@@ -26,7 +26,6 @@
 tidy_add_contrasts <- function(x, model = tidy_get_model(x)) {
   if (is.null(model))
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
-  x <- x %>% tidy_attach_model(model) # in case not already attached
 
   if ("contrasts" %in% names(x))
     x <- x %>% dplyr::select(-.data$contrasts)
@@ -73,7 +72,8 @@ tidy_add_contrasts <- function(x, model = tidy_get_model(x)) {
     x <- x %>%
       dplyr::left_join(contrasts_list, by = "variable")
   }
-  x
+  x %>%
+    tidy_attach_model(model = model)
 }
 
 

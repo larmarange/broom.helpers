@@ -51,7 +51,6 @@
 tidy_add_header_rows <- function(x, show_single_row = NULL, model = tidy_get_model(x)) {
   if (is.null(model))
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
-  x <- x %>% tidy_attach_model(model) # in case not already attached
 
   if ("header_row" %in% names(x)) {
     warning("tidy_add_header_rows() has already been applied. x has been returned unchanged.")
@@ -59,7 +58,7 @@ tidy_add_header_rows <- function(x, show_single_row = NULL, model = tidy_get_mod
   }
 
   if (!"label" %in% names(x))
-    x <- x %>% tidy_add_term_labels()
+    x <- x %>% tidy_add_term_labels(model = model)
 
   # management of show_single_row --------------
   # only if reference_rows have been defined
@@ -145,7 +144,8 @@ tidy_add_header_rows <- function(x, show_single_row = NULL, model = tidy_get_mod
     ) %>%
     dplyr::bind_rows(header_rows) %>%
     dplyr::arrange(.data$rank) %>%
-    dplyr::select(-.data$rank)
+    dplyr::select(-.data$rank) %>%
+    tidy_attach_model(model = model)
 }
 
 

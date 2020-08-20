@@ -45,7 +45,6 @@
 tidy_add_reference_rows <- function(x, model = tidy_get_model(x)) {
   if (is.null(model))
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
-  x <- x %>% tidy_attach_model(model) # in case not already attached
 
   if ("header_row" %in% names(x))
     stop("`tidy_add_reference_rows()` cannot be applied after `tidy_add_header_rows().`")
@@ -56,7 +55,7 @@ tidy_add_reference_rows <- function(x, model = tidy_get_model(x)) {
   }
 
   if (!"contrasts" %in% names(x))
-    x <- x %>% tidy_add_contrasts()
+    x <- x %>% tidy_add_contrasts(model = model)
 
   has_var_label <- "var_label" %in% names(x)
   if (!has_var_label)
@@ -190,7 +189,8 @@ tidy_add_reference_rows <- function(x, model = tidy_get_model(x)) {
 
   x %>%
     dplyr::arrange(.data$rank) %>%
-    dplyr::select(-.data$rank)
+    dplyr::select(-.data$rank) %>%
+    tidy_attach_model(model = model)
 }
 
 
