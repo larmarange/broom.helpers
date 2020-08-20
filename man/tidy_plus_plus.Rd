@@ -8,6 +8,7 @@ tidy_plus_plus(
   model,
   tidy_fun = broom::tidy,
   conf.int = TRUE,
+  exponentiate = FALSE,
   variable_labels = NULL,
   term_labels = NULL,
   add_reference_rows = TRUE,
@@ -24,6 +25,10 @@ tidy_plus_plus(
 \item{tidy_fun}{option to specify a custom tidier function}
 
 \item{conf.int}{should confidence intervals be computed? (see \code{\link[broom:reexports]{broom::tidy()}})}
+
+\item{exponentiate}{logical indicating whether or not to exponentiate the
+coefficient estimates. This is typical for logistic and multinomial regressions,
+but a bad idea if there is no log or logit link. Defaults to \code{FALSE}.}
 
 \item{variable_labels}{a named list or a named vector of custom variable labels}
 

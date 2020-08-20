@@ -14,6 +14,9 @@
 #' @param model a model to be attached/tidied
 #' @param tidy_fun option to specify a custom tidier function
 #' @param conf.int should confidence intervals be computed? (see [broom::tidy()])
+#' @param exponentiate logical indicating whether or not to exponentiate the
+#' coefficient estimates. This is typical for logistic and multinomial regressions,
+#' but a bad idea if there is no log or logit link. Defaults to `FALSE`.
 #' @param variable_labels a named list or a named vector of custom variable labels
 #' @param term_labels a named list or a named vector of custom term labels
 #' @param add_reference_rows should reference rows be added?
@@ -71,6 +74,7 @@ tidy_plus_plus <- function(
   model,
   tidy_fun = broom::tidy,
   conf.int = TRUE,
+  exponentiate = FALSE,
   variable_labels = NULL,
   term_labels = NULL,
   add_reference_rows = TRUE,
@@ -81,7 +85,12 @@ tidy_plus_plus <- function(
   ...
 ) {
   res <- model %>%
-    tidy_and_attach(tidy_fun = tidy_fun, conf.int = conf.int, ...) %>%
+    tidy_and_attach(
+      tidy_fun = tidy_fun,
+      conf.int = conf.int,
+      exponentiate = exponentiate,
+      ...
+    ) %>%
     tidy_identify_variables() %>%
     tidy_add_contrasts()
   if (add_reference_rows)
