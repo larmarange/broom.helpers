@@ -12,6 +12,7 @@ tidy_plus_plus(
   variable_labels = NULL,
   term_labels = NULL,
   add_reference_rows = TRUE,
+  add_estimate_to_reference_rows = TRUE,
   add_header_rows = FALSE,
   show_single_row = NULL,
   intercept = FALSE,
@@ -36,6 +37,8 @@ but a bad idea if there is no log or logit link. Defaults to \code{FALSE}.}
 
 \item{add_reference_rows}{should reference rows be added?}
 
+\item{add_estimate_to_reference_rows}{should an estimate value be added to reference rows?}
+
 \item{add_header_rows}{should header rows be added?}
 
 \item{show_single_row}{a vector indicating the names of binary
@@ -55,6 +58,7 @@ This function will apply sequentially:
 \item \code{\link[=tidy_identify_variables]{tidy_identify_variables()}}
 \item \code{\link[=tidy_add_contrasts]{tidy_add_contrasts()}}
 \item \code{\link[=tidy_add_reference_rows]{tidy_add_reference_rows()}}
+\item \code{\link[=tidy_add_estimate_to_reference_rows]{tidy_add_estimate_to_reference_rows()}}
 \item \code{\link[=tidy_add_variable_labels]{tidy_add_variable_labels()}}
 \item \code{\link[=tidy_add_term_labels]{tidy_add_term_labels()}}
 \item \code{\link[=tidy_add_header_rows]{tidy_add_header_rows()}}

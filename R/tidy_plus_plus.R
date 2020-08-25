@@ -5,6 +5,7 @@
 #' * [tidy_identify_variables()]
 #' * [tidy_add_contrasts()]
 #' * [tidy_add_reference_rows()]
+#' * [tidy_add_estimate_to_reference_rows()]
 #' * [tidy_add_variable_labels()]
 #' * [tidy_add_term_labels()]
 #' * [tidy_add_header_rows()]
@@ -20,6 +21,7 @@
 #' @param variable_labels a named list or a named vector of custom variable labels
 #' @param term_labels a named list or a named vector of custom term labels
 #' @param add_reference_rows should reference rows be added?
+#' @param add_estimate_to_reference_rows should an estimate value be added to reference rows?
 #' @param add_header_rows should header rows be added?
 #' @param show_single_row a vector indicating the names of binary
 #' variables that should be displayed on a single row, when
@@ -78,6 +80,7 @@ tidy_plus_plus <- function(
   variable_labels = NULL,
   term_labels = NULL,
   add_reference_rows = TRUE,
+  add_estimate_to_reference_rows = TRUE,
   add_header_rows = FALSE,
   show_single_row = NULL,
   intercept = FALSE,
@@ -95,6 +98,9 @@ tidy_plus_plus <- function(
     tidy_add_contrasts()
   if (add_reference_rows)
     res <- res %>% tidy_add_reference_rows()
+  if (add_reference_rows & add_estimate_to_reference_rows)
+    res <- res %>%
+      tidy_add_estimate_to_reference_rows(exponentiate = exponentiate)
   res <- res %>%
     tidy_add_variable_labels(labels = variable_labels) %>%
     tidy_add_term_labels(labels = term_labels)
