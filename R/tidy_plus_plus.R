@@ -1,4 +1,4 @@
-#' Tidy a model and add compute additional informations
+#' Tidy a model and compute additional informations
 #'
 #' This function will apply sequentially:
 #' * [tidy_and_attach()]
