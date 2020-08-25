@@ -60,6 +60,9 @@ tidy_add_estimate_to_reference_rows <- function(x, exponentiate = FALSE, model =
   if (!"reference_row" %in% names(x))
     x <- x %>% tidy_add_reference_rows(model = model)
 
+  if (!"estimate" %in% names(x)) # to avoid a problem with certain types of model (e.g. gam)
+    return(x %>% tidy_attach_model(model))
+
   # treatment contrasts
   x <- x %>%
     dplyr::mutate(
@@ -90,7 +93,7 @@ tidy_add_estimate_to_reference_rows <- function(x, exponentiate = FALSE, model =
   dc <- tryCatch(
     dplyr::last(dummy.coef(model)[[variable]]),
     error = function(e) {
-      message(paste0(
+      warning(paste0(
         "No dummy.coef() method for this type of model.\n",
         "Reference row of variable '", variable, "' remained unchanged."
       ))
