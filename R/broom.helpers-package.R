@@ -8,6 +8,10 @@ NULL
 #' @export
 dplyr::`%>%`
 
+# because `where` is not exported by tidyselect
+# cf. https://github.com/r-lib/tidyselect/issues/201
+utils::globalVariables("where")
+
 # remove backtips around variable names
 .clean_backtips <- function(x, variable_names = x) {
   for (i in stats::na.omit(variable_names)) {

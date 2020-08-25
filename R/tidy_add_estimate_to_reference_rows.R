@@ -91,7 +91,7 @@ tidy_add_estimate_to_reference_rows <- function(x, exponentiate = FALSE, model =
       dplyr::mutate(dplyr::across(where(is.character), factor))
 
   dc <- tryCatch(
-    dplyr::last(dummy.coef(model)[[variable]]),
+    dplyr::last(stats::dummy.coef(model)[[variable]]),
     error = function(e) {
       warning(paste0(
         "No dummy.coef() method for this type of model.\n",
