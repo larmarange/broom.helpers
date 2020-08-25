@@ -83,10 +83,21 @@ tidy_add_estimate_to_reference_rows <- function(x, exponentiate = FALSE, model =
 
 .get_ref_row_estimate_contr_sum <- function(variable, model, exponentiate = FALSE) {
   # bug fix for character variables
-  model$model <- model$model %>%
-    dplyr::mutate(dplyr::across(where(is.character), factor))
+  if ("model" %in% names(model))
+    model$model <- model$model %>%
+      dplyr::mutate(dplyr::across(where(is.character), factor))
 
-  dc <- dplyr::last(dummy.coef(model)[[variable]])
+  dc <- tryCatch(
+    dplyr::last(dummy.coef(model)[[variable]]),
+    error = function(e) {
+      message(paste0(
+        "No dummy.coef() method for this type of model.\n",
+        "Reference row of variable '", variable, "' remained unchanged."
+      ))
+      NA
+    }
+  )
+
   if (exponentiate)
     dc <- exp(dc)
   dc
