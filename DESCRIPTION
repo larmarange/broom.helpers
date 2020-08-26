@@ -2,11 +2,18 @@ Package: broom.helpers
 Title: Helpers for model coefficients tibbles
 Version: 0.0.0.9000
 Authors@R: 
+  c(
     person(given = "Joseph",
            family = "Larmarange",
            role = c("aut", "cre"),
            email = "joseph@larmarange.net",
-           comment = c(ORCID = "0000-0001-7097-700X"))
+           comment = c(ORCID = "0000-0001-7097-700X")),
+    person(given = "Daniel D.",
+           family = "Sjoberg",
+           role = "aut",
+           email = "danield.sjoberg@gmail.com",
+           comment = c(ORCID = "0000-0003-0862-2018"))
+  )
 Description: A set of functions to facilitate manipulation of tibbles 
              produced by broom, like identifying variables associated
              with a model term, adding variable and term labels,
