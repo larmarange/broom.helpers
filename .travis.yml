@@ -4,6 +4,8 @@ language: r
 r:
   - release
   - devel
+cache:
+  packages: true
 after_success:
   - Rscript -e 'covr::codecov()'
 
