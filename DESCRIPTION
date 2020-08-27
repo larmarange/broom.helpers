@@ -1,5 +1,5 @@
 Package: broom.helpers
-Title: Helpers for model coefficients tibbles
+Title: Helpers for Model Coefficients Tibbles
 Version: 0.0.0.9000
 Authors@R: 
   c(
