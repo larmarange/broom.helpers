@@ -15,7 +15,7 @@ Authors@R:
            comment = c(ORCID = "0000-0003-0862-2018"))
   )
 Description: A set of functions to facilitate manipulation of tibbles 
-             produced by broom, like identifying variables associated
+             produced by 'broom', like identifying variables associated
              with a model term, adding variable and term labels,
              adding reference and/or header rows, etc.
 License: GPL-3
