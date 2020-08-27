@@ -36,7 +36,7 @@ broom::tidy(model_logit)
 
 ## Forest Plot
 
-To create the figure, we'll need to add some information to the tidy tibble, e.g. we'll need to group the terms that belong to the same variable, add the reference row, etc.
+To create the figure, we'll need to add some information to the tidy tibble, i.e. we'll need to group the terms that belong to the same variable, add the reference row, etc.
 Parsing this information can be difficult, but the broom.helper package has made it simple.
 
 ```{r}
