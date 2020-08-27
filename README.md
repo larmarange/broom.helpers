@@ -42,14 +42,14 @@ lm(mpg ~ factor(cyl) + hp, mtcars) %>%
   # remove intercept
   tidy_remove_intercept()
 #> # A tibble: 4 x 12
-#>   term  variable var_class var_type estimate std.error statistic  p.value
-#>   <chr> <chr>    <chr>     <chr>       <dbl>     <dbl>     <dbl>    <dbl>
-#> 1 fact~ factor(~ factor    categor~  NA        NA          NA    NA      
-#> 2 fact~ factor(~ factor    categor~  -5.97      1.64       -3.64  0.00109
-#> 3 fact~ factor(~ factor    categor~  -8.52      2.33       -3.66  0.00103
-#> 4 hp    hp       numeric   continu~  -0.0240    0.0154     -1.56  0.130  
-#> # ... with 4 more variables: contrasts <chr>, reference_row <lgl>,
-#> #   var_label <chr>, label <chr>
+#>   term  variable var_label var_class var_type contrasts reference_row label
+#>   <chr> <chr>    <chr>     <chr>     <chr>    <chr>     <lgl>         <chr>
+#> 1 fact~ factor(~ factor(c~ factor    categor~ contr.tr~ TRUE          4    
+#> 2 fact~ factor(~ factor(c~ factor    categor~ contr.tr~ FALSE         6    
+#> 3 fact~ factor(~ factor(c~ factor    categor~ contr.tr~ FALSE         8    
+#> 4 hp    hp       hp        numeric   continu~ <NA>      NA            hp   
+#> # ... with 4 more variables: estimate <dbl>, std.error <dbl>, statistic <dbl>,
+#> #   p.value <dbl>
 ```
 
 The package also includes a handy wrapper for the most commonly used
@@ -59,12 +59,12 @@ functions.
 lm(mpg ~ factor(cyl) + hp, mtcars) %>%
   tidy_plus_plus()
 #> # A tibble: 4 x 14
-#>   term  variable var_class var_type estimate std.error statistic  p.value
-#>   <chr> <chr>    <chr>     <chr>       <dbl>     <dbl>     <dbl>    <dbl>
-#> 1 fact~ factor(~ factor    categor~     0      NA          NA    NA      
-#> 2 fact~ factor(~ factor    categor~    -5.97    1.64       -3.64  0.00109
-#> 3 fact~ factor(~ factor    categor~    -8.52    2.33       -3.66  0.00103
-#> 4 hp    hp       numeric   continu~    NA       0.0154     -1.56  0.130  
-#> # ... with 6 more variables: conf.low <dbl>, conf.high <dbl>, contrasts <chr>,
-#> #   reference_row <lgl>, var_label <chr>, label <chr>
+#>   term  variable var_label var_class var_type contrasts reference_row label
+#>   <chr> <chr>    <chr>     <chr>     <chr>    <chr>     <lgl>         <chr>
+#> 1 fact~ factor(~ factor(c~ factor    categor~ contr.tr~ TRUE          4    
+#> 2 fact~ factor(~ factor(c~ factor    categor~ contr.tr~ FALSE         6    
+#> 3 fact~ factor(~ factor(c~ factor    categor~ contr.tr~ FALSE         8    
+#> 4 hp    hp       hp        numeric   continu~ <NA>      NA            hp   
+#> # ... with 6 more variables: estimate <dbl>, std.error <dbl>, statistic <dbl>,
+#> #   p.value <dbl>, conf.low <dbl>, conf.high <dbl>
 ```
