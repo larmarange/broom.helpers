@@ -145,7 +145,8 @@ tidy_add_header_rows <- function(x, show_single_row = NULL, model = tidy_get_mod
     dplyr::bind_rows(header_rows) %>%
     dplyr::arrange(.data$rank) %>%
     dplyr::select(-.data$rank) %>%
-    tidy_attach_model(model = model)
+    tidy_attach_model(model = model) %>%
+    .order_tidy_columns()
 }
 
 

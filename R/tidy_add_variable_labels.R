@@ -99,7 +99,8 @@ tidy_add_variable_labels <- function(x,
     dplyr::mutate(
       variable = dplyr::if_else(variable_is_na, NA_character_, .data$variable)
     ) %>%
-    tidy_attach_model(model = model)
+    tidy_attach_model(model = model) %>%
+    .order_tidy_columns()
 }
 
 

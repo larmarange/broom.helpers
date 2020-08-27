@@ -111,5 +111,6 @@ tidy_plus_plus <- function(
     res <- res %>% tidy_remove_intercept()
   if (!keep_model)
     res <- res %>% tidy_detach_model()
-  res
+  res %>%
+    .order_tidy_columns()
 }

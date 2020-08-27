@@ -51,3 +51,16 @@ utils::globalVariables("where")
   )
   x %>% stringr::str_replace_all(pattern)
 }
+
+
+# for consistant column order
+.order_tidy_columns <- function(x) {
+  x %>%
+    dplyr::select(
+      any_of(
+        c("term", "variable", "var_label", "var_class", "var_type",
+          "header_row", "contrasts", "reference_row", "label")
+      ),
+      everything()
+    )
+}

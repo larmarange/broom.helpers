@@ -190,7 +190,8 @@ tidy_add_reference_rows <- function(x, model = tidy_get_model(x)) {
   x %>%
     dplyr::arrange(.data$rank) %>%
     dplyr::select(-.data$rank) %>%
-    tidy_attach_model(model = model)
+    tidy_attach_model(model = model) %>%
+    .order_tidy_columns()
 }
 
 

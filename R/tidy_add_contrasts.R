@@ -73,7 +73,8 @@ tidy_add_contrasts <- function(x, model = tidy_get_model(x)) {
       dplyr::left_join(contrasts_list, by = "variable")
   }
   x %>%
-    tidy_attach_model(model = model)
+    tidy_attach_model(model = model) %>%
+    .order_tidy_columns()
 }
 
 

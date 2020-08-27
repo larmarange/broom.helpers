@@ -141,7 +141,8 @@ tidy_add_term_labels <- function(x,
       ),
       by = "term"
     ) %>%
-    tidy_attach_model(model = model)
+    tidy_attach_model(model = model) %>%
+    .order_tidy_columns()
 }
 
 
