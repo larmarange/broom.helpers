@@ -54,6 +54,13 @@ tidy_add_reference_rows <- function(x, model = tidy_get_model(x)) {
     return(x)
   }
 
+  if ("label" %in% names(x)) {
+    warning(paste0(
+      "tidy_add_reference_rows() has been applied after tidy_add_term_labels().\n",
+      "You should consider to apply tidy_add_reference_rows() first."
+    ))
+  }
+
   if (!"contrasts" %in% names(x))
     x <- x %>% tidy_add_contrasts(model = model)
 
