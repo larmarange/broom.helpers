@@ -81,7 +81,8 @@ tidy_add_estimate_to_reference_rows <- function(x, exponentiate = FALSE, model =
   }
 
   x %>%
-    tidy_attach_model(model = model)
+    tidy_attach_model(model = model) %>%
+    .order_tidy_columns()
 }
 
 .get_ref_row_estimate_contr_sum <- function(variable, model, exponentiate = FALSE) {
