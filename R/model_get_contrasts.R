@@ -10,23 +10,11 @@ model_get_contrasts <- function(model) {
 #' @export
 #' @rdname model_get_contrasts
 model_get_contrasts.default <- function(model) {
-  model$contrasts
-}
-
-
-#' @export
-#' @rdname model_get_contrasts
-model_get_contrasts.lmerMod <- function(model) {
-  attr(stats::model.matrix(model), "contrasts")
-}
-
-
-#' @export
-#' @rdname model_get_contrasts
-model_get_contrasts.glmerMod <- model_get_contrasts.lmerMod
-
-#' @export
-#' @rdname model_get_contrasts
-model_get_contrasts.lavaan <- function(model) {
-  NULL
+  tryCatch(
+    model$contrasts,
+    error = function(e) {
+      # if first approach is not working, try second one
+      attr(model_get_model_matrix(model), "contrasts")
+    }
+  )
 }

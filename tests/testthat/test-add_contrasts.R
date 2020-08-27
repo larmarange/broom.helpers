@@ -36,6 +36,18 @@ test_that("tidy_add_contrast() works for basic models", {
 
 })
 
+test_that("test tidy_add_contrasts() checks", {
+  mod <- glm(response ~ stage + grade + trt, gtsummary::trial, family = binomial)
+  # expect an error if no model attached
+  expect_error(mod %>% broom::tidy() %>% tidy_add_contrasts())
+
+  # could be apply twice (no error)
+  expect_error(
+    mod %>% tidy_and_attach() %>% tidy_add_contrasts() %>% tidy_add_contrasts(),
+    NA
+  )
+})
+
 
 test_that("tidy_add_contrasts() works with variables having non standard name", {
   df <- gtsummary::trial %>% dplyr::mutate(`grade of kids` = grade)

@@ -42,7 +42,6 @@ tidy_add_term_labels <- function(x,
                                      ) {
   if (is.null(model))
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
-  x <- x %>% tidy_attach_model(model) # in case not already attached
 
   if ("header_row" %in% names(x))
     stop("`tidy_add_term_labels()` cannot be applied after `tidy_add_header_rows().`")
@@ -54,16 +53,16 @@ tidy_add_term_labels <- function(x,
     labels <- unlist(labels)
 
   if (!"var_label" %in% names(x))
-    x <- x %>% tidy_add_variable_labels()
+    x <- x %>% tidy_add_variable_labels(model = model)
   if (!"contrasts" %in% names(x))
-    x <- x %>% tidy_add_contrasts()
+    x <- x %>% tidy_add_contrasts(model = model)
 
   # reference rows required for naming correctly categorical variables
   # will be removed eventually at the end
   if ("reference_row" %in% names(x))
     xx <- x
   else
-    xx <- x %>% tidy_add_reference_rows()
+    xx <- x %>% tidy_add_reference_rows(model = model)
 
   # specific case for nnet::multinom
   # keeping only one level for computing term_labels
@@ -141,7 +140,8 @@ tidy_add_term_labels <- function(x,
         label = term_labels
       ),
       by = "term"
-    )
+    ) %>%
+    tidy_attach_model(model = model)
 }
 
 

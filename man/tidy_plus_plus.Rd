@@ -2,15 +2,17 @@
 % Please edit documentation in R/tidy_plus_plus.R
 \name{tidy_plus_plus}
 \alias{tidy_plus_plus}
-\title{Tidy a model and add compute additional informations}
+\title{Tidy a model and compute additional informations}
 \usage{
 tidy_plus_plus(
   model,
   tidy_fun = broom::tidy,
   conf.int = TRUE,
+  exponentiate = FALSE,
   variable_labels = NULL,
   term_labels = NULL,
   add_reference_rows = TRUE,
+  add_estimate_to_reference_rows = TRUE,
   add_header_rows = FALSE,
   show_single_row = NULL,
   intercept = FALSE,
@@ -25,11 +27,17 @@ tidy_plus_plus(
 
 \item{conf.int}{should confidence intervals be computed? (see \code{\link[broom:reexports]{broom::tidy()}})}
 
+\item{exponentiate}{logical indicating whether or not to exponentiate the
+coefficient estimates. This is typical for logistic and multinomial regressions,
+but a bad idea if there is no log or logit link. Defaults to \code{FALSE}.}
+
 \item{variable_labels}{a named list or a named vector of custom variable labels}
 
 \item{term_labels}{a named list or a named vector of custom term labels}
 
 \item{add_reference_rows}{should reference rows be added?}
+
+\item{add_estimate_to_reference_rows}{should an estimate value be added to reference rows?}
 
 \item{add_header_rows}{should header rows be added?}
 
@@ -50,6 +58,7 @@ This function will apply sequentially:
 \item \code{\link[=tidy_identify_variables]{tidy_identify_variables()}}
 \item \code{\link[=tidy_add_contrasts]{tidy_add_contrasts()}}
 \item \code{\link[=tidy_add_reference_rows]{tidy_add_reference_rows()}}
+\item \code{\link[=tidy_add_estimate_to_reference_rows]{tidy_add_estimate_to_reference_rows()}}
 \item \code{\link[=tidy_add_variable_labels]{tidy_add_variable_labels()}}
 \item \code{\link[=tidy_add_term_labels]{tidy_add_term_labels()}}
 \item \code{\link[=tidy_add_header_rows]{tidy_add_header_rows()}}
@@ -102,6 +111,7 @@ if(requireNamespace("gtsummary")) {
 \seealso{
 Other tidy_helpers: 
 \code{\link{tidy_add_contrasts}()},
+\code{\link{tidy_add_estimate_to_reference_rows}()},
 \code{\link{tidy_add_header_rows}()},
 \code{\link{tidy_add_reference_rows}()},
 \code{\link{tidy_add_term_labels}()},

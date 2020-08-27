@@ -1,16 +1,28 @@
 Package: broom.helpers
-Title: A set of functions to facilitate manipulation of tibbles produced by broom
+Title: Helpers for model coefficients tibbles
 Version: 0.0.0.9000
 Authors@R: 
+  c(
     person(given = "Joseph",
            family = "Larmarange",
            role = c("aut", "cre"),
            email = "joseph@larmarange.net",
-           comment = c(ORCID = "0000-0001-7097-700X"))
-Description: What the package does (one paragraph).
+           comment = c(ORCID = "0000-0001-7097-700X")),
+    person(given = "Daniel D.",
+           family = "Sjoberg",
+           role = "aut",
+           email = "danield.sjoberg@gmail.com",
+           comment = c(ORCID = "0000-0003-0862-2018"))
+  )
+Description: A set of functions to facilitate manipulation of tibbles 
+             produced by broom, like identifying variables associated
+             with a model term, adding variable and term labels,
+             adding reference and/or header rows, etc.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
+URL: http://larmarange.github.io/broom.helpers/
+BugReports: https://github.com/larmarange/broom.helpers/issues
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Imports: 
@@ -36,5 +48,6 @@ Suggests:
     gee,
     datasets,
     gam,
-    lavaan
+    lavaan,
+    covr
 RdMacros: lifecycle

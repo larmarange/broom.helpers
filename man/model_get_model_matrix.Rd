@@ -4,7 +4,6 @@
 \alias{model_get_model_matrix}
 \alias{model_get_model_matrix.default}
 \alias{model_get_model_matrix.clm}
-\alias{model_get_model_matrix.clmm}
 \title{Get the model matrix of a model}
 \usage{
 model_get_model_matrix(model)
@@ -12,8 +11,6 @@ model_get_model_matrix(model)
 \method{model_get_model_matrix}{default}(model)
 
 \method{model_get_model_matrix}{clm}(model)
-
-\method{model_get_model_matrix}{clmm}(model)
 }
 \arguments{
 \item{model}{a model object}

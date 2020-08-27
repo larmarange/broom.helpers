@@ -19,12 +19,13 @@
 tidy_remove_intercept <- function(x, model = tidy_get_model(x)) {
   if (is.null(model))
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
-  x <- x %>% tidy_attach_model(model) # in case not already attached
 
   if (!"var_type" %in% names(x))
-    x <- x %>% tidy_identify_variables()
+    x <- x %>% tidy_identify_variables(model = model)
 
-  x %>% dplyr::filter(.data$var_type != "intercept")
+  x %>%
+    dplyr::filter(.data$var_type != "intercept") %>%
+    tidy_attach_model(model = model)
 }
 
 

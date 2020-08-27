@@ -63,6 +63,27 @@ test_that("tidy_add_variable_labels() works for basic models", {
 })
 
 
+
+test_that("test tidy_add_variable_labels() checks", {
+  mod <- glm(response ~ stage + grade + trt, gtsummary::trial, family = binomial)
+  # expect an error if no model attached
+  expect_error(mod %>% broom::tidy() %>% tidy_add_variable_labels())
+
+  # could be apply twice (no error)
+  expect_error(
+    mod %>% tidy_and_attach() %>% tidy_add_variable_labels() %>% tidy_add_variable_labels(),
+    NA
+  )
+
+  # cannot be applied after tidy_add_header_rows()
+  expect_error(
+    mod %>% tidy_and_attach() %>%
+      tidy_add_header_rows() %>%
+      tidy_add_variable_labels()
+  )
+})
+
+
 test_that("tidy_add_variable_labels() correctly manages interaction terms", {
   df <- gtsummary::trial
   mod <- glm(response ~ age * grade * trt, df, family = binomial)
@@ -138,6 +159,19 @@ test_that("tidy_add_variable_labels() works with survival::coxph", {
   df <- survival::lung %>% dplyr::mutate(sex = factor(sex))
   mod <- survival::coxph(survival::Surv(time, status) ~ ph.ecog + age + sex, data = df)
   expect_error(mod %>% tidy_and_attach() %>% tidy_add_variable_labels(), NA)
+
+
+  # check that label attribute in original dataset is preserved
+  mod <- survival::coxph(survival::Surv(ttdeath, death) ~ grade, gtsummary::trial)
+    res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_identify_variables() %>%
+    tidy_add_reference_rows() %>%
+    tidy_add_variable_labels()
+  expect_equivalent(
+    res$var_label,
+    c("Grade", "Grade", "Grade")
+  )
 })
 
 test_that("tidy_add_variable_labels() works with survival::survreg", {
