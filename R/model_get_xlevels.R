@@ -3,6 +3,9 @@
 #' @param model a model object
 #' @export
 #' @family model_helpers
+#' @examples
+#' lm(hp ~ mpg + factor(cyl), mtcars) %>%
+#'   model_get_xlevels()
 model_get_xlevels <- function(model) {
   UseMethod("model_get_xlevels")
 }

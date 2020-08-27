@@ -9,6 +9,10 @@
 #' @export
 #' @family model_helpers
 #' @seealso [stats::model.matrix()]
+#' @examples
+#' lm(hp ~ mpg + factor(cyl), mtcars) %>%
+#'   model_get_model_matrix() %>%
+#'   head()
 model_get_model_matrix <- function(model) {
   UseMethod("model_get_model_matrix")
 }

@@ -43,7 +43,7 @@ tidy_add_contrasts <- function(x, model = tidy_get_model(x)) {
       contrasts = NA_character_
     )
     xlevels <- model_get_xlevels(model)
-    for (i in 1:nrow(contrasts_list)) {
+    for (i in seq_len(nrow(contrasts_list))) {
       n_levels <- length(xlevels[[contrasts_list$variable[i]]])
 
       if (is.character(model_contrasts[[i]]) & length(is.character(model_contrasts[[i]]) == 1))

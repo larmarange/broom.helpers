@@ -15,6 +15,15 @@ model_get_contrasts(model)
 \description{
 Get contrasts used in the model
 }
+\examples{
+glm(
+  am ~ mpg + factor(cyl),
+  data = mtcars,
+  family = binomial,
+  contrasts = list(`factor(cyl)` = contr.sum)
+) \%>\%
+model_get_contrasts()
+}
 \seealso{
 Other model_helpers: 
 \code{\link{model_get_model_frame}()},
