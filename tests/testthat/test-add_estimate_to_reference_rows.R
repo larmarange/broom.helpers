@@ -62,6 +62,13 @@ test_that("tidy_add_estimate_to_reference_rows() works for basic models", {
   )
 })
 
+
+test_that("test tidy_add_estimate_to_reference_rows() checks", {
+  mod <- glm(response ~ stage + grade + trt, gtsummary::trial, family = binomial)
+  # expect an error if no model attached
+  expect_error(mod %>% broom::tidy() %>% tidy_add_estimate_to_reference_rows())
+})
+
 test_that("tidy_add_estimate_to_reference_rows() works with character variables", {
   df <- gtsummary::trial %>%
     dplyr::mutate(dplyr::across(where(is.factor), as.character))

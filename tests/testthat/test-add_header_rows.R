@@ -89,6 +89,18 @@ test_that("tidy_add_header_rows() works as expected", {
   )
 })
 
+test_that("test tidy_add_header_rows() checks", {
+  mod <- glm(response ~ stage + grade + trt, gtsummary::trial, family = binomial)
+  # expect an error if no model attached
+  expect_error(mod %>% broom::tidy() %>% tidy_add_header_rows())
+
+  # warning if applied twice
+  expect_warning(
+    mod %>% tidy_and_attach() %>%
+      tidy_add_header_rows() %>%
+      tidy_add_header_rows()
+  )
+})
 
 test_that("tidy_add_header_rows() works with nnet::multinom", {
   mod <- nnet::multinom(grade ~ stage + marker + age + trt, data = gtsummary::trial, trace = FALSE)
