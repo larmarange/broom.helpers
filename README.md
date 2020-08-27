@@ -12,18 +12,21 @@ status](https://travis-ci.com/larmarange/broom.helpers.svg?branch=master)](https
 <!-- badges: end -->
 
 The broom.helpers package provides suite of functions to work with
-`broom::tidy()` tibbles from regression models. The suite includes
-functions to group regression model terms by variable, insert reference
-and header rows for categorical variables, add variable labels, and
-more.
+regression model `broom::tidy()` tibbles. The suite includes functions
+to group regression model terms by variable, insert reference and header
+rows for categorical variables, add variable labels, and more.
 
 ## Installation
+
+This package is still experimental and under development.
+
+To install it for testing purpose, use:
 
 ``` r
 devtools::install_github("larmarange/broom.helpers")
 ```
 
-## Example
+## Examples
 
 ``` r
 library(broom.helpers)
@@ -58,10 +61,10 @@ lm(mpg ~ factor(cyl) + hp, mtcars) %>%
 #> # A tibble: 4 x 14
 #>   term  variable var_class var_type estimate std.error statistic  p.value
 #>   <chr> <chr>    <chr>     <chr>       <dbl>     <dbl>     <dbl>    <dbl>
-#> 1 fact~ factor(~ factor    categor~  NA        NA          NA    NA      
-#> 2 fact~ factor(~ factor    categor~  -5.97      1.64       -3.64  0.00109
-#> 3 fact~ factor(~ factor    categor~  -8.52      2.33       -3.66  0.00103
-#> 4 hp    hp       numeric   continu~  -0.0240    0.0154     -1.56  0.130  
+#> 1 fact~ factor(~ factor    categor~     0      NA          NA    NA      
+#> 2 fact~ factor(~ factor    categor~    -5.97    1.64       -3.64  0.00109
+#> 3 fact~ factor(~ factor    categor~    -8.52    2.33       -3.66  0.00103
+#> 4 hp    hp       numeric   continu~    NA       0.0154     -1.56  0.130  
 #> # ... with 6 more variables: conf.low <dbl>, conf.high <dbl>, contrasts <chr>,
 #> #   reference_row <lgl>, var_label <chr>, label <chr>
 ```

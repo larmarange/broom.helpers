@@ -20,16 +20,20 @@ knitr::opts_chunk$set(
 [![Travis build status](https://travis-ci.com/larmarange/broom.helpers.svg?branch=master)](https://travis-ci.com/larmarange/broom.helpers)
 <!-- badges: end -->
 
-The broom.helpers package provides suite of functions to work with `broom::tidy()` tibbles from regression models.
+The broom.helpers package provides suite of functions to work with regression model `broom::tidy()` tibbles.
 The suite includes functions to group regression model terms by variable, insert reference and header rows for categorical variables, add variable labels, and more.
 
 ## Installation
+
+This package is still experimental and under development.
+
+To install it for testing purpose, use:
 
 ``` r
 devtools::install_github("larmarange/broom.helpers")
 ```
 
-## Example
+## Examples
 
 ```{r example}
 library(broom.helpers)
