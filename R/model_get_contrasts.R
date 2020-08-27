@@ -14,12 +14,7 @@ model_get_contrasts.default <- function(model) {
     model$contrasts,
     error = function(e) {
       # if first approach is not working, try second one
-      tryCatch(
-        attr(model_get_model_matrix(model), "contrasts"),
-        error = function(e) {
-          NULL
-        }
-      )
+      attr(model_get_model_matrix(model), "contrasts")
     }
   )
 }
