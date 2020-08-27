@@ -48,5 +48,6 @@ Suggests:
     gee,
     datasets,
     gam,
-    lavaan
+    lavaan,
+    covr
 RdMacros: lifecycle
