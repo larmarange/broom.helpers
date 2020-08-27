@@ -28,6 +28,32 @@ test_that("tidy_add_reference_rows() works as expected", {
   expect_true(all(is.na(res$reference_row)))
 })
 
+test_that("test tidy_add_reference_rows() checks", {
+  mod <- glm(response ~ stage + grade + trt, gtsummary::trial, family = binomial)
+  # expect an error if no model attached
+  expect_error(mod %>% broom::tidy() %>% tidy_add_reference_rows())
+
+  # warning if applied twice
+  expect_warning(
+    mod %>% tidy_and_attach() %>%
+      tidy_add_reference_rows() %>%
+      tidy_add_reference_rows()
+  )
+
+  # warning if applied after tidy_add_term_labels()
+  expect_warning(
+    mod %>% tidy_and_attach() %>%
+      tidy_add_term_labels() %>%
+      tidy_add_reference_rows()
+  )
+
+  # error if applied after tidy_add_header_rows()
+  expect_error(
+    mod %>% tidy_and_attach() %>%
+      tidy_add_header_rows() %>%
+      tidy_add_reference_rows()
+  )
+})
 
 test_that("tidy_add_reference_rows() works with different values of base in contr.treatment()", {
   mod <- glm(
