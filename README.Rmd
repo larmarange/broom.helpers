@@ -1,0 +1,54 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# broom.helpers
+
+<!-- badges: start -->
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![Travis build status](https://travis-ci.com/larmarange/broom.helpers.svg?branch=master)](https://travis-ci.com/larmarange/broom.helpers)
+<!-- badges: end -->
+
+The broom.helpers package provides suite of functions to work with `broom::tidy()` tibbles from regression models.
+The suite includes functions to group regression model terms by variable, insert reference and header rows for categorical variables, add variable labels, and more.
+
+## Installation
+
+``` r
+devtools::install_github("larmarange/broom.helpers")
+```
+
+## Example
+
+```{r example}
+library(broom.helpers)
+
+# build regression model
+lm(mpg ~ factor(cyl) + hp, mtcars) %>%
+  # perform initial tidying of model
+  tidy_and_attach() %>%
+  # add reference row cyl
+  tidy_add_reference_rows() %>%
+  # add the cyl levels
+  tidy_add_term_labels() %>%
+  # remove intercept
+  tidy_remove_intercept()
+```
+
+The package also includes a handy wrapper for the most commonly used functions.
+
+```{r cars}
+lm(mpg ~ factor(cyl) + hp, mtcars) %>%
+  tidy_plus_plus()
+```
