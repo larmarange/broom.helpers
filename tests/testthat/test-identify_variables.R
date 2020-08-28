@@ -16,6 +16,22 @@ test_that("tidy_identify_variables() works for common models", {
   )
 })
 
+test_that("test tidy_identify_variables() checks", {
+  mod <- glm(response ~ stage + grade + trt, gtsummary::trial, family = binomial)
+  # expect an error if no model attached
+  expect_error(mod %>% broom::tidy() %>% tidy_identify_variables())
+
+  # could be apply twice (no error)
+  expect_error(
+    mod %>% tidy_and_attach() %>% tidy_identify_variables() %>% tidy_identify_variables(),
+    NA
+  )
+
+  # cannot be applied after tidy_add_header_rows
+  expect_error(
+    mod %>% tidy_and_attach() %>% tidy_add_header_rows() %>% tidy_identify_variables()
+  )
+})
 
 test_that("model_identify_variables() works with different contrasts", {
   mod <- glm(
