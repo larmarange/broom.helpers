@@ -72,7 +72,7 @@ tidy_add_estimate_to_reference_rows <- function(x, exponentiate = FALSE, model =
   x <- x %>%
     dplyr::mutate(
       estimate = dplyr::if_else(
-        .data$reference_row & stringr::str_starts(.data$contrasts, "contr.treatment|contr.SAS"),
+        !is.na(.data$reference_row) & .data$reference_row & stringr::str_starts(.data$contrasts, "contr.treatment|contr.SAS"),
         dplyr::if_else(exponentiate, 1, 0),
         .data$estimate
       )

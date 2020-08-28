@@ -146,6 +146,13 @@ test_that("tidy_add_estimate_to_reference_rows() handles variables having non st
   )
 })
 
+test_that("tidy_add_estimate_to_reference_rows() preserve estimates of continuous variables", {
+  mod <- glm(response ~ poly(age, 3) + ttdeath, na.omit(gtsummary::trial), family = binomial)
+  res1 <- mod %>% tidy_and_attach() %>% tidy_add_reference_rows()
+  res2 <- res1 %>% tidy_add_estimate_to_reference_rows()
+  expect_equivalent(res1$estimate, res2$estimate)
+})
+
 
 test_that("tidy_add_estimate_to_reference_rows() works with lme4::lmer", {
   df <- gtsummary::trial
