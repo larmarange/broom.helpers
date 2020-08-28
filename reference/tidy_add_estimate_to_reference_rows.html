@@ -157,8 +157,8 @@ coefficient estimates. It should be consistent with the original call to
 the estimate value of the reference row will be equal to the sum of
 all other coefficients multiplied by <code>-1</code> (eventually exponentiated if
 <code>exponentiate = TRUE</code>), and obtained with <code><a href='https://rdrr.io/r/stats/dummy.coef.html'>stats::dummy.coef()</a></code>.
-To be noted, for sum contrasts, the model coefficients correspond
-to the difference of each level with the great mean.</p>
+For sum contrasts, the model coefficient corresponds
+to the difference of each level with the grand mean.</p>
 <p>For other variables, no change will be made.</p>
 <p>If the <code>reference_row</code> column is not yet available in <code>x</code>,
 <code><a href='tidy_add_reference_rows.html'>tidy_add_reference_rows()</a></code> will be automatically applied.</p>

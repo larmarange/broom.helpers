@@ -75,12 +75,53 @@
 <div id="broomhelpers" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#broomhelpers" class="anchor"></a>broom.helpers</h1></div>
-<p>A set of functions to facilitate manipulation of tibbles produced by <code>broom</code></p>
 <!-- badges: start -->
-<p><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: maturing"></a> <a href="https://travis-ci.com/larmarange/broom.helpers"><img src="https://travis-ci.com/larmarange/broom.helpers.svg?branch=master" alt="Travis build status"></a> <a href="https://github.com/larmarange/broom.helpers/actions"><img src="https://github.com/larmarange/broom.helpers/workflows/R-CMD-check/badge.svg" alt="R build status"></a> <a href="https://codecov.io/gh/larmarange/broom.helpers?branch=master"><img src="https://codecov.io/gh/larmarange/broom.helpers/branch/master/graph/badge.svg" alt="Codecov test coverage"></a> <a href="https://CRAN.R-project.org/package=broom.helpers"><img src="https://www.r-pkg.org/badges/version/broom.helpers" alt="CRAN status"></a> <!-- badges: end --></p>
-<p>This package is still experimental and under developement.</p>
+
+<p>The broom.helpers package provides suite of functions to work with regression model <code><a href="https://broom.tidymodels.org/reference/reexports.html">broom::tidy()</a></code> tibbles. The suite includes functions to group regression model terms by variable, insert reference and header rows for categorical variables, add variable labels, and more.</p>
+<div id="installation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h2>
+<p>This package is still experimental and under development.</p>
 <p>To install it for testing purpose, use:</p>
 <div class="sourceCode" id="cb1"><pre class="r"><span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu">install_github</span>(<span class="st">"larmarange/broom.helpers"</span>)</pre></div>
+</div>
+<div id="examples" class="section level2">
+<h2 class="hasAnchor">
+<a href="#examples" class="anchor"></a>Examples</h2>
+<div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">broom.helpers</span>)
+
+<span class="co"># build regression model</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="no">mpg</span> ~ <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(<span class="no">cyl</span>) + <span class="no">hp</span>, <span class="no">mtcars</span>) <span class="kw">%&gt;%</span>
+  <span class="co"># perform initial tidying of model</span>
+  <span class="fu"><a href="reference/tidy_attach_model.html">tidy_and_attach</a></span>() <span class="kw">%&gt;%</span>
+  <span class="co"># add reference row cyl</span>
+  <span class="fu"><a href="reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span>() <span class="kw">%&gt;%</span>
+  <span class="co"># add the cyl levels</span>
+  <span class="fu"><a href="reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span>() <span class="kw">%&gt;%</span>
+  <span class="co"># remove intercept</span>
+  <span class="fu"><a href="reference/tidy_remove_intercept.html">tidy_remove_intercept</a></span>()
+<span class="co">#&gt; # A tibble: 4 x 12</span>
+<span class="co">#&gt;   term  variable var_label var_class var_type contrasts reference_row label</span>
+<span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;     &lt;lgl&gt;         &lt;chr&gt;</span>
+<span class="co">#&gt; 1 fact~ factor(~ factor(c~ factor    categor~ contr.tr~ TRUE          4    </span>
+<span class="co">#&gt; 2 fact~ factor(~ factor(c~ factor    categor~ contr.tr~ FALSE         6    </span>
+<span class="co">#&gt; 3 fact~ factor(~ factor(c~ factor    categor~ contr.tr~ FALSE         8    </span>
+<span class="co">#&gt; 4 hp    hp       hp        numeric   continu~ &lt;NA&gt;      NA            hp   </span>
+<span class="co">#&gt; # ... with 4 more variables: estimate &lt;dbl&gt;, std.error &lt;dbl&gt;, statistic &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   p.value &lt;dbl&gt;</span></pre></div>
+<p>The package also includes a handy wrapper for the most commonly used functions.</p>
+<div class="sourceCode" id="cb3"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="no">mpg</span> ~ <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(<span class="no">cyl</span>) + <span class="no">hp</span>, <span class="no">mtcars</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="reference/tidy_plus_plus.html">tidy_plus_plus</a></span>()
+<span class="co">#&gt; # A tibble: 4 x 14</span>
+<span class="co">#&gt;   term  variable var_label var_class var_type contrasts reference_row label</span>
+<span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;     &lt;lgl&gt;         &lt;chr&gt;</span>
+<span class="co">#&gt; 1 fact~ factor(~ factor(c~ factor    categor~ contr.tr~ TRUE          4    </span>
+<span class="co">#&gt; 2 fact~ factor(~ factor(c~ factor    categor~ contr.tr~ FALSE         6    </span>
+<span class="co">#&gt; 3 fact~ factor(~ factor(c~ factor    categor~ contr.tr~ FALSE         8    </span>
+<span class="co">#&gt; 4 hp    hp       hp        numeric   continu~ &lt;NA&gt;      NA            hp   </span>
+<span class="co">#&gt; # ... with 6 more variables: estimate &lt;dbl&gt;, std.error &lt;dbl&gt;, statistic &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;</span></pre></div>
+</div>
 </div>
   </div>
 
@@ -109,7 +150,14 @@
 </ul>
 </div>
 
-  </div>
+  <div class="dev-status">
+<h2>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
+<li><a href="https://travis-ci.com/larmarange/broom.helpers"><img src="https://travis-ci.com/larmarange/broom.helpers.svg?branch=master" alt="Travis build status"></a></li>
+</ul>
+</div>
+</div>
 </div>
 
 
