@@ -1,8 +1,8 @@
 ---
-title: "Getting Started"
+title: "Getting Started with broom.helpers"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Getting Started}
+  %\VignetteIndexEntry{Getting Started with broom.helpers}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -10,19 +10,24 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  rows.print = 25
 )
 ```
 
 The `broom.helpers` package offers a suite of functions that make easy to interact, add information, and manipulate tibbles created with `broom::tidy()` (and friends).
+
+The suite includes functions to group regression model terms by variable, insert reference and header rows for categorical variables, add variable labels, and more.
 
 As a motivating example, let's summarize a logistic regression model with a forest plot and in a table.
 
 To begin, let's load our packages.
 
 ```{r setup, warning=FALSE, message=FALSE}
-library(broom.helpers); library(gtsummary)
-library(ggplot2); library(dplyr)
+library(broom.helpers)
+library(gtsummary)
+library(ggplot2)
+library(dplyr)
 ```
 
 Our model predicts tumor response using chemotherapy treatment and tumor grade.
@@ -37,7 +42,7 @@ broom::tidy(model_logit)
 ## Forest Plot
 
 To create the figure, we'll need to add some information to the tidy tibble, i.e. we'll need to group the terms that belong to the same variable, add the reference row, etc.
-Parsing this information can be difficult, but the broom.helper package has made it simple.
+Parsing this information can be difficult, but the `broom.helper` package has made it simple.
 
 ```{r}
 tidy_forest <-
@@ -55,7 +60,9 @@ tidy_forest <-
 tidy_forest
 ```
 
-We now have a tibble with every piece of information we need to create our forest plot.
+**Note:** we used `tidy_and_attach()` instead of `broom::tidy()`. `broom.helpers` functions needs a copy of the original model. To avoid passing the model at each step, the easier way is to attach the model as an attribute of the tibble with `tidy_attach_model()`. `tidy_and_attach()` is simply a shorcut of `model %>% broom::tidy() %>% tidy_and_attach(model)`.
+
+We now have a tibble with every piece of information we need to create our forest plot using `ggplot2`.
 
 ```{r, warning=FALSE}
 tidy_forest %>%
@@ -106,9 +113,124 @@ tidy_table %>%
   knitr::kable()
 ```
 
-There is also a handy wrapper for the most commonly used `tidy_*()` functions, and they can be executed with a single line of code:
+## All-in-one function
+
+There is also a handy wrapper, called `tidy_plus_plus()`, for the most commonly used `tidy_*()` functions, and they can be executed with a single line of code:
 
 ```{r}
 model_logit %>%
-  tidy_plus_plus(exponentiate = TRUE, conf.int = TRUE)
+  tidy_plus_plus(exponentiate = TRUE)
+```
+
+```{r}
+model_logit %>%
+  tidy_plus_plus(exponentiate = TRUE) %>%
+  rmarkdown::paged_table()
+```
+
+See the documentation of `tidy_plus_plus()` for the full list of available options.
+
+## Advanced examples
+
+`broom.helpers` can also handle different contrasts for categorical variables and the use of polynomial terms for continuous variables.
+
+### Polynomial terms
+
+When polynomial terms of a continuous variable are defined with `stats::poly()`, `broom.helpers` will be able to identify the corresponding variable, create appropriate labels and add header rows.
+
+```{r}
+model_poly <- glm(response ~ poly(age, 3) + ttdeath, na.omit(trial), family = binomial)
+
+model_poly %>%
+  tidy_plus_plus(
+    exponentiate = TRUE,
+    add_header_rows = TRUE,
+    variable_labels = c(age = "Age in years")
+  ) %>%
+  rmarkdown::paged_table()
+```
+
+### Different type of contrasts
+
+By default, categorical variables are coded with a treatment contrasts (see `stats::contr.treatment()`). With such contrasts, model coefficients correspond to the effect of a modality compared with the reference modality (by default, the first one). `tidy_add_reference_rows()` allows to add a row for this reference modality and `tidy_add_estimate_to_reference_rows()` will populate the estimate value of these references rows by 0 (or 1 if `exponentiate = TRUE`). `tidy_add_term_labels()` is able to retrieve the label of the factor level associated with a specific model term.
+
+```{r}
+model_1 <- glm(
+  response ~ stage + grade * trt,
+  gtsummary::trial,
+  family = binomial
+)
+
+model_1 %>%
+  tidy_and_attach(exponentiate = TRUE) %>%
+  tidy_add_reference_rows() %>%
+  tidy_add_estimate_to_reference_rows(exponentiate = TRUE) %>%
+  tidy_add_term_labels() %>%
+  rmarkdown::paged_table()
+```
+
+Using `stats::contr.treatment()`, it is possible to defined alternative reference rows. It will be properly managed by `broom.helpers`.
+
+```{r}
+model_2 <- glm(
+  response ~ stage + grade * trt,
+  gtsummary::trial,
+  family = binomial,
+  contrasts = list(
+    stage = contr.treatment(4, base = 3),
+    grade = contr.treatment(3, base = 2),
+    trt = contr.treatment(2, base = 2)
+  )
+)
+
+model_2 %>%
+  tidy_and_attach(exponentiate = TRUE) %>%
+  tidy_add_reference_rows() %>%
+  tidy_add_estimate_to_reference_rows(exponentiate = TRUE) %>%
+  tidy_add_term_labels() %>%
+  rmarkdown::paged_table()
+```
+
+You can also use sum contrasts (cf. `stats::contr.sum()`). In that case, each model coefficient corresponds to the difference of that modality with the grand mean. A variable with 4 modalities will be coded with 3 terms. However, a value could be computed (using `stats::dummy.coef()`) for the last modality, corresponding to the difference of that modality with the grand mean and equal to sum of all other coefficients multiplied by -1. `broom.helpers` will identify categorical variables coded with sum contrasts and could retrieve an estimate value for the reference term.
+
+```{r}
+model_3 <- glm(
+  response ~ stage + grade * trt,
+  gtsummary::trial,
+  family = binomial,
+  contrasts = list(
+    stage = contr.sum,
+    grade = contr.sum,
+    trt = contr.sum
+  )
+)
+
+model_3 %>%
+  tidy_and_attach(exponentiate = TRUE) %>%
+  tidy_add_reference_rows() %>%
+  tidy_add_estimate_to_reference_rows(exponentiate = TRUE) %>%
+  tidy_add_term_labels() %>%
+  rmarkdown::paged_table()
+```
+
+Other types of contrasts exist, like Helmert (`contr.helmert()`) or plynomial (`contr.poly()`). They are more complex as a modality will be coded with a combination of terms. Therefore, for such contrasts, it will not be possible to associate a specific model term with a level of the original factor. `broom.helpers` will not add a reference term in such case.
+
+```{r}
+model_4 <- glm(
+  response ~ stage + grade * trt,
+  gtsummary::trial,
+  family = binomial,
+  contrasts = list(
+    stage = contr.poly,
+    grade = contr.helmert,
+    trt = contr.poly
+  )
+)
+
+model_4 %>%
+  tidy_and_attach(exponentiate = TRUE) %>%
+  tidy_add_reference_rows() %>%
+  tidy_add_estimate_to_reference_rows(exponentiate = TRUE) %>%
+  tidy_add_term_labels() %>%
+  rmarkdown::paged_table()
 ```
