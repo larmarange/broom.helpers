@@ -1,3 +1,32 @@
+url: https://larmarange.github.io/broom.helpers/
+
+template:
+  params:
+    bootswatch: flatly
+
+authors:
+  Joseph Larmarange:
+    href: "http://joseph.larmarange.net/"
+  Daniel D. Sjoberg:
+    href: "http://www.danieldsjoberg.com/"
+
+navbar:
+  type: default
+  left:
+  - icon: fa-home
+    href: index.html
+  - text: Reference
+    href: reference/index.html
+  - text: Getting Started
+    href: articles/tidy.html
+  - text: News
+    href: news/index.html
+  right:
+  - icon: fa-github fa-lg
+    href: https://github.com/larmarange/broom.helpers
+
+
+
 reference:
   - title: Add to tidy tibbles
   - contents:
