@@ -17,16 +17,16 @@
 #'   tidy_and_attach() %>%
 #'   tidy_remove_intercept()
 tidy_remove_intercept <- function(x, model = tidy_get_model(x)) {
-  if (is.null(model))
+  if (is.null(model)) {
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
+  }
 
-  if (!"var_type" %in% names(x))
+  if (!"var_type" %in% names(x)) {
     x <- x %>% tidy_identify_variables(model = model)
+  }
 
   x %>%
     dplyr::filter(.data$var_type != "intercept") %>%
     tidy_attach_model(model = model) %>%
     .order_tidy_columns()
 }
-
-

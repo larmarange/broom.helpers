@@ -53,13 +53,15 @@
 #'   tidy_plus_plus(exponentiate = TRUE)
 #' ex2
 #'
-#' if(requireNamespace("gtsummary")) {
+#' if (requireNamespace("gtsummary")) {
 #'   ex3 <- glm(
 #'     response ~ poly(age, 3) + stage + grade * trt,
 #'     na.omit(gtsummary::trial),
 #'     family = binomial,
-#'     contrasts = list(stage = contr.treatment(4, base = 3),
-#'                      grade = contr.sum)
+#'     contrasts = list(
+#'       stage = contr.treatment(4, base = 3),
+#'       grade = contr.sum
+#'     )
 #'   ) %>%
 #'     tidy_plus_plus(
 #'       exponentiate = TRUE,
@@ -73,20 +75,19 @@
 #' }
 #' @export
 tidy_plus_plus <- function(
-  model,
-  tidy_fun = broom::tidy,
-  conf.int = TRUE,
-  exponentiate = FALSE,
-  variable_labels = NULL,
-  term_labels = NULL,
-  add_reference_rows = TRUE,
-  add_estimate_to_reference_rows = TRUE,
-  add_header_rows = FALSE,
-  show_single_row = NULL,
-  intercept = FALSE,
-  keep_model = FALSE,
-  ...
-) {
+                           model,
+                           tidy_fun = broom::tidy,
+                           conf.int = TRUE,
+                           exponentiate = FALSE,
+                           variable_labels = NULL,
+                           term_labels = NULL,
+                           add_reference_rows = TRUE,
+                           add_estimate_to_reference_rows = TRUE,
+                           add_header_rows = FALSE,
+                           show_single_row = NULL,
+                           intercept = FALSE,
+                           keep_model = FALSE,
+                           ...) {
   res <- model %>%
     tidy_and_attach(
       tidy_fun = tidy_fun,
@@ -96,21 +97,26 @@ tidy_plus_plus <- function(
     ) %>%
     tidy_identify_variables() %>%
     tidy_add_contrasts()
-  if (add_reference_rows)
+  if (add_reference_rows) {
     res <- res %>% tidy_add_reference_rows()
-  if (add_reference_rows & add_estimate_to_reference_rows)
+  }
+  if (add_reference_rows & add_estimate_to_reference_rows) {
     res <- res %>%
       tidy_add_estimate_to_reference_rows(exponentiate = exponentiate)
+  }
   res <- res %>%
     tidy_add_variable_labels(labels = variable_labels) %>%
     tidy_add_term_labels(labels = term_labels)
-  if (add_header_rows)
+  if (add_header_rows) {
     res <- res %>%
       tidy_add_header_rows(show_single_row = show_single_row)
-  if(!intercept)
+  }
+  if (!intercept) {
     res <- res %>% tidy_remove_intercept()
-  if (!keep_model)
+  }
+  if (!keep_model) {
     res <- res %>% tidy_detach_model()
+  }
   res %>%
     .order_tidy_columns()
 }

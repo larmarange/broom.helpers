@@ -1,37 +1,48 @@
 test_that("tidy_add_estimate_to_reference_rows() works for basic models", {
   mod <- glm(response ~ stage + grade + trt, gtsummary::trial, family = binomial)
-  res <- mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows()
-  expect_equivalent(
-    res$estimate[res$reference_row & !is.na(res$reference_row)],
-    c(0, 0, 0)
-  )
-
-  res <- mod %>% tidy_and_attach(exponentiate = TRUE) %>%
-    tidy_add_estimate_to_reference_rows(exponentiate = TRUE)
-  expect_equivalent(
-    res$estimate[res$reference_row & !is.na(res$reference_row)],
-    c(1, 1, 1)
-  )
-
-  mod <- glm(response ~ stage + grade + trt, gtsummary::trial, family = binomial,
-             contrasts = list(stage = contr.treatment(4, base = 3), grade = contr.treatment(3, base = 2), trt = contr.SAS))
-  res <- mod %>% tidy_and_attach() %>%
+  res <- mod %>%
+    tidy_and_attach() %>%
     tidy_add_estimate_to_reference_rows()
   expect_equivalent(
     res$estimate[res$reference_row & !is.na(res$reference_row)],
     c(0, 0, 0)
   )
 
-  res <- mod %>% tidy_and_attach(exponentiate = TRUE) %>%
+  res <- mod %>%
+    tidy_and_attach(exponentiate = TRUE) %>%
     tidy_add_estimate_to_reference_rows(exponentiate = TRUE)
   expect_equivalent(
     res$estimate[res$reference_row & !is.na(res$reference_row)],
     c(1, 1, 1)
   )
 
-  mod <- glm(response ~ stage + grade + trt, gtsummary::trial, family = binomial,
-             contrasts = list(stage = contr.sum, grade = contr.sum, trt = contr.sum))
-  res <- mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows()
+  mod <- glm(response ~ stage + grade + trt, gtsummary::trial,
+    family = binomial,
+    contrasts = list(stage = contr.treatment(4, base = 3), grade = contr.treatment(3, base = 2), trt = contr.SAS)
+  )
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_add_estimate_to_reference_rows()
+  expect_equivalent(
+    res$estimate[res$reference_row & !is.na(res$reference_row)],
+    c(0, 0, 0)
+  )
+
+  res <- mod %>%
+    tidy_and_attach(exponentiate = TRUE) %>%
+    tidy_add_estimate_to_reference_rows(exponentiate = TRUE)
+  expect_equivalent(
+    res$estimate[res$reference_row & !is.na(res$reference_row)],
+    c(1, 1, 1)
+  )
+
+  mod <- glm(response ~ stage + grade + trt, gtsummary::trial,
+    family = binomial,
+    contrasts = list(stage = contr.sum, grade = contr.sum, trt = contr.sum)
+  )
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_add_estimate_to_reference_rows()
   # should be -1 * sum of other coefficients when sum contrasts
   expect_equivalent(
     res$estimate[res$reference_row & res$variable == "stage" & !is.na(res$reference_row)],
@@ -46,7 +57,8 @@ test_that("tidy_add_estimate_to_reference_rows() works for basic models", {
     sum(res$estimate[!res$reference_row & res$variable == "trt"], na.rm = TRUE) * -1
   )
 
-  res2 <- mod %>% tidy_and_attach(exponentiate = TRUE) %>%
+  res2 <- mod %>%
+    tidy_and_attach(exponentiate = TRUE) %>%
     tidy_add_estimate_to_reference_rows(exponentiate = TRUE)
   expect_equivalent(
     res2$estimate[res2$reference_row & res2$variable == "stage" & !is.na(res2$reference_row)],
@@ -73,23 +85,33 @@ test_that("tidy_add_estimate_to_reference_rows() works with character variables"
   df <- gtsummary::trial %>%
     dplyr::mutate(dplyr::across(where(is.factor), as.character))
   mod <- glm(response ~ stage + grade + trt, df, family = binomial)
-  res <- mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows()
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_add_estimate_to_reference_rows()
   expect_equivalent(
     res$estimate[res$reference_row & !is.na(res$reference_row)],
     c(0, 0, 0)
   )
 
-  mod <- glm(response ~ stage + grade + trt, df, family = binomial,
-             contrasts = list(stage = contr.treatment(4, base = 3), grade = contr.treatment(3, base = 2), trt = contr.SAS))
-  res <- mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows()
+  mod <- glm(response ~ stage + grade + trt, df,
+    family = binomial,
+    contrasts = list(stage = contr.treatment(4, base = 3), grade = contr.treatment(3, base = 2), trt = contr.SAS)
+  )
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_add_estimate_to_reference_rows()
   expect_equivalent(
     res$estimate[res$reference_row & !is.na(res$reference_row)],
     c(0, 0, 0)
   )
 
-  mod <- glm(response ~ stage + grade + trt, df, family = binomial,
-             contrasts = list(stage = contr.sum, grade = contr.sum, trt = contr.sum))
-  res <- mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows()
+  mod <- glm(response ~ stage + grade + trt, df,
+    family = binomial,
+    contrasts = list(stage = contr.sum, grade = contr.sum, trt = contr.sum)
+  )
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_add_estimate_to_reference_rows()
   # should be -1 * sum of other coefficients when sum contrasts
   expect_equivalent(
     res$estimate[res$reference_row & res$variable == "stage" & !is.na(res$reference_row)],
@@ -111,8 +133,10 @@ test_that("tidy_add_estimate_to_reference_rows() handles variables having non st
   # a warning should have been displayed
 
   df <- gtsummary::trial %>% dplyr::mutate(`grade of kids` = grade)
-  mod <- glm(response ~ stage + `grade of kids` + trt, df, family = binomial,
-            contrasts = list(`grade of kids` = contr.sum))
+  mod <- glm(response ~ stage + `grade of kids` + trt, df,
+    family = binomial,
+    contrasts = list(`grade of kids` = contr.sum)
+  )
   expect_warning(
     res <- mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows()
   )
@@ -120,7 +144,6 @@ test_that("tidy_add_estimate_to_reference_rows() handles variables having non st
     res$estimate[res$variable == "grade of kids" & res$reference_row & !is.na(res$variable)],
     NA_real_
   )
-
 })
 
 
@@ -153,7 +176,8 @@ test_that("tidy_add_estimate_to_reference_rows() works with survival::coxph", {
 test_that("tidy_add_estimate_to_reference_rows() works with survival::survreg", {
   mod <- survival::survreg(
     survival::Surv(futime, fustat) ~ factor(ecog.ps) + rx,
-    survival::ovarian, dist="exponential"
+    survival::ovarian,
+    dist = "exponential"
   )
   expect_error(mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows(), NA)
 })
@@ -165,26 +189,27 @@ test_that("tidy_add_estimate_to_reference_rows() works with nnet::multinom", {
   # no dummy coef for multinom
   # should return a warning but not an error
   mod <- nnet::multinom(
-    grade ~ stage + marker + age, data = gtsummary::trial, trace = FALSE,
+    grade ~ stage + marker + age,
+    data = gtsummary::trial, trace = FALSE,
     contrasts = list(stage = contr.sum)
   )
   expect_warning(mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows())
 })
 
 test_that("tidy_add_estimate_to_reference_rows() works with survey::svyglm", {
-  df <- survey::svydesign(~ 1, weights = ~1, data = gtsummary::trial)
+  df <- survey::svydesign(~1, weights = ~1, data = gtsummary::trial)
   mod <- survey::svyglm(response ~ age + grade * trt, df, family = quasibinomial)
   expect_error(mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows(), NA)
 })
 
 test_that("tidy_add_estimate_to_reference_rows() works with ordinal::clm", {
-  mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine, nominal = ~ contact)
+  mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine, nominal = ~contact)
   expect_error(mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows(), NA)
 })
 
 
 test_that("tidy_add_estimate_to_reference_rows() works with ordinal::clmm", {
-  mod <- ordinal::clmm(rating ~ temp * contact + (1|judge), data = ordinal::wine)
+  mod <- ordinal::clmm(rating ~ temp * contact + (1 | judge), data = ordinal::wine)
   expect_error(mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows(), NA)
 })
 
@@ -197,7 +222,7 @@ test_that("tidy_add_estimate_to_reference_rows() works with MASS::polr", {
 
 test_that("tidy_add_estimate_to_reference_rows() works with geepack::geeglm", {
   df <- geepack::dietox
-  df$Cu     <- as.factor(df$Cu)
+  df$Cu <- as.factor(df$Cu)
   mf <- formula(Weight ~ Cu * Time)
   suppressWarnings(
     mod <- geepack::geeglm(mf, data = df, id = Pig, family = poisson("identity"), corstr = "ar1")
@@ -208,7 +233,7 @@ test_that("tidy_add_estimate_to_reference_rows() works with geepack::geeglm", {
 
 test_that("tidy_add_estimate_to_reference_rows() works with gam::gam", {
   data(kyphosis, package = "gam")
-  mod <- gam::gam(Kyphosis ~ gam::s(Age,4) + Number, family = binomial, data = kyphosis)
+  mod <- gam::gam(Kyphosis ~ gam::s(Age, 4) + Number, family = binomial, data = kyphosis)
   expect_error(mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows(), NA)
 })
 
@@ -216,13 +241,13 @@ test_that("tidy_add_estimate_to_reference_rows() works with gam::gam", {
 test_that("tidy_add_estimate_to_reference_rows() works with lavaan::lavaan", {
   df <- lavaan::HolzingerSwineford1939
   df$grade <- factor(df$grade, ordered = TRUE)
-  HS.model <- 'visual  =~ x1 + x2 + x3
+  HS.model <- "visual  =~ x1 + x2 + x3
                textual =~ x4 + x5 + x6 + grade
-               speed   =~ x7 + x8 + x9 '
-  mod <- lavaan::lavaan(HS.model, data = df,
-                        auto.var = TRUE, auto.fix.first = TRUE,
-                        auto.cov.lv.x = TRUE)
+               speed   =~ x7 + x8 + x9 "
+  mod <- lavaan::lavaan(HS.model,
+    data = df,
+    auto.var = TRUE, auto.fix.first = TRUE,
+    auto.cov.lv.x = TRUE
+  )
   expect_error(mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows(), NA)
 })
-
-

@@ -10,5 +10,4 @@ test_that("Attach and Detach models works", {
     tb,
     tb %>% tidy_attach_model(mod) %>% tidy_detach_model()
   )
-
 })

@@ -10,7 +10,7 @@
 #'   family = binomial,
 #'   contrasts = list(`factor(cyl)` = contr.sum)
 #' ) %>%
-#' model_get_contrasts()
+#'   model_get_contrasts()
 model_get_contrasts <- function(model) {
   UseMethod("model_get_contrasts")
 }

@@ -103,7 +103,5 @@ model_identify_variables.lavaan <- function(model) {
         !is.na(.data$var_class) ~ "continuous",
         is.na(.data$var_class) & stringr::str_detect(.data$variable, ":") ~ "interaction"
       )
-  )
+    )
 }
-
-

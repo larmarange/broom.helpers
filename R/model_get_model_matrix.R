@@ -25,7 +25,9 @@ model_get_model_matrix.default <- function(model) {
     error = function(e) {
       tryCatch( # test second approach
         stats::model.matrix(stats::terms(model), model$model),
-        error = function(e) {NULL}
+        error = function(e) {
+          NULL
+        }
       )
     }
   )
@@ -38,9 +40,9 @@ model_get_model_matrix.default <- function(model) {
 # than treatment are used, resulting in an issue for
 # the identification of variables
 model_get_model_matrix.multinom <- function(model) {
-    mm <- stats::model.matrix(model)
-    colnames(mm) <- colnames(stats::coef(model))
-    mm
+  mm <- stats::model.matrix(model)
+  colnames(mm) <- colnames(stats::coef(model))
+  mm
 }
 
 #' @export
@@ -48,4 +50,3 @@ model_get_model_matrix.multinom <- function(model) {
 model_get_model_matrix.clm <- function(model) {
   stats::model.matrix(model)[[1]]
 }
-

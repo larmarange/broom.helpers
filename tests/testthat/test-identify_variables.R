@@ -1,6 +1,8 @@
 test_that("tidy_identify_variables() works for common models", {
   mod <- glm(response ~ age + grade * trt, gtsummary::trial, family = binomial)
-  res <- mod %>% tidy_and_attach() %>% tidy_identify_variables()
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_identify_variables()
   expect_equivalent(
     res$variable,
     c(NA, "age", "grade", "grade", "trt", "grade:trt", "grade:trt")
@@ -11,8 +13,10 @@ test_that("tidy_identify_variables() works for common models", {
   )
   expect_equivalent(
     res$var_type,
-    c("intercept", "continuous", "categorical", "categorical", "categorical",
-      "interaction", "interaction")
+    c(
+      "intercept", "continuous", "categorical", "categorical", "categorical",
+      "interaction", "interaction"
+    )
   )
 })
 
@@ -43,8 +47,10 @@ test_that("model_identify_variables() works with different contrasts", {
   res <- mod %>% model_identify_variables()
   expect_equivalent(
     res$variable,
-    c(NA, "stage", "stage", "stage", "grade", "grade", "trt", "grade:trt",
-      "grade:trt")
+    c(
+      NA, "stage", "stage", "stage", "grade", "grade", "trt", "grade:trt",
+      "grade:trt"
+    )
   )
   expect_error(mod %>% tidy_and_attach() %>% tidy_identify_variables(), NA)
 
@@ -68,14 +74,18 @@ test_that("model_identify_variables() works with stats::poly()", {
   res <- mod %>% model_identify_variables()
   expect_equivalent(
     res$variable,
-    c(NA, "poly(Sepal.Width, 3)", "poly(Sepal.Width, 3)", "poly(Sepal.Width, 3)",
-      "poly(Petal.Length, 2)", "poly(Petal.Length, 2)")
+    c(
+      NA, "poly(Sepal.Width, 3)", "poly(Sepal.Width, 3)", "poly(Sepal.Width, 3)",
+      "poly(Petal.Length, 2)", "poly(Petal.Length, 2)"
+    )
   )
   expect_error(tb <- mod %>% tidy_and_attach() %>% tidy_identify_variables(), NA)
   expect_equivalent(
     tb$variable,
-    c(NA, "Sepal.Width", "Sepal.Width", "Sepal.Width", "Petal.Length",
-      "Petal.Length")
+    c(
+      NA, "Sepal.Width", "Sepal.Width", "Sepal.Width", "Petal.Length",
+      "Petal.Length"
+    )
   )
 })
 
@@ -84,11 +94,15 @@ test_that("tidy_identify_variables() works with variables having non standard na
   # cf. https://github.com/ddsjoberg/gtsummary/issues/609
   df <- gtsummary::trial %>% dplyr::mutate(`grade of kids` = grade)
   mod <- lm(age ~ marker * `grade of kids`, df)
-  res <- mod %>% tidy_and_attach() %>% tidy_identify_variables()
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_identify_variables()
   expect_equivalent(
     res$variable,
-    c(NA, "marker", "grade of kids", "grade of kids", "marker:grade of kids",
-      "marker:grade of kids")
+    c(
+      NA, "marker", "grade of kids", "grade of kids", "marker:grade of kids",
+      "marker:grade of kids"
+    )
   )
   expect_equivalent(
     res$var_class,
@@ -110,7 +124,8 @@ test_that("model_identify_variables() works with lme4::lmer", {
 
 test_that("model_identify_variables() works with lme4::glmer", {
   mod <- lme4::glmer(cbind(incidence, size - incidence) ~ period + (1 | herd),
-                     family = binomial, data = lme4::cbpp)
+    family = binomial, data = lme4::cbpp
+  )
   res <- mod %>% model_identify_variables()
   expect_equivalent(
     res$variable,
@@ -134,7 +149,8 @@ test_that("model_identify_variables() works with survival::coxph", {
 test_that("model_identify_variables() works with survival::survreg", {
   mod <- survival::survreg(
     survival::Surv(futime, fustat) ~ ecog.ps + rx,
-    survival::ovarian, dist="exponential"
+    survival::ovarian,
+    dist = "exponential"
   )
   res <- mod %>% model_identify_variables()
   expect_equivalent(
@@ -153,50 +169,69 @@ test_that("model_identify_variables() works with nnet::multinom", {
   )
   expect_error(mod %>% tidy_and_attach() %>% tidy_identify_variables(), NA)
 
-  res <- mod %>% tidy_and_attach() %>% tidy_identify_variables()
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_identify_variables()
   expect_equivalent(
     res$variable,
-    c(NA, "stage", "stage", "stage", "marker", "age", NA, "stage",
-      "stage", "stage", "marker", "age")
+    c(
+      NA, "stage", "stage", "stage", "marker", "age", NA, "stage",
+      "stage", "stage", "marker", "age"
+    )
   )
 
   # should work also with sum/SAS contrasts
   mod <- nnet::multinom(
-    grade ~ stage + marker + age, data = gtsummary::trial, trace = FALSE,
+    grade ~ stage + marker + age,
+    data = gtsummary::trial, trace = FALSE,
     contrasts = list(stage = contr.sum)
   )
-  res <- mod %>% tidy_and_attach() %>% tidy_identify_variables()
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_identify_variables()
   expect_equivalent(
     res$variable,
-    c(NA, "stage", "stage", "stage", "marker", "age", NA, "stage",
-      "stage", "stage", "marker", "age")
+    c(
+      NA, "stage", "stage", "stage", "marker", "age", NA, "stage",
+      "stage", "stage", "marker", "age"
+    )
   )
 
   mod <- nnet::multinom(
-    grade ~ stage + marker + age, data = gtsummary::trial, trace = FALSE,
+    grade ~ stage + marker + age,
+    data = gtsummary::trial, trace = FALSE,
     contrasts = list(stage = contr.SAS)
   )
-  res <- mod %>% tidy_and_attach() %>% tidy_identify_variables()
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_identify_variables()
   expect_equivalent(
     res$variable,
-    c(NA, "stage", "stage", "stage", "marker", "age", NA, "stage",
-      "stage", "stage", "marker", "age")
+    c(
+      NA, "stage", "stage", "stage", "marker", "age", NA, "stage",
+      "stage", "stage", "marker", "age"
+    )
   )
 
   mod <- nnet::multinom(
-    grade ~ stage + marker + age, data = gtsummary::trial, trace = FALSE,
+    grade ~ stage + marker + age,
+    data = gtsummary::trial, trace = FALSE,
     contrasts = list(stage = contr.helmert)
   )
-  res <- mod %>% tidy_and_attach() %>% tidy_identify_variables()
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_identify_variables()
   expect_equivalent(
     res$variable,
-    c(NA, "stage", "stage", "stage", "marker", "age", NA, "stage",
-      "stage", "stage", "marker", "age")
+    c(
+      NA, "stage", "stage", "stage", "marker", "age", NA, "stage",
+      "stage", "stage", "marker", "age"
+    )
   )
 })
 
 test_that("model_identify_variables() works with survey::svyglm", {
-  df <- survey::svydesign(~ 1, weights = ~1, data = gtsummary::trial)
+  df <- survey::svydesign(~1, weights = ~1, data = gtsummary::trial)
   mod <- survey::svyglm(response ~ age + grade * trt, df, family = quasibinomial)
   res <- mod %>% model_identify_variables()
   expect_equivalent(
@@ -207,7 +242,7 @@ test_that("model_identify_variables() works with survey::svyglm", {
 })
 
 test_that("model_identify_variables() works with ordinal::clm", {
-  mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine, nominal = ~ contact)
+  mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine, nominal = ~contact)
   res <- mod %>% model_identify_variables()
   expect_equivalent(
     res$variable,
@@ -218,7 +253,7 @@ test_that("model_identify_variables() works with ordinal::clm", {
 
 
 test_that("model_identify_variables() works with ordinal::clmm", {
-  mod <- ordinal::clmm(rating ~ temp * contact + (1|judge), data = ordinal::wine)
+  mod <- ordinal::clmm(rating ~ temp * contact + (1 | judge), data = ordinal::wine)
   res <- mod %>% model_identify_variables()
   expect_equivalent(
     res$variable,
@@ -241,7 +276,7 @@ test_that("model_identify_variables() works with MASS::polr", {
 
 test_that("model_identify_variables() works with geepack::geeglm", {
   df <- geepack::dietox
-  df$Cu     <- as.factor(df$Cu)
+  df$Cu <- as.factor(df$Cu)
   mf <- formula(Weight ~ Cu * Time)
   suppressWarnings(
     mod <- geepack::geeglm(mf, data = df, id = Pig, family = poisson("identity"), corstr = "ar1")
@@ -258,7 +293,7 @@ test_that("model_identify_variables() works with geepack::geeglm", {
 
 test_that("model_identify_variables() works with gam::gam", {
   data(kyphosis, package = "gam")
-  mod <- gam::gam(Kyphosis ~ gam::s(Age,4) + Number, family = binomial, data = kyphosis)
+  mod <- gam::gam(Kyphosis ~ gam::s(Age, 4) + Number, family = binomial, data = kyphosis)
   res <- mod %>% model_identify_variables()
   expect_equivalent(
     res$variable,
@@ -267,7 +302,7 @@ test_that("model_identify_variables() works with gam::gam", {
   expect_error(mod %>% tidy_and_attach() %>% tidy_identify_variables(), NA)
 
   mod <- suppressWarnings(gam::gam(
-    Ozone^(1/3) ~ gam::lo(Solar.R) + gam::lo(Wind, Temp),
+    Ozone^(1 / 3) ~ gam::lo(Solar.R) + gam::lo(Wind, Temp),
     data = datasets::airquality, na = gam::na.gam.replace
   ))
   res <- mod %>% model_identify_variables()
@@ -282,12 +317,14 @@ test_that("model_identify_variables() works with gam::gam", {
 test_that("model_identify_variables() works with lavaan::lavaan", {
   df <- lavaan::HolzingerSwineford1939
   df$grade <- factor(df$grade, ordered = TRUE)
-  HS.model <- 'visual  =~ x1 + x2 + x3
+  HS.model <- "visual  =~ x1 + x2 + x3
                textual =~ x4 + x5 + x6 + grade
-               speed   =~ x7 + x8 + x9 '
-  mod <- lavaan::lavaan(HS.model, data = df,
-                        auto.var = TRUE, auto.fix.first = TRUE,
-                        auto.cov.lv.x = TRUE)
+               speed   =~ x7 + x8 + x9 "
+  mod <- lavaan::lavaan(HS.model,
+    data = df,
+    auto.var = TRUE, auto.fix.first = TRUE,
+    auto.cov.lv.x = TRUE
+  )
   res <- mod %>% model_identify_variables()
   expect_equivalent(
     res$variable,
@@ -295,5 +332,3 @@ test_that("model_identify_variables() works with lavaan::lavaan", {
   )
   expect_error(mod %>% tidy_and_attach() %>% tidy_identify_variables(), NA)
 })
-
-

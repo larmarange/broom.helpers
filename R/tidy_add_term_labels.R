@@ -36,39 +36,46 @@
 #'   tidy_and_attach() %>%
 #'   tidy_add_term_labels()
 tidy_add_term_labels <- function(x,
-                                     labels = NULL,
-                                     interaction_sep = " * ",
-                                     model = tidy_get_model(x)
-                                     ) {
-  if (is.null(model))
+                                 labels = NULL,
+                                 interaction_sep = " * ",
+                                 model = tidy_get_model(x)) {
+  if (is.null(model)) {
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
+  }
 
-  if ("header_row" %in% names(x))
+  if ("header_row" %in% names(x)) {
     stop("`tidy_add_term_labels()` cannot be applied after `tidy_add_header_rows().`")
+  }
 
-  if ("label" %in% names(x))
+  if ("label" %in% names(x)) {
     x <- x %>% dplyr::select(-.data$label)
+  }
 
-  if (is.list(labels))
+  if (is.list(labels)) {
     labels <- unlist(labels)
+  }
 
-  if (!"var_label" %in% names(x))
+  if (!"var_label" %in% names(x)) {
     x <- x %>% tidy_add_variable_labels(model = model)
-  if (!"contrasts" %in% names(x))
+  }
+  if (!"contrasts" %in% names(x)) {
     x <- x %>% tidy_add_contrasts(model = model)
+  }
 
   # reference rows required for naming correctly categorical variables
   # will be removed eventually at the end
-  if ("reference_row" %in% names(x))
+  if ("reference_row" %in% names(x)) {
     xx <- x
-  else
+  } else {
     xx <- x %>% tidy_add_reference_rows(model = model)
+  }
 
   # specific case for nnet::multinom
   # keeping only one level for computing term_labels
-  if ("y.level" %in% names(x))
+  if ("y.level" %in% names(x)) {
     xx <- xx %>%
       dplyr::filter(.data$y.level == x$y.level[1])
+  }
 
   # start with term names
   term_labels <- unique(stats::na.omit(xx$term))
@@ -77,11 +84,12 @@ tidy_add_term_labels <- function(x,
   # check if all elements of labels are in x
   # show a message otherwise
   not_found <- setdiff(names(labels), names(term_labels))
-  if (length(not_found) > 0)
+  if (length(not_found) > 0) {
     message(paste0(
       paste0('"', not_found, '"', collapse = ", "),
       " terms have not been found in \"x\"."
     ))
+  }
 
   # factor levels for categorical variables
   xlevels <- model_get_xlevels(model)
@@ -128,7 +136,9 @@ tidy_add_term_labels <- function(x,
   interaction_terms <-
     interaction_terms %>%
     strsplit(":") %>%
-    lapply(function(x){paste(term_labels[x], collapse = interaction_sep)}) %>%
+    lapply(function(x) {
+      paste(term_labels[x], collapse = interaction_sep)
+    }) %>%
     unlist()
   term_labels <- term_labels %>%
     .update_vector(interaction_terms)
@@ -144,5 +154,3 @@ tidy_add_term_labels <- function(x,
     tidy_attach_model(model = model) %>%
     .order_tidy_columns()
 }
-
-

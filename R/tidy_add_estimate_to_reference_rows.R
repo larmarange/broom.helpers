@@ -40,28 +40,33 @@
 #'   tidy_add_reference_rows() %>%
 #'   tidy_add_estimate_to_reference_rows(exponentiate = TRUE)
 #'
-#' if(requireNamespace("gtsummary")) {
+#' if (requireNamespace("gtsummary")) {
 #'   glm(
 #'     response ~ stage + grade * trt,
 #'     gtsummary::trial,
 #'     family = binomial,
-#'     contrasts = list(stage = contr.treatment(4, base = 3),
-#'                      grade = contr.treatment(3, base = 2),
-#'                      trt = contr.treatment(2, base = 2))
+#'     contrasts = list(
+#'       stage = contr.treatment(4, base = 3),
+#'       grade = contr.treatment(3, base = 2),
+#'       trt = contr.treatment(2, base = 2)
+#'     )
 #'   ) %>%
 #'     tidy_and_attach() %>%
 #'     tidy_add_reference_rows() %>%
-#'     tidy_add_estimate_to_reference_rows
+#'     tidy_add_estimate_to_reference_rows()
 #' }
 tidy_add_estimate_to_reference_rows <- function(x, exponentiate = FALSE, model = tidy_get_model(x)) {
-  if (is.null(model))
+  if (is.null(model)) {
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
+  }
 
-  if (!"reference_row" %in% names(x))
+  if (!"reference_row" %in% names(x)) {
     x <- x %>% tidy_add_reference_rows(model = model)
+  }
 
-  if (!"estimate" %in% names(x)) # to avoid a problem with certain types of model (e.g. gam)
+  if (!"estimate" %in% names(x)) { # to avoid a problem with certain types of model (e.g. gam)
     return(x %>% tidy_attach_model(model))
+  }
 
   # treatment contrasts
   x <- x %>%
@@ -76,8 +81,9 @@ tidy_add_estimate_to_reference_rows <- function(x, exponentiate = FALSE, model =
   # sum contrasts
   ref_rows_sum <- which(x$reference_row & x$contrasts == "contr.sum")
   if (length(ref_rows_sum) > 0) {
-    for (i in ref_rows_sum)
+    for (i in ref_rows_sum) {
       x$estimate[i] <- .get_ref_row_estimate_contr_sum(x$variable[i], model, exponentiate)
+    }
   }
 
   x %>%
@@ -87,9 +93,10 @@ tidy_add_estimate_to_reference_rows <- function(x, exponentiate = FALSE, model =
 
 .get_ref_row_estimate_contr_sum <- function(variable, model, exponentiate = FALSE) {
   # bug fix for character variables
-  if ("model" %in% names(model))
+  if ("model" %in% names(model)) {
     model$model <- model$model %>%
       dplyr::mutate(dplyr::across(where(is.character), factor))
+  }
 
   dc <- tryCatch(
     dplyr::last(stats::dummy.coef(model)[[variable]]),
@@ -102,7 +109,8 @@ tidy_add_estimate_to_reference_rows <- function(x, exponentiate = FALSE, model =
     }
   )
 
-  if (exponentiate)
+  if (exponentiate) {
     dc <- exp(dc)
+  }
   dc
 }

@@ -15,7 +15,9 @@ model_get_xlevels <- function(model) {
 model_get_xlevels.default <- function(model) {
   tryCatch(
     model$xlevels,
-    error = function(e) {NULL}
+    error = function(e) {
+      NULL
+    }
   )
 }
 
@@ -24,7 +26,7 @@ model_get_xlevels.default <- function(model) {
 #' @rdname model_get_xlevels
 model_get_xlevels.lmerMod <- function(model) {
   xlevels <- stats::model.frame(model) %>% lapply(levels)
-  selection <- ! (xlevels %>% lapply(is.null) %>% unlist())
+  selection <- !(xlevels %>% lapply(is.null) %>% unlist())
   xlevels[selection] # keep only not null
 }
 
@@ -32,5 +34,3 @@ model_get_xlevels.lmerMod <- function(model) {
 #' @export
 #' @rdname model_get_xlevels
 model_get_xlevels.glmerMod <- model_get_xlevels.lmerMod
-
-

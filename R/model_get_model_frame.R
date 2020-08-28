@@ -23,7 +23,9 @@ model_get_model_frame <- function(model) {
 model_get_model_frame.default <- function(model) {
   tryCatch(
     stats::model.frame(model),
-    error = function(e) {NULL}
+    error = function(e) {
+      NULL
+    }
   )
 }
 
@@ -32,4 +34,3 @@ model_get_model_frame.default <- function(model) {
 model_get_model_frame.coxph <- function(model) {
   stats::model.frame.default(model)
 }
-

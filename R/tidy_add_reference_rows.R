@@ -30,24 +30,28 @@
 #'   tidy_and_attach() %>%
 #'   tidy_add_reference_rows()
 #'
-#' if(requireNamespace("gtsummary")) {
+#' if (requireNamespace("gtsummary")) {
 #'   glm(
 #'     response ~ stage + grade * trt,
 #'     gtsummary::trial,
 #'     family = binomial,
-#'     contrasts = list(stage = contr.treatment(4, base = 3),
-#'                      grade = contr.treatment(3, base = 2),
-#'                      trt = contr.treatment(2, base = 2))
+#'     contrasts = list(
+#'       stage = contr.treatment(4, base = 3),
+#'       grade = contr.treatment(3, base = 2),
+#'       trt = contr.treatment(2, base = 2)
+#'     )
 #'   ) %>%
 #'     tidy_and_attach() %>%
 #'     tidy_add_reference_rows()
 #' }
 tidy_add_reference_rows <- function(x, model = tidy_get_model(x)) {
-  if (is.null(model))
+  if (is.null(model)) {
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
+  }
 
-  if ("header_row" %in% names(x))
+  if ("header_row" %in% names(x)) {
     stop("`tidy_add_reference_rows()` cannot be applied after `tidy_add_header_rows().`")
+  }
 
   if ("reference_row" %in% names(x)) {
     warning("tidy_add_reference_rows() has already been applied. x has been returned unchanged.")
@@ -61,12 +65,14 @@ tidy_add_reference_rows <- function(x, model = tidy_get_model(x)) {
     ))
   }
 
-  if (!"contrasts" %in% names(x))
+  if (!"contrasts" %in% names(x)) {
     x <- x %>% tidy_add_contrasts(model = model)
+  }
 
   has_var_label <- "var_label" %in% names(x)
-  if (!has_var_label)
-    x$var_label <- NA_character_ # temporary populate it
+  if (!has_var_label) {
+    x$var_label <- NA_character_
+  } # temporary populate it
 
   x <- x %>%
     dplyr::mutate(
@@ -104,7 +110,7 @@ tidy_add_reference_rows <- function(x, model = tidy_get_model(x)) {
           contr_base = stringr::str_replace(.data$contr_base, "contr.treatment", "1"),
           contr_base = as.integer(.data$contr_base),
           rank = .data$rank + .data$contr_base - 1, # update position based on rank
-          #term = paste0(.data$variable, "_ref"),
+          # term = paste0(.data$variable, "_ref"),
           reference_row = TRUE
         ) %>%
         dplyr::rowwise() %>%
@@ -157,7 +163,7 @@ tidy_add_reference_rows <- function(x, model = tidy_get_model(x)) {
           contr_base = stringr::str_replace(.data$contr_base, "contr.treatment", "1"),
           contr_base = as.integer(.data$contr_base),
           rank = .data$rank + .data$contr_base - 1, # update position based on rank
-          #term = paste0(.data$variable, "_ref"),
+          # term = paste0(.data$variable, "_ref"),
           reference_row = TRUE
         ) %>%
         dplyr::rowwise() %>%
@@ -191,8 +197,9 @@ tidy_add_reference_rows <- function(x, model = tidy_get_model(x)) {
     }
   }
 
-  if (!has_var_label)
+  if (!has_var_label) {
     x <- x %>% dplyr::select(-.data$var_label)
+  }
 
   x %>%
     dplyr::arrange(.data$rank) %>%
@@ -200,5 +207,3 @@ tidy_add_reference_rows <- function(x, model = tidy_get_model(x)) {
     tidy_attach_model(model = model) %>%
     .order_tidy_columns()
 }
-
-

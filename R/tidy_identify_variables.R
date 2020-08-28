@@ -24,17 +24,20 @@
 #'   data = iris,
 #'   contrasts = list(Species = contr.sum)
 #' ) %>%
-#' tidy_and_attach(conf.int = TRUE) %>%
-#' tidy_identify_variables()
+#'   tidy_and_attach(conf.int = TRUE) %>%
+#'   tidy_identify_variables()
 tidy_identify_variables <- function(x, model = tidy_get_model(x)) {
-  if (is.null(model))
+  if (is.null(model)) {
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
+  }
 
-  if ("header_row" %in% names(x))
+  if ("header_row" %in% names(x)) {
     stop("`tidy_identify_variables()` cannot be applied after `tidy_add_header_rows().`")
+  }
 
-  if ("variable" %in% names(x))
+  if ("variable" %in% names(x)) {
     x <- x %>% dplyr::select(-.data$variable, -.data$var_class, -.data$var_type)
+  }
 
   variables_list <- model_identify_variables(model)
 
@@ -60,4 +63,3 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x)) {
     tidy_attach_model(model) %>%
     .order_tidy_columns()
 }
-

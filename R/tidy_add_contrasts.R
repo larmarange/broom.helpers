@@ -24,14 +24,17 @@
 #'   tidy_and_attach() %>%
 #'   tidy_add_contrasts()
 tidy_add_contrasts <- function(x, model = tidy_get_model(x)) {
-  if (is.null(model))
+  if (is.null(model)) {
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
+  }
 
-  if ("contrasts" %in% names(x))
+  if ("contrasts" %in% names(x)) {
     x <- x %>% dplyr::select(-.data$contrasts)
+  }
 
-  if (!"variable" %in% names(x))
+  if (!"variable" %in% names(x)) {
     x <- x %>% tidy_identify_variables()
+  }
 
   model_contrasts <- model_get_contrasts(model)
 
@@ -46,28 +49,30 @@ tidy_add_contrasts <- function(x, model = tidy_get_model(x)) {
     for (i in seq_len(nrow(contrasts_list))) {
       n_levels <- length(xlevels[[contrasts_list$variable[i]]])
 
-      if (is.character(model_contrasts[[i]]) & length(is.character(model_contrasts[[i]]) == 1))
+      if (is.character(model_contrasts[[i]]) & length(is.character(model_contrasts[[i]]) == 1)) {
         contrasts_list$contrasts[[i]] <- model_contrasts[[i]]
-      else if (all(model_contrasts[[i]] == stats::contr.treatment(n_levels)))
+      } else if (all(model_contrasts[[i]] == stats::contr.treatment(n_levels))) {
         contrasts_list$contrasts[[i]] <- "contr.treatment"
-      else if (all(model_contrasts[[i]] == stats::contr.sum(n_levels)))
+      } else if (all(model_contrasts[[i]] == stats::contr.sum(n_levels))) {
         contrasts_list$contrasts[[i]] <- "contr.sum"
-      else if (all(model_contrasts[[i]] == stats::contr.helmert(n_levels)))
+      } else if (all(model_contrasts[[i]] == stats::contr.helmert(n_levels))) {
         contrasts_list$contrasts[[i]] <- "contr.helmert"
-      else if (all(model_contrasts[[i]] == stats::contr.poly(n_levels)))
+      } else if (all(model_contrasts[[i]] == stats::contr.poly(n_levels))) {
         contrasts_list$contrasts[[i]] <- "contr.poly"
-      else if (all(model_contrasts[[i]] == stats::contr.SAS(n_levels)))
+      } else if (all(model_contrasts[[i]] == stats::contr.SAS(n_levels))) {
         contrasts_list$contrasts[[i]] <- "contr.SAS"
-      else {
+      } else {
         for (j in 2:n_levels) { # testing treatment coding width different value for base variable
-          if (all(model_contrasts[[i]] == stats::contr.treatment(n_levels, base = j)))
+          if (all(model_contrasts[[i]] == stats::contr.treatment(n_levels, base = j))) {
             contrasts_list$contrasts[[i]] <- paste0("contr.treatment(base=", j, ")")
+          }
         }
       }
 
       # if still not found, just indicate custom contrast
-      if (is.na(contrasts_list$contrasts[[i]]))
+      if (is.na(contrasts_list$contrasts[[i]])) {
         contrasts_list$contrasts[[i]] <- "custom"
+      }
     }
     x <- x %>%
       dplyr::left_join(contrasts_list, by = "variable")
@@ -76,5 +81,3 @@ tidy_add_contrasts <- function(x, model = tidy_get_model(x)) {
     tidy_attach_model(model = model) %>%
     .order_tidy_columns()
 }
-
-

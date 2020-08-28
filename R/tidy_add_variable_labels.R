@@ -37,22 +37,26 @@
 tidy_add_variable_labels <- function(x,
                                      labels = NULL,
                                      interaction_sep = " * ",
-                                     model = tidy_get_model(x)
-                                     ) {
-  if (is.null(model))
+                                     model = tidy_get_model(x)) {
+  if (is.null(model)) {
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
+  }
 
-  if ("header_row" %in% names(x))
+  if ("header_row" %in% names(x)) {
     stop("`tidy_add_variable_labels()` cannot be applied after `tidy_add_header_rows().`")
+  }
 
-  if ("var_label" %in% names(x))
+  if ("var_label" %in% names(x)) {
     x <- x %>% dplyr::select(-.data$var_label)
+  }
 
-  if (is.list(labels))
+  if (is.list(labels)) {
     labels <- unlist(labels)
+  }
 
-  if (!"variable" %in% names(x))
+  if (!"variable" %in% names(x)) {
     x <- x %>% tidy_identify_variables(model = model)
+  }
 
   # if variable is NA, use term
   variable_is_na <- is.na(x$variable)
@@ -65,11 +69,12 @@ tidy_add_variable_labels <- function(x,
   # check if all elements of labels are in x
   # show a message otherwise
   not_found <- setdiff(names(labels), names(var_labels))
-  if (length(not_found) > 0)
+  if (length(not_found) > 0) {
     message(paste0(
       paste0('"', not_found, '"', collapse = ", "),
       " have not been found in \"x\"."
     ))
+  }
 
   var_labels <- var_labels %>%
     .update_vector(unlist(labelled::var_label(model_get_model_frame(model)))) %>%
@@ -83,7 +88,9 @@ tidy_add_variable_labels <- function(x,
   # compute labels for interaction terms
   interaction_terms <- interaction_terms %>%
     strsplit(":") %>%
-    lapply(function(x){paste(var_labels[x], collapse = interaction_sep)}) %>%
+    lapply(function(x) {
+      paste(var_labels[x], collapse = interaction_sep)
+    }) %>%
     unlist()
   var_labels <- var_labels %>% .update_vector(interaction_terms)
 
@@ -102,5 +109,3 @@ tidy_add_variable_labels <- function(x,
     tidy_attach_model(model = model) %>%
     .order_tidy_columns()
 }
-
-

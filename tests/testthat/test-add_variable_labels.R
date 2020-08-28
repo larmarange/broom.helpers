@@ -4,7 +4,9 @@ test_that("tidy_add_variable_labels() works for basic models", {
   df <- gtsummary::trial
   labelled::var_label(df) <- NULL
   mod <- glm(response ~ age + grade + trt, df, family = binomial)
-  res <- mod %>% tidy_and_attach() %>% tidy_add_variable_labels()
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_add_variable_labels()
   expect_equivalent(
     res$var_label,
     c("(Intercept)", "age", "grade", "grade", "trt")
@@ -13,7 +15,9 @@ test_that("tidy_add_variable_labels() works for basic models", {
   # if variable labels defined in data, variable labels
   df <- gtsummary::trial
   mod <- glm(response ~ age + grade + trt, df, family = binomial)
-  res <- mod %>% tidy_and_attach() %>% tidy_add_variable_labels()
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_add_variable_labels()
   expect_equivalent(
     res$var_label,
     c("(Intercept)", "Age", "Grade", "Grade", "Chemotherapy Treatment")
@@ -27,8 +31,10 @@ test_that("tidy_add_variable_labels() works for basic models", {
     )
   expect_equivalent(
     res$var_label,
-    c("custom intercept", "Age", "custom label", "custom label",
-      "Chemotherapy Treatment")
+    c(
+      "custom intercept", "Age", "custom label", "custom label",
+      "Chemotherapy Treatment"
+    )
   )
 
   # labels can also be a named vector
@@ -39,8 +45,10 @@ test_that("tidy_add_variable_labels() works for basic models", {
     )
   expect_equivalent(
     res$var_label,
-    c("custom intercept", "Age", "custom label", "custom label",
-      "Chemotherapy Treatment")
+    c(
+      "custom intercept", "Age", "custom label", "custom label",
+      "Chemotherapy Treatment"
+    )
   )
 
   # no error if providing labels not corresponding to an existing variable
@@ -87,10 +95,13 @@ test_that("test tidy_add_variable_labels() checks", {
 test_that("tidy_add_variable_labels() correctly manages interaction terms", {
   df <- gtsummary::trial
   mod <- glm(response ~ age * grade * trt, df, family = binomial)
-  res <- mod %>% tidy_and_attach() %>% tidy_add_variable_labels()
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_add_variable_labels()
   expect_equivalent(
     res$var_label,
-    c("(Intercept)", "Age", "Grade", "Grade", "Chemotherapy Treatment",
+    c(
+      "(Intercept)", "Age", "Grade", "Grade", "Chemotherapy Treatment",
       "Age * Grade", "Age * Grade", "Age * Chemotherapy Treatment",
       "Grade * Chemotherapy Treatment", "Grade * Chemotherapy Treatment",
       "Age * Grade * Chemotherapy Treatment", "Age * Grade * Chemotherapy Treatment"
@@ -109,10 +120,12 @@ test_that("tidy_add_variable_labels() correctly manages interaction terms", {
     )
   expect_equivalent(
     res$var_label,
-    c("(Intercept)", "Age", "Grade", "Grade", "Chemotherapy Treatment",
+    c(
+      "(Intercept)", "Age", "Grade", "Grade", "Chemotherapy Treatment",
       "custom interaction label", "custom interaction label", "Age:::Chemotherapy Treatment",
       "a second custom label", "a second custom label", "Age:::Grade:::Chemotherapy Treatment",
-      "Age:::Grade:::Chemotherapy Treatment")
+      "Age:::Grade:::Chemotherapy Treatment"
+    )
   )
 })
 
@@ -120,11 +133,15 @@ test_that("tidy_add_variable_labels() correctly manages interaction terms", {
 test_that("tidy_add_variable_labels() works with variables having non standard name", {
   df <- gtsummary::trial %>% dplyr::mutate(`grade of kids` = grade)
   mod <- lm(age ~ marker * `grade of kids`, df)
-  res <- mod %>% tidy_and_attach() %>% tidy_add_variable_labels()
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_add_variable_labels()
   expect_equivalent(
     res$var_label,
-    c("(Intercept)", "Marker Level (ng/mL)", "Grade", "Grade", "Marker Level (ng/mL) * Grade",
-      "Marker Level (ng/mL) * Grade")
+    c(
+      "(Intercept)", "Marker Level (ng/mL)", "Grade", "Grade", "Marker Level (ng/mL) * Grade",
+      "Marker Level (ng/mL) * Grade"
+    )
   )
 })
 
@@ -132,12 +149,15 @@ test_that("tidy_add_variable_labels() works with variables having non standard n
 test_that("tidy_add_variable_labels() works with stats::poly()", {
   df <- iris %>% labelled::set_variable_labels(Petal.Length = "Length of petal")
   mod <- lm(Sepal.Length ~ poly(Sepal.Width, 3) + poly(Petal.Length, 2), df)
-  res <- mod %>% tidy_and_attach() %>%
+  res <- mod %>%
+    tidy_and_attach() %>%
     tidy_add_variable_labels(labels = c(Sepal.Width = "Width of sepal"))
   expect_equivalent(
     res$var_label,
-    c("(Intercept)", "Width of sepal", "Width of sepal", "Width of sepal",
-      "Petal.Length", "Petal.Length")
+    c(
+      "(Intercept)", "Width of sepal", "Width of sepal", "Width of sepal",
+      "Petal.Length", "Petal.Length"
+    )
   )
 })
 
@@ -150,7 +170,8 @@ test_that("tidy_add_variable_labels() works with lme4::lmer", {
 
 test_that("tidy_add_variable_labels() works with lme4::glmer", {
   mod <- lme4::glmer(cbind(incidence, size - incidence) ~ period + (1 | herd),
-                     family = binomial, data = lme4::cbpp)
+    family = binomial, data = lme4::cbpp
+  )
   expect_error(mod %>% tidy_and_attach(tidy_fun = broom.mixed::tidy) %>% tidy_add_variable_labels(), NA)
 })
 
@@ -163,7 +184,7 @@ test_that("tidy_add_variable_labels() works with survival::coxph", {
 
   # check that label attribute in original dataset is preserved
   mod <- survival::coxph(survival::Surv(ttdeath, death) ~ grade, gtsummary::trial)
-    res <- mod %>%
+  res <- mod %>%
     tidy_and_attach() %>%
     tidy_identify_variables() %>%
     tidy_add_reference_rows() %>%
@@ -177,7 +198,8 @@ test_that("tidy_add_variable_labels() works with survival::coxph", {
 test_that("tidy_add_variable_labels() works with survival::survreg", {
   mod <- survival::survreg(
     survival::Surv(futime, fustat) ~ ecog.ps + rx,
-    survival::ovarian, dist="exponential"
+    survival::ovarian,
+    dist = "exponential"
   )
   expect_error(mod %>% tidy_and_attach() %>% tidy_add_variable_labels(), NA)
 })
@@ -188,19 +210,19 @@ test_that("tidy_add_variable_labels() works with nnet::multinom", {
 })
 
 test_that("tidy_add_variable_labels() works with survey::svyglm", {
-  df <- survey::svydesign(~ 1, weights = ~1, data = gtsummary::trial)
+  df <- survey::svydesign(~1, weights = ~1, data = gtsummary::trial)
   mod <- survey::svyglm(response ~ age + grade * trt, df, family = quasibinomial)
   expect_error(mod %>% tidy_and_attach() %>% tidy_add_variable_labels(), NA)
 })
 
 test_that("tidy_add_variable_labels() works with ordinal::clm", {
-  mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine, nominal = ~ contact)
+  mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine, nominal = ~contact)
   expect_error(mod %>% tidy_and_attach() %>% tidy_add_variable_labels(), NA)
 })
 
 
 test_that("tidy_add_variable_labels() works with ordinal::clmm", {
-  mod <- ordinal::clmm(rating ~ temp * contact + (1|judge), data = ordinal::wine)
+  mod <- ordinal::clmm(rating ~ temp * contact + (1 | judge), data = ordinal::wine)
   expect_error(mod %>% tidy_and_attach() %>% tidy_add_variable_labels(), NA)
 })
 
@@ -213,7 +235,7 @@ test_that("tidy_add_variable_labels() works with MASS::polr", {
 
 test_that("tidy_add_variable_labels() works with geepack::geeglm", {
   df <- geepack::dietox
-  df$Cu     <- as.factor(df$Cu)
+  df$Cu <- as.factor(df$Cu)
   mf <- formula(Weight ~ Cu * Time)
   suppressWarnings(
     mod <- geepack::geeglm(mf, data = df, id = Pig, family = poisson("identity"), corstr = "ar1")
@@ -224,11 +246,11 @@ test_that("tidy_add_variable_labels() works with geepack::geeglm", {
 
 test_that("tidy_add_variable_labels() works with gam::gam", {
   data(kyphosis, package = "gam")
-  mod <- gam::gam(Kyphosis ~ gam::s(Age,4) + Number, family = binomial, data = kyphosis)
+  mod <- gam::gam(Kyphosis ~ gam::s(Age, 4) + Number, family = binomial, data = kyphosis)
   expect_error(mod %>% tidy_and_attach() %>% tidy_add_variable_labels(), NA)
 
   mod <- suppressWarnings(gam::gam(
-    Ozone^(1/3) ~ gam::lo(Solar.R) + gam::lo(Wind, Temp),
+    Ozone^(1 / 3) ~ gam::lo(Solar.R) + gam::lo(Wind, Temp),
     data = datasets::airquality, na = gam::na.gam.replace
   ))
   expect_error(mod %>% tidy_and_attach() %>% tidy_add_variable_labels(), NA)
@@ -238,13 +260,13 @@ test_that("tidy_add_variable_labels() works with gam::gam", {
 test_that("tidy_add_variable_labels() works with lavaan::lavaan", {
   df <- lavaan::HolzingerSwineford1939
   df$grade <- factor(df$grade, ordered = TRUE)
-  HS.model <- 'visual  =~ x1 + x2 + x3
+  HS.model <- "visual  =~ x1 + x2 + x3
                textual =~ x4 + x5 + x6 + grade
-               speed   =~ x7 + x8 + x9 '
-  mod <- lavaan::lavaan(HS.model, data = df,
-                        auto.var = TRUE, auto.fix.first = TRUE,
-                        auto.cov.lv.x = TRUE)
+               speed   =~ x7 + x8 + x9 "
+  mod <- lavaan::lavaan(HS.model,
+    data = df,
+    auto.var = TRUE, auto.fix.first = TRUE,
+    auto.cov.lv.x = TRUE
+  )
   expect_error(mod %>% tidy_and_attach() %>% tidy_add_variable_labels(), NA)
 })
-
-

@@ -36,38 +36,42 @@
 #'   tidy_add_reference_rows() %>%
 #'   tidy_add_header_rows()
 #'
-#' if(requireNamespace("gtsummary")) {
+#' if (requireNamespace("gtsummary")) {
 #'   glm(
 #'     response ~ stage + grade * trt,
 #'     gtsummary::trial,
 #'     family = binomial,
-#'     contrasts = list(stage = contr.treatment(4, base = 3),
-#'                      grade = contr.treatment(3, base = 2),
-#'                      trt = contr.treatment(2, base = 2))
+#'     contrasts = list(
+#'       stage = contr.treatment(4, base = 3),
+#'       grade = contr.treatment(3, base = 2),
+#'       trt = contr.treatment(2, base = 2)
+#'     )
 #'   ) %>%
 #'     tidy_and_attach() %>%
 #'     tidy_add_reference_rows() %>%
 #'     tidy_add_header_rows()
 #' }
 tidy_add_header_rows <- function(x, show_single_row = NULL, model = tidy_get_model(x)) {
-  if (is.null(model))
+  if (is.null(model)) {
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
+  }
 
   if ("header_row" %in% names(x)) {
     warning("tidy_add_header_rows() has already been applied. x has been returned unchanged.")
     return(x)
   }
 
-  if (!"label" %in% names(x))
+  if (!"label" %in% names(x)) {
     x <- x %>% tidy_add_term_labels(model = model)
+  }
 
   # management of show_single_row --------------
   # only if reference_rows have been defined
   show_single_row <- stats::na.omit(unique(show_single_row))
   if (
     length(show_single_row) > 0 &&
-    "reference_row" %in% names(x) &&
-    any(x$variable %in% show_single_row)
+      "reference_row" %in% names(x) &&
+      any(x$variable %in% show_single_row)
   ) {
     xx <- x
     if ("y.level" %in% names(x)) { # specific case for multinom
@@ -149,5 +153,3 @@ tidy_add_header_rows <- function(x, show_single_row = NULL, model = tidy_get_mod
     tidy_attach_model(model = model) %>%
     .order_tidy_columns()
 }
-
-
