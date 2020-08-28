@@ -60,7 +60,7 @@ tidy_forest <-
 tidy_forest
 ```
 
-**Note:** we used `tidy_and_attach()` instead of `broom::tidy()`. `broom.helpers` functions needs a copy of the original model. To avoid passing the model at each step, the easier way is to attach the model as an attribute of the tibble with `tidy_attach_model()`. `tidy_and_attach()` is simply a shorcut of `model %>% broom::tidy() %>% tidy_and_attach(model)`.
+**Note:** we used `tidy_and_attach()` instead of `broom::tidy()`. `broom.helpers` functions needs a copy of the original model. To avoid passing the model at each step, the easier way is to attach the model as an attribute of the tibble with `tidy_attach_model()`. `tidy_and_attach()` is simply a shortcut of `model %>% broom::tidy() %>% tidy_and_attach(model)`.
 
 We now have a tibble with every piece of information we need to create our forest plot using `ggplot2`.
 
@@ -231,6 +231,27 @@ model_4 %>%
   tidy_and_attach(exponentiate = TRUE) %>%
   tidy_add_reference_rows() %>%
   tidy_add_estimate_to_reference_rows(exponentiate = TRUE) %>%
-  tidy_add_term_labels() %>%
+  # tidy_add_term_labels() %>%
   rmarkdown::paged_table()
+```
+
+
+## Column Details
+
+Below is a summary of the additional columns that may be added by a tidy.helpers function.
+The table includes the column name, the function that adds the function, and a short description of the information in the column.
+
+```{r, echo=FALSE}
+tibble::tribble(
+  ~Column, ~Function, ~Description,
+  'variable', '`tidy_identify_variables()`', 'String of variable names from the model. For categorical variables, terms belonging to the variable are identified.',
+  'var_label', '`tidy_add_variable_labels()`', "String of variable labels from the model. Columns labelled with the {labelled} package are retained.", 
+  'var_class', '`tidy_identify_variables()`', "Class of variable/terms.",
+  'var_type', '`tidy_identify_variables()`', "One of 'intercept', 'continuous', 'categorical', or 'interaction'",
+  'header_row', '`tidy_add_header_rows()`', "Logical indicating if row is a header row for categorical or interaction terms.",
+  'contrasts', '`tidy_add_reference_rows()`', "Name of contrast utilized for categorical variables.",
+  'reference_row', '`tidy_add_reference_rows()`', "Logical indicating if row is a reference row for categorical terms.",
+  'label', '`tidy_add_header_rows()`', "String that coalesces variable and term labels into a single column."
+) %>%
+  knitr::kable()
 ```
