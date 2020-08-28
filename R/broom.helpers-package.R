@@ -58,7 +58,7 @@ utils::globalVariables("where")
   x %>%
     dplyr::select(
       dplyr::any_of(
-        c("term", "variable", "var_label", "var_class", "var_type",
+        c("y.level", "term", "variable", "var_label", "var_class", "var_type",
           "header_row", "contrasts", "reference_row", "label")
       ),
       dplyr::everything()
