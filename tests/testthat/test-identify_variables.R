@@ -136,6 +136,47 @@ test_that("model_identify_variables() works with nnet::multinom", {
     c(NA, "stage", "stage", "stage", "marker", "age")
   )
   expect_error(mod %>% tidy_and_attach() %>% tidy_identify_variables(), NA)
+
+  res <- mod %>% tidy_and_attach() %>% tidy_identify_variables()
+  expect_equivalent(
+    res$variable,
+    c(NA, "stage", "stage", "stage", "marker", "age", NA, "stage",
+      "stage", "stage", "marker", "age")
+  )
+
+  # should work also with sum/SAS contrasts
+  mod <- nnet::multinom(
+    grade ~ stage + marker + age, data = gtsummary::trial, trace = FALSE,
+    contrasts = list(stage = contr.sum)
+  )
+  res <- mod %>% tidy_and_attach() %>% tidy_identify_variables()
+  expect_equivalent(
+    res$variable,
+    c(NA, "stage", "stage", "stage", "marker", "age", NA, "stage",
+      "stage", "stage", "marker", "age")
+  )
+
+  mod <- nnet::multinom(
+    grade ~ stage + marker + age, data = gtsummary::trial, trace = FALSE,
+    contrasts = list(stage = contr.SAS)
+  )
+  res <- mod %>% tidy_and_attach() %>% tidy_identify_variables()
+  expect_equivalent(
+    res$variable,
+    c(NA, "stage", "stage", "stage", "marker", "age", NA, "stage",
+      "stage", "stage", "marker", "age")
+  )
+
+  mod <- nnet::multinom(
+    grade ~ stage + marker + age, data = gtsummary::trial, trace = FALSE,
+    contrasts = list(stage = contr.helmert)
+  )
+  res <- mod %>% tidy_and_attach() %>% tidy_identify_variables()
+  expect_equivalent(
+    res$variable,
+    c(NA, "stage", "stage", "stage", "marker", "age", NA, "stage",
+      "stage", "stage", "marker", "age")
+  )
 })
 
 test_that("model_identify_variables() works with survey::svyglm", {

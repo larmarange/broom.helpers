@@ -33,6 +33,18 @@ model_get_model_matrix.default <- function(model) {
 
 #' @export
 #' @rdname model_get_model_matrix
+# For multinom models, names of the model matrix are not
+# consistent with the terms names when contrasts other
+# than treatment are used, resulting in an issue for
+# the identification of variables
+model_get_model_matrix.multinom <- function(model) {
+    mm <- stats::model.matrix(model)
+    colnames(mm) <- colnames(coef(model))
+    mm
+}
+
+#' @export
+#' @rdname model_get_model_matrix
 model_get_model_matrix.clm <- function(model) {
   stats::model.matrix(model)[[1]]
 }

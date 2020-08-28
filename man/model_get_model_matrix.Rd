@@ -3,12 +3,15 @@
 \name{model_get_model_matrix}
 \alias{model_get_model_matrix}
 \alias{model_get_model_matrix.default}
+\alias{model_get_model_matrix.multinom}
 \alias{model_get_model_matrix.clm}
 \title{Get the model matrix of a model}
 \usage{
 model_get_model_matrix(model)
 
 \method{model_get_model_matrix}{default}(model)
+
+\method{model_get_model_matrix}{multinom}(model)
 
 \method{model_get_model_matrix}{clm}(model)
 }
