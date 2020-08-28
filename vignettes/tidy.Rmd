@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-The tidy.helpers package offers a suite of functions that make easy to interact, add information, and manipulate tibbles created with `broom::tidy()` (and friends).
+The `broom.helpers` package offers a suite of functions that make easy to interact, add information, and manipulate tibbles created with `broom::tidy()` (and friends).
 
 As a motivating example, let's summarize a logistic regression model with a forest plot and in a table.
 
