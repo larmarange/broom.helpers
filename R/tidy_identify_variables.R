@@ -34,7 +34,7 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x)) {
     stop("`tidy_identify_variables()` cannot be applied after `tidy_add_header_rows().`")
 
   if ("variable" %in% names(x))
-    x <- dplyr::select(-.data$variable, -.data$var_class, -.data$var_type)
+    x <- x %>% dplyr::select(-.data$variable, -.data$var_class, -.data$var_type)
 
   variables_list <- model_identify_variables(model)
 
