@@ -10,6 +10,10 @@
 #' @export
 #' @family model_helpers
 #' @seealso [stats::model.frame()]
+#' @examples
+#' lm(hp ~ mpg + factor(cyl), mtcars) %>%
+#'   model_get_model_frame() %>%
+#'   head()
 model_get_model_frame <- function(model) {
   UseMethod("model_get_model_frame")
 }

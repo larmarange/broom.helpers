@@ -21,6 +21,11 @@ could slightly differ for certain types of models.
 \code{model_get_model_matrix()} will always return an object
 with the same structure as \code{\link[stats:model.matrix]{stats::model.matrix.default()}}.
 }
+\examples{
+lm(hp ~ mpg + factor(cyl), mtcars) \%>\%
+  model_get_model_matrix() \%>\%
+  head()
+}
 \seealso{
 \code{\link[stats:model.matrix]{stats::model.matrix()}}
 

@@ -22,6 +22,11 @@ could slightly differ for certain types of models.
 with the same data structure or \code{NULL} if it is not possible
 to compute model frame from \code{model}.
 }
+\examples{
+lm(hp ~ mpg + factor(cyl), mtcars) \%>\%
+  model_get_model_frame() \%>\%
+  head()
+}
 \seealso{
 \code{\link[stats:model.frame]{stats::model.frame()}}
 

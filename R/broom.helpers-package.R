@@ -53,14 +53,14 @@ utils::globalVariables("where")
 }
 
 
-# for consistant column order
+# for consistent column order
 .order_tidy_columns <- function(x) {
   x %>%
     dplyr::select(
-      any_of(
+      dplyr::any_of(
         c("term", "variable", "var_label", "var_class", "var_type",
           "header_row", "contrasts", "reference_row", "label")
       ),
-      everything()
+      dplyr::everything()
     )
 }

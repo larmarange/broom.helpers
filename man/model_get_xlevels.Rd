@@ -21,6 +21,10 @@ model_get_xlevels(model)
 \description{
 Get xlevels used in the model
 }
+\examples{
+lm(hp ~ mpg + factor(cyl), mtcars) \%>\%
+  model_get_xlevels()
+}
 \seealso{
 Other model_helpers: 
 \code{\link{model_get_contrasts}()},
