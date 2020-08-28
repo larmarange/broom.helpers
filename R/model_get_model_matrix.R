@@ -39,7 +39,7 @@ model_get_model_matrix.default <- function(model) {
 # the identification of variables
 model_get_model_matrix.multinom <- function(model) {
     mm <- stats::model.matrix(model)
-    colnames(mm) <- colnames(coef(model))
+    colnames(mm) <- colnames(stats::coef(model))
     mm
 }
 
