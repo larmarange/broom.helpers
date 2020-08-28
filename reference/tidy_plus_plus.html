@@ -288,13 +288,15 @@ variables that should be displayed on a single row, when
 #&gt; </span><span style='color: #555555;'>9</span><span> AgeC… Age:Sex  Age * Ge… </span><span style='color: #BB0000;'>NA</span><span>        interac… </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>            Chil…
 #&gt; </span><span style='color: #555555;'># … with 6 more variables: estimate </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, std.error </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, statistic </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   p.value </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, conf.low </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, conf.high </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>
-<span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"gtsummary"</span>)) {
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"gtsummary"</span>)) {
   <span class='no'>ex3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span>(
     <span class='no'>response</span> ~ <span class='fu'><a href='https://rdrr.io/r/stats/poly.html'>poly</a></span>(<span class='no'>age</span>, <span class='fl'>3</span>) + <span class='no'>stage</span> + <span class='no'>grade</span> * <span class='no'>trt</span>,
     <span class='fu'><a href='https://rdrr.io/r/stats/na.fail.html'>na.omit</a></span>(<span class='kw pkg'>gtsummary</span><span class='kw ns'>::</span><span class='no'><a href='http://www.danieldsjoberg.com/gtsummary//reference/trial.html'>trial</a></span>),
     <span class='kw'>family</span> <span class='kw'>=</span> <span class='no'>binomial</span>,
-    <span class='kw'>contrasts</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>stage</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/contrast.html'>contr.treatment</a></span>(<span class='fl'>4</span>, <span class='kw'>base</span> <span class='kw'>=</span> <span class='fl'>3</span>),
-                     <span class='kw'>grade</span> <span class='kw'>=</span> <span class='no'>contr.sum</span>)
+    <span class='kw'>contrasts</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
+      <span class='kw'>stage</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/contrast.html'>contr.treatment</a></span>(<span class='fl'>4</span>, <span class='kw'>base</span> <span class='kw'>=</span> <span class='fl'>3</span>),
+      <span class='kw'>grade</span> <span class='kw'>=</span> <span class='no'>contr.sum</span>
+    )
   ) <span class='kw'>%&gt;%</span>
     <span class='fu'>tidy_plus_plus</span>(
       <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,

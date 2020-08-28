@@ -212,14 +212,16 @@ rows have not been added to the tibble (cf. <code><a href='tidy_add_reference_ro
 #&gt; </span><span style='color: #555555;'>12</span><span> SexM… Sex      Sex       character categor… FALSE      contr.tr…
 #&gt; </span><span style='color: #555555;'># … with 6 more variables: reference_row </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span style='color: #555555;'>, label </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, estimate </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   std.error </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, statistic </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, p.value </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>
-<span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"gtsummary"</span>)) {
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"gtsummary"</span>)) {
   <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span>(
     <span class='no'>response</span> ~ <span class='no'>stage</span> + <span class='no'>grade</span> * <span class='no'>trt</span>,
     <span class='kw pkg'>gtsummary</span><span class='kw ns'>::</span><span class='no'><a href='http://www.danieldsjoberg.com/gtsummary//reference/trial.html'>trial</a></span>,
     <span class='kw'>family</span> <span class='kw'>=</span> <span class='no'>binomial</span>,
-    <span class='kw'>contrasts</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>stage</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/contrast.html'>contr.treatment</a></span>(<span class='fl'>4</span>, <span class='kw'>base</span> <span class='kw'>=</span> <span class='fl'>3</span>),
-                     <span class='kw'>grade</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/contrast.html'>contr.treatment</a></span>(<span class='fl'>3</span>, <span class='kw'>base</span> <span class='kw'>=</span> <span class='fl'>2</span>),
-                     <span class='kw'>trt</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/contrast.html'>contr.treatment</a></span>(<span class='fl'>2</span>, <span class='kw'>base</span> <span class='kw'>=</span> <span class='fl'>2</span>))
+    <span class='kw'>contrasts</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
+      <span class='kw'>stage</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/contrast.html'>contr.treatment</a></span>(<span class='fl'>4</span>, <span class='kw'>base</span> <span class='kw'>=</span> <span class='fl'>3</span>),
+      <span class='kw'>grade</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/contrast.html'>contr.treatment</a></span>(<span class='fl'>3</span>, <span class='kw'>base</span> <span class='kw'>=</span> <span class='fl'>2</span>),
+      <span class='kw'>trt</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/contrast.html'>contr.treatment</a></span>(<span class='fl'>2</span>, <span class='kw'>base</span> <span class='kw'>=</span> <span class='fl'>2</span>)
+    )
   ) <span class='kw'>%&gt;%</span>
     <span class='fu'><a href='tidy_attach_model.html'>tidy_and_attach</a></span>() <span class='kw'>%&gt;%</span>
     <span class='fu'><a href='tidy_add_reference_rows.html'>tidy_add_reference_rows</a></span>() <span class='kw'>%&gt;%</span>
