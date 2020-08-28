@@ -213,7 +213,7 @@ model_3 %>%
   rmarkdown::paged_table()
 ```
 
-Other types of contrasts exist, like Helmert (`contr.helmert()`) or plynomial (`contr.poly()`). They are more complex as a modality will be coded with a combination of terms. Therefore, for such contrasts, it will not be possible to associate a specific model term with a level of the original factor. `broom.helpers` will not add a reference term in such case.
+Other types of contrasts exist, like Helmert (`contr.helmert()`) or polynomial (`contr.poly()`). They are more complex as a modality will be coded with a combination of terms. Therefore, for such contrasts, it will not be possible to associate a specific model term with a level of the original factor. `broom.helpers` will not add a reference term in such case.
 
 ```{r}
 model_4 <- glm(
