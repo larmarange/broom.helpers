@@ -98,7 +98,7 @@ to the reference row." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/tidy.html">Getting Started</a>
+      <a href="../articles/tidy.html">Getting Started with broom.helpers</a>
     </li>
   </ul>
 </li>
@@ -203,7 +203,7 @@ to the difference of each level with the grand mean.</p>
   <span class='fu'>tidy_add_estimate_to_reference_rows</span>(<span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 9 x 10</span><span>
 #&gt;   term  variable var_class var_type contrasts reference_row estimate std.error
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> (Int… </span><span style='color: #BB0000;'>NA</span><span>       </span><span style='color: #BB0000;'>NA</span><span>        interce… </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>             </span><span style='color: #BB0000;'>NA</span><span>          0.206
+#&gt; </span><span style='color: #555555;'>1</span><span> (Int… </span><span style='color: #BB0000;'>NA</span><span>       </span><span style='color: #BB0000;'>NA</span><span>        interce… </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>              5.57       0.206
 #&gt; </span><span style='color: #555555;'>2</span><span> Clas… Class    factor    categor… contr.SAS FALSE           2.36       0.157
 #&gt; </span><span style='color: #555555;'>3</span><span> Clas… Class    factor    categor… contr.SAS FALSE           0.852      0.174
 #&gt; </span><span style='color: #555555;'>4</span><span> Clas… Class    factor    categor… contr.SAS FALSE           0.398      0.149
@@ -230,7 +230,7 @@ to the difference of each level with the grand mean.</p>
 }</div><div class='output co'>#&gt; <span class='message'>Loading required namespace: gtsummary</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 12 x 10</span><span>
 #&gt;    term  variable var_class var_type contrasts reference_row estimate std.error
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> (Int… </span><span style='color: #BB0000;'>NA</span><span>       </span><span style='color: #BB0000;'>NA</span><span>        interce… </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>              </span><span style='color: #BB0000;'>NA</span><span>         0.487
+#&gt; </span><span style='color: #555555;'> 1</span><span> (Int… </span><span style='color: #BB0000;'>NA</span><span>       </span><span style='color: #BB0000;'>NA</span><span>        interce… </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>              -</span><span style='color: #BB0000;'>0.196</span><span>     0.487
 #&gt; </span><span style='color: #555555;'> 2</span><span> stag… stage    factor    categor… contr.tr… FALSE           -</span><span style='color: #BB0000;'>0.138</span><span>     0.455
 #&gt; </span><span style='color: #555555;'> 3</span><span> stag… stage    factor    categor… contr.tr… FALSE           -</span><span style='color: #BB0000;'>0.698</span><span>     0.471
 #&gt; </span><span style='color: #555555;'> 4</span><span> stag… stage    factor    categor… contr.tr… TRUE             0        </span><span style='color: #BB0000;'>NA</span><span>    
@@ -240,8 +240,8 @@ to the difference of each level with the grand mean.</p>
 #&gt; </span><span style='color: #555555;'> 8</span><span> grad… grade    factor    categor… contr.tr… FALSE           -</span><span style='color: #BB0000;'>0.615</span><span>     0.550
 #&gt; </span><span style='color: #555555;'> 9</span><span> trt1  trt      character categor… contr.SAS FALSE           -</span><span style='color: #BB0000;'>0.710</span><span>     0.575
 #&gt; </span><span style='color: #555555;'>10</span><span> trt2  trt      character categor… contr.SAS TRUE             0        </span><span style='color: #BB0000;'>NA</span><span>    
-#&gt; </span><span style='color: #555555;'>11</span><span> grad… grade:t… </span><span style='color: #BB0000;'>NA</span><span>        interac… </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>              </span><span style='color: #BB0000;'>NA</span><span>         0.794
-#&gt; </span><span style='color: #555555;'>12</span><span> grad… grade:t… </span><span style='color: #BB0000;'>NA</span><span>        interac… </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>              </span><span style='color: #BB0000;'>NA</span><span>         0.803
+#&gt; </span><span style='color: #555555;'>11</span><span> grad… grade:t… </span><span style='color: #BB0000;'>NA</span><span>        interac… </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>              -</span><span style='color: #BB0000;'>0.180</span><span>     0.794
+#&gt; </span><span style='color: #555555;'>12</span><span> grad… grade:t… </span><span style='color: #BB0000;'>NA</span><span>        interac… </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>               1.63      0.803
 #&gt; </span><span style='color: #555555;'># … with 2 more variables: statistic </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, p.value </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -95,7 +95,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/tidy.html">Getting Started</a>
+      <a href="../articles/tidy.html">Getting Started with broom.helpers</a>
     </li>
   </ul>
 </li>
@@ -172,7 +172,11 @@ or <code>"interaction"</code></p></li>
     <pre class="examples"><div class='input'><span class='no'>Titanic</span> <span class='kw'>%&gt;%</span>
   <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/reexports.html'>as_tibble</a></span>() <span class='kw'>%&gt;%</span>
   <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>Survived</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='no'>Survived</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"No"</span>, <span class='st'>"Yes"</span>))) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span>(<span class='no'>Survived</span> ~ <span class='no'>Class</span> + <span class='no'>Age</span> * <span class='no'>Sex</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>.</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='no'>.</span>$<span class='no'>n</span>, <span class='kw'>family</span> <span class='kw'>=</span> <span class='no'>binomial</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span>(
+    <span class='no'>Survived</span> ~ <span class='no'>Class</span> + <span class='no'>Age</span> * <span class='no'>Sex</span>,
+    <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>.</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='no'>.</span>$<span class='no'>n</span>,
+    <span class='kw'>family</span> <span class='kw'>=</span> <span class='no'>binomial</span>
+  ) <span class='kw'>%&gt;%</span>
   <span class='fu'>model_identify_variables</span>()</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 7 x 4</span><span>
 #&gt;   term             variable var_class var_type   
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      

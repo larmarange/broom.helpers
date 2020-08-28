@@ -12,10 +12,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Helpers for Model Coefficients Tibbles">
-<meta property="og:description" content="A set of functions to facilitate manipulation of tibbles 
-             produced by broom, like identifying variables associated
-             with a model term, adding variable and term labels,
-             adding reference and/or header rows, etc.">
+<meta property="og:description" content="The broom.helpers package provides suite of functions
+             to work with regression model broom::tidy() tibbles. 
+             The suite includes functions to group regression model 
+             terms by variable, insert reference and header rows for 
+             categorical variables, add variable labels, and more.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -57,7 +58,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/tidy.html">Getting Started</a>
+      <a href="articles/tidy.html">Getting Started with broom.helpers</a>
     </li>
   </ul>
 </li>
@@ -84,6 +85,7 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
+
 <div id="broomhelpers" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#broomhelpers" class="anchor"></a>broom.helpers</h1></div>
@@ -100,41 +102,124 @@
 <div id="examples" class="section level2">
 <h2 class="hasAnchor">
 <a href="#examples" class="anchor"></a>Examples</h2>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">broom.helpers</span>)
+<div id="all-in-one-wrapper" class="section level3">
+<h3 class="hasAnchor">
+<a href="#all-in-one-wrapper" class="anchor"></a>all-in-one wrapper</h3>
+<div class="sourceCode" id="cb2"><pre class="r"><span class="no">mod1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="no">Sepal.Length</span> ~ <span class="no">Sepal.Width</span> + <span class="no">Species</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">iris</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">broom.helpers</span>)
+<span class="no">mod1</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="reference/tidy_plus_plus.html">tidy_plus_plus</a></span>()
+<span class="co">#&gt; # A tibble: 4 x 14</span>
+<span class="co">#&gt;   term  variable var_label var_class var_type contrasts reference_row label</span>
+<span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;     &lt;lgl&gt;         &lt;chr&gt;</span>
+<span class="co">#&gt; 1 Sepa~ Sepal.W~ Sepal.Wi~ numeric   continu~ &lt;NA&gt;      NA            Sepa~</span>
+<span class="co">#&gt; 2 Spec~ Species  Species   factor    categor~ contr.tr~ TRUE          seto~</span>
+<span class="co">#&gt; 3 Spec~ Species  Species   factor    categor~ contr.tr~ FALSE         vers~</span>
+<span class="co">#&gt; 4 Spec~ Species  Species   factor    categor~ contr.tr~ FALSE         virg~</span>
+<span class="co">#&gt; # ... with 6 more variables: estimate &lt;dbl&gt;, std.error &lt;dbl&gt;, statistic &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;</span>
 
-<span class="co"># build regression model</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="no">mpg</span> ~ <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(<span class="no">cyl</span>) + <span class="no">hp</span>, <span class="no">mtcars</span>) <span class="kw">%&gt;%</span>
+<span class="no">mod2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span>(
+  <span class="no">response</span> ~ <span class="fu"><a href="https://rdrr.io/r/stats/poly.html">poly</a></span>(<span class="no">age</span>, <span class="fl">3</span>) + <span class="no">stage</span> + <span class="no">grade</span> * <span class="no">trt</span>,
+  <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span>(<span class="kw pkg">gtsummary</span><span class="kw ns">::</span><span class="no"><a href="http://www.danieldsjoberg.com/gtsummary//reference/trial.html">trial</a></span>),
+  <span class="kw">family</span> <span class="kw">=</span> <span class="no">binomial</span>,
+  <span class="kw">contrasts</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
+    <span class="kw">stage</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/contrast.html">contr.treatment</a></span>(<span class="fl">4</span>, <span class="kw">base</span> <span class="kw">=</span> <span class="fl">3</span>),
+    <span class="kw">grade</span> <span class="kw">=</span> <span class="no">contr.sum</span>
+  )
+)
+<span class="no">mod2</span> <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="reference/tidy_plus_plus.html">tidy_plus_plus</a></span>(
+    <span class="kw">exponentiate</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
+    <span class="kw">variable_labels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">age</span> <span class="kw">=</span> <span class="st">"Age (in years)"</span>),
+    <span class="kw">add_header_rows</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
+    <span class="kw">show_single_row</span> <span class="kw">=</span> <span class="st">"trt"</span>
+  )
+<span class="co">#&gt; # A tibble: 17 x 15</span>
+<span class="co">#&gt;    term  variable var_label var_class var_type header_row contrasts</span>
+<span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;    &lt;lgl&gt;      &lt;chr&gt;    </span>
+<span class="co">#&gt;  1 &lt;NA&gt;  age      Age (in ~ nmatrix.3 continu~ TRUE       &lt;NA&gt;     </span>
+<span class="co">#&gt;  2 poly~ age      Age (in ~ nmatrix.3 continu~ FALSE      &lt;NA&gt;     </span>
+<span class="co">#&gt;  3 poly~ age      Age (in ~ nmatrix.3 continu~ FALSE      &lt;NA&gt;     </span>
+<span class="co">#&gt;  4 poly~ age      Age (in ~ nmatrix.3 continu~ FALSE      &lt;NA&gt;     </span>
+<span class="co">#&gt;  5 &lt;NA&gt;  stage    T Stage   factor    categor~ TRUE       &lt;NA&gt;     </span>
+<span class="co">#&gt;  6 stag~ stage    T Stage   factor    categor~ FALSE      contr.tr~</span>
+<span class="co">#&gt;  7 stag~ stage    T Stage   factor    categor~ FALSE      contr.tr~</span>
+<span class="co">#&gt;  8 stag~ stage    T Stage   factor    categor~ FALSE      contr.tr~</span>
+<span class="co">#&gt;  9 stag~ stage    T Stage   factor    categor~ FALSE      contr.tr~</span>
+<span class="co">#&gt; 10 &lt;NA&gt;  grade    Grade     factor    categor~ TRUE       &lt;NA&gt;     </span>
+<span class="co">#&gt; 11 grad~ grade    Grade     factor    categor~ FALSE      contr.sum</span>
+<span class="co">#&gt; 12 grad~ grade    Grade     factor    categor~ FALSE      contr.sum</span>
+<span class="co">#&gt; 13 grad~ grade    Grade     factor    categor~ FALSE      contr.sum</span>
+<span class="co">#&gt; 14 trtD~ trt      Chemothe~ character categor~ NA         contr.tr~</span>
+<span class="co">#&gt; 15 &lt;NA&gt;  grade:t~ Grade * ~ &lt;NA&gt;      interac~ TRUE       &lt;NA&gt;     </span>
+<span class="co">#&gt; 16 grad~ grade:t~ Grade * ~ &lt;NA&gt;      interac~ FALSE      &lt;NA&gt;     </span>
+<span class="co">#&gt; 17 grad~ grade:t~ Grade * ~ &lt;NA&gt;      interac~ FALSE      &lt;NA&gt;     </span>
+<span class="co">#&gt; # ... with 8 more variables: reference_row &lt;lgl&gt;, label &lt;chr&gt;, estimate &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   std.error &lt;dbl&gt;, statistic &lt;dbl&gt;, p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   conf.high &lt;dbl&gt;</span></pre></div>
+</div>
+</div>
+</div>
+<div id="fine-control" class="section level1">
+<h1 class="hasAnchor">
+<a href="#fine-control" class="anchor"></a>fine control</h1>
+<div class="sourceCode" id="cb3"><pre class="r"><span class="no">mod1</span> <span class="kw">%&gt;%</span>
   <span class="co"># perform initial tidying of model</span>
   <span class="fu"><a href="reference/tidy_attach_model.html">tidy_and_attach</a></span>() <span class="kw">%&gt;%</span>
-  <span class="co"># add reference row cyl</span>
+  <span class="co"># add reference row</span>
   <span class="fu"><a href="reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span>() <span class="kw">%&gt;%</span>
-  <span class="co"># add the cyl levels</span>
+  <span class="co"># add term labels</span>
   <span class="fu"><a href="reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span>() <span class="kw">%&gt;%</span>
   <span class="co"># remove intercept</span>
   <span class="fu"><a href="reference/tidy_remove_intercept.html">tidy_remove_intercept</a></span>()
 <span class="co">#&gt; # A tibble: 4 x 12</span>
 <span class="co">#&gt;   term  variable var_label var_class var_type contrasts reference_row label</span>
 <span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;     &lt;lgl&gt;         &lt;chr&gt;</span>
-<span class="co">#&gt; 1 fact~ factor(~ factor(c~ factor    categor~ contr.tr~ TRUE          4    </span>
-<span class="co">#&gt; 2 fact~ factor(~ factor(c~ factor    categor~ contr.tr~ FALSE         6    </span>
-<span class="co">#&gt; 3 fact~ factor(~ factor(c~ factor    categor~ contr.tr~ FALSE         8    </span>
-<span class="co">#&gt; 4 hp    hp       hp        numeric   continu~ &lt;NA&gt;      NA            hp   </span>
+<span class="co">#&gt; 1 Sepa~ Sepal.W~ Sepal.Wi~ numeric   continu~ &lt;NA&gt;      NA            Sepa~</span>
+<span class="co">#&gt; 2 Spec~ Species  Species   factor    categor~ contr.tr~ TRUE          seto~</span>
+<span class="co">#&gt; 3 Spec~ Species  Species   factor    categor~ contr.tr~ FALSE         vers~</span>
+<span class="co">#&gt; 4 Spec~ Species  Species   factor    categor~ contr.tr~ FALSE         virg~</span>
 <span class="co">#&gt; # ... with 4 more variables: estimate &lt;dbl&gt;, std.error &lt;dbl&gt;, statistic &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   p.value &lt;dbl&gt;</span></pre></div>
-<p>The package also includes a handy wrapper for the most commonly used functions.</p>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="no">mpg</span> ~ <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(<span class="no">cyl</span>) + <span class="no">hp</span>, <span class="no">mtcars</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/tidy_plus_plus.html">tidy_plus_plus</a></span>()
-<span class="co">#&gt; # A tibble: 4 x 14</span>
-<span class="co">#&gt;   term  variable var_label var_class var_type contrasts reference_row label</span>
-<span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;     &lt;lgl&gt;         &lt;chr&gt;</span>
-<span class="co">#&gt; 1 fact~ factor(~ factor(c~ factor    categor~ contr.tr~ TRUE          4    </span>
-<span class="co">#&gt; 2 fact~ factor(~ factor(c~ factor    categor~ contr.tr~ FALSE         6    </span>
-<span class="co">#&gt; 3 fact~ factor(~ factor(c~ factor    categor~ contr.tr~ FALSE         8    </span>
-<span class="co">#&gt; 4 hp    hp       hp        numeric   continu~ &lt;NA&gt;      NA            hp   </span>
-<span class="co">#&gt; # ... with 6 more variables: estimate &lt;dbl&gt;, std.error &lt;dbl&gt;, statistic &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;</span></pre></div>
+<span class="co">#&gt; #   p.value &lt;dbl&gt;</span>
+
+<span class="no">mod2</span> <span class="kw">%&gt;%</span>
+  <span class="co"># perform initial tidying of model</span>
+  <span class="fu"><a href="reference/tidy_attach_model.html">tidy_and_attach</a></span>(<span class="kw">exponentiate</span> <span class="kw">=</span> <span class="fl">TRUE</span>) <span class="kw">%&gt;%</span>
+  <span class="co"># add variable labels, including a custom value for age</span>
+  <span class="fu"><a href="reference/tidy_add_variable_labels.html">tidy_add_variable_labels</a></span>(<span class="kw">labels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">age</span> <span class="kw">=</span> <span class="st">"Age in years"</span>)) <span class="kw">%&gt;%</span>
+  <span class="co"># add reference rows for categorical variables</span>
+  <span class="fu"><a href="reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span>() <span class="kw">%&gt;%</span>
+  <span class="co"># add a, estimate value of reference terms</span>
+  <span class="fu"><a href="reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows</a></span>(<span class="kw">exponentiate</span> <span class="kw">=</span> <span class="fl">TRUE</span>) <span class="kw">%&gt;%</span>
+  <span class="co"># add header rows for categorical variables</span>
+  <span class="fu"><a href="reference/tidy_add_header_rows.html">tidy_add_header_rows</a></span>()
+<span class="co">#&gt; # A tibble: 20 x 13</span>
+<span class="co">#&gt;    term  variable var_label var_class var_type header_row contrasts</span>
+<span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;    &lt;lgl&gt;      &lt;chr&gt;    </span>
+<span class="co">#&gt;  1 (Int~ &lt;NA&gt;     (Interce~ &lt;NA&gt;      interce~ NA         &lt;NA&gt;     </span>
+<span class="co">#&gt;  2 &lt;NA&gt;  age      Age in y~ nmatrix.3 continu~ TRUE       &lt;NA&gt;     </span>
+<span class="co">#&gt;  3 poly~ age      Age in y~ nmatrix.3 continu~ FALSE      &lt;NA&gt;     </span>
+<span class="co">#&gt;  4 poly~ age      Age in y~ nmatrix.3 continu~ FALSE      &lt;NA&gt;     </span>
+<span class="co">#&gt;  5 poly~ age      Age in y~ nmatrix.3 continu~ FALSE      &lt;NA&gt;     </span>
+<span class="co">#&gt;  6 &lt;NA&gt;  stage    T Stage   factor    categor~ TRUE       &lt;NA&gt;     </span>
+<span class="co">#&gt;  7 stag~ stage    T Stage   factor    categor~ FALSE      contr.tr~</span>
+<span class="co">#&gt;  8 stag~ stage    T Stage   factor    categor~ FALSE      contr.tr~</span>
+<span class="co">#&gt;  9 stag~ stage    T Stage   factor    categor~ FALSE      contr.tr~</span>
+<span class="co">#&gt; 10 stag~ stage    T Stage   factor    categor~ FALSE      contr.tr~</span>
+<span class="co">#&gt; 11 &lt;NA&gt;  grade    Grade     factor    categor~ TRUE       &lt;NA&gt;     </span>
+<span class="co">#&gt; 12 grad~ grade    Grade     factor    categor~ FALSE      contr.sum</span>
+<span class="co">#&gt; 13 grad~ grade    Grade     factor    categor~ FALSE      contr.sum</span>
+<span class="co">#&gt; 14 grad~ grade    Grade     factor    categor~ FALSE      contr.sum</span>
+<span class="co">#&gt; 15 &lt;NA&gt;  trt      Chemothe~ character categor~ TRUE       &lt;NA&gt;     </span>
+<span class="co">#&gt; 16 trtD~ trt      Chemothe~ character categor~ FALSE      contr.tr~</span>
+<span class="co">#&gt; 17 trtD~ trt      Chemothe~ character categor~ FALSE      contr.tr~</span>
+<span class="co">#&gt; 18 &lt;NA&gt;  grade:t~ Grade * ~ &lt;NA&gt;      interac~ TRUE       &lt;NA&gt;     </span>
+<span class="co">#&gt; 19 grad~ grade:t~ Grade * ~ &lt;NA&gt;      interac~ FALSE      &lt;NA&gt;     </span>
+<span class="co">#&gt; 20 grad~ grade:t~ Grade * ~ &lt;NA&gt;      interac~ FALSE      &lt;NA&gt;     </span>
+<span class="co">#&gt; # ... with 6 more variables: reference_row &lt;lgl&gt;, label &lt;chr&gt;, estimate &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   std.error &lt;dbl&gt;, statistic &lt;dbl&gt;, p.value &lt;dbl&gt;</span></pre></div>
 </div>
-</div>
+
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
