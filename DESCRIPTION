@@ -49,5 +49,10 @@ Suggests:
     datasets,
     gam,
     lavaan,
-    covr
+    covr,
+    knitr,
+    rmarkdown,
+    forcats,
+    ggplot2
 RdMacros: lifecycle
+VignetteBuilder: knitr
