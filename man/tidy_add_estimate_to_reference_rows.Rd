@@ -30,8 +30,8 @@ For categorical variables with a sum contrast (\code{\link[stats:contrast]{stats
 the estimate value of the reference row will be equal to the sum of
 all other coefficients multiplied by \code{-1} (eventually exponentiated if
 \code{exponentiate = TRUE}), and obtained with \code{\link[stats:dummy.coef]{stats::dummy.coef()}}.
-To be noted, for sum contrasts, the model coefficients correspond
-to the difference of each level with the great mean.
+For sum contrasts, the model coefficient corresponds
+to the difference of each level with the grand mean.
 
 For other variables, no change will be made.
 

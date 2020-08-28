@@ -1,0 +1,8 @@
+reference:
+  - title: Add to tidy tibbles
+  - contents:
+      - starts_with("tidy_")
+
+  - title: Get information from model objects
+  - contents:
+      - starts_with("model_")
