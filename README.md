@@ -6,9 +6,15 @@
 <!-- badges: start -->
 
 [![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![Travis build
 status](https://travis-ci.com/larmarange/broom.helpers.svg?branch=master)](https://travis-ci.com/larmarange/broom.helpers)
+[![R build
+status](https://github.com/larmarange/broom.helpers/workflows/R-CMD-check/badge.svg)](https://github.com/larmarange/broom.helpers/actions)
+[![Codecov test
+coverage](https://codecov.io/gh/larmarange/broom.helpers/branch/master/graph/badge.svg)](https://codecov.io/gh/larmarange/broom.helpers?branch=master)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/broom.helpers)](https://CRAN.R-project.org/package=broom.helpers)
 <!-- badges: end -->
 
 The broom.helpers package provides suite of functions to work with
