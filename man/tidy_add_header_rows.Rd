@@ -46,14 +46,16 @@ df \%>\%
   tidy_add_reference_rows() \%>\%
   tidy_add_header_rows()
 
-if(requireNamespace("gtsummary")) {
+if (requireNamespace("gtsummary")) {
   glm(
     response ~ stage + grade * trt,
     gtsummary::trial,
     family = binomial,
-    contrasts = list(stage = contr.treatment(4, base = 3),
-                     grade = contr.treatment(3, base = 2),
-                     trt = contr.treatment(2, base = 2))
+    contrasts = list(
+      stage = contr.treatment(4, base = 3),
+      grade = contr.treatment(3, base = 2),
+      trt = contr.treatment(2, base = 2)
+    )
   ) \%>\%
     tidy_and_attach() \%>\%
     tidy_add_reference_rows() \%>\%

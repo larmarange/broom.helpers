@@ -89,13 +89,15 @@ ex2 <- glm(
   tidy_plus_plus(exponentiate = TRUE)
 ex2
 
-if(requireNamespace("gtsummary")) {
+if (requireNamespace("gtsummary")) {
   ex3 <- glm(
     response ~ poly(age, 3) + stage + grade * trt,
     na.omit(gtsummary::trial),
     family = binomial,
-    contrasts = list(stage = contr.treatment(4, base = 3),
-                     grade = contr.sum)
+    contrasts = list(
+      stage = contr.treatment(4, base = 3),
+      grade = contr.sum
+    )
   ) \%>\%
     tidy_plus_plus(
       exponentiate = TRUE,

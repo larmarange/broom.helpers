@@ -33,8 +33,8 @@ lm(
   data = iris,
   contrasts = list(Species = contr.sum)
 ) \%>\%
-tidy_and_attach(conf.int = TRUE) \%>\%
-tidy_identify_variables()
+  tidy_and_attach(conf.int = TRUE) \%>\%
+  tidy_identify_variables()
 }
 \seealso{
 \code{\link[=model_identify_variables]{model_identify_variables()}}
