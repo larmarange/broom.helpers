@@ -42,6 +42,7 @@ df \%>\%
     contrasts = list(Age = contr.sum, Class = "contr.SAS")
   ) \%>\%
   tidy_and_attach() \%>\%
+  tidy_add_variable_labels(labels = list(Class = "Custom label for Class")) \%>\%
   tidy_add_reference_rows() \%>\%
   tidy_add_header_rows()
 
