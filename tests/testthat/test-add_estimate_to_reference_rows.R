@@ -169,7 +169,6 @@ test_that("tidy_add_estimate_to_reference_rows() works with nnet::multinom", {
     contrasts = list(stage = contr.sum)
   )
   expect_warning(mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows())
-  expect_error(mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows(), NA)
 })
 
 test_that("tidy_add_estimate_to_reference_rows() works with survey::svyglm", {
