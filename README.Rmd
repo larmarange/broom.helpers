@@ -38,24 +38,53 @@ devtools::install_github("larmarange/broom.helpers")
 
 ## Examples
 
-```{r example}
-library(broom.helpers)
+### all-in-one wrapper
 
-# build regression model
-lm(mpg ~ factor(cyl) + hp, mtcars) %>%
+```{r}
+mod1 <- lm(Sepal.Length ~ Sepal.Width + Species, data = iris)
+library(broom.helpers)
+mod1 %>% tidy_plus_plus()
+
+mod2 <- glm(
+  response ~ poly(age, 3) + stage + grade * trt,
+  na.omit(gtsummary::trial),
+  family = binomial,
+  contrasts = list(
+    stage = contr.treatment(4, base = 3),
+    grade = contr.sum
+  )
+)
+mod2 %>% 
+  tidy_plus_plus(
+    exponentiate = TRUE,
+    variable_labels = c(age = "Age (in years)"),
+    add_header_rows = TRUE,
+    show_single_row = "trt"
+  )
+```
+
+# fine control
+
+```{r}
+mod1 %>%
   # perform initial tidying of model
   tidy_and_attach() %>%
-  # add reference row cyl
+  # add reference row
   tidy_add_reference_rows() %>%
-  # add the cyl levels
+  # add term labels
   tidy_add_term_labels() %>%
   # remove intercept
   tidy_remove_intercept()
-```
 
-The package also includes a handy wrapper for the most commonly used functions.
-
-```{r cars}
-lm(mpg ~ factor(cyl) + hp, mtcars) %>%
-  tidy_plus_plus()
+mod2 %>%
+  # perform initial tidying of model
+  tidy_and_attach(exponentiate = TRUE) %>%
+  # add variable labels, including a custom value for age
+  tidy_add_variable_labels(labels = c(age = "Age in years")) %>%
+  # add reference rows for categorical variables
+  tidy_add_reference_rows() %>%
+  # add a, estimate value of reference terms
+  tidy_add_estimate_to_reference_rows(exponentiate = TRUE) %>%
+  # add header rows for categorical variables
+  tidy_add_header_rows()
 ```
