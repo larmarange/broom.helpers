@@ -16,7 +16,11 @@
 #' Titanic %>%
 #'   dplyr::as_tibble() %>%
 #'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes"))) %>%
-#'   glm(Survived ~ Class + Age * Sex, data = ., weights = .$n, family = binomial) %>%
+#'   glm(
+#'     Survived ~ Class + Age * Sex,
+#'     data = ., weights = .$n,
+#'     family = binomial
+#'   ) %>%
 #'   model_identify_variables()
 #'
 #' iris %>%
@@ -74,7 +78,11 @@ model_identify_variables.lavaan <- function(model) {
       by = "variable"
     ) %>%
     dplyr::mutate(
-      var_class = dplyr::if_else(.data$var_class == "ordered", "factor", .data$var_class)
+      var_class = dplyr::if_else(
+        .data$var_class == "ordered",
+        "factor",
+        .data$var_class
+      )
     ) %>%
     .compute_var_type()
 }
