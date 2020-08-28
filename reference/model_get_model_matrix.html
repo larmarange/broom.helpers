@@ -152,6 +152,16 @@ with the same structure as <code><a href='https://rdrr.io/r/stats/model.matrix.h
 <code><a href='model_get_xlevels.html'>model_get_xlevels</a>()</code>,
 <code><a href='model_identify_variables.html'>model_identify_variables</a>()</code></p></div>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>hp</span> ~ <span class='no'>mpg</span> + <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='no'>cyl</span>), <span class='no'>mtcars</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>model_get_model_matrix</span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>()</div><div class='output co'>#&gt;                   (Intercept)  mpg factor(cyl)6 factor(cyl)8
+#&gt; Mazda RX4                   1 21.0            1            0
+#&gt; Mazda RX4 Wag               1 21.0            1            0
+#&gt; Datsun 710                  1 22.8            0            0
+#&gt; Hornet 4 Drive              1 21.4            1            0
+#&gt; Hornet Sportabout           1 18.7            0            1
+#&gt; Valiant                     1 18.1            1            0</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

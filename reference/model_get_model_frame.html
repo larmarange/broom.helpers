@@ -154,6 +154,16 @@ to compute model frame from <code>model</code>.</p>
 <code><a href='model_get_xlevels.html'>model_get_xlevels</a>()</code>,
 <code><a href='model_identify_variables.html'>model_identify_variables</a>()</code></p></div>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>hp</span> ~ <span class='no'>mpg</span> + <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='no'>cyl</span>), <span class='no'>mtcars</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>model_get_model_frame</span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>()</div><div class='output co'>#&gt;                    hp  mpg factor(cyl)
+#&gt; Mazda RX4         110 21.0           6
+#&gt; Mazda RX4 Wag     110 21.0           6
+#&gt; Datsun 710         93 22.8           4
+#&gt; Hornet 4 Drive    110 21.4           6
+#&gt; Hornet Sportabout 175 18.7           8
+#&gt; Valiant           105 18.1           6</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
