@@ -193,16 +193,17 @@ rows have not been added to the tibble (cf. <code><a href='tidy_add_reference_ro
     <span class='kw'>contrasts</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>Age</span> <span class='kw'>=</span> <span class='no'>contr.sum</span>, <span class='kw'>Class</span> <span class='kw'>=</span> <span class='st'>"contr.SAS"</span>)
   ) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='tidy_attach_model.html'>tidy_and_attach</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='tidy_add_variable_labels.html'>tidy_add_variable_labels</a></span>(<span class='kw'>labels</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>Class</span> <span class='kw'>=</span> <span class='st'>"Custom label for Class"</span>)) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='tidy_add_reference_rows.html'>tidy_add_reference_rows</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'>tidy_add_header_rows</span>()</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 12 x 13</span><span>
 #&gt;    term  variable var_label var_class var_type header_row contrasts
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    
 #&gt; </span><span style='color: #555555;'> 1</span><span> (Int… </span><span style='color: #BB0000;'>NA</span><span>       (Interce… </span><span style='color: #BB0000;'>NA</span><span>        interce… </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>       
-#&gt; </span><span style='color: #555555;'> 2</span><span> </span><span style='color: #BB0000;'>NA</span><span>    Class    Class     character categor… TRUE       </span><span style='color: #BB0000;'>NA</span><span>       
-#&gt; </span><span style='color: #555555;'> 3</span><span> Clas… Class    Class     character categor… FALSE      contr.SAS
-#&gt; </span><span style='color: #555555;'> 4</span><span> Clas… Class    Class     character categor… FALSE      contr.SAS
-#&gt; </span><span style='color: #555555;'> 5</span><span> Clas… Class    Class     character categor… FALSE      contr.SAS
-#&gt; </span><span style='color: #555555;'> 6</span><span> Clas… Class    Class     character categor… FALSE      contr.SAS
+#&gt; </span><span style='color: #555555;'> 2</span><span> </span><span style='color: #BB0000;'>NA</span><span>    Class    Custom l… character categor… TRUE       </span><span style='color: #BB0000;'>NA</span><span>       
+#&gt; </span><span style='color: #555555;'> 3</span><span> Clas… Class    Custom l… character categor… FALSE      contr.SAS
+#&gt; </span><span style='color: #555555;'> 4</span><span> Clas… Class    Custom l… character categor… FALSE      contr.SAS
+#&gt; </span><span style='color: #555555;'> 5</span><span> Clas… Class    Custom l… character categor… FALSE      contr.SAS
+#&gt; </span><span style='color: #555555;'> 6</span><span> Clas… Class    Custom l… character categor… FALSE      contr.SAS
 #&gt; </span><span style='color: #555555;'> 7</span><span> </span><span style='color: #BB0000;'>NA</span><span>    Age      Age       character categor… TRUE       </span><span style='color: #BB0000;'>NA</span><span>       
 #&gt; </span><span style='color: #555555;'> 8</span><span> Age1  Age      Age       character categor… FALSE      contr.sum
 #&gt; </span><span style='color: #555555;'> 9</span><span> Age2  Age      Age       character categor… FALSE      contr.sum
