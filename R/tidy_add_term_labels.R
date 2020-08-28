@@ -95,10 +95,14 @@ tidy_add_term_labels <- function(x,
   xlevels <- model_get_xlevels(model)
   for (v in names(xlevels)) {
     if (v %in% unique(xx$variable)) {
-      additional_term_labels <- xlevels[[v]]
-      names(additional_term_labels) <- xx$term[!is.na(xx$variable) & xx$variable == v]
-      term_labels <- term_labels %>%
-        .update_vector(additional_term_labels)
+      var_contrasts <- xx$contrasts[!is.na(xx$variable) & xx$variable == v][1]
+      # add xlevels only if treatment or sum contrasts
+      if (var_contrasts %>% stringr::str_starts("contr.treatment|contr.SAS|contr.sum")) {
+        additional_term_labels <- xlevels[[v]]
+        names(additional_term_labels) <- xx$term[!is.na(xx$variable) & xx$variable == v]
+        term_labels <- term_labels %>%
+          .update_vector(additional_term_labels)
+      }
     }
   }
 

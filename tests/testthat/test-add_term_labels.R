@@ -112,6 +112,20 @@ test_that("tidy_add_term_labels() correctly manages interaction terms", {
   )
 })
 
+test_that("tidy_add_term_labels() works with poly or helmert contrasts", {
+  mod <- glm(
+    response ~ stage + grade + trt,
+    gtsummary::trial,
+    family = binomial,
+    contrasts = list(stage = contr.sum, grade = contr.helmert, trt = contr.SAS)
+  )
+  # should not produce an error
+  expect_error(
+    mod %>% tidy_and_attach() %>% tidy_add_term_labels(),
+    NA
+  )
+})
+
 
 test_that("tidy_add_term_labels() works with variables having non standard name", {
   df <- gtsummary::trial %>% dplyr::mutate(`grade of kids` = grade)
