@@ -63,7 +63,7 @@ mod2 %>%
   )
 ```
 
-# fine control
+### fine control
 
 ```{r}
 mod1 %>%

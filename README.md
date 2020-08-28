@@ -91,7 +91,7 @@ mod2 %>%
 #> #   conf.high <dbl>
 ```
 
-# fine control
+### fine control
 
 ``` r
 mod1 %>%
