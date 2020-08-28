@@ -161,6 +161,15 @@ test_that("tidy_add_estimate_to_reference_rows() works with survival::survreg", 
 test_that("tidy_add_estimate_to_reference_rows() works with nnet::multinom", {
   mod <- nnet::multinom(grade ~ stage + marker + age, data = gtsummary::trial, trace = FALSE)
   expect_error(mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows(), NA)
+
+  # no dummy coef for multinom
+  # should return a warning but not an error
+  mod <- nnet::multinom(
+    grade ~ stage + marker + age, data = gtsummary::trial, trace = FALSE,
+    contrasts = list(stage = contr.sum)
+  )
+  expect_warning(mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows())
+  expect_error(mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows(), NA)
 })
 
 test_that("tidy_add_estimate_to_reference_rows() works with survey::svyglm", {

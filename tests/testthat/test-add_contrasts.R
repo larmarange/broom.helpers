@@ -107,6 +107,18 @@ test_that("tidy_add_contrasts() works with survival::survreg", {
 test_that("tidy_add_contrasts() works with nnet::multinom", {
   mod <- nnet::multinom(grade ~ stage + marker + age, data = gtsummary::trial, trace = FALSE)
   expect_error(mod %>% tidy_and_attach() %>% tidy_add_contrasts(), NA)
+
+  mod <- nnet::multinom(
+    grade ~ stage + marker + age, data = gtsummary::trial, trace = FALSE,
+    contrasts = list(stage = contr.sum)
+  )
+  expect_error(mod %>% tidy_and_attach() %>% tidy_add_contrasts(), NA)
+  res <- mod %>% tidy_and_attach() %>% tidy_add_contrasts()
+  expect_equivalent(
+    res$contrasts,
+    c(NA, "contr.sum", "contr.sum", "contr.sum", NA, NA, NA, "contr.sum",
+      "contr.sum", "contr.sum", NA, NA)
+  )
 })
 
 test_that("tidy_add_contrasts() works with survey::svyglm", {
