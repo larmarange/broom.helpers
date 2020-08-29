@@ -231,7 +231,7 @@ model_4 %>%
   tidy_and_attach(exponentiate = TRUE) %>%
   tidy_add_reference_rows() %>%
   tidy_add_estimate_to_reference_rows(exponentiate = TRUE) %>%
-  # tidy_add_term_labels() %>%
+  tidy_add_term_labels() %>%
   rmarkdown::paged_table()
 ```
 
