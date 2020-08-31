@@ -72,8 +72,8 @@ tidy_forest %>%
       forcats::fct_rev()
   ) %>%
   ggplot(aes(x = plot_label, y = estimate, ymin = conf.low, ymax = conf.high, color = variable)) +
-  geom_pointrange() +
   geom_hline(yintercept = 1, linetype = 2) +
+  geom_pointrange() +
   coord_flip() +
   theme(legend.position = "none") +
   labs(
