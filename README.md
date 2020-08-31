@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# broom.helpers
+# broom.helpers <img src="man/figures/broom.helpers.png" align="right" width="120" />
 
 <!-- badges: start -->
 
@@ -73,12 +73,12 @@ mod2 %>%
 #>  2 poly~ age      Age (in ~ nmatrix.3 continu~ FALSE      <NA>     
 #>  3 poly~ age      Age (in ~ nmatrix.3 continu~ FALSE      <NA>     
 #>  4 poly~ age      Age (in ~ nmatrix.3 continu~ FALSE      <NA>     
-#>  5 <NA>  stage    T Stage   factor    categor~ TRUE       <NA>     
+#>  5 <NA>  stage    T Stage   factor    categor~ TRUE       contr.tr~
 #>  6 stag~ stage    T Stage   factor    categor~ FALSE      contr.tr~
 #>  7 stag~ stage    T Stage   factor    categor~ FALSE      contr.tr~
 #>  8 stag~ stage    T Stage   factor    categor~ FALSE      contr.tr~
 #>  9 stag~ stage    T Stage   factor    categor~ FALSE      contr.tr~
-#> 10 <NA>  grade    Grade     factor    categor~ TRUE       <NA>     
+#> 10 <NA>  grade    Grade     factor    categor~ TRUE       contr.sum
 #> 11 grad~ grade    Grade     factor    categor~ FALSE      contr.sum
 #> 12 grad~ grade    Grade     factor    categor~ FALSE      contr.sum
 #> 13 grad~ grade    Grade     factor    categor~ FALSE      contr.sum
@@ -132,16 +132,16 @@ mod2 %>%
 #>  3 poly~ age      Age in y~ nmatrix.3 continu~ FALSE      <NA>     
 #>  4 poly~ age      Age in y~ nmatrix.3 continu~ FALSE      <NA>     
 #>  5 poly~ age      Age in y~ nmatrix.3 continu~ FALSE      <NA>     
-#>  6 <NA>  stage    T Stage   factor    categor~ TRUE       <NA>     
+#>  6 <NA>  stage    T Stage   factor    categor~ TRUE       contr.tr~
 #>  7 stag~ stage    T Stage   factor    categor~ FALSE      contr.tr~
 #>  8 stag~ stage    T Stage   factor    categor~ FALSE      contr.tr~
 #>  9 stag~ stage    T Stage   factor    categor~ FALSE      contr.tr~
 #> 10 stag~ stage    T Stage   factor    categor~ FALSE      contr.tr~
-#> 11 <NA>  grade    Grade     factor    categor~ TRUE       <NA>     
+#> 11 <NA>  grade    Grade     factor    categor~ TRUE       contr.sum
 #> 12 grad~ grade    Grade     factor    categor~ FALSE      contr.sum
 #> 13 grad~ grade    Grade     factor    categor~ FALSE      contr.sum
 #> 14 grad~ grade    Grade     factor    categor~ FALSE      contr.sum
-#> 15 <NA>  trt      Chemothe~ character categor~ TRUE       <NA>     
+#> 15 <NA>  trt      Chemothe~ character categor~ TRUE       contr.tr~
 #> 16 trtD~ trt      Chemothe~ character categor~ FALSE      contr.tr~
 #> 17 trtD~ trt      Chemothe~ character categor~ FALSE      contr.tr~
 #> 18 <NA>  grade:t~ Grade * ~ <NA>      interac~ TRUE       <NA>     
