@@ -262,4 +262,4 @@ tibble::tribble(
   knitr::kable()
 ```
 
-Note: `tidy_add_estimate_to_reference_rows()` do not create additional columns but populate the 'estimate' column of reference rows.
+Note: `tidy_add_estimate_to_reference_rows()` do not create an additional column but populate the 'estimate' column of reference rows.
