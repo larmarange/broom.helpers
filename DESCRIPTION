@@ -22,7 +22,7 @@ Description: The broom.helpers package provides suite of functions
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-URL: http://larmarange.github.io/broom.helpers/
+URL: https://larmarange.github.io/broom.helpers/
 BugReports: https://github.com/larmarange/broom.helpers/issues
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
