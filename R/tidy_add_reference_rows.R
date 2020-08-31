@@ -4,7 +4,12 @@
 #' ([stats::contr.treatment()]), a SAS contrast ([stats::contr.SAS()])
 #' or a sum contrast ([stats::contr.sum()]), add a reference row.
 #'
-#' @details
+#' The added `reference_row` column will be equal to:
+#'
+#' * `TRUE` for a reference row;
+#' * `FALSE` for a normal row of a variable with a reference row;
+#' * `NA` for variables without a reference row.
+#'
 #' If the `contrasts` column is not yet available in `x`,
 #' [tidy_add_contrasts()] will be automatically applied.
 #'

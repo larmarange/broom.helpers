@@ -22,10 +22,17 @@ per variable, where \code{label} will be equal to \code{var_label}.
 These additional rows could be identified with \code{header_row} column.
 }
 \details{
-In addition, the \code{show_single_row} argument allows to specify a list
+The \code{show_single_row} argument allows to specify a list
 of dichotomous variables that should be displayed on a single row
 instead of two rows. This argument will have no effect if reference
 rows have not been added to the tibble (cf. \code{\link[=tidy_add_reference_rows]{tidy_add_reference_rows()}}).
+
+The added \code{header_row} column will be equal to:
+\itemize{
+\item \code{TRUE} for an header row;
+\item \code{FALSE} for a normal row of a variable with an header row;
+\item \code{NA} for variables without an header row.
+}
 
 If the \code{label} column is not yet available in \code{x},
 \code{\link[=tidy_add_term_labels]{tidy_add_term_labels()}} will be automatically applied.

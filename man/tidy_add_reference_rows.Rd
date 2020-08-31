@@ -17,6 +17,13 @@ For categorical variables with a treatment contrast
 or a sum contrast (\code{\link[stats:contrast]{stats::contr.sum()}}), add a reference row.
 }
 \details{
+The added \code{reference_row} column will be equal to:
+\itemize{
+\item \code{TRUE} for a reference row;
+\item \code{FALSE} for a normal row of a variable with a reference row;
+\item \code{NA} for variables without a reference row.
+}
+
 If the \code{contrasts} column is not yet available in \code{x},
 \code{\link[=tidy_add_contrasts]{tidy_add_contrasts()}} will be automatically applied.
 

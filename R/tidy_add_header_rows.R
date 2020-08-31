@@ -6,12 +6,17 @@
 #' per variable, where `label` will be equal to `var_label`.
 #' These additional rows could be identified with `header_row` column.
 #'
-#' In addition, the `show_single_row` argument allows to specify a list
+#' The `show_single_row` argument allows to specify a list
 #' of dichotomous variables that should be displayed on a single row
 #' instead of two rows. This argument will have no effect if reference
 #' rows have not been added to the tibble (cf. [tidy_add_reference_rows()]).
 #'
-#' @details
+#' The added `header_row` column will be equal to:
+#'
+#' * `TRUE` for an header row;
+#' * `FALSE` for a normal row of a variable with an header row;
+#' * `NA` for variables without an header row.
+#'
 #' If the `label` column is not yet available in `x`,
 #' [tidy_add_term_labels()] will be automatically applied.
 #' @param x a tidy tibble
