@@ -15,7 +15,7 @@ Authors@R:
            comment = c(ORCID = "0000-0003-0862-2018"))
   )
 Description: The broom.helpers package provides suite of functions
-             to work with regression model broom::tidy() data frames. 
+             to work with regression model broom::tidy() tibbles. 
              The suite includes functions to group regression model 
              terms by variable, insert reference and header rows for 
              categorical variables, add variable labels, and more.
