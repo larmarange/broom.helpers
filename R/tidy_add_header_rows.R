@@ -113,11 +113,6 @@ tidy_add_header_rows <- function(x, show_single_row = NULL, model = tidy_get_mod
       rank = 1:dplyr::n() # for sorting table at the end
     )
 
-  has_contrasts <- "contrasts" %in% names(x)
-  if (!has_contrasts) # temporarily populate the column
-    x$contrasts <- NA_character_
-
-
   if ("y.level" %in% names(x)) { # specific case for nnet::multinom
     header_rows <- x %>%
       dplyr::filter(!is.na(.data$variable)) %>%
@@ -162,10 +157,6 @@ tidy_add_header_rows <- function(x, show_single_row = NULL, model = tidy_get_mod
     dplyr::bind_rows(header_rows) %>%
     dplyr::arrange(.data$rank) %>%
     dplyr::select(-.data$rank)
-
-  if (!has_contrasts)
-    x <- x %>%
-    dplyr::select(-.data$contrasts)
 
   x %>%
     tidy_attach_model(model = model) %>%
