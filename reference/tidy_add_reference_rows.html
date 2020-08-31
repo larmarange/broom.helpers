@@ -144,7 +144,13 @@ or a sum contrast (<code><a href='https://rdrr.io/r/stats/contrast.html'>stats::
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>If the <code>contrasts</code> column is not yet available in <code>x</code>,
+    <p>The added <code>reference_row</code> column will be equal to:</p><ul>
+<li><p><code>TRUE</code> for a reference row;</p></li>
+<li><p><code>FALSE</code> for a normal row of a variable with a reference row;</p></li>
+<li><p><code>NA</code> for variables without a reference row.</p></li>
+</ul>
+
+<p>If the <code>contrasts</code> column is not yet available in <code>x</code>,
 <code><a href='tidy_add_contrasts.html'>tidy_add_contrasts()</a></code> will be automatically applied.</p>
 <p><code>tidy_add_reference_rows()</code> will not populate the label
 of the reference term. It is therefore better to apply

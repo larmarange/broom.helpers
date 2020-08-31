@@ -153,10 +153,16 @@ variables that should be displayed on a single row</p></td>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>In addition, the <code>show_single_row</code> argument allows to specify a list
+    <p>The <code>show_single_row</code> argument allows to specify a list
 of dichotomous variables that should be displayed on a single row
 instead of two rows. This argument will have no effect if reference
 rows have not been added to the tibble (cf. <code><a href='tidy_add_reference_rows.html'>tidy_add_reference_rows()</a></code>).</p>
+<p>The added <code>header_row</code> column will be equal to:</p><ul>
+<li><p><code>TRUE</code> for an header row;</p></li>
+<li><p><code>FALSE</code> for a normal row of a variable with an header row;</p></li>
+<li><p><code>NA</code> for variables without an header row.</p></li>
+</ul>
+
 <p>If the <code>label</code> column is not yet available in <code>x</code>,
 <code><a href='tidy_add_term_labels.html'>tidy_add_term_labels()</a></code> will be automatically applied.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -190,15 +196,15 @@ rows have not been added to the tibble (cf. <code><a href='tidy_add_reference_ro
 #&gt;    term  variable var_label var_class var_type header_row contrasts
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    
 #&gt; </span><span style='color: #555555;'> 1</span><span> (Int… </span><span style='color: #BB0000;'>NA</span><span>       (Interce… </span><span style='color: #BB0000;'>NA</span><span>        interce… </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>       
-#&gt; </span><span style='color: #555555;'> 2</span><span> </span><span style='color: #BB0000;'>NA</span><span>    Class    Custom l… character categor… TRUE       </span><span style='color: #BB0000;'>NA</span><span>       
+#&gt; </span><span style='color: #555555;'> 2</span><span> </span><span style='color: #BB0000;'>NA</span><span>    Class    Custom l… character categor… TRUE       contr.SAS
 #&gt; </span><span style='color: #555555;'> 3</span><span> Clas… Class    Custom l… character categor… FALSE      contr.SAS
 #&gt; </span><span style='color: #555555;'> 4</span><span> Clas… Class    Custom l… character categor… FALSE      contr.SAS
 #&gt; </span><span style='color: #555555;'> 5</span><span> Clas… Class    Custom l… character categor… FALSE      contr.SAS
 #&gt; </span><span style='color: #555555;'> 6</span><span> Clas… Class    Custom l… character categor… FALSE      contr.SAS
-#&gt; </span><span style='color: #555555;'> 7</span><span> </span><span style='color: #BB0000;'>NA</span><span>    Age      Age       character categor… TRUE       </span><span style='color: #BB0000;'>NA</span><span>       
+#&gt; </span><span style='color: #555555;'> 7</span><span> </span><span style='color: #BB0000;'>NA</span><span>    Age      Age       character categor… TRUE       contr.sum
 #&gt; </span><span style='color: #555555;'> 8</span><span> Age1  Age      Age       character categor… FALSE      contr.sum
 #&gt; </span><span style='color: #555555;'> 9</span><span> Age2  Age      Age       character categor… FALSE      contr.sum
-#&gt; </span><span style='color: #555555;'>10</span><span> </span><span style='color: #BB0000;'>NA</span><span>    Sex      Sex       character categor… TRUE       </span><span style='color: #BB0000;'>NA</span><span>       
+#&gt; </span><span style='color: #555555;'>10</span><span> </span><span style='color: #BB0000;'>NA</span><span>    Sex      Sex       character categor… TRUE       contr.tr…
 #&gt; </span><span style='color: #555555;'>11</span><span> SexF… Sex      Sex       character categor… FALSE      contr.tr…
 #&gt; </span><span style='color: #555555;'>12</span><span> SexM… Sex      Sex       character categor… FALSE      contr.tr…
 #&gt; </span><span style='color: #555555;'># … with 6 more variables: reference_row </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span style='color: #555555;'>, label </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, estimate </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
@@ -221,16 +227,16 @@ rows have not been added to the tibble (cf. <code><a href='tidy_add_reference_ro
 #&gt;    term  variable var_label var_class var_type header_row contrasts
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    
 #&gt; </span><span style='color: #555555;'> 1</span><span> (Int… </span><span style='color: #BB0000;'>NA</span><span>       (Interce… </span><span style='color: #BB0000;'>NA</span><span>        interce… </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>       
-#&gt; </span><span style='color: #555555;'> 2</span><span> </span><span style='color: #BB0000;'>NA</span><span>    stage    T Stage   factor    categor… TRUE       </span><span style='color: #BB0000;'>NA</span><span>       
+#&gt; </span><span style='color: #555555;'> 2</span><span> </span><span style='color: #BB0000;'>NA</span><span>    stage    T Stage   factor    categor… TRUE       contr.tr…
 #&gt; </span><span style='color: #555555;'> 3</span><span> stag… stage    T Stage   factor    categor… FALSE      contr.tr…
 #&gt; </span><span style='color: #555555;'> 4</span><span> stag… stage    T Stage   factor    categor… FALSE      contr.tr…
 #&gt; </span><span style='color: #555555;'> 5</span><span> stag… stage    T Stage   factor    categor… FALSE      contr.tr…
 #&gt; </span><span style='color: #555555;'> 6</span><span> stag… stage    T Stage   factor    categor… FALSE      contr.tr…
-#&gt; </span><span style='color: #555555;'> 7</span><span> </span><span style='color: #BB0000;'>NA</span><span>    grade    Grade     factor    categor… TRUE       </span><span style='color: #BB0000;'>NA</span><span>       
+#&gt; </span><span style='color: #555555;'> 7</span><span> </span><span style='color: #BB0000;'>NA</span><span>    grade    Grade     factor    categor… TRUE       contr.tr…
 #&gt; </span><span style='color: #555555;'> 8</span><span> grad… grade    Grade     factor    categor… FALSE      contr.tr…
 #&gt; </span><span style='color: #555555;'> 9</span><span> grad… grade    Grade     factor    categor… FALSE      contr.tr…
 #&gt; </span><span style='color: #555555;'>10</span><span> grad… grade    Grade     factor    categor… FALSE      contr.tr…
-#&gt; </span><span style='color: #555555;'>11</span><span> </span><span style='color: #BB0000;'>NA</span><span>    trt      Chemothe… character categor… TRUE       </span><span style='color: #BB0000;'>NA</span><span>       
+#&gt; </span><span style='color: #555555;'>11</span><span> </span><span style='color: #BB0000;'>NA</span><span>    trt      Chemothe… character categor… TRUE       contr.SAS
 #&gt; </span><span style='color: #555555;'>12</span><span> trt1  trt      Chemothe… character categor… FALSE      contr.SAS
 #&gt; </span><span style='color: #555555;'>13</span><span> trt2  trt      Chemothe… character categor… FALSE      contr.SAS
 #&gt; </span><span style='color: #555555;'>14</span><span> </span><span style='color: #BB0000;'>NA</span><span>    grade:t… Grade * … </span><span style='color: #BB0000;'>NA</span><span>        interac… TRUE       </span><span style='color: #BB0000;'>NA</span><span>       
