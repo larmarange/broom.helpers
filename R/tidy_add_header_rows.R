@@ -113,6 +113,11 @@ tidy_add_header_rows <- function(x, show_single_row = NULL, model = tidy_get_mod
       rank = 1:dplyr::n() # for sorting table at the end
     )
 
+  has_contrasts <- "contrasts" %in% names(x)
+  if (!has_contrasts) # temporarily populate teh column
+    x$contrasts <- NA_character_
+
+
   if ("y.level" %in% names(x)) { # specific case for nnet::multinom
     header_rows <- x %>%
       dplyr::filter(!is.na(.data$variable)) %>%
@@ -121,6 +126,7 @@ tidy_add_header_rows <- function(x, show_single_row = NULL, model = tidy_get_mod
         var_class = dplyr::first(.data$var_class),
         var_type = dplyr::first(.data$var_type),
         var_label = dplyr::first(.data$var_label),
+        contrasts = dplyr::first(.data$contrasts),
         var_nrow = dplyr::n(),
         rank = min(.data$rank) - .25,
         .groups = "drop_last"
@@ -136,6 +142,7 @@ tidy_add_header_rows <- function(x, show_single_row = NULL, model = tidy_get_mod
         var_class = dplyr::first(.data$var_class),
         var_type = dplyr::first(.data$var_type),
         var_label = dplyr::first(.data$var_label),
+        contrasts = dplyr::first(.data$contrasts),
         var_nrow = dplyr::n(),
         rank = min(.data$rank) - .25,
         .groups = "drop_last"
@@ -148,13 +155,19 @@ tidy_add_header_rows <- function(x, show_single_row = NULL, model = tidy_get_mod
       )
   }
 
-  x %>%
+  x <- x %>%
     dplyr::mutate(
       header_row = dplyr::if_else(.data$variable %in% header_rows$variable, FALSE, NA)
     ) %>%
     dplyr::bind_rows(header_rows) %>%
     dplyr::arrange(.data$rank) %>%
-    dplyr::select(-.data$rank) %>%
+    dplyr::select(-.data$rank)
+
+  if (!has_contrasts)
+    x <- x %>%
+    dplyr::select(-.data$contrasts)
+
+  x %>%
     tidy_attach_model(model = model) %>%
     .order_tidy_columns()
 }
