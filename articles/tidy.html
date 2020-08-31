@@ -129,7 +129,7 @@
 <span class="co">#&gt; 5 grad… grade    Grade     factor    categor… contr.tr… FALSE         III  </span>
 <span class="co">#&gt; # … with 6 more variables: estimate &lt;dbl&gt;, std.error &lt;dbl&gt;, statistic &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;</span></pre></body></html></div>
-<p><strong>Note:</strong> we used <code><a href="../reference/tidy_attach_model.html">tidy_and_attach()</a></code> instead of <code><a href="https://broom.tidymodels.org/reference/reexports.html">broom::tidy()</a></code>. <code>broom.helpers</code> functions needs a copy of the original model. To avoid passing the model at each step, the easier way is to attach the model as an attribute of the tibble with <code><a href="../reference/tidy_attach_model.html">tidy_attach_model()</a></code>. <code><a href="../reference/tidy_attach_model.html">tidy_and_attach()</a></code> is simply a shorcut of <code>model %&gt;% broom::tidy() %&gt;% tidy_and_attach(model)</code>.</p>
+<p><strong>Note:</strong> we used <code><a href="../reference/tidy_attach_model.html">tidy_and_attach()</a></code> instead of <code><a href="https://broom.tidymodels.org/reference/reexports.html">broom::tidy()</a></code>. <code>broom.helpers</code> functions needs a copy of the original model. To avoid passing the model at each step, the easier way is to attach the model as an attribute of the tibble with <code><a href="../reference/tidy_attach_model.html">tidy_attach_model()</a></code>. <code><a href="../reference/tidy_attach_model.html">tidy_and_attach()</a></code> is simply a shortcut of <code>model %&gt;% broom::tidy() %&gt;% tidy_and_attach(model)</code>.</p>
 <p>We now have a tibble with every piece of information we need to create our forest plot using <code>ggplot2</code>.</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">tidy_forest</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(
@@ -375,6 +375,65 @@
   </script>
 </div>
 </div>
+</div>
+<div id="column-details" class="section level2">
+<h2 class="hasAnchor">
+<a href="#column-details" class="anchor"></a>Column Details</h2>
+<p>Below is a summary of the additional columns that may be added by a tidy.helpers function. The table includes the column name, the function that adds the function, and a short description of the information in the column.</p>
+<table class="table">
+<colgroup>
+<col width="8%">
+<col width="18%">
+<col width="72%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">Column</th>
+<th align="left">Function</th>
+<th align="left">Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">variable</td>
+<td align="left"><code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code></td>
+<td align="left">String of variable names from the model. For categorical variables, terms belonging to the variable are identified.</td>
+</tr>
+<tr class="even">
+<td align="left">var_label</td>
+<td align="left"><code><a href="../reference/tidy_add_variable_labels.html">tidy_add_variable_labels()</a></code></td>
+<td align="left">String of variable labels from the model. Columns labelled with the {labelled} package are retained.</td>
+</tr>
+<tr class="odd">
+<td align="left">var_class</td>
+<td align="left"><code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code></td>
+<td align="left">Class of variable/terms.</td>
+</tr>
+<tr class="even">
+<td align="left">var_type</td>
+<td align="left"><code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code></td>
+<td align="left">One of ‘intercept’, ‘continuous’, ‘categorical’, or ‘interaction’</td>
+</tr>
+<tr class="odd">
+<td align="left">header_row</td>
+<td align="left"><code><a href="../reference/tidy_add_header_rows.html">tidy_add_header_rows()</a></code></td>
+<td align="left">Logical indicating if row is a header row for categorical or interaction terms.</td>
+</tr>
+<tr class="even">
+<td align="left">contrasts</td>
+<td align="left"><code><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows()</a></code></td>
+<td align="left">Name of contrast utilized for categorical variables.</td>
+</tr>
+<tr class="odd">
+<td align="left">reference_row</td>
+<td align="left"><code><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows()</a></code></td>
+<td align="left">Logical indicating if row is a reference row for categorical terms.</td>
+</tr>
+<tr class="even">
+<td align="left">label</td>
+<td align="left"><code><a href="../reference/tidy_add_header_rows.html">tidy_add_header_rows()</a></code></td>
+<td align="left">String that coalesces variable and term labels into a single column.</td>
+</tr>
+</tbody>
+</table>
 </div>
   </div>
 
