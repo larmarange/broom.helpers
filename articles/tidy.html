@@ -379,12 +379,15 @@
 <div id="column-details" class="section level2">
 <h2 class="hasAnchor">
 <a href="#column-details" class="anchor"></a>Column Details</h2>
-<p>Below is a summary of the additional columns that may be added by a tidy.helpers function. The table includes the column name, the function that adds the function, and a short description of the information in the column.</p>
+<p>Below is a summary of the additional columns that may be added by a <code>broom.helpers</code> function. The table includes the column name, the function that adds the function, and a short description of the information in the column.</p>
+<style>
+td {vertical-align: top;}
+</style>
 <table class="table">
 <colgroup>
-<col width="8%">
-<col width="18%">
-<col width="72%">
+<col width="2%">
+<col width="5%">
+<col width="91%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">Column</th>
@@ -395,45 +398,51 @@
 <tr class="odd">
 <td align="left">variable</td>
 <td align="left"><code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code></td>
-<td align="left">String of variable names from the model. For categorical variables, terms belonging to the variable are identified.</td>
+<td align="left">String of variable names from the model. For categorical variables and polynomial terms defined with <code><a href="https://rdrr.io/r/stats/poly.html">stats::poly()</a></code>, terms belonging to the variable are identified.</td>
 </tr>
 <tr class="even">
-<td align="left">var_label</td>
-<td align="left"><code><a href="../reference/tidy_add_variable_labels.html">tidy_add_variable_labels()</a></code></td>
-<td align="left">String of variable labels from the model. Columns labelled with the {labelled} package are retained.</td>
-</tr>
-<tr class="odd">
 <td align="left">var_class</td>
 <td align="left"><code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code></td>
-<td align="left">Class of variable/terms.</td>
+<td align="left">Class of the variable.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">var_type</td>
 <td align="left"><code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code></td>
 <td align="left">One of ‘intercept’, ‘continuous’, ‘categorical’, or ‘interaction’</td>
 </tr>
-<tr class="odd">
-<td align="left">header_row</td>
-<td align="left"><code><a href="../reference/tidy_add_header_rows.html">tidy_add_header_rows()</a></code></td>
-<td align="left">Logical indicating if row is a header row for categorical or interaction terms.</td>
-</tr>
 <tr class="even">
 <td align="left">contrasts</td>
-<td align="left"><code><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows()</a></code></td>
-<td align="left">Name of contrast utilized for categorical variables.</td>
+<td align="left"><code><a href="../reference/tidy_add_contrasts.html">tidy_add_contrasts()</a></code></td>
+<td align="left">Type of contrasts used for categorical variables.<br><em>Require ‘variable’ column. If needed, will automatically apply <code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code>.</em>
+</td>
 </tr>
 <tr class="odd">
 <td align="left">reference_row</td>
 <td align="left"><code><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows()</a></code></td>
-<td align="left">Logical indicating if row is a reference row for categorical terms.</td>
+<td align="left">Logical indicating if a row is a reference row for categorical variables using a treatment or a sum contrast. Is equal to <code>NA</code> for variables who do not have a reference row.<em>Require ‘contrasts’ column. If needed, will automatically apply <code><a href="../reference/tidy_add_contrasts.html">tidy_add_contrasts()</a></code>.<br><code><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows()</a></code> will not populate the label of the reference term. It is therefore better to apply <code><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels()</a></code> after <code><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows()</a></code> rather than before.</em>
+</td>
 </tr>
 <tr class="even">
+<td align="left">var_label</td>
+<td align="left"><code><a href="../reference/tidy_add_variable_labels.html">tidy_add_variable_labels()</a></code></td>
+<td align="left">String of variable labels from the model. Columns labelled with the <code>labelled</code> package are retained. It is possible to pass a custom label for an interaction term with the <code>labels</code> argument. <br><em>Require ‘variable’ column. If needed, will automatically apply <code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code>.</em>
+</td>
+</tr>
+<tr class="odd">
 <td align="left">label</td>
+<td align="left"><code><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels()</a></code></td>
+<td align="left">String of term labels based on (1) labels provided in <code>labels</code> argument if provided; (2) factor levels for categorical variables coded with treatment, SAS or sum contrasts; (3) variable labels when there is only one term per variable; and (4) term name otherwise.<br><em>Require ‘variable_label’ column. If needed, will automatically apply <code><a href="../reference/tidy_add_variable_labels.html">tidy_add_variable_labels()</a></code>.<br>Require ‘contrasts’ column. If needed, will automatically apply <code><a href="../reference/tidy_add_contrasts.html">tidy_add_contrasts()</a></code>.</em>
+</td>
+</tr>
+<tr class="even">
+<td align="left">header_row</td>
 <td align="left"><code><a href="../reference/tidy_add_header_rows.html">tidy_add_header_rows()</a></code></td>
-<td align="left">String that coalesces variable and term labels into a single column.</td>
+<td align="left">Logical indicating if a row is a header row for variables with several terms. Is equal to <code>NA</code> for variables who do not have an header row.<em>Require ‘label’ column. If needed, will automatically apply <code><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels()</a></code>.<br>It is better to apply <code><a href="../reference/tidy_add_header_rows.html">tidy_add_header_rows()</a></code> after other <code>tidy_*</code> functions</em>
+</td>
 </tr>
 </tbody>
 </table>
+<p>Note: <code><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows()</a></code> do not create additional columns but populate the ‘estimate’ column of reference rows.</p>
 </div>
   </div>
 
