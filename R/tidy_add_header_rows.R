@@ -114,7 +114,7 @@ tidy_add_header_rows <- function(x, show_single_row = NULL, model = tidy_get_mod
     )
 
   has_contrasts <- "contrasts" %in% names(x)
-  if (!has_contrasts) # temporarily populate teh column
+  if (!has_contrasts) # temporarily populate the column
     x$contrasts <- NA_character_
 
 
