@@ -131,23 +131,26 @@ tidy_add_header_rows <- function(x, show_single_row = NULL, model = tidy_get_mod
       dplyr::mutate(header_row = TRUE)
   } else {
     header_rows <- x %>%
-      dplyr::filter(!is.na(.data$variable)) %>%
-      dplyr::group_by(.data$variable) %>%
-      dplyr::summarise(
-        var_class = dplyr::first(.data$var_class),
-        var_type = dplyr::first(.data$var_type),
-        var_label = dplyr::first(.data$var_label),
-        contrasts = dplyr::first(.data$contrasts),
-        var_nrow = dplyr::n(),
-        rank = min(.data$rank) - .25,
-        .groups = "drop_last"
-      ) %>%
-      dplyr::filter(.data$var_nrow >= 2) %>%
-      dplyr::select(-.data$var_nrow) %>%
-      dplyr::mutate(
-        header_row = TRUE,
-        label = .data$var_label
-      )
+      dplyr::filter(!is.na(.data$variable))
+
+    if (nrow(header_rows) > 0)
+      header_rows <- header_rows %>%
+        dplyr::group_by(.data$variable) %>%
+        dplyr::summarise(
+          var_class = dplyr::first(.data$var_class),
+          var_type = dplyr::first(.data$var_type),
+          var_label = dplyr::first(.data$var_label),
+          contrasts = dplyr::first(.data$contrasts),
+          var_nrow = dplyr::n(),
+          rank = min(.data$rank) - .25,
+          .groups = "drop_last"
+        ) %>%
+        dplyr::filter(.data$var_nrow >= 2) %>%
+        dplyr::select(-.data$var_nrow) %>%
+        dplyr::mutate(
+          header_row = TRUE,
+          label = .data$var_label
+        )
   }
 
   x <- x %>%

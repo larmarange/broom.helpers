@@ -113,6 +113,13 @@ test_that("tidy_add_header_rows() works as expected", {
       NA, TRUE, FALSE, FALSE
     )
   )
+
+  # no warning with an intercept only model
+  mod <- lm(mpg ~ 1, mtcars)
+  expect_warning(
+    mod %>% tidy_and_attach() %>% tidy_add_header_rows(),
+    NA
+  )
 })
 
 test_that("test tidy_add_header_rows() checks", {
