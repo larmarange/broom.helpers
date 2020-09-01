@@ -23,6 +23,7 @@
 #' @param show_single_row a vector indicating the names of binary
 #' variables that should be displayed on a single row
 #' @param model the corresponding model, if not attached to `x`
+#' @inheritParams tidy_plus_plus
 #' @export
 #' @family tidy_helpers
 #' @examples
@@ -56,7 +57,10 @@
 #'     tidy_add_reference_rows() %>%
 #'     tidy_add_header_rows()
 #' }
-tidy_add_header_rows <- function(x, show_single_row = NULL, model = tidy_get_model(x)) {
+tidy_add_header_rows <- function(x,
+                                 show_single_row = NULL,
+                                 model = tidy_get_model(x),
+                                 strict = FALSE) {
   if (is.null(model)) {
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
   }
@@ -73,6 +77,23 @@ tidy_add_header_rows <- function(x, show_single_row = NULL, model = tidy_get_mod
   # management of show_single_row --------------
   # only if reference_rows have been defined
   show_single_row <- stats::na.omit(unique(show_single_row))
+
+  # checking if variables incorrectly requested for single row summary
+  bad_single_row <- x %>%
+    dplyr::filter(!is.na(.data$estimate),
+                  !is.na(.data$variable),
+                  .data$variable %in% show_single_row) %>%
+    dplyr::group_by(.data$variable) %>%
+    dplyr::count() %>%
+    dplyr::filter(.data$n > 1) %>%
+    dplyr::pull(.data$variable)
+  if (length(bad_single_row) > 0) {
+    paste("Variable(s) {paste(shQuote(bad_single_row), collapse = ", ")} were",
+          "incorrectly requested to be printed on a single row.") %>%
+    usethis::ui_oops()
+    if (strict) stop("Quitting execution.", call. = FALSE)
+  }
+
   if (
     length(show_single_row) > 0 &&
       "reference_row" %in% names(x) &&
