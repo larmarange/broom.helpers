@@ -1,3 +1,6 @@
+library(survival)
+library(gtsummary)
+
 test_that("tidy_identify_variables() works for common models", {
   mod <- glm(response ~ age + grade * trt, gtsummary::trial, family = binomial)
   res <- mod %>%
@@ -334,22 +337,25 @@ test_that("model_identify_variables() works with lavaan::lavaan", {
 })
 
 test_that("model_identify_variables() strict argument", {
-  library(survival)
+  df_models <-
+    tibble::tibble(grade = c("I", "II", "III")) %>%
+    dplyr::mutate(df_model = purrr::map(grade, ~trial %>% dplyr::filter(grade == ..1))) %>%
+    dplyr::mutate(
+      mv_formula_char = "Surv(ttdeath, death) ~ trt + age + marker",
+      mv_formula = purrr::map(mv_formula_char, as.formula),
+      mv_model_form =
+        purrr::map2(
+          mv_formula, df_model,
+          ~ coxph(..1, data = ..2)
+        )
+    )
   expect_error(
-    tibble(grade = c("I", "II", "III")) %>%
-      mutate(df_model = map(grade, ~ trial %>% filter(grade == ..1))) %>%
-      mutate(
-        mv_formula_char = "Surv(ttdeath, death) ~ trt + age + marker",
-        mv_formula = map(mv_formula_char, ~ as.formula(.x)),
-        mv_model_form =
-          map2(
-            mv_formula, df_model,
-            ~ coxph(..1, data = ..2)
-          ),
+    df_models %>%
+      dplyr::mutate(
         mv_tbl_form =
-          map(
+          purrr::map(
             mv_model_form,
-            ~ broom.helpers::tidy_plus_plus(..1, exponentiate = TRUE, strict = TRUE)
+            ~tidy_and_attach(.x) %>% tidy_identify_variables(strict = TRUE)
           )
       )
   )
