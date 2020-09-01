@@ -28,6 +28,8 @@
 #' `add_header_rows` is `TRUE`
 #' @param intercept should the intercept(s) be included?
 #' @param keep_model should the model be kept as an attribute of the final result?
+#' @param strict logical argument whether broom.helpers should return an error
+#' when requested output cannot be generated. Default is FALSE
 #' @param ... other arguments passed to `tidy_fun()`
 #' @family tidy_helpers
 #' @examples
@@ -87,6 +89,7 @@ tidy_plus_plus <- function(
                            show_single_row = NULL,
                            intercept = FALSE,
                            keep_model = FALSE,
+                           strict = FALSE,
                            ...) {
   res <- model %>%
     tidy_and_attach(
@@ -95,7 +98,7 @@ tidy_plus_plus <- function(
       exponentiate = exponentiate,
       ...
     ) %>%
-    tidy_identify_variables() %>%
+    tidy_identify_variables(strict = strict) %>%
     tidy_add_contrasts()
   if (add_reference_rows) {
     res <- res %>% tidy_add_reference_rows()
@@ -109,7 +112,7 @@ tidy_plus_plus <- function(
     tidy_add_term_labels(labels = term_labels)
   if (add_header_rows) {
     res <- res %>%
-      tidy_add_header_rows(show_single_row = show_single_row)
+      tidy_add_header_rows(show_single_row = show_single_row, strict = strict)
   }
   if (!intercept) {
     res <- res %>% tidy_remove_intercept()

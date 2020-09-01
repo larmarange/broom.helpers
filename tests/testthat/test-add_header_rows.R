@@ -161,3 +161,17 @@ test_that("tidy_add_header_rows() works with nnet::multinom", {
     )
   )
 })
+
+
+test_that("test tidy_add_header_rows() bad single row request", {
+  mod <- lm(mpg ~ hp + factor(cyl) + factor(am), mtcars) %>%
+    tidy_and_attach() %>%
+    tidy_identify_variables()
+
+  expect_message(
+    tidy_add_header_rows(mod, show_single_row = "factor(cyl)")
+  )
+  expect_error(
+    tidy_add_header_rows(mod, show_single_row = "factor(cyl)", strict = TRUE)
+  )
+})

@@ -10,6 +10,7 @@
 #' of variables.
 #' @param x a tidy tibble
 #' @param model the corresponding model, if not attached to `x`
+#' @inheritParams tidy_plus_plus
 #' @export
 #' @seealso [model_identify_variables()]
 #' @family tidy_helpers
@@ -28,7 +29,7 @@
 #' ) %>%
 #'   tidy_and_attach(conf.int = TRUE) %>%
 #'   tidy_identify_variables()
-tidy_identify_variables <- function(x, model = tidy_get_model(x)) {
+tidy_identify_variables <- function(x, model = tidy_get_model(x), strict = FALSE) {
   if (is.null(model)) {
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
   }
@@ -74,6 +75,7 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x)) {
       "functional programming framework (e.g. using {usethis::ui_code('lappy()')}, ",
       "{usethis::ui_code('purrr::map()')}, etc.)."
     ))
+    if (strict) stop("Quitting execution.", call. = FALSE)
     x %>%
       dplyr::mutate(
         variable = NA_character_,

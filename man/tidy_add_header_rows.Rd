@@ -4,7 +4,12 @@
 \alias{tidy_add_header_rows}
 \title{Add header rows variables with several terms}
 \usage{
-tidy_add_header_rows(x, show_single_row = NULL, model = tidy_get_model(x))
+tidy_add_header_rows(
+  x,
+  show_single_row = NULL,
+  model = tidy_get_model(x),
+  strict = FALSE
+)
 }
 \arguments{
 \item{x}{a tidy tibble}
@@ -13,6 +18,9 @@ tidy_add_header_rows(x, show_single_row = NULL, model = tidy_get_model(x))
 variables that should be displayed on a single row}
 
 \item{model}{the corresponding model, if not attached to \code{x}}
+
+\item{strict}{logical argument whether broom.helpers should return an error
+when requested output cannot be generated. Default is FALSE}
 }
 \description{
 For variables with several terms (usually categorical variables but

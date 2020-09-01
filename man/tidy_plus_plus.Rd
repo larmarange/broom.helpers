@@ -17,6 +17,7 @@ tidy_plus_plus(
   show_single_row = NULL,
   intercept = FALSE,
   keep_model = FALSE,
+  strict = FALSE,
   ...
 )
 }
@@ -48,6 +49,9 @@ variables that should be displayed on a single row, when
 \item{intercept}{should the intercept(s) be included?}
 
 \item{keep_model}{should the model be kept as an attribute of the final result?}
+
+\item{strict}{logical argument whether broom.helpers should return an error
+when requested output cannot be generated. Default is FALSE}
 
 \item{...}{other arguments passed to \code{tidy_fun()}}
 }
