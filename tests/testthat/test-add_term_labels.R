@@ -55,6 +55,15 @@ test_that("tidy_add_term_labels() works for basic models", {
         labels = list(aaa = "aaa", bbb = "bbb", ccc = 44)
       )
   )
+
+  expect_error(
+    mod %>%
+      tidy_and_attach() %>%
+      tidy_add_term_labels(
+        labels = list(aaa = "aaa", bbb = "bbb", ccc = 44),
+        strict = TRUE
+      )
+  )
 })
 
 

@@ -40,7 +40,8 @@ tidy_add_term_labels <- function(x,
                                  labels = NULL,
                                  interaction_sep = " * ",
                                  model = tidy_get_model(x),
-                                 quiet = FALSE) {
+                                 quiet = FALSE,
+                                 strict = FALSE) {
   if (is.null(model)) {
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
   }
@@ -93,6 +94,9 @@ tidy_add_term_labels <- function(x,
       usethis::ui_code("x"),
       "."
     ))
+  }
+  if (length(not_found) > 0 && strict) {
+    stop("Incorrect call with `labels=`. Quitting execution.", call. = FALSE)
   }
 
   # factor levels for categorical variables

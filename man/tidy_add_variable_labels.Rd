@@ -9,7 +9,8 @@ tidy_add_variable_labels(
   labels = NULL,
   interaction_sep = " * ",
   model = tidy_get_model(x),
-  quiet = FALSE
+  quiet = FALSE,
+  strict = FALSE
 )
 }
 \arguments{
@@ -23,6 +24,9 @@ custom variable labels}
 \item{model}{the corresponding model, if not attached to \code{x}}
 
 \item{quiet}{logical argument whether broom.helpers should return an error
+when requested output cannot be generated. Default is FALSE}
+
+\item{strict}{logical argument whether broom.helpers should return an error
 when requested output cannot be generated. Default is FALSE}
 }
 \description{
