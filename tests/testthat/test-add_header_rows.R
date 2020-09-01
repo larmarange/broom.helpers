@@ -128,7 +128,7 @@ test_that("test tidy_add_header_rows() checks", {
   expect_error(mod %>% broom::tidy() %>% tidy_add_header_rows())
 
   # warning if applied twice
-  expect_warning(
+  expect_message(
     mod %>% tidy_and_attach() %>%
       tidy_add_header_rows() %>%
       tidy_add_header_rows()

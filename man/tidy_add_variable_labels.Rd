@@ -8,7 +8,8 @@ tidy_add_variable_labels(
   x,
   labels = NULL,
   interaction_sep = " * ",
-  model = tidy_get_model(x)
+  model = tidy_get_model(x),
+  quiet = FALSE
 )
 }
 \arguments{
@@ -20,6 +21,9 @@ custom variable labels}
 \item{interaction_sep}{separator for interaction terms}
 
 \item{model}{the corresponding model, if not attached to \code{x}}
+
+\item{quiet}{logical argument whether broom.helpers should return an error
+when requested output cannot be generated. Default is FALSE}
 }
 \description{
 Will add variable labels in a \code{var_label} column, based on:

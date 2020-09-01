@@ -60,13 +60,15 @@
 tidy_add_header_rows <- function(x,
                                  show_single_row = NULL,
                                  model = tidy_get_model(x),
+                                 quiet = FALSE,
                                  strict = FALSE) {
   if (is.null(model)) {
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
   }
 
   if ("header_row" %in% names(x)) {
-    warning("tidy_add_header_rows() has already been applied. x has been returned unchanged.")
+    if (!quiet)
+      message("tidy_add_header_rows() has already been applied. x has been returned unchanged.")
     return(x)
   }
 
@@ -88,10 +90,11 @@ tidy_add_header_rows <- function(x,
     dplyr::filter(.data$n > 1) %>%
     dplyr::pull(.data$variable)
   if (length(bad_single_row) > 0) {
-    paste("Variable(s) {paste(shQuote(bad_single_row), collapse = ", ")} were",
-          "incorrectly requested to be printed on a single row.") %>%
-    usethis::ui_oops()
-    if (strict) stop("Quitting execution.", call. = FALSE)
+    if (!quiet)
+      paste("Variable(s) {paste(shQuote(bad_single_row), collapse = ", ")} were",
+            "incorrectly requested to be printed on a single row.") %>%
+      usethis::ui_oops()
+    if (strict) stop("Incorrect call with `show_single_row=`. Quitting execution.", call. = FALSE)
   }
 
   if (

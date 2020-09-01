@@ -29,7 +29,8 @@
 #' ) %>%
 #'   tidy_and_attach(conf.int = TRUE) %>%
 #'   tidy_identify_variables()
-tidy_identify_variables <- function(x, model = tidy_get_model(x), strict = FALSE) {
+tidy_identify_variables <- function(x, model = tidy_get_model(x),
+                                    quiet = FALSE, strict = FALSE) {
   if (is.null(model)) {
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
   }
@@ -67,15 +68,16 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x), strict = FALSE
       tidy_attach_model(model) %>%
       .order_tidy_columns()
   } else {
-    usethis::ui_oops(paste0(
-      "broom.helpers was not able to identify the list of variables.\n\n",
-      "This is usually due to an error calling {usethis::ui_code('stats::model.frame(x)')}.\n",
-      "It could be the case if that type of model does not implement this method.\n",
-      "Rarely, this error may occur if the model object was created within\na ",
-      "functional programming framework (e.g. using {usethis::ui_code('lappy()')}, ",
-      "{usethis::ui_code('purrr::map()')}, etc.)."
-    ))
-    if (strict) stop("Quitting execution.", call. = FALSE)
+    if (!quiet)
+      usethis::ui_oops(paste0(
+        "Unable to identify the list of variables.\n\n",
+        "This is usually due to an error calling {usethis::ui_code('stats::model.frame(x)')}.\n",
+        "It could be the case if that type of model does not implement this method.\n",
+        "Rarely, this error may occur if the model object was created within\na ",
+        "functional programming framework (e.g. using {usethis::ui_code('lappy()')}, ",
+        "{usethis::ui_code('purrr::map()')}, etc.)."
+      ))
+    if (strict) stop("Cannot identify variables. Quitting execution.", call. = FALSE)
     x %>%
       dplyr::mutate(
         variable = NA_character_,

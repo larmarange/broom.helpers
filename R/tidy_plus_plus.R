@@ -28,6 +28,8 @@
 #' `add_header_rows` is `TRUE`
 #' @param intercept should the intercept(s) be included?
 #' @param keep_model should the model be kept as an attribute of the final result?
+#' @param quiet logical argument whether broom.helpers should return an error
+#' when requested output cannot be generated. Default is FALSE
 #' @param strict logical argument whether broom.helpers should return an error
 #' when requested output cannot be generated. Default is FALSE
 #' @param ... other arguments passed to `tidy_fun()`
@@ -89,6 +91,7 @@ tidy_plus_plus <- function(
                            show_single_row = NULL,
                            intercept = FALSE,
                            keep_model = FALSE,
+                           quiet = FALSE,
                            strict = FALSE,
                            ...) {
   res <- model %>%
@@ -98,21 +101,22 @@ tidy_plus_plus <- function(
       exponentiate = exponentiate,
       ...
     ) %>%
-    tidy_identify_variables(strict = strict) %>%
+    tidy_identify_variables(strict = strict, quiet = quiet) %>%
     tidy_add_contrasts()
   if (add_reference_rows) {
-    res <- res %>% tidy_add_reference_rows()
+    res <- res %>% tidy_add_reference_rows(quiet = quiet)
   }
   if (add_reference_rows & add_estimate_to_reference_rows) {
     res <- res %>%
-      tidy_add_estimate_to_reference_rows(exponentiate = exponentiate)
+      tidy_add_estimate_to_reference_rows(exponentiate = exponentiate, quiet = quiet)
   }
   res <- res %>%
-    tidy_add_variable_labels(labels = variable_labels) %>%
-    tidy_add_term_labels(labels = term_labels)
+    tidy_add_variable_labels(labels = variable_labels, quiet = quiet) %>%
+    tidy_add_term_labels(labels = term_labels, quiet = quiet)
   if (add_header_rows) {
     res <- res %>%
-      tidy_add_header_rows(show_single_row = show_single_row, strict = strict)
+      tidy_add_header_rows(show_single_row = show_single_row,
+                           strict = strict, quiet = quiet)
   }
   if (!intercept) {
     res <- res %>% tidy_remove_intercept()

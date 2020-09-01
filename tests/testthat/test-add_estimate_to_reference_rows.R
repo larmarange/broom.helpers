@@ -137,7 +137,7 @@ test_that("tidy_add_estimate_to_reference_rows() handles variables having non st
     family = binomial,
     contrasts = list(`grade of kids` = contr.sum)
   )
-  expect_warning(
+  expect_message(
     res <- mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows()
   )
   expect_equivalent(
@@ -202,7 +202,7 @@ test_that("tidy_add_estimate_to_reference_rows() works with nnet::multinom", {
     data = gtsummary::trial, trace = FALSE,
     contrasts = list(stage = contr.sum)
   )
-  expect_warning(mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows())
+  expect_message(mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows())
 })
 
 test_that("tidy_add_estimate_to_reference_rows() works with survey::svyglm", {

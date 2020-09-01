@@ -23,6 +23,7 @@
 #' coefficient estimates. It should be consistent with the original call to
 #' [broom::tidy()]
 #' @param model the corresponding model, if not attached to `x`
+#' @inheritParams tidy_plus_plus
 #' @export
 #' @family tidy_helpers
 #' @examples
@@ -55,7 +56,8 @@
 #'     tidy_add_reference_rows() %>%
 #'     tidy_add_estimate_to_reference_rows()
 #' }
-tidy_add_estimate_to_reference_rows <- function(x, exponentiate = FALSE, model = tidy_get_model(x)) {
+tidy_add_estimate_to_reference_rows <- function(x, exponentiate = FALSE, model = tidy_get_model(x),
+                                                quiet = FALSE) {
   if (is.null(model)) {
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
   }
@@ -82,7 +84,9 @@ tidy_add_estimate_to_reference_rows <- function(x, exponentiate = FALSE, model =
   ref_rows_sum <- which(x$reference_row & x$contrasts == "contr.sum")
   if (length(ref_rows_sum) > 0) {
     for (i in ref_rows_sum) {
-      x$estimate[i] <- .get_ref_row_estimate_contr_sum(x$variable[i], model, exponentiate)
+      x$estimate[i] <-
+        .get_ref_row_estimate_contr_sum(x$variable[i], model = model,
+                                        exponentiate = exponentiate, quiet = quiet)
     }
   }
 
@@ -91,7 +95,8 @@ tidy_add_estimate_to_reference_rows <- function(x, exponentiate = FALSE, model =
     .order_tidy_columns()
 }
 
-.get_ref_row_estimate_contr_sum <- function(variable, model, exponentiate = FALSE) {
+.get_ref_row_estimate_contr_sum <- function(variable, model, exponentiate = FALSE,
+                                            quiet) {
   # bug fix for character variables
   if ("model" %in% names(model)) {
     model$model <- model$model %>%
@@ -101,10 +106,11 @@ tidy_add_estimate_to_reference_rows <- function(x, exponentiate = FALSE, model =
   dc <- tryCatch(
     dplyr::last(stats::dummy.coef(model)[[variable]]),
     error = function(e) {
-      warning(paste0(
-        "No dummy.coef() method for this type of model.\n",
-        "Reference row of variable '", variable, "' remained unchanged."
-      ))
+      if (!quiet)
+        message(paste0(
+          "No dummy.coef() method for this type of model.\n",
+          "Reference row of variable '", variable, "' remained unchanged."
+        ))
       NA
     }
   )

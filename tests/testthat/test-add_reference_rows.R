@@ -42,14 +42,14 @@ test_that("test tidy_add_reference_rows() checks", {
   expect_error(mod %>% broom::tidy() %>% tidy_add_reference_rows())
 
   # warning if applied twice
-  expect_warning(
+  expect_message(
     mod %>% tidy_and_attach() %>%
       tidy_add_reference_rows() %>%
       tidy_add_reference_rows()
   )
 
   # warning if applied after tidy_add_term_labels()
-  expect_warning(
+  expect_message(
     mod %>% tidy_and_attach() %>%
       tidy_add_term_labels() %>%
       tidy_add_reference_rows()

@@ -19,6 +19,7 @@
 #' rather than before.
 #' @param x a tidy tibble
 #' @param model the corresponding model, if not attached to `x`
+#' @inheritParams tidy_plus_plus
 #' @export
 #' @family tidy_helpers
 #' @examples
@@ -49,7 +50,7 @@
 #'     tidy_and_attach() %>%
 #'     tidy_add_reference_rows()
 #' }
-tidy_add_reference_rows <- function(x, model = tidy_get_model(x)) {
+tidy_add_reference_rows <- function(x, model = tidy_get_model(x), quiet = FALSE) {
   if (is.null(model)) {
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
   }
@@ -59,15 +60,17 @@ tidy_add_reference_rows <- function(x, model = tidy_get_model(x)) {
   }
 
   if ("reference_row" %in% names(x)) {
-    warning("tidy_add_reference_rows() has already been applied. x has been returned unchanged.")
+    if (!quiet)
+      message("tidy_add_reference_rows() has already been applied. x has been returned unchanged.")
     return(x)
   }
 
   if ("label" %in% names(x)) {
-    warning(paste0(
-      "tidy_add_reference_rows() has been applied after tidy_add_term_labels().\n",
-      "You should consider to apply tidy_add_reference_rows() first."
-    ))
+    if (!quiet)
+      message(paste0(
+        "tidy_add_reference_rows() has been applied after tidy_add_term_labels().\n",
+        "You should consider applying tidy_add_reference_rows() first."
+      ))
   }
 
   if (!"contrasts" %in% names(x)) {
