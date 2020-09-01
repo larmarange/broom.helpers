@@ -70,9 +70,11 @@ tidy_add_variable_labels <- function(x,
   # show a message otherwise
   not_found <- setdiff(names(labels), names(var_labels))
   if (length(not_found) > 0) {
-    message(paste0(
-      paste0('"', not_found, '"', collapse = ", "),
-      " have not been found in \"x\"."
+    usethis::ui_oops(paste0(
+      usethis::ui_code(not_found),
+      " terms have not been found in ",
+      usethis::ui_code("x"),
+      "."
     ))
   }
 
