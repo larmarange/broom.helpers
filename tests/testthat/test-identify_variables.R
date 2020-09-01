@@ -332,3 +332,25 @@ test_that("model_identify_variables() works with lavaan::lavaan", {
   )
   expect_error(mod %>% tidy_and_attach() %>% tidy_identify_variables(), NA)
 })
+
+test_that("model_identify_variables() strict argument", {
+  library(survival)
+  expect_error(
+    tibble(grade = c("I", "II", "III")) %>%
+      mutate(df_model = map(grade, ~ trial %>% filter(grade == ..1))) %>%
+      mutate(
+        mv_formula_char = "Surv(ttdeath, death) ~ trt + age + marker",
+        mv_formula = map(mv_formula_char, ~ as.formula(.x)),
+        mv_model_form =
+          map2(
+            mv_formula, df_model,
+            ~ coxph(..1, data = ..2)
+          ),
+        mv_tbl_form =
+          map(
+            mv_model_form,
+            ~ broom.helpers::tidy_plus_plus(..1, exponentiate = TRUE, strict = TRUE)
+          )
+      )
+  )
+})
