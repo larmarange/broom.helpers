@@ -5,7 +5,9 @@
 #'
 #' It will also identify interaction terms and intercept(s).
 #' `var_type` could be `"continuous"`, `"categorical"`, `"intercept"`
-#' or `"interaction"`.
+#' or `"interaction"`. Will be equal to `"unknown"` in the rare cases
+#' where `tidy_identify_variables()` will fail to identify the list
+#' of variables.
 #' @param x a tidy tibble
 #' @param model the corresponding model, if not attached to `x`
 #' @export
@@ -41,25 +43,46 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x)) {
 
   variables_list <- model_identify_variables(model)
 
-  # clean unconventional variable names
-  x$term <- .clean_backtips(x$term, variables_list$variable)
+  if (nrow(variables_list) > 0) {
+    # clean unconventional variable names
+    x$term <- .clean_backtips(x$term, variables_list$variable)
 
-  x %>%
-    dplyr::left_join(variables_list, by = "term") %>%
-    dplyr::select(
-      dplyr::any_of("y.level"), # for multinom models
-      .data$term, .data$variable, .data$var_class, .data$var_type,
-      dplyr::everything()
-    ) %>%
-    dplyr::mutate(
-      var_type = dplyr::if_else(
-        is.na(.data$variable),
-        "intercept",
-        .data$var_type
-      ),
-      # specific case of polynomial terms defined with poly()
-      variable = stringr::str_replace(.data$variable, "^poly\\((.*),(.*)\\)$", "\\1")
-    ) %>%
-    tidy_attach_model(model) %>%
-    .order_tidy_columns()
+    x %>%
+      dplyr::left_join(variables_list, by = "term") %>%
+      dplyr::select(
+        dplyr::any_of("y.level"), # for multinom models
+        .data$term, .data$variable, .data$var_class, .data$var_type,
+        dplyr::everything()
+      ) %>%
+      dplyr::mutate(
+        var_type = dplyr::if_else(
+          is.na(.data$variable),
+          "intercept",
+          .data$var_type
+        ),
+        # specific case of polynomial terms defined with poly()
+        variable = stringr::str_replace(.data$variable, "^poly\\((.*),(.*)\\)$", "\\1")
+      ) %>%
+      tidy_attach_model(model) %>%
+      .order_tidy_columns()
+  } else {
+    usethis::ui_oops(paste0(
+      "broom.helpers was not able to identify the list of variables.\n\n",
+      "This is usually due to an error calling {usethis::ui_code('stats::model.frame(x)')}.\n",
+      "It could be the case if that type of model does not implement this method.\n",
+      "Rarely, this error may occur if the model object was created within\na ",
+      "functional programming framework (e.g. using {usethis::ui_code('lappy()')}, ",
+      "{usethis::ui_code('purrr::map()')}, etc.)."
+    ))
+    x %>%
+      dplyr::mutate(
+        variable = NA_character_,
+        var_class = NA_integer_,
+        var_type = "unknown"
+      ) %>%
+      tidy_attach_model(model) %>%
+      .order_tidy_columns()
+  }
+
+
 }

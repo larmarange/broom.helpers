@@ -32,5 +32,10 @@ model_get_model_frame.default <- function(model) {
 #' @export
 #' @rdname model_get_model_frame
 model_get_model_frame.coxph <- function(model) {
-  stats::model.frame.default(model)
+  tryCatch(
+    stats::model.frame.default(model),
+    error = function(e) {
+      NULL
+    }
+  )
 }

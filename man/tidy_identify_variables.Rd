@@ -18,7 +18,9 @@ three additional columns: \code{variable}, \code{var_class} and \code{var_type}.
 \details{
 It will also identify interaction terms and intercept(s).
 \code{var_type} could be \code{"continuous"}, \code{"categorical"}, \code{"intercept"}
-or \code{"interaction"}.
+or \code{"interaction"}. Will be equal to \code{"unknown"} in the rare cases
+where \code{tidy_identify_variables()} will fail to identify the list
+of variables.
 }
 \examples{
 Titanic \%>\%

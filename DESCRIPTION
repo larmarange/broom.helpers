@@ -34,7 +34,8 @@ Imports:
     stats,
     purrr,
     tibble,
-    stringr
+    stringr,
+    usethis
 Suggests: 
     testthat,
     gtsummary,
