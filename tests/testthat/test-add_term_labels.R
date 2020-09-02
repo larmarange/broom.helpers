@@ -63,7 +63,8 @@ test_that("tidy_add_term_labels() works for basic models", {
         labels = list(aaa = "aaa", bbb = "bbb", ccc = 44),
         strict = TRUE
       )
-    
+  )
+
   # model with only an interaction term
   mod <- lm(age ~ factor(response) : marker, gtsummary::trial)
   res <- mod %>% tidy_and_attach() %>% tidy_add_term_labels()
