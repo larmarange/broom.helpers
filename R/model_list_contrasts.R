@@ -2,7 +2,7 @@
 #'
 #' @param model a model object
 #' @return
-#' A tibble with three columns:
+#' A tibble with two columns:
 #' * `variable`: variable name
 #' * `contrasts`: type of contrasts
 #' @export
