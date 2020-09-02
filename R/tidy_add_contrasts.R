@@ -41,7 +41,11 @@ tidy_add_contrasts <- function(x, model = tidy_get_model(x)) {
     x$contrasts <- NA_character_
   } else {
     x <- x %>%
-      dplyr::left_join(contrasts_list, by = "variable")
+      dplyr::left_join(
+        contrasts_list %>%
+          dplyr::select(.data$variable, .data$contrasts),
+        by = "variable"
+      )
   }
   x %>%
     tidy_attach_model(model = model) %>%
