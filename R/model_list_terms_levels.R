@@ -39,7 +39,11 @@ model_list_terms_levels <- function(model) {
 #' @export
 #' @rdname model_list_terms_levels
 model_list_terms_levels.default <- function(model) {
-  contrasts_list <- model_list_contrasts(model) %>%
+  contrasts_list <- model_list_contrasts(model)
+  if (is.null(contrasts_list))
+    return(NULL)
+
+  contrasts_list <- contrasts_list %>%
     # keep only treatment, SAS and sum contrasts
     dplyr::filter(
       .data$contrasts %>%
@@ -47,7 +51,7 @@ model_list_terms_levels.default <- function(model) {
     )
   xlevels <- model_get_xlevels(model)
 
-  if (is.null(contrasts_list) | length(xlevels) == 0)
+  if (nrow(contrasts_list) == 0 | length(xlevels) == 0)
     return(NULL)
 
   model_terms <- model_identify_variables(model) %>%
