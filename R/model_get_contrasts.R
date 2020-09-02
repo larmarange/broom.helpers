@@ -26,3 +26,4 @@ model_get_contrasts.default <- function(model) {
     }
   )
 }
+

@@ -10,37 +10,31 @@ test_that("tidy_add_header_rows() works as expected", {
     tidy_add_header_rows()
   expect_equivalent(
     res$label,
-    c(
-      "(Intercept)", "T Stage", "T2", "T3", "T4", "Grade", "I", "II",
-      "Drug A", "Grade * Chemotherapy Treatment", "I * Drug A", "II * Drug A"
-    )
+    c("(Intercept)", "T Stage", "T2", "T3", "T4", "Grade", "I", "II",
+      "Chemotherapy Treatment", "Drug A", "Grade * Chemotherapy Treatment",
+      "I * Drug A", "II * Drug A")
   )
   expect_equivalent(
     res$term,
-    c(
-      "(Intercept)", NA, "stage2", "stage3", "stage4", NA, "grade1",
-      "grade2", "trt1", NA, "grade1:trt1", "grade2:trt1"
-    )
+    c("(Intercept)", NA, "stage2", "stage3", "stage4", NA, "grade1",
+      "grade2", NA, "trt1", NA, "grade1:trt1", "grade2:trt1")
   )
   expect_equivalent(
     res$header_row,
-    c(
-      NA, TRUE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, NA, TRUE,
-      FALSE, FALSE
-    )
+    c(NA, TRUE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, TRUE, FALSE,
+      TRUE, FALSE, FALSE)
   )
 
-  # no effect of show_single_row when no reference row
+  # show_single_row has an effect only on variables with one term (2 if a ref term)
   res <- mod %>%
     tidy_and_attach() %>%
     tidy_identify_variables() %>%
     tidy_add_header_rows(show_single_row = .$variable)
   expect_equivalent(
     res$label,
-    c(
-      "(Intercept)", "T Stage", "T2", "T3", "T4", "Grade", "I", "II",
-      "Drug A", "Grade * Chemotherapy Treatment", "I * Drug A", "II * Drug A"
-    )
+    c("(Intercept)", "T Stage", "T2", "T3", "T4", "Grade", "I", "II",
+      "Chemotherapy Treatment", "Grade * Chemotherapy Treatment", "I * Drug A",
+      "II * Drug A")
   )
   expect_equivalent(
     res$term,
@@ -73,7 +67,7 @@ test_that("tidy_add_header_rows() works as expected", {
   expect_equivalent(
     res$term,
     c(
-      "(Intercept)", NA, "stageT1", "stage2", "stage3", "stage4",
+      "(Intercept)", NA, "stage1", "stage2", "stage3", "stage4",
       NA, "grade1", "grade2", "grade3", NA, "trt1", "trt2", NA, "grade1:trt1",
       "grade2:trt1"
     )
@@ -101,7 +95,7 @@ test_that("tidy_add_header_rows() works as expected", {
   expect_equivalent(
     res$term,
     c(
-      "(Intercept)", NA, "stageT1", "stage2", "stage3", "stage4",
+      "(Intercept)", NA, "stage1", "stage2", "stage3", "stage4",
       NA, "grade1", "grade2", "grade3", "trt1", NA, "grade1:trt1",
       "grade2:trt1"
     )
@@ -119,6 +113,16 @@ test_that("tidy_add_header_rows() works as expected", {
   expect_warning(
     mod %>% tidy_and_attach() %>% tidy_add_header_rows(),
     NA
+  )
+
+  # header row for all categorical variable (even if no reference row)
+  # and if interaction with a categorical variable
+  # (except if )
+  mod <- lm(age ~ factor(response) * marker + trt, gtsummary::trial)
+  res <- mod %>% tidy_and_attach() %>% tidy_add_header_rows(show_single_row = "trt")
+  expect_equivalent(
+    res$header_row,
+    c(NA, TRUE, FALSE, NA, NA, TRUE, FALSE)
   )
 })
 
