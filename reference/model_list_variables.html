@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Identify for each coefficient of a model the corresponding variable — model_identify_variables • broom.helpers</title>
+<title>List all the variables used in a model — model_list_variables • broom.helpers</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Identify for each coefficient of a model the corresponding variable — model_identify_variables" />
-<meta property="og:description" content="It will also identify interaction terms and intercept(s)." />
+<meta property="og:title" content="List all the variables used in a model — model_list_variables" />
+<meta property="og:description" content="Including variables used only in an interaction." />
 
 
 
@@ -114,22 +114,22 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Identify for each coefficient of a model the corresponding variable</h1>
-    <small class="dont-index">Source: <a href='https://github.com/larmarange/broom.helpers/blob/master/R/model_identify_variables.R'><code>R/model_identify_variables.R</code></a></small>
-    <div class="hidden name"><code>model_identify_variables.Rd</code></div>
+    <h1>List all the variables used in a model</h1>
+    <small class="dont-index">Source: <a href='https://github.com/larmarange/broom.helpers/blob/master/R/model_list_variables.R'><code>R/model_list_variables.R</code></a></small>
+    <div class="hidden name"><code>model_list_variables.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>It will also identify interaction terms and intercept(s).</p>
+    <p>Including variables used only in an interaction.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>model_identify_variables</span>(<span class='no'>model</span>)
+    <pre class="usage"><span class='fu'>model_list_variables</span>(<span class='no'>model</span>)
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>model_identify_variables</span>(<span class='no'>model</span>)
+<span class='fu'>model_list_variables</span>(<span class='no'>model</span>)
 
 <span class='co'># S3 method for lavaan</span>
-<span class='fu'>model_identify_variables</span>(<span class='no'>model</span>)</pre>
+<span class='fu'>model_list_variables</span>(<span class='no'>model</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -142,59 +142,70 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A tibble with four columns:</p><ul>
-<li><p><code>term</code>: coefficients of the model</p></li>
+    <p>A tibble with three columns:</p><ul>
 <li><p><code>variable</code>: the corresponding variable</p></li>
 <li><p><code>var_class</code>: class of the variable (cf. <code><a href='https://rdrr.io/r/stats/checkMFClasses.html'>stats::.MFclass()</a></code>)</p></li>
-<li><p><code>var_type</code>: <code>"continuous"</code>, <code>"categorical"</code>, <code>"intercept"</code>
-or <code>"interaction"</code></p></li>
+<li><p><code>label_attr</code>: variable label defined in the original data frame
+with the label attribute (cf. <code><a href='https://rdrr.io/pkg/labelled/man/var_label.html'>labelled::var_label()</a></code>)</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='tidy_identify_variables.html'>tidy_identify_variables()</a></code></p>
-<p>Other model_helpers: 
+    <div class='dont-index'><p>Other model_helpers: 
 <code><a href='model_get_contrasts.html'>model_get_contrasts</a>()</code>,
 <code><a href='model_get_model_frame.html'>model_get_model_frame</a>()</code>,
 <code><a href='model_get_model_matrix.html'>model_get_model_matrix</a>()</code>,
 <code><a href='model_get_xlevels.html'>model_get_xlevels</a>()</code>,
+<code><a href='model_identify_variables.html'>model_identify_variables</a>()</code>,
 <code><a href='model_list_contrasts.html'>model_list_contrasts</a>()</code>,
-<code><a href='model_list_terms_levels.html'>model_list_terms_levels</a>()</code>,
-<code><a href='model_list_variables.html'>model_list_variables</a>()</code></p></div>
+<code><a href='model_list_terms_levels.html'>model_list_terms_levels</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>Titanic</span> <span class='kw'>%&gt;%</span>
   <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/reexports.html'>as_tibble</a></span>() <span class='kw'>%&gt;%</span>
   <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>Survived</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='no'>Survived</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"No"</span>, <span class='st'>"Yes"</span>))) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span>(
-    <span class='no'>Survived</span> ~ <span class='no'>Class</span> + <span class='no'>Age</span> * <span class='no'>Sex</span>,
+    <span class='no'>Survived</span> ~ <span class='no'>Class</span> + <span class='no'>Age</span> : <span class='no'>Sex</span>,
     <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>.</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='no'>.</span>$<span class='no'>n</span>,
     <span class='kw'>family</span> <span class='kw'>=</span> <span class='no'>binomial</span>
   ) <span class='kw'>%&gt;%</span>
-  <span class='fu'>model_identify_variables</span>()</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 7 x 4</span><span>
-#&gt;   term             variable var_class var_type   
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      
-#&gt; </span><span style='color: #555555;'>1</span><span> (Intercept)      </span><span style='color: #BB0000;'>NA</span><span>       </span><span style='color: #BB0000;'>NA</span><span>        intercept  
-#&gt; </span><span style='color: #555555;'>2</span><span> Class2nd         Class    character categorical
-#&gt; </span><span style='color: #555555;'>3</span><span> Class3rd         Class    character categorical
-#&gt; </span><span style='color: #555555;'>4</span><span> ClassCrew        Class    character categorical
-#&gt; </span><span style='color: #555555;'>5</span><span> AgeChild         Age      character categorical
-#&gt; </span><span style='color: #555555;'>6</span><span> SexMale          Sex      character categorical
-#&gt; </span><span style='color: #555555;'>7</span><span> AgeChild:SexMale Age:Sex  </span><span style='color: #BB0000;'>NA</span><span>        interaction</div><div class='input'>
+  <span class='fu'>model_list_variables</span>()</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 6 x 3</span><span>
+#&gt;   variable  var_class label_attr
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     
+#&gt; </span><span style='color: #555555;'>1</span><span> Survived  factor    </span><span style='color: #BB0000;'>NA</span><span>        
+#&gt; </span><span style='color: #555555;'>2</span><span> Class     character </span><span style='color: #BB0000;'>NA</span><span>        
+#&gt; </span><span style='color: #555555;'>3</span><span> Age       character </span><span style='color: #BB0000;'>NA</span><span>        
+#&gt; </span><span style='color: #555555;'>4</span><span> Sex       character </span><span style='color: #BB0000;'>NA</span><span>        
+#&gt; </span><span style='color: #555555;'>5</span><span> (weights) numeric   </span><span style='color: #BB0000;'>NA</span><span>        
+#&gt; </span><span style='color: #555555;'>6</span><span> Age:Sex   </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </div><div class='input'>
 <span class='no'>iris</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(
     <span class='no'>Sepal.Length</span> ~ <span class='fu'><a href='https://rdrr.io/r/stats/poly.html'>poly</a></span>(<span class='no'>Sepal.Width</span>, <span class='fl'>2</span>) + <span class='no'>Species</span>,
     <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>.</span>,
     <span class='kw'>contrasts</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>Species</span> <span class='kw'>=</span> <span class='no'>contr.sum</span>)
   ) <span class='kw'>%&gt;%</span>
-  <span class='fu'>model_identify_variables</span>()</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 5 x 4</span><span>
-#&gt;   term                  variable    var_class var_type   
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                 </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      
-#&gt; </span><span style='color: #555555;'>1</span><span> (Intercept)           </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span>        intercept  
-#&gt; </span><span style='color: #555555;'>2</span><span> poly(Sepal.Width, 2)1 Sepal.Width nmatrix.2 continuous 
-#&gt; </span><span style='color: #555555;'>3</span><span> poly(Sepal.Width, 2)2 Sepal.Width nmatrix.2 continuous 
-#&gt; </span><span style='color: #555555;'>4</span><span> Species1              Species     factor    categorical
-#&gt; </span><span style='color: #555555;'>5</span><span> Species2              Species     factor    categorical</div></span></pre>
+  <span class='fu'>model_list_variables</span>()</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 3 x 3</span><span>
+#&gt;   variable     var_class label_attr
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     
+#&gt; </span><span style='color: #555555;'>1</span><span> Sepal.Length numeric   </span><span style='color: #BB0000;'>NA</span><span>        
+#&gt; </span><span style='color: #555555;'>2</span><span> Sepal.Width  nmatrix.2 </span><span style='color: #BB0000;'>NA</span><span>        
+#&gt; </span><span style='color: #555555;'>3</span><span> Species      factor    </span><span style='color: #BB0000;'>NA</span><span>        </div><div class='input'>
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"gtsummary"</span>)) {
+  <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span>(
+    <span class='no'>response</span> ~ <span class='fu'><a href='https://rdrr.io/r/stats/poly.html'>poly</a></span>(<span class='no'>age</span>, <span class='fl'>3</span>) + <span class='no'>stage</span> + <span class='no'>grade</span> * <span class='no'>trt</span>,
+    <span class='fu'><a href='https://rdrr.io/r/stats/na.fail.html'>na.omit</a></span>(<span class='kw pkg'>gtsummary</span><span class='kw ns'>::</span><span class='no'><a href='http://www.danieldsjoberg.com/gtsummary//reference/trial.html'>trial</a></span>),
+    <span class='kw'>family</span> <span class='kw'>=</span> <span class='no'>binomial</span>,
+  ) <span class='kw'>%&gt;%</span>
+    <span class='fu'>model_list_variables</span>()
+}</div><div class='output co'>#&gt; <span class='message'>Loading required namespace: gtsummary</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 6 x 3</span><span>
+#&gt;   variable  var_class label_attr            
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                 
+#&gt; </span><span style='color: #555555;'>1</span><span> response  numeric   Tumor Response        
+#&gt; </span><span style='color: #555555;'>2</span><span> age       nmatrix.3 </span><span style='color: #BB0000;'>NA</span><span>                    
+#&gt; </span><span style='color: #555555;'>3</span><span> stage     factor    T Stage               
+#&gt; </span><span style='color: #555555;'>4</span><span> grade     factor    Grade                 
+#&gt; </span><span style='color: #555555;'>5</span><span> trt       character Chemotherapy Treatment
+#&gt; </span><span style='color: #555555;'>6</span><span> grade:trt </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>                    </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
