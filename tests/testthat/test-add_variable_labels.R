@@ -75,6 +75,7 @@ test_that("tidy_add_variable_labels() works for basic models", {
         labels = list(aaa = "aaa", bbb = "bbb", ccc = 44),
         strict = TRUE
       )
+  )
 
   # model with only an interaction term
   mod <- lm(age ~ factor(response):marker, gtsummary::trial)
