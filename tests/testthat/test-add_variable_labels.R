@@ -202,6 +202,18 @@ test_that("tidy_add_variable_labels() works with survival::survreg", {
     dist = "exponential"
   )
   expect_error(mod %>% tidy_and_attach() %>% tidy_add_variable_labels(), NA)
+
+  # check that label attribute in original dataset is preserved
+  mod <- survival::survreg(survival::Surv(ttdeath, death) ~ grade, gtsummary::trial)
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_identify_variables() %>%
+    tidy_add_reference_rows() %>%
+    tidy_add_variable_labels()
+  expect_equivalent(
+    res$var_label,
+    c("(Intercept)", "Grade", "Grade", "Grade", "Log(scale)")
+  )
 })
 
 test_that("tidy_add_variable_labels() works with nnet::multinom", {
