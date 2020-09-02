@@ -65,24 +65,60 @@ tidy_add_term_labels <- function(x,
     x <- x %>% tidy_add_contrasts(model = model)
   }
 
-  # reference rows required for naming correctly categorical variables
-  # will be removed eventually at the end
-  if ("reference_row" %in% names(x)) {
-    xx <- x
-  } else {
-    xx <- x %>% tidy_add_reference_rows(model = model)
-  }
-
   # specific case for nnet::multinom
   # keeping only one level for computing term_labels
   if ("y.level" %in% names(x)) {
-    xx <- xx %>%
+    xx <- x %>%
       dplyr::filter(.data$y.level == x$y.level[1])
+  } else {
+    xx <- x
   }
 
   # start with term names
   term_labels <- unique(stats::na.omit(xx$term))
   names(term_labels) <- term_labels
+
+  # add categorical terms levels
+  terms_levels <- model_list_terms_levels(model)
+  additional_term_labels <- terms_levels$label
+  names(additional_term_labels) <- terms_levels$term
+  term_labels <- term_labels %>%
+    .update_vector(additional_term_labels)
+
+  # add variable labels
+  # first variable list (for interaction only terms)
+  # then current variable labels in x
+  variables_list <- model_list_variables(model) %>%
+    dplyr::mutate(
+      label = dplyr::if_else(
+        is.na(.data$label_attr),
+        .data$variable,
+        as.character(.data$label_attr)
+      )
+    )
+  additional_term_labels <- variables_list$label
+  names(additional_term_labels) <- variables_list$variable
+  term_labels <- term_labels %>%
+    .update_vector(additional_term_labels)
+
+  x_var_labels <- xx %>%
+    dplyr::mutate(
+      variable = dplyr::if_else(
+        is.na(.data$variable), # for intercept
+        .data$term,
+        .data$variable
+      )
+    ) %>%
+    dplyr::group_by(.data$variable) %>%
+    dplyr::summarise(
+      var_label = dplyr::first(.data$var_label),
+      .groups = "drop_last"
+    )
+  additional_term_labels <- x_var_labels$var_label
+  names(additional_term_labels) <- x_var_labels$variable
+  term_labels <- term_labels %>%
+    .update_vector(additional_term_labels)
+
 
   # check if all elements of labels are in x
   # show a message otherwise
@@ -97,31 +133,6 @@ tidy_add_term_labels <- function(x,
   }
   if (length(not_found) > 0 && strict) {
     stop("Incorrect call with `labels=`. Quitting execution.", call. = FALSE)
-  }
-
-  # factor levels for categorical variables
-  xlevels <- model_get_xlevels(model)
-  for (v in names(xlevels)) {
-    if (v %in% unique(xx$variable)) {
-      var_contrasts <- xx$contrasts[!is.na(xx$variable) & xx$variable == v][1]
-      # add xlevels only if treatment or sum contrasts
-      if (var_contrasts %>% stringr::str_starts("contr.treatment|contr.SAS|contr.sum")) {
-        additional_term_labels <- xlevels[[v]]
-        names(additional_term_labels) <- xx$term[!is.na(xx$variable) & xx$variable == v]
-        term_labels <- term_labels %>%
-          .update_vector(additional_term_labels)
-      }
-    }
-  }
-
-  # variable label if term is equal to the variable
-  additional_term_labels <-
-    xx$var_label[!is.na(xx$term) & !is.na(xx$variable) & xx$term == xx$variable]
-  if (length(additional_term_labels) > 0) {
-    names(additional_term_labels) <-
-      xx$term[!is.na(xx$term) & !is.na(xx$variable) & xx$term == xx$variable]
-    term_labels <- term_labels %>%
-      .update_vector(additional_term_labels)
   }
 
   # labels for polynomial terms

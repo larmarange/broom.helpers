@@ -78,8 +78,8 @@ test_that("model_identify_variables() works with stats::poly()", {
   expect_equivalent(
     res$variable,
     c(
-      NA, "poly(Sepal.Width, 3)", "poly(Sepal.Width, 3)", "poly(Sepal.Width, 3)",
-      "poly(Petal.Length, 2)", "poly(Petal.Length, 2)"
+      NA, "Sepal.Width", "Sepal.Width", "Sepal.Width",
+      "Petal.Length", "Petal.Length"
     )
   )
   expect_error(tb <- mod %>% tidy_and_attach() %>% tidy_identify_variables(), NA)

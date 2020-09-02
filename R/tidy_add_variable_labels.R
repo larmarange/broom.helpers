@@ -61,13 +61,28 @@ tidy_add_variable_labels <- function(x,
     x <- x %>% tidy_identify_variables(model = model)
   }
 
-  # if variable is NA, use term
+  # start with the list of variables
+  variable_list <- model_list_variables(model)
+  var_labels <- variable_list$variable
+  names(var_labels) <- var_labels
+
+  # identify terms with no variable
+  # (e.g. intercepts)
+  # use term name in that case
+
   variable_is_na <- is.na(x$variable)
   # temporarily copy term in variable
   x$variable[variable_is_na] <- x$term[variable_is_na]
+  additional_labels <- unique(x$variable[variable_is_na])
+  names(additional_labels) <- additional_labels
+  var_labels <- var_labels %>%
+    .update_vector(additional_labels)
 
-  var_labels <- unique(stats::na.omit(x$variable))
-  names(var_labels) <- var_labels
+  # table into account variable label attribute
+  additional_labels <- variable_list$label_attr[!is.na(variable_list$label_attr)]
+  names(additional_labels) <- variable_list$variable[!is.na(variable_list$label_attr)]
+  var_labels <- var_labels %>%
+    .update_vector(additional_labels)
 
   # check if all elements of labels are in x
   # show a message otherwise
@@ -85,7 +100,6 @@ tidy_add_variable_labels <- function(x,
   }
 
   var_labels <- var_labels %>%
-    .update_vector(unlist(labelled::var_label(model_get_model_frame(model)))) %>%
     .update_vector(labels)
 
   # management of interaction terms

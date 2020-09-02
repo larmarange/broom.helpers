@@ -77,6 +77,19 @@ tidy_add_reference_rows <- function(x, model = tidy_get_model(x), quiet = FALSE)
     x <- x %>% tidy_add_contrasts(model = model)
   }
 
+  terms_levels <- model_list_terms_levels(model)
+  if (is.null(terms_levels))
+    return(
+      x %>%
+        dplyr::mutate(reference_row = NA) %>%
+        tidy_attach_model(model)
+      )
+
+  terms_levels <- terms_levels %>%
+    dplyr::group_by(.data$variable) %>%
+    dplyr::mutate(rank = 1:dplyr::n())
+
+
   has_var_label <- "var_label" %in% names(x)
   if (!has_var_label) {
     x$var_label <- NA_character_
@@ -85,124 +98,92 @@ tidy_add_reference_rows <- function(x, model = tidy_get_model(x), quiet = FALSE)
   x <- x %>%
     dplyr::mutate(
       reference_row = dplyr::if_else(
-        .data$contrasts %in% c("contr.treatment", "contr.SAS", "contr.sum"),
+        .data$variable %in% unique(terms_levels$variable),
         FALSE,
         NA
-      ),
-      reference_row = dplyr::if_else(
-        .data$contrasts %>% stringr::str_starts("contr.treatment"),
-        FALSE,
-        .data$reference_row
       ),
       rank = 1:dplyr::n() # for sorting table at the end
     )
 
   if ("y.level" %in% names(x)) { # specific case for nnet::multinom
-    # contr.treatment -> add reference row before
-    # base term needs to be taken into account
-    if (any(!is.na(x$contrasts) & stringr::str_starts(x$contrasts, "contr.treatment"))) {
-      xlevels <- model_get_xlevels(model)
-      ref_rows_before <- x %>%
-        dplyr::filter(.data$contrasts %>% stringr::str_starts("contr.treatment")) %>%
-        dplyr::group_by(.data$variable, .data$y.level) %>%
-        dplyr::summarise(
-          var_class = dplyr::first(.data$var_class),
-          var_type = dplyr::first(.data$var_type),
-          var_label = dplyr::last(.data$var_label),
-          contrasts = dplyr::first(.data$contrasts),
-          rank = min(.data$rank) - .25,
-          .groups = "drop_last"
-        ) %>%
-        dplyr::mutate(
-          contr_base = stringr::str_replace(.data$contrasts, "contr.treatment\\(base=([0-9]+)\\)", "\\1"),
-          contr_base = stringr::str_replace(.data$contr_base, "contr.treatment", "1"),
-          contr_base = as.integer(.data$contr_base),
-          rank = .data$rank + .data$contr_base - 1, # update position based on rank
-          # term = paste0(.data$variable, "_ref"),
-          reference_row = TRUE
-        ) %>%
-        dplyr::rowwise() %>%
-        dplyr::mutate(term = paste0(.data$variable, xlevels[[.data$variable]][.data$contr_base])) %>%
-        dplyr::select(-.data$contr_base)
-      x <- x %>%
-        dplyr::bind_rows(ref_rows_before)
-    }
+    ref_rows <- terms_levels %>%
+      dplyr::filter(.data$reference) %>%
+      dplyr::mutate(reference_row = TRUE) %>%
+      dplyr::select(.data$term, .data$variable, .data$label, .data$reference_row, .data$rank)
 
-    # contr.SAS & contr.sum -> add reference row after
-    if (any(!is.na(x$contrasts) & x$contrasts %in% c("contr.sum", "contr.SAS"))) {
-      ref_rows_after <- x %>%
-        dplyr::filter(.data$contrasts %in% c("contr.sum", "contr.SAS")) %>%
-        dplyr::group_by(.data$variable, .data$y.level) %>%
-        dplyr::summarise(
-          var_class = dplyr::last(.data$var_class),
-          var_type = dplyr::last(.data$var_type),
-          var_label = dplyr::last(.data$var_label),
-          contrasts = dplyr::last(.data$contrasts),
-          rank = max(.data$rank) + .25,
-          n_levels = dplyr::n(),
-          .groups = "drop_last"
-        ) %>%
-        dplyr::mutate(
-          term = paste0(.data$variable, .data$n_levels),
-          reference_row = TRUE
-        ) %>%
-        dplyr::select(-.data$n_levels)
-      x <- x %>%
-        dplyr::bind_rows(ref_rows_after)
-    }
+    if (!"label" %in% names(x))
+      ref_rows <- ref_rows %>% dplyr::select(-.data$label)
+
+    var_summary <- x %>%
+      dplyr::group_by(.data$y.level, .data$variable) %>%
+      dplyr::summarise(
+        var_class = dplyr::first(.data$var_class),
+        var_type = dplyr::first(.data$var_type),
+        var_label = dplyr::first(.data$var_label),
+        contrasts = dplyr::first(.data$contrasts),
+        var_min_rank = min(.data$rank),
+        var_max_rank = min(.data$rank),
+        .groups = "drop_last"
+      )
+
+    ref_rows <- ref_rows %>%
+      dplyr::left_join(
+        var_summary,
+        by = "variable"
+      ) %>%
+      dplyr::mutate(
+        rank = .data$var_min_rank -1.25 + .data$rank,
+        # if last, reduce by .5 to avoid overlap with next variable
+        rank = dplyr::if_else(
+          .data$rank > .data$var_max_rank,
+          .data$rank - .5,
+          .data$rank
+        )
+      ) %>%
+      dplyr::select(-.data$var_min_rank, -.data$var_max_rank)
+
+    x <- x %>%
+      dplyr::bind_rows(ref_rows)
   } else {
-    # contr.treatment -> add reference row before
-    # base term needs to be taken into account
-    if (any(!is.na(x$contrasts) & stringr::str_starts(x$contrasts, "contr.treatment"))) {
-      xlevels <- model_get_xlevels(model)
-      ref_rows_before <- x %>%
-        dplyr::filter(.data$contrasts %>% stringr::str_starts("contr.treatment")) %>%
-        dplyr::group_by(.data$variable) %>%
-        dplyr::summarise(
-          var_class = dplyr::first(.data$var_class),
-          var_type = dplyr::first(.data$var_type),
-          var_label = dplyr::last(.data$var_label),
-          contrasts = dplyr::first(.data$contrasts),
-          rank = min(.data$rank) - .25,
-          .groups = "drop_last"
-        ) %>%
-        dplyr::mutate(
-          contr_base = stringr::str_replace(.data$contrasts, "contr.treatment\\(base=([0-9]+)\\)", "\\1"),
-          contr_base = stringr::str_replace(.data$contr_base, "contr.treatment", "1"),
-          contr_base = as.integer(.data$contr_base),
-          rank = .data$rank + .data$contr_base - 1, # update position based on rank
-          # term = paste0(.data$variable, "_ref"),
-          reference_row = TRUE
-        ) %>%
-        dplyr::rowwise() %>%
-        dplyr::mutate(term = paste0(.data$variable, xlevels[[.data$variable]][.data$contr_base])) %>%
-        dplyr::select(-.data$contr_base)
-      x <- x %>%
-        dplyr::bind_rows(ref_rows_before)
-    }
+    # normal case
+    ref_rows <- terms_levels %>%
+      dplyr::filter(.data$reference) %>%
+      dplyr::mutate(reference_row = TRUE) %>%
+      dplyr::select(.data$term, .data$variable, .data$label, .data$reference_row, .data$rank)
 
-    # contr.SAS & contr.sum -> add reference row after
-    if (any(!is.na(x$contrasts) & x$contrasts %in% c("contr.sum", "contr.SAS"))) {
-      ref_rows_after <- x %>%
-        dplyr::filter(.data$contrasts %in% c("contr.sum", "contr.SAS")) %>%
-        dplyr::group_by(.data$variable) %>%
-        dplyr::summarise(
-          var_class = dplyr::last(.data$var_class),
-          var_type = dplyr::last(.data$var_type),
-          var_label = dplyr::last(.data$var_label),
-          contrasts = dplyr::last(.data$contrasts),
-          rank = max(.data$rank) + .25,
-          n_levels = dplyr::n(),
-          .groups = "drop_last"
-        ) %>%
-        dplyr::mutate(
-          term = paste0(.data$variable, .data$n_levels + 1),
-          reference_row = TRUE
-        ) %>%
-        dplyr::select(-.data$n_levels)
-      x <- x %>%
-        dplyr::bind_rows(ref_rows_after)
-    }
+    if (!"label" %in% names(x))
+      ref_rows <- ref_rows %>% dplyr::select(-.data$label)
+
+    var_summary <- x %>%
+      dplyr::group_by(.data$variable) %>%
+      dplyr::summarise(
+        var_class = dplyr::first(.data$var_class),
+        var_type = dplyr::first(.data$var_type),
+        var_label = dplyr::first(.data$var_label),
+        contrasts = dplyr::first(.data$contrasts),
+        var_min_rank = min(.data$rank),
+        var_max_rank = min(.data$rank),
+        .groups = "drop_last"
+      )
+
+    ref_rows <- ref_rows %>%
+      dplyr::left_join(
+        var_summary,
+        by = "variable"
+      ) %>%
+      dplyr::mutate(
+        rank = .data$var_min_rank -1.25 + .data$rank,
+        # if last, reduce by .5 to avoid overlap with next variable
+        rank = dplyr::if_else(
+          .data$rank > .data$var_max_rank,
+          .data$rank - .5,
+          .data$rank
+        )
+      ) %>%
+      dplyr::select(-.data$var_min_rank, -.data$var_max_rank)
+
+    x <- x %>%
+      dplyr::bind_rows(ref_rows)
   }
 
   if (!has_var_label) {

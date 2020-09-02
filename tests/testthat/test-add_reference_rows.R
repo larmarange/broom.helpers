@@ -11,7 +11,7 @@ test_that("tidy_add_reference_rows() works as expected", {
   expect_equivalent(
     res$term,
     c(
-      "(Intercept)", "stageT1", "stage2", "stage3", "stage4", "grade1",
+      "(Intercept)", "stage1", "stage2", "stage3", "stage4", "grade1",
       "grade2", "grade3", "trt1", "trt2", "grade1:trt1", "grade2:trt1"
     )
   )
@@ -80,8 +80,8 @@ test_that("tidy_add_reference_rows() works with different values of base in cont
   expect_equivalent(
     res$term,
     c(
-      "(Intercept)", "stage1", "stage2", "stageT3", "stage4", "grade1",
-      "gradeII", "grade3", "trt1", "trt2", "grade1:trt1", "grade3:trt1"
+      "(Intercept)", "stage1", "stage2", "stage3", "stage4", "grade1",
+      "grade2", "grade3", "trt1", "trt2", "grade1:trt1", "grade3:trt1"
     )
   )
   expect_equivalent(

@@ -36,8 +36,7 @@ These additional rows could be identified with \code{header_row} column.
 \details{
 The \code{show_single_row} argument allows to specify a list
 of dichotomous variables that should be displayed on a single row
-instead of two rows. This argument will have no effect if reference
-rows have not been added to the tibble (cf. \code{\link[=tidy_add_reference_rows]{tidy_add_reference_rows()}}).
+instead of two rows.
 
 The added \code{header_row} column will be equal to:
 \itemize{

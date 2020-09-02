@@ -75,6 +75,17 @@ test_that("tidy_add_variable_labels() works for basic models", {
         labels = list(aaa = "aaa", bbb = "bbb", ccc = 44),
         strict = TRUE
       )
+
+  # model with only an interaction term
+  mod <- lm(age ~ factor(response):marker, gtsummary::trial)
+  res <- mod %>% tidy_and_attach() %>% tidy_add_variable_labels()
+  expect_equivalent(
+    res$var_label,
+    c(
+      "(Intercept)",
+      "factor(response) * Marker Level (ng/mL)",
+      "factor(response) * Marker Level (ng/mL)"
+    )
   )
 })
 
