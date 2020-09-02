@@ -17,6 +17,8 @@ A tibble with three columns:
 \itemize{
 \item \code{variable}: variable name
 \item \code{contrasts}: type of contrasts
+\item \code{reference}: for variables with treatment, SAS
+or sum contrasts, position of the reference level
 }
 }
 \description{
@@ -38,6 +40,7 @@ Other model_helpers:
 \code{\link{model_get_model_matrix}()},
 \code{\link{model_get_xlevels}()},
 \code{\link{model_identify_variables}()},
+\code{\link{model_list_terms_levels}()},
 \code{\link{model_list_variables}()}
 }
 \concept{model_helpers}

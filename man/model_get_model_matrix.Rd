@@ -38,6 +38,7 @@ Other model_helpers:
 \code{\link{model_get_xlevels}()},
 \code{\link{model_identify_variables}()},
 \code{\link{model_list_contrasts}()},
+\code{\link{model_list_terms_levels}()},
 \code{\link{model_list_variables}()}
 }
 \concept{model_helpers}
