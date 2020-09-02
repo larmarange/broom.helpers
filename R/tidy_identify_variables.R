@@ -49,19 +49,12 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x)) {
 
     x %>%
       dplyr::left_join(variables_list, by = "term") %>%
-      dplyr::select(
-        dplyr::any_of("y.level"), # for multinom models
-        .data$term, .data$variable, .data$var_class, .data$var_type,
-        dplyr::everything()
-      ) %>%
       dplyr::mutate(
         var_type = dplyr::if_else(
           is.na(.data$variable),
           "intercept",
           .data$var_type
-        ),
-        # specific case of polynomial terms defined with poly()
-        variable = stringr::str_replace(.data$variable, "^poly\\((.*),(.*)\\)$", "\\1")
+        )
       ) %>%
       tidy_attach_model(model) %>%
       .order_tidy_columns()

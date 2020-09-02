@@ -38,18 +38,11 @@ model_identify_variables <- function(model) {
 #' @export
 model_identify_variables.default <- function(model) {
   model_matrix <- model_get_model_matrix(model)
-  model_terms <- stats::terms(model)
-
   assign <- attr(model_matrix, "assign")
   assign[assign == 0] <- NA
+  model_terms <- stats::terms(model)
   variable_names <- attr(model_terms, "term.labels") %>%
     .clean_backtips()
-  dataClasses <- attr(model_terms, "dataClasses")
-
-  if (is.null(dataClasses)) {
-    model_frame <- stats::model.frame(model)
-    dataClasses <- purrr::map(model_frame, stats::.MFclass) %>% unlist()
-  }
 
   coef_list <- colnames(model_matrix) %>%
     .clean_backtips(variable_names = variable_names)
@@ -58,7 +51,15 @@ model_identify_variables.default <- function(model) {
     term = coef_list,
     variable = variable_names[assign]
   ) %>%
-    .add_var_class(dataClasses) %>%
+    # specific case of polynomial terms defined with poly()
+    dplyr::mutate(
+      variable = stringr::str_replace(.data$variable, "^poly\\((.*),(.*)\\)$", "\\1")
+    ) %>%
+    dplyr::left_join(
+      model_list_variables(model) %>%
+        dplyr::select(.data$variable, .data$var_class),
+      by = "variable"
+    ) %>%
     .compute_var_type()
 }
 
@@ -90,17 +91,6 @@ model_identify_variables.lavaan <- function(model) {
 
 
 ## model_identify_variables() helpers --------------------------
-
-.add_var_class <- function(x, dataClasses) {
-  x %>%
-    dplyr::left_join(
-      tibble::tibble(
-        variable = names(dataClasses),
-        var_class = dataClasses
-      ),
-      by = "variable"
-    )
-}
 
 .compute_var_type <- function(x) {
   x %>%

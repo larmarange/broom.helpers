@@ -8,8 +8,7 @@
 #'
 #' The `show_single_row` argument allows to specify a list
 #' of dichotomous variables that should be displayed on a single row
-#' instead of two rows. This argument will have no effect if reference
-#' rows have not been added to the tibble (cf. [tidy_add_reference_rows()]).
+#' instead of two rows.
 #'
 #' The added `header_row` column will be equal to:
 #'
@@ -71,13 +70,17 @@ tidy_add_header_rows <- function(x, show_single_row = NULL, model = tidy_get_mod
   }
 
   # management of show_single_row --------------
-  # only if reference_rows have been defined
+  # if reference_rows have been defined, removal of reference row
+  variables_to_simplify <- NULL
   show_single_row <- stats::na.omit(unique(show_single_row))
   if (
     length(show_single_row) > 0 &&
-      "reference_row" %in% names(x) &&
       any(x$variable %in% show_single_row)
   ) {
+    has_reference_row <- "reference_row" %in% names(x)
+    if (!has_reference_row)
+      x$reference_row <- FALSE
+
     xx <- x
     if ("y.level" %in% names(x)) { # specific case for multinom
       xx <- xx %>%
@@ -85,10 +88,14 @@ tidy_add_header_rows <- function(x, show_single_row = NULL, model = tidy_get_mod
     }
 
     variables_to_simplify <- xx %>%
-      dplyr::filter(.data$variable %in% show_single_row) %>%
+      dplyr::filter(
+        .data$variable %in% show_single_row & !.data$reference_row
+      ) %>%
       dplyr::count(.data$variable) %>%
-      dplyr::filter(.data$n == 2) %>%
-      `[[`("variable")
+      dplyr::filter(.data$n == 1) %>%
+      purrr::pluck("variable")
+
+    # removing reference rows of those variables
     if (length(variables_to_simplify) > 0) {
       x <- x %>%
         dplyr::filter(
@@ -104,6 +111,8 @@ tidy_add_header_rows <- function(x, show_single_row = NULL, model = tidy_get_mod
           )
         )
     }
+    if (!has_reference_row)
+      x <- x %>% dplyr::select(-.data$reference_row)
   }
 
   # computing header rows ---------------
@@ -115,23 +124,28 @@ tidy_add_header_rows <- function(x, show_single_row = NULL, model = tidy_get_mod
 
   if ("y.level" %in% names(x)) { # specific case for nnet::multinom
     header_rows <- x %>%
-      dplyr::filter(!is.na(.data$variable)) %>%
-      dplyr::group_by(.data$variable, .data$y.level) %>%
-      dplyr::summarise(
-        var_class = dplyr::first(.data$var_class),
-        var_type = dplyr::first(.data$var_type),
-        var_label = dplyr::first(.data$var_label),
-        contrasts = dplyr::first(.data$contrasts),
-        var_nrow = dplyr::n(),
-        rank = min(.data$rank) - .25,
-        .groups = "drop_last"
-      ) %>%
-      dplyr::filter(.data$var_nrow >= 2) %>%
-      dplyr::select(-.data$var_nrow) %>%
-      dplyr::mutate(header_row = TRUE)
+      dplyr::filter(!is.na(.data$variable) & !.data$variable %in% variables_to_simplify)
+
+    if (nrow(header_rows) > 0) {
+      header_rows <- header_rows %>%
+        dplyr::group_by(.data$variable, .data$y.level) %>%
+        dplyr::summarise(
+          var_class = dplyr::first(.data$var_class),
+          var_type = dplyr::first(.data$var_type),
+          var_label = dplyr::first(.data$var_label),
+          contrasts = dplyr::first(.data$contrasts),
+          var_nrow = dplyr::n(),
+          var_test = sum(.data$term != .data$variable),
+          rank = min(.data$rank) - .25,
+          .groups = "drop_last"
+        ) %>%
+        dplyr::filter(.data$var_nrow >= 2 | .data$var_test > 0) %>%
+        dplyr::select(-.data$var_nrow, -.data$var_test) %>%
+        dplyr::mutate(header_row = TRUE)
+    }
   } else {
     header_rows <- x %>%
-      dplyr::filter(!is.na(.data$variable))
+      dplyr::filter(!is.na(.data$variable) & !.data$variable %in% variables_to_simplify)
 
     if (nrow(header_rows) > 0)
       header_rows <- header_rows %>%
@@ -142,11 +156,12 @@ tidy_add_header_rows <- function(x, show_single_row = NULL, model = tidy_get_mod
           var_label = dplyr::first(.data$var_label),
           contrasts = dplyr::first(.data$contrasts),
           var_nrow = dplyr::n(),
+          var_test = sum(.data$term != .data$variable),
           rank = min(.data$rank) - .25,
           .groups = "drop_last"
         ) %>%
-        dplyr::filter(.data$var_nrow >= 2) %>%
-        dplyr::select(-.data$var_nrow) %>%
+        dplyr::filter(.data$var_nrow >= 2 | .data$var_test > 0) %>%
+        dplyr::select(-.data$var_nrow, -.data$var_test) %>%
         dplyr::mutate(
           header_row = TRUE,
           label = .data$var_label
