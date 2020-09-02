@@ -73,7 +73,7 @@ test_that("tidy_add_header_rows() works as expected", {
   expect_equivalent(
     res$term,
     c(
-      "(Intercept)", NA, "stageT1", "stage2", "stage3", "stage4",
+      "(Intercept)", NA, "stage1", "stage2", "stage3", "stage4",
       NA, "grade1", "grade2", "grade3", NA, "trt1", "trt2", NA, "grade1:trt1",
       "grade2:trt1"
     )
@@ -101,7 +101,7 @@ test_that("tidy_add_header_rows() works as expected", {
   expect_equivalent(
     res$term,
     c(
-      "(Intercept)", NA, "stageT1", "stage2", "stage3", "stage4",
+      "(Intercept)", NA, "stage1", "stage2", "stage3", "stage4",
       NA, "grade1", "grade2", "grade3", "trt1", NA, "grade1:trt1",
       "grade2:trt1"
     )
