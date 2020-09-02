@@ -54,9 +54,7 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x)) {
           is.na(.data$variable),
           "intercept",
           .data$var_type
-        ),
-        # specific case of polynomial terms defined with poly()
-        variable = stringr::str_replace(.data$variable, "^poly\\((.*),(.*)\\)$", "\\1")
+        )
       ) %>%
       tidy_attach_model(model) %>%
       .order_tidy_columns()
