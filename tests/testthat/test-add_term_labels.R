@@ -65,7 +65,7 @@ test_that("tidy_add_term_labels() works for basic models", {
       )
   )
 
-  # model with only an interaction term
+  # model with an interaction term only
   mod <- lm(age ~ factor(response) : marker, gtsummary::trial)
   res <- mod %>% tidy_and_attach() %>% tidy_add_term_labels()
   expect_equivalent(

@@ -69,7 +69,7 @@ model_list_terms_levels.default <- function(model) {
       observed_terms <- model_terms$term[model_terms$variable == v]
       ref <- contrasts_list$reference[contrasts_list$variable == v]
       # observed terms correspond to first case
-      if (all(observed_terms %in% terms_names1[-ref])) {
+      if (length(observed_terms) > 0 & all(observed_terms %in% terms_names1[-ref])) {
         res <- dplyr::bind_rows(
           res,
           dplyr::tibble(
@@ -81,7 +81,7 @@ model_list_terms_levels.default <- function(model) {
         )
       } else {
         # observed terms correspond to second case
-        if (all(observed_terms %in% terms_names2[-ref])) {
+        if (length(observed_terms) > 0 & all(observed_terms %in% terms_names2[-ref])) {
           res <- dplyr::bind_rows(
             res,
             dplyr::tibble(
@@ -94,8 +94,8 @@ model_list_terms_levels.default <- function(model) {
         } else {
           # it could be an interaction term only
           # we check what is the most frequent
-          n1 <- .count_term(model_terms$term, terms_names1[-ref])
-          n2 <- .count_term(model_terms$term, terms_names2[-ref])
+          n1 <- .count_term(model_terms$term, terms_names1)
+          n2 <- .count_term(model_terms$term, terms_names2)
           if (n1 >= n2) {
             res <- dplyr::bind_rows(
               res,
@@ -131,8 +131,17 @@ model_list_terms_levels.default <- function(model) {
   total <- 0
   for (i in searched) {
     total <- total +
-      stringr::str_count(observed, paste0("(^|:)", i, "(:|$)")) %>%
+      stringr::str_count(observed, paste0("(^|:)", .escape_regex(i), "(:|$)")) %>%
       sum()
   }
   total
+}
+
+# based on Hmisc::escapeRegex
+.escape_regex <- function (string)
+{
+  gsub(
+    "([.|()\\^{}+$*?]|\\[|\\])", "\\\\\\1",
+    string
+  )
 }
