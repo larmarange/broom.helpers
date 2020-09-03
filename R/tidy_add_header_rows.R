@@ -84,8 +84,14 @@ tidy_add_header_rows <- function(x,
   if (!has_reference_row)
     x$reference_row <- FALSE
 
+  xx <- x
+  if ("y.level" %in% names(x)) { # specific case for multinom
+    xx <- xx %>%
+      dplyr::filter(.data$y.level == x$y.level[1])
+  }
+
   # checking if variables incorrectly requested for single row summary
-  bad_single_row <- x %>%
+  bad_single_row <- xx %>%
     dplyr::filter(!is.na(.data$variable),
                   is.na(.data$reference_row) | !.data$reference_row,
                   .data$variable %in% show_single_row) %>%
@@ -95,21 +101,17 @@ tidy_add_header_rows <- function(x,
     dplyr::pull(.data$variable)
   if (length(bad_single_row) > 0) {
     if (!quiet)
-      paste("Variable(s) {paste(shQuote(bad_single_row), collapse = ", ")} were",
+      paste("Variable(s) {paste(shQuote(bad_single_row), collapse = \", \")} were",
             "incorrectly requested to be printed on a single row.") %>%
       usethis::ui_oops()
     if (strict) stop("Incorrect call with `show_single_row=`. Quitting execution.", call. = FALSE)
+    show_single_row <- setdiff(show_single_row, bad_single_row)
   }
 
   if (
     length(show_single_row) > 0 &&
       any(x$variable %in% show_single_row)
   ) {
-    xx <- x
-    if ("y.level" %in% names(x)) { # specific case for multinom
-      xx <- xx %>%
-        dplyr::filter(.data$y.level == x$y.level[1])
-    }
 
     variables_to_simplify <- xx %>%
       dplyr::filter(
@@ -149,7 +151,7 @@ tidy_add_header_rows <- function(x,
 
   if ("y.level" %in% names(x)) { # specific case for nnet::multinom
     header_rows <- x %>%
-      dplyr::filter(!is.na(.data$variable) & !.data$variable %in% variables_to_simplify)
+      dplyr::filter(!is.na(.data$variable) & !.data$variable %in% show_single_row)
 
     if (nrow(header_rows) > 0) {
       header_rows <- header_rows %>%
@@ -170,7 +172,7 @@ tidy_add_header_rows <- function(x,
     }
   } else {
     header_rows <- x %>%
-      dplyr::filter(!is.na(.data$variable) & !.data$variable %in% variables_to_simplify)
+      dplyr::filter(!is.na(.data$variable) & !.data$variable %in% show_single_row)
 
     if (nrow(header_rows) > 0)
       header_rows <- header_rows %>%

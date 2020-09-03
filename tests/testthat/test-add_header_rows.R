@@ -29,7 +29,7 @@ test_that("tidy_add_header_rows() works as expected", {
   res <- mod %>%
     tidy_and_attach() %>%
     tidy_identify_variables() %>%
-    tidy_add_header_rows(show_single_row = .$variable)
+    tidy_add_header_rows(show_single_row = .$variable, quiet = TRUE)
   expect_equivalent(
     res$label,
     c("(Intercept)", "T Stage", "T2", "T3", "T4", "Grade", "I", "II",
@@ -134,6 +134,14 @@ test_that("tidy_add_header_rows() works as expected", {
     res$header_row,
     c(NA, TRUE, FALSE, NA, NA)
   )
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_add_reference_rows() %>%
+    tidy_add_header_rows(show_single_row = "factor(response):marker")
+  expect_equivalent(
+    res$header_row,
+    c(NA, TRUE, FALSE, FALSE, NA, NA)
+  )
 })
 
 test_that("test tidy_add_header_rows() checks", {
@@ -166,7 +174,7 @@ test_that("tidy_add_header_rows() works with nnet::multinom", {
   res <- mod %>%
     tidy_and_attach() %>%
     tidy_add_reference_rows() %>%
-    tidy_add_header_rows(show_single_row = .$variable)
+    tidy_add_header_rows(show_single_row = .$variable, quiet = TRUE)
   expect_equivalent(
     res$header_row,
     c(
