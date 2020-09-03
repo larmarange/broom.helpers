@@ -70,6 +70,21 @@ model_list_terms_levels.default <- function(model) {
       ref <- contrasts_list$reference[contrasts_list$variable == v]
       # observed terms correspond to first case
       if (length(observed_terms) > 0 & all(observed_terms %in% terms_names1[-ref])) {
+        approach <- 1
+      } else {
+        # observed terms correspond to second case
+        if (length(observed_terms) > 0 & all(observed_terms %in% terms_names2[-ref])) {
+          approach <- 2
+        } else {
+          # it could be an interaction term only
+          # we check what is the most frequent
+          n1 <- .count_term(model_terms$term, terms_names1)
+          n2 <- .count_term(model_terms$term, terms_names2)
+          approach <- dplyr::if_else(n1 >= n2, 1, 2)
+        }
+      }
+
+      if (approach == 1) {
         res <- dplyr::bind_rows(
           res,
           dplyr::tibble(
@@ -80,45 +95,17 @@ model_list_terms_levels.default <- function(model) {
           )
         )
       } else {
-        # observed terms correspond to second case
-        if (length(observed_terms) > 0 & all(observed_terms %in% terms_names2[-ref])) {
-          res <- dplyr::bind_rows(
-            res,
-            dplyr::tibble(
-              variable = v,
-              term = terms_names2,
-              label = term_levels,
-              reference = seq(1, length(term_levels)) == ref
-            )
+        res <- dplyr::bind_rows(
+          res,
+          dplyr::tibble(
+            variable = v,
+            term = terms_names2,
+            label = term_levels,
+            reference = seq(1, length(term_levels)) == ref
           )
-        } else {
-          # it could be an interaction term only
-          # we check what is the most frequent
-          n1 <- .count_term(model_terms$term, terms_names1)
-          n2 <- .count_term(model_terms$term, terms_names2)
-          if (n1 >= n2) {
-            res <- dplyr::bind_rows(
-              res,
-              dplyr::tibble(
-                variable = v,
-                term = terms_names1,
-                label = term_levels,
-                reference = seq(1, length(term_levels)) == ref
-              )
-            )
-          } else {
-            res <- dplyr::bind_rows(
-              res,
-              dplyr::tibble(
-                variable = v,
-                term = terms_names2,
-                label = term_levels,
-                reference = seq(1, length(term_levels)) == ref
-              )
-            )
-          }
-        }
+        )
       }
+
     }
   }
 
