@@ -16,7 +16,7 @@ model_get_xlevels.default <- function(model) {
   tryCatch(
     model %>% purrr::chuck("xlevels"),
     error = function(e) {
-      NULL
+      NULL # nocov
     }
   )
 }
