@@ -132,7 +132,7 @@ test_that("test tidy_add_header_rows() checks", {
   expect_error(mod %>% broom::tidy() %>% tidy_add_header_rows())
 
   # warning if applied twice
-  expect_warning(
+  expect_message(
     mod %>% tidy_and_attach() %>%
       tidy_add_header_rows() %>%
       tidy_add_header_rows()
@@ -163,5 +163,19 @@ test_that("tidy_add_header_rows() works with nnet::multinom", {
       NA, TRUE, FALSE, FALSE, FALSE, FALSE, NA, NA, NA, NA, TRUE,
       FALSE, FALSE, FALSE, FALSE, NA, NA, NA
     )
+  )
+})
+
+
+test_that("test tidy_add_header_rows() bad single row request", {
+  mod <- lm(mpg ~ hp + factor(cyl) + factor(am), mtcars) %>%
+    tidy_and_attach() %>%
+    tidy_identify_variables()
+
+  expect_message(
+    tidy_add_header_rows(mod, show_single_row = "factor(cyl)")
+  )
+  expect_error(
+    tidy_add_header_rows(mod, show_single_row = "factor(cyl)", strict = TRUE)
   )
 })

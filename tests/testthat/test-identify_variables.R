@@ -1,3 +1,6 @@
+library(survival)
+library(gtsummary)
+
 test_that("tidy_identify_variables() works for common models", {
   mod <- glm(response ~ age + grade * trt, gtsummary::trial, family = binomial)
   res <- mod %>%
@@ -331,4 +334,29 @@ test_that("model_identify_variables() works with lavaan::lavaan", {
     mod@ParTable$lhs
   )
   expect_error(mod %>% tidy_and_attach() %>% tidy_identify_variables(), NA)
+})
+
+test_that("model_identify_variables() strict argument", {
+  df_models <-
+    tibble::tibble(grade = c("I", "II", "III")) %>%
+    dplyr::mutate(df_model = purrr::map(grade, ~trial %>% dplyr::filter(grade == ..1))) %>%
+    dplyr::mutate(
+      mv_formula_char = "Surv(ttdeath, death) ~ trt + age + marker",
+      mv_formula = purrr::map(mv_formula_char, as.formula),
+      mv_model_form =
+        purrr::map2(
+          mv_formula, df_model,
+          ~ coxph(..1, data = ..2)
+        )
+    )
+  expect_error(
+    df_models %>%
+      dplyr::mutate(
+        mv_tbl_form =
+          purrr::map(
+            mv_model_form,
+            ~tidy_and_attach(.x) %>% tidy_identify_variables(strict = TRUE)
+          )
+      )
+  )
 })

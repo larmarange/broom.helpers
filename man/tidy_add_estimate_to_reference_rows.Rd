@@ -7,7 +7,8 @@
 tidy_add_estimate_to_reference_rows(
   x,
   exponentiate = FALSE,
-  model = tidy_get_model(x)
+  model = tidy_get_model(x),
+  quiet = FALSE
 )
 }
 \arguments{
@@ -18,6 +19,9 @@ coefficient estimates. It should be consistent with the original call to
 \code{\link[broom:reexports]{broom::tidy()}}}
 
 \item{model}{the corresponding model, if not attached to \code{x}}
+
+\item{quiet}{logical argument whether broom.helpers should return an error
+when requested output cannot be generated. Default is FALSE}
 }
 \description{
 For categorical variables with a treatment contrast

@@ -17,6 +17,7 @@
 #' custom variable labels
 #' @param interaction_sep separator for interaction terms
 #' @param model the corresponding model, if not attached to `x`
+#' @inheritParams tidy_plus_plus
 #' @export
 #' @family tidy_helpers
 #' @examples
@@ -37,7 +38,9 @@
 tidy_add_variable_labels <- function(x,
                                      labels = NULL,
                                      interaction_sep = " * ",
-                                     model = tidy_get_model(x)) {
+                                     model = tidy_get_model(x),
+                                     quiet = FALSE,
+                                     strict = FALSE) {
   if (is.null(model)) {
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
   }
@@ -84,13 +87,16 @@ tidy_add_variable_labels <- function(x,
   # check if all elements of labels are in x
   # show a message otherwise
   not_found <- setdiff(names(labels), names(var_labels))
-  if (length(not_found) > 0) {
+  if (length(not_found) > 0 && !quiet) {
     usethis::ui_oops(paste0(
       usethis::ui_code(not_found),
       " terms have not been found in ",
       usethis::ui_code("x"),
       "."
     ))
+  }
+  if (length(not_found) > 0 && strict) {
+    stop("Incorrect call with `labels=`. Quitting execution.", call. = FALSE)
   }
 
   var_labels <- var_labels %>%

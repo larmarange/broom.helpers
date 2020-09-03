@@ -4,12 +4,23 @@
 \alias{tidy_identify_variables}
 \title{Identify the variable corresponding to each model coefficient}
 \usage{
-tidy_identify_variables(x, model = tidy_get_model(x))
+tidy_identify_variables(
+  x,
+  model = tidy_get_model(x),
+  quiet = FALSE,
+  strict = FALSE
+)
 }
 \arguments{
 \item{x}{a tidy tibble}
 
 \item{model}{the corresponding model, if not attached to \code{x}}
+
+\item{quiet}{logical argument whether broom.helpers should return an error
+when requested output cannot be generated. Default is FALSE}
+
+\item{strict}{logical argument whether broom.helpers should return an error
+when requested output cannot be generated. Default is FALSE}
 }
 \description{
 \code{tidy_identify_variables()} will add to the tidy tibble
