@@ -22,8 +22,8 @@ A tibble with four columns:
 }
 }
 \description{
-Only for categorical variables with a treatment,
-a SAS or a sum contrasts.
+Only for categorical variables with treatment,
+SAS or sum contrasts.
 }
 \examples{
 glm(

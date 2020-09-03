@@ -1,7 +1,7 @@
 #' List levels of categorical terms
 #'
-#' Only for categorical variables with a treatment,
-#' a SAS or a sum contrasts.
+#' Only for categorical variables with treatment,
+#' SAS or sum contrasts.
 #'
 #' @param model a model object
 #' @return
