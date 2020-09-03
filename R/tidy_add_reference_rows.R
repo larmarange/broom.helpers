@@ -78,7 +78,14 @@ tidy_add_reference_rows <- function(x, model = tidy_get_model(x), quiet = FALSE)
   }
 
   terms_levels <- model_list_terms_levels(model)
-  if (is.null(terms_levels))
+
+  if (!is.null(terms_levels))
+    terms_levels <- terms_levels %>%
+      # keep only terms corresponding to variable in x
+      # (e.g. to exclude interaction only variables)
+      dplyr::filter(.data$variable %in% unique(stats::na.omit(x$variable)))
+
+  if (is.null(terms_levels) || nrow(terms_levels) == 0)
     return(
       x %>%
         dplyr::mutate(reference_row = NA) %>%

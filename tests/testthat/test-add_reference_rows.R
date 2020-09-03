@@ -34,6 +34,16 @@ test_that("tidy_add_reference_rows() works as expected", {
     tidy_and_attach() %>%
     tidy_add_reference_rows()
   expect_true(all(is.na(res$reference_row)))
+
+  # no reference row for an interaction only variable
+  mod <- lm(age ~ factor(response):marker, gtsummary::trial)
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_add_reference_rows()
+  expect_equivalent(
+    res$reference_row,
+    c(NA, NA, NA)
+  )
 })
 
 test_that("test tidy_add_reference_rows() checks", {
