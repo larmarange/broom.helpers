@@ -142,6 +142,11 @@ test_that("tidy_add_header_rows() works as expected", {
     res$header_row,
     c(NA, TRUE, FALSE, FALSE, NA, NA)
   )
+  expect_equivalent(
+    res$var_label,
+    c("(Intercept)", "factor(response)", "factor(response)", "factor(response)",
+      "Marker Level (ng/mL)", "factor(response) * Marker Level (ng/mL)")
+  )
 })
 
 test_that("test tidy_add_header_rows() checks", {

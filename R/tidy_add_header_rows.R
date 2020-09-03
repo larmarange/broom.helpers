@@ -128,15 +128,19 @@ tidy_add_header_rows <- function(x,
           is.na(.data$variable) |
             !.data$variable %in% variables_to_simplify |
             (.data$variable %in% variables_to_simplify & !.data$reference_row)
-        ) %>%
-        dplyr::mutate(
-          label = dplyr::if_else(
-            .data$variable %in% variables_to_simplify,
-            .data$var_label,
-            .data$label
-          )
         )
     }
+
+    # for variables in show_single_row
+    # label should be equal to var_label
+    x <- x %>%
+      dplyr::mutate(
+        label = dplyr::if_else(
+          .data$variable %in% show_single_row,
+          .data$var_label,
+          .data$label
+        )
+      )
   }
 
   if (!has_reference_row)
