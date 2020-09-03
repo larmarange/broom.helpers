@@ -46,7 +46,7 @@ model_get_model_frame.survreg <- function(model) {
   tryCatch(
     stats::model.frame.default(model),
     error = function(e) {
-      NULL
+      NULL # nocov
     }
   )
 }

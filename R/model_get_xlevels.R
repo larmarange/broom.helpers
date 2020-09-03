@@ -14,7 +14,7 @@ model_get_xlevels <- function(model) {
 #' @rdname model_get_xlevels
 model_get_xlevels.default <- function(model) {
   tryCatch(
-    model$xlevels,
+    model %>% purrr::chuck("xlevels"),
     error = function(e) {
       NULL
     }
