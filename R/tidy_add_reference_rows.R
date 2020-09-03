@@ -61,13 +61,13 @@ tidy_add_reference_rows <- function(x, model = tidy_get_model(x), quiet = FALSE)
 
   if ("reference_row" %in% names(x)) {
     if (!quiet)
-      message("tidy_add_reference_rows() has already been applied. x has been returned unchanged.")
+      usethis::ui_oops("tidy_add_reference_rows() has already been applied. x has been returned unchanged.")
     return(x)
   }
 
   if ("label" %in% names(x)) {
     if (!quiet)
-      message(paste0(
+      usethis::ui_info(paste0(
         "tidy_add_reference_rows() has been applied after tidy_add_term_labels().\n",
         "You should consider applying tidy_add_reference_rows() first."
       ))

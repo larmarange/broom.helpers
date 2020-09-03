@@ -107,7 +107,7 @@ tidy_add_estimate_to_reference_rows <- function(x, exponentiate = FALSE, model =
     dplyr::last(stats::dummy.coef(model)[[variable]]),
     error = function(e) {
       if (!quiet)
-        message(paste0(
+        usethis::ui_info(paste0(
           "No dummy.coef() method for this type of model.\n",
           "Reference row of variable '", variable, "' remained unchanged."
         ))

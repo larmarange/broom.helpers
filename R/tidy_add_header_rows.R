@@ -67,7 +67,7 @@ tidy_add_header_rows <- function(x,
 
   if ("header_row" %in% names(x)) {
     if (!quiet)
-      message("tidy_add_header_rows() has already been applied. x has been returned unchanged.")
+      usethis::ui_oops("tidy_add_header_rows() has already been applied. x has been returned unchanged.")
     return(x)
   }
 
