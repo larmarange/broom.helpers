@@ -124,6 +124,16 @@ test_that("tidy_add_header_rows() works as expected", {
     res$header_row,
     c(NA, TRUE, FALSE, NA, NA, TRUE, FALSE)
   )
+
+  # show_single_row could be apply to an interaction variable
+  mod <- lm(age ~ factor(response) * marker, gtsummary::trial)
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_add_header_rows(show_single_row = "factor(response):marker")
+  expect_equivalent(
+    res$header_row,
+    c(NA, TRUE, FALSE, NA, NA)
+  )
 })
 
 test_that("test tidy_add_header_rows() checks", {

@@ -80,10 +80,14 @@ tidy_add_header_rows <- function(x,
   variables_to_simplify <- NULL
   show_single_row <- stats::na.omit(unique(show_single_row))
 
+  has_reference_row <- "reference_row" %in% names(x)
+  if (!has_reference_row)
+    x$reference_row <- FALSE
+
   # checking if variables incorrectly requested for single row summary
   bad_single_row <- x %>%
-    dplyr::filter(!is.na(.data$estimate),
-                  !is.na(.data$variable),
+    dplyr::filter(!is.na(.data$variable),
+                  is.na(.data$reference_row) | !.data$reference_row,
                   .data$variable %in% show_single_row) %>%
     dplyr::group_by(.data$variable) %>%
     dplyr::count() %>%
@@ -101,10 +105,6 @@ tidy_add_header_rows <- function(x,
     length(show_single_row) > 0 &&
       any(x$variable %in% show_single_row)
   ) {
-    has_reference_row <- "reference_row" %in% names(x)
-    if (!has_reference_row)
-      x$reference_row <- FALSE
-
     xx <- x
     if ("y.level" %in% names(x)) { # specific case for multinom
       xx <- xx %>%
@@ -135,9 +135,10 @@ tidy_add_header_rows <- function(x,
           )
         )
     }
-    if (!has_reference_row)
-      x <- x %>% dplyr::select(-.data$reference_row)
   }
+
+  if (!has_reference_row)
+    x <- x %>% dplyr::select(-.data$reference_row)
 
   # computing header rows ---------------
 
