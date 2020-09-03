@@ -132,7 +132,8 @@ to the reference row.</p>
     <pre class="usage"><span class='fu'>tidy_add_estimate_to_reference_rows</span>(
   <span class='no'>x</span>,
   <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>model</span> <span class='kw'>=</span> <span class='fu'><a href='tidy_attach_model.html'>tidy_get_model</a></span>(<span class='no'>x</span>)
+  <span class='kw'>model</span> <span class='kw'>=</span> <span class='fu'><a href='tidy_attach_model.html'>tidy_get_model</a></span>(<span class='no'>x</span>),
+  <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -151,6 +152,11 @@ coefficient estimates. It should be consistent with the original call to
     <tr>
       <th>model</th>
       <td><p>the corresponding model, if not attached to <code>x</code></p></td>
+    </tr>
+    <tr>
+      <th>quiet</th>
+      <td><p>logical argument whether broom.helpers should return an error
+when requested output cannot be generated. Default is FALSE</p></td>
     </tr>
     </table>
 

@@ -131,7 +131,13 @@ per variable, where <code>label</code> will be equal to <code>var_label</code>.
 These additional rows could be identified with <code>header_row</code> column.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>tidy_add_header_rows</span>(<span class='no'>x</span>, <span class='kw'>show_single_row</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>model</span> <span class='kw'>=</span> <span class='fu'><a href='tidy_attach_model.html'>tidy_get_model</a></span>(<span class='no'>x</span>))</pre>
+    <pre class="usage"><span class='fu'>tidy_add_header_rows</span>(
+  <span class='no'>x</span>,
+  <span class='kw'>show_single_row</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>model</span> <span class='kw'>=</span> <span class='fu'><a href='tidy_attach_model.html'>tidy_get_model</a></span>(<span class='no'>x</span>),
+  <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -148,6 +154,16 @@ variables that should be displayed on a single row</p></td>
     <tr>
       <th>model</th>
       <td><p>the corresponding model, if not attached to <code>x</code></p></td>
+    </tr>
+    <tr>
+      <th>quiet</th>
+      <td><p>logical argument whether broom.helpers should return an error
+when requested output cannot be generated. Default is FALSE</p></td>
+    </tr>
+    <tr>
+      <th>strict</th>
+      <td><p>logical argument whether broom.helpers should return an error
+when requested output cannot be generated. Default is FALSE</p></td>
     </tr>
     </table>
 
