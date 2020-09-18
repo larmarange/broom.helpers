@@ -84,7 +84,7 @@ tidy_detach_model()
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">broom.helpers</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
       </span>
     </div>
 
@@ -148,21 +148,21 @@ tidy_detach_model()
     </div>
 
     <pre class="usage"><span class='fu'>tidy_plus_plus</span>(
-  <span class='no'>model</span>,
-  <span class='kw'>tidy_fun</span> <span class='kw'>=</span> <span class='kw pkg'>broom</span><span class='kw ns'>::</span><span class='no'><a href='https://broom.tidymodels.org/reference/reexports.html'>tidy</a></span>,
-  <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>variable_labels</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>term_labels</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>add_reference_rows</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>add_estimate_to_reference_rows</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>add_header_rows</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>show_single_row</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>intercept</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>keep_model</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>...</span>
+  <span class='kw'>model</span>,
+  tidy_fun = <span class='kw'>broom</span>::<span class='kw'><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></span>,
+  conf.int = <span class='fl'>TRUE</span>,
+  exponentiate = <span class='fl'>FALSE</span>,
+  variable_labels = <span class='kw'>NULL</span>,
+  term_labels = <span class='kw'>NULL</span>,
+  add_reference_rows = <span class='fl'>TRUE</span>,
+  add_estimate_to_reference_rows = <span class='fl'>TRUE</span>,
+  add_header_rows = <span class='fl'>FALSE</span>,
+  show_single_row = <span class='kw'>NULL</span>,
+  intercept = <span class='fl'>FALSE</span>,
+  keep_model = <span class='fl'>FALSE</span>,
+  quiet = <span class='fl'>FALSE</span>,
+  strict = <span class='fl'>FALSE</span>,
+  <span class='kw'>...</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -178,7 +178,7 @@ tidy_detach_model()
     </tr>
     <tr>
       <th>conf.int</th>
-      <td><p>should confidence intervals be computed? (see <code><a href='https://broom.tidymodels.org/reference/reexports.html'>broom::tidy()</a></code>)</p></td>
+      <td><p>should confidence intervals be computed? (see <code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>broom::tidy()</a></code>)</p></td>
     </tr>
     <tr>
       <th>exponentiate</th>
@@ -250,9 +250,10 @@ when requested output cannot be generated. Default is FALSE</p></td>
 <code><a href='tidy_remove_intercept.html'>tidy_remove_intercept</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>ex1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>Sepal.Length</span> ~ <span class='no'>Sepal.Width</span> + <span class='no'>Species</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>) <span class='kw'>%&gt;%</span>
+    <pre class="examples"><div class='input'><span class='kw'>ex1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>Sepal.Length</span> <span class='op'>~</span> <span class='kw'>Sepal.Width</span> <span class='op'>+</span> <span class='kw'>Species</span>, data = <span class='kw'>iris</span>) <span class='op'>%&gt;%</span>
   <span class='fu'>tidy_plus_plus</span>()
-<span class='no'>ex1</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 4 x 14</span><span>
+<span class='kw'>ex1</span>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 4 x 14</span><span>
 #&gt;   term  variable var_label var_class var_type contrasts reference_row label
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> Sepa… Sepal.W… Sepal.Wi… numeric   continu… </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>            Sepa…
@@ -261,23 +262,24 @@ when requested output cannot be generated. Default is FALSE</p></td>
 #&gt; </span><span style='color: #555555;'>4</span><span> Spec… Species  Species   factor    categor… contr.tr… FALSE         virg…
 #&gt; </span><span style='color: #555555;'># … with 6 more variables: estimate </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, std.error </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, statistic </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   p.value </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, conf.low </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, conf.high </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>
-<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='no'>Titanic</span> <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/reexports.html'>as_tibble</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(
-    <span class='kw'>Survived</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='no'>Survived</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"No"</span>, <span class='st'>"Yes"</span>))
-  ) <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>labelled</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/labelled/man/var_label.html'>set_variable_labels</a></span>(
-    <span class='kw'>Class</span> <span class='kw'>=</span> <span class='st'>"Passenger's class"</span>,
-    <span class='kw'>Sex</span> <span class='kw'>=</span> <span class='st'>"Gender"</span>
+<span class='kw'>df</span> <span class='op'>&lt;-</span> <span class='kw'>Titanic</span> <span class='op'>%&gt;%</span>
+  <span class='kw'>dplyr</span>::<span class='fu'><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble</a></span>() <span class='op'>%&gt;%</span>
+  <span class='kw'>dplyr</span>::<span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(
+    Survived = <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='kw'>Survived</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"No"</span>, <span class='st'>"Yes"</span>))
+  ) <span class='op'>%&gt;%</span>
+  <span class='kw'>labelled</span>::<span class='fu'><a href='https://rdrr.io/pkg/labelled/man/var_label.html'>set_variable_labels</a></span>(
+    Class = <span class='st'>"Passenger's class"</span>,
+    Sex = <span class='st'>"Gender"</span>
   )
 
-<span class='no'>ex2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span>(
-  <span class='no'>Survived</span> ~ <span class='no'>Class</span> + <span class='no'>Age</span> * <span class='no'>Sex</span>,
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>df</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='no'>df</span>$<span class='no'>n</span>,
-  <span class='kw'>family</span> <span class='kw'>=</span> <span class='no'>binomial</span>
-) <span class='kw'>%&gt;%</span>
-  <span class='fu'>tidy_plus_plus</span>(<span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='no'>ex2</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 9 x 14</span><span>
+<span class='kw'>ex2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span>(
+  <span class='kw'>Survived</span> <span class='op'>~</span> <span class='kw'>Class</span> <span class='op'>+</span> <span class='kw'>Age</span> <span class='op'>*</span> <span class='kw'>Sex</span>,
+  data = <span class='kw'>df</span>, weights = <span class='kw'>df</span><span class='op'>$</span><span class='kw'>n</span>,
+  family = <span class='kw'>binomial</span>
+) <span class='op'>%&gt;%</span>
+  <span class='fu'>tidy_plus_plus</span>(exponentiate = <span class='fl'>TRUE</span>)
+<span class='kw'>ex2</span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 9 x 14</span><span>
 #&gt;   term  variable var_label var_class var_type contrasts reference_row label
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> Clas… Class    Passenge… character categor… contr.tr… TRUE          1st  
@@ -291,26 +293,27 @@ when requested output cannot be generated. Default is FALSE</p></td>
 #&gt; </span><span style='color: #555555;'>9</span><span> AgeC… Age:Sex  Age * Ge… </span><span style='color: #BB0000;'>NA</span><span>        interac… </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>            Chil…
 #&gt; </span><span style='color: #555555;'># … with 6 more variables: estimate </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, std.error </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, statistic </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   p.value </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, conf.low </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, conf.high </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>
-<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"gtsummary"</span>)) {
-  <span class='no'>ex3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span>(
-    <span class='no'>response</span> ~ <span class='fu'><a href='https://rdrr.io/r/stats/poly.html'>poly</a></span>(<span class='no'>age</span>, <span class='fl'>3</span>) + <span class='no'>stage</span> + <span class='no'>grade</span> * <span class='no'>trt</span>,
-    <span class='fu'><a href='https://rdrr.io/r/stats/na.fail.html'>na.omit</a></span>(<span class='kw pkg'>gtsummary</span><span class='kw ns'>::</span><span class='no'><a href='http://www.danieldsjoberg.com/gtsummary//reference/trial.html'>trial</a></span>),
-    <span class='kw'>family</span> <span class='kw'>=</span> <span class='no'>binomial</span>,
-    <span class='kw'>contrasts</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
-      <span class='kw'>stage</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/contrast.html'>contr.treatment</a></span>(<span class='fl'>4</span>, <span class='kw'>base</span> <span class='kw'>=</span> <span class='fl'>3</span>),
-      <span class='kw'>grade</span> <span class='kw'>=</span> <span class='no'>contr.sum</span>
+<span class='co'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"gtsummary"</span>)) {
+  <span class='kw'>ex3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span>(
+    <span class='kw'>response</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/stats/poly.html'>poly</a></span>(<span class='kw'>age</span>, <span class='fl'>3</span>) <span class='op'>+</span> <span class='kw'>stage</span> <span class='op'>+</span> <span class='kw'>grade</span> <span class='op'>*</span> <span class='kw'>trt</span>,
+    <span class='fu'><a href='https://rdrr.io/r/stats/na.fail.html'>na.omit</a></span>(<span class='kw'>gtsummary</span>::<span class='kw'><a href='http://www.danieldsjoberg.com/gtsummary//reference/trial.html'>trial</a></span>),
+    family = <span class='kw'>binomial</span>,
+    contrasts = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
+      stage = <span class='fu'><a href='https://rdrr.io/r/stats/contrast.html'>contr.treatment</a></span>(<span class='fl'>4</span>, base = <span class='fl'>3</span>),
+      grade = <span class='kw'>contr.sum</span>
     )
-  ) <span class='kw'>%&gt;%</span>
+  ) <span class='op'>%&gt;%</span>
     <span class='fu'>tidy_plus_plus</span>(
-      <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-      <span class='kw'>variable_labels</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>age</span> <span class='kw'>=</span> <span class='st'>"Age (in years)"</span>),
-      <span class='kw'>add_header_rows</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-      <span class='kw'>show_single_row</span> <span class='kw'>=</span> <span class='st'>"trt"</span>,
-      <span class='kw'>term_labels</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"poly(age, 3)3"</span> <span class='kw'>=</span> <span class='st'>"Cubic age"</span>),
-      <span class='kw'>keep_model</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+      exponentiate = <span class='fl'>TRUE</span>,
+      variable_labels = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(age = <span class='st'>"Age (in years)"</span>),
+      add_header_rows = <span class='fl'>TRUE</span>,
+      show_single_row = <span class='st'>"trt"</span>,
+      term_labels = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"poly(age, 3)3"</span> = <span class='st'>"Cubic age"</span>),
+      keep_model = <span class='fl'>TRUE</span>
     )
-  <span class='no'>ex3</span>
-}</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 17 x 15</span><span>
+  <span class='kw'>ex3</span>
+}
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 17 x 15</span><span>
 #&gt;    term  variable var_label var_class var_type header_row contrasts
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    
 #&gt; </span><span style='color: #555555;'> 1</span><span> </span><span style='color: #BB0000;'>NA</span><span>    age      Age (in … nmatrix.3 continu… TRUE       </span><span style='color: #BB0000;'>NA</span><span>       
@@ -348,7 +351,7 @@ when requested output cannot be generated. Default is FALSE</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

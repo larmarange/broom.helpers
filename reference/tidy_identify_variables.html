@@ -73,7 +73,7 @@ three additional columns: variable, var_class and var_type." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">broom.helpers</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
       </span>
     </div>
 
@@ -126,10 +126,10 @@ three additional columns: <code>variable</code>, <code>var_class</code> and <cod
     </div>
 
     <pre class="usage"><span class='fu'>tidy_identify_variables</span>(
-  <span class='no'>x</span>,
-  <span class='kw'>model</span> <span class='kw'>=</span> <span class='fu'><a href='tidy_attach_model.html'>tidy_get_model</a></span>(<span class='no'>x</span>),
-  <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+  <span class='kw'>x</span>,
+  model = <span class='fu'><a href='tidy_attach_model.html'>tidy_get_model</a></span>(<span class='kw'>x</span>),
+  quiet = <span class='fl'>FALSE</span>,
+  strict = <span class='fl'>FALSE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -177,12 +177,13 @@ of variables.</p>
 <code><a href='tidy_remove_intercept.html'>tidy_remove_intercept</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>Titanic</span> <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/reexports.html'>as_tibble</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>Survived</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='no'>Survived</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"No"</span>, <span class='st'>"Yes"</span>))) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span>(<span class='no'>Survived</span> ~ <span class='no'>Class</span> + <span class='no'>Age</span> * <span class='no'>Sex</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>.</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='no'>.</span>$<span class='no'>n</span>, <span class='kw'>family</span> <span class='kw'>=</span> <span class='no'>binomial</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tidy_attach_model.html'>tidy_and_attach</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>tidy_identify_variables</span>()</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 7 x 8</span><span>
+    <pre class="examples"><div class='input'><span class='kw'>Titanic</span> <span class='op'>%&gt;%</span>
+  <span class='kw'>dplyr</span>::<span class='fu'><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble</a></span>() <span class='op'>%&gt;%</span>
+  <span class='kw'>dplyr</span>::<span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(Survived = <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='kw'>Survived</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"No"</span>, <span class='st'>"Yes"</span>))) <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span>(<span class='kw'>Survived</span> <span class='op'>~</span> <span class='kw'>Class</span> <span class='op'>+</span> <span class='kw'>Age</span> <span class='op'>*</span> <span class='kw'>Sex</span>, data = <span class='kw'>.</span>, weights = <span class='kw'>.</span><span class='op'>$</span><span class='kw'>n</span>, family = <span class='kw'>binomial</span>) <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='tidy_attach_model.html'>tidy_and_attach</a></span>() <span class='op'>%&gt;%</span>
+  <span class='fu'>tidy_identify_variables</span>()
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 7 x 8</span><span>
 #&gt;   term        variable var_class var_type  estimate std.error statistic  p.value
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> (Intercept) </span><span style='color: #BB0000;'>NA</span><span>       </span><span style='color: #BB0000;'>NA</span><span>        intercept    2.18      0.176    12.4   3.08</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-35</span><span>
@@ -193,12 +194,13 @@ of variables.</p>
 #&gt; </span><span style='color: #555555;'>6</span><span> SexMale     Sex      character categori…   -</span><span style='color: #BB0000;'>2.62</span><span>      0.151   -</span><span style='color: #BB0000;'>17.3</span><span>   2.80</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-67</span><span>
 #&gt; </span><span style='color: #555555;'>7</span><span> AgeChild:S… Age:Sex  </span><span style='color: #BB0000;'>NA</span><span>        interact…    1.90      0.433     4.39  1.12</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 5</span><span></div><div class='input'>
 <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(
-  <span class='no'>Sepal.Length</span> ~ <span class='fu'><a href='https://rdrr.io/r/stats/poly.html'>poly</a></span>(<span class='no'>Sepal.Width</span>, <span class='fl'>2</span>) + <span class='no'>Species</span>,
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>,
-  <span class='kw'>contrasts</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>Species</span> <span class='kw'>=</span> <span class='no'>contr.sum</span>)
-) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tidy_attach_model.html'>tidy_and_attach</a></span>(<span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>tidy_identify_variables</span>()</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 5 x 10</span><span>
+  <span class='kw'>Sepal.Length</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/stats/poly.html'>poly</a></span>(<span class='kw'>Sepal.Width</span>, <span class='fl'>2</span>) <span class='op'>+</span> <span class='kw'>Species</span>,
+  data = <span class='kw'>iris</span>,
+  contrasts = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(Species = <span class='kw'>contr.sum</span>)
+) <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='tidy_attach_model.html'>tidy_and_attach</a></span>(conf.int = <span class='fl'>TRUE</span>) <span class='op'>%&gt;%</span>
+  <span class='fu'>tidy_identify_variables</span>()
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 5 x 10</span><span>
 #&gt;   term  variable var_class var_type estimate std.error statistic   p.value
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> (Int… </span><span style='color: #BB0000;'>NA</span><span>       </span><span style='color: #BB0000;'>NA</span><span>        interce…   5.84      0.035</span><span style='text-decoration: underline;'>9</span><span>   163.    4.32</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-166</span><span>
@@ -222,7 +224,7 @@ of variables.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
