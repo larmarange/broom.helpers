@@ -29,11 +29,16 @@ The suite includes functions to group regression model terms by variable, insert
 
 ## Installation
 
-This package is still experimental and under development.
+To install stable version:
 
-To install it for testing purpose, use:
+```{r eval=FALSE}
+install.packages("broom.helpers")
+```
 
-``` r
+
+To install development version:
+
+```{r eval=FALSE}
 devtools::install_github("larmarange/broom.helpers")
 ```
 

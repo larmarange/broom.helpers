@@ -25,9 +25,13 @@ rows for categorical variables, add variable labels, and more.
 
 ## Installation
 
-This package is still experimental and under development.
+To install stable version:
 
-To install it for testing purpose, use:
+``` r
+install.packages("broom.helpers")
+```
+
+To install development version:
 
 ``` r
 devtools::install_github("larmarange/broom.helpers")
