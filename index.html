@@ -86,9 +86,11 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>This package is still experimental and under development.</p>
-<p>To install it for testing purpose, use:</p>
+<p>To install stable version:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"broom.helpers"</span><span class="op">)</span></pre></div>
+<p>To install development version:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit">
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"larmarange/broom.helpers"</span><span class="op">)</span></pre></div>
 </div>
 <div id="examples" class="section level2">
@@ -97,7 +99,7 @@
 <div id="all-in-one-wrapper" class="section level3">
 <h3 class="hasAnchor">
 <a href="#all-in-one-wrapper" class="anchor"></a>all-in-one wrapper</h3>
-<div class="sourceCode" id="cb2"><pre class="downlit">
+<div class="sourceCode" id="cb3"><pre class="downlit">
 <span class="va">mod1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Sepal.Width</span> <span class="op">+</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://larmarange.github.io/broom.helpers/">broom.helpers</a></span><span class="op">)</span>
 <span class="va">mod1</span> <span class="op">%&gt;%</span> <span class="fu"><a href="reference/tidy_plus_plus.html">tidy_plus_plus</a></span><span class="op">(</span><span class="op">)</span>
@@ -154,7 +156,7 @@
 <div id="fine-control" class="section level3">
 <h3 class="hasAnchor">
 <a href="#fine-control" class="anchor"></a>fine control</h3>
-<div class="sourceCode" id="cb3"><pre class="downlit">
+<div class="sourceCode" id="cb4"><pre class="downlit">
 <span class="va">mod1</span> <span class="op">%&gt;%</span>
   <span class="co"># perform initial tidying of model</span>
   <span class="fu"><a href="reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
