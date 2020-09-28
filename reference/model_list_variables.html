@@ -123,13 +123,13 @@
     <p>Including variables used only in an interaction.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>model_list_variables</span>(<span class='kw'>model</span>)
+    <pre class="usage"><span class='fu'>model_list_variables</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>model_list_variables</span>(<span class='kw'>model</span>)
+<span class='fu'>model_list_variables</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
 
 <span class='co'># S3 method for lavaan</span>
-<span class='fu'>model_list_variables</span>(<span class='kw'>model</span>)</pre>
+<span class='fu'>model_list_variables</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -146,7 +146,7 @@
 <li><p><code>variable</code>: the corresponding variable</p></li>
 <li><p><code>var_class</code>: class of the variable (cf. <code><a href='https://rdrr.io/r/stats/checkMFClasses.html'>stats::.MFclass()</a></code>)</p></li>
 <li><p><code>label_attr</code>: variable label defined in the original data frame
-with the label attribute (cf. <code><a href='https://rdrr.io/pkg/labelled/man/var_label.html'>labelled::var_label()</a></code>)</p></li>
+with the label attribute (cf. <code><a href='http://larmarange.github.io/labelled/reference/var_label.html'>labelled::var_label()</a></code>)</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -161,15 +161,15 @@ with the label attribute (cf. <code><a href='https://rdrr.io/pkg/labelled/man/va
 <code><a href='model_list_terms_levels.html'>model_list_terms_levels</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>Titanic</span> <span class='op'>%&gt;%</span>
-  <span class='kw'>dplyr</span>::<span class='fu'><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble</a></span>() <span class='op'>%&gt;%</span>
-  <span class='kw'>dplyr</span>::<span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(Survived = <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='kw'>Survived</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"No"</span>, <span class='st'>"Yes"</span>))) <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span>(
-    <span class='kw'>Survived</span> <span class='op'>~</span> <span class='kw'>Class</span> <span class='op'>+</span> <span class='kw'>Age</span> <span class='op'>:</span> <span class='kw'>Sex</span>,
-    data = <span class='kw'>.</span>, weights = <span class='kw'>.</span><span class='op'>$</span><span class='kw'>n</span>,
-    family = <span class='kw'>binomial</span>
-  ) <span class='op'>%&gt;%</span>
-  <span class='fu'>model_list_variables</span>()
+    <pre class="examples"><div class='input'><span class='va'>Titanic</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>Survived <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>Survived</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"No"</span>, <span class='st'>"Yes"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span>
+    <span class='va'>Survived</span> <span class='op'>~</span> <span class='va'>Class</span> <span class='op'>+</span> <span class='va'>Age</span> <span class='op'>:</span> <span class='va'>Sex</span>,
+    data <span class='op'>=</span> <span class='va'>.</span>, weights <span class='op'>=</span> <span class='va'>.</span><span class='op'>$</span><span class='va'>n</span>,
+    family <span class='op'>=</span> <span class='va'>binomial</span>
+  <span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>model_list_variables</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 6 x 3</span><span>
 #&gt;   variable  var_class label_attr
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     
@@ -179,27 +179,27 @@ with the label attribute (cf. <code><a href='https://rdrr.io/pkg/labelled/man/va
 #&gt; </span><span style='color: #555555;'>4</span><span> Sex       character </span><span style='color: #BB0000;'>NA</span><span>        
 #&gt; </span><span style='color: #555555;'>5</span><span> (weights) numeric   </span><span style='color: #BB0000;'>NA</span><span>        
 #&gt; </span><span style='color: #555555;'>6</span><span> Age:Sex   </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </div><div class='input'>
-<span class='kw'>iris</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(
-    <span class='kw'>Sepal.Length</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/stats/poly.html'>poly</a></span>(<span class='kw'>Sepal.Width</span>, <span class='fl'>2</span>) <span class='op'>+</span> <span class='kw'>Species</span>,
-    data = <span class='kw'>.</span>,
-    contrasts = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(Species = <span class='kw'>contr.sum</span>)
-  ) <span class='op'>%&gt;%</span>
-  <span class='fu'>model_list_variables</span>()
+<span class='va'>iris</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span>
+    <span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/stats/poly.html'>poly</a></span><span class='op'>(</span><span class='va'>Sepal.Width</span>, <span class='fl'>2</span><span class='op'>)</span> <span class='op'>+</span> <span class='va'>Species</span>,
+    data <span class='op'>=</span> <span class='va'>.</span>,
+    contrasts <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>Species <span class='op'>=</span> <span class='va'>contr.sum</span><span class='op'>)</span>
+  <span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>model_list_variables</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 3 x 3</span><span>
 #&gt;   variable     var_class label_attr
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     
 #&gt; </span><span style='color: #555555;'>1</span><span> Sepal.Length numeric   </span><span style='color: #BB0000;'>NA</span><span>        
 #&gt; </span><span style='color: #555555;'>2</span><span> Sepal.Width  nmatrix.2 </span><span style='color: #BB0000;'>NA</span><span>        
 #&gt; </span><span style='color: #555555;'>3</span><span> Species      factor    </span><span style='color: #BB0000;'>NA</span><span>        </div><div class='input'>
-<span class='co'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"gtsummary"</span>)) {
-  <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span>(
-    <span class='kw'>response</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/stats/poly.html'>poly</a></span>(<span class='kw'>age</span>, <span class='fl'>3</span>) <span class='op'>+</span> <span class='kw'>stage</span> <span class='op'>+</span> <span class='kw'>grade</span> <span class='op'>*</span> <span class='kw'>trt</span>,
-    <span class='fu'><a href='https://rdrr.io/r/stats/na.fail.html'>na.omit</a></span>(<span class='kw'>gtsummary</span>::<span class='kw'><a href='http://www.danieldsjoberg.com/gtsummary//reference/trial.html'>trial</a></span>),
-    family = <span class='kw'>binomial</span>,
-  ) <span class='op'>%&gt;%</span>
-    <span class='fu'>model_list_variables</span>()
-}
+<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"gtsummary"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span>
+    <span class='va'>response</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/stats/poly.html'>poly</a></span><span class='op'>(</span><span class='va'>age</span>, <span class='fl'>3</span><span class='op'>)</span> <span class='op'>+</span> <span class='va'>stage</span> <span class='op'>+</span> <span class='va'>grade</span> <span class='op'>*</span> <span class='va'>trt</span>,
+    <span class='fu'><a href='https://rdrr.io/r/stats/na.fail.html'>na.omit</a></span><span class='op'>(</span><span class='fu'>gtsummary</span><span class='fu'>::</span><span class='va'><a href='http://www.danieldsjoberg.com/gtsummary//reference/trial.html'>trial</a></span><span class='op'>)</span>,
+    family <span class='op'>=</span> <span class='va'>binomial</span>,
+  <span class='op'>)</span> <span class='op'>%&gt;%</span>
+    <span class='fu'>model_list_variables</span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; <span class='message'>Loading required namespace: gtsummary</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 6 x 3</span><span>
 #&gt;   variable  var_class label_attr            
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                 

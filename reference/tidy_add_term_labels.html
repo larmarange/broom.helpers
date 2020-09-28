@@ -137,14 +137,14 @@ treatment, SAS or sum contrasts;</p></li>
 
     </div>
 
-    <pre class="usage"><span class='fu'>tidy_add_term_labels</span>(
-  <span class='kw'>x</span>,
-  labels = <span class='kw'>NULL</span>,
-  interaction_sep = <span class='st'>" * "</span>,
-  model = <span class='fu'><a href='tidy_attach_model.html'>tidy_get_model</a></span>(<span class='kw'>x</span>),
-  quiet = <span class='fl'>FALSE</span>,
-  strict = <span class='fl'>FALSE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>tidy_add_term_labels</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  labels <span class='op'>=</span> <span class='cn'>NULL</span>,
+  interaction_sep <span class='op'>=</span> <span class='st'>" * "</span>,
+  model <span class='op'>=</span> <span class='fu'><a href='tidy_attach_model.html'>tidy_get_model</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>,
+  quiet <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  strict <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -200,18 +200,18 @@ including interaction terms.</p>
 <code><a href='tidy_remove_intercept.html'>tidy_remove_intercept</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>df</span> <span class='op'>&lt;-</span> <span class='kw'>Titanic</span> <span class='op'>%&gt;%</span>
-  <span class='kw'>dplyr</span>::<span class='fu'><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble</a></span>() <span class='op'>%&gt;%</span>
-  <span class='kw'>dplyr</span>::<span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(Survived = <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='kw'>Survived</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"No"</span>, <span class='st'>"Yes"</span>))) <span class='op'>%&gt;%</span>
-  <span class='kw'>labelled</span>::<span class='fu'><a href='https://rdrr.io/pkg/labelled/man/var_label.html'>set_variable_labels</a></span>(
-    Class = <span class='st'>"Passenger's class"</span>,
-    Sex = <span class='st'>"Sex"</span>
-  )
+    <pre class="examples"><div class='input'><span class='va'>df</span> <span class='op'>&lt;-</span> <span class='va'>Titanic</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>Survived <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>Survived</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"No"</span>, <span class='st'>"Yes"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>labelled</span><span class='fu'>::</span><span class='fu'><a href='http://larmarange.github.io/labelled/reference/var_label.html'>set_variable_labels</a></span><span class='op'>(</span>
+    Class <span class='op'>=</span> <span class='st'>"Passenger's class"</span>,
+    Sex <span class='op'>=</span> <span class='st'>"Sex"</span>
+  <span class='op'>)</span>
 
-<span class='kw'>df</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span>(<span class='kw'>Survived</span> <span class='op'>~</span> <span class='kw'>Class</span> <span class='op'>*</span> <span class='kw'>Age</span> <span class='op'>*</span> <span class='kw'>Sex</span>, data = <span class='kw'>.</span>, weights = <span class='kw'>.</span><span class='op'>$</span><span class='kw'>n</span>, family = <span class='kw'>binomial</span>) <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='tidy_attach_model.html'>tidy_and_attach</a></span>() <span class='op'>%&gt;%</span>
-  <span class='fu'>tidy_add_term_labels</span>()
+<span class='va'>df</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span><span class='va'>Survived</span> <span class='op'>~</span> <span class='va'>Class</span> <span class='op'>*</span> <span class='va'>Age</span> <span class='op'>*</span> <span class='va'>Sex</span>, data <span class='op'>=</span> <span class='va'>.</span>, weights <span class='op'>=</span> <span class='va'>.</span><span class='op'>$</span><span class='va'>n</span>, family <span class='op'>=</span> <span class='va'>binomial</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='tidy_attach_model.html'>tidy_and_attach</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>tidy_add_term_labels</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 16 x 11</span><span>
 #&gt;    term  variable var_label var_class var_type contrasts label estimate
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
