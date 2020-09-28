@@ -15,6 +15,7 @@ status](https://github.com/larmarange/broom.helpers/workflows/R-CMD-check/badge.
 coverage](https://codecov.io/gh/larmarange/broom.helpers/branch/master/graph/badge.svg)](https://codecov.io/gh/larmarange/broom.helpers?branch=master)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/broom.helpers)](https://CRAN.R-project.org/package=broom.helpers)
+[![DOI](https://zenodo.org/badge/286680847.svg)](https://zenodo.org/badge/latestdoi/286680847)
 <!-- badges: end -->
 
 The broom.helpers package provides suite of functions to work with
