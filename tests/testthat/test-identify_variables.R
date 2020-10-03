@@ -112,6 +112,31 @@ test_that("tidy_identify_variables() works with variables having non standard na
     c(NA, "numeric", "factor", "factor", NA, NA)
   )
   expect_error(mod %>% tidy_and_attach() %>% tidy_identify_variables(), NA)
+
+  trial2 <-
+    gtsummary::trial %>%
+    dplyr::mutate(
+      `treatment +name` = trt,
+      `disease stage` = stage
+    )
+  mod <- glm(
+    response ~ `treatment +name` + `disease stage`,
+    trial2,
+    family = binomial(link = "logit")
+  )
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_identify_variables() %>%
+    tidy_remove_intercept()
+  expect_equivalent(
+    res$variable,
+    c("treatment +name", "disease stage",
+      "disease stage", "disease stage")
+  )
+  expect_equivalent(
+    res$var_type,
+    c("categorical", "categorical", "categorical", "categorical")
+  )
 })
 
 test_that("model_identify_variables() works with lme4::lmer", {
