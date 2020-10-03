@@ -124,11 +124,3 @@ model_list_terms_levels.default <- function(model) {
   total
 }
 
-# based on Hmisc::escapeRegex
-.escape_regex <- function (string)
-{
-  gsub(
-    "([.|()\\^{}+$*?]|\\[|\\])", "\\\\\\1",
-    string
-  )
-}

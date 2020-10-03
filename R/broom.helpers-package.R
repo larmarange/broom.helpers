@@ -15,10 +15,12 @@ utils::globalVariables("where")
 # Escapes any characters that would have special
 # meaning in a regular expression
 # based on Hmisc::escapeRegex
-.escapeRegex <- function (string)
+.escape_regex <- function (string)
 {
-  gsub("([.|()\\^{}+$*?]|\\[|\\])", "\\\\\\1",
-       string)
+  gsub(
+    "([.|()\\^{}+$*?]|\\[|\\])", "\\\\\\1",
+    string
+  )
 }
 
 
