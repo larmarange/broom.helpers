@@ -47,6 +47,10 @@ test_that("tidy_select_variables() works for basic models", {
     res %>% tidy_select_variables(keep = -everything()),
     NA
   )
+  expect_error(
+    res %>% tidy_select_variables(keep = where(is.character)),
+    NA
+  )
 })
 
 
