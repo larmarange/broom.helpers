@@ -18,6 +18,8 @@
 #' [tidy_add_term_labels()] after `tidy_add_reference_rows()`
 #' rather than before.
 #' @param x a tidy tibble
+#' @param no_reference_row a vector indicating the name of variables
+#' for those no reference row should be added
 #' @param model the corresponding model, if not attached to `x`
 #' @inheritParams tidy_plus_plus
 #' @export
@@ -50,7 +52,11 @@
 #'     tidy_and_attach() %>%
 #'     tidy_add_reference_rows()
 #' }
-tidy_add_reference_rows <- function(x, model = tidy_get_model(x), quiet = FALSE) {
+tidy_add_reference_rows <- function(
+  x, no_reference_row = NULL,
+  model = tidy_get_model(x),
+  quiet = FALSE, strict = FALSE
+) {
   if (is.null(model)) {
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
   }
@@ -65,6 +71,10 @@ tidy_add_reference_rows <- function(x, model = tidy_get_model(x), quiet = FALSE)
     return(x)
   }
 
+  .attributes <- .save_attributes(x)
+
+
+
   if ("label" %in% names(x)) {
     if (!quiet)
       usethis::ui_info(paste0(
@@ -77,13 +87,34 @@ tidy_add_reference_rows <- function(x, model = tidy_get_model(x), quiet = FALSE)
     x <- x %>% tidy_add_contrasts(model = model)
   }
 
+  # check if all elements of no_reference_row are in x
+  # show a message otherwise
+  not_found <- setdiff(no_reference_row, na.omit(unique(x$variable)))
+  if (length(not_found) > 0 && !quiet) {
+    usethis::ui_oops(paste0(
+      usethis::ui_code(not_found),
+      " variables listed in ",
+      usethis::ui_code("no_reference_row"),
+      " have not been found in ",
+      usethis::ui_code("x"),
+      "."
+    ))
+  }
+  if (length(not_found) > 0 && strict) {
+    stop("Incorrect call with `no_reference_row`. Quitting execution.", call. = FALSE)
+  }
+
   terms_levels <- model_list_terms_levels(model)
 
   if (!is.null(terms_levels))
     terms_levels <- terms_levels %>%
       # keep only terms corresponding to variable in x
       # (e.g. to exclude interaction only variables)
-      dplyr::filter(.data$variable %in% unique(stats::na.omit(x$variable)))
+      dplyr::filter(
+        .data$variable %in% unique(stats::na.omit(x$variable)) &
+          # and exclude variables in no_reference_row
+          !.data$variable %in% no_reference_row
+      )
 
   if (is.null(terms_levels) || nrow(terms_levels) == 0)
     return(
@@ -95,7 +126,6 @@ tidy_add_reference_rows <- function(x, model = tidy_get_model(x), quiet = FALSE)
   terms_levels <- terms_levels %>%
     dplyr::group_by(.data$variable) %>%
     dplyr::mutate(rank = 1:dplyr::n())
-
 
   has_var_label <- "var_label" %in% names(x)
   if (!has_var_label) {
@@ -200,6 +230,5 @@ tidy_add_reference_rows <- function(x, model = tidy_get_model(x), quiet = FALSE)
   x %>%
     dplyr::arrange(.data$rank) %>%
     dplyr::select(-.data$rank) %>%
-    tidy_attach_model(model = model) %>%
-    .order_tidy_columns()
+    tidy_attach_model(model = model, .attributes = .attributes)
 }

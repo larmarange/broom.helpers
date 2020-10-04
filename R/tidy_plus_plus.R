@@ -18,11 +18,13 @@
 #' @param tidy_fun option to specify a custom tidier function
 #' @param conf.int should confidence intervals be computed? (see [broom::tidy()])
 #' @param exponentiate logical indicating whether or not to exponentiate the
-#' coefficient estimates. This is typical for logistic and multinomial regressions,
-#' but a bad idea if there is no log or logit link. Defaults to `FALSE`.
+#' coefficient estimates. This is typical for logistic, Poisson and Cox models,
+#' but a bad idea if there is no log or logit link; defaults to `FALSE`.
 #' @param variable_labels a named list or a named vector of custom variable labels
 #' @param term_labels a named list or a named vector of custom term labels
 #' @param add_reference_rows should reference rows be added?
+#' @param no_reference_row a vector indicating the name of variables
+#' for those no reference row should be added, when `add_reference_rows = TRUE`
 #' @param add_estimate_to_reference_rows should an estimate value be added to reference rows?
 #' @param add_header_rows should header rows be added?
 #' @param show_single_row a vector indicating the names of binary
@@ -90,6 +92,7 @@ tidy_plus_plus <- function(
                            variable_labels = NULL,
                            term_labels = NULL,
                            add_reference_rows = TRUE,
+                           no_reference_row = NULL,
                            add_estimate_to_reference_rows = TRUE,
                            add_header_rows = FALSE,
                            show_single_row = NULL,
@@ -110,7 +113,10 @@ tidy_plus_plus <- function(
     tidy_identify_variables(strict = strict, quiet = quiet) %>%
     tidy_add_contrasts()
   if (add_reference_rows) {
-    res <- res %>% tidy_add_reference_rows(quiet = quiet)
+    res <- res %>% tidy_add_reference_rows(
+      no_reference_row = no_reference_row,
+      quiet = quiet, strict = strict
+    )
   }
   if (add_reference_rows & add_estimate_to_reference_rows) {
     res <- res %>%
@@ -137,6 +143,5 @@ tidy_plus_plus <- function(
   if (!keep_model) {
     res <- res %>% tidy_detach_model()
   }
-  res %>%
-    .order_tidy_columns()
+  res
 }

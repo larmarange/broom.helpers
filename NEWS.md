@@ -9,6 +9,7 @@
   `model_get_coefficients_type` to get the type of coefficients
   (generic, logistic, poisson or proportional hazard) used
   by a model (#46)
+* New `no_reference_row` argument for `tidy_add_reference_rows()` (#47)
 * The `exponentiate` argument is now passed to the `tidy_*()`
   functions, as an attribute attached to the tibble
 * Bug fix for non standard variable names containing

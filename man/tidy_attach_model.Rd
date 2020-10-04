@@ -7,7 +7,7 @@
 \alias{tidy_detach_model}
 \title{Attach a full model to the tibble of model terms}
 \usage{
-tidy_attach_model(x, model, exponentiate = NULL)
+tidy_attach_model(x, model, .attributes = NULL)
 
 tidy_and_attach(model, tidy_fun = broom::tidy, exponentiate = FALSE, ...)
 
@@ -20,11 +20,13 @@ tidy_detach_model(x)
 
 \item{model}{a model to be attached/tidied}
 
-\item{exponentiate}{logical indicating whether or not to exponentiate the
-coefficient estimates. This is typical for logistic and multinomial regressions,
-but a bad idea if there is no log or logit link. Defaults to \code{FALSE}.}
+\item{.attributes}{named list of additional attributes to be attached to \code{x}}
 
 \item{tidy_fun}{option to specify a custom tidier function}
+
+\item{exponentiate}{logical indicating whether or not to exponentiate the
+coefficient estimates. This is typical for logistic, Poisson and Cox models,
+but a bad idea if there is no log or logit link; defaults to \code{FALSE}}
 
 \item{...}{other arguments passed to \code{tidy_fun()}}
 }

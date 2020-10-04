@@ -32,6 +32,10 @@ model_get_coefficients_type.glm <- function(model) {
     return("logistic")
   if (model$family$family == "poisson" && model$family$link == "log")
     return("poisson")
+  if (model$family$family == "quasibinomial" && model$family$link == "logit")
+    return("logistic")
+  if (model$family$family == "quasipoisson" && model$family$link == "log")
+    return("poisson")
   "generic"
 }
 
@@ -46,6 +50,7 @@ model_get_coefficients_type.glmerMod <- function(model) {
     return("logistic")
   if (model@resp$family$family == "poisson" && model@resp$family$link == "log")
     return("poisson")
+  # "quasi" families cannot be used with in glmer
   "generic"
 }
 
@@ -53,6 +58,14 @@ model_get_coefficients_type.glmerMod <- function(model) {
 #' @rdname model_get_coefficients_type
 model_get_coefficients_type.clogit <- function(model) {
   "logistic"
+}
+
+#' @export
+#' @rdname model_get_coefficients_type
+model_get_coefficients_type.polr <- function(model) {
+  if (model$method == "logistic")
+    return("logistic")
+  "generic"
 }
 
 #' @export
