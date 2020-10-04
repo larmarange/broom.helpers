@@ -89,7 +89,7 @@ tidy_add_reference_rows <- function(
 
   # check if all elements of no_reference_row are in x
   # show a message otherwise
-  not_found <- setdiff(no_reference_row, na.omit(unique(x$variable)))
+  not_found <- setdiff(no_reference_row, stats::na.omit(unique(x$variable)))
   if (length(not_found) > 0 && !quiet) {
     usethis::ui_oops(paste0(
       usethis::ui_code(not_found),
