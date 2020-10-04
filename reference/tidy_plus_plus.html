@@ -159,6 +159,7 @@ tidy_detach_model()
   variable_labels <span class='op'>=</span> <span class='cn'>NULL</span>,
   term_labels <span class='op'>=</span> <span class='cn'>NULL</span>,
   add_reference_rows <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  no_reference_row <span class='op'>=</span> <span class='cn'>NULL</span>,
   add_estimate_to_reference_rows <span class='op'>=</span> <span class='cn'>TRUE</span>,
   add_header_rows <span class='op'>=</span> <span class='cn'>FALSE</span>,
   show_single_row <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -203,6 +204,11 @@ but a bad idea if there is no log or logit link; defaults to <code>FALSE</code>.
     <tr>
       <th>add_reference_rows</th>
       <td><p>should reference rows be added?</p></td>
+    </tr>
+    <tr>
+      <th>no_reference_row</th>
+      <td><p>a vector indicating the name of variables
+for those no reference row should be added, when <code>add_reference_rows = TRUE</code></p></td>
     </tr>
     <tr>
       <th>add_estimate_to_reference_rows</th>

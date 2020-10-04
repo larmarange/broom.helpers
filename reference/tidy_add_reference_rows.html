@@ -127,7 +127,13 @@ or a sum contrast (stats::contr.sum()), add a reference row." />
 or a sum contrast (<code><a href='https://rdrr.io/r/stats/contrast.html'>stats::contr.sum()</a></code>), add a reference row.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>tidy_add_reference_rows</span><span class='op'>(</span><span class='va'>x</span>, model <span class='op'>=</span> <span class='fu'><a href='tidy_attach_model.html'>tidy_get_model</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>, quiet <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>tidy_add_reference_rows</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  no_reference_row <span class='op'>=</span> <span class='cn'>NULL</span>,
+  model <span class='op'>=</span> <span class='fu'><a href='tidy_attach_model.html'>tidy_get_model</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>,
+  quiet <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  strict <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -137,12 +143,22 @@ or a sum contrast (<code><a href='https://rdrr.io/r/stats/contrast.html'>stats::
       <td><p>a tidy tibble</p></td>
     </tr>
     <tr>
+      <th>no_reference_row</th>
+      <td><p>a vector indicating the name of variables
+for those no reference row should be added</p></td>
+    </tr>
+    <tr>
       <th>model</th>
       <td><p>the corresponding model, if not attached to <code>x</code></p></td>
     </tr>
     <tr>
       <th>quiet</th>
       <td><p>logical argument whether broom.helpers should not return a message
+when requested output cannot be generated. Default is FALSE</p></td>
+    </tr>
+    <tr>
+      <th>strict</th>
+      <td><p>logical argument whether broom.helpers should return an error
 when requested output cannot be generated. Default is FALSE</p></td>
     </tr>
     </table>
