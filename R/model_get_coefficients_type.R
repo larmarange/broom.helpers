@@ -50,10 +50,7 @@ model_get_coefficients_type.glmerMod <- function(model) {
     return("logistic")
   if (model@resp$family$family == "poisson" && model@resp$family$link == "log")
     return("poisson")
-  if (model@resp$family$family == "quasibinomial" && model@resp$family$link == "logit")
-    return("logistic")
-  if (model@resp$family$family == "quasipoisson" && model@resp$family$link == "log")
-    return("poisson")
+  # "quasi" families cannot be used with in glmer
   "generic"
 }
 

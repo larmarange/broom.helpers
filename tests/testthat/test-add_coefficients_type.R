@@ -50,6 +50,26 @@ test_that("tidy_add_coefficients_type() works for common models", {
   expect_equivalent(attr(res, "coefficients_type"), "poisson")
   expect_equivalent(attr(res, "coefficients_label"), "IRR")
 
+  mod <- glm(response ~ age + grade * trt, gtsummary::trial, family = poisson("identity"))
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_add_coefficients_type()
+  expect_equivalent(attr(res, "coefficients_type"), "generic")
+  expect_equivalent(attr(res, "coefficients_label"), "Beta")
+
+  mod <- glm(response ~ age + grade * trt, gtsummary::trial, family = quasipoisson)
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_add_coefficients_type(exponentiate = TRUE)
+  expect_equivalent(attr(res, "coefficients_type"), "poisson")
+  expect_equivalent(attr(res, "coefficients_label"), "IRR")
+
+  mod <- glm(response ~ age + grade * trt, gtsummary::trial, family = quasibinomial)
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_add_coefficients_type(exponentiate = TRUE)
+  expect_equivalent(attr(res, "coefficients_type"), "logistic")
+  expect_equivalent(attr(res, "coefficients_label"), "OR")
 })
 
 test_that("test tidy_add_coefficients_type() checks", {
@@ -87,6 +107,10 @@ test_that("model_identify_variables() works with lme4::glmer", {
   )
   res <- mod %>% model_get_coefficients_type()
   expect_equivalent(res, "generic")
+
+  mod <- lme4::glmer(response ~ trt + (1 | grade), gtsummary::trial, family = poisson)
+  res <- mod %>% model_get_coefficients_type()
+  expect_equivalent(res, "poisson")
 })
 
 
@@ -154,6 +178,10 @@ test_that("model_get_coefficients_type() works with MASS::polr", {
   mod <- MASS::polr(Sat ~ Infl + Type + Cont, weights = Freq, data = MASS::housing)
   res <- mod %>% model_get_coefficients_type()
   expect_equivalent(res, "logistic")
+
+  mod <- MASS::polr(Sat ~ Infl + Type + Cont, weights = Freq, data = MASS::housing, method = "probit")
+  res <- mod %>% model_get_coefficients_type()
+  expect_equivalent(res, "generic")
 })
 
 
