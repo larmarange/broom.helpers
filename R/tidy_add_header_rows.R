@@ -210,6 +210,5 @@ tidy_add_header_rows <- function(x,
     dplyr::select(-.data$rank)
 
   x %>%
-    .order_tidy_columns() %>%
     tidy_attach_model(model = model, .attributes = .attributes)
 }

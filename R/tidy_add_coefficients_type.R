@@ -60,6 +60,5 @@ tidy_add_coefficients_type <- function(
   attr(x, "coefficients_label") <- coefficients_label
 
   x %>%
-    .order_tidy_columns() %>%
     tidy_attach_model(model = model, .attributes = .attributes)
 }

@@ -137,6 +137,5 @@ tidy_plus_plus <- function(
   if (!keep_model) {
     res <- res %>% tidy_detach_model()
   }
-  res %>%
-    .order_tidy_columns()
+  res
 }

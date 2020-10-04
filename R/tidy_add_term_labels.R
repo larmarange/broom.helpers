@@ -176,6 +176,5 @@ tidy_add_term_labels <- function(x,
       ),
       by = "term"
     ) %>%
-    .order_tidy_columns() %>%
     tidy_attach_model(model = model, .attributes = .attributes)
 }

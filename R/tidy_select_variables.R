@@ -84,7 +84,6 @@ tidy_select_variables <- function(
       .data$var_type == "intercept" |
         .data$variable %in% selected_variables
     ) %>%
-    .order_tidy_columns() %>%
     tidy_attach_model(model = model, .attributes = .attributes)
 
 }

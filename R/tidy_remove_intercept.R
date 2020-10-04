@@ -29,6 +29,5 @@ tidy_remove_intercept <- function(x, model = tidy_get_model(x)) {
 
   x %>%
     dplyr::filter(.data$var_type != "intercept") %>%
-    .order_tidy_columns() %>%
     tidy_attach_model(model = model, .attributes = .attributes)
 }

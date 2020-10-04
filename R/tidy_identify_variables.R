@@ -60,7 +60,6 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x),
           .data$var_type
         )
       ) %>%
-      .order_tidy_columns() %>%
       tidy_attach_model(model = model, .attributes = .attributes)
   } else {
     if (!quiet)
@@ -79,7 +78,6 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x),
         var_class = NA_integer_,
         var_type = "unknown"
       ) %>%
-      .order_tidy_columns() %>%
       tidy_attach_model(model = model, .attributes = .attributes)
   }
 

@@ -100,7 +100,6 @@ tidy_add_estimate_to_reference_rows <- function(
   }
 
   x %>%
-    .order_tidy_columns() %>%
     tidy_attach_model(model = model, .attributes = .attributes)
 }
 
