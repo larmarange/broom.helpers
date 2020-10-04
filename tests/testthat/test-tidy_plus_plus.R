@@ -64,6 +64,7 @@ test_that("tidy_plus_plus() with mice objects", {
   expect_error(
     tidy_plus_plus(
       mod,
+      exponentiate = FALSE,
       tidy_fun = function(x, ...) mice::pool(x) %>% mice::tidy(...)
     ),
     NA
