@@ -68,6 +68,9 @@ tidy_add_estimate_to_reference_rows <- function(
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
   }
 
+  .attributes <- .save_attributes(x)
+  .attributes$exponentiate <- exponentiate
+
   if (!"reference_row" %in% names(x)) {
     x <- x %>% tidy_add_reference_rows(model = model)
   }
@@ -97,8 +100,8 @@ tidy_add_estimate_to_reference_rows <- function(
   }
 
   x %>%
-    tidy_attach_model(model = model) %>%
-    .order_tidy_columns()
+    .order_tidy_columns() %>%
+    tidy_attach_model(model = model, .attributes = .attributes)
 }
 
 .get_ref_row_estimate_contr_sum <- function(variable, model, exponentiate = FALSE,

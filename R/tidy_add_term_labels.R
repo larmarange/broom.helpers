@@ -50,6 +50,8 @@ tidy_add_term_labels <- function(x,
     stop("`tidy_add_term_labels()` cannot be applied after `tidy_add_header_rows().`")
   }
 
+  .attributes <- .save_attributes(x)
+
   if ("label" %in% names(x)) {
     x <- x %>% dplyr::select(-.data$label)
   }
@@ -174,6 +176,6 @@ tidy_add_term_labels <- function(x,
       ),
       by = "term"
     ) %>%
-    tidy_attach_model(model = model) %>%
-    .order_tidy_columns()
+    .order_tidy_columns() %>%
+    tidy_attach_model(model = model, .attributes = .attributes)
 }

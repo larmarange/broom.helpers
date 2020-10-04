@@ -18,8 +18,8 @@
 #' @param tidy_fun option to specify a custom tidier function
 #' @param conf.int should confidence intervals be computed? (see [broom::tidy()])
 #' @param exponentiate logical indicating whether or not to exponentiate the
-#' coefficient estimates. This is typical for logistic and multinomial regressions,
-#' but a bad idea if there is no log or logit link. Defaults to `FALSE`.
+#' coefficient estimates. This is typical for logistic, Poisson and Cox models,
+#' but a bad idea if there is no log or logit link; defaults to `FALSE`.
 #' @param variable_labels a named list or a named vector of custom variable labels
 #' @param term_labels a named list or a named vector of custom term labels
 #' @param add_reference_rows should reference rows be added?

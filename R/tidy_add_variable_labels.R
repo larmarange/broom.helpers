@@ -49,6 +49,8 @@ tidy_add_variable_labels <- function(x,
     stop("`tidy_add_variable_labels()` cannot be applied after `tidy_add_header_rows().`")
   }
 
+  .attributes <- .save_attributes(x)
+
   if ("var_label" %in% names(x)) {
     x <- x %>% dplyr::select(-.data$var_label)
   }
@@ -128,6 +130,6 @@ tidy_add_variable_labels <- function(x,
     dplyr::mutate(
       variable = dplyr::if_else(variable_is_na, NA_character_, .data$variable)
     ) %>%
-    tidy_attach_model(model = model) %>%
-    .order_tidy_columns()
+    .order_tidy_columns() %>%
+    tidy_attach_model(model = model, .attributes = .attributes)
 }

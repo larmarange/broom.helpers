@@ -39,6 +39,8 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x),
     stop("`tidy_identify_variables()` cannot be applied after `tidy_add_header_rows().`")
   }
 
+  .attributes <- .save_attributes(x)
+
   if ("variable" %in% names(x)) {
     x <- x %>% dplyr::select(-.data$variable, -.data$var_class, -.data$var_type)
   }
@@ -58,8 +60,8 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x),
           .data$var_type
         )
       ) %>%
-      tidy_attach_model(model) %>%
-      .order_tidy_columns()
+      .order_tidy_columns() %>%
+      tidy_attach_model(model = model, .attributes = .attributes)
   } else {
     if (!quiet)
       usethis::ui_oops(paste0(
@@ -77,8 +79,8 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x),
         var_class = NA_integer_,
         var_type = "unknown"
       ) %>%
-      tidy_attach_model(model) %>%
-      .order_tidy_columns()
+      .order_tidy_columns() %>%
+      tidy_attach_model(model = model, .attributes = .attributes)
   }
 
 
