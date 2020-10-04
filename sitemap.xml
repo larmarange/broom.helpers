@@ -4,6 +4,9 @@
     <loc>https://larmarange.github.io/broom.helpers//index.html</loc>
   </url>
   <url>
+    <loc>https://larmarange.github.io/broom.helpers//reference/model_get_coefficients_type.html</loc>
+  </url>
+  <url>
     <loc>https://larmarange.github.io/broom.helpers//reference/model_get_contrasts.html</loc>
   </url>
   <url>
@@ -29,6 +32,9 @@
   </url>
   <url>
     <loc>https://larmarange.github.io/broom.helpers//reference/reexports.html</loc>
+  </url>
+  <url>
+    <loc>https://larmarange.github.io/broom.helpers//reference/tidy_add_coefficients_type.html</loc>
   </url>
   <url>
     <loc>https://larmarange.github.io/broom.helpers//reference/tidy_add_contrasts.html</loc>

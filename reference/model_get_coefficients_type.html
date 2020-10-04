@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get the model frame of a model — model_get_model_frame • broom.helpers</title>
+<title>Get coefficient type — model_get_coefficients_type • broom.helpers</title>
 
 
 <!-- jquery -->
@@ -39,12 +39,9 @@
 
 
 
-<meta property="og:title" content="Get the model frame of a model — model_get_model_frame" />
-<meta property="og:description" content="The structure of the object returned by stats::model.frame()
-could slightly differ for certain types of models.
-model_get_model_frame() will always return an object
-with the same data structure or NULL if it is not possible
-to compute model frame from model." />
+<meta property="og:title" content="Get coefficient type — model_get_coefficients_type" />
+<meta property="og:description" content="Indicate the type of coefficient among &quot;generic&quot;, &quot;logistic&quot;,
+&quot;poisson&quot; and &quot;prop_hazard&quot;." />
 
 
 
@@ -118,29 +115,44 @@ to compute model frame from model." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get the model frame of a model</h1>
-    <small class="dont-index">Source: <a href='https://github.com/larmarange/broom.helpers/blob/master/R/model_get_model_frame.R'><code>R/model_get_model_frame.R</code></a></small>
-    <div class="hidden name"><code>model_get_model_frame.Rd</code></div>
+    <h1>Get coefficient type</h1>
+    <small class="dont-index">Source: <a href='https://github.com/larmarange/broom.helpers/blob/master/R/model_get_coefficients_type.R'><code>R/model_get_coefficients_type.R</code></a></small>
+    <div class="hidden name"><code>model_get_coefficients_type.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The structure of the object returned by <code><a href='https://rdrr.io/r/stats/model.frame.html'>stats::model.frame()</a></code>
-could slightly differ for certain types of models.
-<code>model_get_model_frame()</code> will always return an object
-with the same data structure or <code>NULL</code> if it is not possible
-to compute model frame from <code>model</code>.</p>
+    <p>Indicate the type of coefficient among "generic", "logistic",
+"poisson" and "prop_hazard".</p>
     </div>
 
-    <pre class="usage"><span class='fu'>model_get_model_frame</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
+    <pre class="usage"><span class='fu'>model_get_coefficients_type</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>model_get_model_frame</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
+<span class='fu'>model_get_coefficients_type</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
+
+<span class='co'># S3 method for glm</span>
+<span class='fu'>model_get_coefficients_type</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
+
+<span class='co'># S3 method for geeglm</span>
+<span class='fu'>model_get_coefficients_type</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
+
+<span class='co'># S3 method for glmerMod</span>
+<span class='fu'>model_get_coefficients_type</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
+
+<span class='co'># S3 method for clogit</span>
+<span class='fu'>model_get_coefficients_type</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
+
+<span class='co'># S3 method for multinom</span>
+<span class='fu'>model_get_coefficients_type</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
+
+<span class='co'># S3 method for clm</span>
+<span class='fu'>model_get_coefficients_type</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
+
+<span class='co'># S3 method for clmm</span>
+<span class='fu'>model_get_coefficients_type</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
 
 <span class='co'># S3 method for coxph</span>
-<span class='fu'>model_get_model_frame</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
-
-<span class='co'># S3 method for survreg</span>
-<span class='fu'>model_get_model_frame</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span></pre>
+<span class='fu'>model_get_coefficients_type</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -153,10 +165,9 @@ to compute model frame from <code>model</code>.</p>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/r/stats/model.frame.html'>stats::model.frame()</a></code></p>
-<p>Other model_helpers: 
-<code><a href='model_get_coefficients_type.html'>model_get_coefficients_type</a>()</code>,
+    <div class='dont-index'><p>Other model_helpers: 
 <code><a href='model_get_contrasts.html'>model_get_contrasts</a>()</code>,
+<code><a href='model_get_model_frame.html'>model_get_model_frame</a>()</code>,
 <code><a href='model_get_model_matrix.html'>model_get_model_matrix</a>()</code>,
 <code><a href='model_get_xlevels.html'>model_get_xlevels</a>()</code>,
 <code><a href='model_identify_variables.html'>model_identify_variables</a>()</code>,
@@ -166,15 +177,14 @@ to compute model frame from <code>model</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>hp</span> <span class='op'>~</span> <span class='va'>mpg</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>cyl</span><span class='op'>)</span>, <span class='va'>mtcars</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>model_get_model_frame</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;                    hp  mpg factor(cyl)
-#&gt; Mazda RX4         110 21.0           6
-#&gt; Mazda RX4 Wag     110 21.0           6
-#&gt; Datsun 710         93 22.8           4
-#&gt; Hornet 4 Drive    110 21.4           6
-#&gt; Hornet Sportabout 175 18.7           8
-#&gt; Valiant           105 18.1           6</div></pre>
+  <span class='fu'>model_get_coefficients_type</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "generic"</div><div class='input'>
+<span class='va'>Titanic</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>Survived <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>Survived</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"No"</span>, <span class='st'>"Yes"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span><span class='va'>Survived</span> <span class='op'>~</span> <span class='va'>Class</span> <span class='op'>+</span> <span class='va'>Age</span> <span class='op'>*</span> <span class='va'>Sex</span>, data <span class='op'>=</span> <span class='va'>.</span>, weights <span class='op'>=</span> <span class='va'>.</span><span class='op'>$</span><span class='va'>n</span>, family <span class='op'>=</span> <span class='va'>binomial</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>model_get_coefficients_type</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "logistic"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

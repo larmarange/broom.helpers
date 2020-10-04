@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Add references rows for categorical variables — tidy_add_reference_rows • broom.helpers</title>
+<title>Add coefficients type and label as attributes — tidy_add_coefficients_type • broom.helpers</title>
 
 
 <!-- jquery -->
@@ -39,10 +39,10 @@
 
 
 
-<meta property="og:title" content="Add references rows for categorical variables — tidy_add_reference_rows" />
-<meta property="og:description" content="For categorical variables with a treatment contrast
-(stats::contr.treatment()), a SAS contrast (stats::contr.SAS())
-or a sum contrast (stats::contr.sum()), add a reference row." />
+<meta property="og:title" content="Add coefficients type and label as attributes — tidy_add_coefficients_type" />
+<meta property="og:description" content="Add the type of coefficients (&quot;generic&quot;, &quot;logistic&quot;, &quot;poisson&quot; or &quot;prop_hazard&quot;)
+and the corresponding coefficient labels, as attributes to x (respectively
+named coefficients_type and coefficients_label)." />
 
 
 
@@ -116,18 +116,22 @@ or a sum contrast (stats::contr.sum()), add a reference row." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Add references rows for categorical variables</h1>
-    <small class="dont-index">Source: <a href='https://github.com/larmarange/broom.helpers/blob/master/R/tidy_add_reference_rows.R'><code>R/tidy_add_reference_rows.R</code></a></small>
-    <div class="hidden name"><code>tidy_add_reference_rows.Rd</code></div>
+    <h1>Add coefficients type and label as attributes</h1>
+    <small class="dont-index">Source: <a href='https://github.com/larmarange/broom.helpers/blob/master/R/tidy_add_coefficients_type.R'><code>R/tidy_add_coefficients_type.R</code></a></small>
+    <div class="hidden name"><code>tidy_add_coefficients_type.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>For categorical variables with a treatment contrast
-(<code><a href='https://rdrr.io/r/stats/contrast.html'>stats::contr.treatment()</a></code>), a SAS contrast (<code><a href='https://rdrr.io/r/stats/contrast.html'>stats::contr.SAS()</a></code>)
-or a sum contrast (<code><a href='https://rdrr.io/r/stats/contrast.html'>stats::contr.sum()</a></code>), add a reference row.</p>
+    <p>Add the type of coefficients ("generic", "logistic", "poisson" or "prop_hazard")
+and the corresponding coefficient labels, as attributes to <code>x</code> (respectively
+named <code>coefficients_type</code> and <code>coefficients_label</code>).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>tidy_add_reference_rows</span><span class='op'>(</span><span class='va'>x</span>, model <span class='op'>=</span> <span class='fu'><a href='tidy_attach_model.html'>tidy_get_model</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>, quiet <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>tidy_add_coefficients_type</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  exponentiate <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='st'>"exponentiate"</span><span class='op'>)</span>,
+  model <span class='op'>=</span> <span class='fu'><a href='tidy_attach_model.html'>tidy_get_model</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -137,37 +141,24 @@ or a sum contrast (<code><a href='https://rdrr.io/r/stats/contrast.html'>stats::
       <td><p>a tidy tibble</p></td>
     </tr>
     <tr>
+      <th>exponentiate</th>
+      <td><p>logical indicating whether or not to exponentiate the
+coefficient estimates. It should be consistent with the original call to
+<code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>broom::tidy()</a></code></p></td>
+    </tr>
+    <tr>
       <th>model</th>
       <td><p>the corresponding model, if not attached to <code>x</code></p></td>
     </tr>
-    <tr>
-      <th>quiet</th>
-      <td><p>logical argument whether broom.helpers should not return a message
-when requested output cannot be generated. Default is FALSE</p></td>
-    </tr>
     </table>
 
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>The added <code>reference_row</code> column will be equal to:</p><ul>
-<li><p><code>TRUE</code> for a reference row;</p></li>
-<li><p><code>FALSE</code> for a normal row of a variable with a reference row;</p></li>
-<li><p><code>NA</code> for variables without a reference row.</p></li>
-</ul>
-
-<p>If the <code>contrasts</code> column is not yet available in <code>x</code>,
-<code><a href='tidy_add_contrasts.html'>tidy_add_contrasts()</a></code> will be automatically applied.</p>
-<p><code>tidy_add_reference_rows()</code> will not populate the label
-of the reference term. It is therefore better to apply
-<code><a href='tidy_add_term_labels.html'>tidy_add_term_labels()</a></code> after <code>tidy_add_reference_rows()</code>
-rather than before.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other tidy_helpers: 
-<code><a href='tidy_add_coefficients_type.html'>tidy_add_coefficients_type</a>()</code>,
 <code><a href='tidy_add_contrasts.html'>tidy_add_contrasts</a>()</code>,
 <code><a href='tidy_add_estimate_to_reference_rows.html'>tidy_add_estimate_to_reference_rows</a>()</code>,
 <code><a href='tidy_add_header_rows.html'>tidy_add_header_rows</a>()</code>,
+<code><a href='tidy_add_reference_rows.html'>tidy_add_reference_rows</a>()</code>,
 <code><a href='tidy_add_term_labels.html'>tidy_add_term_labels</a>()</code>,
 <code><a href='tidy_add_variable_labels.html'>tidy_add_variable_labels</a>()</code>,
 <code><a href='tidy_attach_model.html'>tidy_attach_model</a>()</code>,
@@ -179,7 +170,7 @@ rather than before.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='va'>df</span> <span class='op'>&lt;-</span> <span class='va'>Titanic</span> <span class='op'>%&gt;%</span>
   <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>Survived <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>Survived</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"No"</span>, <span class='st'>"Yes"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span><span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/across.html'>across</a></span><span class='op'>(</span><span class='fu'>where</span><span class='op'>(</span><span class='va'>is.character</span><span class='op'>)</span>, <span class='va'>factor</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='va'>df</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span>
@@ -187,20 +178,21 @@ rather than before.</p>
     data <span class='op'>=</span> <span class='va'>.</span>, weights <span class='op'>=</span> <span class='va'>.</span><span class='op'>$</span><span class='va'>n</span>, family <span class='op'>=</span> <span class='va'>binomial</span>,
     contrasts <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>Age <span class='op'>=</span> <span class='va'>contr.sum</span>, Class <span class='op'>=</span> <span class='st'>"contr.SAS"</span><span class='op'>)</span>
   <span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='tidy_attach_model.html'>tidy_and_attach</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>tidy_add_reference_rows</span><span class='op'>(</span><span class='op'>)</span>
+  <span class='fu'><a href='tidy_attach_model.html'>tidy_and_attach</a></span><span class='op'>(</span>exponentiate <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='tidy_add_reference_rows.html'>tidy_add_reference_rows</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='tidy_add_estimate_to_reference_rows.html'>tidy_add_estimate_to_reference_rows</a></span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 9 x 10</span><span>
 #&gt;   term  variable var_class var_type contrasts reference_row estimate std.error
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> (Int… </span><span style='color: #BB0000;'>NA</span><span>       </span><span style='color: #BB0000;'>NA</span><span>        interce… </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>               1.72      0.206
-#&gt; </span><span style='color: #555555;'>2</span><span> Clas… Class    character categor… contr.SAS FALSE            0.858     0.157
-#&gt; </span><span style='color: #555555;'>3</span><span> Clas… Class    character categor… contr.SAS FALSE           -</span><span style='color: #BB0000;'>0.160</span><span>     0.174
-#&gt; </span><span style='color: #555555;'>4</span><span> Clas… Class    character categor… contr.SAS FALSE           -</span><span style='color: #BB0000;'>0.920</span><span>     0.149
-#&gt; </span><span style='color: #555555;'>5</span><span> Clas… Class    character categor… contr.SAS TRUE            </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>    
-#&gt; </span><span style='color: #555555;'>6</span><span> Age1  Age      character categor… contr.sum FALSE           -</span><span style='color: #BB0000;'>0.531</span><span>     0.122
-#&gt; </span><span style='color: #555555;'>7</span><span> Age2  Age      character categor… contr.sum TRUE            </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>    
-#&gt; </span><span style='color: #555555;'>8</span><span> SexF… Sex      character categor… contr.tr… TRUE            </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>    
-#&gt; </span><span style='color: #555555;'>9</span><span> SexM… Sex      character categor… contr.tr… FALSE           -</span><span style='color: #BB0000;'>2.42</span><span>      0.140
+#&gt; </span><span style='color: #555555;'>1</span><span> (Int… </span><span style='color: #BB0000;'>NA</span><span>       </span><span style='color: #BB0000;'>NA</span><span>        interce… </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>              5.57       0.206
+#&gt; </span><span style='color: #555555;'>2</span><span> Clas… Class    factor    categor… contr.SAS FALSE           2.36       0.157
+#&gt; </span><span style='color: #555555;'>3</span><span> Clas… Class    factor    categor… contr.SAS FALSE           0.852      0.174
+#&gt; </span><span style='color: #555555;'>4</span><span> Clas… Class    factor    categor… contr.SAS FALSE           0.398      0.149
+#&gt; </span><span style='color: #555555;'>5</span><span> Clas… Class    factor    categor… contr.SAS TRUE            1         </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'>6</span><span> Age1  Age      factor    categor… contr.sum FALSE           0.588      0.122
+#&gt; </span><span style='color: #555555;'>7</span><span> Age2  Age      factor    categor… contr.sum TRUE            1.70      </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'>8</span><span> SexF… Sex      factor    categor… contr.tr… TRUE            1         </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'>9</span><span> SexM… Sex      factor    categor… contr.tr… FALSE           0.088</span><span style='text-decoration: underline;'>9</span><span>     0.140
 #&gt; </span><span style='color: #555555;'># … with 2 more variables: statistic </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, p.value </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>
 <span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"gtsummary"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
   <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span>
@@ -214,7 +206,8 @@ rather than before.</p>
     <span class='op'>)</span>
   <span class='op'>)</span> <span class='op'>%&gt;%</span>
     <span class='fu'><a href='tidy_attach_model.html'>tidy_and_attach</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-    <span class='fu'>tidy_add_reference_rows</span><span class='op'>(</span><span class='op'>)</span>
+    <span class='fu'><a href='tidy_add_reference_rows.html'>tidy_add_reference_rows</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+    <span class='fu'><a href='tidy_add_estimate_to_reference_rows.html'>tidy_add_estimate_to_reference_rows</a></span><span class='op'>(</span><span class='op'>)</span>
 <span class='op'>}</span>
 </div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 12 x 10</span><span>
 #&gt;    term  variable var_class var_type contrasts reference_row estimate std.error
@@ -222,13 +215,13 @@ rather than before.</p>
 #&gt; </span><span style='color: #555555;'> 1</span><span> (Int… </span><span style='color: #BB0000;'>NA</span><span>       </span><span style='color: #BB0000;'>NA</span><span>        interce… </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>              -</span><span style='color: #BB0000;'>0.196</span><span>     0.487
 #&gt; </span><span style='color: #555555;'> 2</span><span> stag… stage    factor    categor… contr.tr… FALSE           -</span><span style='color: #BB0000;'>0.138</span><span>     0.455
 #&gt; </span><span style='color: #555555;'> 3</span><span> stag… stage    factor    categor… contr.tr… FALSE           -</span><span style='color: #BB0000;'>0.698</span><span>     0.471
-#&gt; </span><span style='color: #555555;'> 4</span><span> stag… stage    factor    categor… contr.tr… TRUE            </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'> 4</span><span> stag… stage    factor    categor… contr.tr… TRUE             0        </span><span style='color: #BB0000;'>NA</span><span>    
 #&gt; </span><span style='color: #555555;'> 5</span><span> stag… stage    factor    categor… contr.tr… FALSE           -</span><span style='color: #BB0000;'>0.447</span><span>     0.466
 #&gt; </span><span style='color: #555555;'> 6</span><span> grad… grade    factor    categor… contr.tr… FALSE            0.142     0.516
-#&gt; </span><span style='color: #555555;'> 7</span><span> grad… grade    factor    categor… contr.tr… TRUE            </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'> 7</span><span> grad… grade    factor    categor… contr.tr… TRUE             0        </span><span style='color: #BB0000;'>NA</span><span>    
 #&gt; </span><span style='color: #555555;'> 8</span><span> grad… grade    factor    categor… contr.tr… FALSE           -</span><span style='color: #BB0000;'>0.615</span><span>     0.550
 #&gt; </span><span style='color: #555555;'> 9</span><span> trt1  trt      character categor… contr.SAS FALSE           -</span><span style='color: #BB0000;'>0.710</span><span>     0.575
-#&gt; </span><span style='color: #555555;'>10</span><span> trt2  trt      character categor… contr.SAS TRUE            </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'>10</span><span> trt2  trt      character categor… contr.SAS TRUE             0        </span><span style='color: #BB0000;'>NA</span><span>    
 #&gt; </span><span style='color: #555555;'>11</span><span> grad… grade:t… </span><span style='color: #BB0000;'>NA</span><span>        interac… </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>              -</span><span style='color: #BB0000;'>0.180</span><span>     0.794
 #&gt; </span><span style='color: #555555;'>12</span><span> grad… grade:t… </span><span style='color: #BB0000;'>NA</span><span>        interac… </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>               1.63      0.803
 #&gt; </span><span style='color: #555555;'># … with 2 more variables: statistic </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, p.value </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div></span></pre>
