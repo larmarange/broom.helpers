@@ -4,6 +4,7 @@
 \name{reexports}
 \alias{reexports}
 \alias{\%>\%}
+\alias{vars}
 \alias{starts_with}
 \alias{ends_with}
 \alias{contains}
@@ -21,6 +22,6 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{dplyr}{\code{\link[dplyr:reexports]{\%>\%}}, \code{\link[dplyr:reexports]{all_of}}, \code{\link[dplyr:reexports]{any_of}}, \code{\link[dplyr:reexports]{contains}}, \code{\link[dplyr:reexports]{ends_with}}, \code{\link[dplyr:reexports]{everything}}, \code{\link[dplyr:reexports]{last_col}}, \code{\link[dplyr:reexports]{matches}}, \code{\link[dplyr:reexports]{num_range}}, \code{\link[dplyr:reexports]{one_of}}, \code{\link[dplyr:reexports]{starts_with}}}
+  \item{dplyr}{\code{\link[dplyr:reexports]{\%>\%}}, \code{\link[dplyr:reexports]{all_of}}, \code{\link[dplyr:reexports]{any_of}}, \code{\link[dplyr:reexports]{contains}}, \code{\link[dplyr:reexports]{ends_with}}, \code{\link[dplyr:reexports]{everything}}, \code{\link[dplyr:reexports]{last_col}}, \code{\link[dplyr:reexports]{matches}}, \code{\link[dplyr:reexports]{num_range}}, \code{\link[dplyr:reexports]{one_of}}, \code{\link[dplyr:reexports]{starts_with}}, \code{\link[dplyr]{vars}}}
 }}
 

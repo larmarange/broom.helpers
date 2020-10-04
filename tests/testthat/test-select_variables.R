@@ -32,6 +32,12 @@ test_that("tidy_select_variables() works for basic models", {
     res %>% tidy_select_variables(keep = stage)
   )
 
+  # testing vars() selector
+  expect_equivalent(
+    res %>% tidy_select_variables(keep = vars(grade, trt)),
+    res %>% tidy_select_variables(keep = c(grade, trt))
+  )
+
   # no error when none selected
   expect_error(
     res %>% tidy_select_variables(keep = starts_with("zzzzzzz")),

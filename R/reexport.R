@@ -2,6 +2,10 @@
 #' @export
 dplyr::`%>%`
 
+#' @importFrom dplyr vars
+#' @export
+dplyr::vars
+
 #' @importFrom dplyr starts_with
 #' @export
 dplyr::starts_with
