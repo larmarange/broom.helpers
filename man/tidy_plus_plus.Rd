@@ -31,8 +31,8 @@ tidy_plus_plus(
 \item{conf.int}{should confidence intervals be computed? (see \code{\link[broom:reexports]{broom::tidy()}})}
 
 \item{exponentiate}{logical indicating whether or not to exponentiate the
-coefficient estimates. This is typical for logistic and multinomial regressions,
-but a bad idea if there is no log or logit link. Defaults to \code{FALSE}.}
+coefficient estimates. This is typical for logistic, Poisson and Cox models,
+but a bad idea if there is no log or logit link; defaults to \code{FALSE}.}
 
 \item{variable_labels}{a named list or a named vector of custom variable labels}
 

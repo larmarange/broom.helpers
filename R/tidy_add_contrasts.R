@@ -28,6 +28,8 @@ tidy_add_contrasts <- function(x, model = tidy_get_model(x)) {
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
   }
 
+  .attributes <- .save_attributes(x)
+
   if ("contrasts" %in% names(x)) {
     x <- x %>% dplyr::select(-.data$contrasts)
   }
@@ -48,6 +50,5 @@ tidy_add_contrasts <- function(x, model = tidy_get_model(x)) {
       )
   }
   x %>%
-    tidy_attach_model(model = model) %>%
-    .order_tidy_columns()
+    tidy_attach_model(model = model, .attributes = .attributes)
 }

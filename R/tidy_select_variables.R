@@ -36,6 +36,7 @@ tidy_select_variables <- function(
   if (!"variable" %in% names(x)) {
     x <- x %>% tidy_identify_variables(model = model)
   }
+  .attributes <- .save_attributes(x)
 
   df_vars <-
     x %>%
@@ -47,7 +48,8 @@ tidy_select_variables <- function(
     purrr::map2_dfc(
       df_vars$variable, df_vars$var_class,
       function(var, class) {
-        # assigning variable type so user may use `where(is.character)` type selectors
+        # assigning variable type/class so user may use
+        # `where(is.character)` type selectors
         switch(
           class,
           "numeric" = data.frame(NA_real_),
@@ -68,6 +70,6 @@ tidy_select_variables <- function(
       .data$var_type == "intercept" |
         .data$variable %in% keep
     ) %>%
-    tidy_attach_model(model = model) %>%
-    .order_tidy_columns()
+    tidy_attach_model(model = model, .attributes = .attributes)
+
 }

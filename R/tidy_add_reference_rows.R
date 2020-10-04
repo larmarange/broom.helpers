@@ -65,6 +65,8 @@ tidy_add_reference_rows <- function(x, model = tidy_get_model(x), quiet = FALSE)
     return(x)
   }
 
+  .attributes <- .save_attributes(x)
+
   if ("label" %in% names(x)) {
     if (!quiet)
       usethis::ui_info(paste0(
@@ -200,6 +202,5 @@ tidy_add_reference_rows <- function(x, model = tidy_get_model(x), quiet = FALSE)
   x %>%
     dplyr::arrange(.data$rank) %>%
     dplyr::select(-.data$rank) %>%
-    tidy_attach_model(model = model) %>%
-    .order_tidy_columns()
+    tidy_attach_model(model = model, .attributes = .attributes)
 }

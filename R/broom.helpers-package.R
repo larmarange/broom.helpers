@@ -89,3 +89,13 @@ utils::globalVariables("where")
       dplyr::everything()
     )
 }
+
+# attributes to be saved between tidy_* functions
+.save_attributes <- function(x) {
+  .attributes <- attributes(x)
+  .attributes_names <- intersect(
+    names(.attributes),
+    c("exponentiate", "coefficients_type", "coefficients_label")
+  )
+  .attributes[.attributes_names]
+}

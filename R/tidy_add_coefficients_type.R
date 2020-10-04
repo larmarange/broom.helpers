@@ -37,6 +37,9 @@ tidy_add_coefficients_type <- function(
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
   }
 
+  .attributes <- .save_attributes(x)
+  .attributes$exponentiate <- exponentiate
+
   coefficients_type <- model_get_coefficients_type(model)
   if (exponentiate)
     coefficients_label <- dplyr::case_when(
@@ -57,6 +60,5 @@ tidy_add_coefficients_type <- function(
   attr(x, "coefficients_label") <- coefficients_label
 
   x %>%
-    tidy_attach_model(model = model) %>%
-    .order_tidy_columns()
+    tidy_attach_model(model = model, .attributes = .attributes)
 }

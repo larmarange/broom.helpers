@@ -71,6 +71,8 @@ tidy_add_header_rows <- function(x,
     return(x)
   }
 
+  .attributes <- .save_attributes(x)
+
   if (!"label" %in% names(x)) {
     x <- x %>% tidy_add_term_labels(model = model)
   }
@@ -208,6 +210,5 @@ tidy_add_header_rows <- function(x,
     dplyr::select(-.data$rank)
 
   x %>%
-    tidy_attach_model(model = model) %>%
-    .order_tidy_columns()
+    tidy_attach_model(model = model, .attributes = .attributes)
 }
