@@ -4,31 +4,15 @@
 \alias{tidy_select_variables}
 \title{Select variables to keep/drop}
 \usage{
-tidy_select_variables(
-  x,
-  keep = NULL,
-  drop = NULL,
-  model = tidy_get_model(x),
-  quiet = FALSE,
-  strict = FALSE
-)
+tidy_select_variables(x, keep = everything(), model = tidy_get_model(x))
 }
 \arguments{
 \item{x}{a tidy tibble}
 
-\item{keep}{variables to keep}
-
-\item{drop}{variables to drop}
+\item{keep}{variables to keep. Use \code{-} to remove a variable.
+Default is \code{everything()}}
 
 \item{model}{the corresponding model, if not attached to \code{x}}
-
-\item{quiet}{logical argument whether a message should not be
-returned when requesting to keep/drop a variable not
-existing in \code{x}}
-
-\item{strict}{logical argument whether an error should be
-returned when requesting to keep/drop a variable not
-existing in \code{x}}
 }
 \description{
 Will remove unselected variables from the results.
@@ -49,9 +33,8 @@ res <- Titanic \%>\%
 res
 res \%>\% tidy_select_variables()
 res \%>\% tidy_select_variables(keep = "Class")
-res \%>\% tidy_select_variables(drop = "Class")
-res \%>\% tidy_select_variables(keep = c("Age", "Sex"))
-
+res \%>\% tidy_select_variables(keep = -c("Age", "Sex"))
+res \%>\% tidy_select_variables(keep = starts_with("A"))
 }
 \seealso{
 Other tidy_helpers: 

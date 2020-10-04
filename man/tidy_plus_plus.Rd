@@ -16,8 +16,7 @@ tidy_plus_plus(
   add_header_rows = FALSE,
   show_single_row = NULL,
   intercept = FALSE,
-  keep = NULL,
-  drop = NULL,
+  keep = everything(),
   keep_model = FALSE,
   quiet = FALSE,
   strict = FALSE,
@@ -51,9 +50,8 @@ variables that should be displayed on a single row, when
 
 \item{intercept}{should the intercept(s) be included?}
 
-\item{keep}{variables to keep}
-
-\item{drop}{variables to drop}
+\item{keep}{variables to keep. Use \code{-} to remove a variable.
+Default is \code{everything()}}
 
 \item{keep_model}{should the model be kept as an attribute of the final result?}
 

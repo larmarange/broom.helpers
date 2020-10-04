@@ -1,12 +1,9 @@
 ## usethis namespace: start
 #' @importFrom lifecycle deprecate_soft
 #' @importFrom dplyr .data
+#' @importFrom purrr %||%
 ## usethis namespace: end
 NULL
-
-#' @importFrom dplyr `%>%`
-#' @export
-dplyr::`%>%`
 
 # because `where` is not exported by tidyselect
 # cf. https://github.com/r-lib/tidyselect/issues/201
