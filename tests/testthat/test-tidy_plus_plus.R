@@ -51,3 +51,21 @@ test_that("tidy_plus_plus() and functionnal programming", {
       )
   )
 })
+
+
+test_that("tidy_plus_plus() with mice objects", {
+  # impute missing values
+  imputed_trial <-
+    suppressWarnings(mice::mice(gtsummary::trial, maxit = 2, m = 2))
+  # build regression model
+  mod <- with(imputed_trial, lm(age ~ marker + grade))
+
+  # testing pre-pooled results
+  expect_error(
+    tidy_plus_plus(
+      mod,
+      tidy_fun = function(x, ...) mice::pool(x) %>% mice::tidy(...)
+    ),
+    NA
+  )
+})

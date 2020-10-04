@@ -22,7 +22,7 @@
 #' tidy_get_model(tt)
 #' @export
 tidy_attach_model <- function(x, model) {
-  attr(x, "model") <- model
+  attr(x, "model") <- model_get_model(model)
   x
 }
 

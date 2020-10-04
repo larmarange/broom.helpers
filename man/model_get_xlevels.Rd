@@ -30,6 +30,7 @@ Other model_helpers:
 \code{\link{model_get_contrasts}()},
 \code{\link{model_get_model_frame}()},
 \code{\link{model_get_model_matrix}()},
+\code{\link{model_get_model}()},
 \code{\link{model_identify_variables}()},
 \code{\link{model_list_contrasts}()},
 \code{\link{model_list_terms_levels}()},

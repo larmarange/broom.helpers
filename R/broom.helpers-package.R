@@ -80,7 +80,7 @@ utils::globalVariables("where")
 
 
 # for consistent column order
-.order_tidy_columns <- function(x) {
+.order_tidy_columns <- function(x, model = tidy_get_model(x)) {
   x %>%
     dplyr::select(
       dplyr::any_of(
@@ -90,5 +90,6 @@ utils::globalVariables("where")
         )
       ),
       dplyr::everything()
-    )
+    ) %>%
+    tidy_attach_model(model)
 }
