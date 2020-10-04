@@ -7,15 +7,9 @@
 #' If the `variable` column is not yet available in `x`,
 #' [tidy_identify_variables()] will be automatically applied.
 #' @param x a tidy tibble
-#' @param keep variables to keep
-#' @param drop variables to drop
+#' @param keep variables to keep. Use `-` to remove a variable.
+#' Default is `everything()`
 #' @param model the corresponding model, if not attached to `x`
-#' @param quiet logical argument whether a message should not be
-#' returned when requesting to keep/drop a variable not
-#' existing in `x`
-#' @param strict logical argument whether an error should be
-#' returned when requesting to keep/drop a variable not
-#' existing in `x`
 #' @export
 #' @family tidy_helpers
 #' @examples
@@ -29,12 +23,11 @@
 #' res
 #' res %>% tidy_select_variables()
 #' res %>% tidy_select_variables(keep = "Class")
-#' res %>% tidy_select_variables(drop = "Class")
-#' res %>% tidy_select_variables(keep = c("Age", "Sex"))
-#'
+#' res %>% tidy_select_variables(keep = -c("Age", "Sex"))
+#' res %>% tidy_select_variables(keep = starts_with("A"))
+
 tidy_select_variables <- function(
-  x, keep = NULL, drop = NULL,
-  model = tidy_get_model(x), quiet = FALSE, strict = FALSE
+  x, keep = everything(), model = tidy_get_model(x)
 ) {
   if (is.null(model)) {
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
@@ -43,47 +36,83 @@ tidy_select_variables <- function(
   if (!"variable" %in% names(x)) {
     x <- x %>% tidy_identify_variables(model = model)
   }
-
   .attributes <- .save_attributes(x)
 
-  current_variables <- na.omit(unique(x$variable))
-
-  if (is.null(keep))
-    keep <- current_variables
-
-  not_found <- setdiff(keep, current_variables)
-  if (length(not_found) > 0 && !quiet) {
-    usethis::ui_oops(paste0(
-      usethis::ui_code(not_found),
-      " terms in 'keep' have not been found in ",
-      usethis::ui_code("x"),
-      "."
-    ))
-  }
-  if (length(not_found) > 0 && strict) {
-    stop("Incorrect call with `keep =`. Quitting execution.", call. = FALSE)
-  }
-
-  not_found <- setdiff(drop, current_variables)
-  if (length(not_found) > 0 && !quiet) {
-    usethis::ui_oops(paste0(
-      usethis::ui_code(not_found),
-      " terms in 'drop' have not been found in ",
-      usethis::ui_code("x"),
-      "."
-    ))
-  }
-  if (length(not_found) > 0 && strict) {
-    stop("Incorrect call with `drop =`. Quitting execution.", call. = FALSE)
-  }
-
-  selected_variables <- setdiff(keep, drop)
+  # obtain character vector fo selected variables
+  keep <- .tidy_tidyselect(x, {{ keep }})
 
   x %>%
     dplyr::filter(
       .data$var_type == "intercept" |
-        .data$variable %in% selected_variables
+        .data$variable %in% keep
     ) %>%
     tidy_attach_model(model = model, .attributes = .attributes)
 
 }
+
+.tidy_tidyselect <- function(x, keep) {
+  keep <- rlang::enquo(keep)
+  # keeping variables and class
+  df_vars <-
+    x %>%
+    dplyr::filter(!.data$var_type %in% "intercept") %>%
+    dplyr::select(.data$variable, .data$var_class) %>%
+    dplyr::distinct()
+
+  df_empty <-
+    purrr::map2_dfc(
+      df_vars$variable, df_vars$var_class,
+      function(var, class) {
+        # assigning variable type/class so user may use
+        # `where(is.character)` type selectors
+        switch(
+          class,
+          "numeric" = data.frame(NA_real_),
+          "character" = data.frame(NA_character_),
+          "factor" = data.frame(factor(NA)),
+          "ordered" = data.frame(factor(NA, ordered = TRUE)),
+          "integer" = data.frame(NA_integer_)
+        ) %||%
+          data.frame(NA) %>%
+          purrr::set_names(var)
+      }
+    )
+
+  # determine if selecting input begins with `var()`
+  select_input_starts_var <-
+    !rlang::quo_is_symbol(keep) && # if not a symbol (ie name)
+    identical(eval(as.list(rlang::quo_get_expr(keep))[[1]]), dplyr::vars)
+
+  # performing selecting
+  if (select_input_starts_var) {
+    # `vars()` evaluates to a list of quosures; unquoting them in `select()`
+    res <- names(dplyr::select(df_empty, !!!rlang::eval_tidy(keep)))
+  }
+  else {
+    res <- names(dplyr::select(df_empty, !!keep))
+  }
+
+  res
+}
+
+#' Copy of tidyselect's unexported `where()` function
+#'
+#' Need this function when we do checks if the select helpers are wrapped in `var()`.
+#' If it is not present, users cannot use `where(is.numeric)` type selectors.
+#' tidyselect maintainers have indicated they will export `where()` in a future
+#' release so this will not be required
+#' @noRd
+where <- function(fn) {
+  predicate <- rlang::as_function(fn)
+
+  function(x, ...) {
+    out <- predicate(x, ...)
+
+    if (!rlang::is_bool(out)) {
+      rlang::abort("`where()` must be used with functions that return `TRUE` or `FALSE`.")
+    }
+
+    out
+  }
+}
+
