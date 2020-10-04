@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Objects exported from other packages — reexports • broom.helpers</title>
+<title>Get the model from model objects — model_get_model • broom.helpers</title>
 
 
 <!-- jquery -->
@@ -39,13 +39,10 @@
 
 
 
-<meta property="og:title" content="Objects exported from other packages — reexports" />
-<meta property="og:description" content="These objects are imported from other packages. Follow the links
-below to see their documentation.
-
-  dplyr%&amp;gt;%, all_of, any_of, contains, ends_with, everything, last_col, matches, num_range, one_of, starts_with, vars
-
-" />
+<meta property="og:title" content="Get the model from model objects — model_get_model" />
+<meta property="og:description" content="Most model objects are proper R model objects. There are, however, some
+model objects that store the proper object internally (e.g. mice models).
+This function extracts that model object in those cases." />
 
 
 
@@ -119,23 +116,58 @@ below to see their documentation.
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Objects exported from other packages</h1>
-    <small class="dont-index">Source: <a href='https://github.com/larmarange/broom.helpers/blob/master/R/reexport.R'><code>R/reexport.R</code></a></small>
-    <div class="hidden name"><code>reexports.Rd</code></div>
+    <h1>Get the model from model objects</h1>
+    <small class="dont-index">Source: <a href='https://github.com/larmarange/broom.helpers/blob/master/R/model_get_model.R'><code>R/model_get_model.R</code></a></small>
+    <div class="hidden name"><code>model_get_model.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>These objects are imported from other packages. Follow the links
-below to see their documentation.</p>
-<dl>
-  <dt>dplyr</dt><dd><p><code>%&gt;%</code>, <code>all_of</code>, <code>any_of</code>, <code>contains</code>, <code>ends_with</code>, <code>everything</code>, <code>last_col</code>, <code>matches</code>, <code>num_range</code>, <code>one_of</code>, <code>starts_with</code>, <code><a href='https://dplyr.tidyverse.org/reference/vars.html'>vars</a></code></p></dd>
-
-</dl>
+    <p>Most model objects are proper R model objects. There are, however, some
+model objects that store the proper object internally (e.g. mice models).
+This function extracts that model object in those cases.</p>
     </div>
 
+    <pre class="usage"><span class='fu'>model_get_model</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
 
+<span class='co'># S3 method for default</span>
+<span class='fu'>model_get_model</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
 
+<span class='co'># S3 method for mira</span>
+<span class='fu'>model_get_model</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>model</th>
+      <td><p>a model object</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other model_helpers: 
+<code><a href='model_get_coefficients_type.html'>model_get_coefficients_type</a>()</code>,
+<code><a href='model_get_contrasts.html'>model_get_contrasts</a>()</code>,
+<code><a href='model_get_model_frame.html'>model_get_model_frame</a>()</code>,
+<code><a href='model_get_model_matrix.html'>model_get_model_matrix</a>()</code>,
+<code><a href='model_get_xlevels.html'>model_get_xlevels</a>()</code>,
+<code><a href='model_identify_variables.html'>model_identify_variables</a>()</code>,
+<code><a href='model_list_contrasts.html'>model_list_contrasts</a>()</code>,
+<code><a href='model_list_terms_levels.html'>model_list_terms_levels</a>()</code>,
+<code><a href='model_list_variables.html'>model_list_variables</a>()</code></p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>hp</span> <span class='op'>~</span> <span class='va'>mpg</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>cyl</span><span class='op'>)</span>, <span class='va'>mtcars</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>model_get_model</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; 
+#&gt; Call:
+#&gt; lm(formula = hp ~ mpg + factor(cyl), data = mtcars)
+#&gt; 
+#&gt; Coefficients:
+#&gt;  (Intercept)           mpg  factor(cyl)6  factor(cyl)8  
+#&gt;      171.349        -3.327        16.623        88.105  
+#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
