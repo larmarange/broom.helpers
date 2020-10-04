@@ -16,6 +16,8 @@ tidy_plus_plus(
   add_header_rows = FALSE,
   show_single_row = NULL,
   intercept = FALSE,
+  keep = NULL,
+  drop = NULL,
   keep_model = FALSE,
   quiet = FALSE,
   strict = FALSE,
@@ -49,9 +51,13 @@ variables that should be displayed on a single row, when
 
 \item{intercept}{should the intercept(s) be included?}
 
+\item{keep}{variables to keep}
+
+\item{drop}{variables to drop}
+
 \item{keep_model}{should the model be kept as an attribute of the final result?}
 
-\item{quiet}{logical argument whether broom.helpers should return an error
+\item{quiet}{logical argument whether broom.helpers should not return a message
 when requested output cannot be generated. Default is FALSE}
 
 \item{strict}{logical argument whether broom.helpers should return an error
@@ -71,6 +77,7 @@ This function will apply sequentially:
 \item \code{\link[=tidy_add_term_labels]{tidy_add_term_labels()}}
 \item \code{\link[=tidy_add_header_rows]{tidy_add_header_rows()}}
 \item \code{\link[=tidy_remove_intercept]{tidy_remove_intercept()}}
+\item \code{\link[=tidy_select_variables]{tidy_select_variables()}}
 \item \code{\link[=tidy_detach_model]{tidy_detach_model()}}
 }
 }
@@ -128,6 +135,7 @@ Other tidy_helpers:
 \code{\link{tidy_add_variable_labels}()},
 \code{\link{tidy_attach_model}()},
 \code{\link{tidy_identify_variables}()},
-\code{\link{tidy_remove_intercept}()}
+\code{\link{tidy_remove_intercept}()},
+\code{\link{tidy_select_variables}()}
 }
 \concept{tidy_helpers}

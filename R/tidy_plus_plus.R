@@ -10,6 +10,7 @@
 #' * [tidy_add_term_labels()]
 #' * [tidy_add_header_rows()]
 #' * [tidy_remove_intercept()]
+#' * [tidy_select_variables()]
 #' * [tidy_detach_model()]
 #'
 #' @param model a model to be attached/tidied
@@ -27,8 +28,10 @@
 #' variables that should be displayed on a single row, when
 #' `add_header_rows` is `TRUE`
 #' @param intercept should the intercept(s) be included?
+#' @param keep variables to keep
+#' @param drop variables to drop
 #' @param keep_model should the model be kept as an attribute of the final result?
-#' @param quiet logical argument whether broom.helpers should return an error
+#' @param quiet logical argument whether broom.helpers should not return a message
 #' when requested output cannot be generated. Default is FALSE
 #' @param strict logical argument whether broom.helpers should return an error
 #' when requested output cannot be generated. Default is FALSE
@@ -90,6 +93,8 @@ tidy_plus_plus <- function(
                            add_header_rows = FALSE,
                            show_single_row = NULL,
                            intercept = FALSE,
+                           keep = NULL,
+                           drop = NULL,
                            keep_model = FALSE,
                            quiet = FALSE,
                            strict = FALSE,
@@ -121,6 +126,12 @@ tidy_plus_plus <- function(
   if (!intercept) {
     res <- res %>% tidy_remove_intercept()
   }
+  res <- res %>% tidy_select_variables(
+    keep = keep,
+    drop = drop,
+    quiet = quiet,
+    strict = strict
+  )
   if (!keep_model) {
     res <- res %>% tidy_detach_model()
   }
