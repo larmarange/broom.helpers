@@ -7,6 +7,7 @@
 \alias{model_get_coefficients_type.geeglm}
 \alias{model_get_coefficients_type.glmerMod}
 \alias{model_get_coefficients_type.clogit}
+\alias{model_get_coefficients_type.polr}
 \alias{model_get_coefficients_type.multinom}
 \alias{model_get_coefficients_type.clm}
 \alias{model_get_coefficients_type.clmm}
@@ -24,6 +25,8 @@ model_get_coefficients_type(model)
 \method{model_get_coefficients_type}{glmerMod}(model)
 
 \method{model_get_coefficients_type}{clogit}(model)
+
+\method{model_get_coefficients_type}{polr}(model)
 
 \method{model_get_coefficients_type}{multinom}(model)
 

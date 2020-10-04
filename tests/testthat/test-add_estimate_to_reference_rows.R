@@ -78,7 +78,11 @@ test_that("tidy_add_estimate_to_reference_rows() works for basic models", {
 test_that("test tidy_add_estimate_to_reference_rows() checks", {
   mod <- glm(response ~ stage + grade + trt, gtsummary::trial, family = binomial)
   # expect an error if no model attached
-  expect_error(mod %>% broom::tidy() %>% tidy_add_estimate_to_reference_rows())
+  expect_error(mod %>% broom::tidy() %>% tidy_add_estimate_to_reference_rows(exponentiate = TRUE))
+
+  # expect an error if no value for exponentiate
+  expect_error(mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows(exponentiate = NULL))
+  expect_error(mod %>% broom::tidy() %>% tidy_attach_model(mod) %>% tidy_add_estimate_to_reference_rows())
 })
 
 test_that("tidy_add_estimate_to_reference_rows() works with character variables", {

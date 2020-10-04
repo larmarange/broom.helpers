@@ -9,7 +9,6 @@
 #' coefficient estimates. It should be consistent with the original call to
 #' [broom::tidy()]
 #' @param model the corresponding model, if not attached to `x`
-#' @inheritParams tidy_plus_plus
 #' @export
 #' @family tidy_helpers
 #' @examples

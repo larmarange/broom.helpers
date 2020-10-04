@@ -25,35 +25,20 @@ and the corresponding coefficient labels, as attributes to \code{x} (respectivel
 named \code{coefficients_type} and \code{coefficients_label}).
 }
 \examples{
-df <- Titanic \%>\%
+ex1 <- lm(hp ~ mpg + factor(cyl), mtcars) \%>\%
+  tidy_and_attach() \%>\%
+  tidy_add_coefficients_type()
+attr(ex1, "coefficients_type")
+attr(ex1, "coefficients_label")
+
+ex2 <- Titanic \%>\%
   dplyr::as_tibble() \%>\%
-  dplyr::mutate(dplyr::across(where(is.character), factor))
-
-df \%>\%
-  glm(
-    Survived ~ Class + Age + Sex,
-    data = ., weights = .$n, family = binomial,
-    contrasts = list(Age = contr.sum, Class = "contr.SAS")
-  ) \%>\%
+  dplyr::mutate(Survived = factor(Survived, c("No", "Yes"))) \%>\%
+  glm(Survived ~ Class + Age * Sex, data = ., weights = .$n, family = binomial) \%>\%
   tidy_and_attach(exponentiate = TRUE) \%>\%
-  tidy_add_reference_rows() \%>\%
-  tidy_add_estimate_to_reference_rows()
-
-if (requireNamespace("gtsummary")) {
-  glm(
-    response ~ stage + grade * trt,
-    gtsummary::trial,
-    family = binomial,
-    contrasts = list(
-      stage = contr.treatment(4, base = 3),
-      grade = contr.treatment(3, base = 2),
-      trt = contr.treatment(2, base = 2)
-    )
-  ) \%>\%
-    tidy_and_attach() \%>\%
-    tidy_add_reference_rows() \%>\%
-    tidy_add_estimate_to_reference_rows()
-}
+  tidy_add_coefficients_type()
+attr(ex2, "coefficients_type")
+attr(ex2, "coefficients_label")
 }
 \seealso{
 Other tidy_helpers: 
