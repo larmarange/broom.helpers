@@ -4,14 +4,26 @@
 \alias{tidy_add_reference_rows}
 \title{Add references rows for categorical variables}
 \usage{
-tidy_add_reference_rows(x, model = tidy_get_model(x), quiet = FALSE)
+tidy_add_reference_rows(
+  x,
+  no_reference_row = NULL,
+  model = tidy_get_model(x),
+  quiet = FALSE,
+  strict = FALSE
+)
 }
 \arguments{
 \item{x}{a tidy tibble}
 
+\item{no_reference_row}{a vector indicating the name of variables
+for those no reference row should be added}
+
 \item{model}{the corresponding model, if not attached to \code{x}}
 
 \item{quiet}{logical argument whether broom.helpers should not return a message
+when requested output cannot be generated. Default is FALSE}
+
+\item{strict}{logical argument whether broom.helpers should return an error
 when requested output cannot be generated. Default is FALSE}
 }
 \description{

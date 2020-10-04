@@ -12,6 +12,7 @@ tidy_plus_plus(
   variable_labels = NULL,
   term_labels = NULL,
   add_reference_rows = TRUE,
+  no_reference_row = NULL,
   add_estimate_to_reference_rows = TRUE,
   add_header_rows = FALSE,
   show_single_row = NULL,
@@ -40,6 +41,9 @@ but a bad idea if there is no log or logit link; defaults to \code{FALSE}.}
 \item{term_labels}{a named list or a named vector of custom term labels}
 
 \item{add_reference_rows}{should reference rows be added?}
+
+\item{no_reference_row}{a vector indicating the name of variables
+for those no reference row should be added, when \code{add_reference_rows = TRUE}}
 
 \item{add_estimate_to_reference_rows}{should an estimate value be added to reference rows?}
 
