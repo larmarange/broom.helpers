@@ -27,7 +27,7 @@
 #' @export
 tidy_attach_model <- function(x, model, .attributes = NULL) {
   x <- .order_tidy_columns(x)
-  attr(x, "model") <- model
+  attr(x, "model") <- model_get_model(model)
   for (a in names(.attributes)) {
     if (!is.null(.attributes[[a]]))
       attr(x, a) <- .attributes[[a]]

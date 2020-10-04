@@ -1,5 +1,8 @@
 # broom.helpers (development version)
 
+* Added support for multiple imputation models from the {mice} 
+  package. The model passed must be the un-pooled models, and the 
+  pooling step included in `tidy_fun=`. 
 * New function `tidy_select_variables()` to keep/drop
   selected variables in the output (#45)
 * New functions `tidy_add_coefficients_type()` and 
