@@ -164,8 +164,7 @@ tidy_detach_model()
   add_header_rows <span class='op'>=</span> <span class='cn'>FALSE</span>,
   show_single_row <span class='op'>=</span> <span class='cn'>NULL</span>,
   intercept <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  keep <span class='op'>=</span> <span class='cn'>NULL</span>,
-  drop <span class='op'>=</span> <span class='cn'>NULL</span>,
+  keep <span class='op'>=</span> <span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span><span class='op'>(</span><span class='op'>)</span>,
   keep_model <span class='op'>=</span> <span class='cn'>FALSE</span>,
   quiet <span class='op'>=</span> <span class='cn'>FALSE</span>,
   strict <span class='op'>=</span> <span class='cn'>FALSE</span>,
@@ -230,11 +229,8 @@ variables that should be displayed on a single row, when
     </tr>
     <tr>
       <th>keep</th>
-      <td><p>variables to keep</p></td>
-    </tr>
-    <tr>
-      <th>drop</th>
-      <td><p>variables to drop</p></td>
+      <td><p>variables to keep. Use <code><a href='https://rdrr.io/r/base/Arithmetic.html'>-</a></code> to remove a variable.
+Default is <code><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything()</a></code></p></td>
     </tr>
     <tr>
       <th>keep_model</th>
