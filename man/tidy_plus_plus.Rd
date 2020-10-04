@@ -78,6 +78,7 @@ This function will apply sequentially:
 \item \code{\link[=tidy_add_header_rows]{tidy_add_header_rows()}}
 \item \code{\link[=tidy_remove_intercept]{tidy_remove_intercept()}}
 \item \code{\link[=tidy_select_variables]{tidy_select_variables()}}
+\item \code{\link[=tidy_add_coefficients_type]{tidy_add_coefficients_type()}}
 \item \code{\link[=tidy_detach_model]{tidy_detach_model()}}
 }
 }
@@ -127,6 +128,7 @@ if (requireNamespace("gtsummary")) {
 }
 \seealso{
 Other tidy_helpers: 
+\code{\link{tidy_add_coefficients_type}()},
 \code{\link{tidy_add_contrasts}()},
 \code{\link{tidy_add_estimate_to_reference_rows}()},
 \code{\link{tidy_add_header_rows}()},

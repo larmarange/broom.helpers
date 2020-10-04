@@ -26,6 +26,7 @@ glm(
 }
 \seealso{
 Other model_helpers: 
+\code{\link{model_get_coefficients_type}()},
 \code{\link{model_get_model_frame}()},
 \code{\link{model_get_model_matrix}()},
 \code{\link{model_get_xlevels}()},

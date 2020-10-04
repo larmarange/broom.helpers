@@ -48,6 +48,7 @@ df \%>\%
 }
 \seealso{
 Other model_helpers: 
+\code{\link{model_get_coefficients_type}()},
 \code{\link{model_get_contrasts}()},
 \code{\link{model_get_model_frame}()},
 \code{\link{model_get_model_matrix}()},

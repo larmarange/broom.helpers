@@ -11,6 +11,7 @@
 #' * [tidy_add_header_rows()]
 #' * [tidy_remove_intercept()]
 #' * [tidy_select_variables()]
+#' * [tidy_add_coefficients_type()]
 #' * [tidy_detach_model()]
 #'
 #' @param model a model to be attached/tidied
@@ -131,7 +132,8 @@ tidy_plus_plus <- function(
     drop = drop,
     quiet = quiet,
     strict = strict
-  )
+  ) %>%
+    tidy_add_coefficients_type()
   if (!keep_model) {
     res <- res %>% tidy_detach_model()
   }
