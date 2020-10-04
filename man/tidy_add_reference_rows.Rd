@@ -11,7 +11,7 @@ tidy_add_reference_rows(x, model = tidy_get_model(x), quiet = FALSE)
 
 \item{model}{the corresponding model, if not attached to \code{x}}
 
-\item{quiet}{logical argument whether broom.helpers should return an error
+\item{quiet}{logical argument whether broom.helpers should not return a message
 when requested output cannot be generated. Default is FALSE}
 }
 \description{
@@ -66,6 +66,7 @@ if (requireNamespace("gtsummary")) {
 }
 \seealso{
 Other tidy_helpers: 
+\code{\link{tidy_add_coefficients_type}()},
 \code{\link{tidy_add_contrasts}()},
 \code{\link{tidy_add_estimate_to_reference_rows}()},
 \code{\link{tidy_add_header_rows}()},
@@ -74,6 +75,7 @@ Other tidy_helpers:
 \code{\link{tidy_attach_model}()},
 \code{\link{tidy_identify_variables}()},
 \code{\link{tidy_plus_plus}()},
-\code{\link{tidy_remove_intercept}()}
+\code{\link{tidy_remove_intercept}()},
+\code{\link{tidy_select_variables}()}
 }
 \concept{tidy_helpers}

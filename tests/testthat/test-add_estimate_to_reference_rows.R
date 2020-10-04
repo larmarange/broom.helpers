@@ -10,7 +10,7 @@ test_that("tidy_add_estimate_to_reference_rows() works for basic models", {
 
   res <- mod %>%
     tidy_and_attach(exponentiate = TRUE) %>%
-    tidy_add_estimate_to_reference_rows(exponentiate = TRUE)
+    tidy_add_estimate_to_reference_rows()
   expect_equivalent(
     res$estimate[res$reference_row & !is.na(res$reference_row)],
     c(1, 1, 1)
@@ -30,7 +30,7 @@ test_that("tidy_add_estimate_to_reference_rows() works for basic models", {
 
   res <- mod %>%
     tidy_and_attach(exponentiate = TRUE) %>%
-    tidy_add_estimate_to_reference_rows(exponentiate = TRUE)
+    tidy_add_estimate_to_reference_rows()
   expect_equivalent(
     res$estimate[res$reference_row & !is.na(res$reference_row)],
     c(1, 1, 1)
@@ -59,7 +59,7 @@ test_that("tidy_add_estimate_to_reference_rows() works for basic models", {
 
   res2 <- mod %>%
     tidy_and_attach(exponentiate = TRUE) %>%
-    tidy_add_estimate_to_reference_rows(exponentiate = TRUE)
+    tidy_add_estimate_to_reference_rows()
   expect_equivalent(
     res2$estimate[res2$reference_row & res2$variable == "stage" & !is.na(res2$reference_row)],
     exp(sum(res$estimate[!res$reference_row & res$variable == "stage"], na.rm = TRUE) * -1)
@@ -260,3 +260,4 @@ test_that("tidy_add_estimate_to_reference_rows() works with lavaan::lavaan", {
   )
   expect_error(mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows(), NA)
 })
+
