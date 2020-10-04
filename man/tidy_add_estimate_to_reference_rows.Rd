@@ -6,7 +6,7 @@
 \usage{
 tidy_add_estimate_to_reference_rows(
   x,
-  exponentiate = FALSE,
+  exponentiate = attr(x, "exponentiate"),
   model = tidy_get_model(x),
   quiet = FALSE
 )
@@ -55,7 +55,7 @@ df \%>\%
   ) \%>\%
   tidy_and_attach(exponentiate = TRUE) \%>\%
   tidy_add_reference_rows() \%>\%
-  tidy_add_estimate_to_reference_rows(exponentiate = TRUE)
+  tidy_add_estimate_to_reference_rows()
 
 if (requireNamespace("gtsummary")) {
   glm(

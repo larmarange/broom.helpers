@@ -11,3 +11,18 @@ test_that("Attach and Detach models works", {
     tb %>% tidy_attach_model(mod) %>% tidy_detach_model()
   )
 })
+
+test_that("tidy_and_attach() handles models without exponentiate arguments", {
+  df <- lavaan::HolzingerSwineford1939
+  df$grade <- factor(df$grade, ordered = TRUE)
+  HS.model <- "visual  =~ x1 + x2 + x3
+               textual =~ x4 + x5 + x6 + grade
+               speed   =~ x7 + x8 + x9 "
+  mod <- lavaan::lavaan(HS.model,
+                        data = df,
+                        auto.var = TRUE, auto.fix.first = TRUE,
+                        auto.cov.lv.x = TRUE
+  )
+  expect_error(mod %>% tidy_and_attach(exponentiate = TRUE))
+  expect_error(mod %>% tidy_and_attach(), NA)
+})

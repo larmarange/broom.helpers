@@ -12,6 +12,9 @@
 #' @param model a model to be attached/tidied
 #' @param x a tibble of model terms
 #' @param tidy_fun option to specify a custom tidier function
+#' @param exponentiate logical indicating whether or not to exponentiate the
+#' coefficient estimates. This is typical for logistic and multinomial regressions,
+#' but a bad idea if there is no log or logit link. Defaults to `FALSE`.
 #' @param ... other arguments passed to `tidy_fun()`
 #' @family tidy_helpers
 #' @examples
@@ -21,16 +24,30 @@
 #' tt
 #' tidy_get_model(tt)
 #' @export
-tidy_attach_model <- function(x, model) {
+tidy_attach_model <- function(x, model, exponentiate = NULL) {
   attr(x, "model") <- model
+  if (!is.null(exponentiate))
+    attr(x, "exponentiate") <- exponentiate
   x
 }
 
 #' @rdname tidy_attach_model
 #' @export
-tidy_and_attach <- function(model, tidy_fun = broom::tidy, ...) {
-  tidy_fun(model, ...) %>%
-    tidy_attach_model(model)
+tidy_and_attach <- function(model, tidy_fun = broom::tidy, exponentiate = FALSE, ...) {
+  # test if exponentiate can be passed to tidy_fun
+  tryCatch(
+    tidy_fun(model, exponentiate = exponentiate, ...) %>%
+      tidy_attach_model(model, exponentiate),
+    error = function(e) {
+      if (exponentiate)
+        stop("`exponentiate = TRUE` is not valid for this type of model.")
+      tidy_fun(model, ...) %>%
+        tidy_attach_model(model, exponentiate = FALSE)
+    }
+  )
+
+
+
 }
 
 #' @rdname tidy_attach_model

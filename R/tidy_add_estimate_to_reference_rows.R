@@ -39,7 +39,7 @@
 #'   ) %>%
 #'   tidy_and_attach(exponentiate = TRUE) %>%
 #'   tidy_add_reference_rows() %>%
-#'   tidy_add_estimate_to_reference_rows(exponentiate = TRUE)
+#'   tidy_add_estimate_to_reference_rows()
 #'
 #' if (requireNamespace("gtsummary")) {
 #'   glm(
@@ -56,8 +56,14 @@
 #'     tidy_add_reference_rows() %>%
 #'     tidy_add_estimate_to_reference_rows()
 #' }
-tidy_add_estimate_to_reference_rows <- function(x, exponentiate = FALSE, model = tidy_get_model(x),
-                                                quiet = FALSE) {
+tidy_add_estimate_to_reference_rows <- function(
+  x, exponentiate = attr(x, "exponentiate"),
+  model = tidy_get_model(x),
+  quiet = FALSE
+) {
+  if (is.null(exponentiate) | !is.logical(exponentiate))
+    stop("'exponentiate' is not provided. You need to pass it explicitely.")
+
   if (is.null(model)) {
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
   }
