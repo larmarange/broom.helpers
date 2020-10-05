@@ -174,7 +174,10 @@ tidy_add_header_rows <- function(x,
         ) %>%
         dplyr::filter(.data$var_nrow >= 2 | .data$var_test > 0) %>%
         dplyr::select(-.data$var_nrow, -.data$var_test) %>%
-        dplyr::mutate(header_row = TRUE)
+        dplyr::mutate(
+          header_row = TRUE,
+          label = .data$var_label
+        )
     }
   } else {
     header_rows <- x %>%

@@ -15,6 +15,8 @@
 * Bug fix for non standard variable names containing
   a character that would have a special meaning in
   a regular expression (#44)
+* Bug fix in `tidy_add_header_rows()` for `nnet::multinom` models:
+  label for header rows was missing (#50)
 
 # broom.helpers 1.0.0
 

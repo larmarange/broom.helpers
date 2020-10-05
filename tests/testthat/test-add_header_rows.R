@@ -176,6 +176,16 @@ test_that("tidy_add_header_rows() works with nnet::multinom", {
       FALSE
     )
   )
+  expect_equivalent(
+    res$label,
+    c(
+      "(Intercept)", "T Stage", "T1", "T2", "T3", "T4",
+      "Marker Level (ng/mL)", "Age", "Chemotherapy Treatment",
+      "Drug A", "Drug B", "(Intercept)", "T Stage", "T1", "T2",
+      "T3", "T4", "Marker Level (ng/mL)", "Age",
+      "Chemotherapy Treatment", "Drug A", "Drug B"
+    )
+  )
   res <- mod %>%
     tidy_and_attach() %>%
     tidy_add_reference_rows() %>%
@@ -185,6 +195,15 @@ test_that("tidy_add_header_rows() works with nnet::multinom", {
     c(
       NA, TRUE, FALSE, FALSE, FALSE, FALSE, NA, NA, NA, NA, TRUE,
       FALSE, FALSE, FALSE, FALSE, NA, NA, NA
+    )
+  )
+  expect_equivalent(
+    res$label,
+    c(
+      "(Intercept)", "T Stage", "T1", "T2", "T3", "T4",
+      "Marker Level (ng/mL)", "Age", "Chemotherapy Treatment",
+      "(Intercept)", "T Stage", "T1", "T2", "T3", "T4",
+      "Marker Level (ng/mL)", "Age", "Chemotherapy Treatment"
     )
   )
 })
