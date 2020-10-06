@@ -70,3 +70,34 @@ test_that("tidy_plus_plus() with mice objects", {
     NA
   )
 })
+
+
+test_that("tidy_plus_plus() with tidyselect", {
+  # build regression model
+  mod <- lm(age ~ trt + marker + grade, gtsummary::trial)
+
+  expect_error(
+    tidy_plus_plus(
+      mod,
+      add_header_rows = TRUE,
+      show_single_row = trt,
+      no_reference_row = grade
+    ),
+    NA
+  )
+
+  expect_equal(
+    tidy_plus_plus(
+      mod,
+      add_header_rows = TRUE,
+      show_single_row = "trt",
+      no_reference_row = "grade"
+    ),
+    tidy_plus_plus(
+      mod,
+      add_header_rows = TRUE,
+      show_single_row = trt,
+      no_reference_row = grade
+    )
+  )
+})

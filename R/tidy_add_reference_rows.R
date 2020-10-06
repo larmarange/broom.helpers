@@ -19,7 +19,8 @@
 #' rather than before.
 #' @param x a tidy tibble
 #' @param no_reference_row a vector indicating the name of variables
-#' for those no reference row should be added
+#' for those no reference row should be added. Accepts tidyselect notation.
+#' Default is `NULL`
 #' @param model the corresponding model, if not attached to `x`
 #' @inheritParams tidy_plus_plus
 #' @export
@@ -55,7 +56,7 @@
 tidy_add_reference_rows <- function(
   x, no_reference_row = NULL,
   model = tidy_get_model(x),
-  quiet = FALSE, strict = FALSE
+  quiet = FALSE
 ) {
   if (is.null(model)) {
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
@@ -73,8 +74,6 @@ tidy_add_reference_rows <- function(
 
   .attributes <- .save_attributes(x)
 
-
-
   if ("label" %in% names(x)) {
     if (!quiet)
       usethis::ui_info(paste0(
@@ -87,22 +86,8 @@ tidy_add_reference_rows <- function(
     x <- x %>% tidy_add_contrasts(model = model)
   }
 
-  # check if all elements of no_reference_row are in x
-  # show a message otherwise
-  not_found <- setdiff(no_reference_row, stats::na.omit(unique(x$variable)))
-  if (length(not_found) > 0 && !quiet) {
-    usethis::ui_oops(paste0(
-      usethis::ui_code(not_found),
-      " variables listed in ",
-      usethis::ui_code("no_reference_row"),
-      " have not been found in ",
-      usethis::ui_code("x"),
-      "."
-    ))
-  }
-  if (length(not_found) > 0 && strict) {
-    stop("Incorrect call with `no_reference_row`. Quitting execution.", call. = FALSE)
-  }
+  # obtain character vector of selected variables
+  no_reference_row <- .tidy_tidyselect(x, {{ no_reference_row }})
 
   terms_levels <- model_list_terms_levels(model)
 

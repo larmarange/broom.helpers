@@ -95,15 +95,8 @@ test_that("test tidy_add_reference_rows() checks", {
   )
 
   # message or error if non existing variable in no_reference_row
-  expect_message(
-    mod %>% tidy_and_attach() %>% tidy_add_reference_rows(no_reference_row = "g")
-  )
-  expect_message(
-    mod %>% tidy_and_attach() %>% tidy_add_reference_rows(no_reference_row = "g", quiet = TRUE),
-    NA
-  )
   expect_error(
-    mod %>% tidy_and_attach() %>% tidy_add_reference_rows(no_reference_row = "g", strict = TRUE)
+    mod %>% tidy_and_attach() %>% tidy_add_reference_rows(no_reference_row = "g")
   )
 })
 

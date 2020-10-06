@@ -38,7 +38,7 @@ tidy_select_variables <- function(
   }
   .attributes <- .save_attributes(x)
 
-  # obtain character vector fo selected variables
+  # obtain character vector of selected variables
   keep <- .tidy_tidyselect(x, {{ keep }})
 
   x %>%
@@ -52,6 +52,7 @@ tidy_select_variables <- function(
 
 .tidy_tidyselect <- function(x, keep) {
   keep <- rlang::enquo(keep)
+
   # keeping variables and class
   df_vars <-
     x %>%
@@ -81,7 +82,8 @@ tidy_select_variables <- function(
   # determine if selecting input begins with `var()`
   select_input_starts_var <-
     !rlang::quo_is_symbol(keep) && # if not a symbol (ie name)
-    identical(eval(as.list(rlang::quo_get_expr(keep))[[1]]), dplyr::vars)
+    identical(eval(as.list(rlang::quo_get_expr(keep)) %>% purrr::pluck(1)),
+              dplyr::vars)
 
   # performing selecting
   if (select_input_starts_var) {

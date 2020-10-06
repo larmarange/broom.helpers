@@ -16,7 +16,8 @@ tidy_add_header_rows(
 \item{x}{a tidy tibble}
 
 \item{show_single_row}{a vector indicating the names of binary
-variables that should be displayed on a single row}
+variables that should be displayed on a single row.
+Accepts tidyselect notation. Default is \code{NULL}}
 
 \item{model}{the corresponding model, if not attached to \code{x}}
 
