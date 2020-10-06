@@ -20,7 +20,8 @@
 #' [tidy_add_term_labels()] will be automatically applied.
 #' @param x a tidy tibble
 #' @param show_single_row a vector indicating the names of binary
-#' variables that should be displayed on a single row
+#' variables that should be displayed on a single row.
+#' Accepts tidyselect notation. Default is `NULL`
 #' @param model the corresponding model, if not attached to `x`
 #' @inheritParams tidy_plus_plus
 #' @export
@@ -80,7 +81,8 @@ tidy_add_header_rows <- function(x,
   # management of show_single_row --------------
   # if reference_rows have been defined, removal of reference row
   variables_to_simplify <- NULL
-  show_single_row <- stats::na.omit(unique(show_single_row))
+  # obtain character vector of selected variables
+  show_single_row <- .tidy_tidyselect(x, {{ show_single_row }})
 
   has_reference_row <- "reference_row" %in% names(x)
   if (!has_reference_row)

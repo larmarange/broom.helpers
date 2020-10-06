@@ -113,8 +113,8 @@ tidy_plus_plus <- function(
     tidy_add_contrasts()
   if (add_reference_rows) {
     res <- res %>% tidy_add_reference_rows(
-      no_reference_row = no_reference_row,
-      quiet = quiet, strict = strict
+      no_reference_row = {{ no_reference_row }},
+      quiet = quiet
     )
   }
   if (add_reference_rows & add_estimate_to_reference_rows) {
@@ -126,7 +126,7 @@ tidy_plus_plus <- function(
     tidy_add_term_labels(labels = term_labels, quiet = quiet)
   if (add_header_rows) {
     res <- res %>%
-      tidy_add_header_rows(show_single_row = show_single_row,
+      tidy_add_header_rows(show_single_row = {{ show_single_row }},
                            strict = strict, quiet = quiet)
   }
   if (!intercept) {

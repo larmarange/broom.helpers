@@ -8,22 +8,19 @@ tidy_add_reference_rows(
   x,
   no_reference_row = NULL,
   model = tidy_get_model(x),
-  quiet = FALSE,
-  strict = FALSE
+  quiet = FALSE
 )
 }
 \arguments{
 \item{x}{a tidy tibble}
 
 \item{no_reference_row}{a vector indicating the name of variables
-for those no reference row should be added}
+for those no reference row should be added. Accepts tidyselect notation.
+Default is \code{NULL}}
 
 \item{model}{the corresponding model, if not attached to \code{x}}
 
 \item{quiet}{logical argument whether broom.helpers should not return a message
-when requested output cannot be generated. Default is FALSE}
-
-\item{strict}{logical argument whether broom.helpers should return an error
 when requested output cannot be generated. Default is FALSE}
 }
 \description{
