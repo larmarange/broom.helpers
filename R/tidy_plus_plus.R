@@ -23,16 +23,16 @@
 #' @param variable_labels a named list or a named vector of custom variable labels
 #' @param term_labels a named list or a named vector of custom term labels
 #' @param add_reference_rows should reference rows be added?
-#' @param no_reference_row a vector indicating the name of variables
+#' @param no_reference_row variables (accepts tidyselect notation)
 #' for those no reference row should be added, when `add_reference_rows = TRUE`
 #' @param add_estimate_to_reference_rows should an estimate value be added to reference rows?
 #' @param add_header_rows should header rows be added?
-#' @param show_single_row a vector indicating the names of binary
-#' variables that should be displayed on a single row, when
+#' @param show_single_row variables that should be displayed
+#' on a single row (accepts tidyselect notation), when
 #' `add_header_rows` is `TRUE`
 #' @param intercept should the intercept(s) be included?
-#' @param keep variables to keep. Use `-` to remove a variable.
-#' Default is `everything()`
+#' @param keep variables to keep (accepts tidyselect notation).
+#' Use `-` to remove a variable. Default is `everything()`
 #' @param keep_model should the model be kept as an attribute of the final result?
 #' @param quiet logical argument whether broom.helpers should not return a message
 #' when requested output cannot be generated. Default is FALSE

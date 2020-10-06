@@ -41,21 +41,21 @@ but a bad idea if there is no log or logit link; defaults to \code{FALSE}.}
 
 \item{add_reference_rows}{should reference rows be added?}
 
-\item{no_reference_row}{a vector indicating the name of variables
+\item{no_reference_row}{variables (accepts tidyselect notation)
 for those no reference row should be added, when \code{add_reference_rows = TRUE}}
 
 \item{add_estimate_to_reference_rows}{should an estimate value be added to reference rows?}
 
 \item{add_header_rows}{should header rows be added?}
 
-\item{show_single_row}{a vector indicating the names of binary
-variables that should be displayed on a single row, when
+\item{show_single_row}{variables that should be displayed
+on a single row (accepts tidyselect notation), when
 \code{add_header_rows} is \code{TRUE}}
 
 \item{intercept}{should the intercept(s) be included?}
 
-\item{keep}{variables to keep. Use \code{-} to remove a variable.
-Default is \code{everything()}}
+\item{keep}{variables to keep (accepts tidyselect notation).
+Use \code{-} to remove a variable. Default is \code{everything()}}
 
 \item{keep_model}{should the model be kept as an attribute of the final result?}
 
