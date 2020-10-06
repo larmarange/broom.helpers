@@ -131,8 +131,7 @@ or a sum contrast (<code><a href='https://rdrr.io/r/stats/contrast.html'>stats::
   <span class='va'>x</span>,
   no_reference_row <span class='op'>=</span> <span class='cn'>NULL</span>,
   model <span class='op'>=</span> <span class='fu'><a href='tidy_attach_model.html'>tidy_get_model</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>,
-  quiet <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  strict <span class='op'>=</span> <span class='cn'>FALSE</span>
+  quiet <span class='op'>=</span> <span class='cn'>FALSE</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -145,7 +144,8 @@ or a sum contrast (<code><a href='https://rdrr.io/r/stats/contrast.html'>stats::
     <tr>
       <th>no_reference_row</th>
       <td><p>a vector indicating the name of variables
-for those no reference row should be added</p></td>
+for those no reference row should be added. Accepts tidyselect notation.
+Default is <code>NULL</code></p></td>
     </tr>
     <tr>
       <th>model</th>
@@ -154,11 +154,6 @@ for those no reference row should be added</p></td>
     <tr>
       <th>quiet</th>
       <td><p>logical argument whether broom.helpers should not return a message
-when requested output cannot be generated. Default is FALSE</p></td>
-    </tr>
-    <tr>
-      <th>strict</th>
-      <td><p>logical argument whether broom.helpers should return an error
 when requested output cannot be generated. Default is FALSE</p></td>
     </tr>
     </table>
