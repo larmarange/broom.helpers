@@ -31,7 +31,7 @@
 #' on a single row (accepts tidyselect notation), when
 #' `add_header_rows` is `TRUE`
 #' @param intercept should the intercept(s) be included?
-#' @param keep variables to keep (accepts tidyselect notation).
+#' @param include variables to include (accepts tidyselect notation).
 #' Use `-` to remove a variable. Default is `everything()`
 #' @param keep_model should the model be kept as an attribute of the final result?
 #' @param quiet logical argument whether broom.helpers should not return a message
@@ -97,7 +97,7 @@ tidy_plus_plus <- function(
                            add_header_rows = FALSE,
                            show_single_row = NULL,
                            intercept = FALSE,
-                           keep = everything(),
+                           include = everything(),
                            keep_model = FALSE,
                            quiet = FALSE,
                            strict = FALSE,
@@ -133,7 +133,7 @@ tidy_plus_plus <- function(
     res <- res %>% tidy_remove_intercept()
   }
   res <- res %>% tidy_select_variables(
-    keep = {{ keep }},
+    include = {{ include }},
   ) %>%
     tidy_add_coefficients_type()
   if (!keep_model) {

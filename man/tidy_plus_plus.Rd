@@ -17,7 +17,7 @@ tidy_plus_plus(
   add_header_rows = FALSE,
   show_single_row = NULL,
   intercept = FALSE,
-  keep = everything(),
+  include = everything(),
   keep_model = FALSE,
   quiet = FALSE,
   strict = FALSE,
@@ -54,7 +54,7 @@ on a single row (accepts tidyselect notation), when
 
 \item{intercept}{should the intercept(s) be included?}
 
-\item{keep}{variables to keep (accepts tidyselect notation).
+\item{include}{variables to include (accepts tidyselect notation).
 Use \code{-} to remove a variable. Default is \code{everything()}}
 
 \item{keep_model}{should the model be kept as an attribute of the final result?}

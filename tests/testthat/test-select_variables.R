@@ -8,13 +8,13 @@ test_that("tidy_select_variables() works for basic models", {
   res2 <- res %>% tidy_select_variables()
   expect_equivalent(res, res2)
 
-  # keep
-  res2 <- res %>% tidy_select_variables(keep = "stage")
+  # include
+  res2 <- res %>% tidy_select_variables(include = "stage")
   expect_equivalent(
     res2$variable,
     c(NA, "stage", "stage", "stage")
   )
-  res2 <- res %>% tidy_select_variables(keep = c("grade", "trt"))
+  res2 <- res %>% tidy_select_variables(include = c("grade", "trt"))
   expect_equivalent(
     res2$variable,
     c(NA, "grade", "grade", "trt")
@@ -22,33 +22,33 @@ test_that("tidy_select_variables() works for basic models", {
 
   # select and de-select
   expect_equivalent(
-    res %>% tidy_select_variables(keep = stage),
-    res %>% tidy_select_variables(keep = -c(grade, trt))
+    res %>% tidy_select_variables(include = stage),
+    res %>% tidy_select_variables(include = -c(grade, trt))
   )
 
   # tidyselect fns
   expect_equivalent(
-    res %>% tidy_select_variables(keep = contains("tage")),
-    res %>% tidy_select_variables(keep = stage)
+    res %>% tidy_select_variables(include = contains("tage")),
+    res %>% tidy_select_variables(include = stage)
   )
 
   # testing vars() selector
   expect_equivalent(
-    res %>% tidy_select_variables(keep = vars(grade, trt)),
-    res %>% tidy_select_variables(keep = c(grade, trt))
+    res %>% tidy_select_variables(include = vars(grade, trt)),
+    res %>% tidy_select_variables(include = c(grade, trt))
   )
 
   # no error when none selected
   expect_error(
-    res %>% tidy_select_variables(keep = starts_with("zzzzzzz")),
+    res %>% tidy_select_variables(include = starts_with("zzzzzzz")),
     NA
   )
   expect_error(
-    res %>% tidy_select_variables(keep = -everything()),
+    res %>% tidy_select_variables(include = -everything()),
     NA
   )
   expect_error(
-    res %>% tidy_select_variables(keep = where(is.character)),
+    res %>% tidy_select_variables(include = where(is.character)),
     NA
   )
 })
