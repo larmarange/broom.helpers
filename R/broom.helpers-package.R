@@ -101,8 +101,8 @@ utils::globalVariables("where")
 }
 
 # tidyselect helper to be used in tidy_*() functions
-.tidy_tidyselect <- function(x, keep) {
-  keep <- rlang::enquo(keep)
+.tidy_tidyselect <- function(x, include) {
+  include <- rlang::enquo(include)
 
   # keeping variables and class
   df_vars <-
@@ -132,17 +132,17 @@ utils::globalVariables("where")
 
   # determine if selecting input begins with `var()`
   select_input_starts_var <-
-    !rlang::quo_is_symbol(keep) && # if not a symbol (ie name)
-    identical(eval(as.list(rlang::quo_get_expr(keep)) %>% purrr::pluck(1)),
+    !rlang::quo_is_symbol(include) && # if not a symbol (ie name)
+    identical(eval(as.list(rlang::quo_get_expr(include)) %>% purrr::pluck(1)),
               dplyr::vars)
 
   # performing selecting
   if (select_input_starts_var) {
     # `vars()` evaluates to a list of quosures; unquoting them in `select()`
-    res <- names(dplyr::select(df_empty, !!!rlang::eval_tidy(keep)))
+    res <- names(dplyr::select(df_empty, !!!rlang::eval_tidy(include)))
   }
   else {
-    res <- names(dplyr::select(df_empty, !!keep))
+    res <- names(dplyr::select(df_empty, !!include))
   }
 
   res
