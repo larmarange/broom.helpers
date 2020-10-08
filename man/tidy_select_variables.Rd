@@ -4,13 +4,13 @@
 \alias{tidy_select_variables}
 \title{Select variables to keep/drop}
 \usage{
-tidy_select_variables(x, keep = everything(), model = tidy_get_model(x))
+tidy_select_variables(x, include = everything(), model = tidy_get_model(x))
 }
 \arguments{
 \item{x}{a tidy tibble}
 
-\item{keep}{variables to keep. Use \code{-} to remove a variable.
-Default is \code{everything()}}
+\item{include}{variables to include. Accepts tidyselect syntax.
+Use \code{-} to remove a variable. Default is \code{everything()}}
 
 \item{model}{the corresponding model, if not attached to \code{x}}
 }
@@ -32,9 +32,9 @@ res <- Titanic \%>\%
 
 res
 res \%>\% tidy_select_variables()
-res \%>\% tidy_select_variables(keep = "Class")
-res \%>\% tidy_select_variables(keep = -c("Age", "Sex"))
-res \%>\% tidy_select_variables(keep = starts_with("A"))
+res \%>\% tidy_select_variables(include = "Class")
+res \%>\% tidy_select_variables(include = -c("Age", "Sex"))
+res \%>\% tidy_select_variables(include = starts_with("A"))
 }
 \seealso{
 Other tidy_helpers: 
