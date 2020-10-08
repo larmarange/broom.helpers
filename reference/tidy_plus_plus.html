@@ -164,7 +164,7 @@ tidy_detach_model()
   add_header_rows <span class='op'>=</span> <span class='cn'>FALSE</span>,
   show_single_row <span class='op'>=</span> <span class='cn'>NULL</span>,
   intercept <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  keep <span class='op'>=</span> <span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span><span class='op'>(</span><span class='op'>)</span>,
+  include <span class='op'>=</span> <span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span><span class='op'>(</span><span class='op'>)</span>,
   keep_model <span class='op'>=</span> <span class='cn'>FALSE</span>,
   quiet <span class='op'>=</span> <span class='cn'>FALSE</span>,
   strict <span class='op'>=</span> <span class='cn'>FALSE</span>,
@@ -228,8 +228,8 @@ on a single row (accepts tidyselect notation), when
       <td><p>should the intercept(s) be included?</p></td>
     </tr>
     <tr>
-      <th>keep</th>
-      <td><p>variables to keep (accepts tidyselect notation).
+      <th>include</th>
+      <td><p>variables to include (accepts tidyselect notation).
 Use <code><a href='https://rdrr.io/r/base/Arithmetic.html'>-</a></code> to remove a variable. Default is <code><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything()</a></code></p></td>
     </tr>
     <tr>
