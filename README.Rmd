@@ -49,7 +49,9 @@ devtools::install_github("larmarange/broom.helpers")
 ```{r}
 mod1 <- lm(Sepal.Length ~ Sepal.Width + Species, data = iris)
 library(broom.helpers)
-mod1 %>% tidy_plus_plus()
+ex1 <- mod1 %>% tidy_plus_plus()
+ex1
+dplyr::glimpse(ex1)
 
 mod2 <- glm(
   response ~ poly(age, 3) + stage + grade * trt,
@@ -60,19 +62,21 @@ mod2 <- glm(
     grade = contr.sum
   )
 )
-mod2 %>% 
+ex2 <- mod2 %>% 
   tidy_plus_plus(
     exponentiate = TRUE,
     variable_labels = c(age = "Age (in years)"),
     add_header_rows = TRUE,
     show_single_row = "trt"
   )
+ex2
+dplyr::glimpse(ex2)
 ```
 
 ### fine control
 
 ```{r}
-mod1 %>%
+ex3 <- mod1 %>%
   # perform initial tidying of model
   tidy_and_attach() %>%
   # add reference row
@@ -80,9 +84,11 @@ mod1 %>%
   # add term labels
   tidy_add_term_labels() %>%
   # remove intercept
-  tidy_remove_intercept()
+  tidy_remove_intercept
+ex3
+dplyr::glimpse(ex3)
 
-mod2 %>%
+ex4 <- mod2 %>%
   # perform initial tidying of model
   tidy_and_attach(exponentiate = TRUE) %>%
   # add variable labels, including a custom value for age
@@ -93,4 +99,6 @@ mod2 %>%
   tidy_add_estimate_to_reference_rows(exponentiate = TRUE) %>%
   # add header rows for categorical variables
   tidy_add_header_rows()
+ex4
+dplyr::glimpse(ex4)
 ```
