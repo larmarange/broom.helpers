@@ -104,6 +104,9 @@ utils::globalVariables("where")
 .tidy_tidyselect <- function(x, include) {
   include <- rlang::enquo(include)
 
+  # scoping the variable types
+  .scope_variable_type(x)
+
   # keeping variables and class
   df_vars <-
     x %>%
@@ -170,3 +173,26 @@ where <- function(fn) {
   }
 }
 
+# set new environment for new tidyselect funs
+env_variable_type <- rlang::new_environment()
+
+# scoping the variable types
+.scope_variable_type <- function(x) {
+  # removing everything from selecting environment
+  rm(list = ls(envir = env_variable_type), envir = env_variable_type)
+
+  # if variable and var_type not in tibble, exit scoping function
+  if (!all(c("variable", "var_type") %in% names(x)))
+    return(invisible(NULL))
+
+  # saving list of variable types to selecting environment
+  env_variable_type$lst_variable_types <-
+    x %>%
+    dplyr::select(variable, var_type) %>%
+    dplyr::filter(stats::complete.cases(.)) %>%
+    dplyr::distinct() %>%
+    tidyr::spread(key = "variable", value = "var_type") %>%
+    as.list()
+
+  return(invisible(NULL))
+}
