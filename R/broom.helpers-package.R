@@ -7,7 +7,7 @@ NULL
 
 # because `where` is not exported by tidyselect
 # cf. https://github.com/r-lib/tidyselect/issues/201
-utils::globalVariables("where")
+utils::globalVariables(c(".", "where"))
 
 # Escapes any characters that would have special
 # meaning in a regular expression
@@ -186,13 +186,14 @@ env_variable_type <- rlang::new_environment()
     return(invisible(NULL))
 
   # saving list of variable types to selecting environment
-  env_variable_type$lst_variable_types <-
+  df_var_types <-
     x %>%
-    dplyr::select(variable, var_type) %>%
+    dplyr::select(.data$variable, .data$var_type) %>%
     dplyr::filter(stats::complete.cases(.)) %>%
-    dplyr::distinct() %>%
-    tidyr::spread(key = "variable", value = "var_type") %>%
-    as.list()
+    dplyr::distinct()
+
+  env_variable_type$lst_variable_types <-
+    df_var_types$var_type %>% purrr::set_names(df_var_types$variable)
 
   return(invisible(NULL))
 }
