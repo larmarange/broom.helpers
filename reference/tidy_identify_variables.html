@@ -158,11 +158,17 @@ when requested output cannot be generated. Default is FALSE</p></td>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>It will also identify interaction terms and intercept(s).</p>
-<p><code>var_type</code> could be <code>"continuous"</code>, <code>"dichotomous"</code>, <code>"categorical"</code>,
-<code>"intercept"</code> or <code>"interaction"</code>. Will be equal to <code>"unknown"</code> in the rare
-cases where <code>tidy_identify_variables()</code> will fail to identify the list
-of variables.</p>
-<p>For categorical variables, <code>var_nlevels</code> corresponds to the number
+<p><code>var_type</code> could be:</p><ul>
+<li><p><code>"continuous"</code>,</p></li>
+<li><p><code>"dichotomous"</code> (categorical variable with 2 levels),</p></li>
+<li><p><code>"categorical"</code> (categorical variable with 3 levels or more),</p></li>
+<li><p><code>"intercept"</code></p></li>
+<li><p><code>"interaction"</code></p></li>
+<li><p><code>"unknown"</code> in the rare cases where <code>tidy_identify_variables()</code>
+will fail to identify the list of variables</p></li>
+</ul>
+
+<p>For dichotomous and categorical variables, <code>var_nlevels</code> corresponds to the number
 of original levels in the corresponding variables.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
