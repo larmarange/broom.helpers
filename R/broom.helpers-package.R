@@ -108,6 +108,7 @@ utils::globalVariables("where")
   df_vars <-
     x %>%
     dplyr::filter(!.data$var_type %in% "intercept") %>%
+    dplyr::filter(!is.na(variable)) %>%
     dplyr::select(.data$variable, .data$var_class) %>%
     dplyr::distinct()
 

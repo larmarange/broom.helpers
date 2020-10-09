@@ -65,8 +65,9 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x),
     if (!quiet)
       usethis::ui_oops(paste0(
         "Unable to identify the list of variables.\n\n",
-        "This is usually due to an error calling {usethis::ui_code('stats::model.frame(x)')}.\n",
-        "It could be the case if that type of model does not implement this method.\n",
+        "This is usually due to an error calling {usethis::ui_code('stats::model.frame(x)')}",
+        "or {usethis::ui_code('stats::model.matrix(x)')}.\n",
+        "It could be the case if that type of model does not implement these methods.\n",
         "Rarely, this error may occur if the model object was created within\na ",
         "functional programming framework (e.g. using {usethis::ui_code('lappy()')}, ",
         "{usethis::ui_code('purrr::map()')}, etc.)."

@@ -38,6 +38,19 @@ model_identify_variables <- function(model) {
 #' @export
 model_identify_variables.default <- function(model) {
   model_matrix <- model_get_model_matrix(model)
+
+  if (is.null(model_matrix)) {
+    # return an empty tibble
+    return(
+      dplyr::tibble(
+        variable = NA_character_,
+        var_class = NA_character_,
+        var_type = NA_character_
+      ) %>%
+        dplyr::filter(FALSE)
+    )
+  }
+
   assign <- attr(model_matrix, "assign")
   assign[assign == 0] <- NA
   model_terms <- stats::terms(model)
