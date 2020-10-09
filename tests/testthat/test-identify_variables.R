@@ -17,7 +17,7 @@ test_that("tidy_identify_variables() works for common models", {
   expect_equivalent(
     res$var_type,
     c(
-      "intercept", "continuous", "categorical", "categorical", "categorical",
+      "intercept", "continuous", "categorical", "categorical", "dichotomous",
       "continuous", "interaction", "interaction"
     )
   )
@@ -139,7 +139,7 @@ test_that("tidy_identify_variables() works with variables having non standard na
   )
   expect_equivalent(
     res$var_type,
-    c("categorical", "categorical", "categorical", "categorical")
+    c("dichotomous", "categorical", "categorical", "categorical")
   )
 })
 

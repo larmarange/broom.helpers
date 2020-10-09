@@ -250,7 +250,7 @@ tibble::tribble(
   ~Column, ~Function, ~Description,
   'variable', '`tidy_identify_variables()`', 'String of variable names from the model. For categorical variables and polynomial terms defined with `stats::poly()`, terms belonging to the variable are identified.',
   'var_class', '`tidy_identify_variables()`', "Class of the variable.",
-  'var_type', '`tidy_identify_variables()`', "One of 'intercept', 'continuous', 'categorical', or 'interaction'",
+  'var_type', '`tidy_identify_variables()`', "One of 'intercept', 'continuous', 'dichotomous', 'categorical', or 'interaction'",
   'var_nlevels', '`tidy_identify_variables()`', "Number of orginal levels for categorical variables",
   'contrasts', '`tidy_add_contrasts()`', "Type of contrasts used for categorical variables.<br /><em>Require 'variable' column. If needed, will automatically apply `tidy_identify_variables()`.</em>",
   'reference_row', '`tidy_add_reference_rows()`', "Logical indicating if a row is a reference row for categorical variables using a treatment or a sum contrast. Is equal to `NA` for variables who do not have a reference row.<br /><em>Require 'contrasts' column. If needed, will automatically apply `tidy_add_contrasts()`.<br />`tidy_add_reference_rows()` will not populate the label of the reference term. It is therefore better to apply `tidy_add_term_labels()` after `tidy_add_reference_rows()` rather than before.</em>",

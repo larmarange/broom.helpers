@@ -7,7 +7,7 @@
 #' * `term`: coefficients of the model
 #' * `variable`: the corresponding variable
 #' * `var_class`: class of the variable (cf. [stats::.MFclass()])
-#' * `var_type`: `"continuous"`, `"categorical"`, `"intercept"`
+#' * `var_type`: `"continuous"`, `"dichotomous"`, `"categorical"`, `"intercept"`
 #'   or `"interaction"`
 #' * `var_nlevels`: number of original levels for categorical variables
 #' @export
@@ -94,11 +94,17 @@ model_identify_variables.lavaan <- function(model) {
     dplyr::left_join(
       tibble::tibble(
         variable = model@Data@ov$name,
-        var_class = model@Data@ov$type
+        var_class = model@Data@ov$type,
+        var_nlevels = model@Data@ov$nlev
       ),
       by = "variable"
     ) %>%
     dplyr::mutate(
+      var_nlevels = dplyr::if_else(
+        .data$var_nlevels == 0,
+        NA_integer_,
+        .data$var_nlevels
+      ),
       var_class = dplyr::if_else(
         .data$var_class == "ordered",
         "factor",
@@ -113,11 +119,13 @@ model_identify_variables.lavaan <- function(model) {
 ## model_identify_variables() helpers --------------------------
 
 .compute_var_type <- function(x) {
+  cat_classes <- c("factor", "character", "logical")
   x %>%
     dplyr::mutate(
       var_type = dplyr::case_when(
         is.na(.data$variable) ~ "intercept",
-        .data$var_class %in% c("factor", "character", "logical") ~ "categorical",
+        .data$var_class %in% cat_classes & .data$var_nlevels <= 2 ~ "dichotomous",
+        .data$var_class %in% cat_classes ~ "categorical",
         !is.na(.data$var_class) ~ "continuous",
         is.na(.data$var_class) & stringr::str_detect(.data$variable, ":") ~ "interaction"
       )

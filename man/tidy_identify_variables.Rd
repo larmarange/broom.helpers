@@ -29,9 +29,9 @@ three additional columns: \code{variable}, \code{var_class}, \code{var_type} and
 \details{
 It will also identify interaction terms and intercept(s).
 
-\code{var_type} could be \code{"continuous"}, \code{"categorical"}, \code{"intercept"}
-or \code{"interaction"}. Will be equal to \code{"unknown"} in the rare cases
-where \code{tidy_identify_variables()} will fail to identify the list
+\code{var_type} could be \code{"continuous"}, \code{"dichotomous"}, \code{"categorical"},
+\code{"intercept"} or \code{"interaction"}. Will be equal to \code{"unknown"} in the rare
+cases where \code{tidy_identify_variables()} will fail to identify the list
 of variables.
 
 For categorical variables, \code{var_nlevels} corresponds to the number

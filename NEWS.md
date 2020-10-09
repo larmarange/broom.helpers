@@ -1,5 +1,8 @@
 # broom.helpers (development version)
 
+* Breaking change: column `var_type` returned by `tidy_identify_variables`
+  is now equal to `"dichotomous"` for categorical variables with only
+  2 levels
 * Added support for multiple imputation models from the {mice} 
   package. The model passed must be the un-pooled models, and the 
   pooling step included in `tidy_fun=` (#49 @ddsjoberg) 

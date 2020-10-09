@@ -5,9 +5,9 @@
 #'
 #' It will also identify interaction terms and intercept(s).
 #'
-#' `var_type` could be `"continuous"`, `"categorical"`, `"intercept"`
-#' or `"interaction"`. Will be equal to `"unknown"` in the rare cases
-#' where `tidy_identify_variables()` will fail to identify the list
+#' `var_type` could be `"continuous"`, `"dichotomous"`, `"categorical"`,
+#' `"intercept"` or `"interaction"`. Will be equal to `"unknown"` in the rare
+#' cases where `tidy_identify_variables()` will fail to identify the list
 #' of variables.
 #'
 #' For categorical variables, `var_nlevels` corresponds to the number

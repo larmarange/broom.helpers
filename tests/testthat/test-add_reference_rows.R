@@ -30,7 +30,7 @@ test_that("tidy_add_reference_rows() works as expected", {
   expect_equivalent(
     res$var_type,
     c("intercept", "categorical", "categorical", "categorical", "categorical",
-      "categorical", "categorical", "categorical", "categorical", "categorical",
+      "categorical", "categorical", "categorical", "dichotomous", "dichotomous",
       "interaction", "interaction")
   )
   expect_equivalent(
