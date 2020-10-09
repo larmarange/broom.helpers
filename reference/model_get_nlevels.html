@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get xlevels used in the model — model_get_nlevels.default • broom.helpers</title>
+<title>Get the number of levels for each factor used in xlevels — model_get_nlevels • broom.helpers</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Get xlevels used in the model — model_get_nlevels.default" />
-<meta property="og:description" content="Get xlevels used in the model" />
+<meta property="og:title" content="Get the number of levels for each factor used in xlevels — model_get_nlevels" />
+<meta property="og:description" content="Get the number of levels for each factor used in xlevels" />
 
 
 
@@ -114,28 +114,16 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get xlevels used in the model</h1>
-    <small class="dont-index">Source: <a href='https://github.com/larmarange/broom.helpers/blob/master/R/model_get_nlevels.R'><code>R/model_get_nlevels.R</code></a>, <a href='https://github.com/larmarange/broom.helpers/blob/master/R/model_get_xlevels.R'><code>R/model_get_xlevels.R</code></a></small>
-    <div class="hidden name"><code>model_get_xlevels.Rd</code></div>
+    <h1>Get the number of levels for each factor used in <code>xlevels</code></h1>
+    <small class="dont-index">Source: <a href='https://github.com/larmarange/broom.helpers/blob/master/R/model_get_nlevels.R'><code>R/model_get_nlevels.R</code></a></small>
+    <div class="hidden name"><code>model_get_nlevels.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get xlevels used in the model</p>
+    <p>Get the number of levels for each factor used in <code>xlevels</code></p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for default</span>
-<span class='fu'><a href='model_get_nlevels.html'>model_get_nlevels</a></span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
-
-<span class='fu'>model_get_xlevels</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
-
-<span class='co'># S3 method for default</span>
-<span class='fu'>model_get_xlevels</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
-
-<span class='co'># S3 method for lmerMod</span>
-<span class='fu'>model_get_xlevels</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
-
-<span class='co'># S3 method for glmerMod</span>
-<span class='fu'>model_get_xlevels</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>model_get_nlevels</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -154,7 +142,7 @@
 <code><a href='model_get_model_frame.html'>model_get_model_frame</a>()</code>,
 <code><a href='model_get_model_matrix.html'>model_get_model_matrix</a>()</code>,
 <code><a href='model_get_model.html'>model_get_model</a>()</code>,
-<code><a href='model_get_nlevels.html'>model_get_nlevels</a>()</code>,
+<code><a href='model_get_nlevels.default.html'>model_get_nlevels.default</a>()</code>,
 <code><a href='model_identify_variables.html'>model_identify_variables</a>()</code>,
 <code><a href='model_list_contrasts.html'>model_list_contrasts</a>()</code>,
 <code><a href='model_list_terms_levels.html'>model_list_terms_levels</a>()</code>,
@@ -162,10 +150,11 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>hp</span> <span class='op'>~</span> <span class='va'>mpg</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>cyl</span><span class='op'>)</span>, <span class='va'>mtcars</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>model_get_xlevels</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $`factor(cyl)`
-#&gt; [1] "4" "6" "8"
-#&gt; </div></pre>
+  <span class='fu'>model_get_nlevels</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 2</span><span>
+#&gt;   variable    var_nlevels
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>             </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> factor(cyl)           3</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

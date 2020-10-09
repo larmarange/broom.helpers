@@ -41,7 +41,7 @@
 
 <meta property="og:title" content="Identify the variable corresponding to each model coefficient — tidy_identify_variables" />
 <meta property="og:description" content="tidy_identify_variables() will add to the tidy tibble
-three additional columns: variable, var_class and var_type." />
+three additional columns: variable, var_class, var_type and var_nlevels." />
 
 
 
@@ -122,7 +122,7 @@ three additional columns: variable, var_class and var_type." />
 
     <div class="ref-description">
     <p><code>tidy_identify_variables()</code> will add to the tidy tibble
-three additional columns: <code>variable</code>, <code>var_class</code> and <code>var_type</code>.</p>
+three additional columns: <code>variable</code>, <code>var_class</code>, <code>var_type</code> and <code>var_nlevels</code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>tidy_identify_variables</span><span class='op'>(</span>
@@ -157,11 +157,13 @@ when requested output cannot be generated. Default is FALSE</p></td>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>It will also identify interaction terms and intercept(s).
-<code>var_type</code> could be <code>"continuous"</code>, <code>"categorical"</code>, <code>"intercept"</code>
-or <code>"interaction"</code>. Will be equal to <code>"unknown"</code> in the rare cases
-where <code>tidy_identify_variables()</code> will fail to identify the list
+    <p>It will also identify interaction terms and intercept(s).</p>
+<p><code>var_type</code> could be <code>"continuous"</code>, <code>"dichotomous"</code>, <code>"categorical"</code>,
+<code>"intercept"</code> or <code>"interaction"</code>. Will be equal to <code>"unknown"</code> in the rare
+cases where <code>tidy_identify_variables()</code> will fail to identify the list
 of variables.</p>
+<p>For categorical variables, <code>var_nlevels</code> corresponds to the number
+of original levels in the corresponding variables.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='model_identify_variables.html'>model_identify_variables()</a></code></p>
@@ -185,16 +187,17 @@ of variables.</p>
   <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span><span class='va'>Survived</span> <span class='op'>~</span> <span class='va'>Class</span> <span class='op'>+</span> <span class='va'>Age</span> <span class='op'>*</span> <span class='va'>Sex</span>, data <span class='op'>=</span> <span class='va'>.</span>, weights <span class='op'>=</span> <span class='va'>.</span><span class='op'>$</span><span class='va'>n</span>, family <span class='op'>=</span> <span class='va'>binomial</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='tidy_attach_model.html'>tidy_and_attach</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>tidy_identify_variables</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 7 x 8</span><span>
-#&gt;   term        variable var_class var_type  estimate std.error statistic  p.value
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> (Intercept) </span><span style='color: #BB0000;'>NA</span><span>       </span><span style='color: #BB0000;'>NA</span><span>        intercept    2.18      0.176    12.4   3.08</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-35</span><span>
-#&gt; </span><span style='color: #555555;'>2</span><span> Class2nd    Class    character categori…   -</span><span style='color: #BB0000;'>1.03</span><span>      0.200    -</span><span style='color: #BB0000;'>5.17</span><span>  2.29</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 7</span><span>
-#&gt; </span><span style='color: #555555;'>3</span><span> Class3rd    Class    character categori…   -</span><span style='color: #BB0000;'>1.81</span><span>      0.176   -</span><span style='color: #BB0000;'>10.3</span><span>   7.79</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-25</span><span>
-#&gt; </span><span style='color: #555555;'>4</span><span> ClassCrew   Class    character categori…   -</span><span style='color: #BB0000;'>0.803</span><span>     0.160    -</span><span style='color: #BB0000;'>5.03</span><span>  4.99</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 7</span><span>
-#&gt; </span><span style='color: #555555;'>5</span><span> AgeChild    Age      character categori…   -</span><span style='color: #BB0000;'>0.110</span><span>     0.335    -</span><span style='color: #BB0000;'>0.328</span><span> 7.43</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 1</span><span>
-#&gt; </span><span style='color: #555555;'>6</span><span> SexMale     Sex      character categori…   -</span><span style='color: #BB0000;'>2.62</span><span>      0.151   -</span><span style='color: #BB0000;'>17.3</span><span>   2.80</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-67</span><span>
-#&gt; </span><span style='color: #555555;'>7</span><span> AgeChild:S… Age:Sex  </span><span style='color: #BB0000;'>NA</span><span>        interact…    1.90      0.433     4.39  1.12</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 5</span><span></div><div class='input'>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 7 x 9</span><span>
+#&gt;   term  variable var_class var_type var_nlevels estimate std.error statistic
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> (Int… </span><span style='color: #BB0000;'>NA</span><span>       </span><span style='color: #BB0000;'>NA</span><span>        interce…          </span><span style='color: #BB0000;'>NA</span><span>    2.18      0.176    12.4  
+#&gt; </span><span style='color: #555555;'>2</span><span> Clas… Class    character categor…           4   -</span><span style='color: #BB0000;'>1.03</span><span>      0.200    -</span><span style='color: #BB0000;'>5.17</span><span> 
+#&gt; </span><span style='color: #555555;'>3</span><span> Clas… Class    character categor…           4   -</span><span style='color: #BB0000;'>1.81</span><span>      0.176   -</span><span style='color: #BB0000;'>10.3</span><span>  
+#&gt; </span><span style='color: #555555;'>4</span><span> Clas… Class    character categor…           4   -</span><span style='color: #BB0000;'>0.803</span><span>     0.160    -</span><span style='color: #BB0000;'>5.03</span><span> 
+#&gt; </span><span style='color: #555555;'>5</span><span> AgeC… Age      character dichoto…           2   -</span><span style='color: #BB0000;'>0.110</span><span>     0.335    -</span><span style='color: #BB0000;'>0.328</span><span>
+#&gt; </span><span style='color: #555555;'>6</span><span> SexM… Sex      character dichoto…           2   -</span><span style='color: #BB0000;'>2.62</span><span>      0.151   -</span><span style='color: #BB0000;'>17.3</span><span>  
+#&gt; </span><span style='color: #555555;'>7</span><span> AgeC… Age:Sex  </span><span style='color: #BB0000;'>NA</span><span>        interac…          </span><span style='color: #BB0000;'>NA</span><span>    1.90      0.433     4.39 
+#&gt; </span><span style='color: #555555;'># … with 1 more variable: p.value </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>
 <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span>
   <span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/stats/poly.html'>poly</a></span><span class='op'>(</span><span class='va'>Sepal.Width</span>, <span class='fl'>2</span><span class='op'>)</span> <span class='op'>+</span> <span class='va'>Species</span>,
   data <span class='op'>=</span> <span class='va'>iris</span>,
@@ -202,15 +205,15 @@ of variables.</p>
 <span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='tidy_attach_model.html'>tidy_and_attach</a></span><span class='op'>(</span>conf.int <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>tidy_identify_variables</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 5 x 10</span><span>
-#&gt;   term  variable var_class var_type estimate std.error statistic   p.value
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> (Int… </span><span style='color: #BB0000;'>NA</span><span>       </span><span style='color: #BB0000;'>NA</span><span>        interce…   5.84      0.035</span><span style='text-decoration: underline;'>9</span><span>   163.    4.32</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-166</span><span>
-#&gt; </span><span style='color: #555555;'>2</span><span> poly… Sepal.W… nmatrix.2 continu…   4.27      0.568      7.52  5.32</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 12</span><span>
-#&gt; </span><span style='color: #555555;'>3</span><span> poly… Sepal.W… nmatrix.2 continu…  -</span><span style='color: #BB0000;'>0.072</span><span style='color: #BB0000;text-decoration: underline;'>0</span><span>    0.447     -</span><span style='color: #BB0000;'>0.161</span><span> 8.72</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-  1</span><span>
-#&gt; </span><span style='color: #555555;'>4</span><span> Spec… Species  factor    categor…  -</span><span style='color: #BB0000;'>1.13</span><span>      0.064</span><span style='text-decoration: underline;'>7</span><span>   -</span><span style='color: #BB0000;'>17.5</span><span>   1.22</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>- 37</span><span>
-#&gt; </span><span style='color: #555555;'>5</span><span> Spec… Species  factor    categor…   0.324     0.059</span><span style='text-decoration: underline;'>3</span><span>     5.46  2.02</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-  7</span><span>
-#&gt; </span><span style='color: #555555;'># … with 2 more variables: conf.low </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, conf.high </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div></span></pre>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 5 x 11</span><span>
+#&gt;   term  variable var_class var_type var_nlevels estimate std.error statistic
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> (Int… </span><span style='color: #BB0000;'>NA</span><span>       </span><span style='color: #BB0000;'>NA</span><span>        interce…          </span><span style='color: #BB0000;'>NA</span><span>   5.84      0.035</span><span style='text-decoration: underline;'>9</span><span>   163.   
+#&gt; </span><span style='color: #555555;'>2</span><span> poly… Sepal.W… nmatrix.2 continu…          </span><span style='color: #BB0000;'>NA</span><span>   4.27      0.568      7.52 
+#&gt; </span><span style='color: #555555;'>3</span><span> poly… Sepal.W… nmatrix.2 continu…          </span><span style='color: #BB0000;'>NA</span><span>  -</span><span style='color: #BB0000;'>0.072</span><span style='color: #BB0000;text-decoration: underline;'>0</span><span>    0.447     -</span><span style='color: #BB0000;'>0.161</span><span>
+#&gt; </span><span style='color: #555555;'>4</span><span> Spec… Species  factor    categor…           3  -</span><span style='color: #BB0000;'>1.13</span><span>      0.064</span><span style='text-decoration: underline;'>7</span><span>   -</span><span style='color: #BB0000;'>17.5</span><span>  
+#&gt; </span><span style='color: #555555;'>5</span><span> Spec… Species  factor    categor…           3   0.324     0.059</span><span style='text-decoration: underline;'>3</span><span>     5.46 
+#&gt; </span><span style='color: #555555;'># … with 3 more variables: p.value </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, conf.low </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, conf.high </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
