@@ -24,6 +24,10 @@ test_that("tidy_add_header_rows() works as expected", {
     c(NA, TRUE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, TRUE, FALSE,
       TRUE, FALSE, FALSE)
   )
+  expect_equivalent(
+    res$var_nlevels,
+    c(NA, 4L, 4L, 4L, 4L, 3L, 3L, 3L, 2L, 2L, NA, NA, NA)
+  )
 
   # show_single_row has an effect only on variables with one term (2 if a ref term)
   res <- mod %>%

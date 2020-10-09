@@ -9,6 +9,7 @@
 #' * `var_class`: class of the variable (cf. [stats::.MFclass()])
 #' * `var_type`: `"continuous"`, `"categorical"`, `"intercept"`
 #'   or `"interaction"`
+#' * `var_nlevels`: number of original levels for categorical variables
 #' @export
 #' @family model_helpers
 #' @seealso [tidy_identify_variables()]
@@ -45,7 +46,8 @@ model_identify_variables.default <- function(model) {
       dplyr::tibble(
         variable = NA_character_,
         var_class = NA_character_,
-        var_type = NA_character_
+        var_type = NA_character_,
+        var_nlevels = NA_integer_
       ) %>%
         dplyr::filter(FALSE)
     )
@@ -73,6 +75,11 @@ model_identify_variables.default <- function(model) {
         dplyr::select(.data$variable, .data$var_class),
       by = "variable"
     ) %>%
+    dplyr::left_join(
+      model_get_nlevels(model),
+      by = "variable"
+    ) %>%
+
     .compute_var_type()
 }
 

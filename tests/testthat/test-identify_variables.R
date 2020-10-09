@@ -21,6 +21,10 @@ test_that("tidy_identify_variables() works for common models", {
       "continuous", "interaction", "interaction"
     )
   )
+  expect_equivalent(
+    res$var_nlevels,
+    c(NA, NA, 3L, 3L, 2L, NA, NA, NA)
+  )
 })
 
 test_that("test tidy_identify_variables() checks", {

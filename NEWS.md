@@ -13,6 +13,9 @@
 * The `exponentiate` argument is now passed to the `tidy_*()`
   functions, as an attribute attached to the tibble
 * `show_single_row` argument now accepts tidyselect notation (#51 @ddsjoberg)
+* New method `model_get_nlevels` to get the number of levels of categorical variables
+* New column `var_nlevels` returned by `tidy_identify_variables()`,
+  `model_identify_variables()` and `tidy_plus_plus()`
 * Bug fix for non standard variable names containing
   a character that would have a special meaning in
   a regular expression (#44)

@@ -24,14 +24,18 @@ when requested output cannot be generated. Default is FALSE}
 }
 \description{
 \code{tidy_identify_variables()} will add to the tidy tibble
-three additional columns: \code{variable}, \code{var_class} and \code{var_type}.
+three additional columns: \code{variable}, \code{var_class}, \code{var_type} and \code{var_nlevels}.
 }
 \details{
 It will also identify interaction terms and intercept(s).
+
 \code{var_type} could be \code{"continuous"}, \code{"categorical"}, \code{"intercept"}
 or \code{"interaction"}. Will be equal to \code{"unknown"} in the rare cases
 where \code{tidy_identify_variables()} will fail to identify the list
 of variables.
+
+For categorical variables, \code{var_nlevels} corresponds to the number
+of original levels in the corresponding variables.
 }
 \examples{
 Titanic \%>\%
