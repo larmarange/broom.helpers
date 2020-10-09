@@ -2,23 +2,23 @@ library(survival)
 library(gtsummary)
 
 test_that("tidy_identify_variables() works for common models", {
-  mod <- glm(response ~ age + grade * trt, gtsummary::trial, family = binomial)
+  mod <- glm(response ~ age + grade * trt + death, trial, family = binomial)
   res <- mod %>%
     tidy_and_attach() %>%
     tidy_identify_variables()
   expect_equivalent(
     res$variable,
-    c(NA, "age", "grade", "grade", "trt", "grade:trt", "grade:trt")
+    c(NA, "age", "grade", "grade", "trt", "death", "grade:trt", "grade:trt")
   )
   expect_equivalent(
     res$var_class,
-    c(NA, "numeric", "factor", "factor", "character", NA, NA)
+    c(NA, "numeric", "factor", "factor", "character", "integer", NA, NA)
   )
   expect_equivalent(
     res$var_type,
     c(
       "intercept", "continuous", "categorical", "categorical", "categorical",
-      "interaction", "interaction"
+      "continuous", "interaction", "interaction"
     )
   )
 })

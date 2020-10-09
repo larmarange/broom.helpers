@@ -50,11 +50,11 @@ model_list_variables.default <- function(model) {
 
   variable_names <- attr(model_terms, "term.labels") %>%
     .clean_backtips()
-  dataClasses <- attr(model_terms, "dataClasses")
+  model_frame <- stats::model.frame(model)
+  dataClasses <- purrr::map(model_frame, .MFclass2) %>% unlist()
 
   if (is.null(dataClasses)) {
-    model_frame <- stats::model.frame(model)
-    dataClasses <- purrr::map(model_frame, stats::.MFclass) %>% unlist()
+    dataClasses <- attr(model_terms, "dataClasses")
   }
 
   # update the list with all elements of dataClasses
@@ -126,3 +126,22 @@ model_list_variables.lavaan <- function(model) {
       dplyr::mutate(label_attr = NA)
 }
 
+# stats::.MFclass do not distinct integer and numeric
+.MFclass2 <- function (x)
+{
+  if (is.logical(x))
+    return("logical")
+  if (is.ordered(x))
+    return("ordered")
+  if (is.factor(x))
+    return("factor")
+  if (is.character(x))
+    return("character")
+  if (is.matrix(x) && is.numeric(x))
+    return(paste0("nmatrix.", ncol(x)))
+  if (is.integer(x))
+    return("integer")
+  if (is.numeric(x))
+    return("numeric")
+  return("other")
+}

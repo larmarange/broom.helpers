@@ -18,6 +18,8 @@
   a regular expression (#44)
 * Bug fix in `tidy_add_header_rows()` for `nnet::multinom` models:
   label for header rows was missing (#50)
+* Bug fix: now `tidy_identify_variables()` correctly identify class "integer"
+  for this type of variables (#57)
 
 # broom.helpers 1.0.0
 
