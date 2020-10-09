@@ -2,7 +2,7 @@ library(survival)
 library(gtsummary)
 
 test_that("tidy_identify_variables() works for common models", {
-  mod <- glm(response ~ age + grade * trt + death, trial, family = binomial)
+  mod <- glm(response ~ age + grade * trt + death, gtsummary::trial, family = binomial)
   res <- mod %>%
     tidy_and_attach() %>%
     tidy_identify_variables()
