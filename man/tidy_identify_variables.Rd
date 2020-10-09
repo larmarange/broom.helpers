@@ -29,12 +29,18 @@ three additional columns: \code{variable}, \code{var_class}, \code{var_type} and
 \details{
 It will also identify interaction terms and intercept(s).
 
-\code{var_type} could be \code{"continuous"}, \code{"dichotomous"}, \code{"categorical"},
-\code{"intercept"} or \code{"interaction"}. Will be equal to \code{"unknown"} in the rare
-cases where \code{tidy_identify_variables()} will fail to identify the list
-of variables.
+\code{var_type} could be:
+\itemize{
+\item \code{"continuous"},
+\item \code{"dichotomous"} (categorical variable with 2 levels),
+\item \code{"categorical"} (categorical variable with 3 levels or more),
+\item \code{"intercept"}
+\item \code{"interaction"}
+\item \code{"unknown"} in the rare cases where \code{tidy_identify_variables()}
+will fail to identify the list of variables
+}
 
-For categorical variables, \code{var_nlevels} corresponds to the number
+For dichotomous and categorical variables, \code{var_nlevels} corresponds to the number
 of original levels in the corresponding variables.
 }
 \examples{

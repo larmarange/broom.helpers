@@ -7,7 +7,8 @@
 #' * `term`: coefficients of the model
 #' * `variable`: the corresponding variable
 #' * `var_class`: class of the variable (cf. [stats::.MFclass()])
-#' * `var_type`: `"continuous"`, `"dichotomous"`, `"categorical"`, `"intercept"`
+#' * `var_type`: `"continuous"`, `"dichotomous"` (categorical variable with 2 levels),
+#'   `"categorical"` (categorical variable with 3 or more levels), `"intercept"`
 #'   or `"interaction"`
 #' * `var_nlevels`: number of original levels for categorical variables
 #' @export

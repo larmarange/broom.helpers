@@ -5,12 +5,17 @@
 #'
 #' It will also identify interaction terms and intercept(s).
 #'
-#' `var_type` could be `"continuous"`, `"dichotomous"`, `"categorical"`,
-#' `"intercept"` or `"interaction"`. Will be equal to `"unknown"` in the rare
-#' cases where `tidy_identify_variables()` will fail to identify the list
-#' of variables.
+#' `var_type` could be:
 #'
-#' For categorical variables, `var_nlevels` corresponds to the number
+#' * `"continuous"`,
+#' * `"dichotomous"` (categorical variable with 2 levels),
+#' * `"categorical"` (categorical variable with 3 levels or more),
+#' * `"intercept"`
+#' * `"interaction"`
+#' * `"unknown"` in the rare cases where `tidy_identify_variables()`
+#'   will fail to identify the list of variables
+#'
+#' For dichotomous and categorical variables, `var_nlevels` corresponds to the number
 #' of original levels in the corresponding variables.
 #' @param x a tidy tibble
 #' @param model the corresponding model, if not attached to `x`

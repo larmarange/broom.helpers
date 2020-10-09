@@ -9,6 +9,9 @@ model_get_nlevels(model)
 \arguments{
 \item{model}{a model object}
 }
+\value{
+a tibble with two columns: \code{"variable"} and \code{"var_nlevels"}
+}
 \description{
 Get the number of levels for each factor used in \code{xlevels}
 }
