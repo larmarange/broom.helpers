@@ -12,7 +12,7 @@ model_get_nlevels <- function(model) {
 }
 
 #' @export
-#' @rdname model_get_xlevels
+#' @rdname model_get_nlevels
 model_get_nlevels.default <- function(model) {
   nlevels <- model_get_xlevels(model) %>% lapply(length)
   if (length(nlevels) == 0)

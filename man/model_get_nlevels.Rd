@@ -2,9 +2,12 @@
 % Please edit documentation in R/model_get_nlevels.R
 \name{model_get_nlevels}
 \alias{model_get_nlevels}
+\alias{model_get_nlevels.default}
 \title{Get the number of levels for each factor used in \code{xlevels}}
 \usage{
 model_get_nlevels(model)
+
+\method{model_get_nlevels}{default}(model)
 }
 \arguments{
 \item{model}{a model object}
@@ -26,7 +29,7 @@ Other model_helpers:
 \code{\link{model_get_model_frame}()},
 \code{\link{model_get_model_matrix}()},
 \code{\link{model_get_model}()},
-\code{\link{model_get_nlevels.default}()},
+\code{\link{model_get_xlevels}()},
 \code{\link{model_identify_variables}()},
 \code{\link{model_list_contrasts}()},
 \code{\link{model_list_terms_levels}()},
