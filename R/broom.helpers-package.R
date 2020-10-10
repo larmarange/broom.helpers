@@ -83,7 +83,7 @@ utils::globalVariables(c(".", "where"))
       dplyr::any_of(
         c(
           "y.level", "term", "variable", "var_label", "var_class", "var_type",
-          "header_row", "contrasts", "reference_row", "label"
+          "var_nlevels", "header_row", "contrasts", "reference_row", "label"
         )
       ),
       dplyr::everything()
@@ -111,6 +111,7 @@ utils::globalVariables(c(".", "where"))
   df_vars <-
     x %>%
     dplyr::filter(!.data$var_type %in% "intercept") %>%
+    dplyr::filter(!is.na(variable)) %>%
     dplyr::select(.data$variable, .data$var_class) %>%
     dplyr::distinct()
 

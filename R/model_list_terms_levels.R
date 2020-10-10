@@ -57,6 +57,9 @@ model_list_terms_levels.default <- function(model) {
   model_terms <- model_identify_variables(model) %>%
     dplyr::filter(!is.na(.data$variable))
 
+  if (nrow(model_terms) == 0)
+    return(NULL)
+
   res <- dplyr::tibble()
 
   for (v in contrasts_list$variable) {

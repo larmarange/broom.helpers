@@ -21,8 +21,10 @@ A tibble with four columns:
 \item \code{term}: coefficients of the model
 \item \code{variable}: the corresponding variable
 \item \code{var_class}: class of the variable (cf. \code{\link[stats:checkMFClasses]{stats::.MFclass()}})
-\item \code{var_type}: \code{"continuous"}, \code{"categorical"}, \code{"intercept"}
+\item \code{var_type}: \code{"continuous"}, \code{"dichotomous"} (categorical variable with 2 levels),
+\code{"categorical"} (categorical variable with 3 or more levels), \code{"intercept"}
 or \code{"interaction"}
+\item \code{var_nlevels}: number of original levels for categorical variables
 }
 }
 \description{
@@ -56,6 +58,7 @@ Other model_helpers:
 \code{\link{model_get_model_frame}()},
 \code{\link{model_get_model_matrix}()},
 \code{\link{model_get_model}()},
+\code{\link{model_get_nlevels}()},
 \code{\link{model_get_xlevels}()},
 \code{\link{model_list_contrasts}()},
 \code{\link{model_list_terms_levels}()},

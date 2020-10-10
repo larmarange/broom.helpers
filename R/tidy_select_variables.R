@@ -43,7 +43,7 @@ tidy_select_variables <- function(
 
   x %>%
     dplyr::filter(
-      .data$var_type == "intercept" |
+      is.na(.data$variable) |
         .data$variable %in% include
     ) %>%
     tidy_attach_model(model = model, .attributes = .attributes)

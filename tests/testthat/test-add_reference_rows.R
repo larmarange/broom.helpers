@@ -22,6 +22,21 @@ test_that("tidy_add_reference_rows() works as expected", {
       NA, NA
     )
   )
+  expect_equivalent(
+    res$var_class,
+    c(NA, "factor", "factor", "factor", "factor", "factor", "factor",
+      "factor", "character", "character", NA, NA)
+  )
+  expect_equivalent(
+    res$var_type,
+    c("intercept", "categorical", "categorical", "categorical", "categorical",
+      "categorical", "categorical", "categorical", "dichotomous", "dichotomous",
+      "interaction", "interaction")
+  )
+  expect_equivalent(
+    res$var_nlevels,
+    c(NA, 4L, 4L, 4L, 4L, 3L, 3L, 3L, 2L, 2L, NA, NA)
+  )
 
   # no reference row added if other contrasts are used
   mod <- glm(
