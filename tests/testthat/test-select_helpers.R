@@ -10,6 +10,13 @@ test_that("select_helpers: tidy_select_variables", {
   )
 
   expect_equal(
+    tidy_select_variables(mod_tidy, include = all_categorical(dichotomous = FALSE))$variable %>%
+      na.omit() %>%
+      unique(),
+    c("grade")
+  )
+
+  expect_equal(
     tidy_select_variables(mod_tidy, include = all_continuous())$variable %>%
       na.omit() %>%
       unique(),
