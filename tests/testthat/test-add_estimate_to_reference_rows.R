@@ -72,6 +72,28 @@ test_that("tidy_add_estimate_to_reference_rows() works for basic models", {
     res2$estimate[res2$reference_row & res2$variable == "trt" & !is.na(res2$reference_row)],
     exp(sum(res$estimate[!res$reference_row & res$variable == "trt"], na.rm = TRUE) * -1)
   )
+
+  ## works also when there is an interaction term
+  mod <- glm(response ~ stage * grade * trt, gtsummary::trial,
+             family = binomial,
+             contrasts = list(stage = contr.sum, grade = contr.sum, trt = contr.sum)
+  )
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_add_estimate_to_reference_rows()
+  # should be -1 * sum of other coefficients when sum contrasts
+  expect_equivalent(
+    res$estimate[res$reference_row & res$variable == "stage" & !is.na(res$reference_row)],
+    sum(res$estimate[!res$reference_row & res$variable == "stage"], na.rm = TRUE) * -1
+  )
+  expect_equivalent(
+    res$estimate[res$reference_row & res$variable == "grade" & !is.na(res$reference_row)],
+    sum(res$estimate[!res$reference_row & res$variable == "grade"], na.rm = TRUE) * -1
+  )
+  expect_equivalent(
+    res$estimate[res$reference_row & res$variable == "trt" & !is.na(res$reference_row)],
+    sum(res$estimate[!res$reference_row & res$variable == "trt"], na.rm = TRUE) * -1
+  )
 })
 
 
