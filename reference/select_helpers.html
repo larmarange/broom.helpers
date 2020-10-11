@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Changelog • broom.helpers</title>
+<title>Select helper functions — select_helpers • broom.helpers</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,9 @@
 
 
 
-<meta property="og:title" content="Changelog" />
+<meta property="og:title" content="Select helper functions — select_helpers" />
+<meta property="og:description" content="Set of functions to supplement the tidyselect set of functions for selecting
+columns of data frames." />
 
 
 
@@ -58,7 +60,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -113,51 +115,44 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1 data-toc-skip>Changelog <small></small></h1>
-      <small>Source: <a href='https://github.com/larmarange/broom.helpers/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
+    <h1>Select helper functions</h1>
+    <small class="dont-index">Source: <a href='https://github.com/larmarange/broom.helpers/blob/master/R/select_helpers.R'><code>R/select_helpers.R</code></a></small>
+    <div class="hidden name"><code>select_helpers.Rd</code></div>
     </div>
 
-    <div id="broomhelpers-development-version" class="section level1">
-<h1 class="page-header" data-toc-text="development version">
-<a href="#broomhelpers-development-version" class="anchor"></a>broom.helpers (development version)<small> Unreleased </small>
-</h1>
-<ul>
-<li>New selecting functions <code><a href="../reference/select_helpers.html">all_continuous()</a></code>, <code><a href="../reference/select_helpers.html">all_categorical()</a></code>, <code><a href="../reference/select_helpers.html">all_dichotomous()</a></code>, and <code><a href="../reference/select_helpers.html">all_interaction()</a></code> for selecting variables from models (<a href='https://github.com/larmarange/broom.helpers/issues/54'>#54</a>)</li>
-<li>Breaking change: column <code>var_type</code> returned by <code>tidy_identify_variables</code> is now equal to <code>"dichotomous"</code> for categorical variables with only 2 levels</li>
-<li>Added support for multiple imputation models from the {mice} package. The model passed must be the un-pooled models, and the pooling step included in <code>tidy_fun=</code> (<a href='https://github.com/larmarange/broom.helpers/issues/49'>#49</a> <a href='https://github.com/ddsjoberg'>@ddsjoberg</a>)</li>
-<li>New function <code><a href="../reference/tidy_select_variables.html">tidy_select_variables()</a></code> to keep/drop selected variables in the output (<a href='https://github.com/larmarange/broom.helpers/issues/45'>#45</a>)</li>
-<li>New functions <code><a href="../reference/tidy_add_coefficients_type.html">tidy_add_coefficients_type()</a></code> and <code>model_get_coefficients_type</code> to get the type of coefficients (generic, logistic, Poisson or proportional hazard) used by a model (<a href='https://github.com/larmarange/broom.helpers/issues/46'>#46</a>)</li>
-<li>New <code>no_reference_row</code> argument for <code><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows()</a></code> (<a href='https://github.com/larmarange/broom.helpers/issues/47'>#47</a>)</li>
-<li>The <code>exponentiate</code> argument is now passed to the <code>tidy_*()</code> functions, as an attribute attached to the tibble</li>
-<li>
-<code>show_single_row</code> argument now accepts tidyselect notation (<a href='https://github.com/larmarange/broom.helpers/issues/51'>#51</a> <a href='https://github.com/ddsjoberg'>@ddsjoberg</a>)</li>
-<li>New method <code>model_get_nlevels</code> to get the number of levels of categorical variables</li>
-<li>New column <code>var_nlevels</code> returned by <code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code>, <code><a href="../reference/model_identify_variables.html">model_identify_variables()</a></code> and <code><a href="../reference/tidy_plus_plus.html">tidy_plus_plus()</a></code>
-</li>
-<li>
-<code><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows()</a></code> now relies on <code>emmeans</code> for sum contrasts, allowing to cover a wider range of models</li>
-<li>Tibbles returned by <code>tidy_*</code> functions also inherits of <code>"broom.helpers"</code> class (<a href='https://github.com/larmarange/broom.helpers/issues/56'>#56</a>)</li>
-<li>Bug fix for non standard variable names containing a character that would have a special meaning in a regular expression (<a href='https://github.com/larmarange/broom.helpers/issues/44'>#44</a>)</li>
-<li>Bug fix in <code><a href="../reference/tidy_add_header_rows.html">tidy_add_header_rows()</a></code> for <code><a href="https://rdrr.io/pkg/nnet/man/multinom.html">nnet::multinom</a></code> models: label for header rows was missing (<a href='https://github.com/larmarange/broom.helpers/issues/50'>#50</a>)</li>
-<li>Bug fix: now <code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code> correctly identify class “integer” for this type of variables (<a href='https://github.com/larmarange/broom.helpers/issues/57'>#57</a>)</li>
-</ul>
-</div>
-    <div id="broomhelpers-100" class="section level1">
-<h1 class="page-header" data-toc-text="1.0.0">
-<a href="#broomhelpers-100" class="anchor"></a>broom.helpers 1.0.0<small> 2020-09-18 </small>
-</h1>
-<ul>
-<li>Initial version</li>
-</ul>
-</div>
-  </div>
+    <div class="ref-description">
+    <p>Set of functions to supplement the tidyselect set of functions for selecting
+columns of data frames.</p>
+    </div>
 
+    <pre class="usage"><span class='fu'>all_continuous</span><span class='op'>(</span><span class='op'>)</span>
+
+<span class='fu'>all_dichotomous</span><span class='op'>(</span><span class='op'>)</span>
+
+<span class='fu'>all_categorical</span><span class='op'>(</span>dichotomous <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+
+<span class='fu'>all_interaction</span><span class='op'>(</span><span class='op'>)</span></pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>dichotomous</th>
+      <td><p>Logical indicating whether to include dichotomous variables.
+Default is <code>TRUE</code></p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A character vector of column names selected</p>
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
-
 </div>
 
 
