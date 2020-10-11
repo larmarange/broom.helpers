@@ -35,3 +35,7 @@ reference:
   - title: Get information from model objects
   - contents:
       - starts_with("model_")
+
+  - title: Variable type selectors
+  - contents:
+      - starts_with("all_")
