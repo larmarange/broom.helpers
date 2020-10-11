@@ -6,7 +6,7 @@ test_that("Attach and Detach models works", {
   )
 
   tb <- broom::tidy(mod)
-  expect_identical(
+  expect_equivalent(
     tb,
     tb %>% tidy_attach_model(mod) %>% tidy_detach_model()
   )

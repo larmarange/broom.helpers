@@ -26,7 +26,10 @@
 #' tidy_get_model(tt)
 #' @export
 tidy_attach_model <- function(x, model, .attributes = NULL) {
-  x <- .order_tidy_columns(x)
+  x <- x %>%
+    dplyr::as_tibble() %>%
+    .order_tidy_columns()
+  class(x) <- c("broom.helpers", class(x))
   attr(x, "model") <- model_get_model(model)
   for (a in names(.attributes)) {
     if (!is.null(.attributes[[a]]))

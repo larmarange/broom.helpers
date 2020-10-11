@@ -21,6 +21,8 @@
   `model_identify_variables()` and `tidy_plus_plus()`
 * `tidy_add_estimate_to_reference_rows()` now relies on `emmeans` for
   sum contrasts, allowing to cover a wider range of models
+* Tibbles returned by `tidy_*` functions also inherits of `"broom.helpers"` 
+  class (#56)
 * Bug fix for non standard variable names containing
   a character that would have a special meaning in
   a regular expression (#44)
