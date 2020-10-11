@@ -133,20 +133,18 @@ test_that("tidy_add_estimate_to_reference_rows() works with character variables"
 
 
 test_that("tidy_add_estimate_to_reference_rows() handles variables having non standard name", {
-  # dummy.coef do not work with such variable
-  # a warning should have been displayed
-
   df <- gtsummary::trial %>% dplyr::mutate(`grade of kids` = grade)
   mod <- glm(response ~ stage + `grade of kids` + trt, df,
     family = binomial,
     contrasts = list(`grade of kids` = contr.sum)
   )
   expect_message(
-    res <- mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows()
+    res <- mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows(),
+    NA
   )
   expect_equivalent(
-    res$estimate[res$variable == "grade of kids" & res$reference_row & !is.na(res$variable)],
-    NA_real_
+    res$estimate[res$variable == "grade of kids" & !is.na(res$variable)] %>% sum(),
+    0
   )
 })
 

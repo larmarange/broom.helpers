@@ -103,28 +103,72 @@ tidy_add_estimate_to_reference_rows <- function(
     tidy_attach_model(model = model, .attributes = .attributes)
 }
 
+# to be rewritten using
+# emmeans::emmeans(model, specs = "period", contr = variable)
+# to be more generic
+
 .get_ref_row_estimate_contr_sum <- function(variable, model, exponentiate = FALSE,
-                                            quiet) {
-  # bug fix for character variables
-  if ("model" %in% names(model)) {
-    model$model <- model$model %>%
-      dplyr::mutate(dplyr::across(where(is.character), factor))
+                                            quiet = FALSE) {
+
+  if (inherits(model, "multinom")) {
+    dc <- NULL
+    if (!quiet)
+      usethis::ui_info(paste0(
+        "Sum contrasts are not supported for 'multinom' models.\n",
+        "Reference row of variable '", variable, "' remained unchanged."
+      ))
+  } else {
+    dc <- tryCatch(
+      emmeans::emmeans(model, specs = variable, contr = "eff"),
+      error = function(e) {
+        if (!quiet)
+          usethis::ui_info(paste0(
+            "No emmeans() method for this type of model.\n",
+            "Reference row of variable '", variable, "' remained unchanged."
+          ))
+        NULL
+      }
+    )
   }
 
-  dc <- tryCatch(
-    dplyr::last(stats::dummy.coef(model)[[variable]]),
-    error = function(e) {
-      if (!quiet)
-        usethis::ui_info(paste0(
-          "No dummy.coef() method for this type of model.\n",
-          "Reference row of variable '", variable, "' remained unchanged."
-        ))
-      NA
-    }
-  )
+  if (is.null(dc)) {
+    dc <- NA_real_
+  } else {
+    dc <- dc$contrasts %>%
+      as.data.frame() %>%
+      purrr::pluck("estimate") %>%
+      dplyr::last()
+  }
 
   if (exponentiate) {
     dc <- exp(dc)
   }
   dc
 }
+
+# Origiginal code using stats::dummy.coef
+# .get_ref_row_estimate_contr_sum <- function(variable, model, exponentiate = FALSE,
+#                                             quiet) {
+#   # bug fix for character variables
+#   if ("model" %in% names(model)) {
+#     model$model <- model$model %>%
+#       dplyr::mutate(dplyr::across(where(is.character), factor))
+#   }
+#
+#   dc <- tryCatch(
+#     dplyr::last(stats::dummy.coef(model)[[variable]]),
+#     error = function(e) {
+#       if (!quiet)
+#         usethis::ui_info(paste0(
+#           "No dummy.coef() method for this type of model.\n",
+#           "Reference row of variable '", variable, "' remained unchanged."
+#         ))
+#       NA
+#     }
+#   )
+#
+#   if (exponentiate) {
+#     dc <- exp(dc)
+#   }
+#   dc
+# }

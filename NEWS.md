@@ -19,6 +19,8 @@
 * New method `model_get_nlevels` to get the number of levels of categorical variables
 * New column `var_nlevels` returned by `tidy_identify_variables()`,
   `model_identify_variables()` and `tidy_plus_plus()`
+* `tidy_add_estimate_to_reference_rows()` now relies on `emmeans` for
+  sum contrasts, allowing to cover a wider range of models
 * Bug fix for non standard variable names containing
   a character that would have a special meaning in
   a regular expression (#44)
