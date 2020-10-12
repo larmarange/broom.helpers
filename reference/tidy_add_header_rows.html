@@ -150,7 +150,8 @@ These additional rows could be identified with <code>header_row</code> column.</
       <th>show_single_row</th>
       <td><p>a vector indicating the names of binary
 variables that should be displayed on a single row.
-Accepts tidyselect notation. Default is <code>NULL</code></p></td>
+Accepts <a href='https://dplyr.tidyverse.org/reference/select.html'>tidyselect</a> syntax. Default is <code>NULL</code>.
+See also <code><a href='select_helpers.html'>all_dichotomous()</a></code></p></td>
     </tr>
     <tr>
       <th>model</th>
@@ -201,7 +202,7 @@ instead of two rows.</p>
   <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>Survived <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>Survived</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"No"</span>, <span class='st'>"Yes"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='va'>df</span> <span class='op'>%&gt;%</span>
+<span class='va'>res</span> <span class='op'>&lt;-</span> <span class='va'>df</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span>
     <span class='va'>Survived</span> <span class='op'>~</span> <span class='va'>Class</span> <span class='op'>+</span> <span class='va'>Age</span> <span class='op'>+</span> <span class='va'>Sex</span>,
     data <span class='op'>=</span> <span class='va'>.</span>, weights <span class='op'>=</span> <span class='va'>.</span><span class='op'>$</span><span class='va'>n</span>, family <span class='op'>=</span> <span class='va'>binomial</span>,
@@ -209,8 +210,8 @@ instead of two rows.</p>
   <span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='tidy_attach_model.html'>tidy_and_attach</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='tidy_add_variable_labels.html'>tidy_add_variable_labels</a></span><span class='op'>(</span>labels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>Class <span class='op'>=</span> <span class='st'>"Custom label for Class"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='tidy_add_reference_rows.html'>tidy_add_reference_rows</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>tidy_add_header_rows</span><span class='op'>(</span><span class='op'>)</span>
+  <span class='fu'><a href='tidy_add_reference_rows.html'>tidy_add_reference_rows</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>res</span> <span class='op'>%&gt;%</span> <span class='fu'>tidy_add_header_rows</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 12 x 14</span><span>
 #&gt;    term  variable var_label var_class var_type var_nlevels header_row contrasts
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    
@@ -226,6 +227,19 @@ instead of two rows.</p>
 #&gt; </span><span style='color: #555555;'>10</span><span> </span><span style='color: #BB0000;'>NA</span><span>    Sex      Sex       character dichoto…           2 TRUE       contr.tr…
 #&gt; </span><span style='color: #555555;'>11</span><span> SexF… Sex      Sex       character dichoto…           2 FALSE      contr.tr…
 #&gt; </span><span style='color: #555555;'>12</span><span> SexM… Sex      Sex       character dichoto…           2 FALSE      contr.tr…
+#&gt; </span><span style='color: #555555;'># … with 6 more variables: reference_row </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span style='color: #555555;'>, label </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, estimate </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   std.error </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, statistic </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, p.value </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'><span class='va'>res</span> <span class='op'>%&gt;%</span> <span class='fu'>tidy_add_header_rows</span><span class='op'>(</span>show_single_row <span class='op'>=</span> <span class='fu'><a href='select_helpers.html'>all_dichotomous</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 8 x 14</span><span>
+#&gt;   term  variable var_label var_class var_type var_nlevels header_row contrasts
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    
+#&gt; </span><span style='color: #555555;'>1</span><span> (Int… </span><span style='color: #BB0000;'>NA</span><span>       (Interce… </span><span style='color: #BB0000;'>NA</span><span>        interce…          </span><span style='color: #BB0000;'>NA</span><span> </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>       
+#&gt; </span><span style='color: #555555;'>2</span><span> </span><span style='color: #BB0000;'>NA</span><span>    Class    Custom l… character categor…           4 TRUE       contr.SAS
+#&gt; </span><span style='color: #555555;'>3</span><span> Clas… Class    Custom l… character categor…           4 FALSE      contr.SAS
+#&gt; </span><span style='color: #555555;'>4</span><span> Clas… Class    Custom l… character categor…           4 FALSE      contr.SAS
+#&gt; </span><span style='color: #555555;'>5</span><span> Clas… Class    Custom l… character categor…           4 FALSE      contr.SAS
+#&gt; </span><span style='color: #555555;'>6</span><span> Clas… Class    Custom l… character categor…           4 FALSE      contr.SAS
+#&gt; </span><span style='color: #555555;'>7</span><span> Age1  Age      Age       character dichoto…           2 </span><span style='color: #BB0000;'>NA</span><span>         contr.sum
+#&gt; </span><span style='color: #555555;'>8</span><span> SexM… Sex      Sex       character dichoto…           2 </span><span style='color: #BB0000;'>NA</span><span>         contr.tr…
 #&gt; </span><span style='color: #555555;'># … with 6 more variables: reference_row </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span style='color: #555555;'>, label </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, estimate </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   std.error </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, statistic </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, p.value </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>
 <span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"gtsummary"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
