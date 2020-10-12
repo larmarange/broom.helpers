@@ -52,7 +52,7 @@ tidy_forest <-
   # adding in the reference row for categorical variables
   tidy_add_reference_rows() %>%
   # adding a reference value to appear in plot
-  tidy_add_estimate_to_reference_rows(exponentiate = TRUE) %>%
+  tidy_add_estimate_to_reference_rows() %>%
   # adding the variable labels
   tidy_add_term_labels() %>%
   # removing intercept estimate from model
@@ -112,6 +112,8 @@ tidy_table %>%
   mutate_at(vars(p.value), style_pvalue) %>%
   knitr::kable()
 ```
+
+**Note::** for more advanced and nicely formatted tables of model coefficients, look at `gtsummary::tbl_regression()` and its [dedicated vignette](http://www.danieldsjoberg.com/gtsummary/articles/tbl_regression.html). `gtsummary::tbl_regression()` internally uses `broom.helpers`.
 
 ## All-in-one function
 
@@ -191,7 +193,7 @@ model_2 %>%
   rmarkdown::paged_table()
 ```
 
-You can also use sum contrasts (cf. `stats::contr.sum()`). In that case, each model coefficient corresponds to the difference of that modality with the grand mean. A variable with 4 modalities will be coded with 3 terms. However, a value could be computed (using `stats::dummy.coef()`) for the last modality, corresponding to the difference of that modality with the grand mean and equal to sum of all other coefficients multiplied by -1. `broom.helpers` will identify categorical variables coded with sum contrasts and could retrieve an estimate value for the reference term.
+You can also use sum contrasts (cf. `stats::contr.sum()`). In that case, each model coefficient corresponds to the difference of that modality with the grand mean. A variable with 4 modalities will be coded with 3 terms. However, a value could be computed (using `emmeans::emmeans()`) for the last modality, corresponding to the difference of that modality with the grand mean and equal to sum of all other coefficients multiplied by -1. `broom.helpers` will identify categorical variables coded with sum contrasts and could retrieve an estimate value for the reference term.
 
 ```{r}
 model_3 <- glm(
