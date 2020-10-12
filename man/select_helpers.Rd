@@ -29,7 +29,7 @@ columns of data frames.
 }
 \examples{
 mod <- glm(response ~ age * trt + grade, gtsummary::trial, family = binomial)
-res <- mod \%>\% tidy_plus_plus(exponentiate = TRUE)
+res <- mod \%>\% tidy_plus_plus(exponentiate = TRUE, keep_model = TRUE)
 res \%>\% tidy_select_variables(all_continuous())
 res \%>\% tidy_select_variables(all_dichotomous())
 res \%>\% tidy_select_variables(all_categorical())
