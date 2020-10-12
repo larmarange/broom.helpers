@@ -19,8 +19,9 @@
 #' rather than before.
 #' @param x a tidy tibble
 #' @param no_reference_row a vector indicating the name of variables
-#' for those no reference row should be added. Accepts tidyselect notation.
-#' Default is `NULL`
+#' for those no reference row should be added.
+#' Accepts [tidyselect][dplyr::select] syntax. Default is `NULL`.
+#' See also [all_categorical()] and [all_dichotomous()]
 #' @param model the corresponding model, if not attached to `x`
 #' @inheritParams tidy_plus_plus
 #' @export
@@ -30,14 +31,16 @@
 #'   dplyr::as_tibble() %>%
 #'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
 #'
-#' df %>%
+#' res <- df %>%
 #'   glm(
 #'     Survived ~ Class + Age + Sex,
 #'     data = ., weights = .$n, family = binomial,
 #'     contrasts = list(Age = contr.sum, Class = "contr.SAS")
 #'   ) %>%
-#'   tidy_and_attach() %>%
-#'   tidy_add_reference_rows()
+#'   tidy_and_attach()
+#' res %>% tidy_add_reference_rows()
+#' res %>% tidy_add_reference_rows(no_reference_row = all_dichotomous())
+#' res %>% tidy_add_reference_rows(no_reference_row = "Class")
 #'
 #' if (requireNamespace("gtsummary")) {
 #'   glm(

@@ -23,16 +23,15 @@
 #' @param variable_labels a named list or a named vector of custom variable labels
 #' @param term_labels a named list or a named vector of custom term labels
 #' @param add_reference_rows should reference rows be added?
-#' @param no_reference_row variables (accepts tidyselect notation)
+#' @param no_reference_row variables (accepts [tidyselect][dplyr::select] notation)
 #' for those no reference row should be added, when `add_reference_rows = TRUE`
 #' @param add_estimate_to_reference_rows should an estimate value be added to reference rows?
 #' @param add_header_rows should header rows be added?
 #' @param show_single_row variables that should be displayed
-#' on a single row (accepts tidyselect notation), when
+#' on a single row (accepts [tidyselect][dplyr::select] notation), when
 #' `add_header_rows` is `TRUE`
 #' @param intercept should the intercept(s) be included?
-#' @param include variables to include (accepts tidyselect notation).
-#' Use `-` to remove a variable. Default is `everything()`
+#' @inheritParams tidy_select_variables
 #' @param keep_model should the model be kept as an attribute of the final result?
 #' @param quiet logical argument whether broom.helpers should not return a message
 #' when requested output cannot be generated. Default is FALSE
@@ -77,7 +76,7 @@
 #'       exponentiate = TRUE,
 #'       variable_labels = c(age = "Age (in years)"),
 #'       add_header_rows = TRUE,
-#'       show_single_row = "trt",
+#'       show_single_row = all_dichotomous(),
 #'       term_labels = c("poly(age, 3)3" = "Cubic age"),
 #'       keep_model = TRUE
 #'     )

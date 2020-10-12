@@ -15,8 +15,9 @@ tidy_add_reference_rows(
 \item{x}{a tidy tibble}
 
 \item{no_reference_row}{a vector indicating the name of variables
-for those no reference row should be added. Accepts tidyselect notation.
-Default is \code{NULL}}
+for those no reference row should be added.
+Accepts \link[dplyr:select]{tidyselect} syntax. Default is \code{NULL}.
+See also \code{\link[=all_categorical]{all_categorical()}} and \code{\link[=all_dichotomous]{all_dichotomous()}}}
 
 \item{model}{the corresponding model, if not attached to \code{x}}
 
@@ -49,14 +50,16 @@ df <- Titanic \%>\%
   dplyr::as_tibble() \%>\%
   dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
 
-df \%>\%
+res <- df \%>\%
   glm(
     Survived ~ Class + Age + Sex,
     data = ., weights = .$n, family = binomial,
     contrasts = list(Age = contr.sum, Class = "contr.SAS")
   ) \%>\%
-  tidy_and_attach() \%>\%
-  tidy_add_reference_rows()
+  tidy_and_attach()
+res \%>\% tidy_add_reference_rows()
+res \%>\% tidy_add_reference_rows(no_reference_row = all_dichotomous())
+res \%>\% tidy_add_reference_rows(no_reference_row = "Class")
 
 if (requireNamespace("gtsummary")) {
   glm(

@@ -41,7 +41,7 @@ but a bad idea if there is no log or logit link; defaults to \code{FALSE}.}
 
 \item{add_reference_rows}{should reference rows be added?}
 
-\item{no_reference_row}{variables (accepts tidyselect notation)
+\item{no_reference_row}{variables (accepts \link[dplyr:select]{tidyselect} notation)
 for those no reference row should be added, when \code{add_reference_rows = TRUE}}
 
 \item{add_estimate_to_reference_rows}{should an estimate value be added to reference rows?}
@@ -49,13 +49,15 @@ for those no reference row should be added, when \code{add_reference_rows = TRUE
 \item{add_header_rows}{should header rows be added?}
 
 \item{show_single_row}{variables that should be displayed
-on a single row (accepts tidyselect notation), when
+on a single row (accepts \link[dplyr:select]{tidyselect} notation), when
 \code{add_header_rows} is \code{TRUE}}
 
 \item{intercept}{should the intercept(s) be included?}
 
-\item{include}{variables to include (accepts tidyselect notation).
-Use \code{-} to remove a variable. Default is \code{everything()}}
+\item{include}{variables to include. Accepts \link[dplyr:select]{tidyselect}
+syntax. Use \code{-} to remove a variable. Default is \code{everything()}.
+See also \code{\link[=all_continuous]{all_continuous()}}, \code{\link[=all_categorical]{all_categorical()}}, \code{\link[=all_dichotomous]{all_dichotomous()}}
+and \code{\link[=all_interaction]{all_interaction()}}}
 
 \item{keep_model}{should the model be kept as an attribute of the final result?}
 
@@ -121,7 +123,7 @@ if (requireNamespace("gtsummary")) {
       exponentiate = TRUE,
       variable_labels = c(age = "Age (in years)"),
       add_header_rows = TRUE,
-      show_single_row = "trt",
+      show_single_row = all_dichotomous(),
       term_labels = c("poly(age, 3)3" = "Cubic age"),
       keep_model = TRUE
     )

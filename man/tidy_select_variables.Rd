@@ -9,8 +9,10 @@ tidy_select_variables(x, include = everything(), model = tidy_get_model(x))
 \arguments{
 \item{x}{a tidy tibble}
 
-\item{include}{variables to include. Accepts tidyselect syntax.
-Use \code{-} to remove a variable. Default is \code{everything()}}
+\item{include}{variables to include. Accepts \link[dplyr:select]{tidyselect}
+syntax. Use \code{-} to remove a variable. Default is \code{everything()}.
+See also \code{\link[=all_continuous]{all_continuous()}}, \code{\link[=all_categorical]{all_categorical()}}, \code{\link[=all_dichotomous]{all_dichotomous()}}
+and \code{\link[=all_interaction]{all_interaction()}}}
 
 \item{model}{the corresponding model, if not attached to \code{x}}
 }
@@ -26,7 +28,7 @@ If the \code{variable} column is not yet available in \code{x},
 res <- Titanic \%>\%
   dplyr::as_tibble() \%>\%
   dplyr::mutate(Survived = factor(Survived)) \%>\%
-  glm(Survived ~ Class + Age + Sex, data = ., weights = .$n, family = binomial) \%>\%
+  glm(Survived ~ Class + Age * Sex, data = ., weights = .$n, family = binomial) \%>\%
   tidy_and_attach() \%>\%
   tidy_identify_variables()
 
@@ -35,6 +37,12 @@ res \%>\% tidy_select_variables()
 res \%>\% tidy_select_variables(include = "Class")
 res \%>\% tidy_select_variables(include = -c("Age", "Sex"))
 res \%>\% tidy_select_variables(include = starts_with("A"))
+res \%>\% tidy_select_variables(include = all_categorical())
+res \%>\% tidy_select_variables(include = all_dichotomous())
+res \%>\% tidy_select_variables(include = all_interaction())
+res \%>\% tidy_select_variables(
+  include = c("Age", all_categorical(dichotomous = FALSE), all_interaction())
+)
 }
 \seealso{
 Other tidy_helpers: 

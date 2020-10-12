@@ -17,7 +17,8 @@ tidy_add_header_rows(
 
 \item{show_single_row}{a vector indicating the names of binary
 variables that should be displayed on a single row.
-Accepts tidyselect notation. Default is \code{NULL}}
+Accepts \link[dplyr:select]{tidyselect} syntax. Default is \code{NULL}.
+See also \code{\link[=all_dichotomous]{all_dichotomous()}}}
 
 \item{model}{the corresponding model, if not attached to \code{x}}
 
@@ -54,7 +55,7 @@ df <- Titanic \%>\%
   dplyr::as_tibble() \%>\%
   dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
 
-df \%>\%
+res <- df \%>\%
   glm(
     Survived ~ Class + Age + Sex,
     data = ., weights = .$n, family = binomial,
@@ -62,8 +63,9 @@ df \%>\%
   ) \%>\%
   tidy_and_attach() \%>\%
   tidy_add_variable_labels(labels = list(Class = "Custom label for Class")) \%>\%
-  tidy_add_reference_rows() \%>\%
-  tidy_add_header_rows()
+  tidy_add_reference_rows()
+res \%>\% tidy_add_header_rows()
+res \%>\% tidy_add_header_rows(show_single_row = all_dichotomous())
 
 if (requireNamespace("gtsummary")) {
   glm(

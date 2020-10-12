@@ -7,6 +7,14 @@
 #' @param dichotomous Logical indicating whether to include dichotomous variables.
 #' Default is `TRUE`
 #' @return A character vector of column names selected
+#' @examples
+#' mod <- glm(response ~ age * trt + grade, gtsummary::trial, family = binomial)
+#' res <- mod %>% tidy_plus_plus(exponentiate = TRUE)
+#' res %>% tidy_select_variables(all_continuous())
+#' res %>% tidy_select_variables(all_dichotomous())
+#' res %>% tidy_select_variables(all_categorical())
+#' res %>% tidy_select_variables(all_categorical(dichotomous = FALSE))
+#' res %>% tidy_select_variables(all_interaction())
 NULL
 
 #' @rdname select_helpers

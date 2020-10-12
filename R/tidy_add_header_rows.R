@@ -21,7 +21,8 @@
 #' @param x a tidy tibble
 #' @param show_single_row a vector indicating the names of binary
 #' variables that should be displayed on a single row.
-#' Accepts tidyselect notation. Default is `NULL`
+#' Accepts [tidyselect][dplyr::select] syntax. Default is `NULL`.
+#' See also [all_dichotomous()]
 #' @param model the corresponding model, if not attached to `x`
 #' @inheritParams tidy_plus_plus
 #' @export
@@ -31,7 +32,7 @@
 #'   dplyr::as_tibble() %>%
 #'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
 #'
-#' df %>%
+#' res <- df %>%
 #'   glm(
 #'     Survived ~ Class + Age + Sex,
 #'     data = ., weights = .$n, family = binomial,
@@ -39,8 +40,9 @@
 #'   ) %>%
 #'   tidy_and_attach() %>%
 #'   tidy_add_variable_labels(labels = list(Class = "Custom label for Class")) %>%
-#'   tidy_add_reference_rows() %>%
-#'   tidy_add_header_rows()
+#'   tidy_add_reference_rows()
+#' res %>% tidy_add_header_rows()
+#' res %>% tidy_add_header_rows(show_single_row = all_dichotomous())
 #'
 #' if (requireNamespace("gtsummary")) {
 #'   glm(
