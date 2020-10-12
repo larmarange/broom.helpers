@@ -105,6 +105,17 @@ test_that("test tidy_add_estimate_to_reference_rows() checks", {
   # expect an error if no value for exponentiate
   expect_error(mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows(exponentiate = NULL))
   expect_error(mod %>% broom::tidy() %>% tidy_attach_model(mod) %>% tidy_add_estimate_to_reference_rows())
+
+  # expect a message if this is a model not covered by emmeans
+  mod <- glm(
+    response ~ stage + grade + trt, gtsummary::trial,
+    family = binomial, contrasts = list(grade = contr.sum)
+  )
+  res <- mod %>% tidy_and_attach() %>% tidy_add_reference_rows()
+  class(mod) <- "unknown"
+  expect_message(
+    res %>% tidy_add_estimate_to_reference_rows(model = mod)
+  )
 })
 
 test_that("tidy_add_estimate_to_reference_rows() works with character variables", {
