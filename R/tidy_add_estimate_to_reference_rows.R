@@ -119,7 +119,9 @@ tidy_add_estimate_to_reference_rows <- function(
       ))
   } else {
     dc <- tryCatch(
-      emmeans::emmeans(model, specs = variable, contr = "eff"),
+      suppressMessages(
+        emmeans::emmeans(model, specs = variable, contr = "eff")
+      ),
       error = function(e) {
         if (!quiet)
           usethis::ui_info(paste0(
