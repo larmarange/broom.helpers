@@ -158,6 +158,7 @@ tidy_detach_model()
   exponentiate <span class='op'>=</span> <span class='cn'>FALSE</span>,
   variable_labels <span class='op'>=</span> <span class='cn'>NULL</span>,
   term_labels <span class='op'>=</span> <span class='cn'>NULL</span>,
+  interaction_sep <span class='op'>=</span> <span class='st'>" * "</span>,
   add_reference_rows <span class='op'>=</span> <span class='cn'>TRUE</span>,
   no_reference_row <span class='op'>=</span> <span class='cn'>NULL</span>,
   add_estimate_to_reference_rows <span class='op'>=</span> <span class='cn'>TRUE</span>,
@@ -199,6 +200,10 @@ but a bad idea if there is no log or logit link; defaults to <code>FALSE</code>.
     <tr>
       <th>term_labels</th>
       <td><p>a named list or a named vector of custom term labels</p></td>
+    </tr>
+    <tr>
+      <th>interaction_sep</th>
+      <td><p>separator for interaction terms</p></td>
     </tr>
     <tr>
       <th>add_reference_rows</th>
