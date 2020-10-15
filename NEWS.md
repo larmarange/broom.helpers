@@ -26,6 +26,7 @@
   sum contrasts, allowing to cover a wider range of models
 * Tibbles returned by `tidy_*` functions also inherits of `"broom.helpers"` 
   class (#56)
+* `interaction_sep` argument has been added to `tidy_plus_plus()`
 * Bug fix for non standard variable names containing
   a character that would have a special meaning in
   a regular expression (#44)

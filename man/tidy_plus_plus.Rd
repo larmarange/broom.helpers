@@ -11,6 +11,7 @@ tidy_plus_plus(
   exponentiate = FALSE,
   variable_labels = NULL,
   term_labels = NULL,
+  interaction_sep = " * ",
   add_reference_rows = TRUE,
   no_reference_row = NULL,
   add_estimate_to_reference_rows = TRUE,
@@ -38,6 +39,8 @@ but a bad idea if there is no log or logit link; defaults to \code{FALSE}.}
 \item{variable_labels}{a named list or a named vector of custom variable labels}
 
 \item{term_labels}{a named list or a named vector of custom term labels}
+
+\item{interaction_sep}{separator for interaction terms}
 
 \item{add_reference_rows}{should reference rows be added?}
 

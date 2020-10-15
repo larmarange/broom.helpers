@@ -22,6 +22,7 @@
 #' but a bad idea if there is no log or logit link; defaults to `FALSE`.
 #' @param variable_labels a named list or a named vector of custom variable labels
 #' @param term_labels a named list or a named vector of custom term labels
+#' @param interaction_sep separator for interaction terms
 #' @param add_reference_rows should reference rows be added?
 #' @param no_reference_row variables (accepts [tidyselect][dplyr::select] notation)
 #' for those no reference row should be added, when `add_reference_rows = TRUE`
@@ -90,6 +91,7 @@ tidy_plus_plus <- function(
                            exponentiate = FALSE,
                            variable_labels = NULL,
                            term_labels = NULL,
+                           interaction_sep = " * ",
                            add_reference_rows = TRUE,
                            no_reference_row = NULL,
                            add_estimate_to_reference_rows = TRUE,
@@ -121,8 +123,16 @@ tidy_plus_plus <- function(
       tidy_add_estimate_to_reference_rows(exponentiate = exponentiate, quiet = quiet)
   }
   res <- res %>%
-    tidy_add_variable_labels(labels = variable_labels, quiet = quiet) %>%
-    tidy_add_term_labels(labels = term_labels, quiet = quiet)
+    tidy_add_variable_labels(
+      labels = variable_labels,
+      interaction_sep = interaction_sep,
+      quiet = quiet
+      ) %>%
+    tidy_add_term_labels(
+      labels = term_labels,
+      interaction_sep = interaction_sep,
+      quiet = quiet
+    )
   if (add_header_rows) {
     res <- res %>%
       tidy_add_header_rows(show_single_row = {{ show_single_row }},
