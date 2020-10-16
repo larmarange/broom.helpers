@@ -51,7 +51,9 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x),
   .attributes <- .save_attributes(x)
 
   if ("variable" %in% names(x)) {
-    x <- x %>% dplyr::select(-.data$variable, -.data$var_class, -.data$var_type)
+    x <- x %>% dplyr::select(
+      -any_of(c("variable", "var_class", "var_type", "var_nlevels"))
+    )
   }
 
   variables_list <- model_identify_variables(model)

@@ -37,6 +37,11 @@ test_that("test tidy_identify_variables() checks", {
     mod %>% tidy_and_attach() %>% tidy_identify_variables() %>% tidy_identify_variables(),
     NA
   )
+  res <- mod %>% tidy_and_attach() %>% tidy_identify_variables() %>% tidy_identify_variables()
+  expect_true(
+    all(c("variable", "var_type", "var_class", "var_nlevels")
+        %in% names(res))
+  )
 
   # cannot be applied after tidy_add_header_rows
   expect_error(
