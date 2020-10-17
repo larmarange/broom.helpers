@@ -8,6 +8,7 @@ tidy_add_term_labels(
   x,
   labels = NULL,
   interaction_sep = " * ",
+  categorical_terms_pattern = "{level}",
   model = tidy_get_model(x),
   quiet = FALSE,
   strict = FALSE
@@ -20,6 +21,10 @@ tidy_add_term_labels(
 custom term labels}
 
 \item{interaction_sep}{separator for interaction terms}
+
+\item{categorical_terms_pattern}{a \link[glue:glue]{glue pattern} for
+labels of categorical terms with treatment or sum contrasts
+(see examples and \code{\link[=model_list_terms_levels]{model_list_terms_levels()}})}
 
 \item{model}{the corresponding model, if not attached to \code{x}}
 
@@ -57,10 +62,17 @@ df <- Titanic \%>\%
     Sex = "Sex"
   )
 
-df \%>\%
-  glm(Survived ~ Class * Age * Sex, data = ., weights = .$n, family = binomial) \%>\%
+mod <- df \%>\%
+  glm(Survived ~ Class * Age * Sex, data = ., weights = .$n, family = binomial)
+mod \%>\%
   tidy_and_attach() \%>\%
   tidy_add_term_labels()
+mod \%>\%
+  tidy_and_attach() \%>\%
+  tidy_add_term_labels(
+    interaction_sep = " x ",
+    categorical_terms_pattern = "{level} / {reference_level}"
+  )
 }
 \seealso{
 Other tidy_helpers: 
