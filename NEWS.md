@@ -1,11 +1,11 @@
 # broom.helpers (development version)
 
+* **Breaking change:** column `var_type` returned by `tidy_identify_variables`
+  is now equal to `"dichotomous"` for categorical variables with only
+  2 levels
 * New selecting functions `all_continuous()`, `all_categorical()`,
   `all_dichotomous()`, and `all_interaction()` for selecting variables 
   from models (#54)
-* Breaking change: column `var_type` returned by `tidy_identify_variables`
-  is now equal to `"dichotomous"` for categorical variables with only
-  2 levels
 * Added support for multiple imputation models from the {mice} 
   package. The model passed must be the un-pooled models, and the 
   pooling step included in `tidy_fun=` (#49 @ddsjoberg) 
@@ -16,8 +16,15 @@
   (generic, logistic, Poisson or proportional hazard) used
   by a model (#46)
 * New `no_reference_row` argument for `tidy_add_reference_rows()` (#47)
+* Categorical terms can now be customized with a pattern taking into account
+  term level, reference level and/or variable label, see `model_list_terms_levels()`
+  and `categorical_terms_pattern` in `tidy_plus_plus()` and `tidy_add_term_labels` (#61)
+* `model_list_terms_levels()` now returns additional columns (`level`, `reference_level`
+  and `var_label`)
+* `model_list_variables()` now returns an additional `var_label` column
 * The `exponentiate` argument is now passed to the `tidy_*()`
-  functions, as an attribute attached to the tibble
+  functions, as an attribute attached to the tibble, as well as custom labels
+  (`variable_labels` and `term_labels`)
 * `show_single_row` argument now accepts tidyselect notation (#51 @ddsjoberg)
 * New method `model_get_nlevels` to get the number of levels of categorical variables
 * New column `var_nlevels` returned by `tidy_identify_variables()`,

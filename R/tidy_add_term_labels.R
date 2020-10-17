@@ -3,7 +3,8 @@
 #' Will add term labels in a `label` column, based on:
 #' 1. labels provided in `labels` argument if provided;
 #' 2. factor levels for categorical variables coded with
-#'    treatment, SAS or sum contrasts;
+#'    treatment, SAS or sum contrasts (the label could be
+#'    customized with `categorical_terms_pattern` argument);
 #' 3. variable labels when there is only one term per variable;
 #' 4. term name otherwise.
 #'

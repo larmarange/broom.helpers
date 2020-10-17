@@ -39,7 +39,8 @@ Will add term labels in a \code{label} column, based on:
 \enumerate{
 \item labels provided in \code{labels} argument if provided;
 \item factor levels for categorical variables coded with
-treatment, SAS or sum contrasts;
+treatment, SAS or sum contrasts (the label could be
+customized with \code{categorical_terms_pattern} argument);
 \item variable labels when there is only one term per variable;
 \item term name otherwise.
 }
