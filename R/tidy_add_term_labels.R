@@ -163,6 +163,8 @@ tidy_add_term_labels <- function(x,
   # labels argument
   term_labels <- term_labels %>%
     .update_vector(labels)
+  # save custom labels
+  .attributes$term_labels <- labels
 
   # management of interaction terms
   interaction_terms <- xx$term[!is.na(xx$var_type) & xx$var_type == "interaction"]

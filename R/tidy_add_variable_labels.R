@@ -98,6 +98,9 @@ tidy_add_variable_labels <- function(x,
   var_labels <- var_labels %>%
     .update_vector(labels)
 
+  # save custom labels
+  .attributes$variable_labels <- labels
+
   # management of interaction terms
   interaction_terms <- x$variable[!is.na(x$var_type) & x$var_type == "interaction"]
   # do not treat those specified in labels
