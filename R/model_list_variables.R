@@ -169,7 +169,7 @@ model_list_variables.lavaan <- function(model, labels = NULL) {
       )
   }
   x %>% dplyr::mutate(
-    label_attr = as.character(label_attr),
+    label_attr = as.character(.data$label_attr),
     var_label = dplyr::case_when(
       !is.na(.data$var_custom_label) ~ .data$var_custom_label,
       !is.na(.data$label_attr) ~ .data$label_attr,
