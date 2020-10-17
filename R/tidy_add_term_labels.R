@@ -92,7 +92,11 @@ tidy_add_term_labels <- function(x,
   names(term_labels) <- term_labels
 
   # add categorical terms levels
-  terms_levels <- model_list_terms_levels(model, label_pattern = categorical_terms_pattern)
+  terms_levels <- model_list_terms_levels(
+    model,
+    label_pattern = categorical_terms_pattern,
+    variable_labels = .attributes$variable_labels
+  )
   additional_term_labels <- terms_levels$label
   names(additional_term_labels) <- terms_levels$term
   term_labels <- term_labels %>%

@@ -5,15 +5,18 @@
 #'
 #' @param model a model object
 #' @param label_pattern a [glue pattern][glue::glue()] for term labels (see examples)
+#' @param variable_labels an optional named list or named vector of
+#' custom variable labels passed to [model_list_variables()]
 #' @return
-#' A tibble with six columns:
+#' A tibble with seven columns:
 #' * `variable`: variable
 #' * `term`: term name
 #' * `level`: term level
 #' * `reference`: logical indicating which term is the reference level
 #' * `reference_level`: level of the reference term
+#' * `var_label`: variable label obtained with [model_list_variables()]
 #' * `label`: term label (by default equal to term level)
-#' The first five columns can be used in `label_pattern`.
+#' The first six columns can be used in `label_pattern`.
 #' @export
 #' @family model_helpers
 #' @examples
@@ -41,13 +44,20 @@
 #' mod %>% model_list_terms_levels(
 #'   "{ifelse(reference, level, paste(level, '-', reference_level))}"
 #' )
-model_list_terms_levels <- function(model, label_pattern = "{level}") {
+model_list_terms_levels <- function(
+  model,
+  label_pattern = "{level}",
+  variable_labels = NULL
+) {
   UseMethod("model_list_terms_levels")
 }
 
 #' @export
 #' @rdname model_list_terms_levels
-model_list_terms_levels.default <- function(model, label_pattern = "{level}") {
+model_list_terms_levels.default <- function(
+  model, label_pattern = "{level}",
+  variable_labels = NULL
+) {
   contrasts_list <- model_list_contrasts(model)
   if (is.null(contrasts_list))
     return(NULL)
@@ -124,6 +134,12 @@ model_list_terms_levels.default <- function(model, label_pattern = "{level}") {
   }
 
   res %>%
+    dplyr::left_join(
+      model %>%
+        model_list_variables(labels = variable_labels) %>%
+        dplyr::select(all_of(c("variable", "var_label"))),
+      by = "variable"
+    ) %>%
     dplyr::mutate(label = stringr::str_glue_data(res, label_pattern))
 }
 

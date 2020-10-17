@@ -4,6 +4,19 @@ test_that("tidy_plus_plus() works for basic models", {
     mod %>% tidy_plus_plus(add_header_rows = TRUE, include = c(stage, grade)),
     NA
   )
+
+  # combining custom variable labels with categorical_terms_pattern
+  # check that the custom variable labels are passed to model_list_terms_levels()
+  res <- mod %>%
+    tidy_plus_plus(
+      variable_labels = c(grade = "custom"),
+      add_reference_rows = FALSE,
+      categorical_terms_pattern = "{var_label}:{level}/{reference_level}"
+    )
+  expect_equivalent(
+    res$label,
+    c("Age", "custom:II/I", "custom:III/I", "Chemotherapy Treatment:Drug B/Drug A")
+  )
 })
 
 

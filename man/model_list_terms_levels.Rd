@@ -5,25 +5,37 @@
 \alias{model_list_terms_levels.default}
 \title{List levels of categorical terms}
 \usage{
-model_list_terms_levels(model, label_pattern = "{level}")
+model_list_terms_levels(
+  model,
+  label_pattern = "{level}",
+  variable_labels = NULL
+)
 
-\method{model_list_terms_levels}{default}(model, label_pattern = "{level}")
+\method{model_list_terms_levels}{default}(
+  model,
+  label_pattern = "{level}",
+  variable_labels = NULL
+)
 }
 \arguments{
 \item{model}{a model object}
 
 \item{label_pattern}{a \link[glue:glue]{glue pattern} for term labels (see examples)}
+
+\item{variable_labels}{an optional named list or named vector of
+custom variable labels passed to \code{\link[=model_list_variables]{model_list_variables()}}}
 }
 \value{
-A tibble with six columns:
+A tibble with seven columns:
 \itemize{
 \item \code{variable}: variable
 \item \code{term}: term name
 \item \code{level}: term level
 \item \code{reference}: logical indicating which term is the reference level
 \item \code{reference_level}: level of the reference term
+\item \code{var_label}: variable label obtained with \code{\link[=model_list_variables]{model_list_variables()}}
 \item \code{label}: term label (by default equal to term level)
-The first five columns can be used in \code{label_pattern}.
+The first six columns can be used in \code{label_pattern}.
 }
 }
 \description{
