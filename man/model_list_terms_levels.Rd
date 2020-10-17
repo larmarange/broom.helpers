@@ -26,16 +26,17 @@ model_list_terms_levels(
 custom variable labels passed to \code{\link[=model_list_variables]{model_list_variables()}}}
 }
 \value{
-A tibble with seven columns:
+A tibble with height columns:
 \itemize{
 \item \code{variable}: variable
+\item \code{contrasts_type}: type of contrasts ("sum" or "treatment")
 \item \code{term}: term name
 \item \code{level}: term level
 \item \code{reference}: logical indicating which term is the reference level
 \item \code{reference_level}: level of the reference term
 \item \code{var_label}: variable label obtained with \code{\link[=model_list_variables]{model_list_variables()}}
 \item \code{label}: term label (by default equal to term level)
-The first six columns can be used in \code{label_pattern}.
+The first seven columns can be used in \code{label_pattern}.
 }
 }
 \description{

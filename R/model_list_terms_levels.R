@@ -8,15 +8,16 @@
 #' @param variable_labels an optional named list or named vector of
 #' custom variable labels passed to [model_list_variables()]
 #' @return
-#' A tibble with seven columns:
+#' A tibble with height columns:
 #' * `variable`: variable
+#' * `contrasts_type`: type of contrasts ("sum" or "treatment")
 #' * `term`: term name
 #' * `level`: term level
 #' * `reference`: logical indicating which term is the reference level
 #' * `reference_level`: level of the reference term
 #' * `var_label`: variable label obtained with [model_list_variables()]
 #' * `label`: term label (by default equal to term level)
-#' The first six columns can be used in `label_pattern`.
+#' The first seven columns can be used in `label_pattern`.
 #' @export
 #' @family model_helpers
 #' @examples
@@ -83,6 +84,11 @@ model_list_terms_levels.default <- function(
 
   for (v in contrasts_list$variable) {
     if (v %in% names(xlevels)) {
+      contrasts_type <- ifelse(
+        contrasts_list$contrasts[contrasts_list$variable == v] == "contr.sum",
+        "sum",
+        "treatment"
+      )
       term_levels <- xlevels[[v]]
       # terms could be named according to two approaches
       terms_names1 <- paste0(v, term_levels)
@@ -111,6 +117,7 @@ model_list_terms_levels.default <- function(
           res,
           dplyr::tibble(
             variable = v,
+            contrasts_type = contrasts_type,
             term = terms_names1,
             level = term_levels,
             reference = seq(1, length(term_levels)) == ref,
@@ -122,6 +129,7 @@ model_list_terms_levels.default <- function(
           res,
           dplyr::tibble(
             variable = v,
+            contrasts_type = contrasts_type,
             term = terms_names2,
             level = term_levels,
             reference = seq(1, length(term_levels)) == ref,
