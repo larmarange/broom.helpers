@@ -4,12 +4,20 @@
 #' SAS or sum contrasts.
 #'
 #' @param model a model object
+#' @param label_pattern a [glue pattern][glue::glue()] for term labels (see examples)
+#' @param variable_labels an optional named list or named vector of
+#' custom variable labels passed to [model_list_variables()]
 #' @return
-#' A tibble with four columns:
+#' A tibble with height columns:
 #' * `variable`: variable
+#' * `contrasts_type`: type of contrasts ("sum" or "treatment")
 #' * `term`: term name
 #' * `level`: term level
 #' * `reference`: logical indicating which term is the reference level
+#' * `reference_level`: level of the reference term
+#' * `var_label`: variable label obtained with [model_list_variables()]
+#' * `label`: term label (by default equal to term level)
+#' The first seven columns can be used in `label_pattern`.
 #' @export
 #' @family model_helpers
 #' @examples
@@ -25,20 +33,32 @@
 #'   dplyr::as_tibble() %>%
 #'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
 #'
-#' df %>%
+#' mod <- df %>%
 #'   glm(
 #'     Survived ~ Class + Age + Sex,
 #'     data = ., weights = .$n, family = binomial,
 #'     contrasts = list(Age = contr.sum, Class = "contr.helmert")
-#'   ) %>%
-#'   model_list_terms_levels()
-model_list_terms_levels <- function(model) {
+#'   )
+#' mod %>% model_list_terms_levels()
+#' mod %>% model_list_terms_levels("{level} vs {reference_level}")
+#' mod %>% model_list_terms_levels("{variable} [{level} - {reference_level}]")
+#' mod %>% model_list_terms_levels(
+#'   "{ifelse(reference, level, paste(level, '-', reference_level))}"
+#' )
+model_list_terms_levels <- function(
+  model,
+  label_pattern = "{level}",
+  variable_labels = NULL
+) {
   UseMethod("model_list_terms_levels")
 }
 
 #' @export
 #' @rdname model_list_terms_levels
-model_list_terms_levels.default <- function(model) {
+model_list_terms_levels.default <- function(
+  model, label_pattern = "{level}",
+  variable_labels = NULL
+) {
   contrasts_list <- model_list_contrasts(model)
   if (is.null(contrasts_list))
     return(NULL)
@@ -64,6 +84,11 @@ model_list_terms_levels.default <- function(model) {
 
   for (v in contrasts_list$variable) {
     if (v %in% names(xlevels)) {
+      contrasts_type <- ifelse(
+        contrasts_list$contrasts[contrasts_list$variable == v] == "contr.sum",
+        "sum",
+        "treatment"
+      )
       term_levels <- xlevels[[v]]
       # terms could be named according to two approaches
       terms_names1 <- paste0(v, term_levels)
@@ -92,9 +117,11 @@ model_list_terms_levels.default <- function(model) {
           res,
           dplyr::tibble(
             variable = v,
+            contrasts_type = contrasts_type,
             term = terms_names1,
-            label = term_levels,
-            reference = seq(1, length(term_levels)) == ref
+            level = term_levels,
+            reference = seq(1, length(term_levels)) == ref,
+            reference_level = term_levels[ref]
           )
         )
       } else {
@@ -102,9 +129,11 @@ model_list_terms_levels.default <- function(model) {
           res,
           dplyr::tibble(
             variable = v,
+            contrasts_type = contrasts_type,
             term = terms_names2,
-            label = term_levels,
-            reference = seq(1, length(term_levels)) == ref
+            level = term_levels,
+            reference = seq(1, length(term_levels)) == ref,
+            reference_level = term_levels[ref]
           )
         )
       }
@@ -112,7 +141,14 @@ model_list_terms_levels.default <- function(model) {
     }
   }
 
-  res
+  res %>%
+    dplyr::left_join(
+      model %>%
+        model_list_variables(labels = variable_labels) %>%
+        dplyr::select(all_of(c("variable", "var_label"))),
+      by = "variable"
+    ) %>%
+    dplyr::mutate(label = stringr::str_glue_data(res, label_pattern))
 }
 
 # count the total number of times where elements of searched

@@ -88,6 +88,17 @@ test_that("tidy_add_variable_labels() works for basic models", {
       "factor(response) * Marker Level (ng/mL)"
     )
   )
+
+  # custom label for interaction term
+  mod <- glm(response ~ age + grade * trt, df, family = binomial)
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_add_variable_labels(labels = c("grade:trt" = "custom label"))
+  expect_equivalent(
+    res$var_label,
+    c("(Intercept)", "Age", "Grade", "Grade", "Chemotherapy Treatment",
+      "custom label", "custom label")
+  )
 })
 
 

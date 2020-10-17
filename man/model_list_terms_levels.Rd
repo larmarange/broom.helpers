@@ -5,20 +5,38 @@
 \alias{model_list_terms_levels.default}
 \title{List levels of categorical terms}
 \usage{
-model_list_terms_levels(model)
+model_list_terms_levels(
+  model,
+  label_pattern = "{level}",
+  variable_labels = NULL
+)
 
-\method{model_list_terms_levels}{default}(model)
+\method{model_list_terms_levels}{default}(
+  model,
+  label_pattern = "{level}",
+  variable_labels = NULL
+)
 }
 \arguments{
 \item{model}{a model object}
+
+\item{label_pattern}{a \link[glue:glue]{glue pattern} for term labels (see examples)}
+
+\item{variable_labels}{an optional named list or named vector of
+custom variable labels passed to \code{\link[=model_list_variables]{model_list_variables()}}}
 }
 \value{
-A tibble with four columns:
+A tibble with height columns:
 \itemize{
 \item \code{variable}: variable
+\item \code{contrasts_type}: type of contrasts ("sum" or "treatment")
 \item \code{term}: term name
 \item \code{level}: term level
 \item \code{reference}: logical indicating which term is the reference level
+\item \code{reference_level}: level of the reference term
+\item \code{var_label}: variable label obtained with \code{\link[=model_list_variables]{model_list_variables()}}
+\item \code{label}: term label (by default equal to term level)
+The first seven columns can be used in \code{label_pattern}.
 }
 }
 \description{
@@ -38,13 +56,18 @@ df <- Titanic \%>\%
   dplyr::as_tibble() \%>\%
   dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
 
-df \%>\%
+mod <- df \%>\%
   glm(
     Survived ~ Class + Age + Sex,
     data = ., weights = .$n, family = binomial,
     contrasts = list(Age = contr.sum, Class = "contr.helmert")
-  ) \%>\%
-  model_list_terms_levels()
+  )
+mod \%>\% model_list_terms_levels()
+mod \%>\% model_list_terms_levels("{level} vs {reference_level}")
+mod \%>\% model_list_terms_levels("{variable} [{level} - {reference_level}]")
+mod \%>\% model_list_terms_levels(
+  "{ifelse(reference, level, paste(level, '-', reference_level))}"
+)
 }
 \seealso{
 Other model_helpers: 

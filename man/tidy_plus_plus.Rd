@@ -12,6 +12,7 @@ tidy_plus_plus(
   variable_labels = NULL,
   term_labels = NULL,
   interaction_sep = " * ",
+  categorical_terms_pattern = "{level}",
   add_reference_rows = TRUE,
   no_reference_row = NULL,
   add_estimate_to_reference_rows = TRUE,
@@ -41,6 +42,10 @@ but a bad idea if there is no log or logit link; defaults to \code{FALSE}.}
 \item{term_labels}{a named list or a named vector of custom term labels}
 
 \item{interaction_sep}{separator for interaction terms}
+
+\item{categorical_terms_pattern}{a \link[glue:glue]{glue pattern} for
+labels of categorical terms with treatment or sum contrasts
+(see \code{\link[=model_list_terms_levels]{model_list_terms_levels()}})}
 
 \item{add_reference_rows}{should reference rows be added?}
 
@@ -109,7 +114,11 @@ ex2 <- glm(
   data = df, weights = df$n,
   family = binomial
 ) \%>\%
-  tidy_plus_plus(exponentiate = TRUE)
+  tidy_plus_plus(
+    exponentiate = TRUE,
+    add_reference_rows = FALSE,
+    categorical_terms_pattern = "{level} / {reference_level}"
+  )
 ex2
 
 if (requireNamespace("gtsummary")) {

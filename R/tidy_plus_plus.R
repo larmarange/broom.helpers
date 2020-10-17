@@ -23,6 +23,9 @@
 #' @param variable_labels a named list or a named vector of custom variable labels
 #' @param term_labels a named list or a named vector of custom term labels
 #' @param interaction_sep separator for interaction terms
+#' @param categorical_terms_pattern a [glue pattern][glue::glue()] for
+#' labels of categorical terms with treatment or sum contrasts
+#' (see [model_list_terms_levels()])
 #' @param add_reference_rows should reference rows be added?
 #' @param no_reference_row variables (accepts [tidyselect][dplyr::select] notation)
 #' for those no reference row should be added, when `add_reference_rows = TRUE`
@@ -60,7 +63,11 @@
 #'   data = df, weights = df$n,
 #'   family = binomial
 #' ) %>%
-#'   tidy_plus_plus(exponentiate = TRUE)
+#'   tidy_plus_plus(
+#'     exponentiate = TRUE,
+#'     add_reference_rows = FALSE,
+#'     categorical_terms_pattern = "{level} / {reference_level}"
+#'   )
 #' ex2
 #'
 #' if (requireNamespace("gtsummary")) {
@@ -92,6 +99,7 @@ tidy_plus_plus <- function(
                            variable_labels = NULL,
                            term_labels = NULL,
                            interaction_sep = " * ",
+                           categorical_terms_pattern = "{level}",
                            add_reference_rows = TRUE,
                            no_reference_row = NULL,
                            add_estimate_to_reference_rows = TRUE,
@@ -131,6 +139,7 @@ tidy_plus_plus <- function(
     tidy_add_term_labels(
       labels = term_labels,
       interaction_sep = interaction_sep,
+      categorical_terms_pattern = categorical_terms_pattern,
       quiet = quiet
     )
   if (add_header_rows) {

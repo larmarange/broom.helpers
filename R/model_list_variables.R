@@ -3,12 +3,16 @@
 #' Including variables used only in an interaction.
 #'
 #' @param model a model object
+#' @param labels an optional named list or named vector of
+#' custom variable labels
 #' @return
 #' A tibble with three columns:
 #' * `variable`: the corresponding variable
 #' * `var_class`: class of the variable (cf. [stats::.MFclass()])
 #' * `label_attr`: variable label defined in the original data frame
 #'    with the label attribute (cf. [labelled::var_label()])
+#' * `var_label`: a variable label (by priority, `labels` if defined,
+#'   `label_attr` if available, otherwise `variable`)
 #'
 #' @export
 #' @family model_helpers
@@ -39,13 +43,13 @@
 #'   ) %>%
 #'     model_list_variables()
 #' }
-model_list_variables <- function(model) {
+model_list_variables <- function(model, labels = NULL) {
   UseMethod("model_list_variables")
 }
 
 #' @rdname model_list_variables
 #' @export
-model_list_variables.default <- function(model) {
+model_list_variables.default <- function(model, labels = NULL) {
   model_terms <- stats::terms(model)
 
   variable_names <- attr(model_terms, "term.labels") %>%
@@ -70,13 +74,14 @@ model_list_variables.default <- function(model) {
     # specific case of polynomial terms defined with poly()
     dplyr::mutate(
       variable = stringr::str_replace(.data$variable, "^poly\\((.*),(.*)\\)$", "\\1")
-    )
+    ) %>%
+    .compute_var_label(labels)
 }
 
 
 #' @rdname model_list_variables
 #' @export
-model_list_variables.lavaan <- function(model) {
+model_list_variables.lavaan <- function(model, labels = NULL) {
   tibble::tibble(
     variable = unique(model@ParTable$lhs)
   ) %>%
@@ -94,7 +99,8 @@ model_list_variables.lavaan <- function(model) {
         .data$var_class
       )
     ) %>%
-    .add_label_attr(model)
+    .add_label_attr(model) %>%
+    .compute_var_label(labels)
 }
 
 ## model_list_variables() helpers --------------------------
@@ -144,4 +150,31 @@ model_list_variables.lavaan <- function(model) {
   if (is.numeric(x))
     return("numeric")
   return("other")
+}
+
+.compute_var_label <- function(x, labels = NULL) {
+  if (is.list(labels)) {
+    labels <- unlist(labels)
+  }
+  if (is.null(labels)) {
+    x$var_custom_label <- NA_character_
+  } else {
+    x <- x %>%
+      dplyr::left_join(
+        dplyr::tibble(
+          variable = names(labels),
+          var_custom_label = labels
+        ),
+        by = "variable"
+      )
+  }
+  x %>% dplyr::mutate(
+    label_attr = as.character(label_attr),
+    var_label = dplyr::case_when(
+      !is.na(.data$var_custom_label) ~ .data$var_custom_label,
+      !is.na(.data$label_attr) ~ .data$label_attr,
+      TRUE ~ .data$variable
+    )
+  ) %>%
+    dplyr::select(-.data$var_custom_label)
 }

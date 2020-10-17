@@ -3,7 +3,8 @@
 #' Will add term labels in a `label` column, based on:
 #' 1. labels provided in `labels` argument if provided;
 #' 2. factor levels for categorical variables coded with
-#'    treatment, SAS or sum contrasts;
+#'    treatment, SAS or sum contrasts (the label could be
+#'    customized with `categorical_terms_pattern` argument);
 #' 3. variable labels when there is only one term per variable;
 #' 4. term name otherwise.
 #'
@@ -19,6 +20,9 @@
 #' @param labels an optional named list or named vector of
 #' custom term labels
 #' @param interaction_sep separator for interaction terms
+#' @param categorical_terms_pattern a [glue pattern][glue::glue()] for
+#' labels of categorical terms with treatment or sum contrasts
+#' (see examples and [model_list_terms_levels()])
 #' @param model the corresponding model, if not attached to `x`
 #' @inheritParams tidy_plus_plus
 #' @export
@@ -32,13 +36,21 @@
 #'     Sex = "Sex"
 #'   )
 #'
-#' df %>%
-#'   glm(Survived ~ Class * Age * Sex, data = ., weights = .$n, family = binomial) %>%
+#' mod <- df %>%
+#'   glm(Survived ~ Class * Age * Sex, data = ., weights = .$n, family = binomial)
+#' mod %>%
 #'   tidy_and_attach() %>%
 #'   tidy_add_term_labels()
+#' mod %>%
+#'   tidy_and_attach() %>%
+#'   tidy_add_term_labels(
+#'     interaction_sep = " x ",
+#'     categorical_terms_pattern = "{level} / {reference_level}"
+#'   )
 tidy_add_term_labels <- function(x,
                                  labels = NULL,
                                  interaction_sep = " * ",
+                                 categorical_terms_pattern = "{level}",
                                  model = tidy_get_model(x),
                                  quiet = FALSE,
                                  strict = FALSE) {
@@ -81,7 +93,11 @@ tidy_add_term_labels <- function(x,
   names(term_labels) <- term_labels
 
   # add categorical terms levels
-  terms_levels <- model_list_terms_levels(model)
+  terms_levels <- model_list_terms_levels(
+    model,
+    label_pattern = categorical_terms_pattern,
+    variable_labels = .attributes$variable_labels
+  )
   additional_term_labels <- terms_levels$label
   names(additional_term_labels) <- terms_levels$term
   term_labels <- term_labels %>%
@@ -152,6 +168,8 @@ tidy_add_term_labels <- function(x,
   # labels argument
   term_labels <- term_labels %>%
     .update_vector(labels)
+  # save custom labels
+  .attributes$term_labels <- labels
 
   # management of interaction terms
   interaction_terms <- xx$term[!is.na(xx$var_type) & xx$var_type == "interaction"]
