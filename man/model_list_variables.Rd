@@ -6,14 +6,17 @@
 \alias{model_list_variables.lavaan}
 \title{List all the variables used in a model}
 \usage{
-model_list_variables(model)
+model_list_variables(model, labels = NULL)
 
-\method{model_list_variables}{default}(model)
+\method{model_list_variables}{default}(model, labels = NULL)
 
-\method{model_list_variables}{lavaan}(model)
+\method{model_list_variables}{lavaan}(model, labels = NULL)
 }
 \arguments{
 \item{model}{a model object}
+
+\item{labels}{an optional named list or named vector of
+custom variable labels}
 }
 \value{
 A tibble with three columns:
@@ -22,6 +25,8 @@ A tibble with three columns:
 \item \code{var_class}: class of the variable (cf. \code{\link[stats:checkMFClasses]{stats::.MFclass()}})
 \item \code{label_attr}: variable label defined in the original data frame
 with the label attribute (cf. \code{\link[labelled:var_label]{labelled::var_label()}})
+\item \code{var_label}: a variable label (by priority, \code{labels} if defined,
+\code{label_attr} if available, otherwise \code{variable})
 }
 }
 \description{

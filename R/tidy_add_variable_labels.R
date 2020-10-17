@@ -63,10 +63,10 @@ tidy_add_variable_labels <- function(x,
     x <- x %>% tidy_identify_variables(model = model)
   }
 
-  # start with the list of variables
-  variable_list <- model_list_variables(model)
-  var_labels <- variable_list$variable
-  names(var_labels) <- var_labels
+  # start model_list_variables
+  variable_list <- model_list_variables(model, labels = labels)
+  var_labels <- variable_list$var_label
+  names(var_labels) <- variable_list$variable
 
   # identify terms with no variable
   # (e.g. intercepts)
@@ -77,12 +77,6 @@ tidy_add_variable_labels <- function(x,
   x$variable[variable_is_na] <- x$term[variable_is_na]
   additional_labels <- unique(x$variable[variable_is_na])
   names(additional_labels) <- additional_labels
-  var_labels <- var_labels %>%
-    .update_vector(additional_labels)
-
-  # table into account variable label attribute
-  additional_labels <- variable_list$label_attr[!is.na(variable_list$label_attr)]
-  names(additional_labels) <- variable_list$variable[!is.na(variable_list$label_attr)]
   var_labels <- var_labels %>%
     .update_vector(additional_labels)
 
