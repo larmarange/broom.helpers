@@ -15,7 +15,8 @@ test_that("tidy_plus_plus() works for basic models", {
     )
   expect_equivalent(
     res$label,
-    c("Age", "custom:II/I", "custom:III/I", "Chemotherapy Treatment:Drug B/Drug A")
+    c("T Stage:T2/T1", "T Stage:T3/T1", "T Stage:T4/T1", "custom:II/I",
+      "custom:III/I", "Chemotherapy Treatment:Drug B/Drug A")
   )
 })
 
