@@ -123,13 +123,13 @@
     <p>Including variables used only in an interaction.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>model_list_variables</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
+    <pre class="usage"><span class='fu'>model_list_variables</span><span class='op'>(</span><span class='va'>model</span>, labels <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>model_list_variables</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
+<span class='fu'>model_list_variables</span><span class='op'>(</span><span class='va'>model</span>, labels <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
 <span class='co'># S3 method for lavaan</span>
-<span class='fu'>model_list_variables</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span></pre>
+<span class='fu'>model_list_variables</span><span class='op'>(</span><span class='va'>model</span>, labels <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -137,6 +137,11 @@
     <tr>
       <th>model</th>
       <td><p>a model object</p></td>
+    </tr>
+    <tr>
+      <th>labels</th>
+      <td><p>an optional named list or named vector of
+custom variable labels</p></td>
     </tr>
     </table>
 
@@ -147,6 +152,8 @@
 <li><p><code>var_class</code>: class of the variable (cf. <code><a href='https://rdrr.io/r/stats/checkMFClasses.html'>stats::.MFclass()</a></code>)</p></li>
 <li><p><code>label_attr</code>: variable label defined in the original data frame
 with the label attribute (cf. <code><a href='http://larmarange.github.io/labelled/reference/var_label.html'>labelled::var_label()</a></code>)</p></li>
+<li><p><code>var_label</code>: a variable label (by priority, <code>labels</code> if defined,
+<code>label_attr</code> if available, otherwise <code>variable</code>)</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -173,15 +180,15 @@ with the label attribute (cf. <code><a href='http://larmarange.github.io/labelle
     family <span class='op'>=</span> <span class='va'>binomial</span>
   <span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>model_list_variables</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 6 x 3</span><span>
-#&gt;   variable  var_class label_attr
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     
-#&gt; </span><span style='color: #555555;'>1</span><span> Survived  factor    </span><span style='color: #BB0000;'>NA</span><span>        
-#&gt; </span><span style='color: #555555;'>2</span><span> Class     character </span><span style='color: #BB0000;'>NA</span><span>        
-#&gt; </span><span style='color: #555555;'>3</span><span> Age       character </span><span style='color: #BB0000;'>NA</span><span>        
-#&gt; </span><span style='color: #555555;'>4</span><span> Sex       character </span><span style='color: #BB0000;'>NA</span><span>        
-#&gt; </span><span style='color: #555555;'>5</span><span> (weights) numeric   </span><span style='color: #BB0000;'>NA</span><span>        
-#&gt; </span><span style='color: #555555;'>6</span><span> Age:Sex   </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </div><div class='input'>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 6 x 4</span><span>
+#&gt;   variable  var_class label_attr var_label
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    
+#&gt; </span><span style='color: #555555;'>1</span><span> Survived  factor    </span><span style='color: #BB0000;'>NA</span><span>         Survived 
+#&gt; </span><span style='color: #555555;'>2</span><span> Class     character </span><span style='color: #BB0000;'>NA</span><span>         Class    
+#&gt; </span><span style='color: #555555;'>3</span><span> Age       character </span><span style='color: #BB0000;'>NA</span><span>         Age      
+#&gt; </span><span style='color: #555555;'>4</span><span> Sex       character </span><span style='color: #BB0000;'>NA</span><span>         Sex      
+#&gt; </span><span style='color: #555555;'>5</span><span> (weights) numeric   </span><span style='color: #BB0000;'>NA</span><span>         (weights)
+#&gt; </span><span style='color: #555555;'>6</span><span> Age:Sex   </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>         Age:Sex  </div><div class='input'>
 <span class='va'>iris</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span>
     <span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/stats/poly.html'>poly</a></span><span class='op'>(</span><span class='va'>Sepal.Width</span>, <span class='fl'>2</span><span class='op'>)</span> <span class='op'>+</span> <span class='va'>Species</span>,
@@ -189,12 +196,12 @@ with the label attribute (cf. <code><a href='http://larmarange.github.io/labelle
     contrasts <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>Species <span class='op'>=</span> <span class='va'>contr.sum</span><span class='op'>)</span>
   <span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>model_list_variables</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 3 x 3</span><span>
-#&gt;   variable     var_class label_attr
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     
-#&gt; </span><span style='color: #555555;'>1</span><span> Sepal.Length numeric   </span><span style='color: #BB0000;'>NA</span><span>        
-#&gt; </span><span style='color: #555555;'>2</span><span> Sepal.Width  nmatrix.2 </span><span style='color: #BB0000;'>NA</span><span>        
-#&gt; </span><span style='color: #555555;'>3</span><span> Species      factor    </span><span style='color: #BB0000;'>NA</span><span>        </div><div class='input'>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 3 x 4</span><span>
+#&gt;   variable     var_class label_attr var_label   
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       
+#&gt; </span><span style='color: #555555;'>1</span><span> Sepal.Length numeric   </span><span style='color: #BB0000;'>NA</span><span>         Sepal.Length
+#&gt; </span><span style='color: #555555;'>2</span><span> Sepal.Width  nmatrix.2 </span><span style='color: #BB0000;'>NA</span><span>         Sepal.Width 
+#&gt; </span><span style='color: #555555;'>3</span><span> Species      factor    </span><span style='color: #BB0000;'>NA</span><span>         Species     </div><div class='input'>
 <span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"gtsummary"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
   <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span>
     <span class='va'>response</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/stats/poly.html'>poly</a></span><span class='op'>(</span><span class='va'>age</span>, <span class='fl'>3</span><span class='op'>)</span> <span class='op'>+</span> <span class='va'>stage</span> <span class='op'>+</span> <span class='va'>grade</span> <span class='op'>*</span> <span class='va'>trt</span>,
@@ -203,15 +210,15 @@ with the label attribute (cf. <code><a href='http://larmarange.github.io/labelle
   <span class='op'>)</span> <span class='op'>%&gt;%</span>
     <span class='fu'>model_list_variables</span><span class='op'>(</span><span class='op'>)</span>
 <span class='op'>}</span>
-</div><div class='output co'>#&gt; <span class='message'>Loading required namespace: gtsummary</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 6 x 3</span><span>
-#&gt;   variable  var_class label_attr            
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                 
-#&gt; </span><span style='color: #555555;'>1</span><span> response  integer   Tumor Response        
-#&gt; </span><span style='color: #555555;'>2</span><span> age       nmatrix.3 </span><span style='color: #BB0000;'>NA</span><span>                    
-#&gt; </span><span style='color: #555555;'>3</span><span> stage     factor    T Stage               
-#&gt; </span><span style='color: #555555;'>4</span><span> grade     factor    Grade                 
-#&gt; </span><span style='color: #555555;'>5</span><span> trt       character Chemotherapy Treatment
-#&gt; </span><span style='color: #555555;'>6</span><span> grade:trt </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>                    </div></span></pre>
+</div><div class='output co'>#&gt; <span class='message'>Loading required namespace: gtsummary</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 6 x 4</span><span>
+#&gt;   variable  var_class label_attr             var_label             
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                 
+#&gt; </span><span style='color: #555555;'>1</span><span> response  integer   Tumor Response         Tumor Response        
+#&gt; </span><span style='color: #555555;'>2</span><span> age       nmatrix.3 </span><span style='color: #BB0000;'>NA</span><span>                     age                   
+#&gt; </span><span style='color: #555555;'>3</span><span> stage     factor    T Stage                T Stage               
+#&gt; </span><span style='color: #555555;'>4</span><span> grade     factor    Grade                  Grade                 
+#&gt; </span><span style='color: #555555;'>5</span><span> trt       character Chemotherapy Treatment Chemotherapy Treatment
+#&gt; </span><span style='color: #555555;'>6</span><span> grade:trt </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>                     grade:trt             </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

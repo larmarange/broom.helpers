@@ -122,13 +122,19 @@
 <a href="#broomhelpers-development-version" class="anchor"></a>broom.helpers (development version)<small> Unreleased </small>
 </h1>
 <ul>
+<li>
+<strong>Breaking change:</strong> column <code>var_type</code> returned by <code>tidy_identify_variables</code> is now equal to <code>"dichotomous"</code> for categorical variables with only 2 levels</li>
 <li>New selecting functions <code><a href="../reference/select_helpers.html">all_continuous()</a></code>, <code><a href="../reference/select_helpers.html">all_categorical()</a></code>, <code><a href="../reference/select_helpers.html">all_dichotomous()</a></code>, and <code><a href="../reference/select_helpers.html">all_interaction()</a></code> for selecting variables from models (<a href='https://github.com/larmarange/broom.helpers/issues/54'>#54</a>)</li>
-<li>Breaking change: column <code>var_type</code> returned by <code>tidy_identify_variables</code> is now equal to <code>"dichotomous"</code> for categorical variables with only 2 levels</li>
 <li>Added support for multiple imputation models from the {mice} package. The model passed must be the un-pooled models, and the pooling step included in <code>tidy_fun=</code> (<a href='https://github.com/larmarange/broom.helpers/issues/49'>#49</a> <a href='https://github.com/ddsjoberg'>@ddsjoberg</a>)</li>
 <li>New function <code><a href="../reference/tidy_select_variables.html">tidy_select_variables()</a></code> to keep/drop selected variables in the output (<a href='https://github.com/larmarange/broom.helpers/issues/45'>#45</a>)</li>
 <li>New functions <code><a href="../reference/tidy_add_coefficients_type.html">tidy_add_coefficients_type()</a></code> and <code>model_get_coefficients_type</code> to get the type of coefficients (generic, logistic, Poisson or proportional hazard) used by a model (<a href='https://github.com/larmarange/broom.helpers/issues/46'>#46</a>)</li>
 <li>New <code>no_reference_row</code> argument for <code><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows()</a></code> (<a href='https://github.com/larmarange/broom.helpers/issues/47'>#47</a>)</li>
-<li>The <code>exponentiate</code> argument is now passed to the <code>tidy_*()</code> functions, as an attribute attached to the tibble</li>
+<li>Categorical terms can now be customized with a pattern taking into account term level, reference level and/or variable label, see <code><a href="../reference/model_list_terms_levels.html">model_list_terms_levels()</a></code> and <code>categorical_terms_pattern</code> in <code><a href="../reference/tidy_plus_plus.html">tidy_plus_plus()</a></code> and <code>tidy_add_term_labels</code> (<a href='https://github.com/larmarange/broom.helpers/issues/61'>#61</a>)</li>
+<li>
+<code><a href="../reference/model_list_terms_levels.html">model_list_terms_levels()</a></code> now returns additional columns (<code>level</code>, <code>reference_level</code> <code>contrasts_type</code> and <code>var_label</code>)</li>
+<li>
+<code><a href="../reference/model_list_variables.html">model_list_variables()</a></code> now returns an additional <code>var_label</code> column</li>
+<li>The <code>exponentiate</code> argument is now passed to the <code>tidy_*()</code> functions, as an attribute attached to the tibble, as well as custom labels (<code>variable_labels</code> and <code>term_labels</code>)</li>
 <li>
 <code>show_single_row</code> argument now accepts tidyselect notation (<a href='https://github.com/larmarange/broom.helpers/issues/51'>#51</a> <a href='https://github.com/ddsjoberg'>@ddsjoberg</a>)</li>
 <li>New method <code>model_get_nlevels</code> to get the number of levels of categorical variables</li>
