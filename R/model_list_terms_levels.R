@@ -17,7 +17,7 @@
 #' * `reference_level`: level of the reference term
 #' * `var_label`: variable label obtained with [model_list_variables()]
 #' * `var_nlevels`: number of levels in this variable
-#' * `var_dichotomous`: logical indicating if the variable is dichotomous
+#' * `dichotomous`: logical indicating if the variable is dichotomous
 #' * `label`: term label (by default equal to term level)
 #' The first nine columns can be used in `label_pattern`.
 #' @export
@@ -157,7 +157,7 @@ model_list_terms_levels.default <- function(
       by = "variable"
     ) %>%
     dplyr::mutate(
-      var_dichotomous = .data$var_nlevels == 2,
+      dichotomous = .data$var_nlevels == 2,
       label = stringr::str_glue_data(res, label_pattern)
     )
 }

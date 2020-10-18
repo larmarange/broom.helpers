@@ -23,7 +23,7 @@
   term level, reference level and/or variable label, see `model_list_terms_levels()`
   and `categorical_terms_pattern` in `tidy_plus_plus()` and `tidy_add_term_labels` (#61)
 * `model_list_terms_levels()` now returns additional columns (`level`, `reference_level`
-  `contrasts_type`, `var_label`, `var_levels` and `var_dichotomous`)
+  `contrasts_type`, `var_label`, `var_levels` and `dichotomous`)
 * `model_list_variables()` now returns an additional `var_label` column
 * The `exponentiate` argument is now passed to the `tidy_*()`
   functions, as an attribute attached to the tibble, as well as custom labels

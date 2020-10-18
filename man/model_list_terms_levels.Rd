@@ -36,7 +36,7 @@ A tibble with ten columns:
 \item \code{reference_level}: level of the reference term
 \item \code{var_label}: variable label obtained with \code{\link[=model_list_variables]{model_list_variables()}}
 \item \code{var_nlevels}: number of levels in this variable
-\item \code{var_dichotomous}: logical indicating if the variable is dichotomous
+\item \code{dichotomous}: logical indicating if the variable is dichotomous
 \item \code{label}: term label (by default equal to term level)
 The first nine columns can be used in \code{label_pattern}.
 }
