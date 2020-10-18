@@ -158,7 +158,7 @@ custom variable labels passed to <code><a href='model_list_variables.html'>model
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A tibble with height columns:</p><ul>
+    <p>A tibble with ten columns:</p><ul>
 <li><p><code>variable</code>: variable</p></li>
 <li><p><code>contrasts_type</code>: type of contrasts ("sum" or "treatment")</p></li>
 <li><p><code>term</code>: term name</p></li>
@@ -166,8 +166,10 @@ custom variable labels passed to <code><a href='model_list_variables.html'>model
 <li><p><code>reference</code>: logical indicating which term is the reference level</p></li>
 <li><p><code>reference_level</code>: level of the reference term</p></li>
 <li><p><code>var_label</code>: variable label obtained with <code><a href='model_list_variables.html'>model_list_variables()</a></code></p></li>
+<li><p><code>var_nlevels</code>: number of levels in this variable</p></li>
+<li><p><code>var_dichotomous</code>: logical indicating if the variable is dichotomous</p></li>
 <li><p><code>label</code>: term label (by default equal to term level)
-The first seven columns can be used in <code>label_pattern</code>.</p></li>
+The first nine columns can be used in <code>label_pattern</code>.</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -192,12 +194,14 @@ The first seven columns can be used in <code>label_pattern</code>.</p></li>
   contrasts <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>`factor(cyl)` <span class='op'>=</span> <span class='va'>contr.sum</span><span class='op'>)</span>
 <span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>model_list_terms_levels</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 3 x 8</span><span>
-#&gt;   variable  contrasts_type term  level reference reference_level var_label label
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;glu&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> factor(c… sum            fact… 4     FALSE     8               factor(c… 4    
-#&gt; </span><span style='color: #555555;'>2</span><span> factor(c… sum            fact… 6     FALSE     8               factor(c… 6    
-#&gt; </span><span style='color: #555555;'>3</span><span> factor(c… sum            fact… 8     TRUE      8               factor(c… 8    </div><div class='input'>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 3 x 10</span><span>
+#&gt;   variable contrasts_type term  level reference reference_level var_label
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    
+#&gt; </span><span style='color: #555555;'>1</span><span> factor(… sum            fact… 4     FALSE     8               factor(c…
+#&gt; </span><span style='color: #555555;'>2</span><span> factor(… sum            fact… 6     FALSE     8               factor(c…
+#&gt; </span><span style='color: #555555;'>3</span><span> factor(… sum            fact… 8     TRUE      8               factor(c…
+#&gt; </span><span style='color: #555555;'># … with 3 more variables: var_nlevels </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, var_dichotomous </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   label </span><span style='color: #555555;font-style: italic;'>&lt;glue&gt;</span><span></div><div class='input'>
 <span class='va'>df</span> <span class='op'>&lt;-</span> <span class='va'>Titanic</span> <span class='op'>%&gt;%</span>
   <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>Survived <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>Survived</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"No"</span>, <span class='st'>"Yes"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
@@ -209,36 +213,44 @@ The first seven columns can be used in <code>label_pattern</code>.</p></li>
     contrasts <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>Age <span class='op'>=</span> <span class='va'>contr.sum</span>, Class <span class='op'>=</span> <span class='st'>"contr.helmert"</span><span class='op'>)</span>
   <span class='op'>)</span>
 <span class='va'>mod</span> <span class='op'>%&gt;%</span> <span class='fu'>model_list_terms_levels</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 8</span><span>
-#&gt;   variable contrasts_type term   level reference reference_level var_label label
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;glu&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> Age      sum            Age1   Adult FALSE     Child           Age       Adult
-#&gt; </span><span style='color: #555555;'>2</span><span> Age      sum            Age2   Child TRUE      Child           Age       Child
-#&gt; </span><span style='color: #555555;'>3</span><span> Sex      treatment      SexFe… Fema… TRUE      Female          Sex       Fema…
-#&gt; </span><span style='color: #555555;'>4</span><span> Sex      treatment      SexMa… Male  FALSE     Female          Sex       Male </div><div class='input'><span class='va'>mod</span> <span class='op'>%&gt;%</span> <span class='fu'>model_list_terms_levels</span><span class='op'>(</span><span class='st'>"{level} vs {reference_level}"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 8</span><span>
-#&gt;   variable contrasts_type term   level reference reference_level var_label label
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;glu&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> Age      sum            Age1   Adult FALSE     Child           Age       Adul…
-#&gt; </span><span style='color: #555555;'>2</span><span> Age      sum            Age2   Child TRUE      Child           Age       Chil…
-#&gt; </span><span style='color: #555555;'>3</span><span> Sex      treatment      SexFe… Fema… TRUE      Female          Sex       Fema…
-#&gt; </span><span style='color: #555555;'>4</span><span> Sex      treatment      SexMa… Male  FALSE     Female          Sex       Male…</div><div class='input'><span class='va'>mod</span> <span class='op'>%&gt;%</span> <span class='fu'>model_list_terms_levels</span><span class='op'>(</span><span class='st'>"{variable} [{level} - {reference_level}]"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 8</span><span>
-#&gt;   variable contrasts_type term   level reference reference_level var_label label
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;glu&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> Age      sum            Age1   Adult FALSE     Child           Age       Age …
-#&gt; </span><span style='color: #555555;'>2</span><span> Age      sum            Age2   Child TRUE      Child           Age       Age …
-#&gt; </span><span style='color: #555555;'>3</span><span> Sex      treatment      SexFe… Fema… TRUE      Female          Sex       Sex …
-#&gt; </span><span style='color: #555555;'>4</span><span> Sex      treatment      SexMa… Male  FALSE     Female          Sex       Sex …</div><div class='input'><span class='va'>mod</span> <span class='op'>%&gt;%</span> <span class='fu'>model_list_terms_levels</span><span class='op'>(</span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 10</span><span>
+#&gt;   variable contrasts_type term  level reference reference_level var_label
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    
+#&gt; </span><span style='color: #555555;'>1</span><span> Age      sum            Age1  Adult FALSE     Child           Age      
+#&gt; </span><span style='color: #555555;'>2</span><span> Age      sum            Age2  Child TRUE      Child           Age      
+#&gt; </span><span style='color: #555555;'>3</span><span> Sex      treatment      SexF… Fema… TRUE      Female          Sex      
+#&gt; </span><span style='color: #555555;'>4</span><span> Sex      treatment      SexM… Male  FALSE     Female          Sex      
+#&gt; </span><span style='color: #555555;'># … with 3 more variables: var_nlevels </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, var_dichotomous </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   label </span><span style='color: #555555;font-style: italic;'>&lt;glue&gt;</span><span></div><div class='input'><span class='va'>mod</span> <span class='op'>%&gt;%</span> <span class='fu'>model_list_terms_levels</span><span class='op'>(</span><span class='st'>"{level} vs {reference_level}"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 10</span><span>
+#&gt;   variable contrasts_type term  level reference reference_level var_label
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    
+#&gt; </span><span style='color: #555555;'>1</span><span> Age      sum            Age1  Adult FALSE     Child           Age      
+#&gt; </span><span style='color: #555555;'>2</span><span> Age      sum            Age2  Child TRUE      Child           Age      
+#&gt; </span><span style='color: #555555;'>3</span><span> Sex      treatment      SexF… Fema… TRUE      Female          Sex      
+#&gt; </span><span style='color: #555555;'>4</span><span> Sex      treatment      SexM… Male  FALSE     Female          Sex      
+#&gt; </span><span style='color: #555555;'># … with 3 more variables: var_nlevels </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, var_dichotomous </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   label </span><span style='color: #555555;font-style: italic;'>&lt;glue&gt;</span><span></div><div class='input'><span class='va'>mod</span> <span class='op'>%&gt;%</span> <span class='fu'>model_list_terms_levels</span><span class='op'>(</span><span class='st'>"{variable} [{level} - {reference_level}]"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 10</span><span>
+#&gt;   variable contrasts_type term  level reference reference_level var_label
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    
+#&gt; </span><span style='color: #555555;'>1</span><span> Age      sum            Age1  Adult FALSE     Child           Age      
+#&gt; </span><span style='color: #555555;'>2</span><span> Age      sum            Age2  Child TRUE      Child           Age      
+#&gt; </span><span style='color: #555555;'>3</span><span> Sex      treatment      SexF… Fema… TRUE      Female          Sex      
+#&gt; </span><span style='color: #555555;'>4</span><span> Sex      treatment      SexM… Male  FALSE     Female          Sex      
+#&gt; </span><span style='color: #555555;'># … with 3 more variables: var_nlevels </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, var_dichotomous </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   label </span><span style='color: #555555;font-style: italic;'>&lt;glue&gt;</span><span></div><div class='input'><span class='va'>mod</span> <span class='op'>%&gt;%</span> <span class='fu'>model_list_terms_levels</span><span class='op'>(</span>
   <span class='st'>"{ifelse(reference, level, paste(level, '-', reference_level))}"</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 8</span><span>
-#&gt;   variable contrasts_type term   level reference reference_level var_label label
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;glu&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> Age      sum            Age1   Adult FALSE     Child           Age       Adul…
-#&gt; </span><span style='color: #555555;'>2</span><span> Age      sum            Age2   Child TRUE      Child           Age       Child
-#&gt; </span><span style='color: #555555;'>3</span><span> Sex      treatment      SexFe… Fema… TRUE      Female          Sex       Fema…
-#&gt; </span><span style='color: #555555;'>4</span><span> Sex      treatment      SexMa… Male  FALSE     Female          Sex       Male…</div></span></pre>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 10</span><span>
+#&gt;   variable contrasts_type term  level reference reference_level var_label
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    
+#&gt; </span><span style='color: #555555;'>1</span><span> Age      sum            Age1  Adult FALSE     Child           Age      
+#&gt; </span><span style='color: #555555;'>2</span><span> Age      sum            Age2  Child TRUE      Child           Age      
+#&gt; </span><span style='color: #555555;'>3</span><span> Sex      treatment      SexF… Fema… TRUE      Female          Sex      
+#&gt; </span><span style='color: #555555;'>4</span><span> Sex      treatment      SexM… Male  FALSE     Female          Sex      
+#&gt; </span><span style='color: #555555;'># … with 3 more variables: var_nlevels </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, var_dichotomous </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   label </span><span style='color: #555555;font-style: italic;'>&lt;glue&gt;</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
