@@ -8,6 +8,8 @@ test_that("tidy_add_coefficients_type() works for common models", {
     tidy_add_coefficients_type()
   expect_equivalent(attr(res, "coefficients_type"), "generic")
   expect_equivalent(attr(res, "coefficients_label"), "Beta")
+
+  mod <- glm(Sepal.Length ~ Sepal.Width, iris, family = gaussian)
   res <- mod %>%
     tidy_and_attach(exponentiate = TRUE) %>%
     tidy_add_coefficients_type()
