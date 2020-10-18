@@ -16,19 +16,19 @@
   (generic, logistic, Poisson or proportional hazard) used
   by a model (#46)
 * New `no_reference_row` argument for `tidy_add_reference_rows()` (#47)
+* New method `model_get_nlevels` to get the number of levels of categorical variables
+* New column `var_nlevels` returned by `tidy_identify_variables()`,
+  `model_identify_variables()` and `tidy_plus_plus()`
 * Categorical terms can now be customized with a pattern taking into account
   term level, reference level and/or variable label, see `model_list_terms_levels()`
   and `categorical_terms_pattern` in `tidy_plus_plus()` and `tidy_add_term_labels` (#61)
 * `model_list_terms_levels()` now returns additional columns (`level`, `reference_level`
-  `contrasts_type` and `var_label`)
+  `contrasts_type`, `var_label`, `var_levels` and `var_dichotomous`)
 * `model_list_variables()` now returns an additional `var_label` column
 * The `exponentiate` argument is now passed to the `tidy_*()`
   functions, as an attribute attached to the tibble, as well as custom labels
   (`variable_labels` and `term_labels`)
 * `show_single_row` argument now accepts tidyselect notation (#51 @ddsjoberg)
-* New method `model_get_nlevels` to get the number of levels of categorical variables
-* New column `var_nlevels` returned by `tidy_identify_variables()`,
-  `model_identify_variables()` and `tidy_plus_plus()`
 * `tidy_add_estimate_to_reference_rows()` now relies on `emmeans` for
   sum contrasts, allowing to cover a wider range of models
 * Tibbles returned by `tidy_*` functions also inherits of `"broom.helpers"` 

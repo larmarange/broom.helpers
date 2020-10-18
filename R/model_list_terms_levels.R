@@ -8,7 +8,7 @@
 #' @param variable_labels an optional named list or named vector of
 #' custom variable labels passed to [model_list_variables()]
 #' @return
-#' A tibble with height columns:
+#' A tibble with ten columns:
 #' * `variable`: variable
 #' * `contrasts_type`: type of contrasts ("sum" or "treatment")
 #' * `term`: term name
@@ -16,8 +16,10 @@
 #' * `reference`: logical indicating which term is the reference level
 #' * `reference_level`: level of the reference term
 #' * `var_label`: variable label obtained with [model_list_variables()]
+#' * `var_nlevels`: number of levels in this variable
+#' * `var_dichotomous`: logical indicating if the variable is dichotomous
 #' * `label`: term label (by default equal to term level)
-#' The first seven columns can be used in `label_pattern`.
+#' The first nine columns can be used in `label_pattern`.
 #' @export
 #' @family model_helpers
 #' @examples
@@ -148,7 +150,16 @@ model_list_terms_levels.default <- function(
         dplyr::select(all_of(c("variable", "var_label"))),
       by = "variable"
     ) %>%
-    dplyr::mutate(label = stringr::str_glue_data(res, label_pattern))
+    dplyr::left_join(
+      model %>%
+        model_get_nlevels() %>%
+        dplyr::select(all_of(c("variable", "var_nlevels"))),
+      by = "variable"
+    ) %>%
+    dplyr::mutate(
+      var_dichotomous = .data$var_nlevels == 2,
+      label = stringr::str_glue_data(res, label_pattern)
+    )
 }
 
 # count the total number of times where elements of searched
