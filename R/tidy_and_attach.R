@@ -41,6 +41,10 @@ tidy_attach_model <- function(x, model, .attributes = NULL) {
 #' @rdname tidy_attach_model
 #' @export
 tidy_and_attach <- function(model, tidy_fun = broom::tidy, exponentiate = FALSE, ...) {
+  # exponentiate cannot be used with lm models
+  # but broom will not produce an error and will return unexponentiated estimates
+  if (identical(class(model), "lm") & exponentiate)
+    stop("`exponentiate = TRUE` is not valid for this type of model.")
   # test if exponentiate can be passed to tidy_fun
   tryCatch(
     tidy_fun(model, exponentiate = exponentiate, ...) %>%

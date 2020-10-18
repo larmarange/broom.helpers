@@ -10,6 +10,11 @@ test_that("Attach and Detach models works", {
     tb,
     tb %>% tidy_attach_model(mod) %>% tidy_detach_model()
   )
+
+  # an error should occur if 'exponentiate = TRUE' for a linear model
+  expect_error(
+    mod %>% tidy_and_attach(exponentiate = TRUE)
+  )
 })
 
 test_that("tidy_and_attach() handles models without exponentiate arguments", {
