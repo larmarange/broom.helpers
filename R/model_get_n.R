@@ -17,6 +17,15 @@
 #'
 #' mod <- glm(Survived ~ Class * Age + Sex, data = Titanic %>% as.data.frame(), weights = Freq, family = binomial)
 #' mod %>% model_get_n()
+#'
+#' d <- dplyr::as_tibble(Titanic) %>%
+#'   dplyr::group_by(Class, Sex, Age) %>%
+#'   dplyr::summarise(
+#'     n_survived = sum(n * (Survived == "Yes")),
+#'     n_dead = sum(n * (Survived == "No"))
+#'   )
+#' mod <- glm(cbind(n_survived, n_dead) ~ Class * Age + Sex, data = d, family = binomial)
+#' mod %>% model_get_n()
 model_get_n <- function(model) {
   UseMethod("model_get_n")
 }
@@ -66,10 +75,14 @@ model_get_n.default <- function(model) {
   }
 
   # getting weights
-  if ("(weights)" %in% colnames(mf)) {
-    weights <- mf[["(weights)"]]
+  if ("prior.weights" %in% names(model)) {
+    weights <- model$prior.weights
   } else {
-    weights <- rep.int(1L, nrow(mf))
+    if ("(weights)" %in% colnames(mf)) {
+      weights <- mf[["(weights)"]]
+    } else {
+      weights <- rep.int(1L, nrow(mf))
+    }
   }
 
   # adding reference terms
@@ -118,10 +131,17 @@ model_get_n.default <- function(model) {
 
   res <- dplyr::tibble(
     term = colnames(tm),
-    n = colSums((tm > 0) * weights),
-    n_unweighted = colSums(tm > 0)
+    n = colSums((tm > 0) * weights)
   )
   attr(res, "N") <- sum(weights)
-  attr(res, "N_unweighted") <- nrow(mf)
+
+  # adding n_events
+  # look at model$y (* model$prior.weights) if exists
+  if (model %>% model_get_coefficients_type() == "logistic") {
+    y <- model$y
+    res$nevent <- colSums((tm > 0) * y * weights)
+    attr(res, "Nevent") <- sum(y * weights)
+  }
+
   res
 }

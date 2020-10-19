@@ -29,6 +29,15 @@ mod \%>\% model_get_n()
 
 mod <- glm(Survived ~ Class * Age + Sex, data = Titanic \%>\% as.data.frame(), weights = Freq, family = binomial)
 mod \%>\% model_get_n()
+
+d <- dplyr::as_tibble(Titanic) \%>\%
+  dplyr::group_by(Class, Sex, Age) \%>\%
+  dplyr::summarise(
+    n_survived = sum(n * (Survived == "Yes")),
+    n_dead = sum(n * (Survived == "No"))
+  )
+mod <- glm(cbind(n_survived, n_dead) ~ Class * Age + Sex, data = d, family = binomial)
+mod \%>\% model_get_n()
 }
 \seealso{
 Other model_helpers: 
