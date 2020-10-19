@@ -59,6 +59,7 @@ Other model_helpers:
 \code{\link{model_get_model_matrix}()},
 \code{\link{model_get_model}()},
 \code{\link{model_get_nlevels}()},
+\code{\link{model_get_n}()},
 \code{\link{model_get_xlevels}()},
 \code{\link{model_list_contrasts}()},
 \code{\link{model_list_terms_levels}()},

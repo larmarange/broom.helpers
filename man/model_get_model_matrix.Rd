@@ -7,16 +7,18 @@
 \alias{model_get_model_matrix.clm}
 \title{Get the model matrix of a model}
 \usage{
-model_get_model_matrix(model)
+model_get_model_matrix(model, ...)
 
-\method{model_get_model_matrix}{default}(model)
+\method{model_get_model_matrix}{default}(model, ...)
 
-\method{model_get_model_matrix}{multinom}(model)
+\method{model_get_model_matrix}{multinom}(model, ...)
 
-\method{model_get_model_matrix}{clm}(model)
+\method{model_get_model_matrix}{clm}(model, ...)
 }
 \arguments{
 \item{model}{a model object}
+
+\item{...}{additional arguments passed to \code{\link[stats:model.matrix]{stats::model.matrix()}}}
 }
 \description{
 The structure of the object returned by \code{\link[stats:model.matrix]{stats::model.matrix()}}
@@ -38,6 +40,7 @@ Other model_helpers:
 \code{\link{model_get_model_frame}()},
 \code{\link{model_get_model}()},
 \code{\link{model_get_nlevels}()},
+\code{\link{model_get_n}()},
 \code{\link{model_get_xlevels}()},
 \code{\link{model_identify_variables}()},
 \code{\link{model_list_contrasts}()},
