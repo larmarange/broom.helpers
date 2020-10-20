@@ -13,7 +13,7 @@ model_get_n(model)
 \item{model}{a model object}
 }
 \description{
-Get the number of observations
+\lifecycle{experimental}
 }
 \examples{
 lm(hp ~ mpg + factor(cyl) + disp:hp, mtcars) \%>\%
