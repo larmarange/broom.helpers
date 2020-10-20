@@ -22,7 +22,7 @@ utils::globalVariables(c(".", "where"))
 
 
 # remove backtips around variable names
-.clean_backtips <- function(x, variable_names = x) {
+.clean_backticks <- function(x, variable_names = x) {
   for (i in stats::na.omit(variable_names)) {
     x <- stringr::str_replace_all(
       x,

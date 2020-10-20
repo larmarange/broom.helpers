@@ -53,7 +53,7 @@ model_list_variables.default <- function(model, labels = NULL) {
   model_terms <- stats::terms(model)
 
   variable_names <- attr(model_terms, "term.labels") %>%
-    .clean_backtips()
+    .clean_backticks()
   model_frame <- model_get_model_frame(model)
   dataClasses <- purrr::map(model_frame, .MFclass2) %>% unlist()
 

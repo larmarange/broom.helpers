@@ -58,10 +58,10 @@ model_identify_variables.default <- function(model) {
   assign[assign == 0] <- NA
   model_terms <- stats::terms(model)
   variable_names <- attr(model_terms, "term.labels") %>%
-    .clean_backtips()
+    .clean_backticks()
 
   coef_list <- colnames(model_matrix) %>%
-    .clean_backtips(variable_names = variable_names)
+    .clean_backticks(variable_names = variable_names)
 
   tibble::tibble(
     term = coef_list,
