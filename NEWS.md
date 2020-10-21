@@ -1,8 +1,11 @@
 # broom.helpers (development version)
 
-* **Breaking change:** column `var_type` returned by `tidy_identify_variables`
+* **Minor breaking change:** column `var_type` returned by `tidy_identify_variables`
   is now equal to `"dichotomous"` for categorical variables with only
   2 levels
+* **Minor breaking change:** If the variables can't be identified by 
+  `tidy_identify_variables()`, the `variable` column is now populated 
+  with the content of the `term` column (#63)
 * New selecting functions `all_continuous()`, `all_categorical()`,
   `all_dichotomous()`, and `all_interaction()` for selecting variables 
   from models (#54)
