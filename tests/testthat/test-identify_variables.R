@@ -165,6 +165,23 @@ test_that("tidy_identify_variables() works with variables having non standard na
     res$var_type,
     c("dichotomous", "categorical", "categorical", "categorical")
   )
+
+  mod <- lm(
+    hp ~ factor(`number + cylinders`) : `miles :: galon` + factor(`type of transmission`),
+    mtcars %>% dplyr::rename(
+      `miles :: galon` = mpg, `type of transmission` = am,
+      `number + cylinders` = cyl
+    )
+  )
+  res <- tidy_plus_plus(mod)
+  expect_equivalent(
+    res$variable,
+    c("factor(`type of transmission`)",
+      "factor(`type of transmission`)",
+      "factor(`number + cylinders`):miles :: galon",
+      "factor(`number + cylinders`):miles :: galon",
+      "factor(`number + cylinders`):miles :: galon")
+  )
 })
 
 test_that("model_identify_variables() works with lme4::lmer", {
