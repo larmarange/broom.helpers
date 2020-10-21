@@ -66,6 +66,11 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x),
           is.na(.data$variable),
           "intercept",
           .data$var_type
+        ),
+        variable = dplyr::if_else(
+          .data$var_type == "intercept",
+          .data$term,
+          .data$variable
         )
       ) %>%
       tidy_attach_model(model = model, .attributes = .attributes)
