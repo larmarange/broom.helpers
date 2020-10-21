@@ -13,4 +13,8 @@ meaning in a regular expression}
 \description{
 This functions has been adapted from \code{Hmisc::escapeRegex()}
 }
+\seealso{
+Other other_helpers: 
+\code{\link{.clean_backticks}()}
+}
 \concept{other_helpers}
