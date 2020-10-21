@@ -123,7 +123,9 @@
 </h1>
 <ul>
 <li>
-<strong>Minor breaking change:</strong> column <code>var_type</code> returned by <code>tidy_identify_variables</code> is now equal to <code>"dichotomous"</code> for categorical variables with only 2 levels</li>
+<strong>Minor breaking change:</strong> column <code>var_type</code> returned by <code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code> is now equal to <code>"dichotomous"</code> for categorical variables with only 2 levels</li>
+<li>
+<strong>Minor breaking changes::</strong> for intercepts terms, <code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code> now populates <code>variable</code> column by <code>term</code> content, instead of <code>NA</code> (<a href='https://github.com/larmarange/broom.helpers/issues/66'>#66</a>)</li>
 <li>
 <strong>Minor breaking change:</strong> If the variables can’t be identified by <code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code>, the <code>variable</code> column is now populated with the content of the <code>term</code> column (<a href='https://github.com/larmarange/broom.helpers/issues/63'>#63</a>)</li>
 <li>New selecting functions <code><a href="../reference/select_helpers.html">all_continuous()</a></code>, <code><a href="../reference/select_helpers.html">all_categorical()</a></code>, <code><a href="../reference/select_helpers.html">all_dichotomous()</a></code>, and <code><a href="../reference/select_helpers.html">all_interaction()</a></code> for selecting variables from models (<a href='https://github.com/larmarange/broom.helpers/issues/54'>#54</a>)</li>
@@ -148,7 +150,7 @@
 <li>
 <code>interaction_sep</code> argument has been added to <code><a href="../reference/tidy_plus_plus.html">tidy_plus_plus()</a></code>
 </li>
-<li>Better management of variables with non standard names</li>
+<li>Better management of variables with non standard names (<a href='https://github.com/larmarange/broom.helpers/issues/67'>#67</a>)</li>
 <li>
 <code><a href="../reference/.clean_backticks.html">.clean_backticks()</a></code> and <code><a href="../reference/.escape_regex.html">.escape_regex()</a></code> are now exported</li>
 <li>Bug fix for non standard variable names containing a character that would have a special meaning in a regular expression (<a href='https://github.com/larmarange/broom.helpers/issues/44'>#44</a>)</li>
