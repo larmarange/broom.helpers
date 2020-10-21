@@ -39,3 +39,7 @@ reference:
   - title: Variable type selectors
   - contents:
       - starts_with("all_")
+
+  - title: Other helpers
+  - contents:
+      - starts_with(".")

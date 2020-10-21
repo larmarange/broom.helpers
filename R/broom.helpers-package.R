@@ -9,17 +9,6 @@ NULL
 # cf. https://github.com/r-lib/tidyselect/issues/201
 utils::globalVariables(c(".", "where"))
 
-# Escapes any characters that would have special
-# meaning in a regular expression
-# based on Hmisc::escapeRegex
-.escape_regex <- function (string)
-{
-  gsub(
-    "([.|()\\^{}+$*?]|\\[|\\])", "\\\\\\1",
-    string
-  )
-}
-
 
 # remove backtips around variable names
 .clean_backticks <- function(x, variable_names = x) {
