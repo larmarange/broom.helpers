@@ -1,5 +1,7 @@
 #' Get the number of observations
 #'
+#' \lifecycle{experimental}
+#'
 #' @param model a model object
 #' @export
 #' @family model_helpers
