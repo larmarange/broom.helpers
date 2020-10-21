@@ -83,7 +83,7 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x),
     if (strict) stop("Cannot identify variables. Quitting execution.", call. = FALSE)
     x %>%
       dplyr::mutate(
-        variable = NA_character_,
+        variable = .data$term,
         var_class = NA_integer_,
         var_type = "unknown",
         var_nlevels = NA_integer_
