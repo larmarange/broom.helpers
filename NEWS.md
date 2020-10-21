@@ -34,6 +34,8 @@
 * Tibbles returned by `tidy_*` functions also inherits of `"broom.helpers"` 
   class (#56)
 * `interaction_sep` argument has been added to `tidy_plus_plus()`
+* Better management of variables with non standard names
+* `.clean_backticks()` and `.escape_regex()` are now exported
 * Bug fix for non standard variable names containing
   a character that would have a special meaning in
   a regular expression (#44)
