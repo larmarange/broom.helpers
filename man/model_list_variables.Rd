@@ -6,17 +6,20 @@
 \alias{model_list_variables.lavaan}
 \title{List all the variables used in a model}
 \usage{
-model_list_variables(model, labels = NULL)
+model_list_variables(model, labels = NULL, only_variable = FALSE)
 
-\method{model_list_variables}{default}(model, labels = NULL)
+\method{model_list_variables}{default}(model, labels = NULL, only_variable = FALSE)
 
-\method{model_list_variables}{lavaan}(model, labels = NULL)
+\method{model_list_variables}{lavaan}(model, labels = NULL, only_variable = FALSE)
 }
 \arguments{
 \item{model}{a model object}
 
 \item{labels}{an optional named list or named vector of
 custom variable labels}
+
+\item{only_variable}{if \code{TRUE}, will return only "variable"
+column}
 }
 \value{
 A tibble with three columns:
