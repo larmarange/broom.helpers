@@ -33,7 +33,11 @@
 #'   glm(Survived ~ Class * Age * Sex, data = ., weights = .$n, family = binomial) %>%
 #'   tidy_and_attach() %>%
 #'   tidy_add_variable_labels(
-#'     labels = list(Sex = "Gender", "Class:Age" = "Custom label")
+#'     labels = list(
+#'       "(Intercept)" = "Custom intercept",
+#'       Sex = "Gender",
+#'       "Class:Age" = "Custom label"
+#'     )
 #'   )
 tidy_add_variable_labels <- function(x,
                                      labels = NULL,
