@@ -67,20 +67,14 @@ tidy_add_variable_labels <- function(x,
     x <- x %>% tidy_identify_variables(model = model)
   }
 
-  # start model_list_variables
+  # start with the list of terms
+  var_labels <- unique(x$term)
+  names(var_labels) <- var_labels
+
+  # add the list of variables
   variable_list <- model_list_variables(model, labels = labels)
-  var_labels <- variable_list$var_label
-  names(var_labels) <- variable_list$variable
-
-  # identify terms with no variable
-  # (e.g. intercepts)
-  # use term name in that case
-
-  variable_is_na <- is.na(x$variable)
-  # temporarily copy term in variable
-  x$variable[variable_is_na] <- x$term[variable_is_na]
-  additional_labels <- unique(x$variable[variable_is_na])
-  names(additional_labels) <- additional_labels
+  additional_labels <- variable_list$var_label
+  names(additional_labels) <- variable_list$variable
   var_labels <- var_labels %>%
     .update_vector(additional_labels)
 
@@ -126,10 +120,6 @@ tidy_add_variable_labels <- function(x,
         var_label = var_labels
       ),
       by = "variable"
-    ) %>%
-    # restore missing values in variable
-    dplyr::mutate(
-      variable = dplyr::if_else(variable_is_na, NA_character_, .data$variable)
     ) %>%
     tidy_attach_model(model = model, .attributes = .attributes)
 }

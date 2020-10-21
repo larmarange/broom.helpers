@@ -161,7 +161,7 @@ test_that("tidy_add_term_labels() works with variables having non standard name"
   )
   expect_equivalent(
     res$variable,
-    c(NA, "marker", "grade of kids...", "grade of kids...", "grade of kids...",
+    c("(Intercept)", "marker", "grade of kids...", "grade of kids...", "grade of kids...",
       "factor(`?? treatment ++ response ...`)", "factor(`?? treatment ++ response ...`)",
       "marker:grade of kids...", "marker:grade of kids...")
   )
