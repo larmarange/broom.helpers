@@ -42,4 +42,5 @@ reference:
 
   - title: Other helpers
   - contents:
-      - starts_with(".")
+      - .clean_backticks
+      - .escape_regex
