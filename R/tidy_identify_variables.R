@@ -59,9 +59,6 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x),
   variables_list <- model_identify_variables(model)
 
   if (nrow(variables_list) > 0) {
-    # clean unconventional variable names
-    x$term <- .clean_backticks(x$term, variables_list$variable)
-
     x %>%
       dplyr::left_join(variables_list, by = "term") %>%
       dplyr::mutate(

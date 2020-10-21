@@ -54,8 +54,7 @@ model_list_variables <- function(model, labels = NULL, only_variable = FALSE) {
 model_list_variables.default <- function(model, labels = NULL, only_variable = FALSE) {
   model_terms <- stats::terms(model)
 
-  variable_names <- attr(model_terms, "term.labels") %>%
-    .clean_backticks()
+  variable_names <- attr(model_terms, "term.labels")
   model_frame <- model_get_model_frame(model)
   dataClasses <- purrr::map(model_frame, .MFclass2) %>% unlist()
 
@@ -66,6 +65,7 @@ model_list_variables.default <- function(model, labels = NULL, only_variable = F
   # update the list with all elements of dataClasses
   variable_names <- names(dataClasses) %>%
     c(variable_names) %>%
+    .clean_backticks() %>%
     unique()
 
   res <- tibble::tibble(
@@ -89,11 +89,11 @@ model_list_variables.default <- function(model, labels = NULL, only_variable = F
 #' @export
 model_list_variables.lavaan <- function(model, labels = NULL, only_variable = FALSE) {
   res <- tibble::tibble(
-    variable = unique(model@ParTable$lhs)
+    variable = .clean_backticks(unique(model@ParTable$lhs))
   ) %>%
     dplyr::left_join(
       tibble::tibble(
-        variable = model@Data@ov$name,
+        variable = .clean_backticks(model@Data@ov$name),
         var_class = model@Data@ov$type
       ),
       by = "variable"

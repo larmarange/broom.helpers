@@ -145,18 +145,25 @@ test_that("tidy_add_term_labels() works with poly or helmert contrasts", {
 
 
 test_that("tidy_add_term_labels() works with variables having non standard name", {
-  df <- gtsummary::trial %>% dplyr::mutate(`grade of kids` = grade)
-  mod <- lm(age ~ marker * `grade of kids`, df)
+  df <- gtsummary::trial %>% dplyr::rename(
+    `grade of kids...` = grade,
+    `?? treatment ++ response ...` = response
+  )
+  mod <- lm(age ~ marker * `grade of kids...` + factor(`?? treatment ++ response ...`), df)
   res <- mod %>%
     tidy_and_attach() %>%
     tidy_add_reference_rows() %>%
     tidy_add_term_labels()
   expect_equivalent(
     res$label,
-    c(
-      "(Intercept)", "Marker Level (ng/mL)", "I", "II", "III", "Marker Level (ng/mL) * II",
-      "Marker Level (ng/mL) * III"
-    )
+    c("(Intercept)", "Marker Level (ng/mL)", "I", "II", "III", "0",
+      "1", "Marker Level (ng/mL) * II", "Marker Level (ng/mL) * III")
+  )
+  expect_equivalent(
+    res$variable,
+    c(NA, "marker", "grade of kids...", "grade of kids...", "grade of kids...",
+      "factor(`?? treatment ++ response ...`)", "factor(`?? treatment ++ response ...`)",
+      "marker:grade of kids...", "marker:grade of kids...")
   )
 })
 

@@ -122,6 +122,25 @@ test_that("tidy_identify_variables() works with variables having non standard na
   )
   expect_error(mod %>% tidy_and_attach() %>% tidy_identify_variables(), NA)
 
+  # interaction only term
+  mod <- lm(age ~ marker : `grade of kids`, df)
+  expect_equivalent(
+    mod %>% model_list_variables(only_variable = TRUE),
+    c("age", "marker", "grade of kids", "marker:grade of kids")
+  )
+  expect_equivalent(
+    mod %>% model_identify_variables() %>% purrr::pluck("variable"),
+    c(NA, "marker:grade of kids", "marker:grade of kids", "marker:grade of kids")
+  )
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_identify_variables()
+  expect_equivalent(
+    res$variable,
+    c(NA, "marker:grade of kids", "marker:grade of kids", "marker:grade of kids")
+  )
+
+
   trial2 <-
     gtsummary::trial %>%
     dplyr::mutate(

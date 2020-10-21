@@ -15,12 +15,13 @@
 
 
 
-#' Remove backtips around variable names
+#' Remove backticks around variable names
 #'
-#' @param x a character vector of variable names to be cleaned
-#' @param variable_names optional character vector of possible
-#' variable names, for example obtained with
+#' @param x a character vector to be cleaned
+#' @param variable_names list of variable names,
+#' could be obtained with
 #' [model_list_variables(only_variable = TRUE)][model_list_variables()]
+#' to properly take into account interaction only terms/variables
 #'
 #' @export
 #' @family other_helpers
@@ -30,7 +31,7 @@
     unique() %>%
     .escape_regex()
 
-  # cleaning existing backtips in variable_names
+  # cleaning existing backticks in variable_names
   variable_names <- ifelse(
     # does string starts and ends with backticks
     stringr::str_detect(variable_names, "^`.*`$"),
