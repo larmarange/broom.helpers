@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Remove backtips around variable names — .clean_backticks • broom.helpers</title>
+<title>Remove backticks around variable names — .clean_backticks • broom.helpers</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Remove backtips around variable names — .clean_backticks" />
-<meta property="og:description" content="Remove backtips around variable names" />
+<meta property="og:title" content="Remove backticks around variable names — .clean_backticks" />
+<meta property="og:description" content="Remove backticks around variable names" />
 
 
 
@@ -114,13 +114,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Remove backtips around variable names</h1>
+    <h1>Remove backticks around variable names</h1>
     <small class="dont-index">Source: <a href='https://github.com/larmarange/broom.helpers/blob/master/R/helpers.R'><code>R/helpers.R</code></a></small>
     <div class="hidden name"><code>dot-clean_backticks.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Remove backtips around variable names</p>
+    <p>Remove backticks around variable names</p>
     </div>
 
     <pre class="usage"><span class='fu'>.clean_backticks</span><span class='op'>(</span><span class='va'>x</span>, variable_names <span class='op'>=</span> <span class='va'>x</span><span class='op'>)</span></pre>
@@ -130,13 +130,14 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>a character vector of variable names to be cleaned</p></td>
+      <td><p>a character vector to be cleaned</p></td>
     </tr>
     <tr>
       <th>variable_names</th>
-      <td><p>optional character vector of possible
-variable names, for example obtained with
-<a href='model_list_variables.html'>model_list_variables(only_variable = TRUE)</a></p></td>
+      <td><p>list of variable names,
+could be obtained with
+<a href='model_list_variables.html'>model_list_variables(only_variable = TRUE)</a>
+to properly take into account interaction only terms/variables</p></td>
     </tr>
     </table>
 
