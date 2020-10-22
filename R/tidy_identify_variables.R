@@ -59,9 +59,6 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x),
   variables_list <- model_identify_variables(model)
 
   if (nrow(variables_list) > 0) {
-    # clean unconventional variable names
-    x$term <- .clean_backtips(x$term, variables_list$variable)
-
     x %>%
       dplyr::left_join(variables_list, by = "term") %>%
       dplyr::mutate(
@@ -69,6 +66,11 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x),
           is.na(.data$variable),
           "intercept",
           .data$var_type
+        ),
+        variable = dplyr::if_else(
+          .data$var_type == "intercept",
+          .data$term,
+          .data$variable
         )
       ) %>%
       tidy_attach_model(model = model, .attributes = .attributes)
@@ -86,7 +88,7 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x),
     if (strict) stop("Cannot identify variables. Quitting execution.", call. = FALSE)
     x %>%
       dplyr::mutate(
-        variable = NA_character_,
+        variable = .data$term,
         var_class = NA_integer_,
         var_type = "unknown",
         var_nlevels = NA_integer_

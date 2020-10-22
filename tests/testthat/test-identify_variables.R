@@ -1,6 +1,37 @@
 library(survival)
 library(gtsummary)
 
+test_that("model_list_variables() tests", {
+  mod <- glm(response ~ age + grade * trt + death, gtsummary::trial, family = binomial)
+  res <- mod %>% model_list_variables()
+  expect_equivalent(
+    res$variable,
+    c("response", "age", "grade", "trt", "death", "grade:trt")
+  )
+  expect_equivalent(
+    res$variable,
+    mod %>% model_list_variables(only_variable = TRUE)
+  )
+  expect_equivalent(
+    res$var_class,
+    c(response = "integer", age = "numeric", grade = "factor", trt = "character",
+      death = "integer", NA)
+  )
+
+  mod <- lm(marker ~ as.logical(response), gtsummary::trial)
+  res <- mod %>%
+    model_list_variables(
+      labels = list(marker = "MARKER", "as.logical(response)" = "RESPONSE"))
+  expect_equivalent(
+    res$var_class,
+    c("numeric", "logical")
+  )
+  expect_equivalent(
+    res$var_label,
+    c("MARKER", "RESPONSE")
+  )
+})
+
 test_that("tidy_identify_variables() works for common models", {
   mod <- glm(response ~ age + grade * trt + death, gtsummary::trial, family = binomial)
   res <- mod %>%
@@ -8,7 +39,7 @@ test_that("tidy_identify_variables() works for common models", {
     tidy_identify_variables()
   expect_equivalent(
     res$variable,
-    c(NA, "age", "grade", "grade", "trt", "death", "grade:trt", "grade:trt")
+    c("(Intercept)", "age", "grade", "grade", "trt", "death", "grade:trt", "grade:trt")
   )
   expect_equivalent(
     res$var_class,
@@ -95,7 +126,7 @@ test_that("model_identify_variables() works with stats::poly()", {
   expect_equivalent(
     tb$variable,
     c(
-      NA, "Sepal.Width", "Sepal.Width", "Sepal.Width", "Petal.Length",
+      "(Intercept)", "Sepal.Width", "Sepal.Width", "Sepal.Width", "Petal.Length",
       "Petal.Length"
     )
   )
@@ -112,7 +143,7 @@ test_that("tidy_identify_variables() works with variables having non standard na
   expect_equivalent(
     res$variable,
     c(
-      NA, "marker", "grade of kids", "grade of kids", "marker:grade of kids",
+      "(Intercept)", "marker", "grade of kids", "grade of kids", "marker:grade of kids",
       "marker:grade of kids"
     )
   )
@@ -121,6 +152,25 @@ test_that("tidy_identify_variables() works with variables having non standard na
     c(NA, "numeric", "factor", "factor", NA, NA)
   )
   expect_error(mod %>% tidy_and_attach() %>% tidy_identify_variables(), NA)
+
+  # interaction only term
+  mod <- lm(age ~ marker : `grade of kids`, df)
+  expect_equivalent(
+    mod %>% model_list_variables(only_variable = TRUE),
+    c("age", "marker", "grade of kids", "marker:grade of kids")
+  )
+  expect_equivalent(
+    mod %>% model_identify_variables() %>% purrr::pluck("variable"),
+    c(NA, "marker:grade of kids", "marker:grade of kids", "marker:grade of kids")
+  )
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_identify_variables()
+  expect_equivalent(
+    res$variable,
+    c("(Intercept)", "marker:grade of kids", "marker:grade of kids", "marker:grade of kids")
+  )
+
 
   trial2 <-
     gtsummary::trial %>%
@@ -145,6 +195,23 @@ test_that("tidy_identify_variables() works with variables having non standard na
   expect_equivalent(
     res$var_type,
     c("dichotomous", "categorical", "categorical", "categorical")
+  )
+
+  mod <- lm(
+    hp ~ factor(`number + cylinders`) : `miles :: galon` + factor(`type of transmission`),
+    mtcars %>% dplyr::rename(
+      `miles :: galon` = mpg, `type of transmission` = am,
+      `number + cylinders` = cyl
+    )
+  )
+  res <- tidy_plus_plus(mod)
+  expect_equivalent(
+    res$variable,
+    c("factor(`type of transmission`)",
+      "factor(`type of transmission`)",
+      "factor(`number + cylinders`):miles :: galon",
+      "factor(`number + cylinders`):miles :: galon",
+      "factor(`number + cylinders`):miles :: galon")
   )
 })
 
@@ -212,7 +279,7 @@ test_that("model_identify_variables() works with nnet::multinom", {
   expect_equivalent(
     res$variable,
     c(
-      NA, "stage", "stage", "stage", "marker", "age", NA, "stage",
+      "(Intercept)", "stage", "stage", "stage", "marker", "age", "(Intercept)", "stage",
       "stage", "stage", "marker", "age"
     )
   )
@@ -229,7 +296,7 @@ test_that("model_identify_variables() works with nnet::multinom", {
   expect_equivalent(
     res$variable,
     c(
-      NA, "stage", "stage", "stage", "marker", "age", NA, "stage",
+      "(Intercept)", "stage", "stage", "stage", "marker", "age", "(Intercept)", "stage",
       "stage", "stage", "marker", "age"
     )
   )
@@ -245,7 +312,7 @@ test_that("model_identify_variables() works with nnet::multinom", {
   expect_equivalent(
     res$variable,
     c(
-      NA, "stage", "stage", "stage", "marker", "age", NA, "stage",
+      "(Intercept)", "stage", "stage", "stage", "marker", "age", "(Intercept)", "stage",
       "stage", "stage", "marker", "age"
     )
   )
@@ -261,8 +328,8 @@ test_that("model_identify_variables() works with nnet::multinom", {
   expect_equivalent(
     res$variable,
     c(
-      NA, "stage", "stage", "stage", "marker", "age", NA, "stage",
-      "stage", "stage", "marker", "age"
+      "(Intercept)", "stage", "stage", "stage", "marker", "age",
+      "(Intercept)", "stage", "stage", "stage", "marker", "age"
     )
   )
 })
@@ -394,3 +461,4 @@ test_that("model_identify_variables() strict argument", {
       )
   )
 })
+

@@ -57,15 +57,13 @@ model_identify_variables.default <- function(model) {
   assign <- attr(model_matrix, "assign")
   assign[assign == 0] <- NA
   model_terms <- stats::terms(model)
-  variable_names <- attr(model_terms, "term.labels") %>%
-    .clean_backtips()
-
-  coef_list <- colnames(model_matrix) %>%
-    .clean_backtips(variable_names = variable_names)
+  variable_names <- model %>% model_list_variables(only_variable = TRUE)
+  variables <- attr(model_terms, "term.labels") %>%
+    .clean_backticks(variable_names = variable_names)
 
   tibble::tibble(
-    term = coef_list,
-    variable = variable_names[assign]
+    term = colnames(model_matrix),
+    variable = variables[assign]
   ) %>%
     # specific case of polynomial terms defined with poly()
     dplyr::mutate(
@@ -90,11 +88,11 @@ model_identify_variables.default <- function(model) {
 model_identify_variables.lavaan <- function(model) {
   tibble::tibble(
     term = paste(model@ParTable$lhs, model@ParTable$op, model@ParTable$rhs),
-    variable = model@ParTable$lhs
+    variable = .clean_backticks(model@ParTable$lhs)
   ) %>%
     dplyr::left_join(
       tibble::tibble(
-        variable = model@Data@ov$name,
+        variable = .clean_backticks(model@Data@ov$name),
         var_class = model@Data@ov$type,
         var_nlevels = model@Data@ov$nlev
       ),

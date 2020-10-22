@@ -12,12 +12,12 @@ test_that("tidy_select_variables() works for basic models", {
   res2 <- res %>% tidy_select_variables(include = "stage")
   expect_equivalent(
     res2$variable,
-    c(NA, "stage", "stage", "stage")
+    c("(Intercept)", "stage", "stage", "stage")
   )
   res2 <- res %>% tidy_select_variables(include = c("grade", "trt"))
   expect_equivalent(
     res2$variable,
-    c(NA, "grade", "grade", "trt")
+    c("(Intercept)", "grade", "grade", "trt")
   )
 
   # select and de-select
@@ -65,3 +65,4 @@ test_that("test tidy_select_variables() checks", {
     NA
   )
 })
+
