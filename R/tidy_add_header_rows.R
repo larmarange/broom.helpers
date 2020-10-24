@@ -84,7 +84,7 @@ tidy_add_header_rows <- function(x,
   # if reference_rows have been defined, removal of reference row
   variables_to_simplify <- NULL
   # obtain character vector of selected variables
-  show_single_row <- .tidy_tidyselect(x, {{ show_single_row }})
+  show_single_row <- .select_to_chr_vector({{ show_single_row }}, var_info = x, arg_name = "show_single_row")
 
   has_reference_row <- "reference_row" %in% names(x)
   if (!has_reference_row)

@@ -20,36 +20,76 @@ NULL
 #' @rdname select_helpers
 #' @export
 all_continuous <- function() {
-  env_variable_type$lst_variable_types %>%
-    purrr::keep(~identical(., "continuous")) %>%
-    names()
+  .generic_selector("variable", "var_type",
+                    .data$var_type %in% "continuous",
+                    fun_name = "all_continuous")
 }
 
 #' @rdname select_helpers
 #' @export
 all_dichotomous <- function() {
-  env_variable_type$lst_variable_types %>%
-    purrr::keep(~identical(., "dichotomous")) %>%
-    names()
+  .generic_selector("variable", "var_type",
+                    .data$var_type %in% "dichotomous",
+                    fun_name = "all_dichotomous")
 }
 
 #' @rdname select_helpers
 #' @export
 all_categorical <- function(dichotomous = TRUE) {
-  types <-
-    switch(dichotomous, c("categorical", "dichotomous")) %||%
-    "categorical"
+  types <- switch(dichotomous, c("categorical", "dichotomous")) %||% "categorical"
 
-  env_variable_type$lst_variable_types %>%
-    purrr::keep(~. %in% types) %>%
-    names()
+  .generic_selector("variable", "var_type",
+                    .data$var_type %in% types,
+                    fun_name = "all_categorical")
 }
 
 #' @rdname select_helpers
 #' @export
 all_interaction <- function() {
-  env_variable_type$lst_variable_types %>%
-    purrr::keep(~identical(., "interaction")) %>%
-    names()
+  .generic_selector("variable", "var_type",
+                    .data$var_type %in% "interaction",
+                    fun_name = "all_interaction")
 }
+
+#' @rdname select_helpers
+#' @export
+all_intercepts <- function() {
+  .generic_selector("variable", "var_type",
+                    .data$var_type %in% "intercept",
+                    fun_name = "all_intercepts")
+}
+
+#' @rdname select_helpers
+#' @export
+all_treatment_contrasts <- function() {
+  .generic_selector("variable", "contrasts",
+                    .data$contrasts %in% "contr.treatment",
+                    fun_name = "all_treatment_contrasts")
+}
+
+#' @rdname select_helpers
+#' @export
+all_sum_contrasts <- function() {
+  .generic_selector("variable", "contrasts",
+                    .data$contrasts %in% "contr.sum",
+                    fun_name = "all_sum_contrasts")
+}
+
+#' @rdname select_helpers
+#' @export
+all_poly_contrasts <- function() {
+  .generic_selector("variable", "contrasts",
+                    .data$contrasts %in% "contr.poly",
+                    fun_name = "all_poly_contrasts")
+}
+
+#' @rdname select_helpers
+#' @export
+all_helmert_contrasts <- function() {
+  .generic_selector("variable", "contrasts",
+                    .data$contrasts %in% "contr.helmert",
+                    fun_name = "all_helmert_contrasts")
+}
+
+
 

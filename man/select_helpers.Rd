@@ -6,6 +6,11 @@
 \alias{all_dichotomous}
 \alias{all_categorical}
 \alias{all_interaction}
+\alias{all_intercepts}
+\alias{all_treatment_contrasts}
+\alias{all_sum_contrasts}
+\alias{all_poly_contrasts}
+\alias{all_helmert_contrasts}
 \title{Select helper functions}
 \usage{
 all_continuous()
@@ -15,6 +20,16 @@ all_dichotomous()
 all_categorical(dichotomous = TRUE)
 
 all_interaction()
+
+all_intercepts()
+
+all_treatment_contrasts()
+
+all_sum_contrasts()
+
+all_poly_contrasts()
+
+all_helmert_contrasts()
 }
 \arguments{
 \item{dichotomous}{Logical indicating whether to include dichotomous variables.

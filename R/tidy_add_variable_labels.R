@@ -55,6 +55,7 @@ tidy_add_variable_labels <- function(x,
     x <- x %>% dplyr::select(-.data$var_label)
   }
 
+  labels <- .formula_list_to_named_list(labels, var_info = x, arg_name = "labels")
   if (is.list(labels)) {
     labels <- unlist(labels)
   }

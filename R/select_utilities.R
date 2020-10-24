@@ -1,0 +1,286 @@
+#' Convert formula selector to a named list
+#'
+#' Functions takes a list of formulas, e.g. `list(starts_with("age") ~ "continuous")`,
+#' and returns a named list, e.g. `list(age = "continuous")`.
+#'
+#' @param x list of selecting formulas
+#' @inheritParams .select_to_chr_vector
+#' @export
+.formula_list_to_named_list <- function(x, data = NULL, var_info = NULL,
+                                        arg_name = NULL, select_single = FALSE) {
+  # if NULL provided, return NULL ----------------------------------------------
+  if (is.null(x)) {
+    return(NULL)
+  }
+
+  # converting to list if single element passed --------------------------------
+  if (inherits(x, "formula")) {
+    x <- list(x)
+  }
+
+  # returning named list if passed ---------------------------------------------
+  if (!is.null(names(x)) && # names are non-null
+      length(names(x)) == length(x) && # name of every element of list
+      sum(names(x) == "") == 0) { # no names are blank
+    return(x)
+  }
+
+  # check class of input -------------------------------------------------------
+  if (!purrr::every(x, ~inherits(.x, "formula"))) {
+    .tidyselect_to_list_error(arg_name = arg_name)
+  }
+
+  # converting all inputs to named list ----------------------------------------
+  named_list <-
+    purrr::map(
+      x,
+      function(x) {
+        # for each formula extract lhs and rhs ---------------------------------
+        # checking the LHS is not empty
+        f_lhs_quo <- .f_side_as_quo(x, "lhs")
+        if (rlang::quo_is_null(f_lhs_quo)) .tidyselect_to_list_error(arg_name = arg_name)
+        # extract LHS of formula
+        lhs <- .select_to_chr_vector(select = !!.f_side_as_quo(x, "lhs"),
+                                     data = data,
+                                     var_info = var_info,
+                                     arg_name = arg_name,
+                                     select_single = select_single)
+
+        # evaluate RHS of formula in the original formula environment
+        rhs <- .f_side_as_quo(x, "rhs") %>% rlang::eval_tidy()
+
+        # converting rhs and lhs into a named list
+        purrr::map(lhs, ~ list(rhs) %>% rlang::set_names(.x)) %>%
+          purrr::flatten()
+      }
+    ) %>%
+    purrr::flatten()
+
+  # removing duplicates (using the last one listed if variable occurs more than once)
+  tokeep <- names(named_list) %>% rev() %>% {!duplicated(.)} %>% rev()
+  named_list[tokeep]
+}
+
+#' Variable selector
+#'
+#' Function takes `select()`-like inputs and converts the selector to
+#' a character vector of variable names. Functions accepts tidyselect syntax,
+#' and additional selector functions defined within the package
+#'
+#' @param select A single object selecting variables, e.g. `c(age, stage)`,
+#' `starts_with("age")`
+#' @param data A data frame to select columns from. Default is NULL
+#' @param var_info A data frame of variable names and attributes. May also pass
+#' a character vector of variable names. Default is NULL
+#' @param arg_name Optional string indicating the source argument name. This
+#' helps in the error messaging. Default is NULL.
+#' @param select_single Logical indicating whether the result must be a single
+#' variable. Default is `FALSE`
+#'
+#' @return A character vector of variable names
+#' @export
+.select_to_chr_vector <- function(select, data = NULL, var_info = NULL,
+                                  arg_name = NULL, select_single = FALSE) {
+  if ((is.null(data) + is.null(var_info)) != 1)
+    stop("One and only one of `data=` and `var_info=` may be specified.")
+  select <- rlang::enquo(select)
+
+  if (!is.null(var_info)) {
+    # scoping the variable types
+    .scope_var_info(var_info)
+    # convert variable names vector to data frame
+    data <- .var_info_to_df(var_info)
+  }
+
+  # determine if selecting input begins with `var()`
+  select_input_starts_var <-
+    !rlang::quo_is_symbol(select) && # if not a symbol (ie name)
+    identical(eval(as.list(rlang::quo_get_expr(select)) %>% purrr::pluck(1)),
+              dplyr::vars)
+
+  # performing selecting
+  res <-
+    tryCatch({
+      if (select_input_starts_var) {
+        # `vars()` evaluates to a list of quosures; unquoting them in `select()`
+        names(dplyr::select(data, !!!rlang::eval_tidy(select)))
+      }
+      else {
+        names(dplyr::select(data, !!select))
+      }
+    },
+    error = function(e) {
+      if (!is.null(arg_name))
+        error_msg <- stringr::str_glue("Error in `{arg_name}=` argument input. Select from ",
+                                       "{paste(sQuote(names(data)), collapse = ', ')}")
+      else error_msg <- as.character(e)
+      stop(error_msg, call. = FALSE)
+    })
+
+  # assuring only a single column is selected
+  if (select_single == TRUE && length(res) != 1) {
+    stop(stringr::str_glue(
+      "Error in `{arg_name}=` argument input--select only a single column. ",
+      "The following columns were selected, ",
+      "{paste(sQuote(res), collapse = ', ')}"
+    ), call. = FALSE)
+  }
+
+  res
+}
+
+
+#' Generate a custom selector function
+#'
+#' Only works after
+#'
+#' @param variable_column string indicating column variable names are stored
+#' @param select_column character vector of columns used in the `select_expr=` argument
+#' @param select_expr unquoted predicate command to subset a data frame to select variables
+#' @param fun_name quoted name of function where `.generic_selector()` is being used.
+#' This helps with error messaging.
+#'
+#' @return custom selector functions
+#' @export
+.generic_selector <- function(variable_column, select_column, select_expr, fun_name) {
+  # ensuring the proper data has been scoped to use this function
+  if (!exists("df_var_info", envir = env_variable_type)) {
+    stringr::str_glue("Cannot use selector '{fun_name}()' in this context.") %>%
+      stop(call. = FALSE)
+  }
+  if (!all(c(variable_column, select_column) %in% names(env_variable_type$df_var_info))) {
+    stringr::str_glue("Cannot use selector '{fun_name}()' in this context.") %>%
+      stop(call. = FALSE)
+  }
+
+  # selecting the variable from the variable information data frame
+  env_variable_type$df_var_info %>%
+    dplyr::select(all_of(c(variable_column, select_column))) %>%
+    dplyr::filter(stats::complete.cases(.)) %>%
+    dplyr::filter({{ select_expr }}) %>%
+    dplyr::pull(all_of(variable_column)) %>%
+    unique()
+}
+
+
+# scoping the variable characteristics
+.scope_var_info <- function(x) {
+  # removing everything from selecting environment
+  rm(list = ls(envir = env_variable_type), envir = env_variable_type)
+
+  # saving list of variable types to selecting environment
+  df_var_info <-
+    x %>%
+    dplyr::select(any_of(c("variable", "var_label", "var_class",
+                           "var_type", "var_nlevels", "contrasts"))) %>%
+    dplyr::distinct()
+
+  env_variable_type$df_var_info <- df_var_info
+
+  return(invisible(NULL))
+}
+
+# function that converts a meta_data tibble to a tibble of variable names (to be used in selecting)
+.var_info_to_df <- function(x) {
+  # converting variable name and class into data frame so users can use `where(predicate)`-types
+  if (inherits(x, "data.frame") && all(c("variable", "var_class") %in% names(x))) {
+    # keep unique var names
+    x <-
+      dplyr::select(x, all_of(c("variable", "var_class"))) %>%
+      dplyr::distinct() %>%
+      dplyr::filter(!is.na(.data$variable))
+    df <-
+      purrr::map2_dfc(
+        x$variable, x$var_class,
+        function(var, class) {
+          switch(
+            class,
+            "numeric" = data.frame(pi),
+            "character" = data.frame(letters[1]),
+            "factor" = data.frame(datasets::iris$Species[1]),
+            "ordered" = data.frame(factor(datasets::iris$Species[1], ordered = TRUE)),
+            "integer" = data.frame(1L),
+            "Date" = data.frame(Sys.Date()),
+            "difftime" = data.frame(Sys.Date() - Sys.Date())
+          ) %||%
+            data.frame(NA) %>%
+            purrr::set_names(var)
+        }
+      )
+  }
+  # if only a vector of names were passed, converting them to a data frame
+  else if (rlang::is_vector(x) && !is.list(x)) {
+    df <- purrr::map_dfc(x, ~data.frame(NA) %>% purrr::set_names(.x))
+  }
+  # return data frame with variables as column names
+  df
+}
+
+# extract LHS/RHS of formula as quosure. attached env will be the formula env
+.f_side_as_quo <- function(x, side = c("lhs", "rhs")) {
+  side <- match.arg(side)
+  f_expr <-
+    switch(side,
+           "lhs" = rlang::f_lhs(x),
+           "rhs" = rlang::f_rhs(x))
+  f_quo <- rlang::quo(!!f_expr)
+  attr(f_quo, ".Environment") <- rlang::f_env(x)
+  f_quo
+}
+
+.tidyselect_to_list_error <- function(arg_name) {
+  example_text <-
+    switch(
+      arg_name %||% "not_specified",
+      "type" = paste("type = list(age ~ \"continuous\", where(is.integer) ~ \"categorical\")"),
+      "label" = paste("label = list(age ~ \"Age, years\", response ~ \"Tumor Response\")"),
+      "statistic" = paste(c("statistic = list(all_continuous() ~ \"{mean} ({sd})\", all_categorical() ~ \"{n} / {N} ({p}%)\")",
+                            "statistic = list(age ~ \"{median}\")")),
+      "digits" = paste(c("digits = list(age ~ 2)",
+                         "digits = list(all_continuous() ~ 2)")),
+      "value" = paste(c("value = list(grade ~ \"III\")",
+                        "value = list(all_logical() ~ FALSE)")),
+      "test" = paste(c("test = list(all_continuous() ~ \"t.test\")",
+                       "test = list(age ~ \"kruskal.test\")"))
+    ) %||%
+    paste(c("label = list(age ~ \"Age, years\")",
+            "statistic = list(all_continuous() ~ \"{mean} ({sd})\")",
+            "type = list(c(response, death) ~ \"categorical\")"))
+
+  # printing error for argument input
+  if (!is.null(arg_name))
+    usethis::ui_oops(stringr::str_glue(
+      "There was a problem with the",
+      "{usethis::ui_code(stringr::str_glue('{arg_name}='))} argument input."))
+  else
+    usethis::ui_oops("There was a problem with one of the function argument inputs.")
+  usethis::ui_info("Below is an example of correct syntax.")
+  purrr::walk(example_text, ~print(usethis::ui_code(.)))
+  stop("Invalid argument syntax", call. = FALSE)
+}
+
+
+#' Copy of tidyselect's unexported `where()` function
+#'
+#' Need this function when we do checks if the select helpers are wrapped in `var()`.
+#' If it is not present, users cannot use `where(is.numeric)` type selectors.
+#' tidyselect maintainers have indicated they will export `where()` in a future
+#' release so this will not be required
+#' @noRd
+where <- function(fn) {
+  predicate <- rlang::as_function(fn)
+
+  function(x, ...) {
+    out <- predicate(x, ...)
+
+    if (!rlang::is_bool(out)) {
+      rlang::abort("`where()` must be used with functions that return `TRUE` or `FALSE`.")
+    }
+
+    out
+  }
+}
+
+# set new environment for new tidyselect funs
+env_variable_type <- rlang::new_environment()
+
