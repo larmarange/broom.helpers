@@ -98,8 +98,10 @@
   # determine if selecting input begins with `var()`
   select_input_starts_var <-
     !rlang::quo_is_symbol(select) && # if not a symbol (ie name)
-    identical(eval(as.list(rlang::quo_get_expr(select)) %>% purrr::pluck(1)),
-              dplyr::vars)
+    tryCatch(identical(
+      eval(as.list(rlang::quo_get_expr(select)) %>% purrr::pluck(1)),
+      dplyr::vars),
+      error = function(e) FALSE)
 
   # performing selecting
   res <-
@@ -257,28 +259,6 @@ formula_select_examples <- list(
   value = c("value = list(grade ~ \"III\")", "value = list(all_logical() ~ FALSE)"),
   test = c("test = list(all_continuous() ~ \"t.test\")", "test = list(age ~ \"kruskal.test\")")
 )
-
-
-#' Copy of tidyselect's unexported `where()` function
-#'
-#' Need this function when we do checks if the select helpers are wrapped in `var()`.
-#' If it is not present, users cannot use `where(is.numeric)` type selectors.
-#' tidyselect maintainers have indicated they will export `where()` in a future
-#' release so this will not be required
-#' @noRd
-where <- function(fn) {
-  predicate <- rlang::as_function(fn)
-
-  function(x, ...) {
-    out <- predicate(x, ...)
-
-    if (!rlang::is_bool(out)) {
-      rlang::abort("`where()` must be used with functions that return `TRUE` or `FALSE`.")
-    }
-
-    out
-  }
-}
 
 # set new environment for new tidyselect funs
 env_variable_type <- rlang::new_environment()
