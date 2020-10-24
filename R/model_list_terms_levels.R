@@ -91,55 +91,57 @@ model_list_terms_levels.default <- function(
         "sum",
         "treatment"
       )
-      term_levels <- xlevels[[v]]
+      terms_levels <- xlevels[[v]]
       # terms could be named according to two approaches
-      terms_names1 <- paste0(v, term_levels)
-      terms_names2 <- paste0(v, seq(1, length(term_levels)))
+      # plus variations with backticks
+      terms_names1 <- paste0(v, terms_levels)
+      terms_names2 <- paste0(v, seq(1, length(terms_levels)))
+      terms_names1b <- paste0("`", v, "`",  terms_levels)
+      terms_names2b <- paste0("`", v, "`", seq(1, length(terms_levels)))
 
       observed_terms <- model_terms$term[model_terms$variable == v]
       ref <- contrasts_list$reference[contrasts_list$variable == v]
-      # observed terms correspond to first case
-      if (length(observed_terms) > 0 & all(observed_terms %in% terms_names1[-ref])) {
-        approach <- 1
-      } else {
-        # observed terms correspond to second case
-        if (length(observed_terms) > 0 & all(observed_terms %in% terms_names2[-ref])) {
-          approach <- 2
-        } else {
-          # it could be an interaction term only
-          # we check what is the most frequent
-          n1 <- .count_term(model_terms$term, terms_names1)
-          n2 <- .count_term(model_terms$term, terms_names2)
-          approach <- dplyr::if_else(n1 >= n2, 1, 2)
-        }
-      }
-
-      if (approach == 1) {
-        res <- dplyr::bind_rows(
-          res,
-          dplyr::tibble(
-            variable = v,
-            contrasts_type = contrasts_type,
-            term = terms_names1,
-            level = term_levels,
-            reference = seq(1, length(term_levels)) == ref,
-            reference_level = term_levels[ref]
-          )
+      # identification of the naming approach
+      approach <- NA
+      if (length(observed_terms)) {
+        approach <- dplyr::case_when(
+          all(observed_terms %in% terms_names1[-ref]) ~ "1",
+          all(observed_terms %in% terms_names2[-ref]) ~ "2",
+          all(observed_terms %in% terms_names1b[-ref]) ~ "1b",
+          all(observed_terms %in% terms_names2b[-ref]) ~ "2b"
         )
-      } else {
-        res <- dplyr::bind_rows(
-          res,
-          dplyr::tibble(
-            variable = v,
-            contrasts_type = contrasts_type,
-            term = terms_names2,
-            level = term_levels,
-            reference = seq(1, length(term_levels)) == ref,
-            reference_level = term_levels[ref]
-          )
+      }
+      # case of an interaction term only
+      if (is.na(approach)) {
+        n1 <- .count_term(model_terms$term, terms_names1)
+        n2 <- .count_term(model_terms$term, terms_names2)
+        n1b <- .count_term(model_terms$term, terms_names1b)
+        n2b <- .count_term(model_terms$term, terms_names2b)
+        approach <- dplyr::case_when(
+          (n1b + n2b) > (n1 + n2) & n1b >= n2b ~ "1b",
+          (n1b + n2b) > (n1 + n2) & n1b < n2b ~ "2b",
+          n2 > n1 ~ "2",
+          TRUE ~ "1"
         )
       }
 
+      terms_names <- dplyr::case_when(
+        approach == "1" ~ terms_names1,
+        approach == "2" ~ terms_names2,
+        approach == "1b" ~ terms_names1b,
+        approach == "2b" ~ terms_names2b
+      )
+    res <- dplyr::bind_rows(
+        res,
+        dplyr::tibble(
+          variable = v,
+          contrasts_type = contrasts_type,
+          term = terms_names,
+          level = terms_levels,
+          reference = seq(1, length(terms_levels)) == ref,
+          reference_level = terms_levels[ref]
+        )
+      )
     }
   }
 

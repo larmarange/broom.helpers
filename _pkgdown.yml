@@ -39,3 +39,8 @@ reference:
   - title: Variable type selectors
   - contents:
       - starts_with("all_")
+
+  - title: Other helpers
+  - contents:
+      - .clean_backticks
+      - .escape_regex

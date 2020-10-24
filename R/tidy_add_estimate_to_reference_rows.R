@@ -103,9 +103,6 @@ tidy_add_estimate_to_reference_rows <- function(
     tidy_attach_model(model = model, .attributes = .attributes)
 }
 
-# to be rewritten using
-# emmeans::emmeans(model, specs = "period", contr = variable)
-# to be more generic
 
 .get_ref_row_estimate_contr_sum <- function(variable, model, exponentiate = FALSE,
                                             quiet = FALSE) {

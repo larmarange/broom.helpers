@@ -1,8 +1,13 @@
 # broom.helpers (development version)
 
-* **Breaking change:** column `var_type` returned by `tidy_identify_variables`
+* **Minor breaking change:** column `var_type` returned by `tidy_identify_variables()`
   is now equal to `"dichotomous"` for categorical variables with only
   2 levels
+* **Minor breaking changes::** for intercepts terms, `tidy_identify_variables()`
+  now populates `variable` column by `term` content, instead of `NA` (#66)
+* **Minor breaking change:** If the variables can't be identified by 
+  `tidy_identify_variables()`, the `variable` column is now populated 
+  with the content of the `term` column (#63)
 * New selecting functions `all_continuous()`, `all_categorical()`,
   `all_dichotomous()`, and `all_interaction()` for selecting variables 
   from models (#54)
@@ -34,6 +39,8 @@
 * Tibbles returned by `tidy_*` functions also inherits of `"broom.helpers"` 
   class (#56)
 * `interaction_sep` argument has been added to `tidy_plus_plus()`
+* Better management of variables with non standard names (#67)
+* `.clean_backticks()` and `.escape_regex()` are now exported
 * Bug fix for non standard variable names containing
   a character that would have a special meaning in
   a regular expression (#44)

@@ -6,35 +6,35 @@ test_that("select_helpers: tidy_select_variables", {
     tidy_select_variables(mod_tidy, include = all_categorical())$variable %>%
       na.omit() %>%
       unique(),
-    c("trt", "grade")
+    c("(Intercept)", "trt", "grade")
   )
 
   expect_equal(
     tidy_select_variables(mod_tidy, include = all_categorical(dichotomous = FALSE))$variable %>%
       na.omit() %>%
       unique(),
-    c("grade")
+    c("(Intercept)", "grade")
   )
 
   expect_equal(
     tidy_select_variables(mod_tidy, include = all_continuous())$variable %>%
       na.omit() %>%
       unique(),
-    c("age")
+    c("(Intercept)", "age")
   )
 
   expect_equal(
     tidy_select_variables(mod_tidy, include = all_dichotomous())$variable %>%
       na.omit() %>%
       unique(),
-    c("trt")
+    c("(Intercept)", "trt")
   )
 
   expect_equal(
     tidy_select_variables(mod_tidy, include = all_interaction())$variable %>%
       na.omit() %>%
       unique(),
-    c("age:trt")
+    c("(Intercept)", "age:trt")
   )
 })
 
