@@ -4,7 +4,7 @@
 #' and returns a named list, e.g. `list(age = "continuous")`.
 #'
 #' @param x list of selecting formulas
-#' @inheritParams .select_to_chr_vector
+#' @inheritParams .select_to_varnames
 #' @export
 .formula_list_to_named_list <- function(x, data = NULL, var_info = NULL,
                                         arg_name = NULL, select_single = FALSE) {
@@ -27,7 +27,7 @@
 
   # check class of input -------------------------------------------------------
   if (!purrr::every(x, ~inherits(.x, "formula"))) {
-    .tidyselect_to_list_error(arg_name = arg_name)
+    formula_select_error(arg_name = arg_name)
   }
 
   # converting all inputs to named list ----------------------------------------
@@ -38,13 +38,13 @@
         # for each formula extract lhs and rhs ---------------------------------
         # checking the LHS is not empty
         f_lhs_quo <- .f_side_as_quo(x, "lhs")
-        if (rlang::quo_is_null(f_lhs_quo)) .tidyselect_to_list_error(arg_name = arg_name)
+        if (rlang::quo_is_null(f_lhs_quo)) formula_select_error(arg_name = arg_name)
         # extract LHS of formula
-        lhs <- .select_to_chr_vector(select = !!.f_side_as_quo(x, "lhs"),
-                                     data = data,
-                                     var_info = var_info,
-                                     arg_name = arg_name,
-                                     select_single = select_single)
+        lhs <- .select_to_varnames(select = !!f_lhs_quo,
+                                   data = data,
+                                   var_info = var_info,
+                                   arg_name = arg_name,
+                                   select_single = select_single)
 
         # evaluate RHS of formula in the original formula environment
         rhs <- .f_side_as_quo(x, "rhs") %>% rlang::eval_tidy()
@@ -79,8 +79,8 @@
 #'
 #' @return A character vector of variable names
 #' @export
-.select_to_chr_vector <- function(select, data = NULL, var_info = NULL,
-                                  arg_name = NULL, select_single = FALSE) {
+.select_to_varnames <- function(select, data = NULL, var_info = NULL,
+                                arg_name = NULL, select_single = FALSE) {
   if ((is.null(data) + is.null(var_info)) != 1)
     stop("One and only one of `data=` and `var_info=` may be specified.")
   select <- rlang::enquo(select)
@@ -88,6 +88,9 @@
   if (!is.null(var_info)) {
     # scoping the variable types
     .scope_var_info(var_info)
+    # un-scoping on exit
+    on.exit(rm(list = ls(envir = env_variable_type), envir = env_variable_type))
+
     # convert variable names vector to data frame
     data <- .var_info_to_df(var_info)
   }
@@ -144,13 +147,11 @@
 #' @export
 .generic_selector <- function(variable_column, select_column, select_expr, fun_name) {
   # ensuring the proper data has been scoped to use this function
-  if (!exists("df_var_info", envir = env_variable_type)) {
-    stringr::str_glue("Cannot use selector '{fun_name}()' in this context.") %>%
-      stop(call. = FALSE)
-  }
-  if (!all(c(variable_column, select_column) %in% names(env_variable_type$df_var_info))) {
-    stringr::str_glue("Cannot use selector '{fun_name}()' in this context.") %>%
-      stop(call. = FALSE)
+  if (!exists("df_var_info", envir = env_variable_type) ||
+      (exists("df_var_info", envir = env_variable_type) &&
+       !all(c(variable_column, select_column) %in% names(env_variable_type$df_var_info)))) {
+    usethis::ui_oops("Cannot use selector '{fun_name}()' in this context.")
+    stop("Invalid syntax", call. = FALSE)
   }
 
   # selecting the variable from the variable information data frame
@@ -228,21 +229,8 @@
   f_quo
 }
 
-.tidyselect_to_list_error <- function(arg_name) {
-  example_text <-
-    switch(
-      arg_name %||% "not_specified",
-      "type" = paste("type = list(age ~ \"continuous\", where(is.integer) ~ \"categorical\")"),
-      "label" = paste("label = list(age ~ \"Age, years\", response ~ \"Tumor Response\")"),
-      "statistic" = paste(c("statistic = list(all_continuous() ~ \"{mean} ({sd})\", all_categorical() ~ \"{n} / {N} ({p}%)\")",
-                            "statistic = list(age ~ \"{median}\")")),
-      "digits" = paste(c("digits = list(age ~ 2)",
-                         "digits = list(all_continuous() ~ 2)")),
-      "value" = paste(c("value = list(grade ~ \"III\")",
-                        "value = list(all_logical() ~ FALSE)")),
-      "test" = paste(c("test = list(all_continuous() ~ \"t.test\")",
-                       "test = list(age ~ \"kruskal.test\")"))
-    ) %||%
+formula_select_error <- function(arg_name) {
+  example_text <- formula_select_examples[[arg_name %||% "not_an_arg"]] %||%
     paste(c("label = list(age ~ \"Age, years\")",
             "statistic = list(all_continuous() ~ \"{mean} ({sd})\")",
             "type = list(c(response, death) ~ \"categorical\")"))
@@ -258,6 +246,17 @@
   purrr::walk(example_text, ~print(usethis::ui_code(.)))
   stop("Invalid argument syntax", call. = FALSE)
 }
+
+formula_select_examples <- list(
+  labels = "labels = list(age ~ \"Age, years\", response ~ \"Tumor Response\")",
+  label = "label = list(age ~ \"Age, years\", response ~ \"Tumor Response\")",
+  type = "type = list(age ~ \"continuous\", where(is.integer) ~ \"categorical\")",
+  statistic = c("statistic = list(all_continuous() ~ \"{mean} ({sd})\", all_categorical() ~ \"{n} / {N} ({p}%)\")",
+                "statistic = list(age ~ \"{median}\")"),
+  digits = c("digits = list(age ~ 2)", "digits = list(all_continuous() ~ 2)"),
+  value = c("value = list(grade ~ \"III\")", "value = list(all_logical() ~ FALSE)"),
+  test = c("test = list(all_continuous() ~ \"t.test\")", "test = list(age ~ \"kruskal.test\")")
+)
 
 
 #' Copy of tidyselect's unexported `where()` function

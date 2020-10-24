@@ -48,7 +48,7 @@ tidy_select_variables <- function(
   .attributes <- .save_attributes(x)
 
   # obtain character vector of selected variables
-  include <- .select_to_chr_vector({{ include }}, var_info = x, arg_name = "include")
+  include <- .select_to_varnames({{ include }}, var_info = x, arg_name = "include")
 
   x %>%
     dplyr::filter(

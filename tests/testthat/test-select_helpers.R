@@ -40,9 +40,22 @@ test_that("select_helpers: tidy_select_variables", {
 
 test_that("select_helpers: tidy_plus_plus", {
   mod <- glm(response ~ age * trt + grade, gtsummary::trial, family = binomial)
+  mod2 <- glm(response ~ stage + grade * trt,
+              gtsummary::trial,
+              family = binomial,
+              contrasts = list(stage = contr.sum,
+                               grade = contr.poly,
+                               trt = contr.helmert))
 
   expect_equal(
     tidy_plus_plus(mod, include = all_categorical())$variable %>%
+      na.omit() %>%
+      unique(),
+    c("trt", "grade")
+  )
+
+  expect_equal(
+    tidy_plus_plus(mod, include = all_treatment_contrasts())$variable %>%
       na.omit() %>%
       unique(),
     c("trt", "grade")
@@ -70,10 +83,38 @@ test_that("select_helpers: tidy_plus_plus", {
   )
 
   expect_equal(
+    tidy_plus_plus(mod, include = all_intercepts(), intercept = TRUE)$variable %>%
+      na.omit() %>%
+      unique(),
+    c("(Intercept)")
+  )
+
+  expect_equal(
     tidy_plus_plus(mod, add_header_rows = TRUE,
                    show_single_row = all_dichotomous())$variable %in% "trt" %>%
       sum(),
     1L
+  )
+
+  expect_equal(
+    tidy_plus_plus(mod2, include = all_sum_contrasts())$variable %>%
+      na.omit() %>%
+      unique(),
+    c("stage")
+  )
+
+  expect_equal(
+    tidy_plus_plus(mod2, include = all_poly_contrasts())$variable %>%
+      na.omit() %>%
+      unique(),
+    c("grade")
+  )
+
+  expect_equal(
+    tidy_plus_plus(mod2, include = all_helmert_contrasts())$variable %>%
+      na.omit() %>%
+      unique(),
+    c("trt")
   )
 })
 
@@ -87,3 +128,70 @@ test_that("select_helpers: tidy_add_header_rows", {
     1L
   )
 })
+
+test_that("select_helpers: tidy_add_variable_labels", {
+  mod <- glm(response ~ age * trt + grade, gtsummary::trial, family = binomial)
+  mod_tidy <- tidy_and_attach(mod)
+
+  expect_error(
+    tidy_add_variable_labels(mod_tidy, labels = where(is.numeric) ~ "NUMERIC"),
+    NA
+  )
+
+  expect_equal(
+    tidy_add_variable_labels(mod_tidy,
+                             labels = list(`(Intercept)` ~ "b0",
+                                           age ~ "AGE",
+                                           trt ~ "Drug",
+                                           "grade" ~ "Grade",
+                                           contains("age:") ~ "Interaction")) %>%
+      dplyr::pull(var_label) %>%
+      unique(),
+    c("b0", "AGE", "Drug", "Grade", "Interaction")
+  )
+})
+
+test_that("select_helpers: .select_to_varnames", {
+  expect_error(
+    .select_to_varnames(c(mpg, hp), data = mtcars, select_single = TRUE)
+  )
+})
+
+test_that("select_helpers: .generic_selector ", {
+  mod <- glm(response ~ age * trt + grade, gtsummary::trial, family = binomial)
+
+  expect_error(
+    tidy_and_attach(mod) %>%
+      tidy_identify_variables() %>%
+      tidy_add_variable_labels(labels = all_helmert_contrasts() ~ "HELMERT!")
+  )
+
+  expect_error(
+    all_continuous()
+  )
+
+  expect_equal(
+    .var_info_to_df(letters) %>% names(),
+    letters
+  )
+})
+
+test_that("select_helpers: .formula_list_to_named_list ", {
+  mod <- glm(response ~ age * trt + grade, gtsummary::trial, family = binomial)
+  tidy_mod <- tidy_plus_plus(mod)
+
+  expect_equal(
+    .formula_list_to_named_list(age ~ "Age", var_info = tidy_mod),
+    list(age = "Age")
+  )
+
+  expect_error(
+    .formula_list_to_named_list(~ "Age", var_info = tidy_mod)
+  )
+
+  expect_error(
+    .formula_list_to_named_list(~ "Age", var_info = tidy_mod, arg_name = "labels")
+  )
+})
+
+
