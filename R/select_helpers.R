@@ -6,7 +6,7 @@
 #' - `all_continuous2()` selects only type `"continuous2"`
 #' - `all_categorical()` selects categorical (including `"dichotomous"`) variables
 #' - `all_dichotomous()` selects only type `"dichotomous"`
-#' - `all_interactions()` selects interaction terms from a regression model
+#' - `all_interaction()` selects interaction terms from a regression model
 #' - `all_intercepts()` selects intercept terms from a regression model
 #' - `all_contrasts()` selects variables in regression model based on their type of contrast
 #' @name select_helpers
@@ -52,7 +52,7 @@ all_categorical <- function(dichotomous = TRUE) {
 
 #' @rdname select_helpers
 #' @export
-all_interactions <- function() {
+all_interaction <- function() {
   .generic_selector("variable", "var_type",
                     .data$var_type %in% "interaction",
                     fun_name = "all_interaction")

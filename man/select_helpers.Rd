@@ -5,7 +5,7 @@
 \alias{all_continuous}
 \alias{all_dichotomous}
 \alias{all_categorical}
-\alias{all_interactions}
+\alias{all_interaction}
 \alias{all_intercepts}
 \alias{all_treatment_contrasts}
 \alias{all_sum_contrasts}
@@ -19,7 +19,7 @@ all_dichotomous()
 
 all_categorical(dichotomous = TRUE)
 
-all_interactions()
+all_interaction()
 
 all_intercepts()
 
@@ -46,7 +46,7 @@ functions for selecting columns of data frames (and other items as well).
 \item \code{all_continuous2()} selects only type \code{"continuous2"}
 \item \code{all_categorical()} selects categorical (including \code{"dichotomous"}) variables
 \item \code{all_dichotomous()} selects only type \code{"dichotomous"}
-\item \code{all_interactions()} selects interaction terms from a regression model
+\item \code{all_interaction()} selects interaction terms from a regression model
 \item \code{all_intercepts()} selects intercept terms from a regression model
 \item \code{all_contrasts()} selects variables in regression model based on their type of contrast
 }
