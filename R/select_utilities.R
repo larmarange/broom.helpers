@@ -81,18 +81,22 @@
 #' @export
 .select_to_varnames <- function(select, data = NULL, var_info = NULL,
                                 arg_name = NULL, select_single = FALSE) {
-  if ((is.null(data) + is.null(var_info)) != 1)
-    stop("One and only one of `data=` and `var_info=` may be specified.")
+  if (is.null(data) && is.null(var_info))
+    stop("At least one of `data=` and `var_info=` must be specified.")
+
   select <- rlang::enquo(select)
+
+  # if NULL passed, return NULL
+  if (rlang::quo_is_null(select)) return(NULL)
+
+  # convert var_info to data frame if data not provided ------------------------
+  if (is.null(data)) data <- .var_info_to_df(var_info)
 
   if (!is.null(var_info)) {
     # scoping the variable types
     .scope_var_info(var_info)
     # un-scoping on exit
     on.exit(rm(list = ls(envir = env_variable_type), envir = env_variable_type))
-
-    # convert variable names vector to data frame
-    data <- .var_info_to_df(var_info)
   }
 
   # determine if selecting input begins with `var()`
@@ -123,13 +127,16 @@
     })
 
   # assuring only a single column is selected
-  if (select_single == TRUE && length(res) != 1) {
+  if (select_single == TRUE && length(res) > 1) {
     stop(stringr::str_glue(
       "Error in `{arg_name}=` argument input--select only a single column. ",
       "The following columns were selected, ",
       "{paste(sQuote(res), collapse = ', ')}"
     ), call. = FALSE)
   }
+
+  # if nothing is selected, return a NULL
+  if (length(res) == 0) return(NULL)
 
   res
 }
@@ -170,6 +177,7 @@
 .scope_var_info <- function(x) {
   # removing everything from selecting environment
   rm(list = ls(envir = env_variable_type), envir = env_variable_type)
+  if (!inherits(x, "data.frame")) return(invisible(NULL))
 
   # saving list of variable types to selecting environment
   df_var_info <-
@@ -211,9 +219,13 @@
         }
       )
   }
+  # if a data.frame
+  else if (inherits(x, "data.frame") && "variable" %in% names(x)) {
+    df <- purrr::map_dfc(unique(x$variable), ~data.frame(NA) %>% purrr::set_names(.x))
+  }
   # if only a vector of names were passed, converting them to a data frame
   else if (rlang::is_vector(x) && !is.list(x)) {
-    df <- purrr::map_dfc(x, ~data.frame(NA) %>% purrr::set_names(.x))
+    df <- purrr::map_dfc(unique(x), ~data.frame(NA) %>% purrr::set_names(.x))
   }
   # return data frame with variables as column names
   df

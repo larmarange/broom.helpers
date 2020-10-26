@@ -1,7 +1,14 @@
 #' Select helper functions
 #'
-#' Set of functions to supplement the {tidyselect} set of functions for selecting
-#' columns of data frames.
+#' @description Set of functions to supplement the {tidyselect} set of
+#' functions for selecting columns of data frames (and other items as well).
+#' - `all_continuous()` selects continuous variables
+#' - `all_continuous2()` selects only type `"continuous2"`
+#' - `all_categorical()` selects categorical (including `"dichotomous"`) variables
+#' - `all_dichotomous()` selects only type `"dichotomous"`
+#' - `all_interactions()` selects interaction terms from a regression model
+#' - `all_intercepts()` selects intercept terms from a regression model
+#' - `all_contrasts()` selects variables in regression model based on their type of contrast
 #' @name select_helpers
 #' @rdname select_helpers
 #' @param dichotomous Logical indicating whether to include dichotomous variables.
@@ -45,7 +52,7 @@ all_categorical <- function(dichotomous = TRUE) {
 
 #' @rdname select_helpers
 #' @export
-all_interaction <- function() {
+all_interactions <- function() {
   .generic_selector("variable", "var_type",
                     .data$var_type %in% "interaction",
                     fun_name = "all_interaction")

@@ -1,4 +1,41 @@
-test_that("select_helpers: tidy_select_variables", {
+test_that("select_helpers: .select_to_varnames", {
+  expect_equal(
+    .select_to_varnames(select = vars(hp, mpg), data = mtcars),
+    dplyr::select(mtcars, hp, mpg) %>% colnames()
+  )
+
+  expect_equal(
+    .select_to_varnames(select = mpg, data = mtcars),
+    dplyr::select(mtcars, mpg) %>% colnames()
+  )
+
+  expect_equal(
+    .select_to_varnames(select = "mpg", data = mtcars),
+    dplyr::select(mtcars, "mpg") %>% colnames()
+  )
+
+  expect_equal(
+    .select_to_varnames(select = c("hp", "mpg"), data = mtcars),
+    dplyr::select(mtcars, c("hp", "mpg")) %>% colnames()
+  )
+
+  expect_equal(
+    .select_to_varnames(select = c(hp, mpg), data = mtcars),
+    dplyr::select(mtcars, c(hp, mpg)) %>% colnames()
+  )
+
+  expect_equal(
+    .select_to_varnames(select = NULL, data = mtcars),
+    NULL
+  )
+
+  expect_equal(
+    .select_to_varnames(select = vars(dplyr::everything(), -mpg), data = mtcars),
+    dplyr::select(mtcars, dplyr::everything(), -mpg) %>% colnames()
+  )
+})
+
+test_that("select_helpers: all_*()", {
   mod <- glm(response ~ age * trt + grade, gtsummary::trial, family = binomial)
   mod_tidy <- tidy_and_attach(mod)
 
