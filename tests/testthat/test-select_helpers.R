@@ -1,4 +1,8 @@
 test_that("select_helpers: .select_to_varnames", {
+  expect_error(
+    .select_to_varnames(mpg)
+  )
+
   expect_equal(
     .select_to_varnames(select = vars(hp, mpg), data = mtcars),
     dplyr::select(mtcars, hp, mpg) %>% colnames()
@@ -217,6 +221,10 @@ test_that("select_helpers: .formula_list_to_named_list ", {
   mod <- glm(response ~ age * trt + grade, gtsummary::trial, family = binomial)
   tidy_mod <- tidy_plus_plus(mod)
 
+  expect_error(
+    .formula_list_to_named_list(list(age ~ "Age", TRUE), var_info = tidy_mod)
+  )
+
   expect_equal(
     .formula_list_to_named_list(age ~ "Age", var_info = tidy_mod),
     list(age = "Age")
@@ -231,4 +239,28 @@ test_that("select_helpers: .formula_list_to_named_list ", {
   )
 })
 
+
+test_that("select_helpers: .scope_var_info", {
+  mod_tidy <- lm(mpg ~ hp, mtcars) %>% tidy_and_attach()
+
+  # can scope a data frame with no variable
+  expect_error(
+    .scope_var_info(mod_tidy %>% tidy_identify_variables()), NA
+  )
+
+  # no error when non-data frame is scoped
+  expect_error(
+    .scope_var_info(mod_tidy$term), NA
+  )
+})
+
+
+test_that("select_helpers: .var_info_to_df ", {
+  mod_tidy <- lm(mpg ~ hp, mtcars) %>% tidy_and_attach()
+
+  # can convert a tibble without a var_class column
+  expect_error(
+    .var_info_to_df(mod_tidy %>% tidy_identify_variables() %>% dplyr::select(-var_class)), NA
+  )
+})
 
