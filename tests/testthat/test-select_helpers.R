@@ -96,7 +96,7 @@ test_that("select_helpers: tidy_plus_plus", {
   )
 
   expect_equal(
-    tidy_plus_plus(mod, include = all_treatment_contrasts())$variable %>%
+    tidy_plus_plus(mod, include = all_contrasts("treatment"))$variable %>%
       na.omit() %>%
       unique(),
     c("trt", "grade")
@@ -138,21 +138,21 @@ test_that("select_helpers: tidy_plus_plus", {
   )
 
   expect_equal(
-    tidy_plus_plus(mod2, include = all_sum_contrasts())$variable %>%
+    tidy_plus_plus(mod2, include = all_contrasts("sum"))$variable %>%
       na.omit() %>%
       unique(),
     c("stage")
   )
 
   expect_equal(
-    tidy_plus_plus(mod2, include = all_poly_contrasts())$variable %>%
+    tidy_plus_plus(mod2, include = all_contrasts("poly"))$variable %>%
       na.omit() %>%
       unique(),
     c("grade")
   )
 
   expect_equal(
-    tidy_plus_plus(mod2, include = all_helmert_contrasts())$variable %>%
+    tidy_plus_plus(mod2, include = all_contrasts("helmert"))$variable %>%
       na.omit() %>%
       unique(),
     c("trt")
@@ -204,7 +204,7 @@ test_that("select_helpers: .generic_selector ", {
   expect_error(
     tidy_and_attach(mod) %>%
       tidy_identify_variables() %>%
-      tidy_add_variable_labels(labels = all_helmert_contrasts() ~ "HELMERT!")
+      tidy_add_variable_labels(labels = all_contrasts("helmert") ~ "HELMERT!")
   )
 
   expect_error(

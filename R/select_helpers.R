@@ -3,7 +3,6 @@
 #' @description Set of functions to supplement the {tidyselect} set of
 #' functions for selecting columns of data frames (and other items as well).
 #' - `all_continuous()` selects continuous variables
-#' - `all_continuous2()` selects only type `"continuous2"`
 #' - `all_categorical()` selects categorical (including `"dichotomous"`) variables
 #' - `all_dichotomous()` selects only type `"dichotomous"`
 #' - `all_interaction()` selects interaction terms from a regression model
@@ -13,6 +12,8 @@
 #' @rdname select_helpers
 #' @param dichotomous Logical indicating whether to include dichotomous variables.
 #' Default is `TRUE`
+#' @param type type of contrast to select. Must be one or more of
+#' `c("treatment", "sum", "poly", "helmert")`. Default is all.
 #' @return A character vector of column names selected
 #' @examples
 #' mod <- glm(response ~ age * trt + grade, gtsummary::trial, family = binomial)
@@ -68,35 +69,18 @@ all_intercepts <- function() {
 
 #' @rdname select_helpers
 #' @export
-all_treatment_contrasts <- function() {
+all_contrasts <- function(type = c("treatment", "sum", "poly", "helmert")) {
+  type <- match.arg(type, several.ok = TRUE)
+  contr.type <-
+    purrr::map_chr(type,
+                   ~switch(.x,
+                           "treatment" = "contr.treatment",
+                           "sum" = "contr.sum",
+                           "poly" = "contr.poly",
+                           "helmert" = "contr.helmert")
+    )
+
   .generic_selector("variable", "contrasts",
-                    .data$contrasts %in% "contr.treatment",
-                    fun_name = "all_treatment_contrasts")
+                    .data$contrasts %in% contr.type,
+                    fun_name = "all_contrasts")
 }
-
-#' @rdname select_helpers
-#' @export
-all_sum_contrasts <- function() {
-  .generic_selector("variable", "contrasts",
-                    .data$contrasts %in% "contr.sum",
-                    fun_name = "all_sum_contrasts")
-}
-
-#' @rdname select_helpers
-#' @export
-all_poly_contrasts <- function() {
-  .generic_selector("variable", "contrasts",
-                    .data$contrasts %in% "contr.poly",
-                    fun_name = "all_poly_contrasts")
-}
-
-#' @rdname select_helpers
-#' @export
-all_helmert_contrasts <- function() {
-  .generic_selector("variable", "contrasts",
-                    .data$contrasts %in% "contr.helmert",
-                    fun_name = "all_helmert_contrasts")
-}
-
-
-

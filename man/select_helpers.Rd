@@ -7,10 +7,7 @@
 \alias{all_categorical}
 \alias{all_interaction}
 \alias{all_intercepts}
-\alias{all_treatment_contrasts}
-\alias{all_sum_contrasts}
-\alias{all_poly_contrasts}
-\alias{all_helmert_contrasts}
+\alias{all_contrasts}
 \title{Select helper functions}
 \usage{
 all_continuous()
@@ -23,17 +20,14 @@ all_interaction()
 
 all_intercepts()
 
-all_treatment_contrasts()
-
-all_sum_contrasts()
-
-all_poly_contrasts()
-
-all_helmert_contrasts()
+all_contrasts(type = c("treatment", "sum", "poly", "helmert"))
 }
 \arguments{
 \item{dichotomous}{Logical indicating whether to include dichotomous variables.
 Default is \code{TRUE}}
+
+\item{type}{type of contrast to select. Must be one or more of
+\code{c("treatment", "sum", "poly", "helmert")}. Default is all.}
 }
 \value{
 A character vector of column names selected
@@ -43,7 +37,6 @@ Set of functions to supplement the {tidyselect} set of
 functions for selecting columns of data frames (and other items as well).
 \itemize{
 \item \code{all_continuous()} selects continuous variables
-\item \code{all_continuous2()} selects only type \code{"continuous2"}
 \item \code{all_categorical()} selects categorical (including \code{"dichotomous"}) variables
 \item \code{all_dichotomous()} selects only type \code{"dichotomous"}
 \item \code{all_interaction()} selects interaction terms from a regression model

@@ -144,8 +144,6 @@
 
 #' Generate a custom selector function
 #'
-#' Only works after
-#'
 #' @param variable_column string indicating column variable names are stored
 #' @param select_column character vector of columns used in the `select_expr=` argument
 #' @param select_expr unquoted predicate command to subset a data frame to select variables

@@ -20,5 +20,5 @@ This helps with error messaging.}
 custom selector functions
 }
 \description{
-Only works after
+Generate a custom selector function
 }
