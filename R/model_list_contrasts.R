@@ -4,7 +4,9 @@
 #' @return
 #' A tibble with three columns:
 #' * `variable`: variable name
-#' * `contrasts`: type of contrasts
+#' * `contrasts`: contrasts used
+#' * `contrasts_type`: type of contrasts
+#'   ("treatment", "sum", "poly", "helmert" or "other")
 #' * `reference`: for variables with treatment, SAS
 #'   or sum contrasts, position of the reference level
 #' @export
@@ -72,6 +74,16 @@ model_list_contrasts.default <- function(model) {
       contrasts_list$contrasts[[i]] <- "custom"
     }
   }
-  contrasts_list
+  contrasts_list %>%
+    dplyr::mutate(
+      contrasts_type = dplyr::case_when(
+        .data$contrasts %>% stringr::str_starts("contr.treatment") ~ "treatment",
+        .data$contrasts == "contr.SAS" ~ "treatment",
+        .data$contrasts == "contr.sum" ~ "sum",
+        .data$contrasts == "contr.helmert" ~ "helmert",
+        .data$contrasts == "contr.poly" ~ "poly",
+        TRUE ~ "other"
+      )
+    )
 }
 

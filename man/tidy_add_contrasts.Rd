@@ -12,7 +12,9 @@ tidy_add_contrasts(x, model = tidy_get_model(x))
 \item{model}{the corresponding model, if not attached to \code{x}}
 }
 \description{
-Add a \code{contrasts} column corresponding to the type of contrasts
+Add a \code{contrasts} column corresponding to contrasts used for a
+categorical variable and a \code{contrasts_type} column equal to
+"treatment", "sum", "poly", "helmert" or "other".
 }
 \details{
 If the \code{variable} column is not yet available in \code{x},
