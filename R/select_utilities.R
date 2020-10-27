@@ -181,7 +181,7 @@
   df_var_info <-
     x %>%
     dplyr::select(any_of(c("variable", "var_label", "var_class",
-                           "var_type", "var_nlevels", "contrasts"))) %>%
+                           "var_type", "var_nlevels", "contrasts", "contrasts_type"))) %>%
     dplyr::distinct()
 
   env_variable_type$df_var_info <- df_var_info

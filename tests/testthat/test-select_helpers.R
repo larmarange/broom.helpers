@@ -98,6 +98,20 @@ test_that("select_helpers: tidy_plus_plus", {
   )
 
   expect_equal(
+    tidy_plus_plus(mod3, include = all_contrasts("treatment"))$variable %>%
+      na.omit() %>%
+      unique(),
+    c("stage")
+  )
+
+  expect_equal(
+    tidy_plus_plus(mod3, include = all_contrasts("other"))$variable %>%
+      na.omit() %>%
+      unique(),
+    c("factor(death)")
+  )
+
+  expect_equal(
     tidy_plus_plus(mod, include = all_categorical())$variable %>%
       na.omit() %>%
       unique(),

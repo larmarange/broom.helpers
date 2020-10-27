@@ -49,7 +49,7 @@ all_categorical <- function(dichotomous = TRUE) {
   types <- switch(dichotomous, c("categorical", "dichotomous")) %||% "categorical"
 
   .generic_selector("variable", "var_type",
-                    .data$var_type %in% types,
+                    .data$var_type %in% .env$types,
                     fun_name = "all_categorical")
 }
 
@@ -87,7 +87,7 @@ all_contrasts <- function(contrasts_type = NULL) {
                 several.ok = TRUE)
     return(
       .generic_selector("variable", "contrasts_type",
-                        .data$contrasts %in% contrasts_type,
+                        .data$contrasts_type %in% .env$contrasts_type,
                         fun_name = "all_contrasts")
     )
   }
