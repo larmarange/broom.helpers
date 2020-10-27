@@ -147,6 +147,7 @@ tidy_add_reference_rows <- function(
         var_label = dplyr::first(.data$var_label),
         var_nlevels = dplyr::first(.data$var_nlevels),
         contrasts = dplyr::first(.data$contrasts),
+        contrasts_type = dplyr::first(.data$contrasts_type),
         var_min_rank = min(.data$rank),
         var_max_rank = min(.data$rank),
         .groups = "drop_last"
@@ -188,6 +189,7 @@ tidy_add_reference_rows <- function(
         var_label = dplyr::first(.data$var_label),
         var_nlevels = dplyr::first(.data$var_nlevels),
         contrasts = dplyr::first(.data$contrasts),
+        contrasts_type = dplyr::first(.data$contrasts_type),
         var_min_rank = min(.data$rank),
         var_max_rank = min(.data$rank),
         .groups = "drop_last"
