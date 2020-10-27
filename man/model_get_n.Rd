@@ -3,17 +3,40 @@
 \name{model_get_n}
 \alias{model_get_n}
 \alias{model_get_n.default}
+\alias{model_get_n.glm}
+\alias{model_get_n.glmerMod}
+\alias{model_get_n.multinom}
+\alias{model_get_n.coxph}
+\alias{model_get_n.survreg}
 \title{Get the number of observations}
 \usage{
 model_get_n(model)
 
 \method{model_get_n}{default}(model)
+
+\method{model_get_n}{glm}(model)
+
+\method{model_get_n}{glmerMod}(model)
+
+\method{model_get_n}{multinom}(model)
+
+\method{model_get_n}{coxph}(model)
+
+\method{model_get_n}{survreg}(model)
 }
 \arguments{
 \item{model}{a model object}
 }
 \description{
 \lifecycle{experimental}
+}
+\details{
+For logistic models, will also return the number of events.
+
+For Poisson models, will return the number of events and exposure time
+(defined with \code{\link[stats:offset]{stats::offset()}}).
+
+For Cox models (\code{\link[survival:coxph]{survival::coxph()}}), will return the number of events and exposure time.
 }
 \examples{
 lm(hp ~ mpg + factor(cyl) + disp:hp, mtcars) \%>\%
@@ -27,7 +50,10 @@ mod <- glm(
 )
 mod \%>\% model_get_n()
 
-mod <- glm(Survived ~ Class * Age + Sex, data = Titanic \%>\% as.data.frame(), weights = Freq, family = binomial)
+mod <- glm(
+  Survived ~ Class * Age + Sex, data = Titanic \%>\% as.data.frame(),
+  weights = Freq, family = binomial
+)
 mod \%>\% model_get_n()
 
 d <- dplyr::as_tibble(Titanic) \%>\%
@@ -38,15 +64,42 @@ d <- dplyr::as_tibble(Titanic) \%>\%
   )
 mod <- glm(cbind(n_survived, n_dead) ~ Class * Age + Sex, data = d, family = binomial)
 mod \%>\% model_get_n()
+
+mod <- glm(response ~ age + grade * trt, gtsummary::trial, family = poisson)
+mod \%>\% model_get_n()
+
+mod <- glm(response ~ trt * grade + offset(ttdeath), gtsummary::trial, family = poisson, weights = rep_len(1:2, 200))
+mod \%>\% model_get_n()
+
+df <- survival::lung \%>\% dplyr::mutate(sex = factor(sex))
+mod <- survival::coxph(survival::Surv(time, status) ~ ph.ecog + age + sex, data = df)
+mod \%>\% model_get_n()
+
+mod <- lme4::lmer(Reaction ~ Days + (Days | Subject), lme4::sleepstudy)
+mod \%>\% model_get_n()
+
+mod <- lme4::glmer(response ~ trt * grade + (1 | stage),
+  family = binomial, data = gtsummary::trial
+)
+mod \%>\% model_get_n()
+
+mod <- lme4::glmer(cbind(incidence, size - incidence) ~ period + (1 | herd),
+  family = binomial, data = lme4::cbpp
+)
+mod \%>\% model_get_n()
 }
 \seealso{
 Other model_helpers: 
+\code{\link{model_compute_terms_contributions}()},
 \code{\link{model_get_coefficients_type}()},
 \code{\link{model_get_contrasts}()},
 \code{\link{model_get_model_frame}()},
 \code{\link{model_get_model_matrix}()},
 \code{\link{model_get_model}()},
 \code{\link{model_get_nlevels}()},
+\code{\link{model_get_offset}()},
+\code{\link{model_get_response}()},
+\code{\link{model_get_weights}()},
 \code{\link{model_get_xlevels}()},
 \code{\link{model_identify_variables}()},
 \code{\link{model_list_contrasts}()},

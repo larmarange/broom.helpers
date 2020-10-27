@@ -53,6 +53,7 @@ iris \%>\%
 \code{\link[=tidy_identify_variables]{tidy_identify_variables()}}
 
 Other model_helpers: 
+\code{\link{model_compute_terms_contributions}()},
 \code{\link{model_get_coefficients_type}()},
 \code{\link{model_get_contrasts}()},
 \code{\link{model_get_model_frame}()},
@@ -60,6 +61,9 @@ Other model_helpers:
 \code{\link{model_get_model}()},
 \code{\link{model_get_nlevels}()},
 \code{\link{model_get_n}()},
+\code{\link{model_get_offset}()},
+\code{\link{model_get_response}()},
+\code{\link{model_get_weights}()},
 \code{\link{model_get_xlevels}()},
 \code{\link{model_list_contrasts}()},
 \code{\link{model_list_terms_levels}()},

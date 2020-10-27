@@ -2,6 +2,13 @@
 #'
 #' \lifecycle{experimental}
 #'
+#' For logistic models, will also return the number of events.
+#'
+#' For Poisson models, will return the number of events and exposure time
+#' (defined with [stats::offset()]).
+#'
+#' For Cox models ([survival::coxph()]), will return the number of events and exposure time.
+#'
 #' @param model a model object
 #' @export
 #' @family model_helpers
@@ -17,7 +24,10 @@
 #' )
 #' mod %>% model_get_n()
 #'
-#' mod <- glm(Survived ~ Class * Age + Sex, data = Titanic %>% as.data.frame(), weights = Freq, family = binomial)
+#' mod <- glm(
+#'   Survived ~ Class * Age + Sex, data = Titanic %>% as.data.frame(),
+#'   weights = Freq, family = binomial
+#' )
 #' mod %>% model_get_n()
 #'
 #' d <- dplyr::as_tibble(Titanic) %>%
@@ -28,6 +38,29 @@
 #'   )
 #' mod <- glm(cbind(n_survived, n_dead) ~ Class * Age + Sex, data = d, family = binomial)
 #' mod %>% model_get_n()
+#'
+#' mod <- glm(response ~ age + grade * trt, gtsummary::trial, family = poisson)
+#' mod %>% model_get_n()
+#'
+#' mod <- glm(response ~ trt * grade + offset(ttdeath), gtsummary::trial, family = poisson, weights = rep_len(1:2, 200))
+#' mod %>% model_get_n()
+#'
+#' df <- survival::lung %>% dplyr::mutate(sex = factor(sex))
+#' mod <- survival::coxph(survival::Surv(time, status) ~ ph.ecog + age + sex, data = df)
+#' mod %>% model_get_n()
+#'
+#' mod <- lme4::lmer(Reaction ~ Days + (Days | Subject), lme4::sleepstudy)
+#' mod %>% model_get_n()
+#'
+#' mod <- lme4::glmer(response ~ trt * grade + (1 | stage),
+#'   family = binomial, data = gtsummary::trial
+#' )
+#' mod %>% model_get_n()
+#'
+#' mod <- lme4::glmer(cbind(incidence, size - incidence) ~ period + (1 | herd),
+#'   family = binomial, data = lme4::cbpp
+#' )
+#' mod %>% model_get_n()
 model_get_n <- function(model) {
   UseMethod("model_get_n")
 }
@@ -35,115 +68,108 @@ model_get_n <- function(model) {
 #' @export
 #' @rdname model_get_n
 model_get_n.default <- function(model) {
-  # add a warning if contr.poly or custom contrasts
+  tcm <- model %>% model_compute_terms_contributions()
+  if (is.null(tcm)) return(NULL)
 
-  # computation will be done using a term matrix (tm)
-  # adapted from model matrix
-  # only positive terms are taken into account
-  mf <- model %>% model_get_model_frame()
-  tryCatch({
-    mf2 <- mf %>%
-      dplyr::mutate(
-        dplyr::across(
-          c(where(is.numeric), -dplyr::any_of("(weights)")),
-          ~ 1L
-        )
-      )
-    tm <- model %>%
-      model_get_model_matrix(data = mf2)
-  },
-  error = function(e) {
-    tm <- NULL
-  })
-  if (is.null(tm)) {
-    tryCatch({
-      model2 <- model
-      model2$model <- model2$model %>%
-        dplyr::mutate(
-          dplyr::across(
-            c(where(is.numeric), -dplyr::any_of("(weights)")),
-            ~ 1L
-          )
-        )
-      tm <- model2 %>%
-        model_get_model_matrix()
-    },
-    error = function(e) {
-      tm <- NULL
-    })
-  }
-  if (is.null(tm)) {
-    return(NULL)
-  }
-
-  # getting weights
-  if ("prior.weights" %in% names(model)) {
-    weights <- model$prior.weights
-  } else {
-    if ("(weights)" %in% colnames(mf)) {
-      weights <- mf[["(weights)"]]
-    } else {
-      weights <- rep.int(1L, nrow(mf))
-    }
-  }
-
-  # adding reference terms
-  # for treatment and sum contrasts
-  tl <- model %>%
-    model_list_terms_levels()
-  for (v in unique(tl$variable)) {
-    ct <- tl %>%
-      dplyr::filter(.data$variable == v) %>%
-      purrr::chuck("contrasts_type") %>%
-      dplyr::first()
-    ref_term <- tl %>%
-      dplyr::filter(.data$variable == v & reference) %>%
-      purrr::chuck("term")
-    nonref_terms <- tl %>%
-      dplyr::filter(.data$variable == v & !reference) %>%
-      purrr::chuck("term")
-
-    if (ct == "treatment" & all(nonref_terms %in% colnames(tm))) {
-      tm <- cbind(
-        tm,
-        matrix(
-          as.integer(
-            rowSums(tm[, nonref_terms, drop = FALSE] == 0L) ==
-              length(nonref_terms)
-          ),
-          ncol = 1,
-          dimnames = list(NULL, ref_term)
-        )
-      )
-    }
-    if (ct == "sum" & all(nonref_terms %in% colnames(tm))) {
-      tm <- cbind(
-        tm,
-        matrix(
-          as.integer(
-            rowSums(tm[, nonref_terms, drop = FALSE] == -1L) ==
-              length(nonref_terms)
-          ),
-          ncol = 1,
-          dimnames = list(NULL, ref_term)
-        )
-      )
-    }
-  }
-
-  res <- dplyr::tibble(
-    term = colnames(tm),
-    n = colSums((tm > 0) * weights)
+  w <- model %>% model_get_weights()
+  n <- dplyr::tibble(
+    term = colnames(tcm),
+    n = colSums(tcm * w)
   )
-  attr(res, "N") <- sum(weights)
+  attr(n, "N") <- sum(w)
 
-  # adding n_events
-  # look at model$y (* model$prior.weights) if exists
-  if (model %>% model_get_coefficients_type() == "logistic") {
-    y <- model$y
-    res$nevent <- colSums((tm > 0) * y * weights)
-    attr(res, "Nevent") <- sum(y * weights)
+  n
+}
+
+#' @export
+#' @rdname model_get_n
+model_get_n.glm <- function(model) {
+  tcm <- model %>% model_compute_terms_contributions()
+  if (is.null(tcm)) return(NULL)
+
+  w <- model %>% model_get_weights()
+  n <- dplyr::tibble(
+    term = colnames(tcm),
+    n = colSums(tcm * w)
+  )
+  attr(n, "N") <- sum(w)
+
+  ct <- model %>% model_get_coefficients_type()
+
+  if(ct %in% c("logistic", "poisson")) {
+    y <- model %>% model_get_response()
+    n$nevent <- colSums(tcm * y * w)
+    attr(n, "Nevent") <- sum(y * w)
   }
 
-  res
+  if (ct == "poisson") {
+    off <- model %>% model_get_offset()
+    if (is.null(off)) off <- 1L
+    n$exposure <- colSums(tcm * off * w)
+    attr(n, "Exposure") <- sum(off * w)
+  }
+
+  n
 }
+
+#' @export
+#' @rdname model_get_n
+model_get_n.glmerMod <- model_get_n.glm
+
+#' @export
+#' @rdname model_get_n
+model_get_n.multinom <- function(model) {
+  tcm <- model %>% model_compute_terms_contributions()
+  if (is.null(tcm)) return(NULL)
+
+  w <- model %>% model_get_weights()
+  y <- model %>% model_get_response()
+
+  n <- purrr::map_df(
+    levels(y)[-1],
+    ~ dplyr::tibble(
+      y.level = .x,
+      term = colnames(tcm),
+      n = colSums(tcm * w),
+      nevent = colSums((y == .x) * tcm * w)
+    )
+  )
+  attr(n, "N") <- sum(w)
+  attr(n, "Nevent") <- sum((y != levels(y)[1]) * w)
+
+  n
+}
+
+
+#' @export
+#' @rdname model_get_n
+model_get_n.coxph <- function(model) {
+  tcm <- model %>% model_compute_terms_contributions()
+  if (is.null(tcm)) return(NULL)
+
+  w <- model %>% model_get_weights()
+  n <- dplyr::tibble(
+    term = colnames(tcm),
+    n = colSums(tcm * w)
+  )
+  attr(n, "N") <- sum(w)
+
+  y <- model %>% model_get_response()
+  status <- y[, ncol(y)]
+  if (ncol(y) == 3) {
+    time <- y[, 2] - y[, 1]
+  } else {
+    time <- y[, 1]
+  }
+
+  n$nevent <- colSums(tcm * status * w)
+  attr(n, "Nevent") <- sum(status * w)
+  n$exposure <- colSums(tcm * time * w)
+  attr(n, "Exposure") <- sum(time * w)
+
+  n
+}
+
+#' @export
+#' @rdname model_get_n
+model_get_n.survreg <- model_get_n.coxph

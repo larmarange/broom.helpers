@@ -65,7 +65,7 @@ utils::globalVariables(c(".", "where"))
     names(.attributes),
     c(
       "exponentiate", "coefficients_type", "coefficients_label",
-      "variable_labels", "term_labels"
+      "variable_labels", "term_labels", "N", "Nevent", "Exposure"
       )
   )
   .attributes[.attributes_names]
