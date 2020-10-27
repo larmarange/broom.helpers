@@ -20,14 +20,15 @@ all_interaction()
 
 all_intercepts()
 
-all_contrasts(type = c("treatment", "sum", "poly", "helmert"))
+all_contrasts(contrasts_type = NULL)
 }
 \arguments{
 \item{dichotomous}{Logical indicating whether to include dichotomous variables.
 Default is \code{TRUE}}
 
-\item{type}{type of contrast to select. Must be one or more of
-\code{c("treatment", "sum", "poly", "helmert")}. Default is all.}
+\item{contrasts_type}{type of contrast to select. When \code{NULL}, all variables with a
+contrast will be selected. Default is \code{NULL}.  Select among contrast types
+\code{c("treatment", "sum", "poly", "helmert", "other")}}
 }
 \value{
 A character vector of column names selected

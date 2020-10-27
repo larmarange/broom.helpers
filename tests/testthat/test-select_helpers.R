@@ -101,7 +101,7 @@ test_that("select_helpers: tidy_plus_plus", {
     tidy_plus_plus(mod3, include = all_contrasts("treatment"))$variable %>%
       na.omit() %>%
       unique(),
-    c("stage")
+    c("stage", "grade", "trt")
   )
 
   expect_equal(
