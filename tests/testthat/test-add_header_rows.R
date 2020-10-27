@@ -123,6 +123,26 @@ test_that("tidy_add_header_rows() works as expected", {
     c("(Intercept)", "factor(response)", "factor(response)", "factor(response)",
       "Marker Level (ng/mL)", "factor(response) * Marker Level (ng/mL)")
   )
+
+  # no standard name
+  mod <- lm(hp ~ `miles per gallon`,
+     mtcars %>% dplyr::rename(`miles per gallon` = mpg))
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_add_header_rows()
+  expect_equivalent(
+    res$header_row,
+    c(NA, NA)
+  )
+  mod <- lm(hp ~ `cyl as factor`,
+            mtcars %>% dplyr::mutate(`cyl as factor` = factor(cyl)))
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_add_header_rows()
+  expect_equivalent(
+    res$header_row,
+    c(NA, TRUE, FALSE, FALSE)
+  )
 })
 
 test_that("test tidy_add_header_rows() checks", {
