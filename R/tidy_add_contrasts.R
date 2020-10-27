@@ -43,6 +43,7 @@ tidy_add_contrasts <- function(x, model = tidy_get_model(x)) {
   contrasts_list <- model_list_contrasts(model)
   if (is.null(contrasts_list)) {
     x$contrasts <- NA_character_
+    x$contrasts_type <- NA_character_
   } else {
     x <- x %>%
       dplyr::left_join(
