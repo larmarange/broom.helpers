@@ -1,6 +1,8 @@
 #' Add contrasts type for categorical variables
 #'
-#' Add a `contrasts` column corresponding to the type of contrasts
+#' Add a `contrasts` column corresponding to contrasts used for a
+#' categorical variable and a `contrasts_type` column equal to
+#' "treatment", "sum", "poly", "helmert" or "other".
 #'
 #' @details
 #' If the `variable` column is not yet available in `x`,
@@ -45,7 +47,7 @@ tidy_add_contrasts <- function(x, model = tidy_get_model(x)) {
     x <- x %>%
       dplyr::left_join(
         contrasts_list %>%
-          dplyr::select(.data$variable, .data$contrasts),
+          dplyr::select(.data$variable, .data$contrasts, .data$contrasts_type),
         by = "variable"
       )
   }

@@ -10,6 +10,11 @@ test_that("tidy_add_contrast() works for basic models", {
       "contr.treatment", "contr.treatment", "contr.treatment"
     )
   )
+  expect_equivalent(
+    res$contrasts_type,
+    c(NA, "treatment", "treatment", "treatment", "treatment", "treatment",
+      "treatment")
+  )
 
   mod <- glm(response ~ stage + grade + trt, gtsummary::trial,
     family = binomial,
@@ -25,6 +30,10 @@ test_that("tidy_add_contrast() works for basic models", {
       "contr.helmert", "contr.SAS"
     )
   )
+  expect_equivalent(
+    res$contrasts_type,
+    c(NA, "sum", "sum", "sum", "helmert", "helmert", "treatment")
+  )
 
   mod <- glm(response ~ stage + grade + trt, gtsummary::trial,
     family = binomial,
@@ -39,6 +48,10 @@ test_that("tidy_add_contrast() works for basic models", {
       NA, "contr.poly", "contr.poly", "contr.poly", "contr.treatment",
       "contr.treatment", "custom"
     )
+  )
+  expect_equivalent(
+    res$contrasts_type,
+    c(NA, "poly", "poly", "poly", "treatment", "treatment", "other")
   )
 
   mod <- glm(
@@ -59,6 +72,11 @@ test_that("tidy_add_contrast() works for basic models", {
       "contr.treatment(base=2)", "contr.treatment(base=2)", "contr.SAS",
       "custom")
   )
+  expect_equivalent(
+    res$contrasts_type,
+    c(NA, "treatment", "treatment", "treatment", "treatment", "treatment",
+      "treatment", "other")
+  )
 
   mod <- glm(response ~ stage + grade + trt, gtsummary::trial,
     family = binomial,
@@ -73,6 +91,10 @@ test_that("tidy_add_contrast() works for basic models", {
       NA, "contr.sum", "contr.sum", "contr.sum", "contr.helmert",
       "contr.helmert", "contr.SAS"
     )
+  )
+  expect_equivalent(
+    res$contrasts_type,
+    c(NA, "sum", "sum", "sum", "helmert", "helmert", "treatment")
   )
 })
 

@@ -16,7 +16,9 @@ model_list_contrasts(model)
 A tibble with three columns:
 \itemize{
 \item \code{variable}: variable name
-\item \code{contrasts}: type of contrasts
+\item \code{contrasts}: contrasts used
+\item \code{contrasts_type}: type of contrasts
+("treatment", "sum", "poly", "helmert" or "other")
 \item \code{reference}: for variables with treatment, SAS
 or sum contrasts, position of the reference level
 }
