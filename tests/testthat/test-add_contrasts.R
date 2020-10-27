@@ -41,12 +41,14 @@ test_that("tidy_add_contrast() works for basic models", {
     )
   )
 
-  mod <- glm(response ~ stage + grade + trt + factor(death), gtsummary::trial,
-             family = binomial,
-             contrasts = list(
-               stage = contr.treatment(4, 3), grade = contr.treatment(3, 2),
-               trt = contr.treatment(2, 2), "factor(death)" = matrix(c(-3, 2))
-             )
+  mod <- glm(
+    response ~ stage + grade + trt + factor(death),
+    gtsummary::trial,
+    family = binomial,
+    contrasts = list(
+      stage = contr.treatment(4, 3), grade = contr.treatment(3, 2),
+      trt = contr.treatment(2, 2), "factor(death)" = matrix(c(-3, 2))
+    )
   )
   res <- mod %>%
     tidy_and_attach() %>%
