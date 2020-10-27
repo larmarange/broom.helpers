@@ -112,6 +112,13 @@ test_that("select_helpers: tidy_plus_plus", {
   )
 
   expect_equal(
+    tidy_plus_plus(mod, include = all_contrasts())$variable %>%
+      na.omit() %>%
+      unique(),
+    c("trt", "grade")
+  )
+
+  expect_equal(
     tidy_plus_plus(mod, include = all_categorical())$variable %>%
       na.omit() %>%
       unique(),
