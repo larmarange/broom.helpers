@@ -50,6 +50,8 @@
   label for header rows was missing (#50)
 * Bug fix: now `tidy_identify_variables()` correctly identify class "integer"
   for this type of variables (#57)
+* Bug fix for `tidy_add_header_rows()` for continuous variables with a non 
+  standard name (#70)
 
 # broom.helpers 1.0.0
 
