@@ -12,8 +12,10 @@
 #' @rdname select_helpers
 #' @param dichotomous Logical indicating whether to include dichotomous variables.
 #' Default is `TRUE`
-#' @param type type of contrast to select. Must be one or more of
-#' `c("treatment", "sum", "poly", "helmert")`. Default is all.
+#' @param contrasts_type type of contrast to select. When `NULL`, all variables with a
+#' contrast will be selected. Default is `NULL`.  Select among contrast types
+#' `c("treatment", "sum", "poly", "helmert", "other")`
+#'
 #' @return A character vector of column names selected
 #' @examples
 #' mod <- glm(response ~ age * trt + grade, gtsummary::trial, family = binomial)
@@ -69,18 +71,24 @@ all_intercepts <- function() {
 
 #' @rdname select_helpers
 #' @export
-all_contrasts <- function(type = c("treatment", "sum", "poly", "helmert")) {
-  type <- match.arg(type, several.ok = TRUE)
-  contr.type <-
-    purrr::map_chr(type,
-                   ~switch(.x,
-                           "treatment" = "contr.treatment",
-                           "sum" = "contr.sum",
-                           "poly" = "contr.poly",
-                           "helmert" = "contr.helmert")
+all_contrasts <- function(contrasts_type = NULL) {
+  # if no types specified, select all contrasts
+  if (is.null(contrasts_type))
+    return(
+      .generic_selector("variable", "contrasts_type",
+                        !is.na(.data$contrasts_type),
+                        fun_name = "all_contrasts")
     )
-
-  .generic_selector("variable", "contrasts",
-                    .data$contrasts %in% contr.type,
-                    fun_name = "all_contrasts")
+  # otherwise, select those specified in `contrasts_type=`
+  else {
+    contrasts_type <-
+      match.arg(contrasts_type,
+                c("treatment", "sum", "poly", "helmert", "other"),
+                several.ok = TRUE)
+    return(
+      .generic_selector("variable", "contrasts_type",
+                        .data$contrasts %in% contrasts_type,
+                        fun_name = "all_contrasts")
+    )
+  }
 }

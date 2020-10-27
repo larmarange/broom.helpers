@@ -27,7 +27,7 @@
 
   # check class of input -------------------------------------------------------
   if (!purrr::every(x, ~inherits(.x, "formula"))) {
-    formula_select_error(arg_name = arg_name)
+    .formula_select_error(arg_name = arg_name)
   }
 
   # converting all inputs to named list ----------------------------------------
@@ -38,7 +38,7 @@
         # for each formula extract lhs and rhs ---------------------------------
         # checking the LHS is not empty
         f_lhs_quo <- .f_side_as_quo(x, "lhs")
-        if (rlang::quo_is_null(f_lhs_quo)) formula_select_error(arg_name = arg_name)
+        if (rlang::quo_is_null(f_lhs_quo)) .formula_select_error(arg_name = arg_name)
         # extract LHS of formula
         lhs <- .select_to_varnames(select = !!f_lhs_quo,
                                    data = data,
@@ -210,6 +210,8 @@
             "ordered" = data.frame(factor(datasets::iris$Species[1], ordered = TRUE)),
             "integer" = data.frame(1L),
             "Date" = data.frame(Sys.Date()),
+            "POSIXlt" = data.frame(as.POSIXlt(Sys.Date())),
+            "POSIXct" = data.frame(as.POSIXct(Sys.Date())),
             "difftime" = data.frame(Sys.Date() - Sys.Date())
           ) %||%
             data.frame(NA) %>%
@@ -241,7 +243,9 @@
   f_quo
 }
 
-formula_select_error <- function(arg_name) {
+# there are a couple of places the users input may result in an error.
+# this function prints an informative error msg with correct syntax example
+.formula_select_error <- function(arg_name) {
   example_text <- formula_select_examples[[arg_name %||% "not_an_arg"]] %||%
     paste(c("label = list(age ~ \"Age, years\")",
             "statistic = list(all_continuous() ~ \"{mean} ({sd})\")",

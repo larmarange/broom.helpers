@@ -87,6 +87,15 @@ test_that("select_helpers: tidy_plus_plus", {
               contrasts = list(stage = contr.sum,
                                grade = contr.poly,
                                trt = contr.helmert))
+  mod3 <- glm(
+    response ~ stage + grade + trt + factor(death),
+    gtsummary::trial,
+    family = binomial,
+    contrasts = list(
+      stage = contr.treatment(4, 3), grade = contr.treatment(3, 2),
+      trt = contr.treatment(2, 2), "factor(death)" = matrix(c(-3, 2))
+    )
+  )
 
   expect_equal(
     tidy_plus_plus(mod, include = all_categorical())$variable %>%
