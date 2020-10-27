@@ -42,6 +42,21 @@ test_that("tidy_add_contrast() works for basic models", {
   )
 
   mod <- glm(response ~ stage + grade + trt, gtsummary::trial,
+             family = binomial,
+             contrasts = list(stage = contr.treatment(4, 3), grade = contr.treatment(3, 2), trt = contr.treatment(2, 2))
+  )
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_add_contrasts()
+  expect_equivalent(
+    res$contrasts,
+    c(
+      NA, "contr.treatment(base=3)", "contr.treatment(base=3)", "contr.treatment(base=3)",
+      "contr.treatment(base=2)", "contr.treatment(base=2)", "contr.SAS"
+    )
+  )
+
+  mod <- glm(response ~ stage + grade + trt, gtsummary::trial,
     family = binomial,
     contrasts = list(stage = "contr.sum", grade = "contr.helmert", trt = "contr.SAS")
   )
