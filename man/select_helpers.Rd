@@ -53,4 +53,15 @@ res \%>\% tidy_select_variables(all_dichotomous())
 res \%>\% tidy_select_variables(all_categorical())
 res \%>\% tidy_select_variables(all_categorical(dichotomous = FALSE))
 res \%>\% tidy_select_variables(all_interaction())
+
+mod <- glm(
+  response ~ age + trt + grade + stage,
+  gtsummary::trial,
+  family = binomial,
+  contrasts = list(trt = contr.SAS, grade = contr.sum, stage = contr.poly)
+)
+res <- mod \%>\% tidy_plus_plus(exponentiate = TRUE, keep_model = TRUE)
+res \%>\% tidy_select_variables(all_contrasts())
+res \%>\% tidy_select_variables(all_contrasts("poly"))
+res \%>\% tidy_select_variables(all_contrasts(c("treatment", "sum")))
 }
