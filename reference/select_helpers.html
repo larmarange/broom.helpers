@@ -40,8 +40,16 @@
 
 
 <meta property="og:title" content="Select helper functions — select_helpers" />
-<meta property="og:description" content="Set of functions to supplement the tidyselect set of functions for selecting
-columns of data frames." />
+<meta property="og:description" content="Set of functions to supplement the tidyselect set of
+functions for selecting columns of data frames (and other items as well).
+all_continuous() selects continuous variables
+all_categorical() selects categorical (including &quot;dichotomous&quot;) variables
+all_dichotomous() selects only type &quot;dichotomous&quot;
+all_interaction() selects interaction terms from a regression model
+all_intercepts() selects intercept terms from a regression model
+all_contrasts() selects variables in regression model based on their type of contrast
+
+" />
 
 
 
@@ -121,8 +129,16 @@ columns of data frames." />
     </div>
 
     <div class="ref-description">
-    <p>Set of functions to supplement the tidyselect set of functions for selecting
-columns of data frames.</p>
+    <p>Set of functions to supplement the tidyselect set of
+functions for selecting columns of data frames (and other items as well).</p><ul>
+<li><p><code>all_continuous()</code> selects continuous variables</p></li>
+<li><p><code>all_categorical()</code> selects categorical (including <code>"dichotomous"</code>) variables</p></li>
+<li><p><code>all_dichotomous()</code> selects only type <code>"dichotomous"</code></p></li>
+<li><p><code>all_interaction()</code> selects interaction terms from a regression model</p></li>
+<li><p><code>all_intercepts()</code> selects intercept terms from a regression model</p></li>
+<li><p><code>all_contrasts()</code> selects variables in regression model based on their type of contrast</p></li>
+</ul>
+
     </div>
 
     <pre class="usage"><span class='fu'>all_continuous</span><span class='op'>(</span><span class='op'>)</span>
@@ -131,7 +147,11 @@ columns of data frames.</p>
 
 <span class='fu'>all_categorical</span><span class='op'>(</span>dichotomous <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
-<span class='fu'>all_interaction</span><span class='op'>(</span><span class='op'>)</span></pre>
+<span class='fu'>all_interaction</span><span class='op'>(</span><span class='op'>)</span>
+
+<span class='fu'>all_intercepts</span><span class='op'>(</span><span class='op'>)</span>
+
+<span class='fu'>all_contrasts</span><span class='op'>(</span>contrasts_type <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -140,6 +160,12 @@ columns of data frames.</p>
       <th>dichotomous</th>
       <td><p>Logical indicating whether to include dichotomous variables.
 Default is <code>TRUE</code></p></td>
+    </tr>
+    <tr>
+      <th>contrasts_type</th>
+      <td><p>type of contrast to select. When <code>NULL</code>, all variables with a
+contrast will be selected. Default is <code>NULL</code>.  Select among contrast types
+<code><a href='https://rdrr.io/r/base/c.html'>c("treatment", "sum", "poly", "helmert", "other")</a></code></p></td>
     </tr>
     </table>
 
