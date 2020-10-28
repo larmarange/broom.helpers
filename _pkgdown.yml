@@ -40,7 +40,7 @@ reference:
   - contents:
       - starts_with("all_")
 
-  - title: Other helpers
+  - title: Exported utility functions
   - contents:
-      - .clean_backticks
-      - .escape_regex
+      - starts_with("\\.")
+

@@ -20,6 +20,8 @@
   `model_get_coefficients_type` to get the type of coefficients
   (generic, logistic, Poisson or proportional hazard) used
   by a model (#46)
+* `tidy_add_contrasts()` and `model_list_contrasts()` now return an
+  additional column `contrasts_type`
 * New `no_reference_row` argument for `tidy_add_reference_rows()` (#47)
 * New method `model_get_nlevels` to get the number of levels of categorical variables
 * New column `var_nlevels` returned by `tidy_identify_variables()`,
@@ -48,6 +50,8 @@
   label for header rows was missing (#50)
 * Bug fix: now `tidy_identify_variables()` correctly identify class "integer"
   for this type of variables (#57)
+* Bug fix for `tidy_add_header_rows()` for continuous variables with a non 
+  standard name (#70)
 
 # broom.helpers 1.0.0
 

@@ -84,7 +84,7 @@ tidy_add_header_rows <- function(x,
   # if reference_rows have been defined, removal of reference row
   variables_to_simplify <- NULL
   # obtain character vector of selected variables
-  show_single_row <- .tidy_tidyselect(x, {{ show_single_row }})
+  show_single_row <- .select_to_varnames({{ show_single_row }}, var_info = x, arg_name = "show_single_row")
 
   has_reference_row <- "reference_row" %in% names(x)
   if (!has_reference_row)
@@ -165,6 +165,7 @@ tidy_add_header_rows <- function(x,
 
     if (nrow(header_rows) > 0) {
       header_rows <- header_rows %>%
+        dplyr::mutate(term_cleaned = .clean_backticks(.data$term, .data$variable)) %>%
         dplyr::group_by(.data$variable, .data$y.level) %>%
         dplyr::summarise(
           var_class = dplyr::first(.data$var_class),
@@ -172,8 +173,9 @@ tidy_add_header_rows <- function(x,
           var_label = dplyr::first(.data$var_label),
           var_nlevels = dplyr::first(.data$var_nlevels),
           contrasts = dplyr::first(.data$contrasts),
+          contrasts_type = dplyr::first(.data$contrasts_type),
           var_nrow = dplyr::n(),
-          var_test = sum(.data$term != .data$variable),
+          var_test = sum(.data$term_cleaned != .data$variable),
           rank = min(.data$rank) - .25,
           .groups = "drop_last"
         ) %>%
@@ -190,6 +192,7 @@ tidy_add_header_rows <- function(x,
 
     if (nrow(header_rows) > 0)
       header_rows <- header_rows %>%
+        dplyr::mutate(term_cleaned = .clean_backticks(.data$term, .data$variable)) %>%
         dplyr::group_by(.data$variable) %>%
         dplyr::summarise(
           var_class = dplyr::first(.data$var_class),
@@ -197,8 +200,9 @@ tidy_add_header_rows <- function(x,
           var_label = dplyr::first(.data$var_label),
           var_nlevels = dplyr::first(.data$var_nlevels),
           contrasts = dplyr::first(.data$contrasts),
+          contrasts_type = dplyr::first(.data$contrasts_type),
           var_nrow = dplyr::n(),
-          var_test = sum(.data$term != .data$variable),
+          var_test = sum(.data$term_cleaned != .data$variable), # for dichotomous variables with no reference row
           rank = min(.data$rank) - .25,
           .groups = "drop_last"
         ) %>%

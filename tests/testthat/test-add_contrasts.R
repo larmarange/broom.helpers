@@ -10,6 +10,11 @@ test_that("tidy_add_contrast() works for basic models", {
       "contr.treatment", "contr.treatment", "contr.treatment"
     )
   )
+  expect_equivalent(
+    res$contrasts_type,
+    c(NA, "treatment", "treatment", "treatment", "treatment", "treatment",
+      "treatment")
+  )
 
   mod <- glm(response ~ stage + grade + trt, gtsummary::trial,
     family = binomial,
@@ -24,6 +29,10 @@ test_that("tidy_add_contrast() works for basic models", {
       NA, "contr.sum", "contr.sum", "contr.sum", "contr.helmert",
       "contr.helmert", "contr.SAS"
     )
+  )
+  expect_equivalent(
+    res$contrasts_type,
+    c(NA, "sum", "sum", "sum", "helmert", "helmert", "treatment")
   )
 
   mod <- glm(response ~ stage + grade + trt, gtsummary::trial,
@@ -40,6 +49,34 @@ test_that("tidy_add_contrast() works for basic models", {
       "contr.treatment", "custom"
     )
   )
+  expect_equivalent(
+    res$contrasts_type,
+    c(NA, "poly", "poly", "poly", "treatment", "treatment", "other")
+  )
+
+  mod <- glm(
+    response ~ stage + grade + trt + factor(death),
+    gtsummary::trial,
+    family = binomial,
+    contrasts = list(
+      stage = contr.treatment(4, 3), grade = contr.treatment(3, 2),
+      trt = contr.treatment(2, 2), "factor(death)" = matrix(c(-3, 2))
+    )
+  )
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_add_contrasts()
+  expect_equivalent(
+    res$contrasts,
+    c(NA, "contr.treatment(base=3)", "contr.treatment(base=3)", "contr.treatment(base=3)",
+      "contr.treatment(base=2)", "contr.treatment(base=2)", "contr.SAS",
+      "custom")
+  )
+  expect_equivalent(
+    res$contrasts_type,
+    c(NA, "treatment", "treatment", "treatment", "treatment", "treatment",
+      "treatment", "other")
+  )
 
   mod <- glm(response ~ stage + grade + trt, gtsummary::trial,
     family = binomial,
@@ -54,6 +91,10 @@ test_that("tidy_add_contrast() works for basic models", {
       NA, "contr.sum", "contr.sum", "contr.sum", "contr.helmert",
       "contr.helmert", "contr.SAS"
     )
+  )
+  expect_equivalent(
+    res$contrasts_type,
+    c(NA, "sum", "sum", "sum", "helmert", "helmert", "treatment")
   )
 })
 

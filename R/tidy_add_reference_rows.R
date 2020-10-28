@@ -90,7 +90,7 @@ tidy_add_reference_rows <- function(
   }
 
   # obtain character vector of selected variables
-  no_reference_row <- .tidy_tidyselect(x, {{ no_reference_row }})
+  no_reference_row <- .select_to_varnames({{ no_reference_row }}, var_info = x, arg_name = "no_reference_row")
 
   terms_levels <- model_list_terms_levels(model)
 
@@ -147,6 +147,7 @@ tidy_add_reference_rows <- function(
         var_label = dplyr::first(.data$var_label),
         var_nlevels = dplyr::first(.data$var_nlevels),
         contrasts = dplyr::first(.data$contrasts),
+        contrasts_type = dplyr::first(.data$contrasts_type),
         var_min_rank = min(.data$rank),
         var_max_rank = min(.data$rank),
         .groups = "drop_last"
@@ -188,6 +189,7 @@ tidy_add_reference_rows <- function(
         var_label = dplyr::first(.data$var_label),
         var_nlevels = dplyr::first(.data$var_nlevels),
         contrasts = dplyr::first(.data$contrasts),
+        contrasts_type = dplyr::first(.data$contrasts_type),
         var_min_rank = min(.data$rank),
         var_max_rank = min(.data$rank),
         .groups = "drop_last"
