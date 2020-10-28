@@ -13,7 +13,7 @@ model_compute_terms_contributions(model)
 \item{model}{a model object}
 }
 \description{
-Used for \code{\link[=model_add_n]{model_add_n()}}. For each row and term, equal 1 if this row should
+Used for \code{\link[=model_get_n]{model_get_n()}}. For each row and term, equal 1 if this row should
 be taken into account in the estimate of the number of observations, 0 otherwise.
 }
 \details{
@@ -42,7 +42,11 @@ mod <- glm(
 )
 mod \%>\% model_compute_terms_contributions()
 
-mod <- glm(Survived ~ Class * Age + Sex, data = Titanic \%>\% as.data.frame(), weights = Freq, family = binomial)
+mod <- glm(
+  Survived ~ Class * Age + Sex,
+  data = Titanic \%>\% as.data.frame(),
+  weights = Freq, family = binomial
+)
 mod \%>\% model_compute_terms_contributions()
 
 d <- dplyr::as_tibble(Titanic) \%>\%

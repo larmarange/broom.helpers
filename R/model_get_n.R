@@ -42,7 +42,12 @@
 #' mod <- glm(response ~ age + grade * trt, gtsummary::trial, family = poisson)
 #' mod %>% model_get_n()
 #'
-#' mod <- glm(response ~ trt * grade + offset(ttdeath), gtsummary::trial, family = poisson, weights = rep_len(1:2, 200))
+#' mod <- glm(
+#'   response ~ trt * grade + offset(ttdeath),
+#'   gtsummary::trial,
+#'   family = poisson,
+#'   weights = rep_len(1:2, 200)
+#' )
 #' mod %>% model_get_n()
 #'
 #' df <- survival::lung %>% dplyr::mutate(sex = factor(sex))

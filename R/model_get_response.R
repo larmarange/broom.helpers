@@ -17,7 +17,12 @@
 #' )
 #' mod %>% model_get_response()
 #'
-#' mod <- glm(Survived ~ Class * Age + Sex, data = Titanic %>% as.data.frame(), weights = Freq, family = binomial)
+#' mod <- glm(
+#'   Survived ~ Class * Age + Sex,
+#'   data = Titanic %>% as.data.frame(),
+#'   weights = Freq,
+#'   family = binomial
+#' )
 #' mod %>% model_get_response()
 #'
 #' d <- dplyr::as_tibble(Titanic) %>%

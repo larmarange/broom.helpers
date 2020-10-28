@@ -32,7 +32,12 @@ mod <- glm(
 )
 mod \%>\% model_get_weights()
 
-mod <- glm(Survived ~ Class * Age + Sex, data = Titanic \%>\% as.data.frame(), weights = Freq, family = binomial)
+mod <- glm(
+  Survived ~ Class * Age + Sex,
+  data = Titanic \%>\% as.data.frame(),
+  weights = Freq,
+  family = binomial
+)
 mod \%>\% model_get_weights()
 
 d <- dplyr::as_tibble(Titanic) \%>\%

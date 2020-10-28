@@ -1,6 +1,6 @@
 #' Compute a matrix of terms contributions
 #'
-#' Used for [model_add_n()]. For each row and term, equal 1 if this row should
+#' Used for [model_get_n()]. For each row and term, equal 1 if this row should
 #' be taken into account in the estimate of the number of observations, 0 otherwise.
 #'
 #' \lifecycle{experimental}
@@ -31,7 +31,11 @@
 #' )
 #' mod %>% model_compute_terms_contributions()
 #'
-#' mod <- glm(Survived ~ Class * Age + Sex, data = Titanic %>% as.data.frame(), weights = Freq, family = binomial)
+#' mod <- glm(
+#'   Survived ~ Class * Age + Sex,
+#'   data = Titanic %>% as.data.frame(),
+#'   weights = Freq, family = binomial
+#' )
 #' mod %>% model_compute_terms_contributions()
 #'
 #' d <- dplyr::as_tibble(Titanic) %>%
@@ -108,10 +112,10 @@ contr.poly.abs <- function(...) {
       purrr::chuck("contrasts_type") %>%
       dplyr::first()
     ref_term <- tl %>%
-      dplyr::filter(.data$variable == v & reference) %>%
+      dplyr::filter(.data$variable == v & .data$reference) %>%
       purrr::chuck("term")
     nonref_terms <- tl %>%
-      dplyr::filter(.data$variable == v & !reference) %>%
+      dplyr::filter(.data$variable == v & !.data$reference) %>%
       purrr::chuck("term")
 
     if (ct == "treatment" & all(nonref_terms %in% colnames(tcm))) {
