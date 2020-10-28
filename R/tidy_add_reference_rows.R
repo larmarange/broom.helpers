@@ -90,7 +90,7 @@ tidy_add_reference_rows <- function(
   }
 
   # obtain character vector of selected variables
-  no_reference_row <- .tidy_tidyselect(x, {{ no_reference_row }})
+  no_reference_row <- .select_to_varnames({{ no_reference_row }}, var_info = x, arg_name = "no_reference_row")
 
   terms_levels <- model_list_terms_levels(model)
 

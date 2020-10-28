@@ -59,12 +59,13 @@ tidy_add_variable_labels <- function(x,
     x <- x %>% dplyr::select(-.data$var_label)
   }
 
-  if (is.list(labels)) {
-    labels <- unlist(labels)
-  }
-
   if (!"variable" %in% names(x)) {
     x <- x %>% tidy_identify_variables(model = model)
+  }
+
+  labels <- .formula_list_to_named_list(labels, var_info = x, arg_name = "labels")
+  if (is.list(labels)) {
+    labels <- unlist(labels)
   }
 
   # start with the list of terms
