@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">broom.helpers</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9002</span>
       </span>
     </div>
 
@@ -128,7 +128,18 @@
 <strong>Minor breaking changes::</strong> for intercepts terms, <code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code> now populates <code>variable</code> column by <code>term</code> content, instead of <code>NA</code> (<a href='https://github.com/larmarange/broom.helpers/issues/66'>#66</a>)</li>
 <li>
 <strong>Minor breaking change:</strong> If the variables can’t be identified by <code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code>, the <code>variable</code> column is now populated with the content of the <code>term</code> column (<a href='https://github.com/larmarange/broom.helpers/issues/63'>#63</a>)</li>
-<li>New selecting functions <code><a href="../reference/select_helpers.html">all_continuous()</a></code>, <code><a href="../reference/select_helpers.html">all_categorical()</a></code>, <code><a href="../reference/select_helpers.html">all_dichotomous()</a></code>, and <code><a href="../reference/select_helpers.html">all_interaction()</a></code> for selecting variables from models (<a href='https://github.com/larmarange/broom.helpers/issues/54'>#54</a>)</li>
+<li>Exporting select helper utility functions (<a href='https://github.com/larmarange/broom.helpers/issues/65'>#65</a>)
+<ul>
+<li>
+<code><a href="../reference/.generic_selector.html">.generic_selector()</a></code>: makes it easy to create selecting functions like <code><a href="../reference/select_helpers.html">all_continuous()</a></code>.<br>
+</li>
+<li>
+<code><a href="../reference/.select_to_varnames.html">.select_to_varnames()</a></code>: converts selecting syntax into character varnames</li>
+<li>
+<code><a href="../reference/.formula_list_to_named_list.html">.formula_list_to_named_list()</a></code>: takes the formula selecting syntax and converts it to a named list.</li>
+</ul>
+</li>
+<li>New selecting functions <code><a href="../reference/select_helpers.html">all_continuous()</a></code>, <code><a href="../reference/select_helpers.html">all_categorical()</a></code>, <code><a href="../reference/select_helpers.html">all_dichotomous()</a></code>, <code><a href="../reference/select_helpers.html">all_contrasts()</a></code>, <code><a href="../reference/select_helpers.html">all_intercepts()</a></code> and <code><a href="../reference/select_helpers.html">all_interaction()</a></code> for selecting variables from models (<a href='https://github.com/larmarange/broom.helpers/issues/54'>#54</a>)</li>
 <li>Added support for multiple imputation models from the {mice} package. The model passed must be the un-pooled models, and the pooling step included in <code>tidy_fun=</code> (<a href='https://github.com/larmarange/broom.helpers/issues/49'>#49</a> <a href='https://github.com/ddsjoberg'>@ddsjoberg</a>)</li>
 <li>New function <code><a href="../reference/tidy_select_variables.html">tidy_select_variables()</a></code> to keep/drop selected variables in the output (<a href='https://github.com/larmarange/broom.helpers/issues/45'>#45</a>)</li>
 <li>New functions <code><a href="../reference/tidy_add_coefficients_type.html">tidy_add_coefficients_type()</a></code> and <code>model_get_coefficients_type</code> to get the type of coefficients (generic, logistic, Poisson or proportional hazard) used by a model (<a href='https://github.com/larmarange/broom.helpers/issues/46'>#46</a>)</li>
