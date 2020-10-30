@@ -41,6 +41,12 @@ model_get_coefficients_type.glm <- function(model) {
 
 #' @export
 #' @rdname model_get_coefficients_type
+model_get_coefficients_type.negbin <- function(model) {
+  "poisson"
+}
+
+#' @export
+#' @rdname model_get_coefficients_type
 model_get_coefficients_type.geeglm <- model_get_coefficients_type.glm
 
 #' @export
@@ -73,6 +79,7 @@ model_get_coefficients_type.polr <- function(model) {
 model_get_coefficients_type.multinom <- function(model) {
   "logistic"
 }
+
 
 #' @export
 #' @rdname model_get_coefficients_type
