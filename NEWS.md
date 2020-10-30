@@ -8,8 +8,12 @@
 * **Minor breaking change:** If the variables can't be identified by 
   `tidy_identify_variables()`, the `variable` column is now populated 
   with the content of the `term` column (#63)
+* Exporting select helper utility functions (#65)
+    - `.generic_selector()`: makes it easy to create selecting functions like `all_continuous()`.  
+    - `.select_to_varnames()`: converts selecting syntax into character varnames
+    - `.formula_list_to_named_list()`: takes the formula selecting syntax and converts it to a named list. 
 * New selecting functions `all_continuous()`, `all_categorical()`,
-  `all_dichotomous()`, and `all_interaction()` for selecting variables 
+  `all_dichotomous()`, `all_contrasts()`, `all_intercepts()` and `all_interaction()` for selecting variables 
   from models (#54)
 * Added support for multiple imputation models from the {mice} 
   package. The model passed must be the un-pooled models, and the 
