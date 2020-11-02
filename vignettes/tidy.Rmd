@@ -267,3 +267,35 @@ tibble::tribble(
 ```
 
 Note: `tidy_add_estimate_to_reference_rows()` does not create an additional column; rather, it populates the 'estimate' column for reference rows.
+
+## Supported models
+
+```{r, echo=FALSE}
+tibble::tribble(
+  ~Model, ~Notes,
+  '`stats::lm()`', '',
+  '`stats::glm()`', '',
+  '`stats::aov()`', 'Reference rows are not relevant for such models.',
+  '`ordinal:clm()`', '',
+  '`ordinal:clmm()`', '',
+  '`survival:coxph()`', '',
+  '`survival:survreg()`', '',
+  '`survival::clogit()`', '',
+  '`lme4::lmer()`', '`broom.mixed` package required',
+  '`lme4::glmer()`', '`broom.mixed` package required',
+  '`geepack::geeglm()`', '',
+  '`gam::gam()`', '',
+  '`nnet::multinom()`', '',
+  '`survey::svyglm()`', '',
+  '`survey::svycoxph()`', '',
+  '`survey::svyolr()`', '',
+  '`MASS::polr()`', '',
+  '`mice::mira`', 'Limited support. If `mod` is a `mira` object, use `tidy_plus_plus(mod, tidy_fun = function(x, ...) mice::pool(x) %>% mice::tidy(...))`',
+  '`lavaan::lavaan()`', 'Limited support for categorical variables'
+) %>%
+  dplyr::arrange(Model) %>%
+  knitr::kable()
+```
+
+Note: this list of models has been tested. `broom.helpers` may or may not work properly or partially with other 
+types of models. Do not hesitate to provide feedback on [GitHub](https://github.com/larmarange/broom.helpers/issues).

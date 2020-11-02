@@ -115,3 +115,189 @@ test_that("tidy_plus_plus() with tidyselect", {
     )
   )
 })
+
+test_that("tidy_plus_plus() works with stats::aov", {
+  mod <- aov(yield ~ block + N*P*K, npk)
+  expect_error(
+    res <- tidy_plus_plus(mod),
+    NA
+  )
+  expect_equivalent(
+    res$variable,
+    c("block", "N", "P", "K", "N:P", "N:K", "P:K")
+  )
+})
+
+test_that("tidy_plus_plus() works with lme4::lmer", {
+  mod <- lme4::lmer(Reaction ~ Days + (Days | Subject), lme4::sleepstudy)
+  skip_if_not_installed("broom.mixed")
+  expect_error(
+    res <- mod %>% tidy_plus_plus(),
+    NA
+  )
+})
+
+
+test_that("tidy_plus_plus() works with lme4::glmer", {
+  mod <- lme4::glmer(cbind(incidence, size - incidence) ~ period + (1 | herd),
+                     family = binomial, data = lme4::cbpp
+  )
+  skip_if_not_installed("broom.mixed")
+  expect_error(
+    res <- mod %>% tidy_plus_plus(),
+    NA
+  )
+  mod <- lme4::glmer(cbind(incidence, size - incidence) ~ period + (1 | herd),
+                     family = binomial("probit"), data = lme4::cbpp
+  )
+  expect_error(
+    res <- mod %>% tidy_plus_plus(),
+    NA
+  )
+})
+
+
+test_that("tidy_plus_plus() works with survival::coxph", {
+  df <- survival::lung %>% dplyr::mutate(sex = factor(sex))
+  mod <- survival::coxph(survival::Surv(time, status) ~ ph.ecog + age + sex, data = df)
+  expect_error(
+    res <- mod %>% tidy_plus_plus(),
+    NA
+  )
+})
+
+test_that("tidy_plus_plus() works with survival::survreg", {
+  mod <- survival::survreg(
+    survival::Surv(futime, fustat) ~ ecog.ps + rx,
+    survival::ovarian,
+    dist = "exponential"
+  )
+  expect_error(
+    res <- mod %>% tidy_plus_plus(),
+    NA
+  )
+})
+
+
+test_that("tidy_plus_plus() works with survival::clogit", {
+  library(survival)
+  resp <- levels(survival::logan$occupation)
+  n <- nrow(survival::logan)
+  indx <- rep(1:n, length(resp))
+  logan2 <- data.frame(survival::logan[indx,],
+                       id = indx,
+                       tocc = factor(rep(resp, each=n)))
+  logan2$case <- (logan2$occupation == logan2$tocc)
+  mod <- survival::clogit(case ~ tocc + tocc:education + strata(id), logan2)
+  expect_error(
+    res <- mod %>% tidy_plus_plus(),
+    NA
+  )
+})
+
+
+test_that("tidy_plus_plus() works with nnet::multinom", {
+  mod <- nnet::multinom(grade ~ stage + marker + age, data = gtsummary::trial, trace = FALSE)
+  expect_error(
+    res <- mod %>% tidy_plus_plus(),
+    NA
+  )
+})
+
+test_that("tidy_plus_plus() works with survey::svyglm", {
+  df <- survey::svydesign(~1, weights = ~1, data = gtsummary::trial)
+  mod <- survey::svyglm(response ~ age + grade * trt, df, family = quasibinomial)
+  expect_error(
+    res <- mod %>% tidy_plus_plus(),
+    NA
+  )
+})
+
+test_that("tidy_plus_plus() works with survey::svycoxph", {
+  dpbc <- survey::svydesign(id = ~ 1, prob = ~ 1, strata = ~ edema, data = survival::pbc)
+  mod <- survey::svycoxph(Surv(time, status>0) ~ log(bili) + protime + albumin, design = dpbc)
+  expect_error(
+    res <- mod %>% tidy_plus_plus(),
+    NA
+  )
+})
+
+test_that("tidy_plus_plus() works with survey::svyolr", {
+  data(api, package = "survey")
+  fpc <- survey::svydesign(id=~dnum, weights=~pw, data=apiclus1, fpc=~fpc)
+  fpc <- update(fpc, mealcat=cut(meals,c(0,25,50,75,100)))
+  mod <- survey::svyolr(mealcat~avg.ed+mobility+stype, design = fpc)
+  expect_error(
+    res <- mod %>% tidy_plus_plus(),
+    NA
+  )
+})
+
+test_that("tidy_plus_plus() works with ordinal::clm", {
+  mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine)
+  expect_error(
+    res <- mod %>% tidy_plus_plus(),
+    NA
+  )
+})
+
+
+test_that("tidy_plus_plus() works with ordinal::clmm", {
+  mod <- ordinal::clmm(rating ~ temp * contact + (1 | judge), data = ordinal::wine)
+  expect_error(
+    res <- mod %>% tidy_plus_plus(),
+    NA
+  )
+})
+
+
+test_that("tidy_plus_plus() works with MASS::polr", {
+  mod <- MASS::polr(Sat ~ Infl + Type + Cont, weights = Freq, data = MASS::housing)
+  expect_error(
+    res <- mod %>% tidy_plus_plus(),
+    NA
+  )
+})
+
+
+test_that("tidy_plus_plus() works with geepack::geeglm", {
+  df <- geepack::dietox
+  df$Cu <- as.factor(df$Cu)
+  mf <- formula(Weight ~ Cu * Time)
+  suppressWarnings(
+    mod <- geepack::geeglm(mf, data = df, id = Pig, family = poisson("log"), corstr = "ar1")
+  )
+  expect_error(
+    res <- mod %>% tidy_plus_plus(),
+    NA
+  )
+})
+
+
+test_that("tidy_plus_plus() works with gam::gam", {
+  data(kyphosis, package = "gam")
+  mod <- gam::gam(Kyphosis ~ gam::s(Age, 4) + Number, family = binomial, data = kyphosis)
+  expect_error(
+    res <- mod %>% tidy_plus_plus(),
+    NA
+  )
+})
+
+
+test_that("tidy_plus_plus() works with lavaan::lavaan", {
+  df <- lavaan::HolzingerSwineford1939
+  df$grade <- factor(df$grade, ordered = TRUE)
+  HS.model <- "visual  =~ x1 + x2 + x3
+               textual =~ x4 + x5 + x6 + grade
+               speed   =~ x7 + x8 + x9 "
+  mod <- lavaan::lavaan(HS.model,
+                        data = df,
+                        auto.var = TRUE, auto.fix.first = TRUE,
+                        auto.cov.lv.x = TRUE
+  )
+  expect_error(
+    res <- mod %>% tidy_plus_plus(),
+    NA
+  )
+})
+
