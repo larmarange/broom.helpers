@@ -40,6 +40,7 @@ Suggests:
     gee,
     geepack,
     ggplot2,
+    gt,
     gtsummary,
     knitr,
     lavaan,
