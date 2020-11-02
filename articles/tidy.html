@@ -85,7 +85,7 @@
 
     
     
-<p>The <code>broom.helpers</code> package offers a suite of functions that make easy to interact, add information, and manipulate tibbles created with <code><a href="https://rdrr.io/pkg/generics/man/tidy.html">broom::tidy()</a></code> (and friends).</p>
+<p>The <code>broom.helpers</code> package offers a suite of functions that make easy to interact, add information, and manipulate tibbles created with <code><a href="https://generics.r-lib.org/reference/tidy.html">broom::tidy()</a></code> (and friends).</p>
 <p>The suite includes functions to group regression model terms by variable, insert reference and header rows for categorical variables, add variable labels, and more.</p>
 <p>As a motivating example, let’s summarize a logistic regression model with a forest plot and in a table.</p>
 <p>To begin, let’s load our packages.</p>
@@ -97,7 +97,7 @@
 <p>Our model predicts tumor response using chemotherapy treatment and tumor grade. The data set we’re utilizing has already labelled the columns using the <a href="http://larmarange.github.io/labelled/">labelled package</a>. The column labels will be carried through to our figure and table.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
 <span class="va">model_logit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">response</span> <span class="op">~</span> <span class="va">trt</span> <span class="op">+</span> <span class="va">grade</span>, <span class="va">trial</span>, family <span class="op">=</span> <span class="va">binomial</span><span class="op">)</span>
-<span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy</a></span><span class="op">(</span><span class="va">model_logit</span><span class="op">)</span>
+<span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">model_logit</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 x 5</span>
 <span class="co">#&gt;   term        estimate std.error statistic p.value</span>
 <span class="co">#&gt;   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;</span>
@@ -134,7 +134,7 @@
 <span class="co">#&gt; # … with 9 more variables: contrasts_type &lt;chr&gt;, reference_row &lt;lgl&gt;,</span>
 <span class="co">#&gt; #   label &lt;chr&gt;, estimate &lt;dbl&gt;, std.error &lt;dbl&gt;, statistic &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;</span></pre></div>
-<p><strong>Note:</strong> we used <code><a href="../reference/tidy_attach_model.html">tidy_and_attach()</a></code> instead of <code><a href="https://rdrr.io/pkg/generics/man/tidy.html">broom::tidy()</a></code>. <code>broom.helpers</code> functions needs a copy of the original model. To avoid passing the model at each step, the easier way is to attach the model as an attribute of the tibble with <code><a href="../reference/tidy_attach_model.html">tidy_attach_model()</a></code>. <code><a href="../reference/tidy_attach_model.html">tidy_and_attach()</a></code> is simply a shortcut of <code>model %&gt;% broom::tidy() %&gt;% tidy_and_attach(model)</code>.</p>
+<p><strong>Note:</strong> we used <code><a href="../reference/tidy_attach_model.html">tidy_and_attach()</a></code> instead of <code><a href="https://generics.r-lib.org/reference/tidy.html">broom::tidy()</a></code>. <code>broom.helpers</code> functions needs a copy of the original model. To avoid passing the model at each step, the easier way is to attach the model as an attribute of the tibble with <code><a href="../reference/tidy_attach_model.html">tidy_attach_model()</a></code>. <code><a href="../reference/tidy_attach_model.html">tidy_and_attach()</a></code> is simply a shortcut of <code>model %&gt;% broom::tidy() %&gt;% tidy_and_attach(model)</code>.</p>
 <p>We now have a tibble with every piece of information we need to create our forest plot using <code>ggplot2</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit">
 <span class="va">tidy_forest</span> <span class="op">%&gt;%</span>
@@ -469,6 +469,102 @@ td {vertical-align: top;}
 </tbody>
 </table>
 <p>Note: <code><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows()</a></code> does not create an additional column; rather, it populates the ‘estimate’ column for reference rows.</p>
+</div>
+<div id="supported-models" class="section level2">
+<h2 class="hasAnchor">
+<a href="#supported-models" class="anchor"></a>Supported models</h2>
+<table class="table">
+<colgroup>
+<col width="13%">
+<col width="86%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">Model</th>
+<th align="left">Notes</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code><a href="https://rdrr.io/pkg/gam/man/gam.html">gam::gam()</a></code></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="https://rdrr.io/pkg/geepack/man/geeglm.html">geepack::geeglm()</a></code></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><code><a href="https://rdrr.io/pkg/lavaan/man/lavaan.html">lavaan::lavaan()</a></code></td>
+<td align="left">Limited support for categorical variables</td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="https://rdrr.io/pkg/lme4/man/glmer.html">lme4::glmer()</a></code></td>
+<td align="left">
+<code>broom.mixed</code> package required</td>
+</tr>
+<tr class="odd">
+<td align="left"><code><a href="https://rdrr.io/pkg/lme4/man/lmer.html">lme4::lmer()</a></code></td>
+<td align="left">
+<code>broom.mixed</code> package required</td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="https://rdrr.io/pkg/MASS/man/polr.html">MASS::polr()</a></code></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><code><a href="https://rdrr.io/pkg/mice/man/mira-class.html">mice::mira</a></code></td>
+<td align="left">Limited support. If <code>mod</code> is a <code>mira</code> object, use <code><a href="../reference/tidy_plus_plus.html">tidy_plus_plus(mod, tidy_fun = function(x, ...) mice::pool(x) %&gt;% mice::tidy(...))</a></code>
+</td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="https://rdrr.io/pkg/nnet/man/multinom.html">nnet::multinom()</a></code></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>ordinal:clm()</code></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><code>ordinal:clmm()</code></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><code><a href="https://rdrr.io/r/stats/aov.html">stats::aov()</a></code></td>
+<td align="left">Reference rows are not relevant for such models.</td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="https://rdrr.io/r/stats/glm.html">stats::glm()</a></code></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><code><a href="https://rdrr.io/r/stats/lm.html">stats::lm()</a></code></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="https://rdrr.io/pkg/survey/man/svycoxph.html">survey::svycoxph()</a></code></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><code><a href="https://rdrr.io/pkg/survey/man/svyglm.html">survey::svyglm()</a></code></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="https://rdrr.io/pkg/survey/man/svyolr.html">survey::svyolr()</a></code></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><code><a href="https://rdrr.io/pkg/survival/man/clogit.html">survival::clogit()</a></code></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><code>survival:coxph()</code></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>survival:survreg()</code></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<p>Note: this list of models has been tested. <code>broom.helpers</code> may or may not work properly or partially with other types of models. Do not hesitate to provide feedback on <a href="https://github.com/larmarange/broom.helpers/issues">GitHub</a>.</p>
 </div>
   </div>
 
