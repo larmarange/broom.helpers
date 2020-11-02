@@ -4,11 +4,13 @@
 \alias{model_get_coefficients_type}
 \alias{model_get_coefficients_type.default}
 \alias{model_get_coefficients_type.glm}
+\alias{model_get_coefficients_type.negbin}
 \alias{model_get_coefficients_type.geeglm}
 \alias{model_get_coefficients_type.glmerMod}
 \alias{model_get_coefficients_type.clogit}
 \alias{model_get_coefficients_type.polr}
 \alias{model_get_coefficients_type.multinom}
+\alias{model_get_coefficients_type.svyolr}
 \alias{model_get_coefficients_type.clm}
 \alias{model_get_coefficients_type.clmm}
 \alias{model_get_coefficients_type.coxph}
@@ -20,6 +22,8 @@ model_get_coefficients_type(model)
 
 \method{model_get_coefficients_type}{glm}(model)
 
+\method{model_get_coefficients_type}{negbin}(model)
+
 \method{model_get_coefficients_type}{geeglm}(model)
 
 \method{model_get_coefficients_type}{glmerMod}(model)
@@ -29,6 +33,8 @@ model_get_coefficients_type(model)
 \method{model_get_coefficients_type}{polr}(model)
 
 \method{model_get_coefficients_type}{multinom}(model)
+
+\method{model_get_coefficients_type}{svyolr}(model)
 
 \method{model_get_coefficients_type}{clm}(model)
 

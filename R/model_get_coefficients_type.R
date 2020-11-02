@@ -80,6 +80,12 @@ model_get_coefficients_type.multinom <- function(model) {
   "logistic"
 }
 
+#' @export
+#' @rdname model_get_coefficients_type
+model_get_coefficients_type.svyolr <- function(model) {
+  "logistic"
+}
+
 
 #' @export
 #' @rdname model_get_coefficients_type
