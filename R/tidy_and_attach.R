@@ -74,11 +74,11 @@ tidy_and_attach <- function(model, tidy_fun = broom::tidy, exponentiate = FALSE,
         error = function(e) {
           # if error persists, then there is a problem with either model input or `tidy_fun=`
           paste0(
-            "There was an error calling {usethis::ui_code('tidy_fun()')}. ",
-            "Most likely, this is because the function supplied in {usethis::ui_code('tidy_fun=')} ",
+            "There was an error calling {ui_code('tidy_fun()')}. ",
+            "Most likely, this is because the function supplied in {ui_code('tidy_fun=')} ",
             "was misspelled, does not exist, is not compatible with your object, ",
-            "or was missing necessary arguments (e.g. {usethis::ui_code('conf.level=')} ",
-            "or {usethis::ui_code('conf.int=')}). See error message below."
+            "or was missing necessary arguments (e.g. {ui_code('conf.level=')} ",
+            "or {ui_code('conf.int=')}). See error message below."
           ) %>%
             stringr::str_wrap() %>%
             usethis::ui_oops()
