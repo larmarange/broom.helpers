@@ -114,7 +114,8 @@ model_identify_variables.lavaan <- function(model) {
 }
 
 # for stats::aov(), variable is equal to term
-
+#' @rdname model_identify_variables
+#' @export
 model_identify_variables.aov <- function(model) {
   model %>%
     model_list_variables() %>%
@@ -125,6 +126,27 @@ model_identify_variables.aov <- function(model) {
 }
 
 
+#' @rdname model_identify_variables
+#' @export
+model_identify_variables.clm <- function(model) {
+  res <- model_identify_variables.default(model)
+  y.levels <- c(NA_character_, colnames(model$tJac))
+  res %>%
+    tidyr::crossing(y.levels = y.levels) %>%
+    dplyr::mutate(
+      term = dplyr::if_else(
+        is.na(.data$y.levels),
+        .data$term,
+        paste(.data$y.levels, .data$term, sep = ".")
+      )
+    ) %>%
+    dplyr::filter(is.na(.data$y.levels) | .data$var_type != "interaction")
+}
+
+
+#' @rdname model_identify_variables
+#' @export
+model_identify_variables.clmm <- model_identify_variables.clm
 
 ## model_identify_variables() helpers --------------------------
 
