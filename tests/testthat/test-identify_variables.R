@@ -346,24 +346,57 @@ test_that("model_identify_variables() works with survey::svyglm", {
 })
 
 test_that("model_identify_variables() works with ordinal::clm", {
-  mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine, nominal = ~contact)
-  res <- mod %>% model_identify_variables()
+  mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine)
+  res <- mod %>% tidy_and_attach() %>% tidy_identify_variables()
   expect_equivalent(
     res$variable,
-    c(NA, "temp", "contact", "temp:contact")
+    c("1|2", "2|3", "3|4", "4|5", "temp", "contact", "temp:contact")
   )
-  expect_error(mod %>% tidy_and_attach() %>% tidy_identify_variables(), NA)
+
+  mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine, threshold = "symmetric")
+  res <- mod %>% tidy_and_attach() %>% tidy_identify_variables()
+  expect_equivalent(
+    res$variable,
+    c("central.1", "central.2", "spacing.1", "temp", "contact", "temp:contact")
+  )
+
+  mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine, threshold = "symmetric2")
+  res <- mod %>% tidy_and_attach() %>% tidy_identify_variables()
+  expect_equivalent(
+    res$variable,
+    c("spacing.1", "spacing.2", "temp", "contact", "temp:contact")
+  )
+
+  mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine, threshold = "equidistant")
+  res <- mod %>% tidy_and_attach() %>% tidy_identify_variables()
+  expect_equivalent(
+    res$variable,
+    c("threshold.1", "spacing", "temp", "contact", "temp:contact")
+  )
+
+  # wait for https://github.com/runehaubo/ordinal/issues/37
+  # before testing nominal predictors
+
+  # mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine, nominal = ~contact)
+  # res <- mod %>% tidy_and_attach() %>% tidy_identify_variables()
+  # expect_equivalent(
+  #   res$variable,
+  #   c("1|2.(Intercept)", "2|3.(Intercept)", "3|4.(Intercept)", "4|5.(Intercept)",
+  #     "contact", "contact", "contact", "contact", "temp", "contactyes",
+  #     "temp:contact")
+  # )
+
+
 })
 
 
 test_that("model_identify_variables() works with ordinal::clmm", {
   mod <- ordinal::clmm(rating ~ temp * contact + (1 | judge), data = ordinal::wine)
-  res <- mod %>% model_identify_variables()
+  res <- mod %>% tidy_and_attach() %>% tidy_identify_variables()
   expect_equivalent(
     res$variable,
-    c(NA, "temp", "contact", "temp:contact")
+    c("1|2", "2|3", "3|4", "4|5", "temp", "contact", "temp:contact")
   )
-  expect_error(mod %>% tidy_and_attach() %>% tidy_identify_variables(), NA)
 })
 
 
