@@ -130,17 +130,28 @@ model_identify_variables.aov <- function(model) {
 #' @export
 model_identify_variables.clm <- function(model) {
   res <- model_identify_variables.default(model)
-  y.levels <- c(NA_character_, colnames(model$tJac))
-  res %>%
-    tidyr::crossing(y.levels = y.levels) %>%
-    dplyr::mutate(
-      term = dplyr::if_else(
-        is.na(.data$y.levels),
-        .data$term,
-        paste(.data$y.levels, .data$term, sep = ".")
+  if (is.null(model$alpha.mat)) {
+    res <- dplyr::bind_rows(
+      res %>%
+        dplyr::filter(term != "(Intercept)"),
+      dplyr::tibble(
+        term = names(model$alpha),
+        var_type = "intercept"
       )
-    ) %>%
-    dplyr::filter(is.na(.data$y.levels) | .data$var_type != "interaction")
+    )
+  } else {
+    y.levels <- colnames(model$alpha.mat)
+    nominal_terms <- rownames(model$alpha.mat)
+    res <- dplyr::bind_rows(
+      res %>%
+        dplyr::filter(!.data$term %in% nominal_terms),
+      res %>%
+        dplyr::filter(.data$term %in% nominal_terms) %>%
+        tidyr::crossing(y.level = y.levels) %>%
+        dplyr::mutate(term = paste(.data$y.level, .data$term, sep = "."))
+    )
+  }
+  res
 }
 
 
