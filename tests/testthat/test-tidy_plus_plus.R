@@ -157,6 +157,24 @@ test_that("tidy_plus_plus() works with lme4::glmer", {
 })
 
 
+test_that("tidy_plus_plus() works with lme4::glmer.nb", {
+  dd <- expand.grid(
+    f1 = factor(1:3),
+    f2 = LETTERS[1:2], g = 1:9, rep = 1:15,
+    KEEP.OUT.ATTRS = FALSE
+  )
+  mu <- 5*(-4 + with(dd, as.integer(f1) + 4*as.numeric(f2)))
+  dd$y <- rnbinom(nrow(dd), mu = mu, size = 0.5)
+  skip_if_not_installed("lme4")
+  library(lme4)
+  mod <- lme4::glmer.nb(y ~ f1*f2 + (1|g), data = dd)
+  skip_if_not_installed("broom.mixed")
+  expect_error(
+    res <- mod %>% tidy_plus_plus(),
+    NA
+  )
+})
+
 test_that("tidy_plus_plus() works with survival::coxph", {
   df <- survival::lung %>% dplyr::mutate(sex = factor(sex))
   mod <- survival::coxph(survival::Surv(time, status) ~ ph.ecog + age + sex, data = df)
@@ -259,6 +277,14 @@ test_that("tidy_plus_plus() works with MASS::polr", {
   )
 })
 
+
+test_that("tidy_plus_plus() works with MASS::glm.nb", {
+  mod <- MASS::glm.nb(Days ~ Sex / (Age + Eth * Lrn), data = MASS::quine)
+  expect_error(
+    res <- mod %>% tidy_plus_plus(),
+    NA
+  )
+})
 
 test_that("tidy_plus_plus() works with geepack::geeglm", {
   df <- geepack::dietox
