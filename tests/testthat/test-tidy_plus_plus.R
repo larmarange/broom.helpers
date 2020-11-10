@@ -327,3 +327,15 @@ test_that("tidy_plus_plus() works with lavaan::lavaan", {
   )
 })
 
+test_that("tidy_plus_plus() error messaging", {
+  # does not allow for exponentiate, conf.inf, conf.level arguments
+  bad_tidy <- function(x) {
+    broom::tidy
+  }
+
+  expect_error(
+    lm(mpg ~ cyl, mtcars) %>%
+      tidy_plus_plus(tidy_fun = bad_tidy)
+  )
+})
+

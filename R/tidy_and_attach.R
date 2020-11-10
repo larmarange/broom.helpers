@@ -50,20 +50,45 @@ tidy_and_attach <- function(model, tidy_fun = broom::tidy, exponentiate = FALSE,
   # but broom will not produce an error and will return unexponentiated estimates
   if (identical(class(model), "lm") & exponentiate)
     stop("`exponentiate = TRUE` is not valid for this type of model.")
-  # test if exponentiate can be passed to tidy_fun
-  tryCatch(
-    tidy_fun(model, exponentiate = exponentiate, ...) %>%
-      tidy_attach_model(model, .attributes = list(exponentiate = exponentiate)),
-    error = function(e) {
-      if (exponentiate)
-        stop("`exponentiate = TRUE` is not valid for this type of model.")
-      tidy_fun(model, ...) %>%
-        tidy_attach_model(model, .attributes = list(exponentiate = FALSE))
-    }
-  )
 
+  # test if exponentiate can be passed to tidy_fun, and if tidy_fun runs without error
+  result <-
+    tryCatch(
+      tidy_fun(model, exponentiate = exponentiate, ...) %>%
+        tidy_attach_model(model, .attributes = list(exponentiate = exponentiate)),
+      error = function(e) {
+        # `tidy_fun()` fails for two primary reasons:
+        # 1. `tidy_fun()` does not accept the `exponentiate=` arg
+        #       - in this case, we re-run `tidy_fun()` without the `exponentiate=` argument
+        # 2. Incorrect input or incorrect custom `tidy_fun()` passed
+        #       - in this case, we print a message explaining the likely source of error
+        # first attempting to run without `exponentiate=` argument
+        tryCatch({
+          xx <-
+            tidy_fun(model, ...) %>%
+            tidy_attach_model(model, .attributes = list(exponentiate = FALSE))
+          if (exponentiate)
+            message("`exponentiate=TRUE` is not valid for this type of model and was ignored.")
+          xx
+        },
+        error = function(e) {
+          # if error persists, then there is a problem with either model input or `tidy_fun=`
+          paste0(
+            "There was an error calling {ui_code('tidy_fun()')}. ",
+            "Most likely, this is because the function supplied in {ui_code('tidy_fun=')} ",
+            "was misspelled, does not exist, is not compatible with your object, ",
+            "or was missing necessary arguments (e.g. {ui_code('conf.level=')} ",
+            "or {ui_code('conf.int=')}). See error message below."
+          ) %>%
+            stringr::str_wrap() %>%
+            usethis::ui_oops()
+          stop(as.character(e), call. = FALSE)
+        })
+      }
+    )
 
-
+  # return result
+  result
 }
 
 #' @rdname tidy_attach_model
