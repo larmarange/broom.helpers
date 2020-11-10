@@ -135,7 +135,7 @@ tidy_add_reference_rows <- function(
       rank = 1:dplyr::n() # for sorting table at the end
     )
 
-  if ("y.level" %in% names(x)) { # specific case for nnet::multinom
+  if ("y.level" %in% names(x) & inherits(model, "multinom")) { # specific case for nnet::multinom
     ref_rows <- terms_levels %>%
       dplyr::filter(.data$reference) %>%
       dplyr::mutate(reference_row = TRUE) %>%
