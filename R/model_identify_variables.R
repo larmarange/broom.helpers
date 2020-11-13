@@ -133,7 +133,7 @@ model_identify_variables.clm <- function(model) {
   if (is.null(model$alpha.mat)) {
     res <- dplyr::bind_rows(
       res %>%
-        dplyr::filter(term != "(Intercept)"),
+        dplyr::filter(.data$term != "(Intercept)"),
       dplyr::tibble(
         term = names(model$alpha),
         var_type = "intercept"
