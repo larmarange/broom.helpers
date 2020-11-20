@@ -3,7 +3,7 @@
 * **Minor breaking change:** column `var_type` returned by `tidy_identify_variables()`
   is now equal to `"dichotomous"` for categorical variables with only
   2 levels
-* **Minor breaking changes::** for intercepts terms, `tidy_identify_variables()`
+* **Minor breaking changes:** for intercepts terms, `tidy_identify_variables()`
   now populates `variable` column by `term` content, instead of `NA` (#66)
 * **Minor breaking change:** If the variables can't be identified by 
   `tidy_identify_variables()`, the `variable` column is now populated 
