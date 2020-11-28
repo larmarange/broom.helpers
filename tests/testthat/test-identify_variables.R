@@ -30,6 +30,11 @@ test_that("model_list_variables() tests", {
     res$var_label,
     c("MARKER", "RESPONSE")
   )
+
+  expect_equal(
+    .MFclass2(as.Date("2000-01-01")),
+    "other"
+  )
 })
 
 test_that("tidy_identify_variables() works for common models", {
@@ -468,6 +473,9 @@ test_that("model_identify_variables() works with lavaan::lavaan", {
     mod@ParTable$lhs
   )
   expect_error(mod %>% tidy_and_attach() %>% tidy_identify_variables(), NA)
+  expect_vector(
+    mod %>% model_list_variables(only_variable = TRUE)
+  )
 })
 
 test_that("model_identify_variables() strict argument", {

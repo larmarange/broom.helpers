@@ -122,7 +122,7 @@
       if (!is.null(arg_name))
         error_msg <- stringr::str_glue("Error in `{arg_name}=` argument input. Select from ",
                                        "{paste(sQuote(names(data)), collapse = ', ')}")
-      else error_msg <- as.character(e)
+      else error_msg <- as.character(e) # nocov
       stop(error_msg, call. = FALSE)
     })
 
