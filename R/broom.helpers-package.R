@@ -1,5 +1,6 @@
 ## usethis namespace: start
 #' @importFrom lifecycle deprecate_soft
+#' @importFrom usethis ui_code
 #' @importFrom rlang .data .env
 #' @importFrom purrr %||%
 ## usethis namespace: end

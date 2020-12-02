@@ -28,6 +28,6 @@ test_that("tidy_and_attach() handles models without exponentiate arguments", {
                         auto.var = TRUE, auto.fix.first = TRUE,
                         auto.cov.lv.x = TRUE
   )
-  expect_error(mod %>% tidy_and_attach(exponentiate = TRUE))
+  expect_message(mod %>% tidy_and_attach(exponentiate = TRUE))
   expect_error(mod %>% tidy_and_attach(), NA)
 })

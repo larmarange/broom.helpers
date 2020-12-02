@@ -122,7 +122,7 @@
       if (!is.null(arg_name))
         error_msg <- stringr::str_glue("Error in `{arg_name}=` argument input. Select from ",
                                        "{paste(sQuote(names(data)), collapse = ', ')}")
-      else error_msg <- as.character(e)
+      else error_msg <- as.character(e) # nocov
       stop(error_msg, call. = FALSE)
     })
 
@@ -177,14 +177,8 @@
   rm(list = ls(envir = env_variable_type), envir = env_variable_type)
   if (!inherits(x, "data.frame")) return(invisible(NULL))
 
-  # saving list of variable types to selecting environment
-  df_var_info <-
-    x %>%
-    dplyr::select(any_of(c("variable", "var_label", "var_class",
-                           "var_type", "var_nlevels", "contrasts", "contrasts_type"))) %>%
-    dplyr::distinct()
-
-  env_variable_type$df_var_info <- df_var_info
+  # saving var_info to selecting environment, where it may be utilized by selecting fns
+  env_variable_type$df_var_info <- x
 
   return(invisible(NULL))
 }

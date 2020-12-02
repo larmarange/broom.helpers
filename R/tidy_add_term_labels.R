@@ -81,7 +81,7 @@ tidy_add_term_labels <- function(x,
 
   # specific case for nnet::multinom
   # keeping only one level for computing term_labels
-  if ("y.level" %in% names(x)) {
+  if ("y.level" %in% names(x) & inherits(model, "multinom")) {
     xx <- x %>%
       dplyr::filter(.data$y.level == x$y.level[1])
   } else {

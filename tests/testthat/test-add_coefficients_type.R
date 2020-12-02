@@ -162,6 +162,23 @@ test_that("model_get_coefficients_type() works with survey::svyglm", {
   expect_equivalent(res, "logistic")
 })
 
+
+test_that("model_get_coefficients_type() works with survey::svycoxph", {
+  dpbc <- survey::svydesign(id = ~ 1, prob = ~ 1, strata = ~ edema, data = survival::pbc)
+  mod <- survey::svycoxph(Surv(time, status>0) ~ log(bili) + protime + albumin, design = dpbc)
+  res <- mod %>% model_get_coefficients_type()
+  expect_equivalent(res, "prop_hazard")
+})
+
+test_that("tidy_plus_plus() works with survey::svyolr", {
+  data(api, package = "survey")
+  fpc <- survey::svydesign(id=~dnum, weights=~pw, data=apiclus1, fpc=~fpc)
+  fpc <- update(fpc, mealcat=cut(meals,c(0,25,50,75,100)))
+  mod <- survey::svyolr(mealcat~avg.ed+mobility+stype, design = fpc)
+  res <- mod %>% model_get_coefficients_type()
+  expect_equivalent(res, "logistic")
+})
+
 test_that("model_get_coefficients_type() works with ordinal::clm", {
   mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine, nominal = ~contact)
   res <- mod %>% model_get_coefficients_type()

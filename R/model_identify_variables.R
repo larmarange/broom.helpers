@@ -113,7 +113,51 @@ model_identify_variables.lavaan <- function(model) {
     .compute_var_type()
 }
 
+# for stats::aov(), variable is equal to term
+#' @rdname model_identify_variables
+#' @export
+model_identify_variables.aov <- function(model) {
+  model %>%
+    model_list_variables() %>%
+    dplyr::mutate(term = .data$variable) %>%
+    dplyr::select(dplyr::all_of(c("term", "variable", "var_class"))) %>%
+    dplyr::left_join(model %>% model_get_nlevels(), by = "variable") %>%
+    .compute_var_type()
+}
 
+
+#' @rdname model_identify_variables
+#' @export
+model_identify_variables.clm <- function(model) {
+  res <- model_identify_variables.default(model)
+  if (is.null(model$alpha.mat)) {
+    res <- dplyr::bind_rows(
+      res %>%
+        dplyr::filter(.data$term != "(Intercept)"),
+      dplyr::tibble(
+        term = names(model$alpha),
+        var_type = "intercept"
+      )
+    )
+  } else {
+    y.levels <- colnames(model$alpha.mat)
+    nominal_terms <- rownames(model$alpha.mat)
+    res <- dplyr::bind_rows(
+      res %>%
+        dplyr::filter(!.data$term %in% nominal_terms),
+      res %>%
+        dplyr::filter(.data$term %in% nominal_terms) %>%
+        tidyr::crossing(y.level = y.levels) %>%
+        dplyr::mutate(term = paste(.data$y.level, .data$term, sep = "."))
+    )
+  }
+  res
+}
+
+
+#' @rdname model_identify_variables
+#' @export
+model_identify_variables.clmm <- model_identify_variables.clm
 
 ## model_identify_variables() helpers --------------------------
 

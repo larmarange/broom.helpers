@@ -65,6 +65,11 @@ tidy_add_reference_rows <- function(
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
   }
 
+  # adding reference rows is not meaningful for stats::aov
+  if (inherits(model, "aov")) {
+    return(x %>% dplyr::mutate(reference_row = NA))
+  }
+
   if ("header_row" %in% names(x)) {
     stop("`tidy_add_reference_rows()` cannot be applied after `tidy_add_header_rows().`")
   }
@@ -130,7 +135,7 @@ tidy_add_reference_rows <- function(
       rank = 1:dplyr::n() # for sorting table at the end
     )
 
-  if ("y.level" %in% names(x)) { # specific case for nnet::multinom
+  if ("y.level" %in% names(x) & inherits(model, "multinom")) { # specific case for nnet::multinom
     ref_rows <- terms_levels %>%
       dplyr::filter(.data$reference) %>%
       dplyr::mutate(reference_row = TRUE) %>%
