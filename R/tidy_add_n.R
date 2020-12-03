@@ -69,15 +69,21 @@ tidy_add_n <- function(x, model = tidy_get_model(x)) {
   .attributes <- .save_attributes(x)
 
   if (any(c("n", "nevent", "exposure") %in% names(x))) {
-    x <- x %>% dplyr::select(-dplyr::any_of("n", "nevent", "exposure"))
+    x <- x %>% dplyr::select(-dplyr::any_of(c("n", "nevent", "exposure")))
   }
 
   n <- model %>% model_get_n()
   if (is.null(n)) {
     x$n <- NA_real_
   } else {
-    x <- x %>%
-      dplyr::left_join(n, by = "term")
+    if ("y.level" %in% names(n)) {
+      x <- x %>%
+        dplyr::left_join(n, by = c("y.level", "term"))
+    } else {
+      x <- x %>%
+        dplyr::left_join(n, by = "term")
+    }
+
   }
 
   x %>%
