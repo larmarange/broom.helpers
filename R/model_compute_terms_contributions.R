@@ -1,7 +1,7 @@
 #' Compute a matrix of terms contributions
 #'
 #' @description
-#' \lifecycle{experimental}
+#' \lifecycle{maturing}
 #'
 #' Used for [model_get_n()]. For each row and term, equal 1 if this row should
 #' be taken into account in the estimate of the number of observations,

@@ -1,6 +1,6 @@
 #' Get model response
 #'
-#' \lifecycle{experimental}
+#' \lifecycle{maturing}
 #'
 #' This function does not cover `lavaan` models (`NULL` is returned).
 #'

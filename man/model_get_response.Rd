@@ -19,7 +19,7 @@ model_get_response(model)
 \item{model}{a model object}
 }
 \description{
-\lifecycle{experimental}
+\lifecycle{maturing}
 }
 \details{
 This function does not cover \code{lavaan} models (\code{NULL} is returned).

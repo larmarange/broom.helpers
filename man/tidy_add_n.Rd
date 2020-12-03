@@ -12,7 +12,7 @@ tidy_add_n(x, model = tidy_get_model(x))
 \item{model}{the corresponding model, if not attached to \code{x}}
 }
 \description{
-\lifecycle{experimental}
+\lifecycle{maturing}
 
 Add the number of observations in a new column \code{n} taking into account
 interaction terms and the different types of contrasts.

@@ -1,7 +1,7 @@
 #' Add the number of observations
 #'
 #' @description
-#' \lifecycle{experimental}
+#' \lifecycle{maturing}
 #'
 #' Add the number of observations in a new column `n` taking into account
 #' interaction terms and the different types of contrasts.

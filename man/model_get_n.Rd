@@ -28,7 +28,7 @@ model_get_n(model)
 \item{model}{a model object}
 }
 \description{
-\lifecycle{experimental}
+\lifecycle{maturing}
 
 For binomial and multinomial logistic models, will also return
 the number of events.

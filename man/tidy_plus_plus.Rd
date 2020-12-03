@@ -61,7 +61,7 @@ for those no reference row should be added, when \code{add_reference_rows = TRUE
 on a single row (accepts \link[dplyr:select]{tidyselect} notation), when
 \code{add_header_rows} is \code{TRUE}}
 
-\item{add_n}{should the number of observations be added?}
+\item{add_n}{should the number of observations be added? \lifecycle{maturing}}
 
 \item{intercept}{should the intercept(s) be included?}
 

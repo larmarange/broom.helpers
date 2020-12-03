@@ -1,7 +1,7 @@
 #' Get the number of observations
 #'
 #' @description
-#' \lifecycle{experimental}
+#' \lifecycle{maturing}
 #'
 #' For binomial and multinomial logistic models, will also return
 #' the number of events.

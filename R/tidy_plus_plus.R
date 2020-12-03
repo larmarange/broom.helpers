@@ -35,7 +35,7 @@
 #' @param show_single_row variables that should be displayed
 #' on a single row (accepts [tidyselect][dplyr::select] notation), when
 #' `add_header_rows` is `TRUE`
-#' @param add_n should the number of observations be added?
+#' @param add_n should the number of observations be added? \lifecycle{maturing}
 #' @param intercept should the intercept(s) be included?
 #' @inheritParams tidy_select_variables
 #' @param keep_model should the model be kept as an attribute of the final result?
