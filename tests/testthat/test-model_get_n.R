@@ -6,6 +6,16 @@ test_that("model_get_n() works for basic models", {
     c(150, 150, 150, 150, 50, 50, 50)
   )
 
+  mod <- lm(
+    Sepal.Length ~ log(Sepal.Width) + Petal.Length ^2,
+    iris
+  )
+  res <- mod %>% model_get_n()
+  expect_equivalent(
+    res$n,
+    c(150, 150, 150)
+  )
+
   # logistic model
   mod <- glm(response ~ stage + grade + trt, gtsummary::trial, family = binomial)
   res <- mod %>% model_get_n()
@@ -18,7 +28,6 @@ test_that("model_get_n() works for basic models", {
     c(61, 13, 15, 15, 19, 21, 33, 18, 21, 28)
   )
 
-  # works with cbind syntax
   mod <- glm(
     Survived ~ Class * Age + Sex, data = Titanic %>% as.data.frame(),
     weights = Freq, family = binomial
@@ -31,6 +40,25 @@ test_that("model_get_n() works for basic models", {
   expect_equivalent(
     res$nevent,
     c(711, 118, 178, 212, 654, 344, 94, 151, 212, 203, 57, 367)
+  )
+  mod %>% model_get_response()
+
+  # cbind() syntax
+  d <- dplyr::as_tibble(Titanic) %>%
+    dplyr::group_by(Class, Sex, Age) %>%
+    dplyr::summarise(
+      n_survived = sum(n * (Survived == "Yes")),
+      n_dead = sum(n * (Survived == "No"))
+    )
+  mod <- glm(cbind(n_survived, n_dead) ~ Class * Age + Sex, data = d, family = binomial)
+  expect_error(res <- mod %>% model_get_n(), NA)
+  expect_equivalent(
+    res$n,
+    c(2201, 285, 706, 885, 109, 1731, 24, 79, 0, 325, 2092, 470)
+  )
+  expect_equivalent(
+    res$nevent,
+    c(711, 118, 178, 212, 57, 367, 24, 27, 0, 203, 654, 344)
   )
 
   # Poisson without offset
@@ -168,6 +196,19 @@ test_that("model_get_n() works with survival::coxph", {
   mod <- survival::coxph(survival::Surv(time, status) ~ ph.ecog + age + sex, data = df)
   expect_error(res <- mod %>% model_get_n(), NA)
   expect_equivalent(names(res), c("term", "n", "nevent", "exposure"))
+
+  test <- list(
+    start = c(1, 2, 5, 2, 1, 7, 3, 4, 8, 8),
+    stop = c(2, 3, 6, 7, 8, 9, 9, 9, 14, 17),
+    event = c(1, 1, 1, 1, 1, 1, 1, 0, 0, 0),
+    x = c(1, 0, 0, 1, 0, 1, 1, 1, 0, 0)
+  )
+  mod <- survival::coxph(survival::Surv(start, stop, event) ~ x, test)
+  expect_error(res <- mod %>% model_get_n(), NA)
+  expect_equivalent(names(res), c("term", "n", "nevent", "exposure"))
+  expect_equivalent(res$n, c(10, 10))
+  expect_equivalent(res$nevent, c(7, 7))
+  expect_equivalent(res$exposure, c(43, 43))
 })
 
 test_that("model_get_n() works with survival::survreg", {
