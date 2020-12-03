@@ -1,5 +1,11 @@
 # broom.helpers (development version)
 
+- New function `tidy_add_n()` to add the number of observations (and for 
+  relevant models the number of events and exposure time) (#64)
+- New option `add_n` (default `FALSE`) in `tidy_plus_plus()` (#64)
+- New functions `model_get_n()`, `model_get_weights()`, `model_get_offset()`,
+  `model_get_response()` and `model_compute_terms_contributions()` (#64)
+
 # broom.helpers 1.1.0
 
 * **Minor breaking change:** column `var_type` returned by `tidy_identify_variables()`
