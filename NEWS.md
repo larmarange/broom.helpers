@@ -1,5 +1,7 @@
 # broom.helpers (development version)
 
+- Bug fix in `tidy_add_term_labels()` for variables with non standard names (#77)
+
 # broom.helpers 1.1.0
 
 * **Minor breaking change:** column `var_type` returned by `tidy_identify_variables()`

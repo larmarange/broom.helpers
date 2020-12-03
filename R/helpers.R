@@ -26,6 +26,8 @@
 #' @export
 #' @family other_helpers
 .clean_backticks <- function(x, variable_names = x) {
+  saved_names <- names(x)
+
   variable_names <- variable_names %>%
     stats::na.omit() %>%
     unique() %>%
@@ -49,6 +51,7 @@
       v
     )
   }
+  names(x) <- saved_names
   x
 }
 
