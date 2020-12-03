@@ -29,16 +29,17 @@ model_get_n(model)
 }
 \description{
 \lifecycle{experimental}
-}
-\details{
-For logistic models, will also return the number of events.
+
+For binomial and multinomial logistic models, will also return
+the number of events.
 
 For Poisson models, will return the number of events and exposure time
 (defined with \code{\link[stats:offset]{stats::offset()}}).
 
 For Cox models (\code{\link[survival:coxph]{survival::coxph()}}), will return the number of events and
 exposure time.
-
+}
+\details{
 This function does not cover \code{lavaan} models (\code{NULL} is returned).
 }
 \examples{

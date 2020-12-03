@@ -41,7 +41,6 @@ test_that("model_get_n() works for basic models", {
     res$nevent,
     c(711, 118, 178, 212, 654, 344, 94, 151, 212, 203, 57, 367)
   )
-  mod %>% model_get_response()
 
   # cbind() syntax
   d <- dplyr::as_tibble(Titanic) %>%
@@ -100,6 +99,21 @@ test_that("model_get_n() works for basic models", {
   expect_equivalent(
     res$exposure %>% round(),
     c(5819, 2914, 1826, 1766, 887, 916, 2905, 2227)
+  )
+
+  # interaction only terms
+  mod <- glm(
+    Survived ~ Class : Age, data = Titanic %>% as.data.frame(),
+    weights = Freq, family = binomial
+  )
+  res <- mod %>% model_get_n()
+  expect_equivalent(
+    res$n,
+    c(2201, 6, 24, 79, 0, 319, 261, 627, 885)
+  )
+  expect_equivalent(
+    res$nevent,
+    c(711, 6, 24, 27, 0, 197, 94, 151, 212)
   )
 })
 

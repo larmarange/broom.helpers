@@ -1,8 +1,10 @@
 #' Get the number of observations
 #'
+#' @description
 #' \lifecycle{experimental}
 #'
-#' For logistic models, will also return the number of events.
+#' For binomial and multinomial logistic models, will also return
+#' the number of events.
 #'
 #' For Poisson models, will return the number of events and exposure time
 #' (defined with [stats::offset()]).
@@ -10,6 +12,7 @@
 #' For Cox models ([survival::coxph()]), will return the number of events and
 #' exposure time.
 #'
+#' @details
 #' This function does not cover `lavaan` models (`NULL` is returned).
 #'
 #' @param model a model object
