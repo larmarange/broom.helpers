@@ -5,8 +5,7 @@
 #' @param string a character vector
 #' @export
 #' @family other_helpers
-.escape_regex <- function (string)
-{
+.escape_regex <- function(string) {
   gsub(
     "([.|()\\^{}+$*?]|\\[|\\])", "\\\\\\1",
     string

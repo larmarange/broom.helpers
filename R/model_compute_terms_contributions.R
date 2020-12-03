@@ -1,7 +1,8 @@
 #' Compute a matrix of terms contributions
 #'
 #' Used for [model_get_n()]. For each row and term, equal 1 if this row should
-#' be taken into account in the estimate of the number of observations, 0 otherwise.
+#' be taken into account in the estimate of the number of observations,
+#' 0 otherwise.
 #'
 #' \lifecycle{experimental}
 #'
@@ -19,7 +20,11 @@
 #'   response ~ stage * grade + trt,
 #'   gtsummary::trial,
 #'   family = binomial,
-#'   contrasts = list(stage = contr.sum, grade = contr.treatment(3, 2), trt = "contr.SAS")
+#'   contrasts = list(
+#'     stage = contr.sum,
+#'     grade = contr.treatment(3, 2),
+#'     trt = "contr.SAS"
+#'   )
 #' )
 #' mod %>% model_compute_terms_contributions()
 #'
