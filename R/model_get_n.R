@@ -7,7 +7,10 @@
 #' For Poisson models, will return the number of events and exposure time
 #' (defined with [stats::offset()]).
 #'
-#' For Cox models ([survival::coxph()]), will return the number of events and exposure time.
+#' For Cox models ([survival::coxph()]), will return the number of events and
+#' exposure time.
+#'
+#' This function does not cover `lavaan` models (`NULL` is returned).
 #'
 #' @param model a model object
 #' @export

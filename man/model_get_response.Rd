@@ -21,6 +21,9 @@ model_get_response(model)
 \description{
 \lifecycle{experimental}
 }
+\details{
+This function does not cover \code{lavaan} models (\code{NULL} is returned).
+}
 \examples{
 lm(hp ~ mpg + factor(cyl) + disp:hp, mtcars) \%>\%
   model_get_response()

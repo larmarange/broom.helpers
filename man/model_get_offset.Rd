@@ -15,6 +15,9 @@ model_get_offset(model)
 \description{
 \lifecycle{experimental}
 }
+\details{
+This function does not cover \code{lavaan} models (\code{NULL} is returned).
+}
 \examples{
 mod <- glm(response ~ trt + offset(ttdeath), gtsummary::trial, family = poisson)
 mod \%>\% model_get_offset()

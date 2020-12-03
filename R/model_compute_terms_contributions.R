@@ -1,10 +1,14 @@
 #' Compute a matrix of terms contributions
 #'
+#' @description
+#' \lifecycle{experimental}
+#'
 #' Used for [model_get_n()]. For each row and term, equal 1 if this row should
 #' be taken into account in the estimate of the number of observations,
 #' 0 otherwise.
 #'
-#' \lifecycle{experimental}
+#' @details
+#' This function does not cover `lavaan` models (`NULL` is returned).
 #'
 #' @param model a model object
 #' @export

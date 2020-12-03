@@ -2,6 +2,8 @@
 #'
 #' \lifecycle{experimental}
 #'
+#' This function does not cover `lavaan` models (`NULL` is returned).
+#'
 #' @param model a model object
 #' @export
 #' @family model_helpers

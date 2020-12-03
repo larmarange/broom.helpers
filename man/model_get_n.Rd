@@ -36,7 +36,10 @@ For logistic models, will also return the number of events.
 For Poisson models, will return the number of events and exposure time
 (defined with \code{\link[stats:offset]{stats::offset()}}).
 
-For Cox models (\code{\link[survival:coxph]{survival::coxph()}}), will return the number of events and exposure time.
+For Cox models (\code{\link[survival:coxph]{survival::coxph()}}), will return the number of events and
+exposure time.
+
+This function does not cover \code{lavaan} models (\code{NULL} is returned).
 }
 \examples{
 lm(hp ~ mpg + factor(cyl) + disp:hp, mtcars) \%>\%
