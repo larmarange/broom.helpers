@@ -50,7 +50,11 @@ test_that("model_get_n() works for basic models", {
       n_survived = sum(n * (Survived == "Yes")),
       n_dead = sum(n * (Survived == "No"))
     )
-  mod <- glm(cbind(n_survived, n_dead) ~ Class * Age + Sex, data = d, family = binomial)
+  mod <- glm(
+    cbind(n_survived, n_dead) ~ Class * Age + Sex, data = d,
+    family = binomial,
+    y = FALSE # should work even if y is not returned
+  )
   expect_error(res <- mod %>% model_get_n(), NA)
   expect_equivalent(
     res$n,
