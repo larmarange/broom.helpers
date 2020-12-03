@@ -93,7 +93,7 @@ model_get_n.default <- function(model) {
 #' @rdname model_get_n
 model_get_n.glm <- function(model) {
   tcm <- model %>% model_compute_terms_contributions()
-  if (is.null(tcm)) return(NULL)
+  if (is.null(tcm)) return(NULL) # nocov
 
   w <- model %>% model_get_weights()
   n <- dplyr::tibble(
@@ -128,7 +128,7 @@ model_get_n.glmerMod <- model_get_n.glm
 #' @rdname model_get_n
 model_get_n.multinom <- function(model) {
   tcm <- model %>% model_compute_terms_contributions()
-  if (is.null(tcm)) return(NULL)
+  if (is.null(tcm)) return(NULL) # nocov
 
   w <- model %>% model_get_weights()
   y <- model %>% model_get_response()
@@ -153,7 +153,7 @@ model_get_n.multinom <- function(model) {
 #' @rdname model_get_n
 model_get_n.coxph <- function(model) {
   tcm <- model %>% model_compute_terms_contributions()
-  if (is.null(tcm)) return(NULL)
+  if (is.null(tcm)) return(NULL) # nocov
 
   w <- model %>% model_get_weights()
   n <- dplyr::tibble(

@@ -226,5 +226,9 @@ test_that("model_get_n() works with lavaan::lavaan", {
   )
   expect_error(res <- mod %>% model_get_n(), NA)
   expect_null(res)
+  expect_null(mod %>% model_get_response())
+  expect_null(mod %>% model_get_weights())
+  expect_null(mod %>% model_get_offset())
+  expect_null(mod %>% model_compute_terms_contributions())
 })
 
