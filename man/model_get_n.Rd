@@ -41,6 +41,9 @@ exposure time.
 }
 \details{
 This function does not cover \code{lavaan} models (\code{NULL} is returned).
+
+The total number of observations (\code{N}), of events (\code{Nevent}) and of
+exposure time (\code{Exposure}) are stored as attributes of the returned tibble.
 }
 \examples{
 lm(hp ~ mpg + factor(cyl) + disp:hp, mtcars) \%>\%

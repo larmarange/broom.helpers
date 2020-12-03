@@ -15,6 +15,10 @@
 #'
 #' For Cox models ([survival::coxph()]), will return the number of
 #' events (`nevent`) and exposure time (`exposure`).
+#'
+#' The total number of observations (`N`), of events (`Nevent`) and of
+#' exposure time (`Exposure`) are stored as attributes of the returned tibble.
+#'
 #' @param x a tidy tibble
 #' @param model the corresponding model, if not attached to `x`
 #' @export
@@ -94,6 +98,13 @@ tidy_add_n <- function(x, model = tidy_get_model(x)) {
     }
 
   }
+
+  if (!is.null(attr(n, "N")))
+    .attributes$N <- attr(n, "N")
+  if (!is.null(attr(n, "Nevent")))
+    .attributes$Nevent <- attr(n, "Nevent")
+  if (!is.null(attr(n, "Exposure")))
+    .attributes$Exposure <- attr(n, "Exposure")
 
   x %>%
     tidy_attach_model(model = model, .attributes = .attributes)

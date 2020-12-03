@@ -11,6 +11,8 @@ test_that("tidy_add_n() works for basic models", {
     res$nevent,
     c(61, 13, 15, 15, 19, 21, 33)
   )
+  expect_equivalent(attr(res, "N"), 193)
+  expect_equivalent(attr(res, "Nevent"), 61)
 
   mod <- glm(response ~ stage + grade + trt, gtsummary::trial,
     family = binomial,
@@ -23,6 +25,8 @@ test_that("tidy_add_n() works for basic models", {
     res$n,
     c(193, 52, 52, 40, 63, 63, 95)
   )
+  expect_equivalent(attr(res, "N"), 193)
+  expect_equivalent(attr(res, "Nevent"), 61)
 
   mod <- glm(response ~ stage + grade + trt, gtsummary::trial,
     family = binomial,
@@ -35,6 +39,8 @@ test_that("tidy_add_n() works for basic models", {
     res$n,
     c(193, 193, 193, 193, 63, 63, 98)
   )
+  expect_equivalent(attr(res, "N"), 193)
+  expect_equivalent(attr(res, "Nevent"), 61)
 
   mod <- glm(
     response ~ stage + grade + trt + factor(death),
@@ -52,6 +58,8 @@ test_that("tidy_add_n() works for basic models", {
     res$n,
     c(193, 52, 52, 49, 67, 63, 95, 107)
   )
+  expect_equivalent(attr(res, "N"), 193)
+  expect_equivalent(attr(res, "Nevent"), 61)
 
   mod <- glm(response ~ stage + grade + trt, gtsummary::trial,
     family = binomial,
@@ -64,6 +72,52 @@ test_that("tidy_add_n() works for basic models", {
     res$n,
     c(193, 52, 52, 40, 63, 63, 95)
   )
+
+
+  mod <- glm(response ~ age + grade * trt, gtsummary::trial, family = poisson)
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_add_n()
+  expect_equivalent(
+    res$n,
+    c(183, 183, 58, 60, 94, 29, 33)
+  )
+  expect_equivalent(
+    res$nevent,
+    c(58, 58, 17, 20, 31, 10, 8)
+  )
+  expect_equivalent(
+    res$exposure,
+    c(183, 183, 58, 60, 94, 29, 33)
+  )
+  expect_equivalent(attr(res, "N"), 183)
+  expect_equivalent(attr(res, "Nevent"), 58)
+  expect_equivalent(attr(res, "Exposure"), 183)
+
+  mod <- glm(
+    response ~ trt * grade + offset(ttdeath),
+    gtsummary::trial,
+    family = poisson,
+    weights = rep_len(1:2, 200)
+  )
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_add_n()
+  expect_equivalent(
+    res$n,
+    c(292, 151, 94, 92, 49, 49)
+  )
+  expect_equivalent(
+    res$nevent,
+    c(96, 53, 28, 31, 19, 12)
+  )
+  expect_equivalent(
+    res$exposure,
+    c(5819.07, 2913.6, 1826.26, 1765.52, 887.22, 915.56)
+  )
+  expect_equivalent(attr(res, "N"), 292)
+  expect_equivalent(attr(res, "Nevent"), 96)
+  expect_equivalent(attr(res, "Exposure"), 5819.07)
 })
 
 test_that("test tidy_add_n() checks", {

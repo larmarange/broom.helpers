@@ -26,6 +26,9 @@ exposure time defined with \code{\link[stats:offset]{stats::offset()}} (\code{ex
 
 For Cox models (\code{\link[survival:coxph]{survival::coxph()}}), will return the number of
 events (\code{nevent}) and exposure time (\code{exposure}).
+
+The total number of observations (\code{N}), of events (\code{Nevent}) and of
+exposure time (\code{Exposure}) are stored as attributes of the returned tibble.
 }
 \examples{
 lm(Petal.Length ~ ., data = iris) \%>\%

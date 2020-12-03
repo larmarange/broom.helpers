@@ -15,6 +15,9 @@
 #' @details
 #' This function does not cover `lavaan` models (`NULL` is returned).
 #'
+#' The total number of observations (`N`), of events (`Nevent`) and of
+#' exposure time (`Exposure`) are stored as attributes of the returned tibble.
+#'
 #' @param model a model object
 #' @export
 #' @family model_helpers
