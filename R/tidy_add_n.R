@@ -69,8 +69,7 @@
 #' glm(
 #'   response ~ trt * grade + offset(ttdeath),
 #'   gtsummary::trial,
-#'   family = poisson,
-#'   weights = rep_len(1:2, 200)
+#'   family = poisson
 #' ) %>%
 #'   tidy_and_attach() %>%
 #'   tidy_add_n()

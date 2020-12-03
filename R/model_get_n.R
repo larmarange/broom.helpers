@@ -54,8 +54,7 @@
 #' mod <- glm(
 #'   response ~ trt * grade + offset(ttdeath),
 #'   gtsummary::trial,
-#'   family = poisson,
-#'   weights = rep_len(1:2, 200)
+#'   family = poisson
 #' )
 #' mod %>% model_get_n()
 #'
