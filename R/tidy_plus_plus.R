@@ -9,6 +9,7 @@
 #' * [tidy_add_variable_labels()]
 #' * [tidy_add_term_labels()]
 #' * [tidy_add_header_rows()]
+#' * [tidy_add_n()]
 #' * [tidy_remove_intercept()]
 #' * [tidy_select_variables()]
 #' * [tidy_add_coefficients_type()]
@@ -34,6 +35,7 @@
 #' @param show_single_row variables that should be displayed
 #' on a single row (accepts [tidyselect][dplyr::select] notation), when
 #' `add_header_rows` is `TRUE`
+#' @param add_n should the number of observations be added?
 #' @param intercept should the intercept(s) be included?
 #' @inheritParams tidy_select_variables
 #' @param keep_model should the model be kept as an attribute of the final result?
@@ -66,7 +68,8 @@
 #'   tidy_plus_plus(
 #'     exponentiate = TRUE,
 #'     add_reference_rows = FALSE,
-#'     categorical_terms_pattern = "{level} / {reference_level}"
+#'     categorical_terms_pattern = "{level} / {reference_level}",
+#'     add_n = TRUE
 #'   )
 #' ex2
 #'
@@ -105,6 +108,7 @@ tidy_plus_plus <- function(
                            add_estimate_to_reference_rows = TRUE,
                            add_header_rows = FALSE,
                            show_single_row = NULL,
+                           add_n = FALSE,
                            intercept = FALSE,
                            include = everything(),
                            keep_model = FALSE,
@@ -146,6 +150,9 @@ tidy_plus_plus <- function(
     res <- res %>%
       tidy_add_header_rows(show_single_row = {{ show_single_row }},
                            strict = strict, quiet = quiet)
+  }
+  if (add_n) {
+    res <- res %>% tidy_add_n()
   }
   if (!intercept) {
     res <- res %>% tidy_remove_intercept()

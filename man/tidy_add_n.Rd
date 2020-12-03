@@ -14,7 +14,7 @@ tidy_add_n(x, model = tidy_get_model(x))
 \description{
 \lifecycle{experimental}
 
-Add the number of observations in a new column \code{n}, taking into account
+Add the number of observations in a new column \code{n} taking into account
 interaction terms and the different types of contrasts.
 }
 \details{
@@ -67,6 +67,15 @@ df \%>\%
   tidy_add_n()
 
 glm(response ~ age + grade * trt, gtsummary::trial, family = poisson) \%>\%
+  tidy_and_attach() \%>\%
+  tidy_add_n()
+
+glm(
+  response ~ trt * grade + offset(ttdeath),
+  gtsummary::trial,
+  family = poisson,
+  weights = rep_len(1:2, 200)
+) \%>\%
   tidy_and_attach() \%>\%
   tidy_add_n()
 }

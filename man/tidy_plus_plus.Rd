@@ -18,6 +18,7 @@ tidy_plus_plus(
   add_estimate_to_reference_rows = TRUE,
   add_header_rows = FALSE,
   show_single_row = NULL,
+  add_n = FALSE,
   intercept = FALSE,
   include = everything(),
   keep_model = FALSE,
@@ -60,6 +61,8 @@ for those no reference row should be added, when \code{add_reference_rows = TRUE
 on a single row (accepts \link[dplyr:select]{tidyselect} notation), when
 \code{add_header_rows} is \code{TRUE}}
 
+\item{add_n}{should the number of observations be added?}
+
 \item{intercept}{should the intercept(s) be included?}
 
 \item{include}{variables to include. Accepts \link[dplyr:select]{tidyselect}
@@ -88,6 +91,7 @@ This function will apply sequentially:
 \item \code{\link[=tidy_add_variable_labels]{tidy_add_variable_labels()}}
 \item \code{\link[=tidy_add_term_labels]{tidy_add_term_labels()}}
 \item \code{\link[=tidy_add_header_rows]{tidy_add_header_rows()}}
+\item \code{\link[=tidy_add_n]{tidy_add_n()}}
 \item \code{\link[=tidy_remove_intercept]{tidy_remove_intercept()}}
 \item \code{\link[=tidy_select_variables]{tidy_select_variables()}}
 \item \code{\link[=tidy_add_coefficients_type]{tidy_add_coefficients_type()}}
@@ -117,7 +121,8 @@ ex2 <- glm(
   tidy_plus_plus(
     exponentiate = TRUE,
     add_reference_rows = FALSE,
-    categorical_terms_pattern = "{level} / {reference_level}"
+    categorical_terms_pattern = "{level} / {reference_level}",
+    add_n = TRUE
   )
 ex2
 

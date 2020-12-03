@@ -18,6 +18,10 @@ test_that("tidy_plus_plus() works for basic models", {
     c("T Stage:T2/T1", "T Stage:T3/T1", "T Stage:T4/T1", "custom:II/I",
       "custom:III/I", "Chemotherapy Treatment:Drug B/Drug A")
   )
+
+  # works with add_n
+  res <- mod %>% tidy_plus_plus(add_n = TRUE)
+  expect_true(all(c("n", "nevent") %in% names(res)))
 })
 
 
