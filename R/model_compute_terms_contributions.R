@@ -84,8 +84,12 @@ model_compute_terms_contributions.default <- function(model) {
     d <- d %>%
       dplyr::mutate(
         dplyr::across(
-          where(~ is.numeric(.x) & !is.matrix(.x)), # check is.matrix for cbind variables
-          ~ dplyr::if_else(is.na(.x), NA_integer_, 1L)
+          where(~ is.numeric(.x) & (
+            # check is.matrix for cbind variables
+            # but include polynomial terms
+            !is.matrix(.x) | inherits(.x, "poly")
+          )),
+          ~ abs(.x) + 1 # force positive value
         )
       )
     stats::model.matrix(formula, data = d, contrasts.arg = contr)

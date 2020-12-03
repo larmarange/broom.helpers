@@ -78,11 +78,68 @@ test_that("model_get_n() handles variables having non standard name", {
     family = binomial,
     contrasts = list(`grade of kids` = contr.sum)
   )
-  expect_message(
+  expect_error(
     res <- mod %>% model_get_n(),
     NA
   )
 })
+
+
+test_that("model_get_n() works with different contrasts", {
+  mod <- glm(
+    response ~ stage + grade * trt,
+    gtsummary::trial,
+    family = binomial,
+    contrasts = list(stage = contr.treatment, grade = contr.SAS, trt = contr.SAS)
+  )
+  expect_error(res <- mod %>% model_get_n(), NA)
+  expect_equivalent(names(res), c("term", "n", "nevent"))
+  expect_equivalent(
+    res$term,
+    c("(Intercept)", "stage2", "stage3", "stage4", "grade1", "grade2",
+      "trt1", "grade1:trt1", "grade2:trt1", "stage1", "grade3", "trt2")
+  )
+  expect_equivalent(
+    res$n,
+    c(193, 52, 40, 49, 67, 63, 95, 35, 30, 52, 63, 98)
+  )
+
+  mod <- glm(
+    response ~ stage + grade * trt,
+    gtsummary::trial,
+    family = binomial,
+    contrasts = list(stage = contr.poly, grade = contr.helmert, trt = contr.sum)
+  )
+  expect_error(res <- mod %>% model_get_n(), NA)
+  expect_equivalent(names(res), c("term", "n", "nevent"))
+  expect_equivalent(
+    res$term,
+    c("(Intercept)", "stage.L", "stage.Q", "stage.C", "grade1", "grade2",
+      "trt1", "grade1:trt1", "grade2:trt1", "trt2")
+  )
+  expect_equivalent(
+    res$n,
+    c(193, 193, 193, 193, 63, 63, 95, 62, 95, 98)
+  )
+})
+
+
+test_that("model_get_n() works with stats::poly()", {
+  mod <- lm(Sepal.Length ~ poly(Sepal.Width, 3) + poly(Petal.Length, 2), iris)
+  expect_error(res <- mod %>% model_get_n(), NA)
+  expect_equivalent(names(res), c("term", "n"))
+  expect_equivalent(
+    res$term,
+    c("(Intercept)", "poly(Sepal.Width, 3)1", "poly(Sepal.Width, 3)2",
+      "poly(Sepal.Width, 3)3", "poly(Petal.Length, 2)1",
+      "poly(Petal.Length, 2)2")
+  )
+  expect_equivalent(
+    res$n,
+    c(150, 150, 150, 150, 150, 150)
+  )
+})
+
 
 test_that("model_get_n() works with lme4::lmer", {
   df <- gtsummary::trial
