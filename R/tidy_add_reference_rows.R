@@ -90,6 +90,14 @@ tidy_add_reference_rows <- function(
       ))
   }
 
+  if ("n" %in% names(x)) {
+    if (!quiet)
+      usethis::ui_info(paste0(
+        "tidy_add_reference_rows() has been applied after tidy_add_n().\n",
+        "You should consider applying tidy_add_reference_rows() first."
+      ))
+  }
+
   if (!"contrasts" %in% names(x)) {
     x <- x %>% tidy_add_contrasts(model = model)
   }
