@@ -117,9 +117,9 @@ model_get_n.glm <- function(model) {
 
   if (ct == "poisson") {
     off <- model %>% model_get_offset()
-    if (is.null(off)) off <- 1L
-    n$exposure <- colSums(tcm * off * w)
-    attr(n, "Exposure") <- sum(off * w)
+    if (is.null(off)) off <- 0L
+    n$exposure <- colSums(tcm * exp(off) * w)
+    attr(n, "Exposure") <- sum(exp(off) * w)
   }
 
   n

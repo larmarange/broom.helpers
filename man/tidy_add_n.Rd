@@ -74,7 +74,7 @@ glm(response ~ age + grade * trt, gtsummary::trial, family = poisson) \%>\%
   tidy_add_n()
 
 glm(
-  response ~ trt * grade + offset(ttdeath),
+  response ~ trt * grade + offset(log(ttdeath)),
   gtsummary::trial,
   family = poisson
 ) \%>\%

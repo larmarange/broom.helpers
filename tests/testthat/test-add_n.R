@@ -95,7 +95,7 @@ test_that("tidy_add_n() works for basic models", {
   expect_equivalent(attr(res, "Exposure"), 183)
 
   mod <- glm(
-    response ~ trt * grade + offset(ttdeath),
+    response ~ trt * grade + offset(log(ttdeath)),
     gtsummary::trial,
     family = poisson,
     weights = rep_len(1:2, 200)

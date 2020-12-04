@@ -82,7 +82,7 @@ test_that("model_get_n() works for basic models", {
 
   # Poisson with offset
   mod <- glm(
-    response ~ trt * grade + offset(ttdeath),
+    response ~ trt * grade + offset(log(ttdeath)),
     gtsummary::trial,
     family = poisson,
     weights = rep_len(1:2, 200)
@@ -264,7 +264,7 @@ test_that("model_get_n() works with survey::svyglm", {
   expect_error(res <- mod %>% model_get_n(), NA)
   expect_equivalent(names(res), c("term", "n", "nevent"))
 
-  mod <- survey::svyglm(response ~ age + grade + offset(ttdeath), df, family = quasipoisson)
+  mod <- survey::svyglm(response ~ age + grade + offset(log(ttdeath)), df, family = quasipoisson)
   expect_error(res <- mod %>% model_get_n(), NA)
   expect_equivalent(names(res), c("term", "n", "nevent", "exposure"))
 
