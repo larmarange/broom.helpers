@@ -51,7 +51,7 @@ defined, exposure is assumed to be equal to 1 (eventually multiplied by
 weights) per observation. If an offset is defined, \code{exposure} will be equal
 to the (weighted) sum of the exponential of the offset (as a reminder, to
 model the effect of \code{x} on the ratio \code{y / z}, a Poisson model will be defined
-as \code{glm(y ~ x + offset(log(y)), family = poisson)}). Observed rates could be
+as \code{glm(y ~ x + offset(log(z)), family = poisson)}). Observed rates could be
 obtained with \code{nevent / exposure}.
 
 For Cox models (\code{\link[survival:coxph]{survival::coxph()}}), an individual could be coded

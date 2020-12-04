@@ -38,7 +38,7 @@
 #' weights) per observation. If an offset is defined, `exposure` will be equal
 #' to the (weighted) sum of the exponential of the offset (as a reminder, to
 #' model the effect of `x` on the ratio `y / z`, a Poisson model will be defined
-#' as `glm(y ~ x + offset(log(y)), family = poisson)`). Observed rates could be
+#' as `glm(y ~ x + offset(log(z)), family = poisson)`). Observed rates could be
 #' obtained with `nevent / exposure`.
 #'
 #' For Cox models ([survival::coxph()]), an individual could be coded
