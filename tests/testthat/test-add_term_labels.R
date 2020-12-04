@@ -165,6 +165,20 @@ test_that("tidy_add_term_labels() works with variables having non standard name"
       "factor(`?? treatment ++ response ...`)", "factor(`?? treatment ++ response ...`)",
       "marker:grade of kids...", "marker:grade of kids...")
   )
+
+  res <- gtsummary::trial %>%
+    select(response, `age at dx` = age, `drug type` = trt) %>%
+    lm(
+      response ~ `age at dx` + `drug type`,
+      data = .
+    ) %>%
+    tidy_and_attach() %>%
+    tidy_add_variable_labels(list(`age at dx` = "AGGGGGGGE")) %>%
+    tidy_add_term_labels()
+  expect_equivalent(
+    res$label,
+    c("(Intercept)", "AGGGGGGGE", "Drug B")
+  )
 })
 
 

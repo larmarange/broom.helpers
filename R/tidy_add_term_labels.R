@@ -93,8 +93,7 @@ tidy_add_term_labels <- function(x,
   names(term_labels) <- term_labels
 
   # add categorical terms levels
-  terms_levels <- model_list_terms_levels(
-    model,
+  terms_levels <- model %>% model_list_terms_levels(
     label_pattern = categorical_terms_pattern,
     variable_labels = .attributes$variable_labels
   )
@@ -112,10 +111,16 @@ tidy_add_term_labels <- function(x,
         is.na(.data$label_attr),
         .data$variable,
         as.character(.data$label_attr)
-      )
+      ),
     )
   additional_term_labels <- variables_list$label
   names(additional_term_labels) <- variables_list$variable
+  term_labels <- term_labels %>%
+    .update_vector(additional_term_labels)
+  # add version with backtips for variables with non standard names
+  names(additional_term_labels) <- paste0(
+    "`", names(additional_term_labels), "`"
+  )
   term_labels <- term_labels %>%
     .update_vector(additional_term_labels)
 
@@ -134,6 +139,12 @@ tidy_add_term_labels <- function(x,
     )
   additional_term_labels <- x_var_labels$var_label
   names(additional_term_labels) <- x_var_labels$variable
+  term_labels <- term_labels %>%
+    .update_vector(additional_term_labels)
+  # add version with backtips for variables with non standard names
+  names(additional_term_labels) <- paste0(
+    "`", names(additional_term_labels), "`"
+  )
   term_labels <- term_labels %>%
     .update_vector(additional_term_labels)
 
