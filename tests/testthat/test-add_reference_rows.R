@@ -105,7 +105,7 @@ test_that("test tidy_add_reference_rows() checks", {
   # message if applied after tidy_add_n()
   expect_message(
     mod %>% tidy_and_attach() %>%
-      tidy_add_term_labels() %>%
+      tidy_add_n() %>%
       tidy_add_reference_rows()
   )
 
