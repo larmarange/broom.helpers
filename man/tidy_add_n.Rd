@@ -2,7 +2,7 @@
 % Please edit documentation in R/tidy_add_n.R
 \name{tidy_add_n}
 \alias{tidy_add_n}
-\title{Add the number of observations}
+\title{Add the (weighted) number of observations}
 \usage{
 tidy_add_n(x, model = tidy_get_model(x))
 }
@@ -13,22 +13,60 @@ tidy_add_n(x, model = tidy_get_model(x))
 }
 \description{
 \lifecycle{maturing}
-
-Add the number of observations in a new column \code{n} taking into account
-interaction terms and the different types of contrasts.
 }
 \details{
-For binomial and multinomial logistic models, will also return
-the number of events (\code{nevent}).
+Add the number of observations in a new column \code{n}, taking into account any
+weights if they have been defined.
 
-For Poisson models, will return the number of events (\code{nevent}) and
-exposure time defined with \code{\link[stats:offset]{stats::offset()}} (\code{exposure}).
+For continuous variables, it corresponds to all valid observations
+contributing to the model.
 
-For Cox models (\code{\link[survival:coxph]{survival::coxph()}}), will return the number of
-events (\code{nevent}) and exposure time (\code{exposure}).
+For categorical variables coded with treatment or sum contrasts,
+each model term could be associated to only one level of the original
+categorical variable. Therefore, \code{n} will correspond to the number of
+observations associated with that level. \code{n} will also be computed for
+reference rows. For polynomial contrasts (defined with \code{\link[stats:contrast]{stats::contr.poly()}}),
+all levels will contribute to the computation of each model term. Therefore,
+\code{n} will be equal to the total number of observations. For Helmert and custom
+contrasts, only rows contributing positively (i.e. with a positive contrast)
+to the computation of a term will be considered for estimating \code{n}. The
+result could therefore be difficult to interpret. For a better understanding
+of which observations are taken into account to compute \code{n} values, you
+could look at \code{\link[=model_compute_terms_contributions]{model_compute_terms_contributions()}}.
 
-The total number of observations (\code{N}), of events (\code{Nevent}) and of
-exposure time (\code{Exposure}) are stored as attributes of the returned tibble.
+For interaction terms, only rows contributing to all the terms of the
+interaction will be considered to compute \code{n}.
+
+For binomial logistic models, \code{tidy_add_n()} will also return the
+corresponding number of events (\code{nevent}) for each term, taking into account
+any defined weights. Observed proportions could be obtained as \code{n / nevent}.
+
+Similarly, a number of events will be computed for multinomial logistic
+models (\code{\link[nnet:multinom]{nnet::multinom()}}) for each level of the outcome (\code{y.level}),
+corresponding to the number of observations equal to that outcome level.
+
+For Poisson models, \code{nevent} will be equal to the number of counts per term.
+In addition, a third column \code{exposure} will be computed. If no offset is
+defined, exposure is assumed to be equal to 1 (eventually multiplied by
+weights) per observation. If an offset is defined, \code{exposure} will be equal
+to the (weighted) sum of the exponential of the offset (as a reminder, to
+model the effect of \code{x} on the ratio \code{y / z}, a Poisson model will be defined
+as \code{glm(y ~ x + offset(log(y)), family = poisson)}). Observed rates could be
+obtained with \code{nevent / exposure}.
+
+For Cox models (\code{\link[survival:coxph]{survival::coxph()}}), an individual could be coded
+with several observations (several rows). \code{n} will correspond to the weighted
+number of observations which could be different from the number of
+individuals. \code{tidy_add_n()} will also compute a (weighted) number of events
+(\code{nevents}) according to the definition of the \code{\link[survival:Surv]{survival::Surv()}} object.
+Exposure time is also returned in \code{exposure} column. It is equal to the
+(weighted) sum of the time variable if only one vraiable time is passed to
+\code{\link[survival:Surv]{survival::Surv()}}, and to the (weighted) sum of \code{time2 - time} if two time
+variables are defined in \code{\link[survival:Surv]{survival::Surv()}}.
+
+The (weighted) total number of observations (\code{N}), of events (\code{Nevent}) and
+of exposure time (\code{Exposure}) are stored as attributes of the returned
+tibble.
 }
 \examples{
 lm(Petal.Length ~ ., data = iris) \%>\%

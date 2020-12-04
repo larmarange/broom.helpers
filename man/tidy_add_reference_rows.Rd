@@ -43,7 +43,8 @@ If the \code{contrasts} column is not yet available in \code{x},
 \code{tidy_add_reference_rows()} will not populate the label
 of the reference term. It is therefore better to apply
 \code{\link[=tidy_add_term_labels]{tidy_add_term_labels()}} after \code{tidy_add_reference_rows()}
-rather than before.
+rather than before. Similarly, it is better to apply
+\code{tidy_add_reference_rows()} before \code{\link[=tidy_add_n]{tidy_add_n()}}.
 }
 \examples{
 df <- Titanic \%>\%

@@ -1,23 +1,59 @@
-#' Add the number of observations
+#' Add the (weighted) number of observations
 #'
-#' @description
 #' \lifecycle{maturing}
 #'
-#' Add the number of observations in a new column `n` taking into account
-#' interaction terms and the different types of contrasts.
+#' Add the number of observations in a new column `n`, taking into account any
+#' weights if they have been defined.
 #'
-#' @details
-#' For binomial and multinomial logistic models, will also return
-#' the number of events (`nevent`).
+#' For continuous variables, it corresponds to all valid observations
+#' contributing to the model.
 #'
-#' For Poisson models, will return the number of events (`nevent`) and
-#' exposure time defined with [stats::offset()] (`exposure`).
+#' For categorical variables coded with treatment or sum contrasts,
+#' each model term could be associated to only one level of the original
+#' categorical variable. Therefore, `n` will correspond to the number of
+#' observations associated with that level. `n` will also be computed for
+#' reference rows. For polynomial contrasts (defined with [stats::contr.poly()]),
+#' all levels will contribute to the computation of each model term. Therefore,
+#' `n` will be equal to the total number of observations. For Helmert and custom
+#' contrasts, only rows contributing positively (i.e. with a positive contrast)
+#' to the computation of a term will be considered for estimating `n`. The
+#' result could therefore be difficult to interpret. For a better understanding
+#' of which observations are taken into account to compute `n` values, you
+#' could look at [model_compute_terms_contributions()].
 #'
-#' For Cox models ([survival::coxph()]), will return the number of
-#' events (`nevent`) and exposure time (`exposure`).
+#' For interaction terms, only rows contributing to all the terms of the
+#' interaction will be considered to compute `n`.
 #'
-#' The total number of observations (`N`), of events (`Nevent`) and of
-#' exposure time (`Exposure`) are stored as attributes of the returned tibble.
+#' For binomial logistic models, `tidy_add_n()` will also return the
+#' corresponding number of events (`nevent`) for each term, taking into account
+#' any defined weights. Observed proportions could be obtained as `n / nevent`.
+#'
+#' Similarly, a number of events will be computed for multinomial logistic
+#' models ([nnet::multinom()]) for each level of the outcome (`y.level`),
+#' corresponding to the number of observations equal to that outcome level.
+#'
+#' For Poisson models, `nevent` will be equal to the number of counts per term.
+#' In addition, a third column `exposure` will be computed. If no offset is
+#' defined, exposure is assumed to be equal to 1 (eventually multiplied by
+#' weights) per observation. If an offset is defined, `exposure` will be equal
+#' to the (weighted) sum of the exponential of the offset (as a reminder, to
+#' model the effect of `x` on the ratio `y / z`, a Poisson model will be defined
+#' as `glm(y ~ x + offset(log(y)), family = poisson)`). Observed rates could be
+#' obtained with `nevent / exposure`.
+#'
+#' For Cox models ([survival::coxph()]), an individual could be coded
+#' with several observations (several rows). `n` will correspond to the weighted
+#' number of observations which could be different from the number of
+#' individuals. `tidy_add_n()` will also compute a (weighted) number of events
+#' (`nevents`) according to the definition of the [survival::Surv()] object.
+#' Exposure time is also returned in `exposure` column. It is equal to the
+#' (weighted) sum of the time variable if only one vraiable time is passed to
+#' [survival::Surv()], and to the (weighted) sum of `time2 - time` if two time
+#' variables are defined in [survival::Surv()].
+#'
+#' The (weighted) total number of observations (`N`), of events (`Nevent`) and
+#' of exposure time (`Exposure`) are stored as attributes of the returned
+#' tibble.
 #'
 #' @param x a tidy tibble
 #' @param model the corresponding model, if not attached to `x`

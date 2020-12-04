@@ -1,6 +1,5 @@
 #' Get the number of observations
 #'
-#' @description
 #' \lifecycle{maturing}
 #'
 #' For binomial and multinomial logistic models, will also return
@@ -12,11 +11,12 @@
 #' For Cox models ([survival::coxph()]), will return the number of events and
 #' exposure time.
 #'
-#' @details
-#' This function does not cover `lavaan` models (`NULL` is returned).
+#' See [tidy_add_n()] for more details.
 #'
 #' The total number of observations (`N`), of events (`Nevent`) and of
 #' exposure time (`Exposure`) are stored as attributes of the returned tibble.
+#'
+#' This function does not cover `lavaan` models (`NULL` is returned).
 #'
 #' @param model a model object
 #' @export

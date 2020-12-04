@@ -29,7 +29,8 @@ model_get_n(model)
 }
 \description{
 \lifecycle{maturing}
-
+}
+\details{
 For binomial and multinomial logistic models, will also return
 the number of events.
 
@@ -38,12 +39,13 @@ For Poisson models, will return the number of events and exposure time
 
 For Cox models (\code{\link[survival:coxph]{survival::coxph()}}), will return the number of events and
 exposure time.
-}
-\details{
-This function does not cover \code{lavaan} models (\code{NULL} is returned).
+
+See \code{\link[=tidy_add_n]{tidy_add_n()}} for more details.
 
 The total number of observations (\code{N}), of events (\code{Nevent}) and of
 exposure time (\code{Exposure}) are stored as attributes of the returned tibble.
+
+This function does not cover \code{lavaan} models (\code{NULL} is returned).
 }
 \examples{
 lm(hp ~ mpg + factor(cyl) + disp:hp, mtcars) \%>\%
