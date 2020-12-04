@@ -60,7 +60,7 @@ number of observations which could be different from the number of
 individuals. \code{tidy_add_n()} will also compute a (weighted) number of events
 (\code{nevents}) according to the definition of the \code{\link[survival:Surv]{survival::Surv()}} object.
 Exposure time is also returned in \code{exposure} column. It is equal to the
-(weighted) sum of the time variable if only one vraiable time is passed to
+(weighted) sum of the time variable if only one variable time is passed to
 \code{\link[survival:Surv]{survival::Surv()}}, and to the (weighted) sum of \code{time2 - time} if two time
 variables are defined in \code{\link[survival:Surv]{survival::Surv()}}.
 

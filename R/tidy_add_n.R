@@ -47,7 +47,7 @@
 #' individuals. `tidy_add_n()` will also compute a (weighted) number of events
 #' (`nevents`) according to the definition of the [survival::Surv()] object.
 #' Exposure time is also returned in `exposure` column. It is equal to the
-#' (weighted) sum of the time variable if only one vraiable time is passed to
+#' (weighted) sum of the time variable if only one variable time is passed to
 #' [survival::Surv()], and to the (weighted) sum of `time2 - time` if two time
 #' variables are defined in [survival::Surv()].
 #'
