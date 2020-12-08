@@ -91,7 +91,7 @@ tidy_add_reference_rows <- function(
       ))
   }
 
-  if ("n" %in% names(x)) {
+  if ("n_obs" %in% names(x)) {
     if (!quiet)
       usethis::ui_info(paste0(
         "tidy_add_reference_rows() has been applied after tidy_add_n().\n",

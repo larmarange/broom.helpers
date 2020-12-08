@@ -21,7 +21,7 @@ test_that("tidy_plus_plus() works for basic models", {
 
   # works with add_n
   res <- mod %>% tidy_plus_plus(add_n = TRUE)
-  expect_true(all(c("n", "nevent") %in% names(res)))
+  expect_true(all(c("n_obs", "n_event") %in% names(res)))
 })
 
 
@@ -51,23 +51,26 @@ test_that("tidy_plus_plus() and functionnal programming", {
   # will display a message
   # but a result should be returned
   expect_message(
-    res <- dplyr::tibble(grade = c("I", "II", "III")) %>%
-      dplyr::mutate(df_model = purrr:::map(grade, ~ gtsummary::trial %>% dplyr::filter(grade == ..1))) %>%
-      dplyr::mutate(
-        mv_formula_char = "survival::Surv(ttdeath, death) ~ trt + age + marker",
-        mv_formula = purrr::map(mv_formula_char, ~ as.formula(.x)),
-        mv_model_form =
-          purrr::map2(
-            mv_formula, df_model,
-            ~ survival::coxph(..1, data = ..2)
-          ),
-        mv_tbl_form =
-          purrr::map(
-            mv_model_form,
-            ~ tidy_plus_plus(..1, exponentiate = TRUE)
-          )
-      )
+    suppressWarnings(
+      res <- dplyr::tibble(grade = c("I", "II", "III")) %>%
+        dplyr::mutate(df_model = purrr:::map(grade, ~ gtsummary::trial %>% dplyr::filter(grade == ..1))) %>%
+        dplyr::mutate(
+          mv_formula_char = "survival::Surv(ttdeath, death) ~ trt + age + marker",
+          mv_formula = purrr::map(mv_formula_char, ~ as.formula(.x)),
+          mv_model_form =
+            purrr::map2(
+              mv_formula, df_model,
+              ~ survival::coxph(..1, data = ..2)
+            ),
+          mv_tbl_form =
+            purrr::map(
+              mv_model_form,
+              ~ tidy_plus_plus(..1, exponentiate = TRUE)
+            )
+        )
+    )
   )
+
 })
 
 
