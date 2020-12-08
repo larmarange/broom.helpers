@@ -7,6 +7,8 @@
 
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![Travis build
+status](https://travis-ci.com/larmarange/broom.helpers.svg?branch=master)](https://travis-ci.com/larmarange/broom.helpers)
 [![R build
 status](https://github.com/larmarange/broom.helpers/workflows/R-CMD-check/badge.svg)](https://github.com/larmarange/broom.helpers/actions)
 [![Codecov test
@@ -44,19 +46,19 @@ mod1 <- lm(Sepal.Length ~ Sepal.Width + Species, data = iris)
 library(broom.helpers)
 ex1 <- mod1 %>% tidy_plus_plus()
 ex1
-#> # A tibble: 4 x 16
+#> # A tibble: 4 x 17
 #>   term  variable var_label var_class var_type var_nlevels contrasts
 #>   <chr> <chr>    <chr>     <chr>     <chr>          <int> <chr>    
 #> 1 Sepa~ Sepal.W~ Sepal.Wi~ numeric   continu~          NA <NA>     
 #> 2 Spec~ Species  Species   factor    categor~           3 contr.tr~
 #> 3 Spec~ Species  Species   factor    categor~           3 contr.tr~
 #> 4 Spec~ Species  Species   factor    categor~           3 contr.tr~
-#> # ... with 9 more variables: contrasts_type <chr>, reference_row <lgl>,
-#> #   label <chr>, estimate <dbl>, std.error <dbl>, statistic <dbl>,
+#> # ... with 10 more variables: contrasts_type <chr>, reference_row <lgl>,
+#> #   label <chr>, n_obs <dbl>, estimate <dbl>, std.error <dbl>, statistic <dbl>,
 #> #   p.value <dbl>, conf.low <dbl>, conf.high <dbl>
 dplyr::glimpse(ex1)
 #> Rows: 4
-#> Columns: 16
+#> Columns: 17
 #> $ term           <chr> "Sepal.Width", "Speciessetosa", "Speciesversicolor",...
 #> $ variable       <chr> "Sepal.Width", "Species", "Species", "Species"
 #> $ var_label      <chr> "Sepal.Width", "Species", "Species", "Species"
@@ -67,6 +69,7 @@ dplyr::glimpse(ex1)
 #> $ contrasts_type <chr> NA, "treatment", "treatment", "treatment"
 #> $ reference_row  <lgl> NA, TRUE, FALSE, FALSE
 #> $ label          <chr> "Sepal.Width", "setosa", "versicolor", "virginica"
+#> $ n_obs          <dbl> 150, 50, 50, 50
 #> $ estimate       <dbl> 0.8035609, 0.0000000, 1.4587431, 1.9468166
 #> $ std.error      <dbl> 0.1063390, NA, 0.1121079, 0.1000150
 #> $ statistic      <dbl> 7.556598, NA, 13.011954, 19.465255
@@ -91,7 +94,7 @@ ex2 <- mod2 %>%
     show_single_row = "trt"
   )
 ex2
-#> # A tibble: 17 x 17
+#> # A tibble: 17 x 19
 #>    term  variable var_label var_class var_type var_nlevels header_row contrasts
 #>    <chr> <chr>    <chr>     <chr>     <chr>          <int> <lgl>      <chr>    
 #>  1 <NA>  age      Age (in ~ nmatrix.3 continu~          NA TRUE       <NA>     
@@ -111,12 +114,12 @@ ex2
 #> 15 <NA>  grade:t~ Grade * ~ <NA>      interac~          NA TRUE       <NA>     
 #> 16 grad~ grade:t~ Grade * ~ <NA>      interac~          NA FALSE      <NA>     
 #> 17 grad~ grade:t~ Grade * ~ <NA>      interac~          NA FALSE      <NA>     
-#> # ... with 9 more variables: contrasts_type <chr>, reference_row <lgl>,
-#> #   label <chr>, estimate <dbl>, std.error <dbl>, statistic <dbl>,
-#> #   p.value <dbl>, conf.low <dbl>, conf.high <dbl>
+#> # ... with 11 more variables: contrasts_type <chr>, reference_row <lgl>,
+#> #   label <chr>, n_obs <dbl>, n_event <dbl>, estimate <dbl>, std.error <dbl>,
+#> #   statistic <dbl>, p.value <dbl>, conf.low <dbl>, conf.high <dbl>
 dplyr::glimpse(ex2)
 #> Rows: 17
-#> Columns: 17
+#> Columns: 19
 #> $ term           <chr> NA, "poly(age, 3)1", "poly(age, 3)2", "poly(age, 3)3...
 #> $ variable       <chr> "age", "age", "age", "age", "stage", "stage", "stage...
 #> $ var_label      <chr> "Age (in years)", "Age (in years)", "Age (in years)"...
@@ -128,6 +131,8 @@ dplyr::glimpse(ex2)
 #> $ contrasts_type <chr> NA, NA, NA, NA, "treatment", "treatment", "treatment...
 #> $ reference_row  <lgl> NA, NA, NA, NA, NA, FALSE, FALSE, TRUE, FALSE, NA, F...
 #> $ label          <chr> "Age (in years)", "Age (in years)", "Age (in years)²...
+#> $ n_obs          <dbl> NA, 92, 56, 80, NA, 46, 50, 35, 42, NA, 63, 53, 57, ...
+#> $ n_event        <dbl> NA, 31, 17, 22, NA, 17, 12, 13, 12, NA, 20, 16, 18, ...
 #> $ estimate       <dbl> NA, 20.2416394, 1.2337899, 0.4931553, NA, 1.0047885,...
 #> $ std.error      <dbl> NA, 2.3254455, 2.3512842, 2.3936657, NA, 0.4959893, ...
 #> $ statistic      <dbl> NA, 1.29340459, 0.08935144, -0.29533409, NA, 0.00963...
