@@ -19,6 +19,9 @@
     <loc>https://larmarange.github.io/broom.helpers//reference/dot-select_to_varnames.html</loc>
   </url>
   <url>
+    <loc>https://larmarange.github.io/broom.helpers//reference/model_compute_terms_contributions.html</loc>
+  </url>
+  <url>
     <loc>https://larmarange.github.io/broom.helpers//reference/model_get_coefficients_type.html</loc>
   </url>
   <url>
@@ -34,7 +37,19 @@
     <loc>https://larmarange.github.io/broom.helpers//reference/model_get_model_matrix.html</loc>
   </url>
   <url>
+    <loc>https://larmarange.github.io/broom.helpers//reference/model_get_n.html</loc>
+  </url>
+  <url>
     <loc>https://larmarange.github.io/broom.helpers//reference/model_get_nlevels.html</loc>
+  </url>
+  <url>
+    <loc>https://larmarange.github.io/broom.helpers//reference/model_get_offset.html</loc>
+  </url>
+  <url>
+    <loc>https://larmarange.github.io/broom.helpers//reference/model_get_response.html</loc>
+  </url>
+  <url>
+    <loc>https://larmarange.github.io/broom.helpers//reference/model_get_weights.html</loc>
   </url>
   <url>
     <loc>https://larmarange.github.io/broom.helpers//reference/model_get_xlevels.html</loc>
@@ -68,6 +83,9 @@
   </url>
   <url>
     <loc>https://larmarange.github.io/broom.helpers//reference/tidy_add_header_rows.html</loc>
+  </url>
+  <url>
+    <loc>https://larmarange.github.io/broom.helpers//reference/tidy_add_n.html</loc>
   </url>
   <url>
     <loc>https://larmarange.github.io/broom.helpers//reference/tidy_add_reference_rows.html</loc>
