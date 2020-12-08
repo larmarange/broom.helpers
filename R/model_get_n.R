@@ -13,7 +13,7 @@
 #'
 #' See [tidy_add_n()] for more details.
 #'
-#' The total number of observations (`N`), of events (`Nevent`) and of
+#' The total number of observations (`N_obs`), of events (`N_event`) and of
 #' exposure time (`Exposure`) are stored as attributes of the returned tibble.
 #'
 #' This function does not cover `lavaan` models (`NULL` is returned).
@@ -87,9 +87,9 @@ model_get_n.default <- function(model) {
   w <- model %>% model_get_weights()
   n <- dplyr::tibble(
     term = colnames(tcm),
-    n = colSums(tcm * w)
+    n_obs = colSums(tcm * w)
   )
-  attr(n, "N") <- sum(w)
+  attr(n, "N_obs") <- sum(w)
 
   n
 }
@@ -103,16 +103,16 @@ model_get_n.glm <- function(model) {
   w <- model %>% model_get_weights()
   n <- dplyr::tibble(
     term = colnames(tcm),
-    n = colSums(tcm * w)
+    n_obs = colSums(tcm * w)
   )
-  attr(n, "N") <- sum(w)
+  attr(n, "N_obs") <- sum(w)
 
   ct <- model %>% model_get_coefficients_type()
 
   if(ct %in% c("logistic", "poisson")) {
     y <- model %>% model_get_response()
-    n$nevent <- colSums(tcm * y * w)
-    attr(n, "Nevent") <- sum(y * w)
+    n$n_event <- colSums(tcm * y * w)
+    attr(n, "N_event") <- sum(y * w)
   }
 
   if (ct == "poisson") {
@@ -143,12 +143,12 @@ model_get_n.multinom <- function(model) {
     ~ dplyr::tibble(
       y.level = .x,
       term = colnames(tcm),
-      n = colSums(tcm * w),
-      nevent = colSums((y == .x) * tcm * w)
+      n_obs = colSums(tcm * w),
+      n_event = colSums((y == .x) * tcm * w)
     )
   )
-  attr(n, "N") <- sum(w)
-  attr(n, "Nevent") <- sum((y != levels(y)[1]) * w)
+  attr(n, "N_obs") <- sum(w)
+  attr(n, "N_event") <- sum((y != levels(y)[1]) * w)
 
   n
 }
@@ -163,9 +163,9 @@ model_get_n.coxph <- function(model) {
   w <- model %>% model_get_weights()
   n <- dplyr::tibble(
     term = colnames(tcm),
-    n = colSums(tcm * w)
+    n_obs = colSums(tcm * w)
   )
-  attr(n, "N") <- sum(w)
+  attr(n, "N_obs") <- sum(w)
 
   y <- model %>% model_get_response()
   status <- y[, ncol(y)]
@@ -175,8 +175,8 @@ model_get_n.coxph <- function(model) {
     time <- y[, 1]
   }
 
-  n$nevent <- colSums(tcm * status * w)
-  attr(n, "Nevent") <- sum(status * w)
+  n$n_event <- colSums(tcm * status * w)
+  attr(n, "N_event") <- sum(status * w)
   n$exposure <- colSums(tcm * time * w)
   attr(n, "Exposure") <- sum(time * w)
 

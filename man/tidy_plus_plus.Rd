@@ -18,7 +18,7 @@ tidy_plus_plus(
   add_estimate_to_reference_rows = TRUE,
   add_header_rows = FALSE,
   show_single_row = NULL,
-  add_n = FALSE,
+  add_n = TRUE,
   intercept = FALSE,
   include = everything(),
   keep_model = FALSE,

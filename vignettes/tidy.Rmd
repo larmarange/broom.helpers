@@ -260,9 +260,9 @@ tibble::tribble(
   'var_label', '`tidy_add_variable_labels()`', "String of variable labels from the model. Columns labelled with the `labelled` package are retained. It is possible to pass a custom label for an interaction term with the `labels` argument. <br /><em>Require 'variable' column. If needed, will automatically apply `tidy_identify_variables()`.",
   'label', '`tidy_add_term_labels()`', "String of term labels based on (1) labels provided in `labels` argument if provided; (2) factor levels for categorical variables coded with treatment, SAS or sum contrasts; (3) variable labels when there is only one term per variable; and (4) term name otherwise.<br /><em>Require 'variable_label' column. If needed, will automatically apply `tidy_add_variable_labels()`.<br />Require 'contrasts' column. If needed, will automatically apply `tidy_add_contrasts()`.</em>",
   'header_row', '`tidy_add_header_rows()`', "Logical indicating if a row is a header row for variables with several terms. Is equal to `NA` for variables who do not have an header row.</br><em>Require 'label' column. If needed, will automatically apply `tidy_add_term_labels()`.<br />It is better to apply `tidy_add_header_rows()` after other `tidy_*` functions</em>",
-  'n', '`tidy_add_n()`', 'Number of observations',
-  'nevent', '`tidy_add_n()`', 'Number of events (for binomial and multinomial logistic models, Poisson and Cox models)',
-  'n', '`tidy_add_n()`', 'Exposure time (for Poisson and Cox models)'
+  'n_obs', '`tidy_add_n()`', 'Number of observations',
+  'n_event', '`tidy_add_n()`', 'Number of events (for binomial and multinomial logistic models, Poisson and Cox models)',
+  'exposure', '`tidy_add_n()`', 'Exposure time (for Poisson and Cox models)'
 ) %>%
     gt::gt() %>%
   gt::fmt_markdown(columns = TRUE) %>%

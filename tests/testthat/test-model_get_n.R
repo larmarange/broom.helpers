@@ -2,7 +2,7 @@ test_that("model_get_n() works for basic models", {
   mod <- lm(Sepal.Length ~ ., iris)
   res <- mod %>% model_get_n()
   expect_equivalent(
-    res$n,
+    res$n_obs,
     c(150, 150, 150, 150, 50, 50, 50)
   )
 
@@ -12,7 +12,7 @@ test_that("model_get_n() works for basic models", {
   )
   res <- mod %>% model_get_n()
   expect_equivalent(
-    res$n,
+    res$n_obs,
     c(150, 150, 150)
   )
 
@@ -20,11 +20,11 @@ test_that("model_get_n() works for basic models", {
   mod <- glm(response ~ stage + grade + trt, gtsummary::trial, family = binomial)
   res <- mod %>% model_get_n()
   expect_equivalent(
-    res$n,
+    res$n_obs,
     c(193, 52, 40, 49, 63, 63, 98, 52, 67, 95)
   )
   expect_equivalent(
-    res$nevent,
+    res$n_event,
     c(61, 13, 15, 15, 19, 21, 33, 18, 21, 28)
   )
 
@@ -34,11 +34,11 @@ test_that("model_get_n() works for basic models", {
   )
   res <- mod %>% model_get_n()
   expect_equivalent(
-    res$n,
+    res$n_obs,
     c(2201, 285, 706, 885, 2092, 470, 261, 627, 885, 325, 109, 1731)
   )
   expect_equivalent(
-    res$nevent,
+    res$n_event,
     c(711, 118, 178, 212, 654, 344, 94, 151, 212, 203, 57, 367)
   )
 
@@ -56,11 +56,11 @@ test_that("model_get_n() works for basic models", {
   )
   expect_error(res <- mod %>% model_get_n(), NA)
   expect_equivalent(
-    res$n,
+    res$n_obs,
     c(2201, 285, 706, 885, 109, 1731, 24, 79, 0, 325, 2092, 470)
   )
   expect_equivalent(
-    res$nevent,
+    res$n_event,
     c(711, 118, 178, 212, 57, 367, 24, 27, 0, 203, 654, 344)
   )
 
@@ -68,11 +68,11 @@ test_that("model_get_n() works for basic models", {
   mod <- glm(response ~ age + grade * trt, gtsummary::trial, family = poisson)
   res <- mod %>% model_get_n()
   expect_equivalent(
-    res$n,
+    res$n_obs,
     c(183, 183, 58, 60, 94, 29, 33, 65, 89)
   )
   expect_equivalent(
-    res$nevent,
+    res$n_event,
     c(58, 58, 17, 20, 31, 10, 8, 21, 27)
   )
   expect_equivalent(
@@ -89,11 +89,11 @@ test_that("model_get_n() works for basic models", {
   )
   res <- mod %>% model_get_n()
   expect_equivalent(
-    res$n,
+    res$n_obs,
     c(292, 151, 94, 92, 49, 49, 141, 106)
   )
   expect_equivalent(
-    res$nevent,
+    res$n_event,
     c(96, 53, 28, 31, 19, 12, 43, 37)
   )
   expect_equivalent(
@@ -108,11 +108,11 @@ test_that("model_get_n() works for basic models", {
   )
   res <- mod %>% model_get_n()
   expect_equivalent(
-    res$n,
+    res$n_obs,
     c(2201, 6, 24, 79, 0, 319, 261, 627, 885)
   )
   expect_equivalent(
-    res$nevent,
+    res$n_event,
     c(711, 6, 24, 27, 0, 197, 94, 151, 212)
   )
 })
@@ -139,14 +139,14 @@ test_that("model_get_n() works with different contrasts", {
     contrasts = list(stage = contr.treatment, grade = contr.SAS, trt = contr.SAS)
   )
   expect_error(res <- mod %>% model_get_n(), NA)
-  expect_equivalent(names(res), c("term", "n", "nevent"))
+  expect_equivalent(names(res), c("term", "n_obs", "n_event"))
   expect_equivalent(
     res$term,
     c("(Intercept)", "stage2", "stage3", "stage4", "grade1", "grade2",
       "trt1", "grade1:trt1", "grade2:trt1", "stage1", "grade3", "trt2")
   )
   expect_equivalent(
-    res$n,
+    res$n_obs,
     c(193, 52, 40, 49, 67, 63, 95, 35, 30, 52, 63, 98)
   )
 
@@ -157,14 +157,14 @@ test_that("model_get_n() works with different contrasts", {
     contrasts = list(stage = contr.poly, grade = contr.helmert, trt = contr.sum)
   )
   expect_error(res <- mod %>% model_get_n(), NA)
-  expect_equivalent(names(res), c("term", "n", "nevent"))
+  expect_equivalent(names(res), c("term", "n_obs", "n_event"))
   expect_equivalent(
     res$term,
     c("(Intercept)", "stage.L", "stage.Q", "stage.C", "grade1", "grade2",
       "trt1", "grade1:trt1", "grade2:trt1", "trt2")
   )
   expect_equivalent(
-    res$n,
+    res$n_obs,
     c(193, 193, 193, 193, 63, 63, 95, 62, 95, 98)
   )
 })
@@ -173,7 +173,7 @@ test_that("model_get_n() works with different contrasts", {
 test_that("model_get_n() works with stats::poly()", {
   mod <- lm(Sepal.Length ~ poly(Sepal.Width, 3) + poly(Petal.Length, 2), iris)
   expect_error(res <- mod %>% model_get_n(), NA)
-  expect_equivalent(names(res), c("term", "n"))
+  expect_equivalent(names(res), c("term", "n_obs"))
   expect_equivalent(
     res$term,
     c("(Intercept)", "poly(Sepal.Width, 3)1", "poly(Sepal.Width, 3)2",
@@ -181,7 +181,7 @@ test_that("model_get_n() works with stats::poly()", {
       "poly(Petal.Length, 2)2")
   )
   expect_equivalent(
-    res$n,
+    res$n_obs,
     c(150, 150, 150, 150, 150, 150)
   )
 })
@@ -193,7 +193,7 @@ test_that("model_get_n() works with lme4::lmer", {
   df$group <- rep.int(1:2, 100)
   mod <- lme4::lmer(marker ~ stage + grade + (1 | group), df)
   expect_error(res <- mod %>% model_get_n(), NA)
-  expect_equivalent(names(res), c("term", "n"))
+  expect_equivalent(names(res), c("term", "n_obs"))
 })
 
 
@@ -205,7 +205,7 @@ test_that("model_get_n() works with lme4::glmer", {
     mod <- lme4::glmer(response ~ stage + grade + (1 | group), df, family = binomial)
   )
   expect_error(res <- mod %>% model_get_n(), NA)
-  expect_equivalent(names(res), c("term", "n", "nevent"))
+  expect_equivalent(names(res), c("term", "n_obs", "n_event"))
 })
 
 
@@ -213,7 +213,7 @@ test_that("model_get_n() works with survival::coxph", {
   df <- survival::lung %>% dplyr::mutate(sex = factor(sex))
   mod <- survival::coxph(survival::Surv(time, status) ~ ph.ecog + age + sex, data = df)
   expect_error(res <- mod %>% model_get_n(), NA)
-  expect_equivalent(names(res), c("term", "n", "nevent", "exposure"))
+  expect_equivalent(names(res), c("term", "n_obs", "n_event", "exposure"))
 
   test <- list(
     start = c(1, 2, 5, 2, 1, 7, 3, 4, 8, 8),
@@ -223,9 +223,9 @@ test_that("model_get_n() works with survival::coxph", {
   )
   mod <- survival::coxph(survival::Surv(start, stop, event) ~ x, test)
   expect_error(res <- mod %>% model_get_n(), NA)
-  expect_equivalent(names(res), c("term", "n", "nevent", "exposure"))
-  expect_equivalent(res$n, c(10, 10))
-  expect_equivalent(res$nevent, c(7, 7))
+  expect_equivalent(names(res), c("term", "n_obs", "n_event", "exposure"))
+  expect_equivalent(res$n_obs, c(10, 10))
+  expect_equivalent(res$n_event, c(7, 7))
   expect_equivalent(res$exposure, c(43, 43))
 })
 
@@ -236,24 +236,24 @@ test_that("model_get_n() works with survival::survreg", {
     dist = "exponential"
   )
   expect_error(res <- mod %>% model_get_n(), NA)
-  expect_equivalent(names(res), c("term", "n", "nevent", "exposure"))
+  expect_equivalent(names(res), c("term", "n_obs", "n_event", "exposure"))
 })
 
 test_that("model_get_n() works with nnet::multinom", {
   mod <- nnet::multinom(grade ~ stage + marker + age, data = gtsummary::trial, trace = FALSE)
   expect_error(res <- mod %>% model_get_n(), NA)
-  expect_equivalent(names(res), c("y.level", "term", "n", "nevent"))
+  expect_equivalent(names(res), c("y.level", "term", "n_obs", "n_event"))
   expect_equivalent(
     res$y.level,
     c("II", "II", "II", "II", "II", "II", "II", "III", "III", "III",
       "III", "III", "III", "III")
   )
   expect_equivalent(
-    res$n,
+    res$n_obs,
     c(179, 52, 37, 43, 179, 179, 47, 179, 52, 37, 43, 179, 179, 47)
   )
   expect_equivalent(
-    res$nevent,
+    res$n_event,
     c(57, 16, 8, 12, 57, 57, 21, 58, 18, 12, 16, 58, 58, 12)
   )
 })
@@ -262,11 +262,11 @@ test_that("model_get_n() works with survey::svyglm", {
   df <- survey::svydesign(~1, weights = ~1, data = gtsummary::trial)
   mod <- survey::svyglm(response ~ age + grade * trt, df, family = quasibinomial)
   expect_error(res <- mod %>% model_get_n(), NA)
-  expect_equivalent(names(res), c("term", "n", "nevent"))
+  expect_equivalent(names(res), c("term", "n_obs", "n_event"))
 
   mod <- survey::svyglm(response ~ age + grade + offset(log(ttdeath)), df, family = quasipoisson)
   expect_error(res <- mod %>% model_get_n(), NA)
-  expect_equivalent(names(res), c("term", "n", "nevent", "exposure"))
+  expect_equivalent(names(res), c("term", "n_obs", "n_event", "exposure"))
 
   df <- survey::svydesign(
     ~ 1, weights = ~ Freq,
@@ -274,9 +274,9 @@ test_that("model_get_n() works with survey::svyglm", {
   )
   mod <- survey::svyglm(Survived ~ Class + Age * Sex, df, family = quasibinomial)
   expect_error(res <- mod %>% model_get_n(), NA)
-  expect_equivalent(names(res), c("term", "n", "nevent"))
+  expect_equivalent(names(res), c("term", "n_obs", "n_event"))
   expect_equivalent(
-    res$n,
+    res$n_obs,
     c(2201, 285, 706, 885, 2092, 470, 425, 325, 109, 1731)
   )
 })
@@ -284,7 +284,7 @@ test_that("model_get_n() works with survey::svyglm", {
 test_that("model_get_n() works with ordinal::clm", {
   mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine, nominal = ~contact)
   expect_error(res <- mod %>% model_get_n(), NA)
-  expect_equivalent(names(res), c("term", "n"))
+  expect_equivalent(names(res), c("term", "n_obs"))
   # note: no nevent computed for ordinal models
 })
 
@@ -292,14 +292,14 @@ test_that("model_get_n() works with ordinal::clm", {
 test_that("model_get_n() works with ordinal::clmm", {
   mod <- ordinal::clmm(rating ~ temp * contact + (1 | judge), data = ordinal::wine)
   expect_error(res <- mod %>% model_get_n(), NA)
-  expect_equivalent(names(res), c("term", "n"))
+  expect_equivalent(names(res), c("term", "n_obs"))
 })
 
 
 test_that("model_get_n() works with MASS::polr", {
   mod <- MASS::polr(Sat ~ Infl + Type + Cont, weights = Freq, data = MASS::housing)
   expect_error(res <- mod %>% model_get_n(), NA)
-  expect_equivalent(names(res), c("term", "n"))
+  expect_equivalent(names(res), c("term", "n_obs"))
 })
 
 
@@ -311,13 +311,13 @@ test_that("model_get_n() works with geepack::geeglm", {
     mod <- geepack::geeglm(mf, data = df, id = Pig, family = poisson("identity"), corstr = "ar1")
   )
   expect_error(res <- mod %>% model_get_n(), NA)
-  expect_equivalent(names(res), c("term", "n"))
+  expect_equivalent(names(res), c("term", "n_obs"))
 
   suppressWarnings(
     mod <- geepack::geeglm(mf, data = df, id = Pig, family = poisson(), corstr = "ar1")
   )
   expect_error(res <- mod %>% model_get_n(), NA)
-  expect_equivalent(names(res), c("term", "n", "nevent", "exposure"))
+  expect_equivalent(names(res), c("term", "n_obs", "n_event", "exposure"))
 })
 
 
@@ -325,7 +325,7 @@ test_that("model_get_n() works with gam::gam", {
   data(kyphosis, package = "gam")
   mod <- gam::gam(Kyphosis ~ gam::s(Age, 4) + Number, family = binomial, data = kyphosis)
   expect_error(res <- mod %>% model_get_n(), NA)
-  expect_equivalent(names(res), c("term", "n", "nevent"))
+  expect_equivalent(names(res), c("term", "n_obs", "n_event"))
 })
 
 
