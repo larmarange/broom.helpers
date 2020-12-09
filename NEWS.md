@@ -2,7 +2,7 @@
 
 - New function `tidy_add_n()` to add the number of observations (and for 
   relevant models the number of events and exposure time) (#64)
-- New option `add_n` (default `FALSE`) in `tidy_plus_plus()` (#64)
+- New option `add_n` in `tidy_plus_plus()` (#64)
 - New functions `model_get_n()`, `model_get_weights()`, `model_get_offset()`,
   `model_get_response()` and `model_compute_terms_contributions()` (#64)
 - Bug fix in `tidy_add_term_labels()` for variables with non standard names (#77)
