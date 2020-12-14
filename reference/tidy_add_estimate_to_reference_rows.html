@@ -165,7 +165,8 @@ when requested output cannot be generated. Default is FALSE</p></td>
     <p>For categorical variables with a sum contrast (<code><a href='https://rdrr.io/r/stats/contrast.html'>stats::contr.sum()</a></code>),
 the estimate value of the reference row will be equal to the sum of
 all other coefficients multiplied by <code>-1</code> (eventually exponentiated if
-<code>exponentiate = TRUE</code>), and obtained with <code><a href='https://rdrr.io/r/stats/dummy.coef.html'>stats::dummy.coef()</a></code>.
+<code>exponentiate = TRUE</code>), and obtained with <code><a href='https://rdrr.io/pkg/emmeans/man/emmeans.html'>emmeans::emmeans()</a></code>.
+The <code>emmeans</code> package should therefore be installed.
 For sum contrasts, the model coefficient corresponds
 to the difference of each level with the grand mean.</p>
 <p>For other variables, no change will be made.</p>
