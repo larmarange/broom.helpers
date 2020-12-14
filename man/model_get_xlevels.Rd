@@ -5,6 +5,7 @@
 \alias{model_get_xlevels.default}
 \alias{model_get_xlevels.lmerMod}
 \alias{model_get_xlevels.glmerMod}
+\alias{model_get_xlevels.felm}
 \title{Get xlevels used in the model}
 \usage{
 model_get_xlevels(model)
@@ -14,6 +15,8 @@ model_get_xlevels(model)
 \method{model_get_xlevels}{lmerMod}(model)
 
 \method{model_get_xlevels}{glmerMod}(model)
+
+\method{model_get_xlevels}{felm}(model)
 }
 \arguments{
 \item{model}{a model object}
