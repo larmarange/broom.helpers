@@ -36,6 +36,8 @@ test_that("tidy_add_estimate_to_reference_rows() works for basic models", {
     c(1, 1, 1)
   )
 
+  skip_if_not_installed("emmeans")
+
   mod <- glm(response ~ stage + grade + trt, gtsummary::trial,
     family = binomial,
     contrasts = list(stage = contr.sum, grade = contr.sum, trt = contr.sum)
@@ -106,6 +108,8 @@ test_that("test tidy_add_estimate_to_reference_rows() checks", {
   expect_error(mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows(exponentiate = NULL))
   expect_error(mod %>% broom::tidy() %>% tidy_attach_model(mod) %>% tidy_add_estimate_to_reference_rows())
 
+  skip_if_not_installed("emmeans")
+
   # expect a message if this is a model not covered by emmeans
   mod <- glm(
     response ~ stage + grade + trt, gtsummary::trial,
@@ -142,6 +146,8 @@ test_that("tidy_add_estimate_to_reference_rows() works with character variables"
     c(0, 0, 0)
   )
 
+  skip_if_not_installed("emmeans")
+
   mod <- glm(response ~ stage + grade + trt, df,
     family = binomial,
     contrasts = list(stage = contr.sum, grade = contr.sum, trt = contr.sum)
@@ -166,6 +172,8 @@ test_that("tidy_add_estimate_to_reference_rows() works with character variables"
 
 
 test_that("tidy_add_estimate_to_reference_rows() handles variables having non standard name", {
+  skip_if_not_installed("emmeans")
+
   df <- gtsummary::trial %>% dplyr::mutate(`grade of kids` = grade)
   mod <- glm(response ~ stage + `grade of kids` + trt, df,
     family = binomial,
@@ -230,7 +238,7 @@ test_that("tidy_add_estimate_to_reference_rows() works with nnet::multinom", {
   mod <- nnet::multinom(grade ~ stage + marker + age, data = gtsummary::trial, trace = FALSE)
   expect_error(mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows(), NA)
 
-  # no dummy coef for multinom
+  # no emmeans for multinom
   # should return a warning but not an error
   mod <- nnet::multinom(
     grade ~ stage + marker + age,

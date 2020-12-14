@@ -167,6 +167,7 @@ test_that("select_helpers: tidy_plus_plus", {
     1L
   )
 
+  skip_if_not_installed("emmeans")
   expect_equal(
     tidy_plus_plus(mod2, include = all_contrasts("sum"))$variable %>%
       na.omit() %>%
