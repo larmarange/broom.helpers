@@ -40,8 +40,9 @@ model_identify_variables <- function(model) {
 #' @export
 model_identify_variables.default <- function(model) {
   model_matrix <- model_get_model_matrix(model)
+  assign <- attr(model_matrix, "assign")
 
-  if (is.null(model_matrix)) {
+  if (is.null(model_matrix) | is.null(assign)) {
     # return an empty tibble
     return(
       dplyr::tibble(
@@ -54,7 +55,6 @@ model_identify_variables.default <- function(model) {
     )
   }
 
-  assign <- attr(model_matrix, "assign")
   assign[assign == 0] <- NA
   model_terms <- stats::terms(model)
   variable_names <- model %>% model_list_variables(only_variable = TRUE)
