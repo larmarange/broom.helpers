@@ -22,7 +22,6 @@ BugReports: https://github.com/larmarange/broom.helpers/issues
 Imports: 
     broom,
     dplyr,
-    emmeans,
     labelled,
     lifecycle,
     purrr,
@@ -36,6 +35,7 @@ Suggests:
     broom.mixed,
     covr,
     datasets,
+    emmeans,
     forcats,
     gam,
     gee,
