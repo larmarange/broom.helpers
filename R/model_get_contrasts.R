@@ -27,3 +27,9 @@ model_get_contrasts.default <- function(model) {
   )
 }
 
+#' @export
+#' @rdname model_get_contrasts
+model_get_contrasts.felm <- function(model) {
+  mm <- stats::model.matrix(stats::terms(model), stats::model.frame(model))
+  attr(mm, "contrasts")
+}

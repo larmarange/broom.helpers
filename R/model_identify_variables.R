@@ -48,7 +48,7 @@ model_identify_variables.default <- function(model) {
     # an alternative generic way to compute assign
     # (e.g. for felm models)
     model_matrix <- tryCatch(
-      model.matrix(terms(model), stats::model.frame(model)),
+      stats::model.matrix(stats::terms(model), stats::model.frame(model)),
       error = function(e) {
         NULL # nocov
       }
