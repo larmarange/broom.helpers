@@ -75,6 +75,7 @@ test_that("tidy_plus_plus() and functionnal programming", {
 
 
 test_that("tidy_plus_plus() with mice objects", {
+  skip_if(packageVersion("mice") < "3.12.0")
   # impute missing values
   imputed_trial <-
     suppressWarnings(mice::mice(gtsummary::trial, maxit = 2, m = 2))
