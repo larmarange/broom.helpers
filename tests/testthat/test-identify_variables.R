@@ -417,6 +417,8 @@ test_that("model_identify_variables() works with MASS::polr", {
 
 
 test_that("model_identify_variables() works with geepack::geeglm", {
+  skip_if(packageVersion("geepack") < 1.3)
+
   df <- geepack::dietox
   df$Cu <- as.factor(df$Cu)
   mf <- formula(Weight ~ Cu * Time)

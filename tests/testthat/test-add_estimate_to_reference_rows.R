@@ -273,6 +273,8 @@ test_that("tidy_add_estimate_to_reference_rows() works with MASS::polr", {
 
 
 test_that("tidy_add_estimate_to_reference_rows() works with geepack::geeglm", {
+  skip_if(packageVersion("geepack") < 1.3)
+
   df <- geepack::dietox
   df$Cu <- as.factor(df$Cu)
   mf <- formula(Weight ~ Cu * Time)

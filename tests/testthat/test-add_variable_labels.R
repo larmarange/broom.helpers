@@ -277,6 +277,8 @@ test_that("tidy_add_variable_labels() works with MASS::polr", {
 
 
 test_that("tidy_add_variable_labels() works with geepack::geeglm", {
+  skip_if(packageVersion("geepack") < 1.3)
+
   df <- geepack::dietox
   df$Cu <- as.factor(df$Cu)
   mf <- formula(Weight ~ Cu * Time)

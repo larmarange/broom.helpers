@@ -294,6 +294,8 @@ test_that("tidy_plus_plus() works with MASS::glm.nb", {
 })
 
 test_that("tidy_plus_plus() works with geepack::geeglm", {
+  skip_if(packageVersion("geepack") < 1.3)
+
   df <- geepack::dietox
   df$Cu <- as.factor(df$Cu)
   mf <- formula(Weight ~ Cu * Time)
