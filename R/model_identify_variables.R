@@ -179,6 +179,7 @@ model_identify_variables.gam <- function(model) {
   model_identify_variables.default(model) %>%
     dplyr::bind_rows(
       broom::tidy(model, parametric = FALSE) %>%
+        dplyr::bind_rows(tibble::tibble(term = character(0))) %>%
         dplyr::select(.data$term) %>%
         dplyr::mutate(variable = .data$term, var_type = "continuous")
     )
