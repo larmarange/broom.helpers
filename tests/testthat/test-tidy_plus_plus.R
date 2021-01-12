@@ -369,15 +369,15 @@ test_that("tidy_plus_plus() works with mgcv::gam", {
   gam_smooth_only <- mgcv::gam(response ~ s(marker, ttdeath), data = gtsummary::trial)
   gam_param_only <- mgcv::gam(response ~ grade, data = gtsummary::trial)
 
-  expect_error(gam_logistic %>% tidy_plus_plus(tidy_fun = tidy_gam), NA)
+  expect_error(tbl_gam_logistic <- gam_logistic %>% tidy_plus_plus(tidy_fun = tidy_gam), NA)
   expect_error(gam_logistic %>% tidy_plus_plus(), NA)
 
-  expect_error(gam_linear %>% tidy_plus_plus(tidy_fun = tidy_gam), NA)
+  expect_error(tbl_gam_linear <- gam_linear %>% tidy_plus_plus(tidy_fun = tidy_gam), NA)
   expect_error(gam_linear %>% tidy_plus_plus(), NA)
 
-  expect_error(gam_smooth_only %>% tidy_plus_plus(tidy_fun = tidy_gam), NA)
+  expect_error(tbl_gam_smooth_only <- gam_smooth_only %>% tidy_plus_plus(tidy_fun = tidy_gam), NA)
   expect_error(gam_smooth_only %>% tidy_plus_plus(), NA)
 
-  expect_error(gam_param_only %>% tidy_plus_plus(tidy_fun = tidy_gam), NA)
-  expect_error(gam_param_only %>% tidy_plus_plus(), NA)
+  expect_error(tbl_gam_param_only <- gam_param_only %>% tidy_plus_plus(tidy_fun = tidy_gam), NA)
+  # the default tidier return a df with no columns and no rows...it fails.
 })

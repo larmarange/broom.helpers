@@ -127,6 +127,34 @@ model_get_n.glm <- function(model) {
 
 #' @export
 #' @rdname model_get_n
+model_get_n.gam <- function(model) {
+  # get Ns from all terms
+  df_paramtric_n <- model_get_n.glm(model)
+
+  # identify matching terms to the smooth terms and add to rows for smooth terms
+  df_smooth_n <-
+    broom::tidy(model, parametric = FALSE) %>%
+    dplyr::bind_rows(
+      dplyr::bind_rows(tibble::tibble(term = character(0)))
+    ) %>%
+    dplyr::select(.data$term) %>%
+    dplyr::mutate(
+      tbl_obs =
+        purrr::map(
+          .data$term,
+          ~df_paramtric_n %>%
+            dplyr::filter(.data$term %in% all.vars(as.formula(paste0("~", .x)))) %>%
+            dplyr::select(-.data$term) %>%
+            dplyr::distinct() # these data frames should 1 row
+        )
+    )  %>%
+    tidyr::unnest(cols = .data$tbl_obs)
+
+  dplyr::bind_rows(df_paramtric_n, df_smooth_n)
+}
+
+#' @export
+#' @rdname model_get_n
 model_get_n.glmerMod <- model_get_n.glm
 
 #' @export
