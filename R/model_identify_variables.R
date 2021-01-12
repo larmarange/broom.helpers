@@ -173,6 +173,19 @@ model_identify_variables.clm <- function(model) {
 #' @export
 model_identify_variables.clmm <- model_identify_variables.clm
 
+#' @rdname model_identify_variables
+#' @export
+model_identify_variables.gam <- function(model) {
+  model_identify_variables.default(model) %>%
+    dplyr::bind_rows(
+      broom::tidy(model, parametric = FALSE) %>%
+        dplyr::bind_rows(tibble::tibble(term = character(0))) %>%
+        dplyr::select(.data$term) %>%
+        dplyr::mutate(variable = .data$term, var_type = "continuous")
+    )
+}
+
+
 ## model_identify_variables() helpers --------------------------
 
 .compute_var_type <- function(x) {

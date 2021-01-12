@@ -47,6 +47,7 @@ Suggests:
     lavaan,
     lme4,
     MASS,
+    mgcv,
     mice,
     nnet,
     ordinal,
