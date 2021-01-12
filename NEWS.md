@@ -1,5 +1,6 @@
 # broom.helpers (development version)
 
+- Added support for `mgcv::gam()` models. (#82)
 - New function `tidy_add_n()` to add the number of observations (and for 
   relevant models the number of events and exposure time) (#64)
 - New option `add_n` in `tidy_plus_plus()` (#64)
