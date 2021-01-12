@@ -3,7 +3,7 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   tidy: tidy.html
-last_built: 2020-12-15T21:05Z
+last_built: 2021-01-12T15:41Z
 urls:
   reference: https://larmarange.github.io/broom.helpers//reference
   article: https://larmarange.github.io/broom.helpers//articles
