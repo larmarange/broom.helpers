@@ -129,7 +129,7 @@ model_get_n.glm <- function(model) {
 #' @rdname model_get_n
 model_get_n.gam <- function(model) {
   # get Ns from all terms
-  df_paramtric_n <- model_get_n.glm(model)
+  df_parametric_n <- model_get_n.glm(model)
 
   # identify matching terms to the smooth terms and add to rows for smooth terms
   df_smooth_n <-
@@ -142,7 +142,7 @@ model_get_n.gam <- function(model) {
       tbl_obs =
         purrr::map(
           .data$term,
-          ~df_paramtric_n %>%
+          ~df_parametric_n %>%
             dplyr::filter(.data$term %in% all.vars(as.formula(paste0("~", .x)))) %>%
             dplyr::select(-.data$term) %>%
             dplyr::distinct() # these data frames should 1 row
@@ -150,7 +150,7 @@ model_get_n.gam <- function(model) {
     )  %>%
     tidyr::unnest(cols = .data$tbl_obs)
 
-  dplyr::bind_rows(df_paramtric_n, df_smooth_n)
+  dplyr::bind_rows(df_parametric_n, df_smooth_n)
 }
 
 #' @export
