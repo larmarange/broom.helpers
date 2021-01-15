@@ -143,11 +143,16 @@
 <li><p><code>variable</code>: variable name</p></li>
 <li><p><code>contrasts</code>: contrasts used</p></li>
 <li><p><code>contrasts_type</code>: type of contrasts
-("treatment", "sum", "poly", "helmert" or "other")</p></li>
+("treatment", "sum", "poly", "helmert", "other" or "no.contrast")</p></li>
 <li><p><code>reference</code>: for variables with treatment, SAS
 or sum contrasts, position of the reference level</p></li>
 </ul>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>For models with no intercept, no contrasts will be applied to one of the
+categorical variable. In such case, one dummy term will be returned for each
+level of the categorical variable.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other model_helpers: 

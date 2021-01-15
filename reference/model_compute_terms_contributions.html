@@ -321,39 +321,72 @@ be taken into account in the estimate of the number of observations,
 #&gt; 150           1           1</div><div class='input'>
 <span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>hp</span> <span class='op'>~</span> <span class='va'>mpg</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>cyl</span><span class='op'>)</span> <span class='op'>+</span> <span class='va'>disp</span><span class='op'>:</span><span class='va'>hp</span>, <span class='va'>mtcars</span><span class='op'>)</span>
 <span class='va'>mod</span> <span class='op'>%&gt;%</span> <span class='fu'>model_compute_terms_contributions</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;    (Intercept) mpg factor(cyl)6 factor(cyl)8 hp:disp factor(cyl)4
-#&gt; 1            1   1            1            0       1            0
-#&gt; 2            1   1            1            0       1            0
-#&gt; 3            1   1            0            0       1            1
-#&gt; 4            1   1            1            0       1            0
-#&gt; 5            1   1            0            1       1            0
-#&gt; 6            1   1            1            0       1            0
-#&gt; 7            1   1            0            1       1            0
-#&gt; 8            1   1            0            0       1            1
-#&gt; 9            1   1            0            0       1            1
-#&gt; 10           1   1            1            0       1            0
-#&gt; 11           1   1            1            0       1            0
-#&gt; 12           1   1            0            1       1            0
-#&gt; 13           1   1            0            1       1            0
-#&gt; 14           1   1            0            1       1            0
-#&gt; 15           1   1            0            1       1            0
-#&gt; 16           1   1            0            1       1            0
-#&gt; 17           1   1            0            1       1            0
-#&gt; 18           1   1            0            0       1            1
-#&gt; 19           1   1            0            0       1            1
-#&gt; 20           1   1            0            0       1            1
-#&gt; 21           1   1            0            0       1            1
-#&gt; 22           1   1            0            1       1            0
-#&gt; 23           1   1            0            1       1            0
-#&gt; 24           1   1            0            1       1            0
-#&gt; 25           1   1            0            1       1            0
-#&gt; 26           1   1            0            0       1            1
-#&gt; 27           1   1            0            0       1            1
-#&gt; 28           1   1            0            0       1            1
-#&gt; 29           1   1            0            1       1            0
-#&gt; 30           1   1            1            0       1            0
-#&gt; 31           1   1            0            1       1            0
-#&gt; 32           1   1            0            0       1            1</div><div class='input'>
+</div><div class='output co'>#&gt;                     (Intercept) mpg factor(cyl)6 factor(cyl)8 hp:disp
+#&gt; Mazda RX4                     1   1            1            0       1
+#&gt; Mazda RX4 Wag                 1   1            1            0       1
+#&gt; Datsun 710                    1   1            0            0       1
+#&gt; Hornet 4 Drive                1   1            1            0       1
+#&gt; Hornet Sportabout             1   1            0            1       1
+#&gt; Valiant                       1   1            1            0       1
+#&gt; Duster 360                    1   1            0            1       1
+#&gt; Merc 240D                     1   1            0            0       1
+#&gt; Merc 230                      1   1            0            0       1
+#&gt; Merc 280                      1   1            1            0       1
+#&gt; Merc 280C                     1   1            1            0       1
+#&gt; Merc 450SE                    1   1            0            1       1
+#&gt; Merc 450SL                    1   1            0            1       1
+#&gt; Merc 450SLC                   1   1            0            1       1
+#&gt; Cadillac Fleetwood            1   1            0            1       1
+#&gt; Lincoln Continental           1   1            0            1       1
+#&gt; Chrysler Imperial             1   1            0            1       1
+#&gt; Fiat 128                      1   1            0            0       1
+#&gt; Honda Civic                   1   1            0            0       1
+#&gt; Toyota Corolla                1   1            0            0       1
+#&gt; Toyota Corona                 1   1            0            0       1
+#&gt; Dodge Challenger              1   1            0            1       1
+#&gt; AMC Javelin                   1   1            0            1       1
+#&gt; Camaro Z28                    1   1            0            1       1
+#&gt; Pontiac Firebird              1   1            0            1       1
+#&gt; Fiat X1-9                     1   1            0            0       1
+#&gt; Porsche 914-2                 1   1            0            0       1
+#&gt; Lotus Europa                  1   1            0            0       1
+#&gt; Ford Pantera L                1   1            0            1       1
+#&gt; Ferrari Dino                  1   1            1            0       1
+#&gt; Maserati Bora                 1   1            0            1       1
+#&gt; Volvo 142E                    1   1            0            0       1
+#&gt;                     factor(cyl)4
+#&gt; Mazda RX4                      0
+#&gt; Mazda RX4 Wag                  0
+#&gt; Datsun 710                     1
+#&gt; Hornet 4 Drive                 0
+#&gt; Hornet Sportabout              0
+#&gt; Valiant                        0
+#&gt; Duster 360                     0
+#&gt; Merc 240D                      1
+#&gt; Merc 230                       1
+#&gt; Merc 280                       0
+#&gt; Merc 280C                      0
+#&gt; Merc 450SE                     0
+#&gt; Merc 450SL                     0
+#&gt; Merc 450SLC                    0
+#&gt; Cadillac Fleetwood             0
+#&gt; Lincoln Continental            0
+#&gt; Chrysler Imperial              0
+#&gt; Fiat 128                       1
+#&gt; Honda Civic                    1
+#&gt; Toyota Corolla                 1
+#&gt; Toyota Corona                  1
+#&gt; Dodge Challenger               0
+#&gt; AMC Javelin                    0
+#&gt; Camaro Z28                     0
+#&gt; Pontiac Firebird               0
+#&gt; Fiat X1-9                      1
+#&gt; Porsche 914-2                  1
+#&gt; Lotus Europa                   1
+#&gt; Ford Pantera L                 0
+#&gt; Ferrari Dino                   0
+#&gt; Maserati Bora                  0
+#&gt; Volvo 142E                     1</div><div class='input'>
 <span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span>
   <span class='va'>response</span> <span class='op'>~</span> <span class='va'>stage</span> <span class='op'>*</span> <span class='va'>grade</span> <span class='op'>+</span> <span class='va'>trt</span>,
   <span class='fu'>gtsummary</span><span class='fu'>::</span><span class='va'><a href='http://www.danieldsjoberg.com/gtsummary//reference/trial.html'>trial</a></span>,
@@ -1420,7 +1453,7 @@ be taken into account in the estimate of the number of observations,
     n_survived <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>n</span> <span class='op'>*</span> <span class='op'>(</span><span class='va'>Survived</span> <span class='op'>==</span> <span class='st'>"Yes"</span><span class='op'>)</span><span class='op'>)</span>,
     n_dead <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>n</span> <span class='op'>*</span> <span class='op'>(</span><span class='va'>Survived</span> <span class='op'>==</span> <span class='st'>"No"</span><span class='op'>)</span><span class='op'>)</span>
   <span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>`summarise()` regrouping output by 'Class', 'Sex' (override with `.groups` argument)</span></div><div class='input'><span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>n_survived</span>, <span class='va'>n_dead</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>Class</span> <span class='op'>*</span> <span class='va'>Age</span> <span class='op'>+</span> <span class='va'>Sex</span>, data <span class='op'>=</span> <span class='va'>d</span>, family <span class='op'>=</span> <span class='va'>binomial</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>`summarise()` has grouped output by 'Class', 'Sex'. You can override using the `.groups` argument.</span></div><div class='input'><span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>n_survived</span>, <span class='va'>n_dead</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>Class</span> <span class='op'>*</span> <span class='va'>Age</span> <span class='op'>+</span> <span class='va'>Sex</span>, data <span class='op'>=</span> <span class='va'>d</span>, family <span class='op'>=</span> <span class='va'>binomial</span><span class='op'>)</span>
 <span class='va'>mod</span> <span class='op'>%&gt;%</span> <span class='fu'>model_compute_terms_contributions</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;    (Intercept) Class2nd Class3rd ClassCrew AgeChild SexMale Class2nd:AgeChild
 #&gt; 1            1        0        0         0        0       0                 0
