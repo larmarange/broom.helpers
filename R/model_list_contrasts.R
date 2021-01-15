@@ -6,9 +6,13 @@
 #' * `variable`: variable name
 #' * `contrasts`: contrasts used
 #' * `contrasts_type`: type of contrasts
-#'   ("treatment", "sum", "poly", "helmert" or "other")
+#'   ("treatment", "sum", "poly", "helmert", "other" or "no.contrast")
 #' * `reference`: for variables with treatment, SAS
 #'   or sum contrasts, position of the reference level
+#' @details
+#' For models with no intercept, no contrasts will be applied to one of the
+#' categorical variable. In such case, one dummy term will be returned for each
+#' level of the categorical variable.
 #' @export
 #' @family model_helpers
 #' @examples
@@ -38,10 +42,17 @@ model_list_contrasts.default <- function(model) {
     reference = NA_integer_
   )
   xlevels <- model_get_xlevels(model)
+  model_variables <- model_identify_variables(model)
+
   for (i in seq_len(nrow(contrasts_list))) {
     n_levels <- length(xlevels[[contrasts_list$variable[i]]])
+    n_terms <- model_variables %>%
+      dplyr::filter(.data$variable == contrasts_list$variable[i]) %>%
+      nrow()
 
-    if (is.character(model_contrasts[[i]]) & length(is.character(model_contrasts[[i]]) == 1)) {
+    if (n_levels == n_terms) {
+      contrasts_list$contrasts[[i]] <- "no.contrast"
+    } else if (is.character(model_contrasts[[i]]) & length(is.character(model_contrasts[[i]]) == 1)) {
       contrasts_list$contrasts[[i]] <- model_contrasts[[i]]
       if (model_contrasts[[i]] == "contr.treatment")
         contrasts_list$reference[[i]] <- 1
@@ -82,6 +93,7 @@ model_list_contrasts.default <- function(model) {
         .data$contrasts == "contr.sum" ~ "sum",
         .data$contrasts == "contr.helmert" ~ "helmert",
         .data$contrasts == "contr.poly" ~ "poly",
+        .data$contrasts == "no.contrast" ~ "no.contrast",
         TRUE ~ "other"
       )
     )

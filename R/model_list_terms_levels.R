@@ -1,7 +1,7 @@
 #' List levels of categorical terms
 #'
 #' Only for categorical variables with treatment,
-#' SAS or sum contrasts.
+#' SAS or sum contrasts, and categorical variables with no contrast.
 #'
 #' @param model a model object
 #' @param label_pattern a [glue pattern][glue::glue()] for term labels (see examples)
@@ -69,7 +69,7 @@ model_list_terms_levels.default <- function(
     # keep only treatment, SAS and sum contrasts
     dplyr::filter(
       .data$contrasts %>%
-        stringr::str_starts("contr.treatment|contr.SAS|contr.sum")
+        stringr::str_starts("contr.treatment|contr.SAS|contr.sum|no.contrast")
     )
   xlevels <- model_get_xlevels(model)
 

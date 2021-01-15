@@ -2,7 +2,7 @@
 #'
 #' Add a `contrasts` column corresponding to contrasts used for a
 #' categorical variable and a `contrasts_type` column equal to
-#' "treatment", "sum", "poly", "helmert" or "other".
+#' "treatment", "sum", "poly", "helmert", "other" or "no.contrast".
 #'
 #' @details
 #' If the `variable` column is not yet available in `x`,

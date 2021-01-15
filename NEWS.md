@@ -1,5 +1,7 @@
 # broom.helpers (development version)
 
+- Models with categorical variable and no intercept now supported (#85)
+- New contrasts type ("no.contrast") returned by `model_list_contrasts`()
 - Added support for `mgcv::gam()` models. (#82)
 - New function `tidy_add_n()` to add the number of observations (and for 
   relevant models the number of events and exposure time) (#64)

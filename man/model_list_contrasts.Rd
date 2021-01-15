@@ -18,13 +18,18 @@ A tibble with three columns:
 \item \code{variable}: variable name
 \item \code{contrasts}: contrasts used
 \item \code{contrasts_type}: type of contrasts
-("treatment", "sum", "poly", "helmert" or "other")
+("treatment", "sum", "poly", "helmert", "other" or "no.contrast")
 \item \code{reference}: for variables with treatment, SAS
 or sum contrasts, position of the reference level
 }
 }
 \description{
 List contrasts used by a model
+}
+\details{
+For models with no intercept, no contrasts will be applied to one of the
+categorical variable. In such case, one dummy term will be returned for each
+level of the categorical variable.
 }
 \examples{
 glm(
