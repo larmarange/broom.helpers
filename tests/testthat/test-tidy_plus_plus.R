@@ -24,6 +24,26 @@ test_that("tidy_plus_plus() works for basic models", {
   expect_true(all(c("n_obs", "n_event") %in% names(res)))
 })
 
+test_that("tidy_plus_plus() works with no intercept models", {
+  mod <- glm(response ~ stage + grade - 1, data = gtsummary::trial, family = binomial)
+  expect_error(
+    res <- mod %>% tidy_plus_plus(),
+    NA
+  )
+  expect_equivalent(
+    res$variable,
+    c("stage", "stage", "stage", "stage", "grade", "grade", "grade")
+  )
+  expect_equivalent(
+    res$label,
+    c("T1", "T2", "T3", "T4", "I", "II", "III")
+  )
+  expect_equivalent(
+    res$contrasts_type,
+    c("no.contrast", "no.contrast", "no.contrast", "no.contrast",
+      "treatment", "treatment", "treatment")
+  )
+})
 
 test_that("tidy_plus_plus() and functionnal programming", {
   # works with glm

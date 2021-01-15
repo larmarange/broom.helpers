@@ -43,7 +43,7 @@ The first nine columns can be used in \code{label_pattern}.
 }
 \description{
 Only for categorical variables with treatment,
-SAS or sum contrasts.
+SAS or sum contrasts, and categorical variables with no contrast.
 }
 \examples{
 glm(

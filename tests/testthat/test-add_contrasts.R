@@ -111,6 +111,17 @@ test_that("test tidy_add_contrasts() checks", {
 })
 
 
+
+test_that("tidy_add_contrasts() works with no intercept models", {
+  mod <- glm(response ~ stage + grade - 1, data = gtsummary::trial, family = binomial)
+  res <- mod %>% tidy_and_attach() %>% tidy_add_contrasts()
+  expect_equivalent(
+    res$contrasts_type,
+    c("no.contrast", "no.contrast", "no.contrast", "no.contrast",
+      "treatment", "treatment")
+  )
+})
+
 test_that("tidy_add_contrasts() works with variables having non standard name", {
   df <- gtsummary::trial %>% dplyr::mutate(`grade of kids` = grade)
   mod <- glm(response ~ stage + `grade of kids` + trt, df, family = binomial)
