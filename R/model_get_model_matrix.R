@@ -51,3 +51,9 @@ model_get_model_matrix.multinom <- function(model, ...) {
 model_get_model_matrix.clm <- function(model, ...) {
   stats::model.matrix(model, ...)[[1]]
 }
+
+#' @export
+#' @rdname model_get_model_matrix
+model_get_model_matrix.brmsfit <- function(model, ...) {
+  model %>% brms::standata() %>% purrr::pluck("X")
+}

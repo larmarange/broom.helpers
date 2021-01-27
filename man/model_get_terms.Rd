@@ -3,11 +3,14 @@
 \name{model_get_terms}
 \alias{model_get_terms}
 \alias{model_get_terms.default}
+\alias{model_get_terms.brmsfit}
 \title{Get the terms of a model}
 \usage{
 model_get_terms(model)
 
 \method{model_get_terms}{default}(model)
+
+\method{model_get_terms}{brmsfit}(model)
 }
 \arguments{
 \item{model}{a model object}

@@ -24,3 +24,12 @@ model_get_terms.default <- function(model) {
     }
   )
 }
+
+#' @export
+#' @rdname model_get_terms
+model_get_terms.brmsfit <- function(model) {
+  model$formula %>%
+    brms::brmsterms(resp_rhs_all = FALSE) %>%
+    purrr:::pluck("allvars") %>%
+    stats::terms()
+}
