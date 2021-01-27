@@ -72,7 +72,13 @@ tidy_add_variable_labels <- function(x,
   var_labels <- unique(x$term)
   names(var_labels) <- var_labels
 
-  # add the list of variables
+  # add the list of variables from x
+  additional_labels <- x$variable[!is.na(x$variable)] %>% unique()
+  names(additional_labels) <- additional_labels
+  var_labels <- var_labels %>%
+    .update_vector(additional_labels)
+
+  # add the list of variables from model_list_variables
   variable_list <- model_list_variables(model, labels = labels)
   additional_labels <- variable_list$var_label
   names(additional_labels) <- variable_list$variable
