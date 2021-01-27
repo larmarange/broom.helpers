@@ -14,7 +14,7 @@ tidy_add_contrasts(x, model = tidy_get_model(x))
 \description{
 Add a \code{contrasts} column corresponding to contrasts used for a
 categorical variable and a \code{contrasts_type} column equal to
-"treatment", "sum", "poly", "helmert" or "other".
+"treatment", "sum", "poly", "helmert", "other" or "no.contrast".
 }
 \details{
 If the \code{variable} column is not yet available in \code{x},

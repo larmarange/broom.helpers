@@ -12,6 +12,7 @@
 #' * `"categorical"` (categorical variable with 3 levels or more),
 #' * `"intercept"`
 #' * `"interaction"`
+#' * `"ran_pars` (random parameters)
 #' * `"unknown"` in the rare cases where `tidy_identify_variables()`
 #'   will fail to identify the list of variables
 #'
@@ -57,6 +58,30 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x),
   }
 
   variables_list <- model_identify_variables(model)
+
+  # management of random parameters (mixed models)
+  if (all(c("effect", "group") %in% names(x))) {
+    ran_pars <- x %>%
+      dplyr::filter(.data$effect == "ran_pars") %>%
+      dplyr::select(.data$term, variable = .data$group) %>%
+      dplyr::left_join(
+        model %>%
+          model_list_variables() %>%
+          dplyr::select(dplyr::any_of(c("variable", "var_class"))),
+        by = "variable"
+      ) %>%
+      dplyr::left_join(
+        model %>% model_get_nlevels(),
+        by = "variable"
+      ) %>%
+      dplyr::mutate(
+        var_type = "ran_pars"
+      )
+    variables_list <- dplyr::bind_rows(
+      variables_list,
+      ran_pars
+    )
+  }
 
   if (nrow(variables_list) > 0) {
     x %>%

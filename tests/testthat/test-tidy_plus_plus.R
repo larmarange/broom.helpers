@@ -309,7 +309,7 @@ test_that("tidy_plus_plus() works with MASS::polr", {
 test_that("tidy_plus_plus() works with MASS::glm.nb", {
   mod <- MASS::glm.nb(Days ~ Sex / (Age + Eth * Lrn), data = MASS::quine)
   expect_error(
-    res <- mod %>% tidy_plus_plus(),
+    suppressWarnings(res <- mod %>% tidy_plus_plus()),
     NA
   )
 })
