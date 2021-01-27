@@ -52,7 +52,7 @@ model_list_variables <- function(model, labels = NULL, only_variable = FALSE) {
 #' @rdname model_list_variables
 #' @export
 model_list_variables.default <- function(model, labels = NULL, only_variable = FALSE) {
-  model_terms <- stats::terms(model)
+  model_terms <- model_get_terms(model)
 
   variable_names <- attr(model_terms, "term.labels")
   model_frame <- model_get_model_frame(model)
