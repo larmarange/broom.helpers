@@ -43,6 +43,7 @@ Other model_helpers:
 \code{\link{model_get_n}()},
 \code{\link{model_get_offset}()},
 \code{\link{model_get_response}()},
+\code{\link{model_get_terms}()},
 \code{\link{model_get_weights}()},
 \code{\link{model_get_xlevels}()},
 \code{\link{model_identify_variables}()},
