@@ -59,41 +59,31 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x),
 
   variables_list <- model_identify_variables(model)
 
-  # management of random parameters (mixed models)
-  if (all(c("effect", "group") %in% names(x))) {
-    ran_pars <- x %>%
-      dplyr::filter(.data$effect == "ran_pars") %>%
-      dplyr::select(.data$term, variable = .data$group) %>%
-      dplyr::left_join(
-        model %>%
-          model_list_variables() %>%
-          dplyr::select(dplyr::any_of(c("variable", "var_class"))),
-        by = "variable"
-      ) %>%
-      dplyr::left_join(
-        model %>% model_get_nlevels(),
-        by = "variable"
-      ) %>%
-      dplyr::mutate(
-        var_type = "ran_pars"
-      )
-    variables_list <- dplyr::bind_rows(
-      variables_list,
-      ran_pars
-    )
-  }
-
   if (nrow(variables_list) > 0) {
+    x <- x %>%
+      dplyr::left_join(variables_list, by = "term")
+
+    # management of random parameters (mixed models)
+    if ("effect" %in% names(x)) {
+      x <- x %>%
+        dplyr::mutate(
+          var_type = dplyr::if_else(
+            .data$effect == "ran_pars",
+            "ran_pars",
+            .data$var_type
+          )
+        )
+    }
+
     x %>%
-      dplyr::left_join(variables_list, by = "term") %>%
       dplyr::mutate(
         var_type = dplyr::if_else(
-          is.na(.data$variable),
+          is.na(.data$var_type),
           "intercept",
           .data$var_type
         ),
         variable = dplyr::if_else(
-          .data$var_type == "intercept",
+          is.na(.data$variable),
           .data$term,
           .data$variable
         )
@@ -111,6 +101,7 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x),
         "{usethis::ui_code('purrr::map()')}, etc.)."
       ))
     if (strict) stop("Cannot identify variables. Quitting execution.", call. = FALSE)
+
     x %>%
       dplyr::mutate(
         variable = .data$term,
