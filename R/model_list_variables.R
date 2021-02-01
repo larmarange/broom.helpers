@@ -52,8 +52,8 @@ model_list_variables <- function(model, labels = NULL, only_variable = FALSE) {
 #' @rdname model_list_variables
 #' @export
 model_list_variables.default <- function(model, labels = NULL, only_variable = FALSE) {
-  model_terms <- model_get_terms(model)
   model_frame <- model_get_model_frame(model)
+  model_terms <- model_get_terms(model)
 
   if (!is.null(model_terms)) {
     variable_names <- attr(model_terms, "term.labels")
@@ -67,6 +67,7 @@ model_list_variables.default <- function(model, labels = NULL, only_variable = F
     variable_names <- names(dataClasses)
   }
 
+  if (is.null(variable_names)) return(NULL)
 
   # update the list with all elements of dataClasses
   variable_names <- names(dataClasses) %>%
