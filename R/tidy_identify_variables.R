@@ -12,7 +12,8 @@
 #' * `"categorical"` (categorical variable with 3 levels or more),
 #' * `"intercept"`
 #' * `"interaction"`
-#' * `"ran_pars` (random parameters)
+#' * `"ran_pars` (random-effect parameters for mixed models)
+#' * `"ran_vals"` (random-effect values for mixed models)
 #' * `"unknown"` in the rare cases where `tidy_identify_variables()`
 #'   will fail to identify the list of variables
 #'
@@ -68,8 +69,8 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x),
       x <- x %>%
         dplyr::mutate(
           var_type = dplyr::if_else(
-            .data$effect == "ran_pars",
-            "ran_pars",
+            .data$effect %in% c("ran_pars", "ran_vals"),
+            .data$effect,
             .data$var_type
           )
         )
