@@ -190,16 +190,22 @@ test_that("select_helpers: tidy_plus_plus", {
   )
 
   mod3 <- lme4::lmer(age ~ stage + (stage|grade) + (1|grade), gtsummary::trial)
+  res <- mod3 %>% tidy_plus_plus(
+    tidy_fun = broom.mixed::tidy,
+    include = all_ran_pars()
+  )
   expect_equal(
-    tidy_plus_plus(
-      mod3, tidy_fun = broom.mixed::tidy,
-      include = all_ran_pars()
-    )$term,
+    res$term,
     c("sd__(Intercept)", "cor__(Intercept).stageT2", "cor__(Intercept).stageT3",
       "cor__(Intercept).stageT4", "sd__stageT2", "cor__stageT2.stageT3",
       "cor__stageT2.stageT4", "sd__stageT3", "cor__stageT3.stageT4",
       "sd__stageT4", "sd__(Intercept)", "sd__Observation")
   )
+  res <- mod3 %>% tidy_plus_plus(
+    tidy_fun = broom.mixed::tidy,
+    include = all_ran_vals()
+  )
+  expect_equal(res %>% nrow(), 0L)
 })
 
 test_that("select_helpers: tidy_add_header_rows", {
