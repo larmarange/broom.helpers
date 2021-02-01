@@ -1,5 +1,8 @@
 # broom.helpers (development version)
 
+- For mixed models, `var_type` column is now equal to `"ran_pars"` or 
+  `"ran_vals"` for random-effect parameters and values, based of the 
+  `effect` column returned by `broom.mixed::tidy()` (#90)
 - Models with categorical variable and no intercept now supported (#85)
 - New contrasts type ("no.contrast") returned by `model_list_contrasts`()
 - Added support for `mgcv::gam()` models. (#82)
