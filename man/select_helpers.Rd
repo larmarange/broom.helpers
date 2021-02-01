@@ -6,6 +6,8 @@
 \alias{all_dichotomous}
 \alias{all_categorical}
 \alias{all_interaction}
+\alias{all_ran_pars}
+\alias{all_ran_vals}
 \alias{all_intercepts}
 \alias{all_contrasts}
 \title{Select helper functions}
@@ -17,6 +19,10 @@ all_dichotomous()
 all_categorical(dichotomous = TRUE)
 
 all_interaction()
+
+all_ran_pars()
+
+all_ran_vals()
 
 all_intercepts()
 

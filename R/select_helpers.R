@@ -65,6 +65,23 @@ all_interaction <- function() {
 
 #' @rdname select_helpers
 #' @export
+all_ran_pars <- function() {
+  .generic_selector("variable", "var_type",
+                    .data$var_type %in% "ran_pars",
+                    fun_name = "all_ran_pars")
+}
+
+#' @rdname select_helpers
+#' @export
+all_ran_vals <- function() {
+  .generic_selector("variable", "var_type",
+                    .data$var_type %in% "ran_vals",
+                    fun_name = "all_ran_vals")
+}
+
+
+#' @rdname select_helpers
+#' @export
 all_intercepts <- function() {
   .generic_selector("variable", "var_type",
                     .data$var_type %in% "intercept",

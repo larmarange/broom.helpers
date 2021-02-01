@@ -12,6 +12,8 @@
 #' * `"categorical"` (categorical variable with 3 levels or more),
 #' * `"intercept"`
 #' * `"interaction"`
+#' * `"ran_pars` (random-effect parameters for mixed models)
+#' * `"ran_vals"` (random-effect values for mixed models)
 #' * `"unknown"` in the rare cases where `tidy_identify_variables()`
 #'   will fail to identify the list of variables
 #'
@@ -59,16 +61,30 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x),
   variables_list <- model_identify_variables(model)
 
   if (nrow(variables_list) > 0) {
+    x <- x %>%
+      dplyr::left_join(variables_list, by = "term")
+
+    # management of random parameters (mixed models)
+    if ("effect" %in% names(x)) {
+      x <- x %>%
+        dplyr::mutate(
+          var_type = dplyr::if_else(
+            .data$effect %in% c("ran_pars", "ran_vals"),
+            .data$effect,
+            .data$var_type
+          )
+        )
+    }
+
     x %>%
-      dplyr::left_join(variables_list, by = "term") %>%
       dplyr::mutate(
         var_type = dplyr::if_else(
-          is.na(.data$variable),
+          is.na(.data$var_type),
           "intercept",
           .data$var_type
         ),
         variable = dplyr::if_else(
-          .data$var_type == "intercept",
+          is.na(.data$variable),
           .data$term,
           .data$variable
         )
@@ -86,6 +102,7 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x),
         "{usethis::ui_code('purrr::map()')}, etc.)."
       ))
     if (strict) stop("Cannot identify variables. Quitting execution.", call. = FALSE)
+
     x %>%
       dplyr::mutate(
         variable = .data$term,

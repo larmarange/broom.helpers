@@ -228,6 +228,21 @@ test_that("model_identify_variables() works with lme4::lmer", {
     c(NA, "Days")
   )
   expect_error(mod %>% tidy_and_attach(tidy_fun = broom.mixed::tidy) %>% tidy_identify_variables(), NA)
+
+  mod <- lme4::lmer(
+    age ~ stage + (stage|grade) + (1|grade),
+    gtsummary::trial
+  )
+  res <- mod %>%
+    tidy_and_attach(tidy_fun = broom.mixed::tidy) %>%
+    tidy_identify_variables()
+  expect_equal(
+    res %>%
+      dplyr::filter(effect == "ran_pars") %>%
+      purrr::pluck("var_type") %>%
+      unique(),
+    "ran_pars"
+  )
 })
 
 

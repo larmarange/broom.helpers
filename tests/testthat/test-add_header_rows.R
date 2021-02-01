@@ -217,3 +217,20 @@ test_that("test tidy_add_header_rows() bad single row request", {
     tidy_add_header_rows(mod, show_single_row = "factor(cyl)", strict = TRUE)
   )
 })
+
+
+test_that("tidy_add_header_rows() and mixed model", {
+  mod <- lme4::lmer(
+    age ~ stage + (stage|grade) + (1|grade),
+    gtsummary::trial
+  )
+  res <- mod %>%
+    tidy_and_attach(tidy_fun = broom.mixed::tidy) %>%
+    tidy_add_header_rows()
+  expect_equal(
+    res %>%
+      dplyr::filter(.data$header_row & .data$var_type == "ran_pars") %>%
+      nrow(),
+    0L
+  )
+})
