@@ -3,6 +3,7 @@
 - For mixed models, `var_type` column is now equal to `"ran_pars"` or 
   `"ran_vals"` for random-effect parameters and values, based of the 
   `effect` column returned by `broom.mixed::tidy()` (#90)
+- Support of `lfe::felm()` models (#79)
 - Support of `brms::brm()` models (#89)
 - Basic support of `cmprsk::crr()` models (#91)
 - Models with categorical variable and no intercept now supported (#85)

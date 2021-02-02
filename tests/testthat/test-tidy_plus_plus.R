@@ -383,6 +383,17 @@ test_that("tidy_plus_plus() works with lavaan::lavaan", {
   )
 })
 
+
+test_that("tidy_plus_plus() works with lfe::felm", {
+  skip_if_not_installed("lfe")
+  mod <- lfe::felm(marker ~ age + grade | stage | 0, gtsummary::trial)
+  expect_error(
+    res <- mod %>% tidy_plus_plus(),
+    NA
+  )
+})
+
+
 test_that("tidy_plus_plus() error messaging", {
   # does not allow for exponentiate, conf.inf, conf.level arguments
   bad_tidy <- function(x) {
