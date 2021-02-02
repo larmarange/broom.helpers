@@ -340,6 +340,15 @@ test_that("tidy_plus_plus() works with gam::gam", {
 })
 
 
+test_that("tidy_plus_plus() works with brms::brm", {
+  load(system.file("extdata", "brms_example.rda", package="broom.mixed"))
+  mod <- brms_crossedRE
+  expect_error(
+    res <- mod %>% tidy_plus_plus(),
+    NA
+  )
+})
+
 test_that("tidy_plus_plus() works with lavaan::lavaan", {
   df <- lavaan::HolzingerSwineford1939
   df$grade <- factor(df$grade, ordered = TRUE)
