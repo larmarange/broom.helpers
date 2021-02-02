@@ -351,6 +351,21 @@ test_that("tidy_plus_plus() works with brms::brm", {
   )
 })
 
+test_that("tidy_plus_plus() works with cmprsk::crr", {
+  skip_if_not_installed("cmprsk")
+  skip_if(packageVersion("broom") < "0.7.4")
+
+  ftime <- rexp(200)
+  fstatus <- sample(0:2,200,replace=TRUE)
+  cov <- matrix(runif(600),nrow=200)
+  dimnames(cov)[[2]] <- c('x1','x2','x3')
+  mod <- cmprsk::crr(ftime,fstatus,cov)
+  expect_error(
+    res <- mod %>% tidy_plus_plus(quiet = TRUE),
+    NA
+  )
+})
+
 test_that("tidy_plus_plus() works with lavaan::lavaan", {
   df <- lavaan::HolzingerSwineford1939
   df$grade <- factor(df$grade, ordered = TRUE)
