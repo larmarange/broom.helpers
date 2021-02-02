@@ -108,8 +108,8 @@ options(knitr.kable.NA = '')
 tidy_table %>%
   # format model estimates
   select(label, estimate, conf.low, conf.high, p.value) %>%
-  mutate_at(vars(estimate, conf.low, conf.high), style_ratio) %>%
-  mutate_at(vars(p.value), style_pvalue) %>%
+  mutate(across(all_of(c("estimate", "conf.low", "conf.high")), style_ratio)) %>%
+  mutate(across(p.value, style_pvalue)) %>%
   knitr::kable()
 ```
 
