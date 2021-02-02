@@ -122,6 +122,10 @@
 <a href="#broomhelpers-development-version" class="anchor"></a>broom.helpers (development version)<small> Unreleased </small>
 </h1>
 <ul>
+<li>For mixed models, <code>var_type</code> column is now equal to <code>"ran_pars"</code> or <code>"ran_vals"</code> for random-effect parameters and values, based of the <code>effect</code> column returned by <code><a href="https://generics.r-lib.org/reference/tidy.html">broom.mixed::tidy()</a></code> (<a href='https://github.com/larmarange/broom.helpers/issues/90'>#90</a>)</li>
+<li>Support of <code><a href="https://rdrr.io/pkg/lfe/man/felm.html">lfe::felm()</a></code> models (<a href='https://github.com/larmarange/broom.helpers/issues/79'>#79</a>)</li>
+<li>Support of <code><a href="https://rdrr.io/pkg/brms/man/brm.html">brms::brm()</a></code> models (<a href='https://github.com/larmarange/broom.helpers/issues/89'>#89</a>)</li>
+<li>Basic support of <code><a href="https://rdrr.io/pkg/cmprsk/man/crr.html">cmprsk::crr()</a></code> models (<a href='https://github.com/larmarange/broom.helpers/issues/91'>#91</a>)</li>
 <li>Models with categorical variable and no intercept now supported (<a href='https://github.com/larmarange/broom.helpers/issues/85'>#85</a>)</li>
 <li>New contrasts type (“no.contrast”) returned by <code>model_list_contrasts</code>()</li>
 <li>Added support for <code><a href="https://rdrr.io/pkg/mgcv/man/gam.html">mgcv::gam()</a></code> models. (<a href='https://github.com/larmarange/broom.helpers/issues/82'>#82</a>)</li>
