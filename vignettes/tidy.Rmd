@@ -292,6 +292,7 @@ tibble::tribble(
   '`lme4::lmer()`', '`broom.mixed` package required',
   '`lme4::glmer()`', '`broom.mixed` package required',
   '`lme4::glmer.nb()`', '`broom.mixed` package required',
+  '`brms::brm()`', '`broom.mixed` package required',
   '`geepack::geeglm()`', '',
   '`gam::gam()`', '',
   '`mgcv::gam()`', 'Use default tidier `broom::tidy()` for smooth terms only, or `gtsummary::tidy_gam()` to include parametric terms',
