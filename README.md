@@ -19,9 +19,17 @@ status](https://www.r-pkg.org/badges/version/broom.helpers)](https://CRAN.R-proj
 <!-- badges: end -->
 
 The broom.helpers package provides suite of functions to work with
-regression model `broom::tidy()` tibbles. The suite includes functions
-to group regression model terms by variable, insert reference and header
-rows for categorical variables, add variable labels, and more.
+regression model `broom::tidy()` tibbles.
+
+The suite includes functions to group regression model terms by
+variable, insert reference and header rows for categorical variables,
+add variable labels, and more.
+
+`broom.helpers` is used, in particular, by `gtsummary::tbl_regression()`
+for producing [nice formatted tables of model
+coefficients](http://www.danieldsjoberg.com/gtsummary/articles/tbl_regression.html)
+and by `GGally::ggcoef_model()` for [plotting model
+coefficients](http://ggobi.github.io/ggally/articles/ggcoef_model.html).
 
 ## Installation
 
@@ -93,6 +101,7 @@ ex2 <- mod2 %>%
     add_header_rows = TRUE,
     show_single_row = "trt"
   )
+#> Loading required namespace: emmeans
 ex2
 #> # A tibble: 17 x 19
 #>    term  variable var_label var_class var_type var_nlevels header_row contrasts
