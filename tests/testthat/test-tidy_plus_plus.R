@@ -341,6 +341,8 @@ test_that("tidy_plus_plus() works with gam::gam", {
 
 
 test_that("tidy_plus_plus() works with brms::brm", {
+  skip_if_not_installed("broom.mixed")
+  skip_if_not_installed("brms")
   load(system.file("extdata", "brms_example.rda", package="broom.mixed"))
   mod <- brms_crossedRE
   expect_error(
