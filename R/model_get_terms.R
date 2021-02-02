@@ -32,4 +32,5 @@ model_get_terms.brmsfit <- function(model) {
     brms::brmsterms(resp_rhs_all = FALSE) %>%
     purrr:::pluck("allvars") %>%
     stats::terms()
+
 }
