@@ -6,6 +6,7 @@
 \alias{model_get_xlevels.lmerMod}
 \alias{model_get_xlevels.glmerMod}
 \alias{model_get_xlevels.felm}
+\alias{model_get_xlevels.brmsfit}
 \title{Get xlevels used in the model}
 \usage{
 model_get_xlevels(model)
@@ -17,6 +18,8 @@ model_get_xlevels(model)
 \method{model_get_xlevels}{glmerMod}(model)
 
 \method{model_get_xlevels}{felm}(model)
+
+\method{model_get_xlevels}{brmsfit}(model)
 }
 \arguments{
 \item{model}{a model object}
@@ -40,6 +43,7 @@ Other model_helpers:
 \code{\link{model_get_n}()},
 \code{\link{model_get_offset}()},
 \code{\link{model_get_response}()},
+\code{\link{model_get_terms}()},
 \code{\link{model_get_weights}()},
 \code{\link{model_identify_variables}()},
 \code{\link{model_list_contrasts}()},

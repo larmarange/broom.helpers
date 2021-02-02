@@ -70,7 +70,7 @@ model_identify_variables.default <- function(model) {
   }
 
   assign[assign == 0] <- NA
-  model_terms <- stats::terms(model)
+  model_terms <- model_get_terms(model)
   variable_names <- model %>% model_list_variables(only_variable = TRUE)
   variables <- attr(model_terms, "term.labels") %>%
     .clean_backticks(variable_names = variable_names)

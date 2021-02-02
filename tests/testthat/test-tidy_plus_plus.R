@@ -49,7 +49,7 @@ test_that("tidy_plus_plus() and functionnal programming", {
   # works with glm
   expect_error(
     res <- dplyr::tibble(grade = c("I", "II", "III")) %>%
-      dplyr::mutate(df_model = purrr:::map(grade, ~ gtsummary::trial %>% dplyr::filter(grade == ..1))) %>%
+      dplyr::mutate(df_model = purrr::map(grade, ~ gtsummary::trial %>% dplyr::filter(grade == ..1))) %>%
       dplyr::mutate(
         mv_formula_char = "response ~ trt + age + marker",
         mv_formula = purrr::map(mv_formula_char, ~ as.formula(.x)),
@@ -73,7 +73,7 @@ test_that("tidy_plus_plus() and functionnal programming", {
   expect_message(
     suppressWarnings(
       res <- dplyr::tibble(grade = c("I", "II", "III")) %>%
-        dplyr::mutate(df_model = purrr:::map(grade, ~ gtsummary::trial %>% dplyr::filter(grade == ..1))) %>%
+        dplyr::mutate(df_model = purrr::map(grade, ~ gtsummary::trial %>% dplyr::filter(grade == ..1))) %>%
         dplyr::mutate(
           mv_formula_char = "survival::Surv(ttdeath, death) ~ trt + age + marker",
           mv_formula = purrr::map(mv_formula_char, ~ as.formula(.x)),
@@ -339,6 +339,32 @@ test_that("tidy_plus_plus() works with gam::gam", {
   )
 })
 
+
+test_that("tidy_plus_plus() works with brms::brm", {
+  skip_if_not_installed("broom.mixed")
+  skip_if_not_installed("brms")
+  load(system.file("extdata", "brms_example.rda", package="broom.mixed"))
+  mod <- brms_crossedRE
+  expect_error(
+    res <- mod %>% tidy_plus_plus(),
+    NA
+  )
+})
+
+test_that("tidy_plus_plus() works with cmprsk::crr", {
+  skip_if_not_installed("cmprsk")
+  skip_if(packageVersion("broom") < "0.7.4")
+
+  ftime <- rexp(200)
+  fstatus <- sample(0:2,200,replace=TRUE)
+  cov <- matrix(runif(600),nrow=200)
+  dimnames(cov)[[2]] <- c('x1','x2','x3')
+  mod <- cmprsk::crr(ftime,fstatus,cov)
+  expect_error(
+    res <- mod %>% tidy_plus_plus(quiet = TRUE),
+    NA
+  )
+})
 
 test_that("tidy_plus_plus() works with lavaan::lavaan", {
   df <- lavaan::HolzingerSwineford1939

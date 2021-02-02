@@ -105,24 +105,28 @@ tidy_add_term_labels <- function(x,
   # add variable labels
   # first variable list (for interaction only terms)
   # then current variable labels in x
-  variables_list <- model_list_variables(model) %>%
-    dplyr::mutate(
-      label = dplyr::if_else(
-        is.na(.data$label_attr),
-        .data$variable,
-        as.character(.data$label_attr)
-      ),
+  variables_list <- model_list_variables(model)
+  if (!is.null(variables_list)) {
+    variables_list <- variables_list %>%
+      dplyr::mutate(
+        label = dplyr::if_else(
+          is.na(.data$label_attr),
+          .data$variable,
+          as.character(.data$label_attr)
+        ),
+      )
+    additional_term_labels <- variables_list$label
+    names(additional_term_labels) <- variables_list$variable
+    term_labels <- term_labels %>%
+      .update_vector(additional_term_labels)
+    # add version with backtips for variables with non standard names
+    names(additional_term_labels) <- paste0(
+      "`", names(additional_term_labels), "`"
     )
-  additional_term_labels <- variables_list$label
-  names(additional_term_labels) <- variables_list$variable
-  term_labels <- term_labels %>%
-    .update_vector(additional_term_labels)
-  # add version with backtips for variables with non standard names
-  names(additional_term_labels) <- paste0(
-    "`", names(additional_term_labels), "`"
-  )
-  term_labels <- term_labels %>%
-    .update_vector(additional_term_labels)
+    term_labels <- term_labels %>%
+      .update_vector(additional_term_labels)
+
+  }
 
   x_var_labels <- xx %>%
     dplyr::mutate(

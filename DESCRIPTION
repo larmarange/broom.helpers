@@ -32,7 +32,9 @@ Imports:
     tidyr,
     usethis
 Suggests: 
+    brms,
     broom.mixed,
+    cmprsk,
     covr,
     datasets,
     emmeans,

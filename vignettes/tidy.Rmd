@@ -108,8 +108,8 @@ options(knitr.kable.NA = '')
 tidy_table %>%
   # format model estimates
   select(label, estimate, conf.low, conf.high, p.value) %>%
-  mutate_at(vars(estimate, conf.low, conf.high), style_ratio) %>%
-  mutate_at(vars(p.value), style_pvalue) %>%
+  mutate(across(all_of(c("estimate", "conf.low", "conf.high")), style_ratio)) %>%
+  mutate(across(p.value, style_pvalue)) %>%
   knitr::kable()
 ```
 
@@ -292,6 +292,7 @@ tibble::tribble(
   '`lme4::lmer()`', '`broom.mixed` package required',
   '`lme4::glmer()`', '`broom.mixed` package required',
   '`lme4::glmer.nb()`', '`broom.mixed` package required',
+  '`brms::brm()`', '`broom.mixed` package required',
   '`geepack::geeglm()`', '',
   '`gam::gam()`', '',
   '`mgcv::gam()`', 'Use default tidier `broom::tidy()` for smooth terms only, or `gtsummary::tidy_gam()` to include parametric terms',
@@ -302,7 +303,8 @@ tibble::tribble(
   '`MASS::polr()`', '',
   '`MASS::glm.nb()`', '',
   '`mice::mira`', 'Limited support. If `mod` is a `mira` object, use `tidy_plus_plus(mod, tidy_fun = function(x, ...) mice::pool(x) %>% mice::tidy(...))`',
-  '`lavaan::lavaan()`', 'Limited support for categorical variables'
+  '`lavaan::lavaan()`', 'Limited support for categorical variables',
+  '`cmprsk::crr()`', 'Limited support'
 ) %>%
   dplyr::arrange(Model) %>%
   gt::gt() %>%
