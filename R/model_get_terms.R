@@ -30,6 +30,6 @@ model_get_terms.default <- function(model) {
 model_get_terms.brmsfit <- function(model) {
   model$formula %>%
     brms::brmsterms(resp_rhs_all = FALSE) %>%
-    purrr:::pluck("allvars") %>%
+    purrr::pluck("allvars") %>%
     stats::terms()
 }

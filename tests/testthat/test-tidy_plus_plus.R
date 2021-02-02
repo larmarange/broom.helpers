@@ -49,7 +49,7 @@ test_that("tidy_plus_plus() and functionnal programming", {
   # works with glm
   expect_error(
     res <- dplyr::tibble(grade = c("I", "II", "III")) %>%
-      dplyr::mutate(df_model = purrr:::map(grade, ~ gtsummary::trial %>% dplyr::filter(grade == ..1))) %>%
+      dplyr::mutate(df_model = purrr::map(grade, ~ gtsummary::trial %>% dplyr::filter(grade == ..1))) %>%
       dplyr::mutate(
         mv_formula_char = "response ~ trt + age + marker",
         mv_formula = purrr::map(mv_formula_char, ~ as.formula(.x)),
@@ -73,7 +73,7 @@ test_that("tidy_plus_plus() and functionnal programming", {
   expect_message(
     suppressWarnings(
       res <- dplyr::tibble(grade = c("I", "II", "III")) %>%
-        dplyr::mutate(df_model = purrr:::map(grade, ~ gtsummary::trial %>% dplyr::filter(grade == ..1))) %>%
+        dplyr::mutate(df_model = purrr::map(grade, ~ gtsummary::trial %>% dplyr::filter(grade == ..1))) %>%
         dplyr::mutate(
           mv_formula_char = "survival::Surv(ttdeath, death) ~ trt + age + marker",
           mv_formula = purrr::map(mv_formula_char, ~ as.formula(.x)),
