@@ -188,7 +188,11 @@ tidy_add_header_rows <- function(x,
     }
   } else {
     header_rows <- x %>%
-      dplyr::filter(!is.na(.data$variable) & !.data$variable %in% show_single_row)
+      dplyr::filter(
+        !is.na(.data$variable) &
+          !.data$variable %in% show_single_row &
+          !.data$var_type %in% c("ran_pars", "ran_vals")
+      )
 
     if (nrow(header_rows) > 0)
       header_rows <- header_rows %>%

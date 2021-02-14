@@ -36,6 +36,8 @@ It will also identify interaction terms and intercept(s).
 \item \code{"categorical"} (categorical variable with 3 levels or more),
 \item \code{"intercept"}
 \item \code{"interaction"}
+\item \verb{"ran_pars} (random-effect parameters for mixed models)
+\item \code{"ran_vals"} (random-effect values for mixed models)
 \item \code{"unknown"} in the rare cases where \code{tidy_identify_variables()}
 will fail to identify the list of variables
 }

@@ -52,15 +52,22 @@ model_list_variables <- function(model, labels = NULL, only_variable = FALSE) {
 #' @rdname model_list_variables
 #' @export
 model_list_variables.default <- function(model, labels = NULL, only_variable = FALSE) {
-  model_terms <- stats::terms(model)
-
-  variable_names <- attr(model_terms, "term.labels")
   model_frame <- model_get_model_frame(model)
-  dataClasses <- purrr::map(model_frame, .MFclass2) %>% unlist()
+  model_terms <- model_get_terms(model)
 
-  if (is.null(dataClasses)) {
-    dataClasses <- attr(model_terms, "dataClasses")
+  if (!is.null(model_terms)) {
+    variable_names <- attr(model_terms, "term.labels")
+    dataClasses <- purrr::map(model_frame, .MFclass2) %>% unlist()
+
+    if (is.null(dataClasses)) {
+      dataClasses <- attr(model_terms, "dataClasses")
+    }
+  } else {
+    dataClasses <- model_frame %>% lapply(.MFclass2) %>% unlist()
+    variable_names <- names(dataClasses)
   }
+
+  if (is.null(variable_names)) return(NULL)
 
   # update the list with all elements of dataClasses
   variable_names <- names(dataClasses) %>%

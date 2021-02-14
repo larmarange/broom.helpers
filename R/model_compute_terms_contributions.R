@@ -77,10 +77,15 @@ model_compute_terms_contributions.default <- function(model) {
   }
 
   tcm <- tryCatch({
-    formula <- stats::terms(model)
+    formula <- model_get_terms(model)
+    if (is.null(formula)) return(NULL) # stop
+
     # continuous variables converted to 1 to force positive values
     d <- model %>% purrr::pluck("data")
     if (is.null(d)) d <- model %>% model_get_model_frame()
+
+    if (is.null(d)) return(NULL) # stop
+
     d <- d %>%
       dplyr::mutate(
         dplyr::across(

@@ -32,10 +32,13 @@ Imports:
     tidyr,
     usethis
 Suggests: 
+    brms,
     broom.mixed,
+    cmprsk,
     covr,
     datasets,
     emmeans,
+    lfe,
     forcats,
     gam,
     gee,

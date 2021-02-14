@@ -108,8 +108,8 @@ options(knitr.kable.NA = '')
 tidy_table %>%
   # format model estimates
   select(label, estimate, conf.low, conf.high, p.value) %>%
-  mutate_at(vars(estimate, conf.low, conf.high), style_ratio) %>%
-  mutate_at(vars(p.value), style_pvalue) %>%
+  mutate(across(all_of(c("estimate", "conf.low", "conf.high")), style_ratio)) %>%
+  mutate(across(p.value, style_pvalue)) %>%
   knitr::kable()
 ```
 
@@ -252,7 +252,7 @@ tibble::tribble(
   ~Column, ~Function, ~Description,
   'variable', '`tidy_identify_variables()`', 'String of variable names from the model. For categorical variables and polynomial terms defined with `stats::poly()`, terms belonging to the variable are identified.',
   'var_class', '`tidy_identify_variables()`', "Class of the variable.",
-  'var_type', '`tidy_identify_variables()`', "One of 'intercept', 'continuous', 'dichotomous', 'categorical', or 'interaction'",
+  'var_type', '`tidy_identify_variables()`', "One of 'intercept', 'continuous', 'dichotomous', 'categorical', 'interaction', 'ran_pars' or 'ran_vals'",
   'var_nlevels', '`tidy_identify_variables()`', "Number of original levels for categorical variables",
   'contrasts', '`tidy_add_contrasts()`', "Contrasts used for categorical variables.<br /><em>Require 'variable' column. If needed, will automatically apply `tidy_identify_variables()`.</em>",
   'contrasts_type', '`tidy_add_contrasts()`', "Type of contrasts ('treatment', 'sum', 'poly', 'helmert', 'other' or 'no.contrast')",
@@ -292,6 +292,7 @@ tibble::tribble(
   '`lme4::lmer()`', '`broom.mixed` package required',
   '`lme4::glmer()`', '`broom.mixed` package required',
   '`lme4::glmer.nb()`', '`broom.mixed` package required',
+  '`brms::brm()`', '`broom.mixed` package required',
   '`geepack::geeglm()`', '',
   '`gam::gam()`', '',
   '`mgcv::gam()`', 'Use default tidier `broom::tidy()` for smooth terms only, or `gtsummary::tidy_gam()` to include parametric terms',
@@ -302,7 +303,9 @@ tibble::tribble(
   '`MASS::polr()`', '',
   '`MASS::glm.nb()`', '',
   '`mice::mira`', 'Limited support. If `mod` is a `mira` object, use `tidy_plus_plus(mod, tidy_fun = function(x, ...) mice::pool(x) %>% mice::tidy(...))`',
-  '`lavaan::lavaan()`', 'Limited support for categorical variables'
+  '`lavaan::lavaan()`', 'Limited support for categorical variables',
+  '`cmprsk::crr()`', 'Limited support',
+  '`lfe::felm()`', ''
 ) %>%
   dplyr::arrange(Model) %>%
   gt::gt() %>%
