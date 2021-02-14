@@ -153,7 +153,7 @@ tidy_add_term_labels <- function(x,
   # show a message otherwise
   not_found <- setdiff(names(labels), names(term_labels))
   if (length(not_found) > 0 && !quiet) {
-    usethis::ui_oops(paste0(
+    cli_alert_danger(paste0(
       usethis::ui_code(not_found),
       " terms have not been found in ",
       usethis::ui_code("x"),

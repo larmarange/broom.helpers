@@ -77,7 +77,7 @@ tidy_add_reference_rows <- function(
 
   if ("reference_row" %in% names(x)) {
     if (!quiet)
-      usethis::ui_oops("tidy_add_reference_rows() has already been applied. x has been returned unchanged.")
+      cli_alert_danger("{.code tidy_add_reference_rows()} has already been applied. x has been returned unchanged.")
     return(x)
   }
 
