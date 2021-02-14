@@ -85,7 +85,7 @@ tidy_add_reference_rows <- function(
 
   if ("label" %in% names(x)) {
     if (!quiet)
-      usethis::ui_info(paste0(
+      cli_alert_info(paste0(
         "tidy_add_reference_rows() has been applied after tidy_add_term_labels().\n",
         "You should consider applying tidy_add_reference_rows() first."
       ))
@@ -93,9 +93,9 @@ tidy_add_reference_rows <- function(
 
   if ("n_obs" %in% names(x)) {
     if (!quiet)
-      usethis::ui_info(paste0(
-        "tidy_add_reference_rows() has been applied after tidy_add_n().\n",
-        "You should consider applying tidy_add_reference_rows() first."
+      cli_alert_info(paste0(
+        "{.code tidy_add_reference_rows()} has been applied after {.code tidy_add_n()}.\n",
+        "You should consider applying {.code tidy_add_reference_rows()} first."
       ))
   }
 

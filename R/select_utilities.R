@@ -251,8 +251,8 @@
       "There was a problem with the {.code {arg_name}=} argument input.")
   else
     cli_alert_danger("There was a problem with one of the function argument inputs.")
-  usethis::ui_info("Below is an example of correct syntax.")
-  purrr::walk(example_text, ~print(usethis::ui_code(.)))
+  cli_alert_info("Below is an example of correct syntax.")
+  purrr::walk(example_text, ~print(cli_code(.)))
   stop("Invalid argument syntax", call. = FALSE)
 }
 

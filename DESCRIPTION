@@ -21,6 +21,7 @@ URL: https://larmarange.github.io/broom.helpers/
 BugReports: https://github.com/larmarange/broom.helpers/issues
 Imports: 
     broom,
+    cli,
     dplyr,
     labelled,
     lifecycle,
@@ -29,8 +30,7 @@ Imports:
     stats,
     stringr,
     tibble,
-    tidyr,
-    usethis
+    tidyr
 Suggests: 
     brms,
     broom.mixed,

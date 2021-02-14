@@ -109,7 +109,7 @@ tidy_add_header_rows <- function(x,
     if (!quiet)
       paste("Variable(s) {paste(shQuote(bad_single_row), collapse = \", \")} were",
             "incorrectly requested to be printed on a single row.") %>%
-      usethis::ui_oops()
+      cli_alert_danger()
     if (strict) stop("Incorrect call with `show_single_row=`. Quitting execution.", call. = FALSE)
     show_single_row <- setdiff(show_single_row, bad_single_row)
   }
