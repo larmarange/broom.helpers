@@ -1,6 +1,6 @@
 # broom.helpers (development version)
 
-- Replaced `usethis::ui_*()` messaging with `cli::cli_*()`.
+- Replaced `usethis::ui_*()` messaging with `cli::cli_*()` (#94).
 
 - For mixed models, `var_type` column is now equal to `"ran_pars"` or 
   `"ran_vals"` for random-effect parameters and values, based of the 
