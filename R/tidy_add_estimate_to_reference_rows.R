@@ -111,7 +111,7 @@ tidy_add_estimate_to_reference_rows <- function(
   if (inherits(model, "multinom")) {
     dc <- NULL
     if (!quiet)
-      usethis::ui_info(paste0(
+      cli_alert_info(paste0(
         "Sum contrasts are not supported for 'multinom' models.\n",
         "Reference row of variable '", variable, "' remained unchanged."
       ))
@@ -129,7 +129,7 @@ tidy_add_estimate_to_reference_rows <- function(
       ),
       error = function(e) {
         if (!quiet)
-          usethis::ui_info(paste0(
+          cli_alert_info(paste0(
             "No emmeans() method for this type of model.\n",
             "Reference row of variable '", variable, "' remained unchanged."
           ))
@@ -166,7 +166,7 @@ tidy_add_estimate_to_reference_rows <- function(
 #     dplyr::last(stats::dummy.coef(model)[[variable]]),
 #     error = function(e) {
 #       if (!quiet)
-#         usethis::ui_info(paste0(
+#         cli_alert_info(paste0(
 #           "No dummy.coef() method for this type of model.\n",
 #           "Reference row of variable '", variable, "' remained unchanged."
 #         ))

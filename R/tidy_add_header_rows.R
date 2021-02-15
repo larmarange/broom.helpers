@@ -70,7 +70,7 @@ tidy_add_header_rows <- function(x,
 
   if ("header_row" %in% names(x)) {
     if (!quiet)
-      usethis::ui_oops("tidy_add_header_rows() has already been applied. x has been returned unchanged.")
+      cli_alert_danger("{.code tidy_add_header_rows()} has already been applied. x has been returned unchanged.")
     return(x)
   }
 
@@ -109,7 +109,7 @@ tidy_add_header_rows <- function(x,
     if (!quiet)
       paste("Variable(s) {paste(shQuote(bad_single_row), collapse = \", \")} were",
             "incorrectly requested to be printed on a single row.") %>%
-      usethis::ui_oops()
+      cli_alert_danger()
     if (strict) stop("Incorrect call with `show_single_row=`. Quitting execution.", call. = FALSE)
     show_single_row <- setdiff(show_single_row, bad_single_row)
   }

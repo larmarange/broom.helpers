@@ -1,6 +1,6 @@
 Package: broom.helpers
 Title: Helpers for Model Coefficients Tibbles
-Version: 1.1.0.9001
+Version: 1.1.0.9002
 Authors@R: 
     c(person(given = "Joseph",
              family = "Larmarange",
@@ -21,6 +21,7 @@ URL: https://larmarange.github.io/broom.helpers/
 BugReports: https://github.com/larmarange/broom.helpers/issues
 Imports: 
     broom,
+    cli,
     dplyr,
     labelled,
     lifecycle,
@@ -29,8 +30,7 @@ Imports:
     stats,
     stringr,
     tibble,
-    tidyr,
-    usethis
+    tidyr
 Suggests: 
     brms,
     broom.mixed,

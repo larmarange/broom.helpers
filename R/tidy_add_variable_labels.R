@@ -89,12 +89,7 @@ tidy_add_variable_labels <- function(x,
   # show a message otherwise
   not_found <- setdiff(names(labels), names(var_labels))
   if (length(not_found) > 0 && !quiet) {
-    usethis::ui_oops(paste0(
-      usethis::ui_code(not_found),
-      " terms have not been found in ",
-      usethis::ui_code("x"),
-      "."
-    ))
+    cli_alert_danger("{.code {not_found}} terms have not been found in {.code x}.")
   }
   if (length(not_found) > 0 && strict) {
     stop("Incorrect call with `labels=`. Quitting execution.", call. = FALSE)

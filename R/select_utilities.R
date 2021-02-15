@@ -157,7 +157,7 @@
   if (!exists("df_var_info", envir = env_variable_type) ||
       (exists("df_var_info", envir = env_variable_type) &&
        !all(c(variable_column, select_column) %in% names(env_variable_type$df_var_info)))) {
-    usethis::ui_oops("Cannot use selector '{fun_name}()' in this context.")
+    cli_alert_danger("Cannot use selector '{fun_name}()' in this context.")
     stop("Invalid syntax", call. = FALSE)
   }
 
@@ -247,13 +247,12 @@
 
   # printing error for argument input
   if (!is.null(arg_name))
-    usethis::ui_oops(stringr::str_glue(
-      "There was a problem with the",
-      "{usethis::ui_code(stringr::str_glue('{arg_name}='))} argument input."))
+    cli_alert_danger(
+      "There was a problem with the {.code {arg_name}=} argument input.")
   else
-    usethis::ui_oops("There was a problem with one of the function argument inputs.")
-  usethis::ui_info("Below is an example of correct syntax.")
-  purrr::walk(example_text, ~print(usethis::ui_code(.)))
+    cli_alert_danger("There was a problem with one of the function argument inputs.")
+  cli_alert_info("Below is an example of correct syntax.")
+  purrr::walk(example_text, ~print(cli_code(.)))
   stop("Invalid argument syntax", call. = FALSE)
 }
 
