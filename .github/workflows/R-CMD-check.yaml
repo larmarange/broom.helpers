@@ -82,6 +82,7 @@ jobs:
       - name: Install dependencies on Windows / MacOs
         if: runner.os != 'Linux'
         run: |
+          remotes::install_cran("utf8") # no binary for dev version
           remotes::install_deps(dependencies = TRUE, type = "binary")
           remotes::install_cran("rcmdcheck", type = "binary")
         shell: Rscript {0}
