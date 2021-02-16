@@ -4,12 +4,7 @@
 \alias{tidy_identify_variables}
 \title{Identify the variable corresponding to each model coefficient}
 \usage{
-tidy_identify_variables(
-  x,
-  model = tidy_get_model(x),
-  quiet = FALSE,
-  strict = FALSE
-)
+tidy_identify_variables(x, model = tidy_get_model(x), quiet = FALSE)
 }
 \arguments{
 \item{x}{a tidy tibble}
@@ -17,9 +12,6 @@ tidy_identify_variables(
 \item{model}{the corresponding model, if not attached to \code{x}}
 
 \item{quiet}{logical argument whether broom.helpers should not return a message
-when requested output cannot be generated. Default is FALSE}
-
-\item{strict}{logical argument whether broom.helpers should return an error
 when requested output cannot be generated. Default is FALSE}
 }
 \description{

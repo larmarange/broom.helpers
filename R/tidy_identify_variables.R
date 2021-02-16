@@ -41,7 +41,7 @@
 #'   tidy_and_attach(conf.int = TRUE) %>%
 #'   tidy_identify_variables()
 tidy_identify_variables <- function(x, model = tidy_get_model(x),
-                                    quiet = FALSE, strict = FALSE) {
+                                    quiet = FALSE) {
   if (is.null(model)) {
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
   }
@@ -101,7 +101,6 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x),
         "functional programming framework (e.g. using {.code lappy()}, ",
         "{.code purrr::map()}, etc.)."
       ))
-    if (strict) stop("Cannot identify variables. Quitting execution.", call. = FALSE)
 
     x %>%
       dplyr::mutate(
