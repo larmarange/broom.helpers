@@ -7,6 +7,7 @@
 - Support of `lfe::felm()` models (#79)
 - Support of `brms::brm()` models (#89)
 - Basic support of `cmprsk::crr()` models (#91)
+- Basic support of `stats::nls()` models (#97)
 - `strict` argument removed from `tidy_identify_variables()` (#99)
 - Models with categorical variable and no intercept now supported (#85)
 - New contrasts type ("no.contrast") returned by `model_list_contrasts`()

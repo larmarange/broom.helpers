@@ -369,6 +369,20 @@ test_that("tidy_plus_plus() works with cmprsk::crr", {
   )
 })
 
+
+test_that("tidy_plus_plus() works with stats::nls", {
+  mod <- stats::nls(
+    Petal.Width ~ a * Petal.Length - (Sepal.Width + Sepal.Length) / b + a^2,
+    data = iris,
+    start = list(a = 1, b = 1)
+  )
+  expect_error(
+    res <- mod %>% tidy_plus_plus(),
+    NA
+  )
+})
+
+
 test_that("tidy_plus_plus() works with lavaan::lavaan", {
   df <- lavaan::HolzingerSwineford1939
   df$grade <- factor(df$grade, ordered = TRUE)
