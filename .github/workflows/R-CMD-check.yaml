@@ -72,10 +72,18 @@ jobs:
             eval sudo $cmd
           done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "20.04"))')
 
-      - name: Install dependencies
+      - name: Install dependencies on Linux
+        if: runner.os == 'Linux'
         run: |
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("rcmdcheck")
+        shell: Rscript {0}
+
+      - name: Install dependencies on Windows / MacOs
+        if: runner.os != 'Linux'
+        run: |
+          remotes::install_deps(dependencies = TRUE, type = "binary")
+          remotes::install_cran("rcmdcheck", type = "binary")
         shell: Rscript {0}
 
       - name: Check
