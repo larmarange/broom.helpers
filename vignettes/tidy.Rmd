@@ -28,6 +28,15 @@ library(broom.helpers)
 library(gtsummary)
 library(ggplot2)
 library(dplyr)
+
+# paged_table() was introduced only in rmarkdwon v1.2
+print_table <- function(tab) {
+  if (packageVersion("rmarkdown") >= 1.2) {
+    rmarkdown::paged_table(tab)
+  } else {
+    knitr::kable(tab)
+  }
+}
 ```
 
 Our model predicts tumor response using chemotherapy treatment and tumor grade.
@@ -83,6 +92,8 @@ tidy_forest %>%
   )
 ```
 
+**Note::** for more advanced and nicely formatted plots of model coefficients, look at `GGally::ggcoef_model()` and its [dedicated vignette](https://ggobi.github.io/ggally/articles/ggcoef_model.html). `GGally::ggcoef_model()` internally uses `broom.helpers`.
+
 ## Table Summary
 
 In addition to aiding in figure creation, the broom.helpers package can help summarize a model in a table.
@@ -110,7 +121,7 @@ tidy_table %>%
   select(label, estimate, conf.low, conf.high, p.value) %>%
   mutate(across(all_of(c("estimate", "conf.low", "conf.high")), style_ratio)) %>%
   mutate(across(p.value, style_pvalue)) %>%
-  knitr::kable()
+  print_table()
 ```
 
 **Note::** for more advanced and nicely formatted tables of model coefficients, look at `gtsummary::tbl_regression()` and its [dedicated vignette](http://www.danieldsjoberg.com/gtsummary/articles/tbl_regression.html). `gtsummary::tbl_regression()` internally uses `broom.helpers`.
@@ -127,7 +138,7 @@ model_logit %>%
 ```{r}
 model_logit %>%
   tidy_plus_plus(exponentiate = TRUE) %>%
-  rmarkdown::paged_table()
+  print_table()
 ```
 
 See the documentation of `tidy_plus_plus()` for the full list of available options.
@@ -149,7 +160,7 @@ model_poly %>%
     add_header_rows = TRUE,
     variable_labels = c(age = "Age in years")
   ) %>%
-  rmarkdown::paged_table()
+  print_table()
 ```
 
 ### Different type of contrasts
@@ -168,7 +179,7 @@ model_1 %>%
   tidy_add_reference_rows() %>%
   tidy_add_estimate_to_reference_rows(exponentiate = TRUE) %>%
   tidy_add_term_labels() %>%
-  rmarkdown::paged_table()
+  print_table()
 ```
 
 Using `stats::contr.treatment()`, it is possible to defined alternative reference rows. It will be properly managed by `broom.helpers`.
@@ -190,7 +201,7 @@ model_2 %>%
   tidy_add_reference_rows() %>%
   tidy_add_estimate_to_reference_rows(exponentiate = TRUE) %>%
   tidy_add_term_labels() %>%
-  rmarkdown::paged_table()
+  print_table()
 ```
 
 You can also use sum contrasts (cf. `stats::contr.sum()`). In that case, each model coefficient corresponds to the difference of that modality with the grand mean. A variable with 4 modalities will be coded with 3 terms. However, a value could be computed (using `emmeans::emmeans()`) for the last modality, corresponding to the difference of that modality with the grand mean and equal to sum of all other coefficients multiplied by -1. `broom.helpers` will identify categorical variables coded with sum contrasts and could retrieve an estimate value for the reference term.
@@ -212,7 +223,7 @@ model_3 %>%
   tidy_add_reference_rows() %>%
   tidy_add_estimate_to_reference_rows(exponentiate = TRUE) %>%
   tidy_add_term_labels() %>%
-  rmarkdown::paged_table()
+  print_table()
 ```
 
 Other types of contrasts exist, like Helmert (`contr.helmert()`) or polynomial (`contr.poly()`). They are more complex as a modality will be coded with a combination of terms. Therefore, for such contrasts, it will not be possible to associate a specific model term with a level of the original factor. `broom.helpers` will not add a reference term in such case.
@@ -234,7 +245,7 @@ model_4 %>%
   tidy_add_reference_rows() %>%
   tidy_add_estimate_to_reference_rows(exponentiate = TRUE) %>%
   tidy_add_term_labels() %>%
-  rmarkdown::paged_table()
+  print_table()
 ```
 
 
