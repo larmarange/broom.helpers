@@ -495,7 +495,7 @@ test_that("model_identify_variables() works with lavaan::lavaan", {
   )
 })
 
-test_that("model_identify_variables() strict argument", {
+test_that("model_identify_variables() message when failure", {
   df_models <-
     tibble::tibble(grade = c("I", "II", "III")) %>%
     dplyr::mutate(df_model = purrr::map(grade, ~trial %>% dplyr::filter(grade == ..1))) %>%
@@ -508,13 +508,13 @@ test_that("model_identify_variables() strict argument", {
           ~ coxph(..1, data = ..2)
         )
     )
-  expect_error(
+  expect_message(
     df_models %>%
       dplyr::mutate(
         mv_tbl_form =
           purrr::map(
             mv_model_form,
-            ~tidy_and_attach(.x) %>% tidy_identify_variables(strict = TRUE)
+            ~tidy_and_attach(.x) %>% tidy_identify_variables(quiet = FALSE)
           )
       )
   )
