@@ -2,6 +2,7 @@
 #'
 #' This function will apply sequentially:
 #' * [tidy_and_attach()]
+#' * [tidy_disambiguate_terms()]
 #' * [tidy_identify_variables()]
 #' * [tidy_add_contrasts()]
 #' * [tidy_add_reference_rows()]
@@ -38,6 +39,7 @@
 #' @param add_n should the number of observations be added? \lifecycle{maturing}
 #' @param intercept should the intercept(s) be included?
 #' @inheritParams tidy_select_variables
+#' @param disambiguate_sep separator for [`tidy_disambiguate_terms()`]
 #' @param keep_model should the model be kept as an attribute of the final result?
 #' @param quiet logical argument whether broom.helpers should not return a message
 #' when requested output cannot be generated. Default is FALSE
@@ -111,6 +113,7 @@ tidy_plus_plus <- function(
                            add_n = TRUE,
                            intercept = FALSE,
                            include = everything(),
+                           disambiguate_sep = ".",
                            keep_model = FALSE,
                            quiet = FALSE,
                            strict = FALSE,
@@ -122,6 +125,7 @@ tidy_plus_plus <- function(
       exponentiate = exponentiate,
       ...
     ) %>%
+    tidy_disambiguate_terms(sep = disambiguate_sep, quiet = quiet) %>%
     tidy_identify_variables(quiet = quiet) %>%
     tidy_add_contrasts()
   if (add_reference_rows) {

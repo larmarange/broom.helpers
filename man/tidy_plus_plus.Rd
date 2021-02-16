@@ -21,6 +21,7 @@ tidy_plus_plus(
   add_n = TRUE,
   intercept = FALSE,
   include = everything(),
+  disambiguate_sep = ".",
   keep_model = FALSE,
   quiet = FALSE,
   strict = FALSE,
@@ -70,6 +71,8 @@ syntax. Use \code{-} to remove a variable. Default is \code{everything()}.
 See also \code{\link[=all_continuous]{all_continuous()}}, \code{\link[=all_categorical]{all_categorical()}}, \code{\link[=all_dichotomous]{all_dichotomous()}}
 and \code{\link[=all_interaction]{all_interaction()}}}
 
+\item{disambiguate_sep}{separator for \code{\link[=tidy_disambiguate_terms]{tidy_disambiguate_terms()}}}
+
 \item{keep_model}{should the model be kept as an attribute of the final result?}
 
 \item{quiet}{logical argument whether broom.helpers should not return a message
@@ -84,6 +87,7 @@ when requested output cannot be generated. Default is FALSE}
 This function will apply sequentially:
 \itemize{
 \item \code{\link[=tidy_and_attach]{tidy_and_attach()}}
+\item \code{\link[=tidy_disambiguate_terms]{tidy_disambiguate_terms()}}
 \item \code{\link[=tidy_identify_variables]{tidy_identify_variables()}}
 \item \code{\link[=tidy_add_contrasts]{tidy_add_contrasts()}}
 \item \code{\link[=tidy_add_reference_rows]{tidy_add_reference_rows()}}
@@ -158,6 +162,7 @@ Other tidy_helpers:
 \code{\link{tidy_add_term_labels}()},
 \code{\link{tidy_add_variable_labels}()},
 \code{\link{tidy_attach_model}()},
+\code{\link{tidy_disambiguate_terms}()},
 \code{\link{tidy_identify_variables}()},
 \code{\link{tidy_remove_intercept}()},
 \code{\link{tidy_select_variables}()}

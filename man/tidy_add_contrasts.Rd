@@ -4,12 +4,14 @@
 \alias{tidy_add_contrasts}
 \title{Add contrasts type for categorical variables}
 \usage{
-tidy_add_contrasts(x, model = tidy_get_model(x))
+tidy_add_contrasts(x, model = tidy_get_model(x), quiet = FALSE)
 }
 \arguments{
 \item{x}{a tidy tibble}
 
 \item{model}{the corresponding model, if not attached to \code{x}}
+
+\item{quiet}{logical argument whether broom.helpers should not return a message when \code{tidy_disambiguate_terms()} was already applied}
 }
 \description{
 Add a \code{contrasts} column corresponding to contrasts used for a
@@ -44,6 +46,7 @@ Other tidy_helpers:
 \code{\link{tidy_add_term_labels}()},
 \code{\link{tidy_add_variable_labels}()},
 \code{\link{tidy_attach_model}()},
+\code{\link{tidy_disambiguate_terms}()},
 \code{\link{tidy_identify_variables}()},
 \code{\link{tidy_plus_plus}()},
 \code{\link{tidy_remove_intercept}()},
