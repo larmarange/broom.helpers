@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">broom.helpers</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0.9002</span>
       </span>
     </div>
 
@@ -92,7 +92,16 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://larmarange.github.io/broom.helpers/">broom.helpers</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ddsjoberg/gtsummary">gtsummary</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></code></pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+
+<span class="co"># paged_table() was introduced only in rmarkdwon v1.2</span>
+<span class="va">print_table</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">tab</span><span class="op">)</span> <span class="op">{</span>
+  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html">packageVersion</a></span><span class="op">(</span><span class="st">"rmarkdown"</span><span class="op">)</span> <span class="op">&gt;=</span> <span class="fl">1.2</span><span class="op">)</span> <span class="op">{</span>
+    <span class="fu">rmarkdown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rmarkdown/man/paged_table.html">paged_table</a></span><span class="op">(</span><span class="va">tab</span><span class="op">)</span>
+  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
+    <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">tab</span><span class="op">)</span>
+  <span class="op">}</span>
+<span class="op">}</span></code></pre></div>
 <p>Our model predicts tumor response using chemotherapy treatment and tumor grade. The data set we’re utilizing has already labelled the columns using the <a href="http://larmarange.github.io/labelled/">labelled package</a>. The column labels will be carried through to our figure and table.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model_logit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">response</span> <span class="op">~</span> <span class="va">trt</span> <span class="op">+</span> <span class="va">grade</span>, <span class="va">trial</span>, family <span class="op">=</span> <span class="va">binomial</span><span class="op">)</span>
@@ -153,6 +162,7 @@
     title <span class="op">=</span> <span class="st">"Forest Plot using broom.helpers"</span>
   <span class="op">)</span></code></pre></div>
 <p><img src="tidy_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
+<p><strong>Note::</strong> for more advanced and nicely formatted plots of model coefficients, look at <code>GGally::ggcoef_model()</code> and its <a href="https://ggobi.github.io/ggally/articles/ggcoef_model.html">dedicated vignette</a>. <code>GGally::ggcoef_model()</code> internally uses <code>broom.helpers</code>.</p>
 </div>
 <div id="table-summary" class="section level2">
 <h2 class="hasAnchor">
@@ -179,67 +189,12 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">label</span>, <span class="va">estimate</span>, <span class="va">conf.low</span>, <span class="va">conf.high</span>, <span class="va">p.value</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html">all_of</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"estimate"</span>, <span class="st">"conf.low"</span>, <span class="st">"conf.high"</span><span class="op">)</span><span class="op">)</span>, <span class="va">style_ratio</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="va">p.value</span>, <span class="va">style_pvalue</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<table class="table">
-<thead><tr class="header">
-<th align="left">label</th>
-<th align="left">estimate</th>
-<th align="left">conf.low</th>
-<th align="left">conf.high</th>
-<th align="left">p.value</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">Chemotherapy Treatment</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">Drug A</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">Drug B</td>
-<td align="left">1.21</td>
-<td align="left">0.66</td>
-<td align="left">2.24</td>
-<td align="left">0.5</td>
-</tr>
-<tr class="even">
-<td align="left">Grade</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">I</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">II</td>
-<td align="left">0.94</td>
-<td align="left">0.44</td>
-<td align="left">1.98</td>
-<td align="left">0.9</td>
-</tr>
-<tr class="odd">
-<td align="left">III</td>
-<td align="left">1.09</td>
-<td align="left">0.52</td>
-<td align="left">2.27</td>
-<td align="left">0.8</td>
-</tr>
-</tbody>
-</table>
+  <span class="fu">print_table</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["label"],"name":[1],"type":["chr"],"align":["left"]},{"label":["estimate"],"name":[2],"type":["chr"],"align":["left"]},{"label":["conf.low"],"name":[3],"type":["chr"],"align":["left"]},{"label":["conf.high"],"name":[4],"type":["chr"],"align":["left"]},{"label":["p.value"],"name":[5],"type":["chr"],"align":["left"]}],"data":[{"1":"Chemotherapy Treatment","2":"NA","3":"NA","4":"NA","5":"NA"},{"1":"Drug A","2":"NA","3":"NA","4":"NA","5":"NA"},{"1":"Drug B","2":"1.21","3":"0.66","4":"2.24","5":"0.5"},{"1":"Grade","2":"NA","3":"NA","4":"NA","5":"NA"},{"1":"I","2":"NA","3":"NA","4":"NA","5":"NA"},{"1":"II","2":"0.94","3":"0.44","4":"1.98","5":"0.9"},{"1":"III","2":"1.09","3":"0.52","4":"2.27","5":"0.8"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[25],"max":[25]},"pages":{}}}
+  </script>
+</div>
 <p><strong>Note::</strong> for more advanced and nicely formatted tables of model coefficients, look at <code><a href="http://www.danieldsjoberg.com/gtsummary//reference/tbl_regression.html">gtsummary::tbl_regression()</a></code> and its <a href="http://www.danieldsjoberg.com/gtsummary/articles/tbl_regression.html">dedicated vignette</a>. <code><a href="http://www.danieldsjoberg.com/gtsummary//reference/tbl_regression.html">gtsummary::tbl_regression()</a></code> internally uses <code>broom.helpers</code>.</p>
 </div>
 <div id="all-in-one-function" class="section level2">
@@ -263,7 +218,7 @@
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model_logit</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/tidy_plus_plus.html">tidy_plus_plus</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">rmarkdown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rmarkdown/man/paged_table.html">paged_table</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+  <span class="fu">print_table</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["term"],"name":[1],"type":["chr"],"align":["left"]},{"label":["variable"],"name":[2],"type":["chr"],"align":["left"]},{"label":["var_label"],"name":[3],"type":["chr"],"align":["left"]},{"label":["var_class"],"name":[4],"type":["chr"],"align":["left"]},{"label":["var_type"],"name":[5],"type":["chr"],"align":["left"]},{"label":["var_nlevels"],"name":[6],"type":["int"],"align":["right"]},{"label":["contrasts"],"name":[7],"type":["chr"],"align":["left"]},{"label":["contrasts_type"],"name":[8],"type":["chr"],"align":["left"]},{"label":["reference_row"],"name":[9],"type":["lgl"],"align":["right"]},{"label":["label"],"name":[10],"type":["chr"],"align":["left"]},{"label":["n_obs"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["n_event"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["estimate"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["std.error"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["statistic"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["p.value"],"name":[16],"type":["dbl"],"align":["right"]},{"label":["conf.low"],"name":[17],"type":["dbl"],"align":["right"]},{"label":["conf.high"],"name":[18],"type":["dbl"],"align":["right"]}],"data":[{"1":"trtDrug A","2":"trt","3":"Chemotherapy Treatment","4":"character","5":"dichotomous","6":"2","7":"contr.treatment","8":"treatment","9":"TRUE","10":"Drug A","11":"95","12":"28","13":"1.0000000","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","_row":"trtDrug A"},{"1":"trtDrug B","2":"trt","3":"Chemotherapy Treatment","4":"character","5":"dichotomous","6":"2","7":"contr.treatment","8":"treatment","9":"FALSE","10":"Drug B","11":"98","12":"33","13":"1.2145219","14":"0.3107827","15":"0.6253581","16":"0.5317360","17":"0.6610196","18":"2.242643","_row":"trtDrug B"},{"1":"gradeI","2":"grade","3":"Grade","4":"factor","5":"categorical","6":"3","7":"contr.treatment","8":"treatment","9":"TRUE","10":"I","11":"67","12":"21","13":"1.0000000","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","_row":"gradeI"},{"1":"gradeII","2":"grade","3":"Grade","4":"factor","5":"categorical","6":"3","7":"contr.treatment","8":"treatment","9":"FALSE","10":"II","11":"63","12":"19","13":"0.9373213","14":"0.3810833","15":"-0.1698556","16":"0.8651237","17":"0.4417302","18":"1.980028","_row":"gradeII"},{"1":"gradeIII","2":"grade","3":"Grade","4":"factor","5":"categorical","6":"3","7":"contr.treatment","8":"treatment","9":"FALSE","10":"III","11":"63","12":"21","13":"1.0856429","14":"0.3758553","15":"0.2186277","16":"0.8269401","17":"0.5183386","18":"2.274982","_row":"gradeIII"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[25],"max":[25]},"pages":{}}}
@@ -288,7 +243,7 @@
     add_header_rows <span class="op">=</span> <span class="cn">TRUE</span>,
     variable_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>age <span class="op">=</span> <span class="st">"Age in years"</span><span class="op">)</span>
   <span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">rmarkdown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rmarkdown/man/paged_table.html">paged_table</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+  <span class="fu">print_table</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["term"],"name":[1],"type":["chr"],"align":["left"]},{"label":["variable"],"name":[2],"type":["chr"],"align":["left"]},{"label":["var_label"],"name":[3],"type":["chr"],"align":["left"]},{"label":["var_class"],"name":[4],"type":["chr"],"align":["left"]},{"label":["var_type"],"name":[5],"type":["chr"],"align":["left"]},{"label":["var_nlevels"],"name":[6],"type":["int"],"align":["right"]},{"label":["header_row"],"name":[7],"type":["lgl"],"align":["right"]},{"label":["contrasts"],"name":[8],"type":["chr"],"align":["left"]},{"label":["contrasts_type"],"name":[9],"type":["chr"],"align":["left"]},{"label":["reference_row"],"name":[10],"type":["lgl"],"align":["right"]},{"label":["label"],"name":[11],"type":["chr"],"align":["left"]},{"label":["n_obs"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["n_event"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["estimate"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["std.error"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["statistic"],"name":[16],"type":["dbl"],"align":["right"]},{"label":["p.value"],"name":[17],"type":["dbl"],"align":["right"]},{"label":["conf.low"],"name":[18],"type":["dbl"],"align":["right"]},{"label":["conf.high"],"name":[19],"type":["dbl"],"align":["right"]}],"data":[{"1":"NA","2":"age","3":"Age in years","4":"nmatrix.3","5":"continuous","6":"NA","7":"TRUE","8":"NA","9":"NA","10":"NA","11":"Age in years","12":"NA","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","_row":""},{"1":"poly(age, 3)1","2":"age","3":"Age in years","4":"nmatrix.3","5":"continuous","6":"NA","7":"FALSE","8":"NA","9":"NA","10":"NA","11":"Age in years","12":"92","13":"31","14":"73.3062595","15":"2.30181235","16":"1.8657672","17":"0.06207394","18":"0.877867149","19":"7995.690992","_row":"poly(age, 3)1"},{"1":"poly(age, 3)2","2":"age","3":"Age in years","4":"nmatrix.3","5":"continuous","6":"NA","7":"FALSE","8":"NA","9":"NA","10":"NA","11":"Age in years²","12":"56","13":"17","14":"1.4298872","15":"2.26221357","16":"0.1580733","17":"0.87439903","18":"0.011343886","19":"105.165741","_row":"poly(age, 3)2"},{"1":"poly(age, 3)3","2":"age","3":"Age in years","4":"nmatrix.3","5":"continuous","6":"NA","7":"FALSE","8":"NA","9":"NA","10":"NA","11":"Age in years³","12":"80","13":"22","14":"0.4002595","15":"2.23570427","16":"-0.4095543","17":"0.68213295","18":"0.004758251","19":"40.506175","_row":"poly(age, 3)3"},{"1":"ttdeath","2":"ttdeath","3":"Months to Death/Censor","4":"numeric","5":"continuous","6":"NA","7":"NA","8":"NA","9":"NA","10":"NA","11":"Months to Death/Censor","12":"173","13":"54","14":"1.1218874","15":"0.03951317","16":"2.9107373","17":"0.00360577","18":"1.042865358","19":"1.219078","_row":"ttdeath"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[25],"max":[25]},"pages":{}}}
@@ -311,7 +266,7 @@
   <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">rmarkdown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rmarkdown/man/paged_table.html">paged_table</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+  <span class="fu">print_table</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["term"],"name":[1],"type":["chr"],"align":["left"]},{"label":["variable"],"name":[2],"type":["chr"],"align":["left"]},{"label":["var_label"],"name":[3],"type":["chr"],"align":["left"]},{"label":["var_class"],"name":[4],"type":["chr"],"align":["left"]},{"label":["var_type"],"name":[5],"type":["chr"],"align":["left"]},{"label":["var_nlevels"],"name":[6],"type":["int"],"align":["right"]},{"label":["contrasts"],"name":[7],"type":["chr"],"align":["left"]},{"label":["contrasts_type"],"name":[8],"type":["chr"],"align":["left"]},{"label":["reference_row"],"name":[9],"type":["lgl"],"align":["right"]},{"label":["label"],"name":[10],"type":["chr"],"align":["left"]},{"label":["estimate"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["std.error"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["statistic"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["p.value"],"name":[14],"type":["dbl"],"align":["right"]}],"data":[{"1":"(Intercept)","2":"(Intercept)","3":"(Intercept)","4":"NA","5":"intercept","6":"NA","7":"NA","8":"NA","9":"NA","10":"(Intercept)","11":"0.3390697","12":"0.4895787","13":"-2.20914307","14":"0.02716469","_row":"(Intercept)"},{"1":"stageT1","2":"stage","3":"T Stage","4":"factor","5":"categorical","6":"4","7":"contr.treatment","8":"treatment","9":"TRUE","10":"T1","11":"1.0000000","12":"NA","13":"NA","14":"NA","_row":"stageT1"},{"1":"stageT2","2":"stage","3":"T Stage","4":"factor","5":"categorical","6":"4","7":"contr.treatment","8":"treatment","9":"FALSE","10":"T2","11":"0.5711409","12":"0.4467837","13":"-1.25367016","14":"0.20996192","_row":"stageT2"},{"1":"stageT3","2":"stage","3":"T Stage","4":"factor","5":"categorical","6":"4","7":"contr.treatment","8":"treatment","9":"FALSE","10":"T3","11":"1.1479106","12":"0.4552943","13":"0.30297648","14":"0.76190779","_row":"stageT3"},{"1":"stageT4","2":"stage","3":"T Stage","4":"factor","5":"categorical","6":"4","7":"contr.treatment","8":"treatment","9":"FALSE","10":"T4","11":"0.7341427","12":"0.4424990","13":"-0.69842376","14":"0.48491222","_row":"stageT4"},{"1":"gradeI","2":"grade","3":"Grade","4":"factor","5":"categorical","6":"3","7":"contr.treatment","8":"treatment","9":"TRUE","10":"I","11":"1.0000000","12":"NA","13":"NA","14":"NA","_row":"gradeI"},{"1":"gradeII","2":"grade","3":"Grade","4":"factor","5":"categorical","6":"3","7":"contr.treatment","8":"treatment","9":"FALSE","10":"II","11":"1.0391945","12":"0.6033177","13":"0.06372417","14":"0.94918986","_row":"gradeII"},{"1":"gradeIII","2":"grade","3":"Grade","4":"factor","5":"categorical","6":"3","7":"contr.treatment","8":"treatment","9":"FALSE","10":"III","11":"2.8780642","12":"0.5562107","13":"1.90057107","14":"0.05735822","_row":"gradeIII"},{"1":"trtDrug A","2":"trt","3":"Chemotherapy Treatment","4":"character","5":"dichotomous","6":"2","7":"contr.treatment","8":"treatment","9":"TRUE","10":"Drug A","11":"1.0000000","12":"NA","13":"NA","14":"NA","_row":"trtDrug A"},{"1":"trtDrug B","2":"trt","3":"Chemotherapy Treatment","4":"character","5":"dichotomous","6":"2","7":"contr.treatment","8":"treatment","9":"FALSE","10":"Drug B","11":"2.4343417","12":"0.5466956","13":"1.62737050","14":"0.10365843","_row":"trtDrug B"},{"1":"gradeII:trtDrug B","2":"grade:trt","3":"Grade * Chemotherapy Treatment","4":"NA","5":"interaction","6":"NA","7":"NA","8":"NA","9":"NA","10":"II * Drug B","11":"0.8352000","12":"0.7941115","13":"-0.22677430","14":"0.82059925","_row":"gradeII:trtDrug B"},{"1":"gradeIII:trtDrug B","2":"grade:trt","3":"Grade * Chemotherapy Treatment","4":"NA","5":"interaction","6":"NA","7":"NA","8":"NA","9":"NA","10":"III * Drug B","11":"0.1630675","12":"0.7817367","13":"-2.31995133","14":"0.02034351","_row":"gradeIII:trtDrug B"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[25],"max":[25]},"pages":{}}}
@@ -335,7 +290,7 @@
   <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">rmarkdown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rmarkdown/man/paged_table.html">paged_table</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+  <span class="fu">print_table</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["term"],"name":[1],"type":["chr"],"align":["left"]},{"label":["variable"],"name":[2],"type":["chr"],"align":["left"]},{"label":["var_label"],"name":[3],"type":["chr"],"align":["left"]},{"label":["var_class"],"name":[4],"type":["chr"],"align":["left"]},{"label":["var_type"],"name":[5],"type":["chr"],"align":["left"]},{"label":["var_nlevels"],"name":[6],"type":["int"],"align":["right"]},{"label":["contrasts"],"name":[7],"type":["chr"],"align":["left"]},{"label":["contrasts_type"],"name":[8],"type":["chr"],"align":["left"]},{"label":["reference_row"],"name":[9],"type":["lgl"],"align":["right"]},{"label":["label"],"name":[10],"type":["chr"],"align":["left"]},{"label":["estimate"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["std.error"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["statistic"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["p.value"],"name":[14],"type":["dbl"],"align":["right"]}],"data":[{"1":"(Intercept)","2":"(Intercept)","3":"(Intercept)","4":"NA","5":"intercept","6":"NA","7":"NA","8":"NA","9":"NA","10":"(Intercept)","11":"0.8223675","12":"0.4869667","13":"-0.4016042","14":"0.68797535","_row":"(Intercept)"},{"1":"stage1","2":"stage","3":"T Stage","4":"factor","5":"categorical","6":"4","7":"contr.treatment(base=3)","8":"treatment","9":"FALSE","10":"T1","11":"0.8711480","12":"0.4552943","13":"-0.3029765","14":"0.76190779","_row":"stage1"},{"1":"stage2","2":"stage","3":"T Stage","4":"factor","5":"categorical","6":"4","7":"contr.treatment(base=3)","8":"treatment","9":"FALSE","10":"T2","11":"0.4975482","12":"0.4712001","13":"-1.4814574","14":"0.13848473","_row":"stage2"},{"1":"stage3","2":"stage","3":"T Stage","4":"factor","5":"categorical","6":"4","7":"contr.treatment(base=3)","8":"treatment","9":"TRUE","10":"T3","11":"1.0000000","12":"NA","13":"NA","14":"NA","_row":"stage3"},{"1":"stage4","2":"stage","3":"T Stage","4":"factor","5":"categorical","6":"4","7":"contr.treatment(base=3)","8":"treatment","9":"FALSE","10":"T4","11":"0.6395470","12":"0.4661781","13":"-0.9588507","14":"0.33763395","_row":"stage4"},{"1":"grade1","2":"grade","3":"Grade","4":"factor","5":"categorical","6":"3","7":"contr.treatment(base=2)","8":"treatment","9":"FALSE","10":"I","11":"1.1521597","12":"0.5164934","13":"0.2742304","14":"0.78390760","_row":"grade1"},{"1":"grade2","2":"grade","3":"Grade","4":"factor","5":"categorical","6":"3","7":"contr.treatment(base=2)","8":"treatment","9":"TRUE","10":"II","11":"1.0000000","12":"NA","13":"NA","14":"NA","_row":"grade2"},{"1":"grade3","2":"grade","3":"Grade","4":"factor","5":"categorical","6":"3","7":"contr.treatment(base=2)","8":"treatment","9":"FALSE","10":"III","11":"0.5407301","12":"0.5504584","13":"-1.1169507","14":"0.26401539","_row":"grade3"},{"1":"trt1","2":"trt","3":"Chemotherapy Treatment","4":"character","5":"dichotomous","6":"2","7":"contr.SAS","8":"treatment","9":"FALSE","10":"Drug A","11":"0.4918447","12":"0.5750633","13":"-1.2339378","14":"0.21722610","_row":"trt1"},{"1":"trt2","2":"trt","3":"Chemotherapy Treatment","4":"character","5":"dichotomous","6":"2","7":"contr.SAS","8":"treatment","9":"TRUE","10":"Drug B","11":"1.0000000","12":"NA","13":"NA","14":"NA","_row":"trt2"},{"1":"grade1:trt1","2":"grade:trt","3":"Grade * Chemotherapy Treatment","4":"NA","5":"interaction","6":"NA","7":"NA","8":"NA","9":"NA","10":"I * Drug A","11":"0.8352000","12":"0.7941115","13":"-0.2267743","14":"0.82059925","_row":"grade1:trt1"},{"1":"grade3:trt1","2":"grade:trt","3":"Grade * Chemotherapy Treatment","4":"NA","5":"interaction","6":"NA","7":"NA","8":"NA","9":"NA","10":"III * Drug A","11":"5.1218052","12":"0.8026895","13":"2.0350421","14":"0.04184663","_row":"grade3:trt1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[25],"max":[25]},"pages":{}}}
@@ -359,7 +314,7 @@
   <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">rmarkdown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rmarkdown/man/paged_table.html">paged_table</a></span><span class="op">(</span><span class="op">)</span>
+  <span class="fu">print_table</span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Loading required namespace: emmeans</span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -384,7 +339,7 @@
   <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">rmarkdown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rmarkdown/man/paged_table.html">paged_table</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+  <span class="fu">print_table</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["term"],"name":[1],"type":["chr"],"align":["left"]},{"label":["variable"],"name":[2],"type":["chr"],"align":["left"]},{"label":["var_label"],"name":[3],"type":["chr"],"align":["left"]},{"label":["var_class"],"name":[4],"type":["chr"],"align":["left"]},{"label":["var_type"],"name":[5],"type":["chr"],"align":["left"]},{"label":["var_nlevels"],"name":[6],"type":["int"],"align":["right"]},{"label":["contrasts"],"name":[7],"type":["chr"],"align":["left"]},{"label":["contrasts_type"],"name":[8],"type":["chr"],"align":["left"]},{"label":["reference_row"],"name":[9],"type":["lgl"],"align":["right"]},{"label":["label"],"name":[10],"type":["chr"],"align":["left"]},{"label":["estimate"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["std.error"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["statistic"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["p.value"],"name":[14],"type":["dbl"],"align":["right"]}],"data":[{"1":"(Intercept)","2":"(Intercept)","3":"(Intercept)","4":"NA","5":"intercept","6":"NA","7":"NA","8":"NA","9":"NA","10":"(Intercept)","11":"0.4553862","12":"0.1608512","13":"-4.8902924","14":"1.006863e-06","_row":"(Intercept)"},{"1":"stage.L","2":"stage","3":"T Stage","4":"factor","5":"categorical","6":"4","7":"contr.poly","8":"poly","9":"NA","10":"stage.L","11":"0.9500633","12":"0.3142542","13":"-0.1630102","14":"8.705104e-01","_row":"stage.L"},{"1":"stage.Q","2":"stage","3":"T Stage","4":"factor","5":"categorical","6":"4","7":"contr.poly","8":"poly","9":"NA","10":"stage.Q","11":"1.0581923","12":"0.3213201","13":"0.1760303","14":"8.602701e-01","_row":"stage.Q"},{"1":"stage.C","2":"stage","3":"T Stage","4":"factor","5":"categorical","6":"4","7":"contr.poly","8":"poly","9":"NA","10":"stage.C","11":"0.5842765","12":"0.3319062","13":"-1.6190747","14":"1.054312e-01","_row":"stage.C"},{"1":"grade1","2":"grade","3":"Grade","4":"factor","5":"categorical","6":"3","7":"contr.helmert","8":"helmert","9":"NA","10":"grade1","11":"0.9745319","12":"0.1985734","13":"-0.1299170","14":"8.966321e-01","_row":"grade1"},{"1":"grade2","2":"grade","3":"Grade","4":"factor","5":"categorical","6":"3","7":"contr.helmert","8":"helmert","9":"NA","10":"grade2","11":"1.0604643","12":"0.1137965","13":"0.5158930","14":"6.059292e-01","_row":"grade2"},{"1":"trt.L","2":"trt","3":"Chemotherapy Treatment","4":"character","5":"dichotomous","6":"2","7":"contr.poly","8":"poly","9":"NA","10":"trt.L","11":"1.1725519","12":"0.2269674","13":"0.7013449","14":"4.830878e-01","_row":"trt.L"},{"1":"grade1:trt.L","2":"grade:trt","3":"Grade * Chemotherapy Treatment","4":"NA","5":"interaction","6":"NA","7":"NA","8":"NA","9":"NA","10":"grade1 * trt.L","11":"0.9383152","12":"0.2807608","13":"-0.2267743","14":"8.205992e-01","_row":"grade1:trt.L"},{"1":"grade2:trt.L","2":"grade:trt","3":"Grade * Chemotherapy Treatment","4":"NA","5":"interaction","6":"NA","7":"NA","8":"NA","9":"NA","10":"grade2 * trt.L","11":"0.6661473","12":"0.1615993","13":"-2.5138994","14":"1.194045e-02","_row":"grade2:trt.L"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[25],"max":[25]},"pages":{}}}
@@ -399,14 +354,12 @@
 <style>
 td {vertical-align: top;}
 </style>
-<pre><code>#&gt; Warning: The `.dots` argument of `group_by()` is deprecated as of dplyr 1.0.0.
-#&gt; This warning is displayed once every 8 hours.
-#&gt; Call `lifecycle::last_warnings()` to see where this warning was generated.</code></pre>
+<pre><code>#&gt; Warning: The `.dots` argument of `group_by()` is deprecated as of dplyr 1.0.0.</code></pre>
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#klncgpemyd .gt_table {
+#idulaqnvvd .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -431,7 +384,7 @@ td {vertical-align: top;}
   border-left-color: #D3D3D3;
 }
 
-#klncgpemyd .gt_heading {
+#idulaqnvvd .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -443,7 +396,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#klncgpemyd .gt_title {
+#idulaqnvvd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -453,7 +406,7 @@ td {vertical-align: top;}
   border-bottom-width: 0;
 }
 
-#klncgpemyd .gt_subtitle {
+#idulaqnvvd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -463,13 +416,13 @@ td {vertical-align: top;}
   border-top-width: 0;
 }
 
-#klncgpemyd .gt_bottom_border {
+#idulaqnvvd .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#klncgpemyd .gt_col_headings {
+#idulaqnvvd .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -484,7 +437,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#klncgpemyd .gt_col_heading {
+#idulaqnvvd .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -504,7 +457,7 @@ td {vertical-align: top;}
   overflow-x: hidden;
 }
 
-#klncgpemyd .gt_column_spanner_outer {
+#idulaqnvvd .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -516,15 +469,15 @@ td {vertical-align: top;}
   padding-right: 4px;
 }
 
-#klncgpemyd .gt_column_spanner_outer:first-child {
+#idulaqnvvd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#klncgpemyd .gt_column_spanner_outer:last-child {
+#idulaqnvvd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#klncgpemyd .gt_column_spanner {
+#idulaqnvvd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -536,7 +489,7 @@ td {vertical-align: top;}
   width: 100%;
 }
 
-#klncgpemyd .gt_group_heading {
+#idulaqnvvd .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -558,7 +511,7 @@ td {vertical-align: top;}
   vertical-align: middle;
 }
 
-#klncgpemyd .gt_empty_group_heading {
+#idulaqnvvd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -573,15 +526,15 @@ td {vertical-align: top;}
   vertical-align: middle;
 }
 
-#klncgpemyd .gt_from_md > :first-child {
+#idulaqnvvd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#klncgpemyd .gt_from_md > :last-child {
+#idulaqnvvd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#klncgpemyd .gt_row {
+#idulaqnvvd .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -600,7 +553,7 @@ td {vertical-align: top;}
   overflow-x: hidden;
 }
 
-#klncgpemyd .gt_stub {
+#idulaqnvvd .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -612,7 +565,7 @@ td {vertical-align: top;}
   padding-left: 12px;
 }
 
-#klncgpemyd .gt_summary_row {
+#idulaqnvvd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -622,7 +575,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#klncgpemyd .gt_first_summary_row {
+#idulaqnvvd .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -632,7 +585,7 @@ td {vertical-align: top;}
   border-top-color: #D3D3D3;
 }
 
-#klncgpemyd .gt_grand_summary_row {
+#idulaqnvvd .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -642,7 +595,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#klncgpemyd .gt_first_grand_summary_row {
+#idulaqnvvd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -652,11 +605,11 @@ td {vertical-align: top;}
   border-top-color: #D3D3D3;
 }
 
-#klncgpemyd .gt_striped {
+#idulaqnvvd .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#klncgpemyd .gt_table_body {
+#idulaqnvvd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -665,7 +618,7 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#klncgpemyd .gt_footnotes {
+#idulaqnvvd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -679,13 +632,13 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#klncgpemyd .gt_footnote {
+#idulaqnvvd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#klncgpemyd .gt_sourcenotes {
+#idulaqnvvd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -699,46 +652,46 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#klncgpemyd .gt_sourcenote {
+#idulaqnvvd .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#klncgpemyd .gt_left {
+#idulaqnvvd .gt_left {
   text-align: left;
 }
 
-#klncgpemyd .gt_center {
+#idulaqnvvd .gt_center {
   text-align: center;
 }
 
-#klncgpemyd .gt_right {
+#idulaqnvvd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#klncgpemyd .gt_font_normal {
+#idulaqnvvd .gt_font_normal {
   font-weight: normal;
 }
 
-#klncgpemyd .gt_font_bold {
+#idulaqnvvd .gt_font_bold {
   font-weight: bold;
 }
 
-#klncgpemyd .gt_font_italic {
+#idulaqnvvd .gt_font_italic {
   font-style: italic;
 }
 
-#klncgpemyd .gt_super {
+#idulaqnvvd .gt_super {
   font-size: 65%;
 }
 
-#klncgpemyd .gt_footnote_marks {
+#idulaqnvvd .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="klncgpemyd" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="table gt_table">
+<div id="idulaqnvvd" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="table gt_table">
 <thead class="gt_col_headings"><tr>
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Column</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Function</th>
@@ -899,7 +852,7 @@ td {vertical-align: top;}
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#qejirsxmme .gt_table {
+#ujchmmqfvy .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -924,7 +877,7 @@ td {vertical-align: top;}
   border-left-color: #D3D3D3;
 }
 
-#qejirsxmme .gt_heading {
+#ujchmmqfvy .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -936,7 +889,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#qejirsxmme .gt_title {
+#ujchmmqfvy .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -946,7 +899,7 @@ td {vertical-align: top;}
   border-bottom-width: 0;
 }
 
-#qejirsxmme .gt_subtitle {
+#ujchmmqfvy .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -956,13 +909,13 @@ td {vertical-align: top;}
   border-top-width: 0;
 }
 
-#qejirsxmme .gt_bottom_border {
+#ujchmmqfvy .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qejirsxmme .gt_col_headings {
+#ujchmmqfvy .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -977,7 +930,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#qejirsxmme .gt_col_heading {
+#ujchmmqfvy .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -997,7 +950,7 @@ td {vertical-align: top;}
   overflow-x: hidden;
 }
 
-#qejirsxmme .gt_column_spanner_outer {
+#ujchmmqfvy .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1009,15 +962,15 @@ td {vertical-align: top;}
   padding-right: 4px;
 }
 
-#qejirsxmme .gt_column_spanner_outer:first-child {
+#ujchmmqfvy .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qejirsxmme .gt_column_spanner_outer:last-child {
+#ujchmmqfvy .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qejirsxmme .gt_column_spanner {
+#ujchmmqfvy .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1029,7 +982,7 @@ td {vertical-align: top;}
   width: 100%;
 }
 
-#qejirsxmme .gt_group_heading {
+#ujchmmqfvy .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1051,7 +1004,7 @@ td {vertical-align: top;}
   vertical-align: middle;
 }
 
-#qejirsxmme .gt_empty_group_heading {
+#ujchmmqfvy .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1066,15 +1019,15 @@ td {vertical-align: top;}
   vertical-align: middle;
 }
 
-#qejirsxmme .gt_from_md > :first-child {
+#ujchmmqfvy .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qejirsxmme .gt_from_md > :last-child {
+#ujchmmqfvy .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qejirsxmme .gt_row {
+#ujchmmqfvy .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1093,7 +1046,7 @@ td {vertical-align: top;}
   overflow-x: hidden;
 }
 
-#qejirsxmme .gt_stub {
+#ujchmmqfvy .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1105,7 +1058,7 @@ td {vertical-align: top;}
   padding-left: 12px;
 }
 
-#qejirsxmme .gt_summary_row {
+#ujchmmqfvy .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1115,7 +1068,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#qejirsxmme .gt_first_summary_row {
+#ujchmmqfvy .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1125,7 +1078,7 @@ td {vertical-align: top;}
   border-top-color: #D3D3D3;
 }
 
-#qejirsxmme .gt_grand_summary_row {
+#ujchmmqfvy .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1135,7 +1088,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#qejirsxmme .gt_first_grand_summary_row {
+#ujchmmqfvy .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1145,11 +1098,11 @@ td {vertical-align: top;}
   border-top-color: #D3D3D3;
 }
 
-#qejirsxmme .gt_striped {
+#ujchmmqfvy .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qejirsxmme .gt_table_body {
+#ujchmmqfvy .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1158,7 +1111,7 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#qejirsxmme .gt_footnotes {
+#ujchmmqfvy .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1172,13 +1125,13 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#qejirsxmme .gt_footnote {
+#ujchmmqfvy .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#qejirsxmme .gt_sourcenotes {
+#ujchmmqfvy .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1192,46 +1145,46 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#qejirsxmme .gt_sourcenote {
+#ujchmmqfvy .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#qejirsxmme .gt_left {
+#ujchmmqfvy .gt_left {
   text-align: left;
 }
 
-#qejirsxmme .gt_center {
+#ujchmmqfvy .gt_center {
   text-align: center;
 }
 
-#qejirsxmme .gt_right {
+#ujchmmqfvy .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qejirsxmme .gt_font_normal {
+#ujchmmqfvy .gt_font_normal {
   font-weight: normal;
 }
 
-#qejirsxmme .gt_font_bold {
+#ujchmmqfvy .gt_font_bold {
   font-weight: bold;
 }
 
-#qejirsxmme .gt_font_italic {
+#ujchmmqfvy .gt_font_italic {
   font-style: italic;
 }
 
-#qejirsxmme .gt_super {
+#ujchmmqfvy .gt_super {
   font-size: 65%;
 }
 
-#qejirsxmme .gt_footnote_marks {
+#ujchmmqfvy .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="qejirsxmme" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="table gt_table">
+<div id="ujchmmqfvy" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="table gt_table">
 <thead class="gt_col_headings"><tr>
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Model</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Notes</th>
