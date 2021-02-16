@@ -98,7 +98,7 @@ test_that("tidy_plus_plus() with mice objects", {
   skip_if(packageVersion("mice") < "3.12.0")
   # impute missing values
   imputed_trial <-
-    suppressWarnings(mice::mice(gtsummary::trial, maxit = 2, m = 2))
+    suppressWarnings(mice::mice(gtsummary::trial, maxit = 2, m = 2, print = FALSE))
   # build regression model
   mod <- with(imputed_trial, lm(age ~ marker + grade))
 
@@ -186,16 +186,12 @@ test_that("tidy_plus_plus() works with lme4::glmer", {
 
 
 test_that("tidy_plus_plus() works with lme4::glmer.nb", {
-  dd <- expand.grid(
-    f1 = factor(1:3),
-    f2 = LETTERS[1:2], g = 1:9, rep = 1:15,
-    KEEP.OUT.ATTRS = FALSE
-  )
-  mu <- 5*(-4 + with(dd, as.integer(f1) + 4*as.numeric(f2)))
-  dd$y <- rnbinom(nrow(dd), mu = mu, size = 0.5)
   skip_if_not_installed("lme4")
+  skip_if_not_installed("MASS")
   library(lme4)
-  mod <- lme4::glmer.nb(y ~ f1*f2 + (1|g), data = dd)
+  suppressMessages(
+    mod <- lme4::glmer.nb(Days ~ Age + Eth + (1|Sex), data = MASS::quine)
+  )
   skip_if_not_installed("broom.mixed")
   expect_error(
     res <- mod %>% tidy_plus_plus(),
@@ -243,7 +239,12 @@ test_that("tidy_plus_plus() works with survival::clogit", {
 
 
 test_that("tidy_plus_plus() works with nnet::multinom", {
-  mod <- nnet::multinom(grade ~ stage + marker + age, data = gtsummary::trial, trace = FALSE)
+  suppressMessages(
+    mod <- nnet::multinom(
+      grade ~ stage + marker + age, data = gtsummary::trial,
+      trace = FALSE
+    )
+  )
   expect_error(
     res <- mod %>% tidy_plus_plus(),
     NA
