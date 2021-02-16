@@ -122,7 +122,7 @@ tidy_plus_plus <- function(
       exponentiate = exponentiate,
       ...
     ) %>%
-    tidy_identify_variables(strict = strict, quiet = quiet) %>%
+    tidy_identify_variables(quiet = quiet) %>%
     tidy_add_contrasts()
   if (add_reference_rows) {
     res <- res %>% tidy_add_reference_rows(
