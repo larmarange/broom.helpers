@@ -32,7 +32,7 @@ Imports:
     tibble,
     tidyr
 Suggests: 
-    brms,
+    brms (>=2.13.0),
     broom.mixed,
     cmprsk,
     covr,
