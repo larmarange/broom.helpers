@@ -14,7 +14,7 @@
 #' @export
 #' @family tidy_helpers
 #' @examples
-#' if (require(lme4) & require(broom.mixed)) {
+#' if (require(lme4) & require(broom.mixed) & require(gtsummary)) {
 #'   mod <- lme4::lmer(marker ~ stage + (1|grade) + (death|response), trial)
 #'   mod %>% tidy_and_attach() %>% tidy_disambiguate_terms()
 #' }
