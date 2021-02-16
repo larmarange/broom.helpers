@@ -12,6 +12,9 @@ tidy_disambiguate_terms(x, sep = ".", model = tidy_get_model(x), quiet = FALSE)
 \item{sep}{character, separator added between group name and term}
 
 \item{model}{the corresponding model, if not attached to \code{x}}
+
+\item{quiet}{logical argument whether broom.helpers should not return a message
+when requested output cannot be generated. Default is FALSE}
 }
 \description{
 For mixed models, the \code{term} column returned by \code{broom.mixed} may have
@@ -22,7 +25,7 @@ any term if there is no \code{group} column in \code{x}. The original term value
 is kept in a new column \code{original_term}.
 }
 \examples{
-if (require(lme4) & require(broom.mixed)) {
+if (require(lme4) & require(broom.mixed) & require(gtsummary)) {
   mod <- lme4::lmer(marker ~ stage + (1|grade) + (death|response), trial)
   mod \%>\% tidy_and_attach() \%>\% tidy_disambiguate_terms()
 }

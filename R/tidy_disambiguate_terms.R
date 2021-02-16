@@ -11,6 +11,7 @@
 #' @param x a tidy tibble
 #' @param sep character, separator added between group name and term
 #' @param model the corresponding model, if not attached to `x`
+#' @inheritParams tidy_plus_plus
 #' @export
 #' @family tidy_helpers
 #' @examples
@@ -37,10 +38,10 @@ tidy_disambiguate_terms <- function(x, sep = ".", model = tidy_get_model(x), qui
       dplyr::mutate(
         term = dplyr::if_else(
           is.na(.data$group),
-          term,
+          .data$term,
           paste(.data$group, .data$term, sep = sep)
         ),
-        original_term = term
+        original_term = .data$term
       )
   }
 
