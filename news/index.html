@@ -122,18 +122,21 @@
 <a href="#broomhelpers-development-version" class="anchor"></a>broom.helpers (development version)<small> Unreleased </small>
 </h1>
 <ul>
-<li><p>Replaced <code>usethis::ui_*()</code> messaging with <code>cli::cli_*()</code> (<a href='https://github.com/larmarange/broom.helpers/issues/94'>#94</a>)</p></li>
-<li><p>For mixed models, <code>var_type</code> column is now equal to <code>"ran_pars"</code> or <code>"ran_vals"</code> for random-effect parameters and values, based of the <code>effect</code> column returned by <code><a href="https://generics.r-lib.org/reference/tidy.html">broom.mixed::tidy()</a></code> (<a href='https://github.com/larmarange/broom.helpers/issues/90'>#90</a>)</p></li>
-<li><p>Support of <code><a href="https://rdrr.io/pkg/lfe/man/felm.html">lfe::felm()</a></code> models (<a href='https://github.com/larmarange/broom.helpers/issues/79'>#79</a>)</p></li>
-<li><p>Support of <code><a href="https://rdrr.io/pkg/brms/man/brm.html">brms::brm()</a></code> models (<a href='https://github.com/larmarange/broom.helpers/issues/89'>#89</a>)</p></li>
-<li><p>Basic support of <code><a href="https://rdrr.io/pkg/cmprsk/man/crr.html">cmprsk::crr()</a></code> models (<a href='https://github.com/larmarange/broom.helpers/issues/91'>#91</a>)</p></li>
-<li><p>Models with categorical variable and no intercept now supported (<a href='https://github.com/larmarange/broom.helpers/issues/85'>#85</a>)</p></li>
-<li><p>New contrasts type (“no.contrast”) returned by <code>model_list_contrasts</code>()</p></li>
-<li><p>Added support for <code><a href="https://rdrr.io/pkg/mgcv/man/gam.html">mgcv::gam()</a></code> models. (<a href='https://github.com/larmarange/broom.helpers/issues/82'>#82</a>)</p></li>
-<li><p>New function <code><a href="../reference/tidy_add_n.html">tidy_add_n()</a></code> to add the number of observations (and for relevant models the number of events and exposure time) (<a href='https://github.com/larmarange/broom.helpers/issues/64'>#64</a>)</p></li>
-<li><p>New option <code>add_n</code> in <code><a href="../reference/tidy_plus_plus.html">tidy_plus_plus()</a></code> (<a href='https://github.com/larmarange/broom.helpers/issues/64'>#64</a>)</p></li>
-<li><p>New functions <code><a href="../reference/model_get_n.html">model_get_n()</a></code>, <code><a href="../reference/model_get_weights.html">model_get_weights()</a></code>, <code><a href="../reference/model_get_offset.html">model_get_offset()</a></code>, <code><a href="../reference/model_get_response.html">model_get_response()</a></code> and <code><a href="../reference/model_compute_terms_contributions.html">model_compute_terms_contributions()</a></code> (<a href='https://github.com/larmarange/broom.helpers/issues/64'>#64</a>)</p></li>
-<li><p>Bug fix in <code><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels()</a></code> for variables with non standard names (<a href='https://github.com/larmarange/broom.helpers/issues/77'>#77</a>)</p></li>
+<li>Replaced <code>usethis::ui_*()</code> messaging with <code>cli::cli_*()</code> (<a href='https://github.com/larmarange/broom.helpers/issues/94'>#94</a>)</li>
+<li>For mixed models, <code>var_type</code> column is now equal to <code>"ran_pars"</code> or <code>"ran_vals"</code> for random-effect parameters and values, based of the <code>effect</code> column returned by <code><a href="https://generics.r-lib.org/reference/tidy.html">broom.mixed::tidy()</a></code> (<a href='https://github.com/larmarange/broom.helpers/issues/90'>#90</a>)</li>
+<li>Support of <code><a href="https://rdrr.io/pkg/lfe/man/felm.html">lfe::felm()</a></code> models (<a href='https://github.com/larmarange/broom.helpers/issues/79'>#79</a>)</li>
+<li>Support of <code><a href="https://rdrr.io/pkg/brms/man/brm.html">brms::brm()</a></code> models (<a href='https://github.com/larmarange/broom.helpers/issues/89'>#89</a>)</li>
+<li>Basic support of <code><a href="https://rdrr.io/pkg/cmprsk/man/crr.html">cmprsk::crr()</a></code> models (<a href='https://github.com/larmarange/broom.helpers/issues/91'>#91</a>)</li>
+<li>Basic support of <code><a href="https://rdrr.io/r/stats/nls.html">stats::nls()</a></code> models (<a href='https://github.com/larmarange/broom.helpers/issues/97'>#97</a>)</li>
+<li>
+<code>strict</code> argument removed from <code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code> (<a href='https://github.com/larmarange/broom.helpers/issues/99'>#99</a>)</li>
+<li>Models with categorical variable and no intercept now supported (<a href='https://github.com/larmarange/broom.helpers/issues/85'>#85</a>)</li>
+<li>New contrasts type (“no.contrast”) returned by <code>model_list_contrasts</code>()</li>
+<li>Added support for <code><a href="https://rdrr.io/pkg/mgcv/man/gam.html">mgcv::gam()</a></code> models. (<a href='https://github.com/larmarange/broom.helpers/issues/82'>#82</a>)</li>
+<li>New function <code><a href="../reference/tidy_add_n.html">tidy_add_n()</a></code> to add the number of observations (and for relevant models the number of events and exposure time) (<a href='https://github.com/larmarange/broom.helpers/issues/64'>#64</a>)</li>
+<li>New option <code>add_n</code> in <code><a href="../reference/tidy_plus_plus.html">tidy_plus_plus()</a></code> (<a href='https://github.com/larmarange/broom.helpers/issues/64'>#64</a>)</li>
+<li>New functions <code><a href="../reference/model_get_n.html">model_get_n()</a></code>, <code><a href="../reference/model_get_weights.html">model_get_weights()</a></code>, <code><a href="../reference/model_get_offset.html">model_get_offset()</a></code>, <code><a href="../reference/model_get_response.html">model_get_response()</a></code> and <code><a href="../reference/model_compute_terms_contributions.html">model_compute_terms_contributions()</a></code> (<a href='https://github.com/larmarange/broom.helpers/issues/64'>#64</a>)</li>
+<li>Bug fix in <code><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels()</a></code> for variables with non standard names (<a href='https://github.com/larmarange/broom.helpers/issues/77'>#77</a>)</li>
 </ul>
 </div>
     <div id="broomhelpers-110" class="section level1">
