@@ -127,7 +127,7 @@ categorical variable and a <code>contrasts_type</code> column equal to
 "treatment", "sum", "poly", "helmert", "other" or "no.contrast".</p>
     </div>
 
-    <pre class="usage"><span class='fu'>tidy_add_contrasts</span><span class='op'>(</span><span class='va'>x</span>, model <span class='op'>=</span> <span class='fu'><a href='tidy_attach_model.html'>tidy_get_model</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>tidy_add_contrasts</span><span class='op'>(</span><span class='va'>x</span>, model <span class='op'>=</span> <span class='fu'><a href='tidy_attach_model.html'>tidy_get_model</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>, quiet <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -139,6 +139,10 @@ categorical variable and a <code>contrasts_type</code> column equal to
     <tr>
       <th>model</th>
       <td><p>the corresponding model, if not attached to <code>x</code></p></td>
+    </tr>
+    <tr>
+      <th>quiet</th>
+      <td><p>logical argument whether broom.helpers should not return a message when <code><a href='tidy_disambiguate_terms.html'>tidy_disambiguate_terms()</a></code> was already applied</p></td>
     </tr>
     </table>
 
@@ -157,6 +161,7 @@ categorical variable and a <code>contrasts_type</code> column equal to
 <code><a href='tidy_add_term_labels.html'>tidy_add_term_labels</a>()</code>,
 <code><a href='tidy_add_variable_labels.html'>tidy_add_variable_labels</a>()</code>,
 <code><a href='tidy_attach_model.html'>tidy_attach_model</a>()</code>,
+<code><a href='tidy_disambiguate_terms.html'>tidy_disambiguate_terms</a>()</code>,
 <code><a href='tidy_identify_variables.html'>tidy_identify_variables</a>()</code>,
 <code><a href='tidy_plus_plus.html'>tidy_plus_plus</a>()</code>,
 <code><a href='tidy_remove_intercept.html'>tidy_remove_intercept</a>()</code>,
