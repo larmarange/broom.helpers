@@ -157,6 +157,7 @@ test_that("tidy_plus_plus() works with stats::aov", {
 })
 
 test_that("tidy_plus_plus() works with lme4::lmer", {
+  skip_if_not_installed("lme4")
   mod <- lme4::lmer(Reaction ~ Days + (Days | Subject), lme4::sleepstudy)
   skip_if_not_installed("broom.mixed")
   expect_error(
@@ -167,6 +168,7 @@ test_that("tidy_plus_plus() works with lme4::lmer", {
 
 
 test_that("tidy_plus_plus() works with lme4::glmer", {
+  skip_if_not_installed("lme4")
   mod <- lme4::glmer(cbind(incidence, size - incidence) ~ period + (1 | herd),
                      family = binomial, data = lme4::cbpp
   )

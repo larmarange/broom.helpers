@@ -13,6 +13,8 @@ tidy_plus_plus(
   term_labels = NULL,
   interaction_sep = " * ",
   categorical_terms_pattern = "{level}",
+  disambiguate_terms = TRUE,
+  disambiguate_sep = ".",
   add_reference_rows = TRUE,
   no_reference_row = NULL,
   add_estimate_to_reference_rows = TRUE,
@@ -47,6 +49,11 @@ but a bad idea if there is no log or logit link; defaults to \code{FALSE}.}
 \item{categorical_terms_pattern}{a \link[glue:glue]{glue pattern} for
 labels of categorical terms with treatment or sum contrasts
 (see \code{\link[=model_list_terms_levels]{model_list_terms_levels()}})}
+
+\item{disambiguate_terms}{should terms be disambiguated with
+\code{\link[=tidy_disambiguate_terms]{tidy_disambiguate_terms()}}? (default \code{TRUE})}
+
+\item{disambiguate_sep}{separator for \code{\link[=tidy_disambiguate_terms]{tidy_disambiguate_terms()}}}
 
 \item{add_reference_rows}{should reference rows be added?}
 
@@ -84,6 +91,7 @@ when requested output cannot be generated. Default is FALSE}
 This function will apply sequentially:
 \itemize{
 \item \code{\link[=tidy_and_attach]{tidy_and_attach()}}
+\item \code{\link[=tidy_disambiguate_terms]{tidy_disambiguate_terms()}}
 \item \code{\link[=tidy_identify_variables]{tidy_identify_variables()}}
 \item \code{\link[=tidy_add_contrasts]{tidy_add_contrasts()}}
 \item \code{\link[=tidy_add_reference_rows]{tidy_add_reference_rows()}}
@@ -158,6 +166,7 @@ Other tidy_helpers:
 \code{\link{tidy_add_term_labels}()},
 \code{\link{tidy_add_variable_labels}()},
 \code{\link{tidy_attach_model}()},
+\code{\link{tidy_disambiguate_terms}()},
 \code{\link{tidy_identify_variables}()},
 \code{\link{tidy_remove_intercept}()},
 \code{\link{tidy_select_variables}()}

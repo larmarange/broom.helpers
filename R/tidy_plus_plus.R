@@ -2,6 +2,7 @@
 #'
 #' This function will apply sequentially:
 #' * [tidy_and_attach()]
+#' * [tidy_disambiguate_terms()]
 #' * [tidy_identify_variables()]
 #' * [tidy_add_contrasts()]
 #' * [tidy_add_reference_rows()]
@@ -27,6 +28,9 @@
 #' @param categorical_terms_pattern a [glue pattern][glue::glue()] for
 #' labels of categorical terms with treatment or sum contrasts
 #' (see [model_list_terms_levels()])
+#' @param disambiguate_terms should terms be disambiguated with
+#' [`tidy_disambiguate_terms()`]? (default `TRUE`)
+#' @param disambiguate_sep separator for [`tidy_disambiguate_terms()`]
 #' @param add_reference_rows should reference rows be added?
 #' @param no_reference_row variables (accepts [tidyselect][dplyr::select] notation)
 #' for those no reference row should be added, when `add_reference_rows = TRUE`
@@ -103,6 +107,8 @@ tidy_plus_plus <- function(
                            term_labels = NULL,
                            interaction_sep = " * ",
                            categorical_terms_pattern = "{level}",
+                           disambiguate_terms = TRUE,
+                           disambiguate_sep = ".",
                            add_reference_rows = TRUE,
                            no_reference_row = NULL,
                            add_estimate_to_reference_rows = TRUE,
@@ -121,19 +127,29 @@ tidy_plus_plus <- function(
       conf.int = conf.int,
       exponentiate = exponentiate,
       ...
-    ) %>%
+    )
+
+  if (disambiguate_terms) {
+    res <- res %>%
+      tidy_disambiguate_terms(sep = disambiguate_sep, quiet = quiet)
+  }
+
+  res <- res %>%
     tidy_identify_variables(quiet = quiet) %>%
     tidy_add_contrasts()
+
   if (add_reference_rows) {
     res <- res %>% tidy_add_reference_rows(
       no_reference_row = {{ no_reference_row }},
       quiet = quiet
     )
   }
+
   if (add_reference_rows & add_estimate_to_reference_rows) {
     res <- res %>%
       tidy_add_estimate_to_reference_rows(exponentiate = exponentiate, quiet = quiet)
   }
+
   res <- res %>%
     tidy_add_variable_labels(
       labels = variable_labels,
@@ -146,23 +162,30 @@ tidy_plus_plus <- function(
       categorical_terms_pattern = categorical_terms_pattern,
       quiet = quiet
     )
+
   if (add_header_rows) {
     res <- res %>%
       tidy_add_header_rows(show_single_row = {{ show_single_row }},
                            strict = strict, quiet = quiet)
   }
+
   if (add_n) {
     res <- res %>% tidy_add_n()
   }
+
   if (!intercept) {
     res <- res %>% tidy_remove_intercept()
   }
-  res <- res %>% tidy_select_variables(
-    include = {{ include }},
-  ) %>%
+
+  res <- res %>%
+    tidy_select_variables(
+      include = {{ include }},
+    ) %>%
     tidy_add_coefficients_type()
+
   if (!keep_model) {
     res <- res %>% tidy_detach_model()
   }
+
   res
 }

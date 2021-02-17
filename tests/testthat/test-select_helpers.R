@@ -196,10 +196,11 @@ test_that("select_helpers: tidy_plus_plus", {
   )
   expect_equal(
     res$term,
-    c("sd__(Intercept)", "cor__(Intercept).stageT2", "cor__(Intercept).stageT3",
-      "cor__(Intercept).stageT4", "sd__stageT2", "cor__stageT2.stageT3",
-      "cor__stageT2.stageT4", "sd__stageT3", "cor__stageT3.stageT4",
-      "sd__stageT4", "sd__(Intercept)", "sd__Observation")
+    c("grade.sd__(Intercept)", "grade.cor__(Intercept).stageT2",
+      "grade.cor__(Intercept).stageT3", "grade.cor__(Intercept).stageT4",
+      "grade.sd__stageT2", "grade.cor__stageT2.stageT3", "grade.cor__stageT2.stageT4",
+      "grade.sd__stageT3", "grade.cor__stageT3.stageT4", "grade.sd__stageT4",
+      "grade.1.sd__(Intercept)", "Residual.sd__Observation")
   )
   res <- mod3 %>% tidy_plus_plus(
     tidy_fun = broom.mixed::tidy,

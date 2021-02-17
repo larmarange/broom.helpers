@@ -1,5 +1,8 @@
 # broom.helpers (development version)
 
+- New function `tidy_disambiguate_terms()` for disambiguating random-effect 
+  terms in mixed models and new options for `tidy_plus_plus()`: 
+  `disambiguate_terms` (`TRUE` by default) and `disambiguate_sep` (#98)
 - Replaced `usethis::ui_*()` messaging with `cli::cli_*()` (#94)
 - For mixed models, `var_type` column is now equal to `"ran_pars"` or 
   `"ran_vals"` for random-effect parameters and values, based of the 

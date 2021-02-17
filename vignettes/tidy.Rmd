@@ -261,6 +261,7 @@ td {vertical-align: top;}
 ```{r, echo=FALSE}
 tibble::tribble(
   ~Column, ~Function, ~Description,
+  'original_term', '`tidy_disambiguate_terms()`', 'Original term before disambiguation. This columns is added only when disambiguation is needed (i.e. for mixed models).',
   'variable', '`tidy_identify_variables()`', 'String of variable names from the model. For categorical variables and polynomial terms defined with `stats::poly()`, terms belonging to the variable are identified.',
   'var_class', '`tidy_identify_variables()`', "Class of the variable.",
   'var_type', '`tidy_identify_variables()`', "One of 'intercept', 'continuous', 'dichotomous', 'categorical', 'interaction', 'ran_pars' or 'ran_vals'",
@@ -278,8 +279,7 @@ tibble::tribble(
     gt::gt() %>%
   gt::fmt_markdown(columns = TRUE) %>%
   gt::tab_options(
-    column_labels.font.weight = "bold",
-    
+    column_labels.font.weight = "bold"
   ) %>%
   gt::opt_row_striping() %>%
   gt::tab_style("vertical-align:top; font-size: 12px;", gt::cells_body())
