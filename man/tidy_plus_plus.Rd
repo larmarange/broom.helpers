@@ -13,6 +13,8 @@ tidy_plus_plus(
   term_labels = NULL,
   interaction_sep = " * ",
   categorical_terms_pattern = "{level}",
+  disambiguate_terms = TRUE,
+  disambiguate_sep = ".",
   add_reference_rows = TRUE,
   no_reference_row = NULL,
   add_estimate_to_reference_rows = TRUE,
@@ -21,7 +23,6 @@ tidy_plus_plus(
   add_n = TRUE,
   intercept = FALSE,
   include = everything(),
-  disambiguate_sep = ".",
   keep_model = FALSE,
   quiet = FALSE,
   strict = FALSE,
@@ -49,6 +50,11 @@ but a bad idea if there is no log or logit link; defaults to \code{FALSE}.}
 labels of categorical terms with treatment or sum contrasts
 (see \code{\link[=model_list_terms_levels]{model_list_terms_levels()}})}
 
+\item{disambiguate_terms}{should terms be disambiguated with
+\code{\link[=tidy_disambiguate_terms]{tidy_disambiguate_terms()}}? (default \code{TRUE})}
+
+\item{disambiguate_sep}{separator for \code{\link[=tidy_disambiguate_terms]{tidy_disambiguate_terms()}}}
+
 \item{add_reference_rows}{should reference rows be added?}
 
 \item{no_reference_row}{variables (accepts \link[dplyr:select]{tidyselect} notation)
@@ -70,8 +76,6 @@ on a single row (accepts \link[dplyr:select]{tidyselect} notation), when
 syntax. Use \code{-} to remove a variable. Default is \code{everything()}.
 See also \code{\link[=all_continuous]{all_continuous()}}, \code{\link[=all_categorical]{all_categorical()}}, \code{\link[=all_dichotomous]{all_dichotomous()}}
 and \code{\link[=all_interaction]{all_interaction()}}}
-
-\item{disambiguate_sep}{separator for \code{\link[=tidy_disambiguate_terms]{tidy_disambiguate_terms()}}}
 
 \item{keep_model}{should the model be kept as an attribute of the final result?}
 
