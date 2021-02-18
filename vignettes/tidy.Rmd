@@ -252,7 +252,7 @@ model_4 %>%
 ## Column Details
 
 Below is a summary of the additional columns that may be added by a `broom.helpers` function.
-The table includes the column name, the function that adds the function, and a short description of the information in the column.
+The table includes the column name, the function that adds the column, and a short description of the information in the column.
 
 <style>
 td {vertical-align: top;}
@@ -286,6 +286,37 @@ tibble::tribble(
 ```
 
 Note: `tidy_add_estimate_to_reference_rows()` does not create an additional column; rather, it populates the 'estimate' column for reference rows.
+
+
+
+## Additional attributes
+
+Below is a list of additional attributes that `broom.helpers` may attached to the results. The table includes the attribute name, the function that adds the attritude, and a short description.
+
+<style>
+td {vertical-align: top;}
+</style>
+
+```{r, echo=FALSE}
+tibble::tribble(
+  ~Attribute, ~Function, ~Description,
+  'exponentiate', '`tidy_and_attach()`', 'Indicates if estimates were exponentiated',
+  'coefficients_type', '`tidy_add_coefficients_type()`', 'Type of coefficients',
+  'coefficients_label', '`tidy_add_coefficients_type()`', 'Coefficients label',
+  'variable_labels', '`tidy_add_variable_labels()`', 'Custom variable labels passed to `tidy_add_variable_labels()`',
+  'term_labels', '`tidy_add_term_labels()`', 'Custom term labels passed to `tidy_add_term_labels()`',
+  'N_obs', '`tidy_add_n()`', 'Total number of observations',
+  'N_event', '`tidy_add_n()`', 'Total number of events',
+  'Exposure', '`tidy_add_n()`', 'Total of exposure time'
+) %>%
+    gt::gt() %>%
+  gt::fmt_markdown(columns = TRUE) %>%
+  gt::tab_options(
+    column_labels.font.weight = "bold"
+  ) %>%
+  gt::opt_row_striping() %>%
+  gt::tab_style("vertical-align:top; font-size: 12px;", gt::cells_body())
+```
 
 ## Supported models
 
