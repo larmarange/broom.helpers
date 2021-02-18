@@ -54,36 +54,36 @@ mod1 <- lm(Sepal.Length ~ Sepal.Width + Species, data = iris)
 library(broom.helpers)
 ex1 <- mod1 %>% tidy_plus_plus()
 ex1
-#> [90m# A tibble: 4 x 17[39m
+#> # A tibble: 4 x 17
 #>   term  variable var_label var_class var_type var_nlevels contrasts
-#>   [3m[90m<chr>[39m[23m [3m[90m<chr>[39m[23m    [3m[90m<chr>[39m[23m     [3m[90m<chr>[39m[23m     [3m[90m<chr>[39m[23m          [3m[90m<int>[39m[23m [3m[90m<chr>[39m[23m    
-#> [90m1[39m Sepa… Sepal.W… Sepal.Wi… numeric   continu…          [31mNA[39m [31mNA[39m       
-#> [90m2[39m Spec… Species  Species   factor    categor…           3 contr.tr…
-#> [90m3[39m Spec… Species  Species   factor    categor…           3 contr.tr…
-#> [90m4[39m Spec… Species  Species   factor    categor…           3 contr.tr…
-#> [90m# … with 10 more variables: contrasts_type [3m[90m<chr>[90m[23m, reference_row [3m[90m<lgl>[90m[23m,[39m
-#> [90m#   label [3m[90m<chr>[90m[23m, n_obs [3m[90m<dbl>[90m[23m, estimate [3m[90m<dbl>[90m[23m, std.error [3m[90m<dbl>[90m[23m, statistic [3m[90m<dbl>[90m[23m,[39m
-#> [90m#   p.value [3m[90m<dbl>[90m[23m, conf.low [3m[90m<dbl>[90m[23m, conf.high [3m[90m<dbl>[90m[23m[39m
+#>   <chr> <chr>    <chr>     <chr>     <chr>          <int> <chr>    
+#> 1 Sepa… Sepal.W… Sepal.Wi… numeric   continu…          NA <NA>     
+#> 2 Spec… Species  Species   factor    categor…           3 contr.tr…
+#> 3 Spec… Species  Species   factor    categor…           3 contr.tr…
+#> 4 Spec… Species  Species   factor    categor…           3 contr.tr…
+#> # … with 10 more variables: contrasts_type <chr>, reference_row <lgl>,
+#> #   label <chr>, n_obs <dbl>, estimate <dbl>, std.error <dbl>, statistic <dbl>,
+#> #   p.value <dbl>, conf.low <dbl>, conf.high <dbl>
 dplyr::glimpse(ex1)
 #> Rows: 4
 #> Columns: 17
-#> $ term           [3m[90m<chr>[39m[23m "Sepal.Width", "Speciessetosa", "Speciesversicolor", "…
-#> $ variable       [3m[90m<chr>[39m[23m "Sepal.Width", "Species", "Species", "Species"
-#> $ var_label      [3m[90m<chr>[39m[23m "Sepal.Width", "Species", "Species", "Species"
-#> $ var_class      [3m[90m<chr>[39m[23m "numeric", "factor", "factor", "factor"
-#> $ var_type       [3m[90m<chr>[39m[23m "continuous", "categorical", "categorical", "categoric…
-#> $ var_nlevels    [3m[90m<int>[39m[23m NA, 3, 3, 3
-#> $ contrasts      [3m[90m<chr>[39m[23m NA, "contr.treatment", "contr.treatment", "contr.treat…
-#> $ contrasts_type [3m[90m<chr>[39m[23m NA, "treatment", "treatment", "treatment"
-#> $ reference_row  [3m[90m<lgl>[39m[23m NA, TRUE, FALSE, FALSE
-#> $ label          [3m[90m<chr>[39m[23m "Sepal.Width", "setosa", "versicolor", "virginica"
-#> $ n_obs          [3m[90m<dbl>[39m[23m 150, 50, 50, 50
-#> $ estimate       [3m[90m<dbl>[39m[23m 0.8035609, 0.0000000, 1.4587431, 1.9468166
-#> $ std.error      [3m[90m<dbl>[39m[23m 0.1063390, NA, 0.1121079, 0.1000150
-#> $ statistic      [3m[90m<dbl>[39m[23m 7.556598, NA, 13.011954, 19.465255
-#> $ p.value        [3m[90m<dbl>[39m[23m 4.187340e-12, NA, 3.478232e-26, 2.094475e-42
-#> $ conf.low       [3m[90m<dbl>[39m[23m 0.5933983, NA, 1.2371791, 1.7491525
-#> $ conf.high      [3m[90m<dbl>[39m[23m 1.013723, NA, 1.680307, 2.144481
+#> $ term           <chr> "Sepal.Width", "Speciessetosa", "Speciesversicolor", "…
+#> $ variable       <chr> "Sepal.Width", "Species", "Species", "Species"
+#> $ var_label      <chr> "Sepal.Width", "Species", "Species", "Species"
+#> $ var_class      <chr> "numeric", "factor", "factor", "factor"
+#> $ var_type       <chr> "continuous", "categorical", "categorical", "categoric…
+#> $ var_nlevels    <int> NA, 3, 3, 3
+#> $ contrasts      <chr> NA, "contr.treatment", "contr.treatment", "contr.treat…
+#> $ contrasts_type <chr> NA, "treatment", "treatment", "treatment"
+#> $ reference_row  <lgl> NA, TRUE, FALSE, FALSE
+#> $ label          <chr> "Sepal.Width", "setosa", "versicolor", "virginica"
+#> $ n_obs          <dbl> 150, 50, 50, 50
+#> $ estimate       <dbl> 0.8035609, 0.0000000, 1.4587431, 1.9468166
+#> $ std.error      <dbl> 0.1063390, NA, 0.1121079, 0.1000150
+#> $ statistic      <dbl> 7.556598, NA, 13.011954, 19.465255
+#> $ p.value        <dbl> 4.187340e-12, NA, 3.478232e-26, 2.094475e-42
+#> $ conf.low       <dbl> 0.5933983, NA, 1.2371791, 1.7491525
+#> $ conf.high      <dbl> 1.013723, NA, 1.680307, 2.144481
 
 mod2 <- glm(
   response ~ poly(age, 3) + stage + grade * trt,
@@ -103,51 +103,51 @@ ex2 <- mod2 %>%
   )
 #> Loading required namespace: emmeans
 ex2
-#> [90m# A tibble: 17 x 19[39m
+#> # A tibble: 17 x 19
 #>    term  variable var_label var_class var_type var_nlevels header_row contrasts
-#>    [3m[90m<chr>[39m[23m [3m[90m<chr>[39m[23m    [3m[90m<chr>[39m[23m     [3m[90m<chr>[39m[23m     [3m[90m<chr>[39m[23m          [3m[90m<int>[39m[23m [3m[90m<lgl>[39m[23m      [3m[90m<chr>[39m[23m    
-#> [90m 1[39m [31mNA[39m    age      Age (in … nmatrix.3 continu…          [31mNA[39m TRUE       [31mNA[39m       
-#> [90m 2[39m poly… age      Age (in … nmatrix.3 continu…          [31mNA[39m FALSE      [31mNA[39m       
-#> [90m 3[39m poly… age      Age (in … nmatrix.3 continu…          [31mNA[39m FALSE      [31mNA[39m       
-#> [90m 4[39m poly… age      Age (in … nmatrix.3 continu…          [31mNA[39m FALSE      [31mNA[39m       
-#> [90m 5[39m [31mNA[39m    stage    T Stage   factor    categor…           4 TRUE       contr.tr…
-#> [90m 6[39m stag… stage    T Stage   factor    categor…           4 FALSE      contr.tr…
-#> [90m 7[39m stag… stage    T Stage   factor    categor…           4 FALSE      contr.tr…
-#> [90m 8[39m stag… stage    T Stage   factor    categor…           4 FALSE      contr.tr…
-#> [90m 9[39m stag… stage    T Stage   factor    categor…           4 FALSE      contr.tr…
-#> [90m10[39m [31mNA[39m    grade    Grade     factor    categor…           3 TRUE       contr.sum
-#> [90m11[39m grad… grade    Grade     factor    categor…           3 FALSE      contr.sum
-#> [90m12[39m grad… grade    Grade     factor    categor…           3 FALSE      contr.sum
-#> [90m13[39m grad… grade    Grade     factor    categor…           3 FALSE      contr.sum
-#> [90m14[39m trtD… trt      Chemothe… character dichoto…           2 [31mNA[39m         contr.tr…
-#> [90m15[39m [31mNA[39m    grade:t… Grade * … [31mNA[39m        interac…          [31mNA[39m TRUE       [31mNA[39m       
-#> [90m16[39m grad… grade:t… Grade * … [31mNA[39m        interac…          [31mNA[39m FALSE      [31mNA[39m       
-#> [90m17[39m grad… grade:t… Grade * … [31mNA[39m        interac…          [31mNA[39m FALSE      [31mNA[39m       
-#> [90m# … with 11 more variables: contrasts_type [3m[90m<chr>[90m[23m, reference_row [3m[90m<lgl>[90m[23m,[39m
-#> [90m#   label [3m[90m<chr>[90m[23m, n_obs [3m[90m<dbl>[90m[23m, n_event [3m[90m<dbl>[90m[23m, estimate [3m[90m<dbl>[90m[23m, std.error [3m[90m<dbl>[90m[23m,[39m
-#> [90m#   statistic [3m[90m<dbl>[90m[23m, p.value [3m[90m<dbl>[90m[23m, conf.low [3m[90m<dbl>[90m[23m, conf.high [3m[90m<dbl>[90m[23m[39m
+#>    <chr> <chr>    <chr>     <chr>     <chr>          <int> <lgl>      <chr>    
+#>  1 <NA>  age      Age (in … nmatrix.3 continu…          NA TRUE       <NA>     
+#>  2 poly… age      Age (in … nmatrix.3 continu…          NA FALSE      <NA>     
+#>  3 poly… age      Age (in … nmatrix.3 continu…          NA FALSE      <NA>     
+#>  4 poly… age      Age (in … nmatrix.3 continu…          NA FALSE      <NA>     
+#>  5 <NA>  stage    T Stage   factor    categor…           4 TRUE       contr.tr…
+#>  6 stag… stage    T Stage   factor    categor…           4 FALSE      contr.tr…
+#>  7 stag… stage    T Stage   factor    categor…           4 FALSE      contr.tr…
+#>  8 stag… stage    T Stage   factor    categor…           4 FALSE      contr.tr…
+#>  9 stag… stage    T Stage   factor    categor…           4 FALSE      contr.tr…
+#> 10 <NA>  grade    Grade     factor    categor…           3 TRUE       contr.sum
+#> 11 grad… grade    Grade     factor    categor…           3 FALSE      contr.sum
+#> 12 grad… grade    Grade     factor    categor…           3 FALSE      contr.sum
+#> 13 grad… grade    Grade     factor    categor…           3 FALSE      contr.sum
+#> 14 trtD… trt      Chemothe… character dichoto…           2 NA         contr.tr…
+#> 15 <NA>  grade:t… Grade * … <NA>      interac…          NA TRUE       <NA>     
+#> 16 grad… grade:t… Grade * … <NA>      interac…          NA FALSE      <NA>     
+#> 17 grad… grade:t… Grade * … <NA>      interac…          NA FALSE      <NA>     
+#> # … with 11 more variables: contrasts_type <chr>, reference_row <lgl>,
+#> #   label <chr>, n_obs <dbl>, n_event <dbl>, estimate <dbl>, std.error <dbl>,
+#> #   statistic <dbl>, p.value <dbl>, conf.low <dbl>, conf.high <dbl>
 dplyr::glimpse(ex2)
 #> Rows: 17
 #> Columns: 19
-#> $ term           [3m[90m<chr>[39m[23m NA, "poly(age, 3)1", "poly(age, 3)2", "poly(age, 3)3",…
-#> $ variable       [3m[90m<chr>[39m[23m "age", "age", "age", "age", "stage", "stage", "stage",…
-#> $ var_label      [3m[90m<chr>[39m[23m "Age (in years)", "Age (in years)", "Age (in years)", …
-#> $ var_class      [3m[90m<chr>[39m[23m "nmatrix.3", "nmatrix.3", "nmatrix.3", "nmatrix.3", "f…
-#> $ var_type       [3m[90m<chr>[39m[23m "continuous", "continuous", "continuous", "continuous"…
-#> $ var_nlevels    [3m[90m<int>[39m[23m NA, NA, NA, NA, 4, 4, 4, 4, 4, 3, 3, 3, 3, 2, NA, NA, …
-#> $ header_row     [3m[90m<lgl>[39m[23m TRUE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE, …
-#> $ contrasts      [3m[90m<chr>[39m[23m NA, NA, NA, NA, "contr.treatment(base=3)", "contr.trea…
-#> $ contrasts_type [3m[90m<chr>[39m[23m NA, NA, NA, NA, "treatment", "treatment", "treatment",…
-#> $ reference_row  [3m[90m<lgl>[39m[23m NA, NA, NA, NA, NA, FALSE, FALSE, TRUE, FALSE, NA, FAL…
-#> $ label          [3m[90m<chr>[39m[23m "Age (in years)", "Age (in years)", "Age (in years)²",…
-#> $ n_obs          [3m[90m<dbl>[39m[23m NA, 92, 56, 80, NA, 46, 50, 35, 42, NA, 63, 53, 57, 90…
-#> $ n_event        [3m[90m<dbl>[39m[23m NA, 31, 17, 22, NA, 17, 12, 13, 12, NA, 20, 16, 18, 30…
-#> $ estimate       [3m[90m<dbl>[39m[23m NA, 20.2416394, 1.2337899, 0.4931553, NA, 1.0047885, 0…
-#> $ std.error      [3m[90m<dbl>[39m[23m NA, 2.3254455, 2.3512842, 2.3936657, NA, 0.4959893, 0.…
-#> $ statistic      [3m[90m<dbl>[39m[23m NA, 1.29340459, 0.08935144, -0.29533409, NA, 0.0096313…
-#> $ p.value        [3m[90m<dbl>[39m[23m NA, 0.1958712, 0.9288026, 0.7677387, NA, 0.9923154, 0.…
-#> $ conf.low       [3m[90m<dbl>[39m[23m NA, 0.225454425, 0.007493208, 0.004745694, NA, 0.37977…
-#> $ conf.high      [3m[90m<dbl>[39m[23m NA, 2315.587655, 100.318341, 74.226179, NA, 2.683385, …
+#> $ term           <chr> NA, "poly(age, 3)1", "poly(age, 3)2", "poly(age, 3)3",…
+#> $ variable       <chr> "age", "age", "age", "age", "stage", "stage", "stage",…
+#> $ var_label      <chr> "Age (in years)", "Age (in years)", "Age (in years)", …
+#> $ var_class      <chr> "nmatrix.3", "nmatrix.3", "nmatrix.3", "nmatrix.3", "f…
+#> $ var_type       <chr> "continuous", "continuous", "continuous", "continuous"…
+#> $ var_nlevels    <int> NA, NA, NA, NA, 4, 4, 4, 4, 4, 3, 3, 3, 3, 2, NA, NA, …
+#> $ header_row     <lgl> TRUE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE, …
+#> $ contrasts      <chr> NA, NA, NA, NA, "contr.treatment(base=3)", "contr.trea…
+#> $ contrasts_type <chr> NA, NA, NA, NA, "treatment", "treatment", "treatment",…
+#> $ reference_row  <lgl> NA, NA, NA, NA, NA, FALSE, FALSE, TRUE, FALSE, NA, FAL…
+#> $ label          <chr> "Age (in years)", "Age (in years)", "Age (in years)²",…
+#> $ n_obs          <dbl> NA, 92, 56, 80, NA, 46, 50, 35, 42, NA, 63, 53, 57, 90…
+#> $ n_event        <dbl> NA, 31, 17, 22, NA, 17, 12, 13, 12, NA, 20, 16, 18, 30…
+#> $ estimate       <dbl> NA, 20.2416394, 1.2337899, 0.4931553, NA, 1.0047885, 0…
+#> $ std.error      <dbl> NA, 2.3254455, 2.3512842, 2.3936657, NA, 0.4959893, 0.…
+#> $ statistic      <dbl> NA, 1.29340459, 0.08935144, -0.29533409, NA, 0.0096313…
+#> $ p.value        <dbl> NA, 0.1958712, 0.9288026, 0.7677387, NA, 0.9923154, 0.…
+#> $ conf.low       <dbl> NA, 0.225454425, 0.007493208, 0.004745694, NA, 0.37977…
+#> $ conf.high      <dbl> NA, 2315.587655, 100.318341, 74.226179, NA, 2.683385, …
 ```
 
 ### fine control
@@ -163,33 +163,33 @@ ex3 <- mod1 %>%
   # remove intercept
   tidy_remove_intercept
 ex3
-#> [90m# A tibble: 4 x 14[39m
+#> # A tibble: 4 x 14
 #>   term  variable var_label var_class var_type var_nlevels contrasts
-#>   [3m[90m<chr>[39m[23m [3m[90m<chr>[39m[23m    [3m[90m<chr>[39m[23m     [3m[90m<chr>[39m[23m     [3m[90m<chr>[39m[23m          [3m[90m<int>[39m[23m [3m[90m<chr>[39m[23m    
-#> [90m1[39m Sepa… Sepal.W… Sepal.Wi… numeric   continu…          [31mNA[39m [31mNA[39m       
-#> [90m2[39m Spec… Species  Species   factor    categor…           3 contr.tr…
-#> [90m3[39m Spec… Species  Species   factor    categor…           3 contr.tr…
-#> [90m4[39m Spec… Species  Species   factor    categor…           3 contr.tr…
-#> [90m# … with 7 more variables: contrasts_type [3m[90m<chr>[90m[23m, reference_row [3m[90m<lgl>[90m[23m,[39m
-#> [90m#   label [3m[90m<chr>[90m[23m, estimate [3m[90m<dbl>[90m[23m, std.error [3m[90m<dbl>[90m[23m, statistic [3m[90m<dbl>[90m[23m,[39m
-#> [90m#   p.value [3m[90m<dbl>[90m[23m[39m
+#>   <chr> <chr>    <chr>     <chr>     <chr>          <int> <chr>    
+#> 1 Sepa… Sepal.W… Sepal.Wi… numeric   continu…          NA <NA>     
+#> 2 Spec… Species  Species   factor    categor…           3 contr.tr…
+#> 3 Spec… Species  Species   factor    categor…           3 contr.tr…
+#> 4 Spec… Species  Species   factor    categor…           3 contr.tr…
+#> # … with 7 more variables: contrasts_type <chr>, reference_row <lgl>,
+#> #   label <chr>, estimate <dbl>, std.error <dbl>, statistic <dbl>,
+#> #   p.value <dbl>
 dplyr::glimpse(ex3)
 #> Rows: 4
 #> Columns: 14
-#> $ term           [3m[90m<chr>[39m[23m "Sepal.Width", "Speciessetosa", "Speciesversicolor", "…
-#> $ variable       [3m[90m<chr>[39m[23m "Sepal.Width", "Species", "Species", "Species"
-#> $ var_label      [3m[90m<chr>[39m[23m "Sepal.Width", "Species", "Species", "Species"
-#> $ var_class      [3m[90m<chr>[39m[23m "numeric", "factor", "factor", "factor"
-#> $ var_type       [3m[90m<chr>[39m[23m "continuous", "categorical", "categorical", "categoric…
-#> $ var_nlevels    [3m[90m<int>[39m[23m NA, 3, 3, 3
-#> $ contrasts      [3m[90m<chr>[39m[23m NA, "contr.treatment", "contr.treatment", "contr.treat…
-#> $ contrasts_type [3m[90m<chr>[39m[23m NA, "treatment", "treatment", "treatment"
-#> $ reference_row  [3m[90m<lgl>[39m[23m NA, TRUE, FALSE, FALSE
-#> $ label          [3m[90m<chr>[39m[23m "Sepal.Width", "setosa", "versicolor", "virginica"
-#> $ estimate       [3m[90m<dbl>[39m[23m 0.8035609, NA, 1.4587431, 1.9468166
-#> $ std.error      [3m[90m<dbl>[39m[23m 0.1063390, NA, 0.1121079, 0.1000150
-#> $ statistic      [3m[90m<dbl>[39m[23m 7.556598, NA, 13.011954, 19.465255
-#> $ p.value        [3m[90m<dbl>[39m[23m 4.187340e-12, NA, 3.478232e-26, 2.094475e-42
+#> $ term           <chr> "Sepal.Width", "Speciessetosa", "Speciesversicolor", "…
+#> $ variable       <chr> "Sepal.Width", "Species", "Species", "Species"
+#> $ var_label      <chr> "Sepal.Width", "Species", "Species", "Species"
+#> $ var_class      <chr> "numeric", "factor", "factor", "factor"
+#> $ var_type       <chr> "continuous", "categorical", "categorical", "categoric…
+#> $ var_nlevels    <int> NA, 3, 3, 3
+#> $ contrasts      <chr> NA, "contr.treatment", "contr.treatment", "contr.treat…
+#> $ contrasts_type <chr> NA, "treatment", "treatment", "treatment"
+#> $ reference_row  <lgl> NA, TRUE, FALSE, FALSE
+#> $ label          <chr> "Sepal.Width", "setosa", "versicolor", "virginica"
+#> $ estimate       <dbl> 0.8035609, NA, 1.4587431, 1.9468166
+#> $ std.error      <dbl> 0.1063390, NA, 0.1121079, 0.1000150
+#> $ statistic      <dbl> 7.556598, NA, 13.011954, 19.465255
+#> $ p.value        <dbl> 4.187340e-12, NA, 3.478232e-26, 2.094475e-42
 
 ex4 <- mod2 %>%
   # perform initial tidying of model
@@ -203,48 +203,48 @@ ex4 <- mod2 %>%
   # add header rows for categorical variables
   tidy_add_header_rows()
 ex4
-#> [90m# A tibble: 20 x 15[39m
+#> # A tibble: 20 x 15
 #>    term  variable var_label var_class var_type var_nlevels header_row contrasts
-#>    [3m[90m<chr>[39m[23m [3m[90m<chr>[39m[23m    [3m[90m<chr>[39m[23m     [3m[90m<chr>[39m[23m     [3m[90m<chr>[39m[23m          [3m[90m<int>[39m[23m [3m[90m<lgl>[39m[23m      [3m[90m<chr>[39m[23m    
-#> [90m 1[39m (Int… (Interc… (Interce… [31mNA[39m        interce…          [31mNA[39m [31mNA[39m         [31mNA[39m       
-#> [90m 2[39m [31mNA[39m    age      Age in y… nmatrix.3 continu…          [31mNA[39m TRUE       [31mNA[39m       
-#> [90m 3[39m poly… age      Age in y… nmatrix.3 continu…          [31mNA[39m FALSE      [31mNA[39m       
-#> [90m 4[39m poly… age      Age in y… nmatrix.3 continu…          [31mNA[39m FALSE      [31mNA[39m       
-#> [90m 5[39m poly… age      Age in y… nmatrix.3 continu…          [31mNA[39m FALSE      [31mNA[39m       
-#> [90m 6[39m [31mNA[39m    stage    T Stage   factor    categor…           4 TRUE       contr.tr…
-#> [90m 7[39m stag… stage    T Stage   factor    categor…           4 FALSE      contr.tr…
-#> [90m 8[39m stag… stage    T Stage   factor    categor…           4 FALSE      contr.tr…
-#> [90m 9[39m stag… stage    T Stage   factor    categor…           4 FALSE      contr.tr…
-#> [90m10[39m stag… stage    T Stage   factor    categor…           4 FALSE      contr.tr…
-#> [90m11[39m [31mNA[39m    grade    Grade     factor    categor…           3 TRUE       contr.sum
-#> [90m12[39m grad… grade    Grade     factor    categor…           3 FALSE      contr.sum
-#> [90m13[39m grad… grade    Grade     factor    categor…           3 FALSE      contr.sum
-#> [90m14[39m grad… grade    Grade     factor    categor…           3 FALSE      contr.sum
-#> [90m15[39m [31mNA[39m    trt      Chemothe… character dichoto…           2 TRUE       contr.tr…
-#> [90m16[39m trtD… trt      Chemothe… character dichoto…           2 FALSE      contr.tr…
-#> [90m17[39m trtD… trt      Chemothe… character dichoto…           2 FALSE      contr.tr…
-#> [90m18[39m [31mNA[39m    grade:t… Grade * … [31mNA[39m        interac…          [31mNA[39m TRUE       [31mNA[39m       
-#> [90m19[39m grad… grade:t… Grade * … [31mNA[39m        interac…          [31mNA[39m FALSE      [31mNA[39m       
-#> [90m20[39m grad… grade:t… Grade * … [31mNA[39m        interac…          [31mNA[39m FALSE      [31mNA[39m       
-#> [90m# … with 7 more variables: contrasts_type [3m[90m<chr>[90m[23m, reference_row [3m[90m<lgl>[90m[23m,[39m
-#> [90m#   label [3m[90m<chr>[90m[23m, estimate [3m[90m<dbl>[90m[23m, std.error [3m[90m<dbl>[90m[23m, statistic [3m[90m<dbl>[90m[23m,[39m
-#> [90m#   p.value [3m[90m<dbl>[90m[23m[39m
+#>    <chr> <chr>    <chr>     <chr>     <chr>          <int> <lgl>      <chr>    
+#>  1 (Int… (Interc… (Interce… <NA>      interce…          NA NA         <NA>     
+#>  2 <NA>  age      Age in y… nmatrix.3 continu…          NA TRUE       <NA>     
+#>  3 poly… age      Age in y… nmatrix.3 continu…          NA FALSE      <NA>     
+#>  4 poly… age      Age in y… nmatrix.3 continu…          NA FALSE      <NA>     
+#>  5 poly… age      Age in y… nmatrix.3 continu…          NA FALSE      <NA>     
+#>  6 <NA>  stage    T Stage   factor    categor…           4 TRUE       contr.tr…
+#>  7 stag… stage    T Stage   factor    categor…           4 FALSE      contr.tr…
+#>  8 stag… stage    T Stage   factor    categor…           4 FALSE      contr.tr…
+#>  9 stag… stage    T Stage   factor    categor…           4 FALSE      contr.tr…
+#> 10 stag… stage    T Stage   factor    categor…           4 FALSE      contr.tr…
+#> 11 <NA>  grade    Grade     factor    categor…           3 TRUE       contr.sum
+#> 12 grad… grade    Grade     factor    categor…           3 FALSE      contr.sum
+#> 13 grad… grade    Grade     factor    categor…           3 FALSE      contr.sum
+#> 14 grad… grade    Grade     factor    categor…           3 FALSE      contr.sum
+#> 15 <NA>  trt      Chemothe… character dichoto…           2 TRUE       contr.tr…
+#> 16 trtD… trt      Chemothe… character dichoto…           2 FALSE      contr.tr…
+#> 17 trtD… trt      Chemothe… character dichoto…           2 FALSE      contr.tr…
+#> 18 <NA>  grade:t… Grade * … <NA>      interac…          NA TRUE       <NA>     
+#> 19 grad… grade:t… Grade * … <NA>      interac…          NA FALSE      <NA>     
+#> 20 grad… grade:t… Grade * … <NA>      interac…          NA FALSE      <NA>     
+#> # … with 7 more variables: contrasts_type <chr>, reference_row <lgl>,
+#> #   label <chr>, estimate <dbl>, std.error <dbl>, statistic <dbl>,
+#> #   p.value <dbl>
 dplyr::glimpse(ex4)
 #> Rows: 20
 #> Columns: 15
-#> $ term           [3m[90m<chr>[39m[23m "(Intercept)", NA, "poly(age, 3)1", "poly(age, 3)2", "…
-#> $ variable       [3m[90m<chr>[39m[23m "(Intercept)", "age", "age", "age", "age", "stage", "s…
-#> $ var_label      [3m[90m<chr>[39m[23m "(Intercept)", "Age in years", "Age in years", "Age in…
-#> $ var_class      [3m[90m<chr>[39m[23m NA, "nmatrix.3", "nmatrix.3", "nmatrix.3", "nmatrix.3"…
-#> $ var_type       [3m[90m<chr>[39m[23m "intercept", "continuous", "continuous", "continuous",…
-#> $ var_nlevels    [3m[90m<int>[39m[23m NA, NA, NA, NA, NA, 4, 4, 4, 4, 4, 3, 3, 3, 3, 2, 2, 2…
-#> $ header_row     [3m[90m<lgl>[39m[23m NA, TRUE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, FAL…
-#> $ contrasts      [3m[90m<chr>[39m[23m NA, NA, NA, NA, NA, "contr.treatment(base=3)", "contr.…
-#> $ contrasts_type [3m[90m<chr>[39m[23m NA, NA, NA, NA, NA, "treatment", "treatment", "treatme…
-#> $ reference_row  [3m[90m<lgl>[39m[23m NA, NA, NA, NA, NA, NA, FALSE, FALSE, TRUE, FALSE, NA,…
-#> $ label          [3m[90m<chr>[39m[23m "(Intercept)", "Age in years", "Age in years", "Age in…
-#> $ estimate       [3m[90m<dbl>[39m[23m 0.5266376, NA, 20.2416394, 1.2337899, 0.4931553, NA, 1…
-#> $ std.error      [3m[90m<dbl>[39m[23m 0.4130930, NA, 2.3254455, 2.3512842, 2.3936657, NA, 0.…
-#> $ statistic      [3m[90m<dbl>[39m[23m -1.55229592, NA, 1.29340459, 0.08935144, -0.29533409, …
-#> $ p.value        [3m[90m<dbl>[39m[23m 0.1205914, NA, 0.1958712, 0.9288026, 0.7677387, NA, 0.…
+#> $ term           <chr> "(Intercept)", NA, "poly(age, 3)1", "poly(age, 3)2", "…
+#> $ variable       <chr> "(Intercept)", "age", "age", "age", "age", "stage", "s…
+#> $ var_label      <chr> "(Intercept)", "Age in years", "Age in years", "Age in…
+#> $ var_class      <chr> NA, "nmatrix.3", "nmatrix.3", "nmatrix.3", "nmatrix.3"…
+#> $ var_type       <chr> "intercept", "continuous", "continuous", "continuous",…
+#> $ var_nlevels    <int> NA, NA, NA, NA, NA, 4, 4, 4, 4, 4, 3, 3, 3, 3, 2, 2, 2…
+#> $ header_row     <lgl> NA, TRUE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, FAL…
+#> $ contrasts      <chr> NA, NA, NA, NA, NA, "contr.treatment(base=3)", "contr.…
+#> $ contrasts_type <chr> NA, NA, NA, NA, NA, "treatment", "treatment", "treatme…
+#> $ reference_row  <lgl> NA, NA, NA, NA, NA, NA, FALSE, FALSE, TRUE, FALSE, NA,…
+#> $ label          <chr> "(Intercept)", "Age in years", "Age in years", "Age in…
+#> $ estimate       <dbl> 0.5266376, NA, 20.2416394, 1.2337899, 0.4931553, NA, 1…
+#> $ std.error      <dbl> 0.4130930, NA, 2.3254455, 2.3512842, 2.3936657, NA, 0.…
+#> $ statistic      <dbl> -1.55229592, NA, 1.29340459, 0.08935144, -0.29533409, …
+#> $ p.value        <dbl> 0.1205914, NA, 0.1958712, 0.9288026, 0.7677387, NA, 0.…
 ```
