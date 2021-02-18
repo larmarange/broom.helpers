@@ -291,7 +291,7 @@ Note: `tidy_add_estimate_to_reference_rows()` does not create an additional colu
 
 ## Additional attributes
 
-Below is a list of additional attributes that `broom.helpers` may attached to the results. The table includes the attribute name, the function that adds the attritude, and a short description.
+Below is a list of additional attributes that `broom.helpers` may attached to the results. The table includes the attribute name, the function that adds the attribute, and a short description.
 
 <style>
 td {vertical-align: top;}
