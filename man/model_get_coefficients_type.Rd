@@ -47,7 +47,7 @@ model_get_coefficients_type(model)
 }
 \description{
 Indicate the type of coefficient among "generic", "logistic",
-"poisson" and "prop_hazard".
+"poisson", "relative_risk" or "prop_hazard".
 }
 \examples{
 lm(hp ~ mpg + factor(cyl), mtcars) \%>\%

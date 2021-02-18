@@ -20,8 +20,9 @@ coefficient estimates. It should be consistent with the original call to
 \item{model}{the corresponding model, if not attached to \code{x}}
 }
 \description{
-Add the type of coefficients ("generic", "logistic", "poisson" or "prop_hazard")
-and the corresponding coefficient labels, as attributes to \code{x} (respectively
+Add the type of coefficients ("generic", "logistic", "poisson",
+"relative_risk" or "prop_hazard") and the corresponding coefficient labels,
+as attributes to \code{x} (respectively
 named \code{coefficients_type} and \code{coefficients_label}).
 }
 \examples{
