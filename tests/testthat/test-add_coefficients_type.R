@@ -40,6 +40,18 @@ test_that("tidy_add_coefficients_type() works for common models", {
   expect_equivalent(attr(res, "coefficients_type"), "generic")
   expect_equivalent(attr(res, "coefficients_label"), "exp(Beta)")
 
+  mod <- glm(response ~ age + grade * trt, gtsummary::trial, family = binomial(log))
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_add_coefficients_type()
+  expect_equivalent(attr(res, "coefficients_type"), "relative_risk")
+  expect_equivalent(attr(res, "coefficients_label"), "log(RR)")
+  res <- mod %>%
+    tidy_and_attach(exponentiate = TRUE) %>%
+    tidy_add_coefficients_type()
+  expect_equivalent(attr(res, "coefficients_type"), "relative_risk")
+  expect_equivalent(attr(res, "coefficients_label"), "RR")
+
   mod <- glm(response ~ age + grade * trt, gtsummary::trial, family = poisson)
   res <- mod %>%
     tidy_and_attach() %>%
@@ -109,6 +121,12 @@ test_that("model_identify_variables() works with lme4::glmer", {
   )
   res <- mod %>% model_get_coefficients_type()
   expect_equivalent(res, "generic")
+
+  mod <- lme4::glmer(cbind(incidence, size - incidence) ~ period + (1 | herd),
+                     family = binomial("log"), data = lme4::cbpp
+  )
+  res <- mod %>% model_get_coefficients_type()
+  expect_equivalent(res, "relative_risk")
 
   mod <- lme4::glmer(response ~ trt + (1 | grade), gtsummary::trial, family = poisson)
   res <- mod %>% model_get_coefficients_type()

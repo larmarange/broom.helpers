@@ -1,7 +1,7 @@
 #' Get coefficient type
 #'
 #' Indicate the type of coefficient among "generic", "logistic",
-#' "poisson" and "prop_hazard".
+#' "poisson", "relative_risk" or "prop_hazard".
 #'
 #' @param model a model object
 #' @export
@@ -30,6 +30,8 @@ model_get_coefficients_type.default <- function(model) {
 model_get_coefficients_type.glm <- function(model) {
   if (model$family$family == "binomial" && model$family$link == "logit")
     return("logistic")
+  if (model$family$family == "binomial" && model$family$link == "log")
+    return("relative_risk")
   if (model$family$family == "poisson" && model$family$link == "log")
     return("poisson")
   if (model$family$family == "quasibinomial" && model$family$link == "logit")
@@ -54,6 +56,8 @@ model_get_coefficients_type.geeglm <- model_get_coefficients_type.glm
 model_get_coefficients_type.glmerMod <- function(model) {
   if (model@resp$family$family == "binomial" && model@resp$family$link == "logit")
     return("logistic")
+  if (model@resp$family$family == "binomial" && model@resp$family$link == "log")
+    return("relative_risk")
   if (model@resp$family$family == "poisson" && model@resp$family$link == "log")
     return("poisson")
   # "quasi" families cannot be used with in glmer

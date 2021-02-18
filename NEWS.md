@@ -1,5 +1,7 @@
 # broom.helpers (development version)
 
+- `model_get_coefficients_type()` now returns "relative_risk" for log-binomial
+  models (#101)
 - New function `tidy_disambiguate_terms()` for disambiguating random-effect 
   terms in mixed models and new options for `tidy_plus_plus()`: 
   `disambiguate_terms` (`TRUE` by default) and `disambiguate_sep` (#98)

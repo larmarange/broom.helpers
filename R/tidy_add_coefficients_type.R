@@ -1,7 +1,8 @@
 #' Add coefficients type and label as attributes
 #'
-#' Add the type of coefficients ("generic", "logistic", "poisson" or "prop_hazard")
-#' and the corresponding coefficient labels, as attributes to `x` (respectively
+#' Add the type of coefficients ("generic", "logistic", "poisson",
+#' "relative_risk" or "prop_hazard") and the corresponding coefficient labels,
+#' as attributes to `x` (respectively
 #' named `coefficients_type` and `coefficients_label`).
 #'
 #' @param x a tidy tibble
@@ -45,6 +46,7 @@ tidy_add_coefficients_type <- function(
     coefficients_label <- dplyr::case_when(
       coefficients_type == "logistic" ~ "OR",
       coefficients_type == "poisson" ~ "IRR",
+      coefficients_type == "relative_risk" ~ "RR",
       coefficients_type == "prop_hazard" ~ "HR",
       TRUE ~ "exp(Beta)"
     )
@@ -52,6 +54,7 @@ tidy_add_coefficients_type <- function(
     coefficients_label <- dplyr::case_when(
       coefficients_type == "logistic" ~ "log(OR)",
       coefficients_type == "poisson" ~ "log(IRR)",
+      coefficients_type == "relative_risk" ~ "log(RR)",
       coefficients_type == "prop_hazard" ~ "log(HR)",
       TRUE ~ "Beta"
     )
