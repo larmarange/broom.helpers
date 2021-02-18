@@ -1,7 +1,12 @@
 on:
   push:
-    paths:
-      - 'README.Rmd'
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
 
 name: Render README
 
