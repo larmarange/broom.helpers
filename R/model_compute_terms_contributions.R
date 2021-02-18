@@ -100,11 +100,11 @@ model_compute_terms_contributions.default <- function(model) {
     stats::model.matrix(formula, data = d, contrasts.arg = contr)
   },
   error = function(e) {
-    NULL
+    NULL # nocov
   })
 
   if (is.null(tcm)) {
-    return(NULL)
+    return(NULL) # nocov
   }
 
   tcm <- .add_ref_terms_to_tcm(model, tcm)
