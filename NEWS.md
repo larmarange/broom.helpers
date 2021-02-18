@@ -1,46 +1,60 @@
 # broom.helpers (development version)
 
+**New features**
+
 - `model_get_coefficients_type()` now returns "relative_risk" for log-binomial
   models (#101)
 - New function `tidy_disambiguate_terms()` for disambiguating random-effect 
   terms in mixed models and new options for `tidy_plus_plus()`: 
   `disambiguate_terms` (`TRUE` by default) and `disambiguate_sep` (#98)
-- Replaced `usethis::ui_*()` messaging with `cli::cli_*()` (#94)
 - For mixed models, `var_type` column is now equal to `"ran_pars"` or 
   `"ran_vals"` for random-effect parameters and values, based of the 
   `effect` column returned by `broom.mixed::tidy()` (#90)
-- Support of `lfe::felm()` models (#79)
-- Support of `brms::brm()` models (#89)
-- Basic support of `cmprsk::crr()` models (#91)
-- Basic support of `stats::nls()` models (#97)
-- `strict` argument removed from `tidy_identify_variables()` (#99)
-- Models with categorical variable and no intercept now supported (#85)
 - New contrasts type ("no.contrast") returned by `model_list_contrasts`()
-- Added support for `mgcv::gam()` models. (#82)
 - New function `tidy_add_n()` to add the number of observations (and for 
   relevant models the number of events and exposure time) (#64)
 - New option `add_n` in `tidy_plus_plus()` (#64)
 - New functions `model_get_n()`, `model_get_weights()`, `model_get_offset()`,
   `model_get_response()` and `model_compute_terms_contributions()` (#64)
-- Bug fix in `tidy_add_term_labels()` for variables with non standard names (#77)
+
+**New supported models**
+
+- Support of `lfe::felm()` models (#79)
+- Support of `brms::brm()` models (#89)
+- Basic support of `cmprsk::crr()` models (#91)
+- Basic support of `stats::nls()` models (#97)
+- Models with categorical variable and no intercept now supported (#85)
+- Added support for `mgcv::gam()` models. (#82)
+
+**Bug fixes and other changes**
+
+- *Minor breaking change:* `strict` argument removed from 
+  `tidy_identify_variables()` (#99)
+- Replaced `usethis::ui_*()` messaging with `cli::cli_*()` (#94)
+- Bug fix in `tidy_add_term_labels()` for variables with non standard 
+  names (#77)
+- Fix in vignette for old versions of `rmarkdown` (#95)
+
 
 # broom.helpers 1.1.0
 
-* **Minor breaking change:** column `var_type` returned by `tidy_identify_variables()`
-  is now equal to `"dichotomous"` for categorical variables with only
-  2 levels
+* **Minor breaking change:** column `var_type` returned by 
+  `tidy_identify_variables()` is now equal to `"dichotomous"` for categorical 
+  variables with only 2 levels
 * **Minor breaking changes:** for intercepts terms, `tidy_identify_variables()`
   now populates `variable` column by `term` content, instead of `NA` (#66)
 * **Minor breaking change:** If the variables can't be identified by 
   `tidy_identify_variables()`, the `variable` column is now populated 
   with the content of the `term` column (#63)
 * Exporting select helper utility functions (#65)
-    - `.generic_selector()`: makes it easy to create selecting functions like `all_continuous()`.  
+    - `.generic_selector()`: makes it easy to create selecting functions like 
+      `all_continuous()`.  
     - `.select_to_varnames()`: converts selecting syntax into character varnames
-    - `.formula_list_to_named_list()`: takes the formula selecting syntax and converts it to a named list. 
+    - `.formula_list_to_named_list()`: takes the formula selecting syntax and 
+      converts it to a named list. 
 * New selecting functions `all_continuous()`, `all_categorical()`,
-  `all_dichotomous()`, `all_contrasts()`, `all_intercepts()` and `all_interaction()` for selecting variables 
-  from models (#54)
+  `all_dichotomous()`, `all_contrasts()`, `all_intercepts()` and 
+  `all_interaction()` for selecting variables from models (#54)
 * Added support for multiple imputation models from the {mice} 
   package. The model passed must be the un-pooled models, and the 
   pooling step included in `tidy_fun=` (#49 @ddsjoberg) 
@@ -53,14 +67,17 @@
 * `tidy_add_contrasts()` and `model_list_contrasts()` now return an
   additional column `contrasts_type`
 * New `no_reference_row` argument for `tidy_add_reference_rows()` (#47)
-* New method `model_get_nlevels` to get the number of levels of categorical variables
+* New method `model_get_nlevels` to get the number of levels of categorical 
+  variables
 * New column `var_nlevels` returned by `tidy_identify_variables()`,
   `model_identify_variables()` and `tidy_plus_plus()`
 * Categorical terms can now be customized with a pattern taking into account
-  term level, reference level and/or variable label, see `model_list_terms_levels()`
-  and `categorical_terms_pattern` in `tidy_plus_plus()` and `tidy_add_term_labels` (#61)
-* `model_list_terms_levels()` now returns additional columns (`level`, `reference_level`
-  `contrasts_type`, `var_label`, `var_levels` and `dichotomous`)
+  term level, reference level and/or variable label, see 
+  `model_list_terms_levels()` and `categorical_terms_pattern` in 
+  `tidy_plus_plus()` and `tidy_add_term_labels` (#61)
+* `model_list_terms_levels()` now returns additional columns (`level`, 
+  `reference_level`, `contrasts_type`, `var_label`, `var_levels` and 
+  `dichotomous`)
 * `model_list_variables()` now returns an additional `var_label` column
 * The `exponentiate` argument is now passed to the `tidy_*()`
   functions, as an attribute attached to the tibble, as well as custom labels
