@@ -26,6 +26,7 @@ jobs:
           remotes::install_local(".")
           remotes::install_cran("rmarkdown")
           remotes::install_cran("gtsummary")
+          remotes::install_cran("emmeans")
         shell: Rscript {0}
       - name: Render README
         run: Rscript -e 'rmarkdown::render("README.Rmd")'
