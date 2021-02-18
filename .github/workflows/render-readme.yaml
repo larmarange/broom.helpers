@@ -22,11 +22,11 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@v1
       - name: Install rmarkdown, remotes, and the local package
         run: |
-          install.packages("remotes")
-          remotes::install_local(".")
-          remotes::install_cran("rmarkdown")
-          remotes::install_cran("gtsummary")
-          remotes::install_cran("emmeans")
+          install.packages("remotes", type = "binary")
+          remotes::install_local(".", type = "binary")
+          remotes::install_cran("rmarkdown", type = "binary")
+          remotes::install_cran("gtsummary", type = "binary")
+          remotes::install_cran("emmeans", type = "binary")
         shell: Rscript {0}
       - name: Render README
         run: Rscript -e 'rmarkdown::render("README.Rmd")'
