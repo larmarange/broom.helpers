@@ -28,6 +28,10 @@ navbar:
 
 
 reference:
+  - title: All-in-one function
+  - contents:
+      - tidy_plus_plus
+
   - title: Add to tidy tibbles
   - contents:
       - starts_with("tidy_")
