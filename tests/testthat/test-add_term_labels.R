@@ -197,6 +197,7 @@ test_that("tidy_add_term_labels() works with stats::poly()", {
   )
 })
 
+skip_on_cran()
 
 test_that("tidy_add_term_labels() works with lme4::lmer", {
   mod <- lme4::lmer(Reaction ~ Days + (Days | Subject), lme4::sleepstudy)
@@ -295,3 +296,4 @@ test_that("tidy_add_term_labels() works with lavaan::lavaan", {
   )
   expect_error(mod %>% tidy_and_attach() %>% tidy_add_term_labels(), NA)
 })
+

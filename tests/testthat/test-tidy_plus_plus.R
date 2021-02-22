@@ -95,6 +95,7 @@ test_that("tidy_plus_plus() and functionnal programming", {
 
 
 test_that("tidy_plus_plus() with mice objects", {
+  skip_on_cran()
   skip_if(packageVersion("mice") < "3.12.0")
   # impute missing values
   imputed_trial <-
@@ -168,6 +169,7 @@ test_that("tidy_plus_plus() works with lme4::lmer", {
 
 
 test_that("tidy_plus_plus() works with lme4::glmer", {
+  skip_on_cran()
   skip_if_not_installed("lme4")
   mod <- lme4::glmer(cbind(incidence, size - incidence) ~ period + (1 | herd),
                      family = binomial, data = lme4::cbpp
@@ -188,6 +190,7 @@ test_that("tidy_plus_plus() works with lme4::glmer", {
 
 
 test_that("tidy_plus_plus() works with lme4::glmer.nb", {
+  skip_on_cran()
   skip_if_not_installed("lme4")
   skip_if_not_installed("MASS")
   library(lme4)
@@ -224,6 +227,7 @@ test_that("tidy_plus_plus() works with survival::survreg", {
 
 
 test_that("tidy_plus_plus() works with survival::clogit", {
+  skip_on_cran()
   library(survival)
   resp <- levels(survival::logan$occupation)
   n <- nrow(survival::logan)
@@ -241,6 +245,7 @@ test_that("tidy_plus_plus() works with survival::clogit", {
 
 
 test_that("tidy_plus_plus() works with nnet::multinom", {
+  skip_on_cran()
   suppressMessages(
     mod <- nnet::multinom(
       grade ~ stage + marker + age, data = gtsummary::trial,
@@ -254,6 +259,7 @@ test_that("tidy_plus_plus() works with nnet::multinom", {
 })
 
 test_that("tidy_plus_plus() works with survey::svyglm", {
+  skip_on_cran()
   df <- survey::svydesign(~1, weights = ~1, data = gtsummary::trial)
   mod <- survey::svyglm(response ~ age + grade * trt, df, family = quasibinomial)
   expect_error(
@@ -263,6 +269,7 @@ test_that("tidy_plus_plus() works with survey::svyglm", {
 })
 
 test_that("tidy_plus_plus() works with survey::svycoxph", {
+  skip_on_cran()
   dpbc <- survey::svydesign(id = ~ 1, prob = ~ 1, strata = ~ edema, data = survival::pbc)
   mod <- survey::svycoxph(Surv(time, status>0) ~ log(bili) + protime + albumin, design = dpbc)
   expect_error(
@@ -272,6 +279,7 @@ test_that("tidy_plus_plus() works with survey::svycoxph", {
 })
 
 test_that("tidy_plus_plus() works with survey::svyolr", {
+  skip_on_cran()
   data(api, package = "survey")
   fpc <- survey::svydesign(id=~dnum, weights=~pw, data=apiclus1, fpc=~fpc)
   fpc <- update(fpc, mealcat=cut(meals,c(0,25,50,75,100)))
@@ -283,6 +291,7 @@ test_that("tidy_plus_plus() works with survey::svyolr", {
 })
 
 test_that("tidy_plus_plus() works with ordinal::clm", {
+  skip_on_cran()
   mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine)
   expect_error(
     res <- mod %>% tidy_plus_plus(),
@@ -292,6 +301,7 @@ test_that("tidy_plus_plus() works with ordinal::clm", {
 
 
 test_that("tidy_plus_plus() works with ordinal::clmm", {
+  skip_on_cran()
   mod <- ordinal::clmm(rating ~ temp * contact + (1 | judge), data = ordinal::wine)
   expect_error(
     res <- mod %>% tidy_plus_plus(),
@@ -310,6 +320,7 @@ test_that("tidy_plus_plus() works with MASS::polr", {
 
 
 test_that("tidy_plus_plus() works with MASS::glm.nb", {
+  skip_on_cran()
   mod <- MASS::glm.nb(Days ~ Sex / (Age + Eth * Lrn), data = MASS::quine)
   expect_error(
     suppressWarnings(res <- mod %>% tidy_plus_plus()),
@@ -318,6 +329,7 @@ test_that("tidy_plus_plus() works with MASS::glm.nb", {
 })
 
 test_that("tidy_plus_plus() works with geepack::geeglm", {
+  skip_on_cran()
   skip_if(packageVersion("geepack") < 1.3)
 
   df <- geepack::dietox
@@ -334,6 +346,7 @@ test_that("tidy_plus_plus() works with geepack::geeglm", {
 
 
 test_that("tidy_plus_plus() works with gam::gam", {
+  skip_on_cran()
   data(kyphosis, package = "gam")
   mod <- gam::gam(Kyphosis ~ gam::s(Age, 4) + Number, family = binomial, data = kyphosis)
   expect_error(
@@ -344,6 +357,7 @@ test_that("tidy_plus_plus() works with gam::gam", {
 
 
 test_that("tidy_plus_plus() works with brms::brm", {
+  skip_on_cran()
   skip_if_not_installed("broom.mixed")
   skip_if_not_installed("brms")
   skip_if(packageVersion("brms") < 2.13)
@@ -358,6 +372,7 @@ test_that("tidy_plus_plus() works with brms::brm", {
 })
 
 test_that("tidy_plus_plus() works with cmprsk::crr", {
+  skip_on_cran()
   skip_if_not_installed("cmprsk")
   skip_if(packageVersion("broom") < "0.7.4")
 
@@ -387,6 +402,7 @@ test_that("tidy_plus_plus() works with stats::nls", {
 
 
 test_that("tidy_plus_plus() works with lavaan::lavaan", {
+  skip_on_cran()
   df <- lavaan::HolzingerSwineford1939
   df$grade <- factor(df$grade, ordered = TRUE)
   HS.model <- "visual  =~ x1 + x2 + x3
@@ -405,6 +421,7 @@ test_that("tidy_plus_plus() works with lavaan::lavaan", {
 
 
 test_that("tidy_plus_plus() works with lfe::felm", {
+  skip_on_cran()
   skip_if_not_installed("lfe")
   mod <- lfe::felm(marker ~ age + grade | stage | 0, gtsummary::trial)
   expect_error(
@@ -428,6 +445,7 @@ test_that("tidy_plus_plus() error messaging", {
 
 
 test_that("tidy_plus_plus() works with mgcv::gam", {
+  skip_on_cran()
   tidy_gam <- function(x, conf.int = FALSE, exponentiate = FALSE, ...) {
     broom::tidy(x,
                 conf.int = conf.int,

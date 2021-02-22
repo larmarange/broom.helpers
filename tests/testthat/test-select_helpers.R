@@ -80,6 +80,8 @@ test_that("select_helpers: all_*()", {
 })
 
 test_that("select_helpers: tidy_plus_plus", {
+  skip_on_cran()
+
   mod <- glm(response ~ age * trt + grade, gtsummary::trial, family = binomial)
   mod2 <- glm(response ~ stage + grade * trt,
               gtsummary::trial,
@@ -189,7 +191,6 @@ test_that("select_helpers: tidy_plus_plus", {
     c("trt")
   )
 
-  skip_on_cran()
   mod3 <- lme4::lmer(age ~ stage + (stage|grade) + (1|grade), gtsummary::trial)
   res <- mod3 %>% tidy_plus_plus(
     tidy_fun = broom.mixed::tidy,
