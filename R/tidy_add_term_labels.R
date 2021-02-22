@@ -97,21 +97,23 @@ tidy_add_term_labels <- function(x,
     label_pattern = categorical_terms_pattern,
     variable_labels = .attributes$variable_labels
   )
-  additional_term_labels <- terms_levels$label
-  names(additional_term_labels) <- terms_levels$term
-  term_labels <- term_labels %>%
-    .update_vector(additional_term_labels)
-
-  # also consider "variablelevel" notation
-  # when not already used (e.g. for sum contrasts)
-  terms_levels2 <- terms_levels %>%
-    dplyr::mutate(term2 = paste0(.data$variable, .data$level)) %>%
-    dplyr::filter(.data$term2 != .data$term)
-  if (nrow(terms_levels2) > 0) {
-    additional_term_labels <- terms_levels2$label
-    names(additional_term_labels) <- terms_levels2$term2
+  if (!is.null(terms_levels)) {
+    additional_term_labels <- terms_levels$label
+    names(additional_term_labels) <- terms_levels$term
     term_labels <- term_labels %>%
       .update_vector(additional_term_labels)
+
+    # also consider "variablelevel" notation
+    # when not already used (e.g. for sum contrasts)
+    terms_levels2 <- terms_levels %>%
+      dplyr::mutate(term2 = paste0(.data$variable, .data$level)) %>%
+      dplyr::filter(.data$term2 != .data$term)
+    if (nrow(terms_levels2) > 0) {
+      additional_term_labels <- terms_levels2$label
+      names(additional_term_labels) <- terms_levels2$term2
+      term_labels <- term_labels %>%
+        .update_vector(additional_term_labels)
+    }
   }
 
   # add variable labels
