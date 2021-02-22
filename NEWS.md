@@ -1,5 +1,10 @@
 # broom.helpers (development version)
 
+**Bug fixes**
+
+- Better identification of term labels for interaction terms using sum 
+  contrasts (#108)
+
 # broom.helpers 1.2.0
 
 **New features**
