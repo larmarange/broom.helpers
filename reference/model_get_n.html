@@ -40,7 +40,8 @@
 
 
 <meta property="og:title" content="Get the number of observations — model_get_n" />
-<meta property="og:description" content="" />
+<meta property="og:description" content="For binomial and multinomial logistic models, will also return
+the number of events." />
 
 
 
@@ -120,7 +121,8 @@
     </div>
 
     <div class="ref-description">
-    <p><a href='https://lifecycle.r-lib.org/articles/stages.html#maturing'><img src='figures/lifecycle-maturing.svg' alt='[Maturing]' /></a></p>
+    <p>For binomial and multinomial logistic models, will also return
+the number of events.</p>
     </div>
 
     <pre class="usage"><span class='fu'>model_get_n</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
@@ -157,9 +159,7 @@
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>For binomial and multinomial logistic models, will also return
-the number of events.</p>
-<p>For Poisson models, will return the number of events and exposure time
+    <p>For Poisson models, will return the number of events and exposure time
 (defined with <code><a href='https://rdrr.io/r/stats/offset.html'>stats::offset()</a></code>).</p>
 <p>For Cox models (<code><a href='https://rdrr.io/pkg/survival/man/coxph.html'>survival::coxph()</a></code>), will return the number of events and
 exposure time.</p>

@@ -40,7 +40,8 @@
 
 
 <meta property="og:title" content="Add the (weighted) number of observations — tidy_add_n" />
-<meta property="og:description" content="" />
+<meta property="og:description" content="Add the number of observations in a new column n_obs, taking into account any
+weights if they have been defined." />
 
 
 
@@ -120,7 +121,8 @@
     </div>
 
     <div class="ref-description">
-    <p><a href='https://lifecycle.r-lib.org/articles/stages.html#maturing'><img src='figures/lifecycle-maturing.svg' alt='[Maturing]' /></a></p>
+    <p>Add the number of observations in a new column <code>n_obs</code>, taking into account any
+weights if they have been defined.</p>
     </div>
 
     <pre class="usage"><span class='fu'>tidy_add_n</span><span class='op'>(</span><span class='va'>x</span>, model <span class='op'>=</span> <span class='fu'><a href='tidy_attach_model.html'>tidy_get_model</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span></pre>
@@ -140,9 +142,7 @@
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Add the number of observations in a new column <code>n_obs</code>, taking into account any
-weights if they have been defined.</p>
-<p>For continuous variables, it corresponds to all valid observations
+    <p>For continuous variables, it corresponds to all valid observations
 contributing to the model.</p>
 <p>For categorical variables coded with treatment or sum contrasts,
 each model term could be associated to only one level of the original
