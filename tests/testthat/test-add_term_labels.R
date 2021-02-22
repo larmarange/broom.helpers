@@ -127,6 +127,23 @@ test_that("tidy_add_term_labels() correctly manages interaction terms", {
       "III:::Drug B", "Age:::II:::Drug B", "Age:::III:::Drug B"
     )
   )
+
+  # case with sum contrasts
+  mod <- lm(
+    marker ~ stage:ttdeath + stage,
+    data = gtsummary::trial,
+    contrasts = list(stage = "contr.sum")
+  )
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_add_reference_rows() %>%
+    tidy_add_term_labels()
+  expect_equivalent(
+    res$label,
+    c("(Intercept)", "T1", "T2", "T3", "T4", "T1 * Months to Death/Censor",
+      "T2 * Months to Death/Censor", "T3 * Months to Death/Censor",
+      "T4 * Months to Death/Censor")
+  )
 })
 
 test_that("tidy_add_term_labels() works with poly or helmert contrasts", {

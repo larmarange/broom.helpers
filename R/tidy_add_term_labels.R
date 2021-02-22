@@ -102,6 +102,18 @@ tidy_add_term_labels <- function(x,
   term_labels <- term_labels %>%
     .update_vector(additional_term_labels)
 
+  # also consider "variablelevel" notation
+  # when not already used (e.g. for sum contrasts)
+  terms_levels2 <- terms_levels %>%
+    dplyr::mutate(term2 = paste0(.data$variable, .data$level)) %>%
+    dplyr::filter(.data$term2 != .data$term)
+  if (nrow(terms_levels2) > 0) {
+    additional_term_labels <- terms_levels2$label
+    names(additional_term_labels) <- terms_levels2$term2
+    term_labels <- term_labels %>%
+      .update_vector(additional_term_labels)
+  }
+
   # add variable labels
   # first variable list (for interaction only terms)
   # then current variable labels in x
