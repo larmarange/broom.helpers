@@ -12,6 +12,7 @@
 
 0 errors | 0 warnings | 0 note
 
+Links in README have been updated and fixed
 
 ## revdepcheck results
 
