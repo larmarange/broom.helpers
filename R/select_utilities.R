@@ -252,7 +252,7 @@
   else
     cli_alert_danger("There was a problem with one of the function argument inputs.")
   cli_alert_info("Below is an example of correct syntax.")
-  purrr::walk(example_text, ~print(cli_code(.)))
+  cli_code(example_text)
   stop("Invalid argument syntax", call. = FALSE)
 }
 
