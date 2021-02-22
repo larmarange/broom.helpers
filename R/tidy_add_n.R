@@ -1,7 +1,5 @@
 #' Add the (weighted) number of observations
 #'
-#' \lifecycle{maturing}
-#'
 #' Add the number of observations in a new column `n_obs`, taking into account any
 #' weights if they have been defined.
 #'

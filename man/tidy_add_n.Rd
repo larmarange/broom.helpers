@@ -12,12 +12,10 @@ tidy_add_n(x, model = tidy_get_model(x))
 \item{model}{the corresponding model, if not attached to \code{x}}
 }
 \description{
-\lifecycle{maturing}
-}
-\details{
 Add the number of observations in a new column \code{n_obs}, taking into account any
 weights if they have been defined.
-
+}
+\details{
 For continuous variables, it corresponds to all valid observations
 contributing to the model.
 

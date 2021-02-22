@@ -31,12 +31,10 @@ model_get_n(model)
 \item{model}{a model object}
 }
 \description{
-\lifecycle{maturing}
-}
-\details{
 For binomial and multinomial logistic models, will also return
 the number of events.
-
+}
+\details{
 For Poisson models, will return the number of events and exposure time
 (defined with \code{\link[stats:offset]{stats::offset()}}).
 

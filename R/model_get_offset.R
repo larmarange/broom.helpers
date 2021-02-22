@@ -1,7 +1,5 @@
 #' Get model offset
 #'
-#' \lifecycle{maturing}
-#'
 #' This function does not cover `lavaan` models (`NULL` is returned).
 #'
 #' @param model a model object

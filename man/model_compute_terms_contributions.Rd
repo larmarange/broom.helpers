@@ -13,8 +13,6 @@ model_compute_terms_contributions(model)
 \item{model}{a model object}
 }
 \description{
-\lifecycle{maturing}
-
 Used for \code{\link[=model_get_n]{model_get_n()}}. For each row and term, equal 1 if this row should
 be taken into account in the estimate of the number of observations,
 0 otherwise.
