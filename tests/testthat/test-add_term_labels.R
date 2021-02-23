@@ -1,4 +1,10 @@
 test_that("tidy_add_term_labels() works for basic models", {
+  mod <- lm(Petal.Length ~ Petal.Width, iris)
+  expect_error(
+    mod %>% tidy_and_attach() %>% tidy_add_term_labels(),
+    NA
+  )
+
   df <- gtsummary::trial
   mod <- glm(response ~ age + grade + trt, df, family = binomial)
   res <- mod %>%
