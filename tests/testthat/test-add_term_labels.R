@@ -150,6 +150,22 @@ test_that("tidy_add_term_labels() correctly manages interaction terms", {
       "T2 * Months to Death/Censor", "T3 * Months to Death/Censor",
       "T4 * Months to Death/Censor")
   )
+
+  # complex case: model with no intercept and sum contrasts
+  mod <- lm(
+    Petal.Length ~ Species * Petal.Width - 1,
+    data = iris,
+    contrasts = list(Species = contr.sum)
+  )
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_add_reference_rows() %>%
+    tidy_add_term_labels()
+  expect_equivalent(
+    res$label,
+    c("setosa", "versicolor", "virginica", "Petal.Width",
+      "setosa * Petal.Width", "versicolor * Petal.Width")
+  )
 })
 
 test_that("tidy_add_term_labels() works with poly or helmert contrasts", {
@@ -190,7 +206,7 @@ test_that("tidy_add_term_labels() works with variables having non standard name"
   )
 
   res <- gtsummary::trial %>%
-    select(response, `age at dx` = age, `drug type` = trt) %>%
+    dplyr::select(response, `age at dx` = age, `drug type` = trt) %>%
     lm(
       response ~ `age at dx` + `drug type`,
       data = .

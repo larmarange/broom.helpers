@@ -32,6 +32,7 @@ A tibble with ten columns:
 \item \code{contrasts_type}: type of contrasts ("sum" or "treatment")
 \item \code{term}: term name
 \item \code{level}: term level
+\item \code{level_rank}: rank of the level
 \item \code{reference}: logical indicating which term is the reference level
 \item \code{reference_level}: level of the reference term
 \item \code{var_label}: variable label obtained with \code{\link[=model_list_variables]{model_list_variables()}}

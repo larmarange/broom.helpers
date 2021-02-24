@@ -13,6 +13,7 @@
 #' * `contrasts_type`: type of contrasts ("sum" or "treatment")
 #' * `term`: term name
 #' * `level`: term level
+#' * `level_rank`: rank of the level
 #' * `reference`: logical indicating which term is the reference level
 #' * `reference_level`: level of the reference term
 #' * `var_label`: variable label obtained with [model_list_variables()]
@@ -86,11 +87,7 @@ model_list_terms_levels.default <- function(
 
   for (v in contrasts_list$variable) {
     if (v %in% names(xlevels)) {
-      contrasts_type <- ifelse(
-        contrasts_list$contrasts[contrasts_list$variable == v] == "contr.sum",
-        "sum",
-        "treatment"
-      )
+      contrasts_type <- contrasts_list$contrasts_type[contrasts_list$variable == v]
       terms_levels <- xlevels[[v]]
       # terms could be named according to two approaches
       # plus variations with backticks
@@ -138,7 +135,8 @@ model_list_terms_levels.default <- function(
           contrasts_type = contrasts_type,
           term = terms_names,
           level = terms_levels,
-          reference = seq(1, length(terms_levels)) == ref,
+          level_rank = seq(1, length(terms_levels)),
+          reference = level_rank == ref,
           reference_level = terms_levels[ref]
         )
       )
