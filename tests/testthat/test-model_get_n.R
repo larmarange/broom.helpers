@@ -256,6 +256,10 @@ test_that("model_get_n() works with nnet::multinom", {
     res$n_event,
     c(57, 16, 8, 12, 57, 57, 21, 58, 18, 12, 16, 58, 58, 12)
   )
+
+  # when y is not coded as a factor
+  mod <- multinom(race ~ age + lwt + bwt, data = MASS::birthwt)
+  expect_true(mod %>% model_get_n() %>% nrow() > 0)
 })
 
 test_that("model_get_n() works with survey::svyglm", {

@@ -202,6 +202,14 @@ test_that("tidy_add_n() works with nnet::multinom", {
     res$n_event,
     c(57, 21, 16, 8, 57, 57, 58, 12, 18, 12, 58, 58)
   )
+
+  # when y is not coded as a factor
+  mod <- multinom(race ~ age + lwt + bwt, data = MASS::birthwt)
+  expect_error(
+    mod %>% tidy_and_attach() %>% tidy_add_n(),
+    NA
+  )
+
 })
 
 test_that("tidy_add_n() works with survey::svyglm", {

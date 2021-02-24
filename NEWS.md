@@ -4,6 +4,8 @@
 
 - Better identification of term labels for interaction terms using sum 
   contrasts (#108)
+- Now `tidy_add_n()` works with multinomial models when `y` is not coded as
+  a factor (#109)
 
 # broom.helpers 1.2.0
 

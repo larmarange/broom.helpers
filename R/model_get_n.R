@@ -163,6 +163,7 @@ model_get_n.multinom <- function(model) {
 
   w <- model %>% model_get_weights()
   y <- model %>% model_get_response()
+  if (!is.factor(y)) y <- factor(y)
 
   n <- purrr::map_df(
     levels(y)[-1],
