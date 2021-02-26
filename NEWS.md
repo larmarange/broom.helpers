@@ -1,4 +1,4 @@
-# broom.helpers (development version)
+# broom.helpers 1.2.1
 
 **Bug fixes**
 
