@@ -134,6 +134,7 @@ ex2 <- glm(
   )
 ex2
 
+\dontrun{
 if (requireNamespace("gtsummary")) {
   ex3 <- glm(
     response ~ poly(age, 3) + stage + grade * trt,
@@ -153,6 +154,7 @@ if (requireNamespace("gtsummary")) {
       keep_model = TRUE
     )
   ex3
+}
 }
 }
 \seealso{

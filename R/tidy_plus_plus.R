@@ -77,6 +77,7 @@
 #'   )
 #' ex2
 #'
+#' \dontrun{
 #' if (requireNamespace("gtsummary")) {
 #'   ex3 <- glm(
 #'     response ~ poly(age, 3) + stage + grade * trt,
@@ -96,6 +97,7 @@
 #'       keep_model = TRUE
 #'     )
 #'   ex3
+#' }
 #' }
 #' @export
 tidy_plus_plus <- function(
