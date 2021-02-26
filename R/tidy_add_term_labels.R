@@ -118,7 +118,7 @@ tidy_add_term_labels <- function(x,
     # for no intercept model (because type of interaction unknown)
     terms_levels3 <- terms_levels %>%
       dplyr::mutate(term3 = paste0(.data$variable, .data$level_rank)) %>%
-      dplyr::filter(.data$term3 != .data$term & contrasts_type == "no.contrast")
+      dplyr::filter(.data$term3 != .data$term & .data$contrasts_type == "no.contrast")
     if (nrow(terms_levels3) > 0) {
       additional_term_labels <- terms_levels3$label
       names(additional_term_labels) <- terms_levels3$term3
