@@ -136,7 +136,7 @@ model_list_terms_levels.default <- function(
           term = terms_names,
           level = terms_levels,
           level_rank = seq(1, length(terms_levels)),
-          reference = level_rank == ref,
+          reference = seq(1, length(terms_levels)) == ref,
           reference_level = terms_levels[ref]
         )
       )
