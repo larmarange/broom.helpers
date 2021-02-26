@@ -11,6 +11,7 @@ test_that("tidy_disambiguate_terms() changes nothing for basic models", {
 })
 
 test_that("tidy_disambiguate_terms() works for mixed models", {
+  skip_on_cran()
   skip_if_not_installed("lme4")
   mod <- lme4::lmer(Reaction ~ Days + (Days | Subject), lme4::sleepstudy)
   skip_if_not_installed("broom.mixed")
@@ -35,6 +36,7 @@ test_that("tidy_disambiguate_terms() works for mixed models", {
 
 
 test_that("test tidy_disambiguate_terms() checks", {
+  skip_on_cran()
   skip_if_not_installed("lme4")
   skip_if_not_installed("broom.mixed")
   mod <- lme4::lmer(Reaction ~ Days + (Days | Subject), lme4::sleepstudy)

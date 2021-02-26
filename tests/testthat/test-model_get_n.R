@@ -188,6 +188,7 @@ test_that("model_get_n() works with stats::poly()", {
 
 
 test_that("model_get_n() works with lme4::lmer", {
+  skip_on_cran()
   df <- gtsummary::trial
   df$stage <- as.character(df$stage)
   df$group <- rep.int(1:2, 100)
@@ -198,6 +199,7 @@ test_that("model_get_n() works with lme4::lmer", {
 
 
 test_that("model_get_n() works with lme4::glmer", {
+  skip_on_cran()
   df <- gtsummary::trial
   df$stage <- as.character(df$stage)
   df$group <- rep.int(1:2, 100)

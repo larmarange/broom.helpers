@@ -194,12 +194,14 @@ test_that("tidy_add_variable_labels() works with stats::poly()", {
 
 
 test_that("tidy_add_variable_labels() works with lme4::lmer", {
+  skip_on_cran()
   mod <- lme4::lmer(Reaction ~ Days + (Days | Subject), lme4::sleepstudy)
   expect_error(mod %>% tidy_and_attach(tidy_fun = broom.mixed::tidy) %>% tidy_add_variable_labels(), NA)
 })
 
 
 test_that("tidy_add_variable_labels() works with lme4::glmer", {
+  skip_on_cran()
   mod <- lme4::glmer(cbind(incidence, size - incidence) ~ period + (1 | herd),
     family = binomial, data = lme4::cbpp
   )

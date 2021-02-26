@@ -103,6 +103,7 @@ test_that("test tidy_add_coefficients_type() checks", {
 })
 
 test_that("model_get_coefficients_type() works with lme4::lmer", {
+  skip_on_cran()
   mod <- lme4::lmer(Reaction ~ Days + (Days | Subject), lme4::sleepstudy)
   res <- mod %>% model_get_coefficients_type()
   expect_equivalent(res, "generic")
@@ -110,6 +111,7 @@ test_that("model_get_coefficients_type() works with lme4::lmer", {
 
 
 test_that("model_identify_variables() works with lme4::glmer", {
+  skip_on_cran()
   mod <- lme4::glmer(cbind(incidence, size - incidence) ~ period + (1 | herd),
     family = binomial, data = lme4::cbpp
   )
