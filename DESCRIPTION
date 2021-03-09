@@ -56,6 +56,7 @@ Suggests:
     nnet,
     ordinal,
     rmarkdown,
+    rstanarm,
     survey,
     survival,
     testthat,
