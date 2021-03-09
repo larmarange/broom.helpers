@@ -17,7 +17,7 @@
 #' @export
 #' @family custom_tieders
 tidy_parameters <- function(x, conf.int = TRUE, conf.level = .95, ...) {
-  if (!requireNamespace("parameters"))
+  if (!requireNamespace("parameters", quietly = TRUE))
     stop("You need to install 'parameters' to use 'tidy_parameters'.")
 
   if (!conf.int) conf.level <- NULL
