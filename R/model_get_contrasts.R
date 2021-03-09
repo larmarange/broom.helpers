@@ -16,20 +16,42 @@ model_get_contrasts <- function(model) {
 }
 
 #' @export
-#' @rdname model_get_contrasts
 model_get_contrasts.default <- function(model) {
+  # we try 3 different approaches in a row
+  mc <- model_get_contrasts_1(model)
+  if (is.null(mc))
+    mc <- model_get_contrasts_2(model)
+  if (is.null(mc))
+    mc <- model_get_contrasts_3(model)
+  mc
+}
+
+model_get_contrasts_1 <- function(model) {
   tryCatch(
     purrr::chuck(model, "contrasts"),
     error = function(e) {
-      # if first approach is not working, try second one
-      attr(model_get_model_matrix(model), "contrasts")
+      NULL
     }
   )
 }
 
-#' @export
-#' @rdname model_get_contrasts
-model_get_contrasts.felm <- function(model) {
-  mm <- stats::model.matrix(stats::terms(model), stats::model.frame(model))
-  attr(mm, "contrasts")
+model_get_contrasts_2 <- function(model) {
+  tryCatch(
+    attr(model_get_model_matrix(model), "contrasts"),
+    error = function(e) {
+      NULL
+    }
+  )
 }
+
+model_get_contrasts_3 <- function(model) {
+  tryCatch(
+    attr(stats::model.matrix(stats::terms(model), stats::model.frame(model)), "contrasts"),
+    error = function(e) {
+      NULL
+    }
+  )
+}
+
+
+

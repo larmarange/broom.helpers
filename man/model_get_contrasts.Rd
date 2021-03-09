@@ -2,15 +2,9 @@
 % Please edit documentation in R/model_get_contrasts.R
 \name{model_get_contrasts}
 \alias{model_get_contrasts}
-\alias{model_get_contrasts.default}
-\alias{model_get_contrasts.felm}
 \title{Get contrasts used in the model}
 \usage{
 model_get_contrasts(model)
-
-\method{model_get_contrasts}{default}(model)
-
-\method{model_get_contrasts}{felm}(model)
 }
 \arguments{
 \item{model}{a model object}

@@ -269,3 +269,20 @@ test_that("tidy_add_contrasts() works with lavaan::lavaan", {
   )
   expect_error(mod %>% tidy_and_attach() %>% tidy_add_contrasts(), NA)
 })
+
+
+test_that("model_get_contrasts() works with rstanarm::stan_glm", {
+  skip_on_cran()
+  skip_if_not_installed("broom.mixed")
+  skip_if_not_installed("rstanarm")
+
+  mod <- rstanarm::stan_glm(
+    response ~ age + grade,
+    data = gtsummary::trial,
+    refresh = 0,
+    family = binomial
+  )
+  expect_false(
+    is.null(mod %>% model_get_contrasts())
+  )
+})
