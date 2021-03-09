@@ -28,3 +28,4 @@ lm(Sepal.Length ~ Sepal.Width + Species, data = iris) \%>\%
     tidy_parameters(bootstrap = TRUE)
 }
 }
+\concept{custom_tieders}

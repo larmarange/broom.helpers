@@ -39,22 +39,7 @@ model_identify_variables <- function(model) {
 #' @rdname model_identify_variables
 #' @export
 model_identify_variables.default <- function(model) {
-  model_matrix <- model_get_model_matrix(model)
-  get_assign <- purrr::attr_getter("assign")
-
-  assign <- model_matrix %>% get_assign()
-
-  if (is.null(assign)) {
-    # an alternative generic way to compute assign
-    # (e.g. for felm models)
-    model_matrix <- tryCatch(
-      stats::model.matrix(stats::terms(model), stats::model.frame(model)),
-      error = function(e) {
-        NULL # nocov
-      }
-    )
-    assign <- model_matrix %>% get_assign()
-  }
+  assign <- model %>% model_get_assign()
 
   if (is.null(model_matrix) | is.null(assign)) {
     # return an empty tibble

@@ -65,6 +65,7 @@ mod \%>\% model_compute_terms_contributions()
 }
 \seealso{
 Other model_helpers: 
+\code{\link{model_get_assign}()},
 \code{\link{model_get_coefficients_type}()},
 \code{\link{model_get_contrasts}()},
 \code{\link{model_get_model_frame}()},

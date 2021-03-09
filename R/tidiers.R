@@ -15,6 +15,7 @@
 #'     tidy_parameters(bootstrap = TRUE)
 #' }
 #' @export
+#' @family custom_tieders
 tidy_parameters <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   if (!requireNamespace("parameters"))
     stop("You need to install 'parameters' to use 'tidy_parameters'.")
