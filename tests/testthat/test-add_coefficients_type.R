@@ -52,6 +52,13 @@ test_that("tidy_add_coefficients_type() works for common models", {
   expect_equivalent(attr(res, "coefficients_type"), "relative_risk")
   expect_equivalent(attr(res, "coefficients_label"), "RR")
 
+  mod <- glm(response ~ age + grade * trt, gtsummary::trial, family = binomial(cloglog))
+  res <- mod %>%
+    tidy_and_attach(exponentiate = TRUE) %>%
+    tidy_add_coefficients_type()
+  expect_equivalent(attr(res, "coefficients_type"), "prop_hazard")
+  expect_equivalent(attr(res, "coefficients_label"), "HR")
+
   mod <- glm(response ~ age + grade * trt, gtsummary::trial, family = poisson)
   res <- mod %>%
     tidy_and_attach() %>%

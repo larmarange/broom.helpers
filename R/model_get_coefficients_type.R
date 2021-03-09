@@ -32,6 +32,8 @@ model_get_coefficients_type.glm <- function(model) {
     return("logistic")
   if (model$family$family == "binomial" && model$family$link == "log")
     return("relative_risk")
+  if (model$family$family == "binomial" && model$family$link == "cloglog")
+    return("prop_hazard")
   if (model$family$family == "poisson" && model$family$link == "log")
     return("poisson")
   if (model$family$family == "quasibinomial" && model$family$link == "logit")
@@ -58,6 +60,8 @@ model_get_coefficients_type.glmerMod <- function(model) {
     return("logistic")
   if (model@resp$family$family == "binomial" && model@resp$family$link == "log")
     return("relative_risk")
+  if (model@resp$family$family == "binomial" && model@resp$family$link == "cloglog")
+    return("prop_hazard")
   if (model@resp$family$family == "poisson" && model@resp$family$link == "log")
     return("poisson")
   # "quasi" families cannot be used with in glmer

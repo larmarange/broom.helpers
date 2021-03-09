@@ -1,6 +1,13 @@
 # broom.helpers (development version)
 
+**New supported models**
+
 - Support of `rstanarm::stan_glm()` models
+
+**New features**
+
+- `model_get_coefficients_type()` now returns "prop_hazard" for cloglog-binomial
+  models (#106)
 
 # broom.helpers 1.2.1
 
