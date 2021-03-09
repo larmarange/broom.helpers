@@ -48,7 +48,7 @@ model_get_weights.default <- function(model) {
       NULL
     }
   )
-  if (is.null(w)) {
+  if (is.null(w) | length(w) == 0) {
     mf <- model %>% model_get_model_frame()
     if (!is.null(mf)) {
       if ("(weights)" %in% names(mf)) {
