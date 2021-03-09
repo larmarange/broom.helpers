@@ -500,3 +500,26 @@ test_that("tidy_plus_plus() works with mgcv::gam", {
   expect_error(tbl_gam_param_only <- gam_param_only %>% tidy_plus_plus(tidy_fun = tidy_gam), NA)
   # the default tidier return a df with no columns and no rows...it fails.
 })
+
+
+test_that("tidy_plus_plus() works with VGAM::vglm", {
+  skip_on_cran()
+  skip_if_not_installed("VGAM")
+  skip_if_not_installed("parameters")
+
+  df <- data.frame(
+    treatment = gl(3, 3),
+    outcome = gl(3, 1, 9),
+    counts = c(18,17,15,20,10,20,25,13,12)
+  )
+  mod <- VGAM::vglm(
+    counts ~ outcome + treatment,
+    family = poissonff,
+    data = df,
+    trace = FALSE
+  )
+  expect_error(
+    res <- mod %>% tidy_plus_plus(tidy_fun = tidy_parameters),
+    NA
+  )
+})

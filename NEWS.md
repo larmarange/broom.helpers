@@ -3,6 +3,7 @@
 **New supported models**
 
 - Support of `rstanarm::stan_glm()` models
+- Basic support for `VGAM::vglm()` models (#105)
 
 **New features**
 
