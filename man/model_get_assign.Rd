@@ -8,9 +8,9 @@
 \usage{
 model_get_assign(model)
 
-\method{model_get_assign}{default}(model, ...)
+\method{model_get_assign}{default}(model)
 
-\method{model_get_assign}{vglm}(model, ...)
+\method{model_get_assign}{vglm}(model)
 }
 \arguments{
 \item{model}{a model object}

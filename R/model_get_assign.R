@@ -16,7 +16,7 @@ model_get_assign <- function(model) {
 
 #' @export
 #' @rdname model_get_assign
-model_get_assign.default <- function(model, ...) {
+model_get_assign.default <- function(model) {
   model_matrix <- model_get_model_matrix(model)
   get_assign <- purrr::attr_getter("assign")
   assign <- model_matrix %>% get_assign()
@@ -35,13 +35,16 @@ model_get_assign.default <- function(model, ...) {
 
   if (!is.atomic(assign)) return(NULL)
 
+  attr(assign, "model_matrix") <- model_matrix
   assign
 }
 
 #' @export
 #' @rdname model_get_assign
-model_get_assign.vglm <- function(model, ...) {
+model_get_assign.vglm <- function(model) {
   model_matrix <- model_get_model_matrix(model)
   get_assign <- purrr::attr_getter("orig.assign.lm")
-  model_matrix %>% get_assign()
+  assign <- model_matrix %>% get_assign()
+  attr(assign, "model_matrix") <- model_matrix
+  assign
 }

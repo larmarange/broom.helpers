@@ -514,7 +514,7 @@ test_that("tidy_plus_plus() works with VGAM::vglm", {
   )
   mod <- VGAM::vglm(
     counts ~ outcome + treatment,
-    family = poissonff,
+    family = VGAM::poissonff,
     data = df,
     trace = FALSE
   )

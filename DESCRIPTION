@@ -58,10 +58,11 @@ Suggests:
     parameters,
     rmarkdown,
     rstanarm,
+    spelling,
     survey,
     survival,
     testthat,
-    spelling
+    VGAM
 VignetteBuilder: 
     knitr
 RdMacros: 
