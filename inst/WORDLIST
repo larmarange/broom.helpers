@@ -3,6 +3,7 @@ DOI
 Helmert
 Lifecycle
 Tibbles
+cloglog
 disambiguated
 disambiguating
 exponentiate
@@ -12,6 +13,7 @@ poisson
 tibble
 tibbles
 tidyselect
+tieder
 un
 unselected
 varnames

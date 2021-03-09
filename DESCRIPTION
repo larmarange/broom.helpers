@@ -55,6 +55,7 @@ Suggests:
     mice,
     nnet,
     ordinal,
+    parameters,
     rmarkdown,
     rstanarm,
     survey,
