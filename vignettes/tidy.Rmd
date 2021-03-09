@@ -348,7 +348,8 @@ tibble::tribble(
   '`lavaan::lavaan()`', 'Limited support for categorical variables',
   '`cmprsk::crr()`', 'Limited support',
   '`stats::nls()`', 'Limited support',
-  '`lfe::felm()`', ''
+  '`lfe::felm()`', '',
+  '`rstanarm::stan_glm()`', '`broom.mixed` package required'
 ) %>%
   dplyr::arrange(Model) %>%
   gt::gt() %>%

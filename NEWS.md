@@ -1,5 +1,7 @@
 # broom.helpers (development version)
 
+- Support of `rstanarm::stan_glm()` models
+
 # broom.helpers 1.2.1
 
 **Bug fixes**

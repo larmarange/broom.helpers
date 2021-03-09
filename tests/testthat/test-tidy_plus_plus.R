@@ -378,6 +378,23 @@ test_that("tidy_plus_plus() works with brms::brm", {
   )
 })
 
+test_that("tidy_plus_plus() works with rstanarm::stan_glm", {
+  skip_on_cran()
+  skip_if_not_installed("broom.mixed")
+  skip_if_not_installed("rstanarm")
+
+  mod <- rstanarm::stan_glm(
+    response ~ age + grade,
+    data = gtsummary::trial,
+    refresh = 0,
+    family = binomial
+  )
+  expect_error(
+    res <- mod %>% tidy_plus_plus(tidy_fun = broom.mixed::tidy),
+    NA
+  )
+})
+
 test_that("tidy_plus_plus() works with cmprsk::crr", {
   skip_on_cran()
   skip_if_not_installed("cmprsk")
