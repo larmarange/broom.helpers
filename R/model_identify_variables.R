@@ -39,6 +39,7 @@ model_identify_variables <- function(model) {
 #' @rdname model_identify_variables
 #' @export
 model_identify_variables.default <- function(model) {
+  model_matrix <- model_get_model_matrix(model)
   assign <- model %>% model_get_assign()
 
   if (is.null(model_matrix) | is.null(assign)) {
