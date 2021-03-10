@@ -9,6 +9,7 @@
 
 - Custom tieder `tidy_parameters()` based on `parameters::model_parameters()`
   (#104)
+- Custom tierder `tidy_with_broom_or_parameters()` (#104)
 - `model_get_coefficients_type()` now returns "prop_hazard" for cloglog-binomial
   models (#106)
 

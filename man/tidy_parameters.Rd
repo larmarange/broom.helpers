@@ -26,4 +26,8 @@ if (require(parameters)) {
     tidy_parameters()
 }
 }
+\seealso{
+Other custom_tieders: 
+\code{\link{tidy_with_broom_or_parameters}()}
+}
 \concept{custom_tieders}
