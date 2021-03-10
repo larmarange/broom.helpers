@@ -350,7 +350,7 @@ tibble::tribble(
   '`stats::nls()`', 'Limited support',
   '`lfe::felm()`', '',
   '`rstanarm::stan_glm()`', '`broom.mixed` package required',
-  '`VGAM::vglm()`', 'Limited support'
+  '`VGAM::vglm()`', 'Limited support. It is recommanded to use `tidy_parameters()` as `tidy_fun`.'
 ) %>%
   dplyr::arrange(Model) %>%
   gt::gt() %>%
