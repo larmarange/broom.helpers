@@ -38,6 +38,7 @@ tidy_parameters <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 #' @export
 #' @family custom_tieders
 tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, ...) {
+  requireNamespace("broom.mixed") # load broom.mixed if available
   res <- tryCatch(
     broom::tidy(x, conf.int = conf.int, conf.level, ...),
     error = function(e) {
