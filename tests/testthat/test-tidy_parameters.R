@@ -16,11 +16,17 @@ test_that("tidy_parameters() works for basic models", {
     NA
   )
   expect_error(
-    mod %>% tidy_plus_plus(tidy_fun = tidy_parameters),
+    res1 <- mod %>% tidy_plus_plus(tidy_fun = tidy_parameters),
     NA
   )
   expect_error(
-    mod %>% tidy_plus_plus(tidy_fun = tidy_parameters, conf.int = .80),
+    res2 <- mod %>% tidy_plus_plus(tidy_fun = tidy_parameters, conf.level = .80),
     NA
   )
+  expect_false(identical(res1$conf.low, res2$conf.low))
+  expect_error(
+    res <- mod %>% tidy_plus_plus(tidy_fun = tidy_parameters, conf.int = FALSE),
+    NA
+  )
+  expect_false("conf.low" %in% res)
 })

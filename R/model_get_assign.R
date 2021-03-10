@@ -33,7 +33,7 @@ model_get_assign.default <- function(model) {
     assign <- model_matrix %>% get_assign()
   }
 
-  if (!is.atomic(assign)) return(NULL)
+  if (!is.atomic(assign)) return(NULL) # nocov
 
   attr(assign, "model_matrix") <- model_matrix
   assign
