@@ -102,7 +102,7 @@
 #' @export
 tidy_plus_plus <- function(
                            model,
-                           tidy_fun = broom::tidy,
+                           tidy_fun = tidy_with_broom_or_parameters,
                            conf.int = TRUE,
                            exponentiate = FALSE,
                            variable_labels = NULL,

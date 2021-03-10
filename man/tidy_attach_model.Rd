@@ -9,7 +9,12 @@
 \usage{
 tidy_attach_model(x, model, .attributes = NULL)
 
-tidy_and_attach(model, tidy_fun = broom::tidy, exponentiate = FALSE, ...)
+tidy_and_attach(
+  model,
+  tidy_fun = tidy_with_broom_or_parameters,
+  exponentiate = FALSE,
+  ...
+)
 
 tidy_get_model(x)
 

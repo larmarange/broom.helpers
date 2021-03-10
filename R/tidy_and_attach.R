@@ -40,7 +40,10 @@ tidy_attach_model <- function(x, model, .attributes = NULL) {
 
 #' @rdname tidy_attach_model
 #' @export
-tidy_and_attach <- function(model, tidy_fun = broom::tidy, exponentiate = FALSE, ...) {
+tidy_and_attach <- function(
+  model, tidy_fun = tidy_with_broom_or_parameters,
+  exponentiate = FALSE, ...
+) {
   if (any(c("glmerMod", "lmerMod") %in% class(model))) {
     if (!requireNamespace("broom.mixed", quietly = TRUE))
       stop("'broom.mixed' package is required for such model.") # nocov
