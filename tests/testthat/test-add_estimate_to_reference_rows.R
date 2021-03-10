@@ -80,9 +80,11 @@ test_that("tidy_add_estimate_to_reference_rows() works for basic models", {
              family = binomial,
              contrasts = list(stage = contr.sum, grade = contr.sum, trt = contr.sum)
   )
-  res <- mod %>%
-    tidy_and_attach() %>%
-    tidy_add_estimate_to_reference_rows()
+  suppressWarnings(
+    res <- mod %>%
+      tidy_and_attach() %>%
+      tidy_add_estimate_to_reference_rows()
+  )
   # should be -1 * sum of other coefficients when sum contrasts
   expect_equivalent(
     res$estimate[res$reference_row & res$variable == "stage" & !is.na(res$reference_row)],
@@ -180,7 +182,8 @@ test_that("tidy_add_estimate_to_reference_rows() handles variables having non st
     contrasts = list(`grade of kids` = contr.sum)
   )
   expect_message(
-    res <- mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows(),
+    res <- mod %>% tidy_and_attach(tidy_fun = broom::tidy) %>%
+      tidy_add_estimate_to_reference_rows(),
     NA
   )
   expect_equivalent(
@@ -258,7 +261,7 @@ test_that("tidy_add_estimate_to_reference_rows() works with survey::svyglm", {
 })
 
 test_that("tidy_add_estimate_to_reference_rows() works with ordinal::clm", {
-  mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine, nominal = ~contact)
+  mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine)
   expect_error(mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows(), NA)
 })
 

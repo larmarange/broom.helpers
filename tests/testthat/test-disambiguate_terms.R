@@ -50,12 +50,14 @@ test_that("test tidy_disambiguate_terms() checks", {
     NA
   )
   expect_message(
-    mod %>% tidy_and_attach() %>%
-      tidy_disambiguate_terms() %>% tidy_disambiguate_terms()
+    mod %>% tidy_and_attach(tidy_fun = broom::tidy) %>%
+      tidy_disambiguate_terms() %>%
+      tidy_disambiguate_terms()
   )
   expect_message(
-    mod %>% tidy_and_attach() %>%
-      tidy_disambiguate_terms() %>% tidy_disambiguate_terms(quiet = TRUE),
+    mod %>% tidy_and_attach(tidy_fun = broom::tidy) %>%
+      tidy_disambiguate_terms() %>%
+      tidy_disambiguate_terms(quiet = TRUE),
     NA
   )
 })
