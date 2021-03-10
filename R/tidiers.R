@@ -73,11 +73,6 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
       cli::cli_alert_danger("{.code exponentiate = TRUE} is not valid for this type of model and was ignored.")
   }
 
-  if (!is.null(res)) {
-    # success of broom
-    cli::cli_alert_success("Model tidied with {.code broom::tidy()}.")
-  }
-
   if (is.null(res)) {
     res <- tryCatch(
       do.call(tidy_parameters, tidy_args),
@@ -92,6 +87,7 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
     } else {
       # success of parameters
       cli::cli_alert_success("{.code tidy_parameters()} used instead.")
+      cli::cli_alert_info("Add {.code tidy_fun = tidy_parameters} to quiet these messages.")
     }
   }
   res
