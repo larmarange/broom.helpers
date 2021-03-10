@@ -8,11 +8,9 @@
 #' @param conf.level the confidence level to use for the confidence interval
 #' @param ... additional parameters passed to `parameters::model_parameters()`
 #' @examples
-#' lm(Sepal.Length ~ Sepal.Width + Species, data = iris) %>%
-#'   tidy_parameters()
-#' \dontrun{
+#' if (require(parameters)) {
 #'   lm(Sepal.Length ~ Sepal.Width + Species, data = iris) %>%
-#'     tidy_parameters(bootstrap = TRUE)
+#'     tidy_parameters()
 #' }
 #' @export
 #' @family custom_tieders

@@ -21,11 +21,9 @@ Use \code{parameters::model_parameters()} to tidy a model and apply
 \code{parameters::standardize_names(style = "broom")} to the output
 }
 \examples{
-lm(Sepal.Length ~ Sepal.Width + Species, data = iris) \%>\%
-  tidy_parameters()
-\dontrun{
+if (require(parameters)) {
   lm(Sepal.Length ~ Sepal.Width + Species, data = iris) \%>\%
-    tidy_parameters(bootstrap = TRUE)
+    tidy_parameters()
 }
 }
 \concept{custom_tieders}
