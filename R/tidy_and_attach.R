@@ -44,11 +44,6 @@ tidy_and_attach <- function(
   model, tidy_fun = tidy_with_broom_or_parameters,
   exponentiate = FALSE, ...
 ) {
-  if (any(c("glmerMod", "lmerMod") %in% class(model))) {
-    if (!requireNamespace("broom.mixed", quietly = TRUE))
-      stop("'broom.mixed' package is required for such model.") # nocov
-  }
-
   # exponentiate cannot be used with lm models
   # but broom will not produce an error and will return unexponentiated estimates
   if (identical(class(model), "lm") & exponentiate)

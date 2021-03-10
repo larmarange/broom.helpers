@@ -40,15 +40,39 @@ tidy_parameters <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   # load broom.mixed if available
   suppressMessages(requireNamespace("broom.mixed", quietly = TRUE))
+  if (any(c("glmerMod", "lmerMod") %in% class(x))) {
+    if (!requireNamespace("broom.mixed", quietly = TRUE))
+      stop("'broom.mixed' package is required for such model.") # nocov
+  }
+
+  tidy_args <- list(...)
+  tidy_args$x <- x
+  tidy_args$conf.int <- conf.int
+  tidy_args$conf.level <- conf.level
 
   res <- tryCatch(
-    broom::tidy(x, conf.int = conf.int, conf.level = conf.level, ...),
+    do.call(broom::tidy, tidy_args),
     error = function(e) {
-      cli::cli_alert_warning("{.code broom::tidy()} failed to tidy the model.")
-      cli::cli_alert_danger(e)
       NULL
     }
   )
+
+  # trying without exponentiate
+  if (is.null(res)) {
+    tidy_args2 <- tidy_args
+    tidy_args2$exponentiate <- NULL
+    res <- tryCatch(
+      do.call(broom::tidy, tidy_args2),
+      error = function(e) {
+        cli::cli_alert_warning("{.code broom::tidy()} failed to tidy the model.")
+        cli::cli_alert_danger(e)
+        NULL
+      }
+    )
+    if (!is.null(res) && !is.null(tidy_args$exponentiate) && tidy_args$exponentiate)
+      cli::cli_alert_danger("{.code exponentiate = TRUE} is not valid for this type of model and was ignored.")
+  }
+
   if (!is.null(res)) {
     # success of broom
     cli::cli_alert_success("Model tidied with {.code broom::tidy()}.")
@@ -56,7 +80,7 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
 
   if (is.null(res)) {
     res <- tryCatch(
-      tidy_parameters(x, conf.int = conf.int, conf.level = conf.level, ...),
+      do.call(tidy_parameters, tidy_args),
       error = function(e) {
         cli::cli_alert_warning("{.code tidy_parameters()} also failed.")
         cli::cli_alert_danger(e)
