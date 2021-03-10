@@ -38,18 +38,25 @@ tidy_parameters <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 #' @export
 #' @family custom_tieders
 tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, ...) {
-  requireNamespace("broom.mixed") # load broom.mixed if available
+  # load broom.mixed if available
+  suppressMessages(requireNamespace("broom.mixed", quietly = TRUE))
+
   res <- tryCatch(
-    broom::tidy(x, conf.int = conf.int, conf.level, ...),
+    broom::tidy(x, conf.int = conf.int, conf.level = conf.level, ...),
     error = function(e) {
       cli::cli_alert_warning("{.code broom::tidy()} failed to tidy the model.")
       cli::cli_alert_danger(e)
       NULL
     }
   )
+  if (!is.null(res)) {
+    # success of broom
+    cli::cli_alert_success("Model tidied with {.code broom::tidy()}.")
+  }
+
   if (is.null(res)) {
     res <- tryCatch(
-      tidy_parameters(x, conf.int = conf.int, conf.level, ...),
+      tidy_parameters(x, conf.int = conf.int, conf.level = conf.level, ...),
       error = function(e) {
         cli::cli_alert_warning("{.code tidy_parameters()} also failed.")
         cli::cli_alert_danger(e)
@@ -62,9 +69,6 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
       # success of parameters
       cli::cli_alert_success("{.code tidy_parameters()} used instead.")
     }
-  } else {
-    # success of broom
-    cli::cli_alert_success("Model tidied with {.code broom::tidy()}.")
   }
   res
 }

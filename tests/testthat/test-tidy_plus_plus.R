@@ -166,8 +166,8 @@ test_that("tidy_plus_plus() works with stats::aov", {
 test_that("tidy_plus_plus() works with lme4::lmer", {
   skip_on_cran()
   skip_if_not_installed("lme4")
-  mod <- lme4::lmer(Reaction ~ Days + (Days | Subject), lme4::sleepstudy)
   skip_if_not_installed("broom.mixed")
+  mod <- lme4::lmer(Reaction ~ Days + (Days | Subject), lme4::sleepstudy)
   expect_error(
     res <- mod %>% tidy_plus_plus(),
     NA
@@ -519,7 +519,7 @@ test_that("tidy_plus_plus() works with VGAM::vglm", {
     trace = FALSE
   )
   expect_error(
-    res <- mod %>% tidy_plus_plus(tidy_fun = tidy_parameters),
+    res <- mod %>% tidy_plus_plus(),
     NA
   )
 })
