@@ -73,7 +73,7 @@ test_that("tidy_add_coefficients_type() works for common models", {
 
   mod <- glm(response ~ age + grade * trt, gtsummary::trial, family = poisson("identity"))
   res <- mod %>%
-    tidy_and_attach() %>%
+    tidy_and_attach(conf.int = FALSE) %>%
     tidy_add_coefficients_type()
   expect_equivalent(attr(res, "coefficients_type"), "generic")
   expect_equivalent(attr(res, "coefficients_label"), "Beta")
