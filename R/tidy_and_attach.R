@@ -66,7 +66,7 @@ tidy_and_attach <- function(
             tidy_fun(model, ...) %>%
             tidy_attach_model(model, .attributes = list(exponentiate = FALSE))
           if (exponentiate)
-            message("`exponentiate=TRUE` is not valid for this type of model and was ignored.")
+            cli::cli_alert_warning("`exponentiate=TRUE` is not valid for this type of model and was ignored.")
           xx
         },
         error = function(e) {

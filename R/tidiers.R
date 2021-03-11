@@ -69,8 +69,10 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
         NULL
       }
     )
-    if (!is.null(res) && !is.null(tidy_args$exponentiate) && tidy_args$exponentiate)
-      cli::cli_alert_danger("{.code exponentiate = TRUE} is not valid for this type of model and was ignored.")
+    if (!is.null(res) && !is.null(tidy_args$exponentiate) && tidy_args$exponentiate) {
+      # changing to FALSE is managed by tidy_and_attch()
+      stop("'exponentiate = TRUE' is not valid for this type of model.")
+    }
   }
 
   if (is.null(res)) {
