@@ -30,3 +30,16 @@ test_that("tidy_parameters() works for basic models", {
   )
   expect_false("conf.low" %in% res)
 })
+
+test_that("tidy_with_broom_or_parameters() works for basic models", {
+  skip_if_not_installed("parameters")
+  mod <- lm(Petal.Length ~ Petal.Width, iris)
+  expect_error(
+    mod %>% tidy_with_broom_or_parameters(),
+    NA
+  )
+
+  expect_error(
+    suppressWarnings("not a model" %>% tidy_with_broom_or_parameters())
+  )
+})
