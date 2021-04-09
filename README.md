@@ -161,19 +161,19 @@ ex3 <- mod1 %>%
   # remove intercept
   tidy_remove_intercept
 ex3
-#> # A tibble: 4 x 14
+#> # A tibble: 4 x 16
 #>   term        variable   var_label  var_class var_type  var_nlevels contrasts   
 #>   <chr>       <chr>      <chr>      <chr>     <chr>           <int> <chr>       
 #> 1 Sepal.Width Sepal.Wid… Sepal.Wid… numeric   continuo…          NA <NA>        
 #> 2 Speciesset… Species    Species    factor    categori…           3 contr.treat…
 #> 3 Speciesver… Species    Species    factor    categori…           3 contr.treat…
 #> 4 Speciesvir… Species    Species    factor    categori…           3 contr.treat…
-#> # … with 7 more variables: contrasts_type <chr>, reference_row <lgl>,
+#> # … with 9 more variables: contrasts_type <chr>, reference_row <lgl>,
 #> #   label <chr>, estimate <dbl>, std.error <dbl>, statistic <dbl>,
-#> #   p.value <dbl>
+#> #   p.value <dbl>, conf.low <dbl>, conf.high <dbl>
 dplyr::glimpse(ex3)
 #> Rows: 4
-#> Columns: 14
+#> Columns: 16
 #> $ term           <chr> "Sepal.Width", "Speciessetosa", "Speciesversicolor", "S…
 #> $ variable       <chr> "Sepal.Width", "Species", "Species", "Species"
 #> $ var_label      <chr> "Sepal.Width", "Species", "Species", "Species"
@@ -188,6 +188,8 @@ dplyr::glimpse(ex3)
 #> $ std.error      <dbl> 0.1063390, NA, 0.1121079, 0.1000150
 #> $ statistic      <dbl> 7.556598, NA, 13.011954, 19.465255
 #> $ p.value        <dbl> 4.187340e-12, NA, 3.478232e-26, 2.094475e-42
+#> $ conf.low       <dbl> 0.5933983, NA, 1.2371791, 1.7491525
+#> $ conf.high      <dbl> 1.013723, NA, 1.680307, 2.144481
 
 ex4 <- mod2 %>%
   # perform initial tidying of model
@@ -201,7 +203,7 @@ ex4 <- mod2 %>%
   # add header rows for categorical variables
   tidy_add_header_rows()
 ex4
-#> # A tibble: 20 x 15
+#> # A tibble: 20 x 17
 #>    term   variable var_label var_class var_type var_nlevels header_row contrasts
 #>    <chr>  <chr>    <chr>     <chr>     <chr>          <int> <lgl>      <chr>    
 #>  1 (Inte… (Interc… (Interce… <NA>      interce…          NA NA         <NA>     
@@ -224,12 +226,12 @@ ex4
 #> 18 <NA>   grade:t… Grade * … <NA>      interac…          NA TRUE       <NA>     
 #> 19 grade… grade:t… Grade * … <NA>      interac…          NA FALSE      <NA>     
 #> 20 grade… grade:t… Grade * … <NA>      interac…          NA FALSE      <NA>     
-#> # … with 7 more variables: contrasts_type <chr>, reference_row <lgl>,
+#> # … with 9 more variables: contrasts_type <chr>, reference_row <lgl>,
 #> #   label <chr>, estimate <dbl>, std.error <dbl>, statistic <dbl>,
-#> #   p.value <dbl>
+#> #   p.value <dbl>, conf.low <dbl>, conf.high <dbl>
 dplyr::glimpse(ex4)
 #> Rows: 20
-#> Columns: 15
+#> Columns: 17
 #> $ term           <chr> "(Intercept)", NA, "poly(age, 3)1", "poly(age, 3)2", "p…
 #> $ variable       <chr> "(Intercept)", "age", "age", "age", "age", "stage", "st…
 #> $ var_label      <chr> "(Intercept)", "Age in years", "Age in years", "Age in …
@@ -245,4 +247,6 @@ dplyr::glimpse(ex4)
 #> $ std.error      <dbl> 0.4130930, NA, 2.3254455, 2.3512842, 2.3936657, NA, 0.4…
 #> $ statistic      <dbl> -1.55229592, NA, 1.29340459, 0.08935144, -0.29533409, N…
 #> $ p.value        <dbl> 0.1205914, NA, 0.1958712, 0.9288026, 0.7677387, NA, 0.9…
+#> $ conf.low       <dbl> 0.227717775, NA, 0.225454425, 0.007493208, 0.004745694,…
+#> $ conf.high      <dbl> 1.164600, NA, 2315.587655, 100.318341, 74.226179, NA, 2…
 ```
