@@ -288,7 +288,7 @@ test_that("model_get_n() works with survey::svyglm", {
 })
 
 test_that("model_get_n() works with ordinal::clm", {
-  mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine, nominal = ~contact)
+  mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine)
   expect_error(res <- mod %>% model_get_n(), NA)
   expect_equivalent(names(res), c("term", "n_obs"))
   # note: no nevent computed for ordinal models

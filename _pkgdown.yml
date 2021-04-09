@@ -35,6 +35,12 @@ reference:
   - title: Add to tidy tibbles
   - contents:
       - starts_with("tidy_")
+      - -tidy_plus_plus
+      - -tidy_parameters
+
+  - title: Custome tidiers
+  - contents:
+      - tidy_parameters
 
   - title: Get information from model objects
   - contents:

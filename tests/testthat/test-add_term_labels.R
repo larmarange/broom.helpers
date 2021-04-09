@@ -281,7 +281,7 @@ test_that("tidy_add_term_labels() works with survey::svyglm", {
 })
 
 test_that("tidy_add_term_labels() works with ordinal::clm", {
-  mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine, nominal = ~contact)
+  mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine)
   expect_error(mod %>% tidy_and_attach() %>% tidy_add_term_labels(), NA)
 })
 

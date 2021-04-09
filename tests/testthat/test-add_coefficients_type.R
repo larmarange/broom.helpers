@@ -73,7 +73,7 @@ test_that("tidy_add_coefficients_type() works for common models", {
 
   mod <- glm(response ~ age + grade * trt, gtsummary::trial, family = poisson("identity"))
   res <- mod %>%
-    tidy_and_attach() %>%
+    tidy_and_attach(conf.int = FALSE) %>%
     tidy_add_coefficients_type()
   expect_equivalent(attr(res, "coefficients_type"), "generic")
   expect_equivalent(attr(res, "coefficients_label"), "Beta")
@@ -207,7 +207,7 @@ test_that("tidy_plus_plus() works with survey::svyolr", {
 })
 
 test_that("model_get_coefficients_type() works with ordinal::clm", {
-  mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine, nominal = ~contact)
+  mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine)
   res <- mod %>% model_get_coefficients_type()
   expect_equivalent(res, "logistic")
 })

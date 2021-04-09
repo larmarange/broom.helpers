@@ -40,12 +40,10 @@ tidy_attach_model <- function(x, model, .attributes = NULL) {
 
 #' @rdname tidy_attach_model
 #' @export
-tidy_and_attach <- function(model, tidy_fun = broom::tidy, exponentiate = FALSE, ...) {
-  if (any(c("glmerMod", "lmerMod") %in% class(model))) {
-    if (!requireNamespace("broom.mixed", quietly = TRUE))
-      stop("'broom.mixed' package is required for such model.") # nocov
-  }
-
+tidy_and_attach <- function(
+  model, tidy_fun = tidy_with_broom_or_parameters,
+  exponentiate = FALSE, ...
+) {
   # exponentiate cannot be used with lm models
   # but broom will not produce an error and will return unexponentiated estimates
   if (identical(class(model), "lm") & exponentiate)
@@ -68,7 +66,7 @@ tidy_and_attach <- function(model, tidy_fun = broom::tidy, exponentiate = FALSE,
             tidy_fun(model, ...) %>%
             tidy_attach_model(model, .attributes = list(exponentiate = FALSE))
           if (exponentiate)
-            message("`exponentiate=TRUE` is not valid for this type of model and was ignored.")
+            cli::cli_alert_warning("`exponentiate=TRUE` is not valid for this type of model and was ignored.")
           xx
         },
         error = function(e) {
