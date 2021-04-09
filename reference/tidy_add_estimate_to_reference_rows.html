@@ -203,7 +203,7 @@ to the difference of each level with the grand mean.</p>
   <span class='fu'><a href='tidy_attach_model.html'>tidy_and_attach</a></span><span class='op'>(</span>exponentiate <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='tidy_add_reference_rows.html'>tidy_add_reference_rows</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>tidy_add_estimate_to_reference_rows</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 9 x 12</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 9 x 14</span><span>
 #&gt;   term     variable   var_class var_type  var_nlevels contrasts   contrasts_type
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>         
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> (Interc… (Intercep… </span><span style='color: #BB0000;'>NA</span><span>        intercept          </span><span style='color: #BB0000;'>NA</span><span> </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span>            
@@ -215,8 +215,9 @@ to the difference of each level with the grand mean.</p>
 #&gt; </span><span style='color: #BCBCBC;'>7</span><span> Age2     Age        factor    dichotom…           2 contr.sum   sum           
 #&gt; </span><span style='color: #BCBCBC;'>8</span><span> SexFema… Sex        factor    dichotom…           2 contr.trea… treatment     
 #&gt; </span><span style='color: #BCBCBC;'>9</span><span> SexMale  Sex        factor    dichotom…           2 contr.trea… treatment     
-#&gt; </span><span style='color: #949494;'># … with 5 more variables: reference_row &lt;lgl&gt;, estimate &lt;dbl&gt;,</span><span>
-#&gt; </span><span style='color: #949494;'>#   std.error &lt;dbl&gt;, statistic &lt;dbl&gt;, p.value &lt;dbl&gt;</span><span></div><div class='input'>
+#&gt; </span><span style='color: #949494;'># … with 7 more variables: reference_row &lt;lgl&gt;, estimate &lt;dbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   std.error &lt;dbl&gt;, statistic &lt;dbl&gt;, p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   conf.high &lt;dbl&gt;</span><span></div><div class='input'>
 <span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"gtsummary"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
   <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span>
     <span class='va'>response</span> <span class='op'>~</span> <span class='va'>stage</span> <span class='op'>+</span> <span class='va'>grade</span> <span class='op'>*</span> <span class='va'>trt</span>,
@@ -232,7 +233,7 @@ to the difference of each level with the grand mean.</p>
     <span class='fu'><a href='tidy_add_reference_rows.html'>tidy_add_reference_rows</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
     <span class='fu'>tidy_add_estimate_to_reference_rows</span><span class='op'>(</span><span class='op'>)</span>
 <span class='op'>}</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 12 x 12</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 12 x 14</span><span>
 #&gt;    term    variable  var_class var_type  var_nlevels contrasts    contrasts_type
 #&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>         
 #&gt; </span><span style='color: #BCBCBC;'> 1</span><span> (Inter… (Interce… </span><span style='color: #BB0000;'>NA</span><span>        intercept          </span><span style='color: #BB0000;'>NA</span><span> </span><span style='color: #BB0000;'>NA</span><span>           </span><span style='color: #BB0000;'>NA</span><span>            
@@ -247,8 +248,9 @@ to the difference of each level with the grand mean.</p>
 #&gt; </span><span style='color: #BCBCBC;'>10</span><span> trt2    trt       character dichotom…           2 contr.SAS    treatment     
 #&gt; </span><span style='color: #BCBCBC;'>11</span><span> grade1… grade:trt </span><span style='color: #BB0000;'>NA</span><span>        interact…          </span><span style='color: #BB0000;'>NA</span><span> </span><span style='color: #BB0000;'>NA</span><span>           </span><span style='color: #BB0000;'>NA</span><span>            
 #&gt; </span><span style='color: #BCBCBC;'>12</span><span> grade3… grade:trt </span><span style='color: #BB0000;'>NA</span><span>        interact…          </span><span style='color: #BB0000;'>NA</span><span> </span><span style='color: #BB0000;'>NA</span><span>           </span><span style='color: #BB0000;'>NA</span><span>            
-#&gt; </span><span style='color: #949494;'># … with 5 more variables: reference_row &lt;lgl&gt;, estimate &lt;dbl&gt;,</span><span>
-#&gt; </span><span style='color: #949494;'>#   std.error &lt;dbl&gt;, statistic &lt;dbl&gt;, p.value &lt;dbl&gt;</span><span></div></span></pre>
+#&gt; </span><span style='color: #949494;'># … with 7 more variables: reference_row &lt;lgl&gt;, estimate &lt;dbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   std.error &lt;dbl&gt;, statistic &lt;dbl&gt;, p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   conf.high &lt;dbl&gt;</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

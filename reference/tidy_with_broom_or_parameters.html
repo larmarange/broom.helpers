@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get the model matrix of a model — model_get_model_matrix • broom.helpers</title>
+<title>Tidy a model with broom or parameters — tidy_with_broom_or_parameters • broom.helpers</title>
 
 
 <!-- jquery -->
@@ -39,11 +39,9 @@
 
 
 
-<meta property="og:title" content="Get the model matrix of a model — model_get_model_matrix" />
-<meta property="og:description" content="The structure of the object returned by stats::model.matrix()
-could slightly differ for certain types of models.
-model_get_model_matrix() will always return an object
-with the same structure as stats::model.matrix.default()." />
+<meta property="og:title" content="Tidy a model with broom or parameters — tidy_with_broom_or_parameters" />
+<meta property="og:description" content="Try to tidy a model with broom::tidy(). If it fails, will try to tidy the
+model using parameters::model_parameters() through tidy_parameters()." />
 
 
 
@@ -117,78 +115,46 @@ with the same structure as stats::model.matrix.default()." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get the model matrix of a model</h1>
-    <small class="dont-index">Source: <a href='https://github.com/larmarange/broom.helpers/blob/master/R/model_get_model_matrix.R'><code>R/model_get_model_matrix.R</code></a></small>
-    <div class="hidden name"><code>model_get_model_matrix.Rd</code></div>
+    <h1>Tidy a model with broom or parameters</h1>
+    <small class="dont-index">Source: <a href='https://github.com/larmarange/broom.helpers/blob/master/R/tidiers.R'><code>R/tidiers.R</code></a></small>
+    <div class="hidden name"><code>tidy_with_broom_or_parameters.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The structure of the object returned by <code><a href='https://rdrr.io/r/stats/model.matrix.html'>stats::model.matrix()</a></code>
-could slightly differ for certain types of models.
-<code>model_get_model_matrix()</code> will always return an object
-with the same structure as <code><a href='https://rdrr.io/r/stats/model.matrix.html'>stats::model.matrix.default()</a></code>.</p>
+    <p>Try to tidy a model with <code><a href='https://generics.r-lib.org/reference/tidy.html'>broom::tidy()</a></code>. If it fails, will try to tidy the
+model using <code><a href='https://easystats.github.io/parameters/reference/model_parameters.html'>parameters::model_parameters()</a></code> through <code><a href='tidy_parameters.html'>tidy_parameters()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>model_get_model_matrix</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>...</span><span class='op'>)</span>
-
-<span class='co'># S3 method for default</span>
-<span class='fu'>model_get_model_matrix</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>...</span><span class='op'>)</span>
-
-<span class='co'># S3 method for multinom</span>
-<span class='fu'>model_get_model_matrix</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>...</span><span class='op'>)</span>
-
-<span class='co'># S3 method for clm</span>
-<span class='fu'>model_get_model_matrix</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>...</span><span class='op'>)</span>
-
-<span class='co'># S3 method for brmsfit</span>
-<span class='fu'>model_get_model_matrix</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>tidy_with_broom_or_parameters</span><span class='op'>(</span><span class='va'>x</span>, conf.int <span class='op'>=</span> <span class='cn'>TRUE</span>, conf.level <span class='op'>=</span> <span class='fl'>0.95</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>model</th>
-      <td><p>a model object</p></td>
+      <th>x</th>
+      <td><p>a model</p></td>
+    </tr>
+    <tr>
+      <th>conf.int</th>
+      <td><p>logical indicating whether or not to include a confidence
+interval in the tidied output</p></td>
+    </tr>
+    <tr>
+      <th>conf.level</th>
+      <td><p>the confidence level to use for the confidence interval</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>additional arguments passed to <code><a href='https://rdrr.io/r/stats/model.matrix.html'>stats::model.matrix()</a></code></p></td>
+      <td><p>additional parameters passed to <code><a href='https://generics.r-lib.org/reference/tidy.html'>broom::tidy()</a></code> or
+<code><a href='https://easystats.github.io/parameters/reference/model_parameters.html'>parameters::model_parameters()</a></code></p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/r/stats/model.matrix.html'>stats::model.matrix()</a></code></p>
-<p>Other model_helpers: 
-<code><a href='model_compute_terms_contributions.html'>model_compute_terms_contributions</a>()</code>,
-<code><a href='model_get_assign.html'>model_get_assign</a>()</code>,
-<code><a href='model_get_coefficients_type.html'>model_get_coefficients_type</a>()</code>,
-<code><a href='model_get_contrasts.html'>model_get_contrasts</a>()</code>,
-<code><a href='model_get_model_frame.html'>model_get_model_frame</a>()</code>,
-<code><a href='model_get_model.html'>model_get_model</a>()</code>,
-<code><a href='model_get_nlevels.html'>model_get_nlevels</a>()</code>,
-<code><a href='model_get_n.html'>model_get_n</a>()</code>,
-<code><a href='model_get_offset.html'>model_get_offset</a>()</code>,
-<code><a href='model_get_response.html'>model_get_response</a>()</code>,
-<code><a href='model_get_terms.html'>model_get_terms</a>()</code>,
-<code><a href='model_get_weights.html'>model_get_weights</a>()</code>,
-<code><a href='model_get_xlevels.html'>model_get_xlevels</a>()</code>,
-<code><a href='model_identify_variables.html'>model_identify_variables</a>()</code>,
-<code><a href='model_list_contrasts.html'>model_list_contrasts</a>()</code>,
-<code><a href='model_list_terms_levels.html'>model_list_terms_levels</a>()</code>,
-<code><a href='model_list_variables.html'>model_list_variables</a>()</code></p></div>
+    <div class='dont-index'><p>Other custom_tieders: 
+<code><a href='tidy_parameters.html'>tidy_parameters</a>()</code></p></div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>hp</span> <span class='op'>~</span> <span class='va'>mpg</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>cyl</span><span class='op'>)</span>, <span class='va'>mtcars</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>model_get_model_matrix</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;                   (Intercept)  mpg factor(cyl)6 factor(cyl)8
-#&gt; Mazda RX4                   1 21.0            1            0
-#&gt; Mazda RX4 Wag               1 21.0            1            0
-#&gt; Datsun 710                  1 22.8            0            0
-#&gt; Hornet 4 Drive              1 21.4            1            0
-#&gt; Hornet Sportabout           1 18.7            0            1
-#&gt; Valiant                     1 18.1            1            0</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

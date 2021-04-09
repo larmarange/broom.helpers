@@ -204,7 +204,7 @@ rather than before. Similarly, it is better to apply
   <span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='tidy_attach_model.html'>tidy_and_attach</a></span><span class='op'>(</span><span class='op'>)</span>
 <span class='va'>res</span> <span class='op'>%&gt;%</span> <span class='fu'>tidy_add_reference_rows</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 9 x 12</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 9 x 14</span><span>
 #&gt;   term     variable   var_class var_type  var_nlevels contrasts   contrasts_type
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>         
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> (Interc… (Intercep… </span><span style='color: #BB0000;'>NA</span><span>        intercept          </span><span style='color: #BB0000;'>NA</span><span> </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span>            
@@ -216,9 +216,10 @@ rather than before. Similarly, it is better to apply
 #&gt; </span><span style='color: #BCBCBC;'>7</span><span> Age2     Age        character dichotom…           2 contr.sum   sum           
 #&gt; </span><span style='color: #BCBCBC;'>8</span><span> SexFema… Sex        character dichotom…           2 contr.trea… treatment     
 #&gt; </span><span style='color: #BCBCBC;'>9</span><span> SexMale  Sex        character dichotom…           2 contr.trea… treatment     
-#&gt; </span><span style='color: #949494;'># … with 5 more variables: reference_row &lt;lgl&gt;, estimate &lt;dbl&gt;,</span><span>
-#&gt; </span><span style='color: #949494;'>#   std.error &lt;dbl&gt;, statistic &lt;dbl&gt;, p.value &lt;dbl&gt;</span><span></div><div class='input'><span class='va'>res</span> <span class='op'>%&gt;%</span> <span class='fu'>tidy_add_reference_rows</span><span class='op'>(</span>no_reference_row <span class='op'>=</span> <span class='fu'><a href='select_helpers.html'>all_dichotomous</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 7 x 12</span><span>
+#&gt; </span><span style='color: #949494;'># … with 7 more variables: reference_row &lt;lgl&gt;, estimate &lt;dbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   std.error &lt;dbl&gt;, statistic &lt;dbl&gt;, p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   conf.high &lt;dbl&gt;</span><span></div><div class='input'><span class='va'>res</span> <span class='op'>%&gt;%</span> <span class='fu'>tidy_add_reference_rows</span><span class='op'>(</span>no_reference_row <span class='op'>=</span> <span class='fu'><a href='select_helpers.html'>all_dichotomous</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 7 x 14</span><span>
 #&gt;   term     variable   var_class var_type  var_nlevels contrasts   contrasts_type
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>         
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> (Interc… (Intercep… </span><span style='color: #BB0000;'>NA</span><span>        intercept          </span><span style='color: #BB0000;'>NA</span><span> </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span>            
@@ -228,9 +229,10 @@ rather than before. Similarly, it is better to apply
 #&gt; </span><span style='color: #BCBCBC;'>5</span><span> ClassCr… Class      character categori…           4 contr.SAS   treatment     
 #&gt; </span><span style='color: #BCBCBC;'>6</span><span> Age1     Age        character dichotom…           2 contr.sum   sum           
 #&gt; </span><span style='color: #BCBCBC;'>7</span><span> SexMale  Sex        character dichotom…           2 contr.trea… treatment     
-#&gt; </span><span style='color: #949494;'># … with 5 more variables: reference_row &lt;lgl&gt;, estimate &lt;dbl&gt;,</span><span>
-#&gt; </span><span style='color: #949494;'>#   std.error &lt;dbl&gt;, statistic &lt;dbl&gt;, p.value &lt;dbl&gt;</span><span></div><div class='input'><span class='va'>res</span> <span class='op'>%&gt;%</span> <span class='fu'>tidy_add_reference_rows</span><span class='op'>(</span>no_reference_row <span class='op'>=</span> <span class='st'>"Class"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 8 x 12</span><span>
+#&gt; </span><span style='color: #949494;'># … with 7 more variables: reference_row &lt;lgl&gt;, estimate &lt;dbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   std.error &lt;dbl&gt;, statistic &lt;dbl&gt;, p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   conf.high &lt;dbl&gt;</span><span></div><div class='input'><span class='va'>res</span> <span class='op'>%&gt;%</span> <span class='fu'>tidy_add_reference_rows</span><span class='op'>(</span>no_reference_row <span class='op'>=</span> <span class='st'>"Class"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 8 x 14</span><span>
 #&gt;   term     variable   var_class var_type  var_nlevels contrasts   contrasts_type
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>         
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> (Interc… (Intercep… </span><span style='color: #BB0000;'>NA</span><span>        intercept          </span><span style='color: #BB0000;'>NA</span><span> </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span>            
@@ -241,8 +243,9 @@ rather than before. Similarly, it is better to apply
 #&gt; </span><span style='color: #BCBCBC;'>6</span><span> Age2     Age        character dichotom…           2 contr.sum   sum           
 #&gt; </span><span style='color: #BCBCBC;'>7</span><span> SexFema… Sex        character dichotom…           2 contr.trea… treatment     
 #&gt; </span><span style='color: #BCBCBC;'>8</span><span> SexMale  Sex        character dichotom…           2 contr.trea… treatment     
-#&gt; </span><span style='color: #949494;'># … with 5 more variables: reference_row &lt;lgl&gt;, estimate &lt;dbl&gt;,</span><span>
-#&gt; </span><span style='color: #949494;'>#   std.error &lt;dbl&gt;, statistic &lt;dbl&gt;, p.value &lt;dbl&gt;</span><span></div><div class='input'>
+#&gt; </span><span style='color: #949494;'># … with 7 more variables: reference_row &lt;lgl&gt;, estimate &lt;dbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   std.error &lt;dbl&gt;, statistic &lt;dbl&gt;, p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   conf.high &lt;dbl&gt;</span><span></div><div class='input'>
 <span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"gtsummary"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
   <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span>
     <span class='va'>response</span> <span class='op'>~</span> <span class='va'>stage</span> <span class='op'>+</span> <span class='va'>grade</span> <span class='op'>*</span> <span class='va'>trt</span>,
@@ -257,7 +260,7 @@ rather than before. Similarly, it is better to apply
     <span class='fu'><a href='tidy_attach_model.html'>tidy_and_attach</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
     <span class='fu'>tidy_add_reference_rows</span><span class='op'>(</span><span class='op'>)</span>
 <span class='op'>}</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 12 x 12</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 12 x 14</span><span>
 #&gt;    term    variable  var_class var_type  var_nlevels contrasts    contrasts_type
 #&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>         
 #&gt; </span><span style='color: #BCBCBC;'> 1</span><span> (Inter… (Interce… </span><span style='color: #BB0000;'>NA</span><span>        intercept          </span><span style='color: #BB0000;'>NA</span><span> </span><span style='color: #BB0000;'>NA</span><span>           </span><span style='color: #BB0000;'>NA</span><span>            
@@ -272,8 +275,9 @@ rather than before. Similarly, it is better to apply
 #&gt; </span><span style='color: #BCBCBC;'>10</span><span> trt2    trt       character dichotom…           2 contr.SAS    treatment     
 #&gt; </span><span style='color: #BCBCBC;'>11</span><span> grade1… grade:trt </span><span style='color: #BB0000;'>NA</span><span>        interact…          </span><span style='color: #BB0000;'>NA</span><span> </span><span style='color: #BB0000;'>NA</span><span>           </span><span style='color: #BB0000;'>NA</span><span>            
 #&gt; </span><span style='color: #BCBCBC;'>12</span><span> grade3… grade:trt </span><span style='color: #BB0000;'>NA</span><span>        interact…          </span><span style='color: #BB0000;'>NA</span><span> </span><span style='color: #BB0000;'>NA</span><span>           </span><span style='color: #BB0000;'>NA</span><span>            
-#&gt; </span><span style='color: #949494;'># … with 5 more variables: reference_row &lt;lgl&gt;, estimate &lt;dbl&gt;,</span><span>
-#&gt; </span><span style='color: #949494;'>#   std.error &lt;dbl&gt;, statistic &lt;dbl&gt;, p.value &lt;dbl&gt;</span><span></div></span></pre>
+#&gt; </span><span style='color: #949494;'># … with 7 more variables: reference_row &lt;lgl&gt;, estimate &lt;dbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   std.error &lt;dbl&gt;, statistic &lt;dbl&gt;, p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   conf.high &lt;dbl&gt;</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

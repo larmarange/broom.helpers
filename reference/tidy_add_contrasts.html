@@ -180,7 +180,7 @@ categorical variable and a <code>contrasts_type</code> column equal to
   <span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='tidy_attach_model.html'>tidy_and_attach</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>tidy_add_contrasts</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 6 x 11</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 6 x 13</span><span>
 #&gt;   term     variable   var_class var_type  var_nlevels contrasts   contrasts_type
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>         
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> (Interc… (Intercep… </span><span style='color: #BB0000;'>NA</span><span>        intercept          </span><span style='color: #BB0000;'>NA</span><span> </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span>            
@@ -189,8 +189,8 @@ categorical variable and a <code>contrasts_type</code> column equal to
 #&gt; </span><span style='color: #BCBCBC;'>4</span><span> Class3   Class      character categori…           4 contr.helm… helmert       
 #&gt; </span><span style='color: #BCBCBC;'>5</span><span> Age1     Age        character dichotom…           2 contr.sum   sum           
 #&gt; </span><span style='color: #BCBCBC;'>6</span><span> SexMale  Sex        character dichotom…           2 contr.trea… treatment     
-#&gt; </span><span style='color: #949494;'># … with 4 more variables: estimate &lt;dbl&gt;, std.error &lt;dbl&gt;, statistic &lt;dbl&gt;,</span><span>
-#&gt; </span><span style='color: #949494;'>#   p.value &lt;dbl&gt;</span><span></div></span></pre>
+#&gt; </span><span style='color: #949494;'># … with 6 more variables: estimate &lt;dbl&gt;, std.error &lt;dbl&gt;, statistic &lt;dbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

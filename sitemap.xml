@@ -22,6 +22,9 @@
     <loc>https://larmarange.github.io/broom.helpers//reference/model_compute_terms_contributions.html</loc>
   </url>
   <url>
+    <loc>https://larmarange.github.io/broom.helpers//reference/model_get_assign.html</loc>
+  </url>
+  <url>
     <loc>https://larmarange.github.io/broom.helpers//reference/model_get_coefficients_type.html</loc>
   </url>
   <url>
@@ -109,6 +112,9 @@
     <loc>https://larmarange.github.io/broom.helpers//reference/tidy_identify_variables.html</loc>
   </url>
   <url>
+    <loc>https://larmarange.github.io/broom.helpers//reference/tidy_parameters.html</loc>
+  </url>
+  <url>
     <loc>https://larmarange.github.io/broom.helpers//reference/tidy_plus_plus.html</loc>
   </url>
   <url>
@@ -116,6 +122,9 @@
   </url>
   <url>
     <loc>https://larmarange.github.io/broom.helpers//reference/tidy_select_variables.html</loc>
+  </url>
+  <url>
+    <loc>https://larmarange.github.io/broom.helpers//reference/tidy_with_broom_or_parameters.html</loc>
   </url>
   <url>
     <loc>https://larmarange.github.io/broom.helpers//articles/tidy.html</loc>

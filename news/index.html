@@ -124,9 +124,14 @@
 <p><strong>New supported models</strong></p>
 <ul>
 <li>Support of <code><a href="https://mc-stan.org/rstanarm/reference/stan_glm.html">rstanarm::stan_glm()</a></code> models</li>
+<li>Basic support for <code><a href="https://rdrr.io/pkg/VGAM/man/vglm.html">VGAM::vglm()</a></code> models (<a href='https://github.com/larmarange/broom.helpers/issues/105'>#105</a>)</li>
 </ul>
 <p><strong>New features</strong></p>
 <ul>
+<li>Custom tieder <code><a href="../reference/tidy_parameters.html">tidy_parameters()</a></code> based on <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html">parameters::model_parameters()</a></code> (<a href='https://github.com/larmarange/broom.helpers/issues/104'>#104</a>)</li>
+<li>Custom tieder <code><a href="../reference/tidy_with_broom_or_parameters.html">tidy_with_broom_or_parameters()</a></code> (<a href='https://github.com/larmarange/broom.helpers/issues/104'>#104</a>)</li>
+<li>By default, <code><a href="../reference/tidy_plus_plus.html">tidy_plus_plus()</a></code> now uses <code><a href="../reference/tidy_with_broom_or_parameters.html">tidy_with_broom_or_parameters()</a></code>
+</li>
 <li>
 <code><a href="../reference/model_get_coefficients_type.html">model_get_coefficients_type()</a></code> now returns “prop_hazard” for cloglog-binomial models (<a href='https://github.com/larmarange/broom.helpers/issues/106'>#106</a>)</li>
 </ul>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get model offset — model_get_offset • broom.helpers</title>
+<title>Get the assign attribute of model matrix of a model — model_get_assign • broom.helpers</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,9 @@
 
 
 
-<meta property="og:title" content="Get model offset — model_get_offset" />
-<meta property="og:description" content="This function does not cover lavaan models (NULL is returned)." />
+<meta property="og:title" content="Get the assign attribute of model matrix of a model — model_get_assign" />
+<meta property="og:description" content="Return the assign attribute attached to the object returned by
+stats::model.matrix()." />
 
 
 
@@ -114,19 +115,23 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get model offset</h1>
-    <small class="dont-index">Source: <a href='https://github.com/larmarange/broom.helpers/blob/master/R/model_get_offset.R'><code>R/model_get_offset.R</code></a></small>
-    <div class="hidden name"><code>model_get_offset.Rd</code></div>
+    <h1>Get the assign attribute of model matrix of a model</h1>
+    <small class="dont-index">Source: <a href='https://github.com/larmarange/broom.helpers/blob/master/R/model_get_assign.R'><code>R/model_get_assign.R</code></a></small>
+    <div class="hidden name"><code>model_get_assign.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function does not cover <code>lavaan</code> models (<code>NULL</code> is returned).</p>
+    <p>Return the assign attribute attached to the object returned by
+<code><a href='https://rdrr.io/r/stats/model.matrix.html'>stats::model.matrix()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>model_get_offset</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
+    <pre class="usage"><span class='fu'>model_get_assign</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>model_get_offset</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span></pre>
+<span class='fu'>model_get_assign</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
+
+<span class='co'># S3 method for vglm</span>
+<span class='fu'>model_get_assign</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -139,9 +144,9 @@
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other model_helpers: 
+    <div class='dont-index'><p><code><a href='https://rdrr.io/r/stats/model.matrix.html'>stats::model.matrix()</a></code></p>
+<p>Other model_helpers: 
 <code><a href='model_compute_terms_contributions.html'>model_compute_terms_contributions</a>()</code>,
-<code><a href='model_get_assign.html'>model_get_assign</a>()</code>,
 <code><a href='model_get_coefficients_type.html'>model_get_coefficients_type</a>()</code>,
 <code><a href='model_get_contrasts.html'>model_get_contrasts</a>()</code>,
 <code><a href='model_get_model_frame.html'>model_get_model_frame</a>()</code>,
@@ -149,6 +154,7 @@
 <code><a href='model_get_model.html'>model_get_model</a>()</code>,
 <code><a href='model_get_nlevels.html'>model_get_nlevels</a>()</code>,
 <code><a href='model_get_n.html'>model_get_n</a>()</code>,
+<code><a href='model_get_offset.html'>model_get_offset</a>()</code>,
 <code><a href='model_get_response.html'>model_get_response</a>()</code>,
 <code><a href='model_get_terms.html'>model_get_terms</a>()</code>,
 <code><a href='model_get_weights.html'>model_get_weights</a>()</code>,
@@ -159,39 +165,49 @@
 <code><a href='model_list_variables.html'>model_list_variables</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span>
-  <span class='va'>response</span> <span class='op'>~</span> <span class='va'>trt</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/stats/offset.html'>offset</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>ttdeath</span><span class='op'>)</span><span class='op'>)</span>,
-  <span class='fu'>gtsummary</span><span class='fu'>::</span><span class='va'><a href='http://www.danieldsjoberg.com/gtsummary//reference/trial.html'>trial</a></span>,
-  family <span class='op'>=</span> <span class='va'>poisson</span>
-<span class='op'>)</span>
-<span class='va'>mod</span> <span class='op'>%&gt;%</span> <span class='fu'>model_get_offset</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;   [1] 3.178054 3.178054 3.178054 2.870169 2.799109 2.749832 3.178054 2.913980
-#&gt;   [9] 3.178054 2.354228 3.178054 3.178054 2.663053 2.556452 3.121483 2.164472
-#&gt;  [17] 3.178054 2.721953 3.178054 3.178054 3.178054 3.178054 2.828496 3.173460
-#&gt;  [25] 1.843719 2.758109 3.178054 3.178054 2.737609 2.858193 3.178054 3.039749
-#&gt;  [33] 3.178054 3.178054 3.178054 2.527327 3.178054 2.746630 2.890372 2.891482
-#&gt;  [41] 2.520113 2.493205 3.178054 2.857619 3.178054 3.178054 3.178054 2.500616
-#&gt;  [49] 2.304583 2.903069 2.343727 3.178054 3.178054 2.962175 2.502255 2.671386
-#&gt;  [57] 2.962175 2.318458 2.576422 2.314514 3.178054 3.125444 3.178054 3.096934
-#&gt;  [65] 3.178054 3.026261 3.145445 1.998774 3.178054 3.178054 3.178054 3.178054
-#&gt;  [73] 3.178054 2.955951 1.983756 3.173041 2.786861 3.178054 2.643334 3.178054
-#&gt;  [81] 3.178054 3.178054 2.799717 3.170106 3.178054 2.910719 2.437116 3.041661
-#&gt;  [89] 1.673351 3.132010 2.335052 3.178054 3.178054 2.676903 2.951780 3.178054
-#&gt;  [97] 3.053529 2.776954 2.299581 3.178054 3.178054 2.983153 2.813611 2.414126
-#&gt; [105] 2.906354 3.178054 2.865624 2.859340 3.178054 3.129389 2.615935 3.178054
-#&gt; [113] 3.178054 2.859913 3.178054 3.178054 3.178054 3.178054 3.178054 2.564949
-#&gt; [121] 2.275214 2.750471 3.178054 1.261298 3.013081 3.153163 2.801541 3.178054
-#&gt; [129] 3.178054 2.684440 2.879760 3.178054 3.083285 3.178054 3.178054 2.540026
-#&gt; [137] 3.178054 3.178054 3.178054 3.178054 2.309561 3.178054 3.178054 3.178054
-#&gt; [145] 3.012098 3.178054 3.178054 3.060115 2.536075 2.571084 3.178054 2.714695
-#&gt; [153] 3.002708 2.356126 3.178054 3.178054 3.178054 3.178054 3.161247 3.178054
-#&gt; [161] 2.994732 2.744061 3.166319 3.109507 2.972464 2.807594 3.178054 3.178054
-#&gt; [169] 3.178054 3.086943 3.178054 2.528126 3.178054 2.695978 2.800933 3.178054
-#&gt; [177] 2.223542 2.877512 3.178054 3.178054 2.294553 2.782539 2.352327 3.035434
-#&gt; [185] 3.178054 2.799717 3.178054 3.109061 3.178054 3.072693 3.178054 2.986187
-#&gt; [193] 3.178054
-#&gt; attr(,"label")
-#&gt; [1] "Months to Death/Censor"</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>hp</span> <span class='op'>~</span> <span class='va'>mpg</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>cyl</span><span class='op'>)</span>, <span class='va'>mtcars</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>model_get_assign</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 0 1 2 2
+#&gt; attr(,"model_matrix")
+#&gt;                     (Intercept)  mpg factor(cyl)6 factor(cyl)8
+#&gt; Mazda RX4                     1 21.0            1            0
+#&gt; Mazda RX4 Wag                 1 21.0            1            0
+#&gt; Datsun 710                    1 22.8            0            0
+#&gt; Hornet 4 Drive                1 21.4            1            0
+#&gt; Hornet Sportabout             1 18.7            0            1
+#&gt; Valiant                       1 18.1            1            0
+#&gt; Duster 360                    1 14.3            0            1
+#&gt; Merc 240D                     1 24.4            0            0
+#&gt; Merc 230                      1 22.8            0            0
+#&gt; Merc 280                      1 19.2            1            0
+#&gt; Merc 280C                     1 17.8            1            0
+#&gt; Merc 450SE                    1 16.4            0            1
+#&gt; Merc 450SL                    1 17.3            0            1
+#&gt; Merc 450SLC                   1 15.2            0            1
+#&gt; Cadillac Fleetwood            1 10.4            0            1
+#&gt; Lincoln Continental           1 10.4            0            1
+#&gt; Chrysler Imperial             1 14.7            0            1
+#&gt; Fiat 128                      1 32.4            0            0
+#&gt; Honda Civic                   1 30.4            0            0
+#&gt; Toyota Corolla                1 33.9            0            0
+#&gt; Toyota Corona                 1 21.5            0            0
+#&gt; Dodge Challenger              1 15.5            0            1
+#&gt; AMC Javelin                   1 15.2            0            1
+#&gt; Camaro Z28                    1 13.3            0            1
+#&gt; Pontiac Firebird              1 19.2            0            1
+#&gt; Fiat X1-9                     1 27.3            0            0
+#&gt; Porsche 914-2                 1 26.0            0            0
+#&gt; Lotus Europa                  1 30.4            0            0
+#&gt; Ford Pantera L                1 15.8            0            1
+#&gt; Ferrari Dino                  1 19.7            1            0
+#&gt; Maserati Bora                 1 15.0            0            1
+#&gt; Volvo 142E                    1 21.4            0            0
+#&gt; attr(,"model_matrix")attr(,"assign")
+#&gt; [1] 0 1 2 2
+#&gt; attr(,"model_matrix")attr(,"contrasts")
+#&gt; attr(,"model_matrix")attr(,"contrasts")$`factor(cyl)`
+#&gt; [1] "contr.treatment"
+#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
