@@ -109,6 +109,10 @@ model_get_n.glm <- function(model) {
 
   if(ct %in% c("logistic", "poisson")) {
     y <- model %>% model_get_response()
+    if (is.factor(y)) {
+      # the first level denotes failure and all others success
+      y <- as.integer(y != levels(y)[1])
+    }
     n$n_event <- colSums(tcm * y * w)
     attr(n, "N_event") <- sum(y * w)
   }
