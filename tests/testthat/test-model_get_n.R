@@ -203,6 +203,7 @@ test_that("model_get_n() works with lme4::glmer", {
   df <- gtsummary::trial
   df$stage <- as.character(df$stage)
   df$group <- rep.int(1:2, 100)
+  df$response <- factor(df$response)
   suppressMessages(
     mod <- lme4::glmer(response ~ stage + grade + (1 | group), df, family = binomial)
   )
