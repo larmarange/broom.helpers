@@ -1,5 +1,8 @@
 # broom.helpers (development version)
 
+- Bug fix for computing n for some binomial models computed 
+  with `lme4::glmer()` (#116)
+
 # broom.helpers 1.3.0
 
 **New supported models**
