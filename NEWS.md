@@ -2,6 +2,7 @@
 
 - Bug fix for computing n for some binomial models computed 
   with `lme4::glmer()` (#116)
+- Populating **effect** column when adding reference rows (#117)
 
 # broom.helpers 1.3.0
 

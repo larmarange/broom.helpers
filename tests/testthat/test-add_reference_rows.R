@@ -186,3 +186,20 @@ test_that("tidy_add_reference_rows() works with nnet::multinom", {
     )
   )
 })
+
+test_that("tidy_add_reference_rows() works with lme4::glmer", {
+  skip_on_cran()
+  skip_if_not_installed("lme4")
+  skip_if_not_installed("broom.mixed")
+  mod <- lme4::glmer(cbind(incidence, size - incidence) ~ period + (1 | herd),
+                     family = binomial, data = lme4::cbpp
+  )
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_add_reference_rows()
+
+  expect_equal(
+    res[res$reference_row & !is.na(res$reference_row),]$effect,
+    "fixed"
+  )
+})
