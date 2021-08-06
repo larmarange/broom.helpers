@@ -149,112 +149,61 @@ tidy_add_reference_rows <- function(
     group <- "component"
   if ("y.level" %in% names(x) & inherits(model, "multinom")) # specific case for nnet::multinom
     group <- "y.level"
+  if (!is.null(group)) x$.group_by_var <- x[[group]]
+  else x$.group_by_var <- ""
 
-  if (!is.null(group)) {
-    x$.group_by_var <- x[[group]]
-    ref_rows <- terms_levels %>%
-      dplyr::filter(.data$reference) %>%
-      dplyr::mutate(reference_row = TRUE) %>%
-      dplyr::select(.data$term, .data$variable, .data$label, .data$reference_row, .data$rank)
+  ref_rows <- terms_levels %>%
+    dplyr::filter(.data$reference) %>%
+    dplyr::mutate(reference_row = TRUE) %>%
+    dplyr::select(.data$term, .data$variable, .data$label, .data$reference_row, .data$rank)
 
-    if (!"label" %in% names(x))
-      ref_rows <- ref_rows %>% dplyr::select(-.data$label)
+  if (!"label" %in% names(x))
+    ref_rows <- ref_rows %>% dplyr::select(-.data$label)
 
-    # populate effect column for mixed models
-    tmp <- x
-    if (!"effect" %in% names(x))
-      tmp$effect <- NA_character_
+  # populate effect column for mixed models
+  tmp <- x
+  if (!"effect" %in% names(x))
+    tmp$effect <- NA_character_
 
-    var_summary <- tmp %>%
-      dplyr::group_by(.data$.group_by_var, .data$variable) %>%
-      dplyr::summarise(
-        var_class = dplyr::first(.data$var_class),
-        var_type = dplyr::first(.data$var_type),
-        var_label = dplyr::first(.data$var_label),
-        var_nlevels = dplyr::first(.data$var_nlevels),
-        effect = dplyr::first(.data$effect),
-        contrasts = dplyr::first(.data$contrasts),
-        contrasts_type = dplyr::first(.data$contrasts_type),
-        var_min_rank = min(.data$rank),
-        var_max_rank = min(.data$rank),
-        .groups = "drop_last"
+  var_summary <- tmp %>%
+    dplyr::group_by(.data$.group_by_var, .data$variable) %>%
+    dplyr::summarise(
+      var_class = dplyr::first(.data$var_class),
+      var_type = dplyr::first(.data$var_type),
+      var_label = dplyr::first(.data$var_label),
+      var_nlevels = dplyr::first(.data$var_nlevels),
+      effect = dplyr::first(.data$effect),
+      contrasts = dplyr::first(.data$contrasts),
+      contrasts_type = dplyr::first(.data$contrasts_type),
+      var_min_rank = min(.data$rank),
+      var_max_rank = min(.data$rank),
+      .groups = "drop_last"
+    )
+
+  ref_rows <- ref_rows %>%
+    dplyr::left_join(
+      var_summary,
+      by = "variable"
+    ) %>%
+    dplyr::mutate(
+      rank = .data$var_min_rank -1.25 + .data$rank,
+      # if last, reduce by .5 to avoid overlap with next variable
+      rank = dplyr::if_else(
+        .data$rank > .data$var_max_rank,
+        .data$rank - .5,
+        .data$rank
       )
+    ) %>%
+    dplyr::select(-.data$var_min_rank, -.data$var_max_rank)
 
-    ref_rows <- ref_rows %>%
-      dplyr::left_join(
-        var_summary,
-        by = "variable"
-      ) %>%
-      dplyr::mutate(
-        rank = .data$var_min_rank -1.25 + .data$rank,
-        # if last, reduce by .5 to avoid overlap with next variable
-        rank = dplyr::if_else(
-          .data$rank > .data$var_max_rank,
-          .data$rank - .5,
-          .data$rank
-        )
-      ) %>%
-      dplyr::select(-.data$var_min_rank, -.data$var_max_rank)
+  if (!"effect" %in% names(x))
+    ref_rows <- ref_rows %>% dplyr::select(-.data$effect)
 
-    if (!"effect" %in% names(x))
-      ref_rows <- ref_rows %>% dplyr::select(-.data$effect)
-
-    x <- x %>%
-      dplyr::bind_rows(ref_rows)
+  x <- x %>%
+    dplyr::bind_rows(ref_rows)
+  if (!is.null(group))
     x[[group]] <- x$.group_by_var
-    x <- x %>% dplyr::select(-.data$.group_by_var)
-  } else {
-    # normal case
-    ref_rows <- terms_levels %>%
-      dplyr::filter(.data$reference) %>%
-      dplyr::mutate(reference_row = TRUE) %>%
-      dplyr::select(.data$term, .data$variable, .data$label, .data$reference_row, .data$rank)
-
-    if (!"label" %in% names(x))
-      ref_rows <- ref_rows %>% dplyr::select(-.data$label)
-
-    # populate effect column for mixed models
-    tmp <- x
-    if (!"effect" %in% names(x))
-      tmp$effect <- NA_character_
-
-    var_summary <- tmp %>%
-      dplyr::group_by(.data$variable) %>%
-      dplyr::summarise(
-        var_class = dplyr::first(.data$var_class),
-        var_type = dplyr::first(.data$var_type),
-        var_label = dplyr::first(.data$var_label),
-        var_nlevels = dplyr::first(.data$var_nlevels),
-        effect = dplyr::first(.data$effect),
-        contrasts = dplyr::first(.data$contrasts),
-        contrasts_type = dplyr::first(.data$contrasts_type),
-        var_min_rank = min(.data$rank),
-        var_max_rank = min(.data$rank),
-        .groups = "drop_last"
-      )
-
-    ref_rows <- ref_rows %>%
-      dplyr::left_join(
-        var_summary,
-        by = "variable"
-      ) %>%
-      dplyr::mutate(
-        rank = .data$var_min_rank -1.25 + .data$rank,
-        # if last, reduce by .5 to avoid overlap with next variable
-        rank = dplyr::if_else(
-          .data$rank > .data$var_max_rank,
-          .data$rank - .5,
-          .data$rank
-        )
-      ) %>%
-      dplyr::select(-.data$var_min_rank, -.data$var_max_rank)
-
-    if (!"effect" %in% names(x))
-      ref_rows <- ref_rows %>% dplyr::select(-.data$effect)
-
-    x <- x %>%
-      dplyr::bind_rows(ref_rows)
-  }
+  x <- x %>% dplyr::select(-.data$.group_by_var)
 
   if (!has_var_label) {
     x <- x %>% dplyr::select(-.data$var_label)
