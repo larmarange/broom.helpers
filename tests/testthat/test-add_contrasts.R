@@ -213,6 +213,7 @@ test_that("tidy_add_contrasts() works with nnet::multinom", {
 })
 
 test_that("tidy_add_contrasts() works with survey::svyglm", {
+  skip_if_not_installed("survey")
   df <- survey::svydesign(~1, weights = ~1, data = gtsummary::trial)
   mod <- survey::svyglm(response ~ age + grade * trt, df, family = quasibinomial)
   expect_error(mod %>% tidy_and_attach() %>% tidy_add_contrasts(), NA)

@@ -266,6 +266,7 @@ test_that("tidy_plus_plus() works with nnet::multinom", {
 })
 
 test_that("tidy_plus_plus() works with survey::svyglm", {
+  skip_if_not_installed("survey")
   skip_on_cran()
   df <- survey::svydesign(~1, weights = ~1, data = gtsummary::trial)
   mod <- survey::svyglm(response ~ age + grade * trt, df, family = quasibinomial)
@@ -276,6 +277,7 @@ test_that("tidy_plus_plus() works with survey::svyglm", {
 })
 
 test_that("tidy_plus_plus() works with survey::svycoxph", {
+  skip_if_not_installed("survey")
   skip_on_cran()
   dpbc <- survey::svydesign(id = ~ 1, prob = ~ 1, strata = ~ edema, data = survival::pbc)
   mod <- survey::svycoxph(Surv(time, status>0) ~ log(bili) + protime + albumin, design = dpbc)
@@ -286,6 +288,7 @@ test_that("tidy_plus_plus() works with survey::svycoxph", {
 })
 
 test_that("tidy_plus_plus() works with survey::svyolr", {
+  skip_if_not_installed("survey")
   skip_on_cran()
   data(api, package = "survey")
   fpc <- survey::svydesign(id=~dnum, weights=~pw, data=apiclus1, fpc=~fpc)

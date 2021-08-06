@@ -266,6 +266,7 @@ test_that("model_get_n() works with nnet::multinom", {
 })
 
 test_that("model_get_n() works with survey::svyglm", {
+  skip_if_not_installed("survey")
   df <- survey::svydesign(~1, weights = ~1, data = gtsummary::trial)
   mod <- survey::svyglm(response ~ age + grade * trt, df, family = quasibinomial)
   expect_error(res <- mod %>% model_get_n(), NA)

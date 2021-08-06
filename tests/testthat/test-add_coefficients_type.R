@@ -183,6 +183,7 @@ test_that("model_get_coefficients_type() works with nnet::multinom", {
 })
 
 test_that("model_get_coefficients_type() works with survey::svyglm", {
+  skip_if_not_installed("survey")
   df <- survey::svydesign(~1, weights = ~1, data = gtsummary::trial)
   mod <- survey::svyglm(response ~ age + grade * trt, df, family = quasibinomial)
   res <- mod %>% model_get_coefficients_type()
@@ -191,6 +192,7 @@ test_that("model_get_coefficients_type() works with survey::svyglm", {
 
 
 test_that("model_get_coefficients_type() works with survey::svycoxph", {
+  skip_if_not_installed("survey")
   dpbc <- survey::svydesign(id = ~ 1, prob = ~ 1, strata = ~ edema, data = survival::pbc)
   mod <- survey::svycoxph(Surv(time, status>0) ~ log(bili) + protime + albumin, design = dpbc)
   res <- mod %>% model_get_coefficients_type()
@@ -198,6 +200,7 @@ test_that("model_get_coefficients_type() works with survey::svycoxph", {
 })
 
 test_that("tidy_plus_plus() works with survey::svyolr", {
+  skip_if_not_installed("survey")
   data(api, package = "survey")
   fpc <- survey::svydesign(id=~dnum, weights=~pw, data=apiclus1, fpc=~fpc)
   fpc <- update(fpc, mealcat=cut(meals,c(0,25,50,75,100)))
