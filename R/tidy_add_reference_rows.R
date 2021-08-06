@@ -160,13 +160,19 @@ tidy_add_reference_rows <- function(
     if (!"label" %in% names(x))
       ref_rows <- ref_rows %>% dplyr::select(-.data$label)
 
-    var_summary <- x %>%
+    # populate effect column for mixed models
+    tmp <- x
+    if (!"effect" %in% names(x))
+      tmp$effect <- NA_character_
+
+    var_summary <- tmp %>%
       dplyr::group_by(.data$.group_by_var, .data$variable) %>%
       dplyr::summarise(
         var_class = dplyr::first(.data$var_class),
         var_type = dplyr::first(.data$var_type),
         var_label = dplyr::first(.data$var_label),
         var_nlevels = dplyr::first(.data$var_nlevels),
+        effect = dplyr::first(.data$effect),
         contrasts = dplyr::first(.data$contrasts),
         contrasts_type = dplyr::first(.data$contrasts_type),
         var_min_rank = min(.data$rank),
@@ -189,6 +195,9 @@ tidy_add_reference_rows <- function(
         )
       ) %>%
       dplyr::select(-.data$var_min_rank, -.data$var_max_rank)
+
+    if (!"effect" %in% names(x))
+      ref_rows <- ref_rows %>% dplyr::select(-.data$effect)
 
     x <- x %>%
       dplyr::bind_rows(ref_rows)
