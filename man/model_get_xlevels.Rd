@@ -7,6 +7,7 @@
 \alias{model_get_xlevels.glmerMod}
 \alias{model_get_xlevels.felm}
 \alias{model_get_xlevels.brmsfit}
+\alias{model_get_xlevels.glmmTMB}
 \title{Get xlevels used in the model}
 \usage{
 model_get_xlevels(model)
@@ -20,6 +21,8 @@ model_get_xlevels(model)
 \method{model_get_xlevels}{felm}(model)
 
 \method{model_get_xlevels}{brmsfit}(model)
+
+\method{model_get_xlevels}{glmmTMB}(model)
 }
 \arguments{
 \item{model}{a model object}

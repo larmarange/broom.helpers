@@ -44,6 +44,7 @@ Suggests:
     gee,
     geepack,
     ggplot2,
+    glmmTMB,
     glue,
     gt,
     gtsummary,

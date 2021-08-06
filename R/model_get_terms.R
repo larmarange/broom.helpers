@@ -33,3 +33,13 @@ model_get_terms.brmsfit <- function(model) {
     purrr::pluck("allvars") %>%
     stats::terms()
 }
+
+#' @export
+#' @rdname model_get_terms
+#' @details
+#' For models fitted with [glmmTMB::glmmTMB()], it will return a terms object
+#' taking into account all components ("cond" and "zi"). For a more
+#' restricted terms object, please refer to [glmmTMB::terms.glmmTMB()].
+model_get_terms.glmmTMB <- function(model) {
+  model$modelInfo$allForm$combForm %>% stats::terms()
+}

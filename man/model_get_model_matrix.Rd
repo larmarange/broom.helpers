@@ -6,6 +6,7 @@
 \alias{model_get_model_matrix.multinom}
 \alias{model_get_model_matrix.clm}
 \alias{model_get_model_matrix.brmsfit}
+\alias{model_get_model_matrix.glmmTMB}
 \title{Get the model matrix of a model}
 \usage{
 model_get_model_matrix(model, ...)
@@ -17,6 +18,8 @@ model_get_model_matrix(model, ...)
 \method{model_get_model_matrix}{clm}(model, ...)
 
 \method{model_get_model_matrix}{brmsfit}(model, ...)
+
+\method{model_get_model_matrix}{glmmTMB}(model, ...)
 }
 \arguments{
 \item{model}{a model object}
@@ -28,6 +31,11 @@ The structure of the object returned by \code{\link[stats:model.matrix]{stats::m
 could slightly differ for certain types of models.
 \code{model_get_model_matrix()} will always return an object
 with the same structure as \code{\link[stats:model.matrix]{stats::model.matrix.default()}}.
+}
+\details{
+For models fitted with \code{\link[glmmTMB:glmmTMB]{glmmTMB::glmmTMB()}}, it will return a model matrix
+taking into account all components ("cond", "zi" and "disp"). For a more
+restricted model matrix, please refer to \code{\link[glmmTMB:glmmTMB_methods]{glmmTMB::model.matrix.glmmTMB()}}.
 }
 \examples{
 lm(hp ~ mpg + factor(cyl), mtcars) \%>\%

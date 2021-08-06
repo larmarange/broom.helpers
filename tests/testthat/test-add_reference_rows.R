@@ -203,3 +203,23 @@ test_that("tidy_add_reference_rows() works with lme4::glmer", {
     "fixed"
   )
 })
+
+
+test_that("tidy_add_reference_rows() works with glmmTMB::glmmTMB", {
+  skip_if_not_installed("glmmTMB")
+  skip_if_not_installed("broom.mixed")
+  skip_on_cran()
+
+  mod <- glmmTMB::glmmTMB(count ~ mined + spp,
+                          ziformula = ~ mined,
+                          family = poisson,
+                          data = glmmTMB::Salamanders)
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_add_reference_rows()
+  expect_equivalent(
+    res$reference_row,
+    c(NA, TRUE, FALSE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
+      NA, TRUE, FALSE)
+  )
+})
