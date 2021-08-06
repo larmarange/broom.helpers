@@ -144,7 +144,14 @@ tidy_add_reference_rows <- function(
       rank = 1:dplyr::n() # for sorting table at the end
     )
 
-  if ("y.level" %in% names(x) & inherits(model, "multinom")) { # specific case for nnet::multinom
+  group <- NULL
+  if ("component" %in% names(x))
+    group <- "component"
+  if ("y.level" %in% names(x) & inherits(model, "multinom")) # specific case for nnet::multinom
+    group <- "y.level"
+
+  if (!is.null(group)) {
+    x$.group_by_var <- x[[group]]
     ref_rows <- terms_levels %>%
       dplyr::filter(.data$reference) %>%
       dplyr::mutate(reference_row = TRUE) %>%
@@ -154,7 +161,7 @@ tidy_add_reference_rows <- function(
       ref_rows <- ref_rows %>% dplyr::select(-.data$label)
 
     var_summary <- x %>%
-      dplyr::group_by(.data$y.level, .data$variable) %>%
+      dplyr::group_by(.data$.group_by_var, .data$variable) %>%
       dplyr::summarise(
         var_class = dplyr::first(.data$var_class),
         var_type = dplyr::first(.data$var_type),
@@ -185,6 +192,8 @@ tidy_add_reference_rows <- function(
 
     x <- x %>%
       dplyr::bind_rows(ref_rows)
+    x[[group]] <- x$.group_by_var
+    x <- x %>% dplyr::select(-.data$.group_by_var)
   } else {
     # normal case
     ref_rows <- terms_levels %>%
