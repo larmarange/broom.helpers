@@ -526,6 +526,7 @@ test_that("model_identify_variables() message when failure", {
 test_that("model_identify_variables() works with glmmTMB::glmmTMB", {
   skip_if_not_installed("glmmTMB")
   skip_if_not_installed("broom.mixed")
+  skip_on_cran()
 
   mod <- glmmTMB::glmmTMB(count ~ mined + spp,
                           ziformula = ~ mined + site,
