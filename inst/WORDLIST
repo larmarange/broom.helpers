@@ -4,8 +4,10 @@ Helmert
 Lifecycle
 Tibbles
 cloglog
+cond
 disambiguated
 disambiguating
+disp
 exponentiate
 helmert
 labelled
@@ -14,7 +16,9 @@ tibble
 tibbles
 tidyselect
 tieder
+tieders
 un
 unselected
 varnames
 xlevels
+zi
