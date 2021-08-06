@@ -1,5 +1,9 @@
 # broom.helpers (development version)
 
+**New supported models**
+
+- Support for `glmmTMB::glmmTMB()` models (#119)
+
 **Bug fixes**
 
 - Bug fix for computing n for some binomial models computed 
