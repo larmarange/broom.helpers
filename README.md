@@ -52,13 +52,13 @@ mod1 <- lm(Sepal.Length ~ Sepal.Width + Species, data = iris)
 library(broom.helpers)
 ex1 <- mod1 %>% tidy_plus_plus()
 ex1
-#> # A tibble: 4 x 17
-#>   term        variable   var_label  var_class var_type  var_nlevels contrasts   
-#>   <chr>       <chr>      <chr>      <chr>     <chr>           <int> <chr>       
-#> 1 Sepal.Width Sepal.Wid… Sepal.Wid… numeric   continuo…          NA <NA>        
-#> 2 Speciesset… Species    Species    factor    categori…           3 contr.treat…
-#> 3 Speciesver… Species    Species    factor    categori…           3 contr.treat…
-#> 4 Speciesvir… Species    Species    factor    categori…           3 contr.treat…
+#> # A tibble: 4 × 17
+#>   term              variable  var_label var_class var_type var_nlevels contrasts
+#>   <chr>             <chr>     <chr>     <chr>     <chr>          <int> <chr>    
+#> 1 Sepal.Width       Sepal.Wi… Sepal.Wi… numeric   continu…          NA <NA>     
+#> 2 Speciessetosa     Species   Species   factor    categor…           3 contr.tr…
+#> 3 Speciesversicolor Species   Species   factor    categor…           3 contr.tr…
+#> 4 Speciesvirginica  Species   Species   factor    categor…           3 contr.tr…
 #> # … with 10 more variables: contrasts_type <chr>, reference_row <lgl>,
 #> #   label <chr>, n_obs <dbl>, estimate <dbl>, std.error <dbl>, statistic <dbl>,
 #> #   p.value <dbl>, conf.low <dbl>, conf.high <dbl>
@@ -101,7 +101,7 @@ ex2 <- mod2 %>%
   )
 #> Loading required namespace: emmeans
 ex2
-#> # A tibble: 17 x 19
+#> # A tibble: 17 × 19
 #>    term   variable var_label var_class var_type var_nlevels header_row contrasts
 #>    <chr>  <chr>    <chr>     <chr>     <chr>          <int> <lgl>      <chr>    
 #>  1 <NA>   age      Age (in … nmatrix.3 continu…          NA TRUE       <NA>     
@@ -161,13 +161,13 @@ ex3 <- mod1 %>%
   # remove intercept
   tidy_remove_intercept
 ex3
-#> # A tibble: 4 x 16
-#>   term        variable   var_label  var_class var_type  var_nlevels contrasts   
-#>   <chr>       <chr>      <chr>      <chr>     <chr>           <int> <chr>       
-#> 1 Sepal.Width Sepal.Wid… Sepal.Wid… numeric   continuo…          NA <NA>        
-#> 2 Speciesset… Species    Species    factor    categori…           3 contr.treat…
-#> 3 Speciesver… Species    Species    factor    categori…           3 contr.treat…
-#> 4 Speciesvir… Species    Species    factor    categori…           3 contr.treat…
+#> # A tibble: 4 × 16
+#>   term              variable  var_label var_class var_type var_nlevels contrasts
+#>   <chr>             <chr>     <chr>     <chr>     <chr>          <int> <chr>    
+#> 1 Sepal.Width       Sepal.Wi… Sepal.Wi… numeric   continu…          NA <NA>     
+#> 2 Speciessetosa     Species   Species   factor    categor…           3 contr.tr…
+#> 3 Speciesversicolor Species   Species   factor    categor…           3 contr.tr…
+#> 4 Speciesvirginica  Species   Species   factor    categor…           3 contr.tr…
 #> # … with 9 more variables: contrasts_type <chr>, reference_row <lgl>,
 #> #   label <chr>, estimate <dbl>, std.error <dbl>, statistic <dbl>,
 #> #   p.value <dbl>, conf.low <dbl>, conf.high <dbl>
@@ -203,7 +203,7 @@ ex4 <- mod2 %>%
   # add header rows for categorical variables
   tidy_add_header_rows()
 ex4
-#> # A tibble: 20 x 17
+#> # A tibble: 20 × 17
 #>    term   variable var_label var_class var_type var_nlevels header_row contrasts
 #>    <chr>  <chr>    <chr>     <chr>     <chr>          <int> <lgl>      <chr>    
 #>  1 (Inte… (Interc… (Interce… <NA>      interce…          NA NA         <NA>     
