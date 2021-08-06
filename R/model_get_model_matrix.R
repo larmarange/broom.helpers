@@ -71,7 +71,7 @@ model_get_model_matrix.glmmTMB <- function(model, ...) {
 
   stats::model.matrix(
     lme4::nobars(model$modelInfo$allForm$combForm),
-    stats::model.frame(model, ..),
+    stats::model.frame(model, ...),
     contrasts.arg = model$modelInfo$contrasts
   )
 }
