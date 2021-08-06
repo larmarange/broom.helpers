@@ -4,6 +4,7 @@
 \alias{model_get_terms}
 \alias{model_get_terms.default}
 \alias{model_get_terms.brmsfit}
+\alias{model_get_terms.glmmTMB}
 \title{Get the terms of a model}
 \usage{
 model_get_terms(model)
@@ -11,6 +12,8 @@ model_get_terms(model)
 \method{model_get_terms}{default}(model)
 
 \method{model_get_terms}{brmsfit}(model)
+
+\method{model_get_terms}{glmmTMB}(model)
 }
 \arguments{
 \item{model}{a model object}
@@ -18,6 +21,11 @@ model_get_terms(model)
 \description{
 Return the result of \code{\link[stats:terms]{stats::terms()}} applied to the model
 or \code{NULL} if it is not possible to get terms from \code{model}.
+}
+\details{
+For models fitted with \code{\link[glmmTMB:glmmTMB]{glmmTMB::glmmTMB()}}, it will return a terms object
+taking into account all components ("cond" and "zi"). For a more
+restricted terms object, please refer to \code{\link[glmmTMB:glmmTMB_methods]{glmmTMB::terms.glmmTMB()}}.
 }
 \examples{
 lm(hp ~ mpg + factor(cyl), mtcars) \%>\%
