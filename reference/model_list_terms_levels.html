@@ -202,12 +202,12 @@ The first nine columns can be used in <code>label_pattern</code>.</p></li>
   contrasts <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>`factor(cyl)` <span class='op'>=</span> <span class='va'>contr.sum</span><span class='op'>)</span>
 <span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>model_list_terms_levels</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 3 x 11</span>
-#&gt;   variable   contrasts_type term      level level_rank reference reference_level
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          
-#&gt; <span style='color: #BCBCBC;'>1</span> factor(cy… sum            factor(c… 4              1 FALSE     8              
-#&gt; <span style='color: #BCBCBC;'>2</span> factor(cy… sum            factor(c… 6              2 FALSE     8              
-#&gt; <span style='color: #BCBCBC;'>3</span> factor(cy… sum            factor(c… 8              3 TRUE      8              
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 3 × 11</span>
+#&gt;   variable    contrasts_type term         level level_rank reference reference_level
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          
+#&gt; <span style='color: #BCBCBC;'>1</span> factor(cyl) sum            factor(cyl)1 4              1 FALSE     8              
+#&gt; <span style='color: #BCBCBC;'>2</span> factor(cyl) sum            factor(cyl)2 6              2 FALSE     8              
+#&gt; <span style='color: #BCBCBC;'>3</span> factor(cyl) sum            factor(cyl)3 8              3 TRUE      8              
 #&gt; <span style='color: #949494;'># … with 4 more variables: var_label &lt;chr&gt;, var_nlevels &lt;int&gt;,</span>
 #&gt; <span style='color: #949494;'>#   dichotomous &lt;lgl&gt;, label &lt;glue&gt;</span></div><div class='input'>
 <span class='va'>df</span> <span class='op'>&lt;-</span> <span class='va'>Titanic</span> <span class='op'>%&gt;%</span>
@@ -221,7 +221,7 @@ The first nine columns can be used in <code>label_pattern</code>.</p></li>
     contrasts <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>Age <span class='op'>=</span> <span class='va'>contr.sum</span>, Class <span class='op'>=</span> <span class='st'>"contr.helmert"</span><span class='op'>)</span>
   <span class='op'>)</span>
 <span class='va'>mod</span> <span class='op'>%&gt;%</span> <span class='fu'>model_list_terms_levels</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4 x 11</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4 × 11</span>
 #&gt;   variable contrasts_type term      level  level_rank reference reference_level
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          
 #&gt; <span style='color: #BCBCBC;'>1</span> Age      sum            Age1      Adult           1 FALSE     Child          
@@ -230,7 +230,7 @@ The first nine columns can be used in <code>label_pattern</code>.</p></li>
 #&gt; <span style='color: #BCBCBC;'>4</span> Sex      treatment      SexMale   Male            2 FALSE     Female         
 #&gt; <span style='color: #949494;'># … with 4 more variables: var_label &lt;chr&gt;, var_nlevels &lt;int&gt;,</span>
 #&gt; <span style='color: #949494;'>#   dichotomous &lt;lgl&gt;, label &lt;glue&gt;</span></div><div class='input'><span class='va'>mod</span> <span class='op'>%&gt;%</span> <span class='fu'>model_list_terms_levels</span><span class='op'>(</span><span class='st'>"{level} vs {reference_level}"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4 x 11</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4 × 11</span>
 #&gt;   variable contrasts_type term      level  level_rank reference reference_level
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          
 #&gt; <span style='color: #BCBCBC;'>1</span> Age      sum            Age1      Adult           1 FALSE     Child          
@@ -239,7 +239,7 @@ The first nine columns can be used in <code>label_pattern</code>.</p></li>
 #&gt; <span style='color: #BCBCBC;'>4</span> Sex      treatment      SexMale   Male            2 FALSE     Female         
 #&gt; <span style='color: #949494;'># … with 4 more variables: var_label &lt;chr&gt;, var_nlevels &lt;int&gt;,</span>
 #&gt; <span style='color: #949494;'>#   dichotomous &lt;lgl&gt;, label &lt;glue&gt;</span></div><div class='input'><span class='va'>mod</span> <span class='op'>%&gt;%</span> <span class='fu'>model_list_terms_levels</span><span class='op'>(</span><span class='st'>"{variable} [{level} - {reference_level}]"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4 x 11</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4 × 11</span>
 #&gt;   variable contrasts_type term      level  level_rank reference reference_level
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          
 #&gt; <span style='color: #BCBCBC;'>1</span> Age      sum            Age1      Adult           1 FALSE     Child          
@@ -250,7 +250,7 @@ The first nine columns can be used in <code>label_pattern</code>.</p></li>
 #&gt; <span style='color: #949494;'>#   dichotomous &lt;lgl&gt;, label &lt;glue&gt;</span></div><div class='input'><span class='va'>mod</span> <span class='op'>%&gt;%</span> <span class='fu'>model_list_terms_levels</span><span class='op'>(</span>
   <span class='st'>"{ifelse(reference, level, paste(level, '-', reference_level))}"</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4 x 11</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4 × 11</span>
 #&gt;   variable contrasts_type term      level  level_rank reference reference_level
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          
 #&gt; <span style='color: #BCBCBC;'>1</span> Age      sum            Age1      Adult           1 FALSE     Child          

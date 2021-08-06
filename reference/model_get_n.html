@@ -191,7 +191,7 @@ exposure time (<code>Exposure</code>) are stored as attributes of the returned t
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>hp</span> <span class='op'>~</span> <span class='va'>mpg</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>cyl</span><span class='op'>)</span> <span class='op'>+</span> <span class='va'>disp</span><span class='op'>:</span><span class='va'>hp</span>, <span class='va'>mtcars</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>model_get_n</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 6 x 2</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 6 × 2</span>
 #&gt;   term         n_obs
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'>1</span> (Intercept)     32
@@ -207,7 +207,7 @@ exposure time (<code>Exposure</code>) are stored as attributes of the returned t
   contrasts <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>stage <span class='op'>=</span> <span class='va'>contr.sum</span>, grade <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/contrast.html'>contr.treatment</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>2</span><span class='op'>)</span>, trt <span class='op'>=</span> <span class='st'>"contr.SAS"</span><span class='op'>)</span>
 <span class='op'>)</span>
 <span class='va'>mod</span> <span class='op'>%&gt;%</span> <span class='fu'>model_get_n</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 16 x 3</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 16 × 3</span>
 #&gt;    term          n_obs n_event
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 1</span> (Intercept)     193      61
@@ -231,7 +231,7 @@ exposure time (<code>Exposure</code>) are stored as attributes of the returned t
   weights <span class='op'>=</span> <span class='va'>Freq</span>, family <span class='op'>=</span> <span class='va'>binomial</span>
 <span class='op'>)</span>
 <span class='va'>mod</span> <span class='op'>%&gt;%</span> <span class='fu'>model_get_n</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 12 x 3</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 12 × 3</span>
 #&gt;    term               n_obs n_event
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 1</span> (Intercept)         <span style='text-decoration: underline;'>2</span>201     711
@@ -254,7 +254,7 @@ exposure time (<code>Exposure</code>) are stored as attributes of the returned t
   <span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'>`summarise()` has grouped output by 'Class', 'Sex'. You can override using the `.groups` argument.</span></div><div class='input'><span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>n_survived</span>, <span class='va'>n_dead</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>Class</span> <span class='op'>*</span> <span class='va'>Age</span> <span class='op'>+</span> <span class='va'>Sex</span>, data <span class='op'>=</span> <span class='va'>d</span>, family <span class='op'>=</span> <span class='va'>binomial</span><span class='op'>)</span>
 <span class='va'>mod</span> <span class='op'>%&gt;%</span> <span class='fu'>model_get_n</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 12 x 3</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 12 × 3</span>
 #&gt;    term               n_obs n_event
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 1</span> (Intercept)         <span style='text-decoration: underline;'>2</span>201     711
@@ -271,7 +271,7 @@ exposure time (<code>Exposure</code>) are stored as attributes of the returned t
 #&gt; <span style='color: #BCBCBC;'>12</span> SexFemale            470     344</div><div class='input'>
 <span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span><span class='va'>response</span> <span class='op'>~</span> <span class='va'>age</span> <span class='op'>+</span> <span class='va'>grade</span> <span class='op'>*</span> <span class='va'>trt</span>, <span class='fu'>gtsummary</span><span class='fu'>::</span><span class='va'><a href='http://www.danieldsjoberg.com/gtsummary//reference/trial.html'>trial</a></span>, family <span class='op'>=</span> <span class='va'>poisson</span><span class='op'>)</span>
 <span class='va'>mod</span> <span class='op'>%&gt;%</span> <span class='fu'>model_get_n</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 9 x 4</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 9 × 4</span>
 #&gt;   term               n_obs n_event exposure
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'>1</span> (Intercept)          183      58      183
@@ -289,7 +289,7 @@ exposure time (<code>Exposure</code>) are stored as attributes of the returned t
   family <span class='op'>=</span> <span class='va'>poisson</span>
 <span class='op'>)</span>
 <span class='va'>mod</span> <span class='op'>%&gt;%</span> <span class='fu'>model_get_n</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 8 x 4</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 8 × 4</span>
 #&gt;   term               n_obs n_event exposure
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'>1</span> (Intercept)          193      61  2.48<span style='color: #949494;'>e</span>12
@@ -303,7 +303,7 @@ exposure time (<code>Exposure</code>) are stored as attributes of the returned t
 <span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'>survival</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/survival/man/lung.html'>lung</a></span> <span class='op'>%&gt;%</span> <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>sex <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>sex</span><span class='op'>)</span><span class='op'>)</span>
 <span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'>survival</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/survival/man/coxph.html'>coxph</a></span><span class='op'>(</span><span class='fu'>survival</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/survival/man/Surv.html'>Surv</a></span><span class='op'>(</span><span class='va'>time</span>, <span class='va'>status</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>ph.ecog</span> <span class='op'>+</span> <span class='va'>age</span> <span class='op'>+</span> <span class='va'>sex</span>, data <span class='op'>=</span> <span class='va'>df</span><span class='op'>)</span>
 <span class='va'>mod</span> <span class='op'>%&gt;%</span> <span class='fu'>model_get_n</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 5 x 4</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 5 × 4</span>
 #&gt;   term        n_obs n_event exposure
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'>1</span> (Intercept)   227     164    <span style='text-decoration: underline;'>69</span>522
@@ -313,7 +313,7 @@ exposure time (<code>Exposure</code>) are stored as attributes of the returned t
 #&gt; <span style='color: #BCBCBC;'>5</span> sex1          137     111    <span style='text-decoration: underline;'>39</span>015</div><div class='input'>
 <span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'>lme4</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/lme4/man/lmer.html'>lmer</a></span><span class='op'>(</span><span class='va'>Reaction</span> <span class='op'>~</span> <span class='va'>Days</span> <span class='op'>+</span> <span class='op'>(</span><span class='va'>Days</span> <span class='op'>|</span> <span class='va'>Subject</span><span class='op'>)</span>, <span class='fu'>lme4</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/lme4/man/sleepstudy.html'>sleepstudy</a></span><span class='op'>)</span>
 <span class='va'>mod</span> <span class='op'>%&gt;%</span> <span class='fu'>model_get_n</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2 x 2</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2 × 2</span>
 #&gt;   term        n_obs
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'>1</span> (Intercept)   180
@@ -322,7 +322,7 @@ exposure time (<code>Exposure</code>) are stored as attributes of the returned t
   family <span class='op'>=</span> <span class='va'>binomial</span>, data <span class='op'>=</span> <span class='fu'>gtsummary</span><span class='fu'>::</span><span class='va'><a href='http://www.danieldsjoberg.com/gtsummary//reference/trial.html'>trial</a></span>
 <span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'>boundary (singular) fit: see ?isSingular</span></div><div class='input'><span class='va'>mod</span> <span class='op'>%&gt;%</span> <span class='fu'>model_get_n</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 8 x 3</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 8 × 3</span>
 #&gt;   term               n_obs n_event
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'>1</span> (Intercept)          193      61
@@ -337,7 +337,7 @@ exposure time (<code>Exposure</code>) are stored as attributes of the returned t
   family <span class='op'>=</span> <span class='va'>binomial</span>, data <span class='op'>=</span> <span class='fu'>lme4</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/lme4/man/cbpp.html'>cbpp</a></span>
 <span class='op'>)</span>
 <span class='va'>mod</span> <span class='op'>%&gt;%</span> <span class='fu'>model_get_n</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 5 x 3</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 5 × 3</span>
 #&gt;   term        n_obs n_event
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'>1</span> (Intercept)   842      99

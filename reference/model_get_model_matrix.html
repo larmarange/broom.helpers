@@ -141,6 +141,9 @@ with the same structure as <code><a href='https://rdrr.io/r/stats/model.matrix.h
 <span class='fu'>model_get_model_matrix</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for brmsfit</span>
+<span class='fu'>model_get_model_matrix</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S3 method for glmmTMB</span>
 <span class='fu'>model_get_model_matrix</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -156,6 +159,11 @@ with the same structure as <code><a href='https://rdrr.io/r/stats/model.matrix.h
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>For models fitted with <code><a href='https://rdrr.io/pkg/glmmTMB/man/glmmTMB.html'>glmmTMB::glmmTMB()</a></code>, it will return a model matrix
+taking into account all components ("cond", "zi" and "disp"). For a more
+restricted model matrix, please refer to <code><a href='https://rdrr.io/pkg/glmmTMB/man/glmmTMB_methods.html'>glmmTMB::model.matrix.glmmTMB()</a></code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/r/stats/model.matrix.html'>stats::model.matrix()</a></code></p>

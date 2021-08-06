@@ -166,14 +166,14 @@
   <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span><span class='va'>Survived</span> <span class='op'>~</span> <span class='va'>Class</span> <span class='op'>+</span> <span class='va'>Age</span> <span class='op'>+</span> <span class='va'>Sex</span>, data <span class='op'>=</span> <span class='va'>.</span>, weights <span class='op'>=</span> <span class='va'>.</span><span class='op'>$</span><span class='va'>n</span>, family <span class='op'>=</span> <span class='va'>binomial</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='tidy_attach_model.html'>tidy_and_attach</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>tidy_remove_intercept</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 5 x 11</span>
-#&gt;   term     variable var_class var_type  var_nlevels estimate std.error statistic
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> Class2nd Class    character categori…           4   -<span style='color: #BB0000;'>1.02</span>      0.196     -<span style='color: #BB0000;'>5.19</span>
-#&gt; <span style='color: #BCBCBC;'>2</span> Class3rd Class    character categori…           4   -<span style='color: #BB0000;'>1.78</span>      0.172    -<span style='color: #BB0000;'>10.4</span> 
-#&gt; <span style='color: #BCBCBC;'>3</span> ClassCr… Class    character categori…           4   -<span style='color: #BB0000;'>0.858</span>     0.157     -<span style='color: #BB0000;'>5.45</span>
-#&gt; <span style='color: #BCBCBC;'>4</span> AgeChild Age      character dichotom…           2    1.06      0.244      4.35
-#&gt; <span style='color: #BCBCBC;'>5</span> SexMale  Sex      character dichotom…           2   -<span style='color: #BB0000;'>2.42</span>      0.140    -<span style='color: #BB0000;'>17.2</span> 
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 5 × 11</span>
+#&gt;   term      variable var_class var_type var_nlevels estimate std.error statistic
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span> Class2nd  Class    character categor…           4   -<span style='color: #BB0000;'>1.02</span>      0.196     -<span style='color: #BB0000;'>5.19</span>
+#&gt; <span style='color: #BCBCBC;'>2</span> Class3rd  Class    character categor…           4   -<span style='color: #BB0000;'>1.78</span>      0.172    -<span style='color: #BB0000;'>10.4</span> 
+#&gt; <span style='color: #BCBCBC;'>3</span> ClassCrew Class    character categor…           4   -<span style='color: #BB0000;'>0.858</span>     0.157     -<span style='color: #BB0000;'>5.45</span>
+#&gt; <span style='color: #BCBCBC;'>4</span> AgeChild  Age      character dichoto…           2    1.06      0.244      4.35
+#&gt; <span style='color: #BCBCBC;'>5</span> SexMale   Sex      character dichoto…           2   -<span style='color: #BB0000;'>2.42</span>      0.140    -<span style='color: #BB0000;'>17.2</span> 
 #&gt; <span style='color: #949494;'># … with 3 more variables: p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -131,6 +131,9 @@ or <code>NULL</code> if it is not possible to get terms from <code>model</code>.
 <span class='fu'>model_get_terms</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
 
 <span class='co'># S3 method for brmsfit</span>
+<span class='fu'>model_get_terms</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
+
+<span class='co'># S3 method for glmmTMB</span>
 <span class='fu'>model_get_terms</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -142,6 +145,11 @@ or <code>NULL</code> if it is not possible to get terms from <code>model</code>.
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>For models fitted with <code><a href='https://rdrr.io/pkg/glmmTMB/man/glmmTMB.html'>glmmTMB::glmmTMB()</a></code>, it will return a terms object
+taking into account all components ("cond" and "zi"). For a more
+restricted terms object, please refer to <code><a href='https://rdrr.io/pkg/glmmTMB/man/glmmTMB_methods.html'>glmmTMB::terms.glmmTMB()</a></code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/r/stats/terms.html'>stats::terms()</a></code></p>
@@ -184,7 +192,7 @@ or <code>NULL</code> if it is not possible to get terms from <code>model</code>.
 #&gt; attr(,"response")
 #&gt; [1] 1
 #&gt; attr(,".Environment")
-#&gt; &lt;environment: 0x7fb5e3d96a90&gt;
+#&gt; &lt;environment: 0x7ff16b90ee48&gt;
 #&gt; attr(,"predvars")
 #&gt; list(hp, mpg, factor(cyl))
 #&gt; attr(,"dataClasses")
