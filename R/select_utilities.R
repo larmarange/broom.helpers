@@ -1,7 +1,17 @@
 #' Convert formula selector to a named list
 #'
-#' Functions takes a list of formulas, e.g. `list(starts_with("age") ~ "continuous")`,
-#' and returns a named list, e.g. `list(age = "continuous")`.
+#' Functions takes a list of formulas, a named list, or a combination of named
+#' elements with formula elements and returns a named list.
+#' For example, `list(age = 1, starts_with("stage") ~ 2)`.
+#'
+#' @section Shortcuts:
+#' A shortcut for specifying an option be applied to all columns/variables
+#' is omitting the LHS of the formula.
+#' For example, `list(~ 1)` is equivalent to passing `list(everything() ~ 1)`.
+#'
+#' Additionally, a single formula may be passed instead of placing a single
+#' formula in a list; e.g. `everything() ~ 1` is equivalent to
+#' passing `list(everything() ~ 1)`
 #'
 #' @param x list of selecting formulas
 #' @inheritParams .select_to_varnames
