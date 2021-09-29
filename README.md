@@ -82,7 +82,6 @@ dplyr::glimpse(ex1)
 #> $ p.value        <dbl> 4.187340e-12, NA, 3.478232e-26, 2.094475e-42
 #> $ conf.low       <dbl> 0.5933983, NA, 1.2371791, 1.7491525
 #> $ conf.high      <dbl> 1.013723, NA, 1.680307, 2.144481
-
 mod2 <- glm(
   response ~ poly(age, 3) + stage + grade * trt,
   na.omit(gtsummary::trial),
@@ -190,7 +189,6 @@ dplyr::glimpse(ex3)
 #> $ p.value        <dbl> 4.187340e-12, NA, 3.478232e-26, 2.094475e-42
 #> $ conf.low       <dbl> 0.5933983, NA, 1.2371791, 1.7491525
 #> $ conf.high      <dbl> 1.013723, NA, 1.680307, 2.144481
-
 ex4 <- mod2 %>%
   # perform initial tidying of model
   tidy_and_attach(exponentiate = TRUE) %>%
