@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">broom.helpers</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.0.9001</span>
       </span>
     </div>
 
@@ -124,6 +124,16 @@
 <p><strong>New supported models</strong></p>
 <ul>
 <li>Support for <code><a href="https://rdrr.io/pkg/glmmTMB/man/glmmTMB.html">glmmTMB::glmmTMB()</a></code> models (<a href='https://github.com/larmarange/broom.helpers/issues/119'>#119</a>)</li>
+</ul>
+<p><strong>New features</strong></p>
+<ul>
+<li>Function arguments that accept formula-list values now have more flexible inputs. (<a href='https://github.com/larmarange/broom.helpers/issues/121'>#121</a>)
+<ul>
+<li>The passed list may now be a combination of named lists and lists of formulas, e.g. <code><a href="https://rdrr.io/r/base/list.html">list(trt ~ 1, all_continuous() ~ 2)</a></code>.</li>
+<li>The shortcut <code>~ &lt;value&gt;</code> may be now used to indicate <code>everything() ~ &lt;value&gt;</code>
+</li>
+</ul>
+</li>
 </ul>
 <p><strong>Bug fixes</strong></p>
 <ul>
