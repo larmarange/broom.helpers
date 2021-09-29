@@ -283,12 +283,13 @@ test_that("select_helpers: .formula_list_to_named_list ", {
     list(age = "Age")
   )
 
-  expect_error(
-    .formula_list_to_named_list(~ "Age", var_info = tidy_mod)
+  expect_equal(
+    .formula_list_to_named_list(~ "Age", var_info = tidy_mod),
+    list(age = "Age", trt = "Age", grade = "Age", `age:trt` = "Age")
   )
-
-  expect_error(
-    .formula_list_to_named_list(~ "Age", var_info = tidy_mod, arg_name = "labels")
+  expect_equal(
+    .formula_list_to_named_list(list(~ "Age", `age:trt` = "interact"), var_info = tidy_mod),
+    list(age = "Age", trt = "Age", grade = "Age", `age:trt` = "interact")
   )
 })
 

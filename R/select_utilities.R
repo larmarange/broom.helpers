@@ -18,48 +18,53 @@
     x <- list(x)
   }
 
-  # returning named list if passed ---------------------------------------------
-  if (!is.null(names(x)) && # names are non-null
-      length(names(x)) == length(x) && # name of every element of list
-      sum(names(x) == "") == 0) { # no names are blank
-    return(x)
+  # convert to a named list ----------------------------------------------------
+  len_x <- length(x)
+  named_list <- vector(mode = "list", length = len_x)
+  for (i in seq_len(len_x)) {
+    if (rlang::is_named(x[i])) {
+      named_list[i] <- list(x[i])
+    }
+    else if (rlang::is_formula(x[[i]])) {
+      named_list[i] <-
+        .single_formula_to_list(x[[i]],
+                                data = data,
+                                var_info = var_info,
+                                arg_name = arg_name,
+                                select_single = select_single) %>%
+        list()
+    }
+    else {
+      .formula_select_error(arg_name = arg_name)
+    }
   }
-
-  # check class of input -------------------------------------------------------
-  if (!purrr::every(x, ~inherits(.x, "formula"))) {
-    .formula_select_error(arg_name = arg_name)
-  }
-
-  # converting all inputs to named list ----------------------------------------
-  named_list <-
-    purrr::map(
-      x,
-      function(x) {
-        # for each formula extract lhs and rhs ---------------------------------
-        # checking the LHS is not empty
-        f_lhs_quo <- .f_side_as_quo(x, "lhs")
-        if (rlang::quo_is_null(f_lhs_quo)) .formula_select_error(arg_name = arg_name)
-        # extract LHS of formula
-        lhs <- .select_to_varnames(select = !!f_lhs_quo,
-                                   data = data,
-                                   var_info = var_info,
-                                   arg_name = arg_name,
-                                   select_single = select_single)
-
-        # evaluate RHS of formula in the original formula environment
-        rhs <- .f_side_as_quo(x, "rhs") %>% rlang::eval_tidy()
-
-        # converting rhs and lhs into a named list
-        purrr::map(lhs, ~ list(rhs) %>% rlang::set_names(.x)) %>%
-          purrr::flatten()
-      }
-    ) %>%
-    purrr::flatten()
+  named_list <- purrr::flatten(named_list)
 
   # removing duplicates (using the last one listed if variable occurs more than once)
   tokeep <- names(named_list) %>% rev() %>% {!duplicated(.)} %>% rev()
   named_list[tokeep]
 }
+
+.single_formula_to_list <- function(x, data, var_info, arg_name, select_single) {
+  # for each formula extract lhs and rhs ---------------------------------
+  # checking the LHS is not empty
+  f_lhs_quo <- .f_side_as_quo(x, "lhs")
+  if (rlang::quo_is_null(f_lhs_quo)) f_lhs_quo <- rlang::expr(everything())
+  # extract LHS of formula
+  lhs <- .select_to_varnames(select = !!f_lhs_quo,
+                             data = data,
+                             var_info = var_info,
+                             arg_name = arg_name,
+                             select_single = select_single)
+
+  # evaluate RHS of formula in the original formula environment
+  rhs <- .f_side_as_quo(x, "rhs") %>% rlang::eval_tidy()
+
+  # converting rhs and lhs into a named list
+  purrr::map(lhs, ~ list(rhs) %>% rlang::set_names(.x)) %>%
+    purrr::flatten()
+}
+
 
 #' Variable selector
 #'

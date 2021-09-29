@@ -4,6 +4,12 @@
 
 - Support for `glmmTMB::glmmTMB()` models (#119)
 
+**New features**
+
+- Function arguments that accept formula-list values now have more flexible inputs. (#121)
+  - The passed list may now be a combination of named lists and lists of formulas, e.g. `list(trt ~ 1, all_continuous() ~ 2)`.
+  - The shortcut `~ <value>` may be now used to indicate `everything() ~ <value>`
+
 **Bug fixes**
 
 - Bug fix for computing n for some binomial models computed 
