@@ -135,7 +135,6 @@
 <span class="co">#&gt; $ p.value        &lt;dbl&gt; 4.187340e-12, NA, 3.478232e-26, 2.094475e-42</span>
 <span class="co">#&gt; $ conf.low       &lt;dbl&gt; 0.5933983, NA, 1.2371791, 1.7491525</span>
 <span class="co">#&gt; $ conf.high      &lt;dbl&gt; 1.013723, NA, 1.680307, 2.144481</span>
-
 <span class="va">mod2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span>
   <span class="va">response</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html">poly</a></span><span class="op">(</span><span class="va">age</span>, <span class="fl">3</span><span class="op">)</span> <span class="op">+</span> <span class="va">stage</span> <span class="op">+</span> <span class="va">grade</span> <span class="op">*</span> <span class="va">trt</span>,
   <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="fu">gtsummary</span><span class="fu">::</span><span class="va"><a href="http://www.danieldsjoberg.com/gtsummary//reference/trial.html">trial</a></span><span class="op">)</span>,
@@ -243,7 +242,6 @@
 <span class="co">#&gt; $ p.value        &lt;dbl&gt; 4.187340e-12, NA, 3.478232e-26, 2.094475e-42</span>
 <span class="co">#&gt; $ conf.low       &lt;dbl&gt; 0.5933983, NA, 1.2371791, 1.7491525</span>
 <span class="co">#&gt; $ conf.high      &lt;dbl&gt; 1.013723, NA, 1.680307, 2.144481</span>
-
 <span class="va">ex4</span> <span class="op">&lt;-</span> <span class="va">mod2</span> <span class="op">%&gt;%</span>
   <span class="co"># perform initial tidying of model</span>
   <span class="fu"><a href="reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span>
