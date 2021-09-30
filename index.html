@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">broom.helpers</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0.9000</span>
       </span>
     </div>
 
@@ -105,26 +105,26 @@
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://larmarange.github.io/broom.helpers/">broom.helpers</a></span><span class="op">)</span>
 <span class="va">ex1</span> <span class="op">&lt;-</span> <span class="va">mod1</span> <span class="op">%&gt;%</span> <span class="fu"><a href="reference/tidy_plus_plus.html">tidy_plus_plus</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">ex1</span>
-<span class="co">#&gt; # A tibble: 4 x 17</span>
+<span class="co">#&gt; # A tibble: 4 × 17</span>
 <span class="co">#&gt;   term              variable  var_label var_class var_type var_nlevels contrasts</span>
 <span class="co">#&gt;   &lt;chr&gt;             &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;          &lt;int&gt; &lt;chr&gt;    </span>
-<span class="co">#&gt; 1 Sepal.Width       Sepal.Wi~ Sepal.Wi~ numeric   continu~          NA &lt;NA&gt;     </span>
-<span class="co">#&gt; 2 Speciessetosa     Species   Species   factor    categor~           3 contr.tr~</span>
-<span class="co">#&gt; 3 Speciesversicolor Species   Species   factor    categor~           3 contr.tr~</span>
-<span class="co">#&gt; 4 Speciesvirginica  Species   Species   factor    categor~           3 contr.tr~</span>
-<span class="co">#&gt; # ... with 10 more variables: contrasts_type &lt;chr&gt;, reference_row &lt;lgl&gt;,</span>
+<span class="co">#&gt; 1 Sepal.Width       Sepal.Wi… Sepal.Wi… numeric   continu…          NA &lt;NA&gt;     </span>
+<span class="co">#&gt; 2 Speciessetosa     Species   Species   factor    categor…           3 contr.tr…</span>
+<span class="co">#&gt; 3 Speciesversicolor Species   Species   factor    categor…           3 contr.tr…</span>
+<span class="co">#&gt; 4 Speciesvirginica  Species   Species   factor    categor…           3 contr.tr…</span>
+<span class="co">#&gt; # … with 10 more variables: contrasts_type &lt;chr&gt;, reference_row &lt;lgl&gt;,</span>
 <span class="co">#&gt; #   label &lt;chr&gt;, n_obs &lt;dbl&gt;, estimate &lt;dbl&gt;, std.error &lt;dbl&gt;, statistic &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;</span>
 <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">ex1</span><span class="op">)</span>
 <span class="co">#&gt; Rows: 4</span>
 <span class="co">#&gt; Columns: 17</span>
-<span class="co">#&gt; $ term           &lt;chr&gt; "Sepal.Width", "Speciessetosa", "Speciesversicolor", "S~</span>
+<span class="co">#&gt; $ term           &lt;chr&gt; "Sepal.Width", "Speciessetosa", "Speciesversicolor", "S…</span>
 <span class="co">#&gt; $ variable       &lt;chr&gt; "Sepal.Width", "Species", "Species", "Species"</span>
 <span class="co">#&gt; $ var_label      &lt;chr&gt; "Sepal.Width", "Species", "Species", "Species"</span>
 <span class="co">#&gt; $ var_class      &lt;chr&gt; "numeric", "factor", "factor", "factor"</span>
-<span class="co">#&gt; $ var_type       &lt;chr&gt; "continuous", "categorical", "categorical", "categorica~</span>
+<span class="co">#&gt; $ var_type       &lt;chr&gt; "continuous", "categorical", "categorical", "categorica…</span>
 <span class="co">#&gt; $ var_nlevels    &lt;int&gt; NA, 3, 3, 3</span>
-<span class="co">#&gt; $ contrasts      &lt;chr&gt; NA, "contr.treatment", "contr.treatment", "contr.treatm~</span>
+<span class="co">#&gt; $ contrasts      &lt;chr&gt; NA, "contr.treatment", "contr.treatment", "contr.treatm…</span>
 <span class="co">#&gt; $ contrasts_type &lt;chr&gt; NA, "treatment", "treatment", "treatment"</span>
 <span class="co">#&gt; $ reference_row  &lt;lgl&gt; NA, TRUE, FALSE, FALSE</span>
 <span class="co">#&gt; $ label          &lt;chr&gt; "Sepal.Width", "setosa", "versicolor", "virginica"</span>
@@ -151,53 +151,53 @@
     add_header_rows <span class="op">=</span> <span class="cn">TRUE</span>,
     show_single_row <span class="op">=</span> <span class="st">"trt"</span>
   <span class="op">)</span>
-<span class="co">#&gt; Le chargement a nécessité le package : emmeans</span>
+<span class="co">#&gt; Loading required namespace: emmeans</span>
 <span class="va">ex2</span>
-<span class="co">#&gt; # A tibble: 17 x 19</span>
+<span class="co">#&gt; # A tibble: 17 × 19</span>
 <span class="co">#&gt;    term   variable var_label var_class var_type var_nlevels header_row contrasts</span>
 <span class="co">#&gt;    &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;          &lt;int&gt; &lt;lgl&gt;      &lt;chr&gt;    </span>
-<span class="co">#&gt;  1 &lt;NA&gt;   age      Age (in ~ nmatrix.3 continu~          NA TRUE       &lt;NA&gt;     </span>
-<span class="co">#&gt;  2 poly(~ age      Age (in ~ nmatrix.3 continu~          NA FALSE      &lt;NA&gt;     </span>
-<span class="co">#&gt;  3 poly(~ age      Age (in ~ nmatrix.3 continu~          NA FALSE      &lt;NA&gt;     </span>
-<span class="co">#&gt;  4 poly(~ age      Age (in ~ nmatrix.3 continu~          NA FALSE      &lt;NA&gt;     </span>
-<span class="co">#&gt;  5 &lt;NA&gt;   stage    T Stage   factor    categor~           4 TRUE       contr.tr~</span>
-<span class="co">#&gt;  6 stage1 stage    T Stage   factor    categor~           4 FALSE      contr.tr~</span>
-<span class="co">#&gt;  7 stage2 stage    T Stage   factor    categor~           4 FALSE      contr.tr~</span>
-<span class="co">#&gt;  8 stage3 stage    T Stage   factor    categor~           4 FALSE      contr.tr~</span>
-<span class="co">#&gt;  9 stage4 stage    T Stage   factor    categor~           4 FALSE      contr.tr~</span>
-<span class="co">#&gt; 10 &lt;NA&gt;   grade    Grade     factor    categor~           3 TRUE       contr.sum</span>
-<span class="co">#&gt; 11 grade1 grade    Grade     factor    categor~           3 FALSE      contr.sum</span>
-<span class="co">#&gt; 12 grade2 grade    Grade     factor    categor~           3 FALSE      contr.sum</span>
-<span class="co">#&gt; 13 grade3 grade    Grade     factor    categor~           3 FALSE      contr.sum</span>
-<span class="co">#&gt; 14 trtDr~ trt      Chemothe~ character dichoto~           2 NA         contr.tr~</span>
-<span class="co">#&gt; 15 &lt;NA&gt;   grade:t~ Grade * ~ &lt;NA&gt;      interac~          NA TRUE       &lt;NA&gt;     </span>
-<span class="co">#&gt; 16 grade~ grade:t~ Grade * ~ &lt;NA&gt;      interac~          NA FALSE      &lt;NA&gt;     </span>
-<span class="co">#&gt; 17 grade~ grade:t~ Grade * ~ &lt;NA&gt;      interac~          NA FALSE      &lt;NA&gt;     </span>
-<span class="co">#&gt; # ... with 11 more variables: contrasts_type &lt;chr&gt;, reference_row &lt;lgl&gt;,</span>
+<span class="co">#&gt;  1 &lt;NA&gt;   age      Age (in … nmatrix.3 continu…          NA TRUE       &lt;NA&gt;     </span>
+<span class="co">#&gt;  2 poly(… age      Age (in … nmatrix.3 continu…          NA FALSE      &lt;NA&gt;     </span>
+<span class="co">#&gt;  3 poly(… age      Age (in … nmatrix.3 continu…          NA FALSE      &lt;NA&gt;     </span>
+<span class="co">#&gt;  4 poly(… age      Age (in … nmatrix.3 continu…          NA FALSE      &lt;NA&gt;     </span>
+<span class="co">#&gt;  5 &lt;NA&gt;   stage    T Stage   factor    categor…           4 TRUE       contr.tr…</span>
+<span class="co">#&gt;  6 stage1 stage    T Stage   factor    categor…           4 FALSE      contr.tr…</span>
+<span class="co">#&gt;  7 stage2 stage    T Stage   factor    categor…           4 FALSE      contr.tr…</span>
+<span class="co">#&gt;  8 stage3 stage    T Stage   factor    categor…           4 FALSE      contr.tr…</span>
+<span class="co">#&gt;  9 stage4 stage    T Stage   factor    categor…           4 FALSE      contr.tr…</span>
+<span class="co">#&gt; 10 &lt;NA&gt;   grade    Grade     factor    categor…           3 TRUE       contr.sum</span>
+<span class="co">#&gt; 11 grade1 grade    Grade     factor    categor…           3 FALSE      contr.sum</span>
+<span class="co">#&gt; 12 grade2 grade    Grade     factor    categor…           3 FALSE      contr.sum</span>
+<span class="co">#&gt; 13 grade3 grade    Grade     factor    categor…           3 FALSE      contr.sum</span>
+<span class="co">#&gt; 14 trtDr… trt      Chemothe… character dichoto…           2 NA         contr.tr…</span>
+<span class="co">#&gt; 15 &lt;NA&gt;   grade:t… Grade * … &lt;NA&gt;      interac…          NA TRUE       &lt;NA&gt;     </span>
+<span class="co">#&gt; 16 grade… grade:t… Grade * … &lt;NA&gt;      interac…          NA FALSE      &lt;NA&gt;     </span>
+<span class="co">#&gt; 17 grade… grade:t… Grade * … &lt;NA&gt;      interac…          NA FALSE      &lt;NA&gt;     </span>
+<span class="co">#&gt; # … with 11 more variables: contrasts_type &lt;chr&gt;, reference_row &lt;lgl&gt;,</span>
 <span class="co">#&gt; #   label &lt;chr&gt;, n_obs &lt;dbl&gt;, n_event &lt;dbl&gt;, estimate &lt;dbl&gt;, std.error &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   statistic &lt;dbl&gt;, p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;</span>
 <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">ex2</span><span class="op">)</span>
 <span class="co">#&gt; Rows: 17</span>
 <span class="co">#&gt; Columns: 19</span>
-<span class="co">#&gt; $ term           &lt;chr&gt; NA, "poly(age, 3)1", "poly(age, 3)2", "poly(age, 3)3", ~</span>
-<span class="co">#&gt; $ variable       &lt;chr&gt; "age", "age", "age", "age", "stage", "stage", "stage", ~</span>
-<span class="co">#&gt; $ var_label      &lt;chr&gt; "Age (in years)", "Age (in years)", "Age (in years)", "~</span>
-<span class="co">#&gt; $ var_class      &lt;chr&gt; "nmatrix.3", "nmatrix.3", "nmatrix.3", "nmatrix.3", "fa~</span>
-<span class="co">#&gt; $ var_type       &lt;chr&gt; "continuous", "continuous", "continuous", "continuous",~</span>
+<span class="co">#&gt; $ term           &lt;chr&gt; NA, "poly(age, 3)1", "poly(age, 3)2", "poly(age, 3)3", …</span>
+<span class="co">#&gt; $ variable       &lt;chr&gt; "age", "age", "age", "age", "stage", "stage", "stage", …</span>
+<span class="co">#&gt; $ var_label      &lt;chr&gt; "Age (in years)", "Age (in years)", "Age (in years)", "…</span>
+<span class="co">#&gt; $ var_class      &lt;chr&gt; "nmatrix.3", "nmatrix.3", "nmatrix.3", "nmatrix.3", "fa…</span>
+<span class="co">#&gt; $ var_type       &lt;chr&gt; "continuous", "continuous", "continuous", "continuous",…</span>
 <span class="co">#&gt; $ var_nlevels    &lt;int&gt; NA, NA, NA, NA, 4, 4, 4, 4, 4, 3, 3, 3, 3, 2, NA, NA, NA</span>
-<span class="co">#&gt; $ header_row     &lt;lgl&gt; TRUE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE, F~</span>
-<span class="co">#&gt; $ contrasts      &lt;chr&gt; NA, NA, NA, NA, "contr.treatment(base=3)", "contr.treat~</span>
-<span class="co">#&gt; $ contrasts_type &lt;chr&gt; NA, NA, NA, NA, "treatment", "treatment", "treatment", ~</span>
-<span class="co">#&gt; $ reference_row  &lt;lgl&gt; NA, NA, NA, NA, NA, FALSE, FALSE, TRUE, FALSE, NA, FALS~</span>
-<span class="co">#&gt; $ label          &lt;chr&gt; "Age (in years)", "Age (in years)", "Age (in years)²", ~</span>
-<span class="co">#&gt; $ n_obs          &lt;dbl&gt; NA, 92, 56, 80, NA, 46, 50, 35, 42, NA, 63, 53, 57, 90,~</span>
-<span class="co">#&gt; $ n_event        &lt;dbl&gt; NA, 31, 17, 22, NA, 17, 12, 13, 12, NA, 20, 16, 18, 30,~</span>
-<span class="co">#&gt; $ estimate       &lt;dbl&gt; NA, 20.2416394, 1.2337899, 0.4931553, NA, 1.0047885, 0.~</span>
-<span class="co">#&gt; $ std.error      &lt;dbl&gt; NA, 2.3254455, 2.3512842, 2.3936657, NA, 0.4959893, 0.5~</span>
-<span class="co">#&gt; $ statistic      &lt;dbl&gt; NA, 1.29340459, 0.08935144, -0.29533409, NA, 0.00963137~</span>
-<span class="co">#&gt; $ p.value        &lt;dbl&gt; NA, 0.1958712, 0.9288026, 0.7677387, NA, 0.9923154, 0.1~</span>
-<span class="co">#&gt; $ conf.low       &lt;dbl&gt; NA, 0.225454425, 0.007493208, 0.004745694, NA, 0.379776~</span>
-<span class="co">#&gt; $ conf.high      &lt;dbl&gt; NA, 2315.587655, 100.318341, 74.226179, NA, 2.683385, 1~</span></code></pre></div>
+<span class="co">#&gt; $ header_row     &lt;lgl&gt; TRUE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE, F…</span>
+<span class="co">#&gt; $ contrasts      &lt;chr&gt; NA, NA, NA, NA, "contr.treatment(base=3)", "contr.treat…</span>
+<span class="co">#&gt; $ contrasts_type &lt;chr&gt; NA, NA, NA, NA, "treatment", "treatment", "treatment", …</span>
+<span class="co">#&gt; $ reference_row  &lt;lgl&gt; NA, NA, NA, NA, NA, FALSE, FALSE, TRUE, FALSE, NA, FALS…</span>
+<span class="co">#&gt; $ label          &lt;chr&gt; "Age (in years)", "Age (in years)", "Age (in years)²", …</span>
+<span class="co">#&gt; $ n_obs          &lt;dbl&gt; NA, 92, 56, 80, NA, 46, 50, 35, 42, NA, 63, 53, 57, 90,…</span>
+<span class="co">#&gt; $ n_event        &lt;dbl&gt; NA, 31, 17, 22, NA, 17, 12, 13, 12, NA, 20, 16, 18, 30,…</span>
+<span class="co">#&gt; $ estimate       &lt;dbl&gt; NA, 20.2416394, 1.2337899, 0.4931553, NA, 1.0047885, 0.…</span>
+<span class="co">#&gt; $ std.error      &lt;dbl&gt; NA, 2.3254455, 2.3512842, 2.3936657, NA, 0.4959893, 0.5…</span>
+<span class="co">#&gt; $ statistic      &lt;dbl&gt; NA, 1.29340459, 0.08935144, -0.29533409, NA, 0.00963137…</span>
+<span class="co">#&gt; $ p.value        &lt;dbl&gt; NA, 0.1958712, 0.9288026, 0.7677387, NA, 0.9923154, 0.1…</span>
+<span class="co">#&gt; $ conf.low       &lt;dbl&gt; NA, 0.225454425, 0.007493208, 0.004745694, NA, 0.379776…</span>
+<span class="co">#&gt; $ conf.high      &lt;dbl&gt; NA, 2315.587655, 100.318341, 74.226179, NA, 2.683385, 1…</span></code></pre></div>
 </div>
 <div id="fine-control" class="section level3">
 <h3 class="hasAnchor">
@@ -213,26 +213,26 @@
   <span class="co"># remove intercept</span>
   <span class="va">tidy_remove_intercept</span>
 <span class="va">ex3</span>
-<span class="co">#&gt; # A tibble: 4 x 16</span>
+<span class="co">#&gt; # A tibble: 4 × 16</span>
 <span class="co">#&gt;   term              variable  var_label var_class var_type var_nlevels contrasts</span>
 <span class="co">#&gt;   &lt;chr&gt;             &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;          &lt;int&gt; &lt;chr&gt;    </span>
-<span class="co">#&gt; 1 Sepal.Width       Sepal.Wi~ Sepal.Wi~ numeric   continu~          NA &lt;NA&gt;     </span>
-<span class="co">#&gt; 2 Speciessetosa     Species   Species   factor    categor~           3 contr.tr~</span>
-<span class="co">#&gt; 3 Speciesversicolor Species   Species   factor    categor~           3 contr.tr~</span>
-<span class="co">#&gt; 4 Speciesvirginica  Species   Species   factor    categor~           3 contr.tr~</span>
-<span class="co">#&gt; # ... with 9 more variables: contrasts_type &lt;chr&gt;, reference_row &lt;lgl&gt;,</span>
+<span class="co">#&gt; 1 Sepal.Width       Sepal.Wi… Sepal.Wi… numeric   continu…          NA &lt;NA&gt;     </span>
+<span class="co">#&gt; 2 Speciessetosa     Species   Species   factor    categor…           3 contr.tr…</span>
+<span class="co">#&gt; 3 Speciesversicolor Species   Species   factor    categor…           3 contr.tr…</span>
+<span class="co">#&gt; 4 Speciesvirginica  Species   Species   factor    categor…           3 contr.tr…</span>
+<span class="co">#&gt; # … with 9 more variables: contrasts_type &lt;chr&gt;, reference_row &lt;lgl&gt;,</span>
 <span class="co">#&gt; #   label &lt;chr&gt;, estimate &lt;dbl&gt;, std.error &lt;dbl&gt;, statistic &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;</span>
 <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">ex3</span><span class="op">)</span>
 <span class="co">#&gt; Rows: 4</span>
 <span class="co">#&gt; Columns: 16</span>
-<span class="co">#&gt; $ term           &lt;chr&gt; "Sepal.Width", "Speciessetosa", "Speciesversicolor", "S~</span>
+<span class="co">#&gt; $ term           &lt;chr&gt; "Sepal.Width", "Speciessetosa", "Speciesversicolor", "S…</span>
 <span class="co">#&gt; $ variable       &lt;chr&gt; "Sepal.Width", "Species", "Species", "Species"</span>
 <span class="co">#&gt; $ var_label      &lt;chr&gt; "Sepal.Width", "Species", "Species", "Species"</span>
 <span class="co">#&gt; $ var_class      &lt;chr&gt; "numeric", "factor", "factor", "factor"</span>
-<span class="co">#&gt; $ var_type       &lt;chr&gt; "continuous", "categorical", "categorical", "categorica~</span>
+<span class="co">#&gt; $ var_type       &lt;chr&gt; "continuous", "categorical", "categorical", "categorica…</span>
 <span class="co">#&gt; $ var_nlevels    &lt;int&gt; NA, 3, 3, 3</span>
-<span class="co">#&gt; $ contrasts      &lt;chr&gt; NA, "contr.treatment", "contr.treatment", "contr.treatm~</span>
+<span class="co">#&gt; $ contrasts      &lt;chr&gt; NA, "contr.treatment", "contr.treatment", "contr.treatm…</span>
 <span class="co">#&gt; $ contrasts_type &lt;chr&gt; NA, "treatment", "treatment", "treatment"</span>
 <span class="co">#&gt; $ reference_row  &lt;lgl&gt; NA, TRUE, FALSE, FALSE</span>
 <span class="co">#&gt; $ label          &lt;chr&gt; "Sepal.Width", "setosa", "versicolor", "virginica"</span>
@@ -254,52 +254,52 @@
   <span class="co"># add header rows for categorical variables</span>
   <span class="fu"><a href="reference/tidy_add_header_rows.html">tidy_add_header_rows</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">ex4</span>
-<span class="co">#&gt; # A tibble: 20 x 17</span>
+<span class="co">#&gt; # A tibble: 20 × 17</span>
 <span class="co">#&gt;    term   variable var_label var_class var_type var_nlevels header_row contrasts</span>
 <span class="co">#&gt;    &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;          &lt;int&gt; &lt;lgl&gt;      &lt;chr&gt;    </span>
-<span class="co">#&gt;  1 (Inte~ (Interc~ (Interce~ &lt;NA&gt;      interce~          NA NA         &lt;NA&gt;     </span>
-<span class="co">#&gt;  2 &lt;NA&gt;   age      Age in y~ nmatrix.3 continu~          NA TRUE       &lt;NA&gt;     </span>
-<span class="co">#&gt;  3 poly(~ age      Age in y~ nmatrix.3 continu~          NA FALSE      &lt;NA&gt;     </span>
-<span class="co">#&gt;  4 poly(~ age      Age in y~ nmatrix.3 continu~          NA FALSE      &lt;NA&gt;     </span>
-<span class="co">#&gt;  5 poly(~ age      Age in y~ nmatrix.3 continu~          NA FALSE      &lt;NA&gt;     </span>
-<span class="co">#&gt;  6 &lt;NA&gt;   stage    T Stage   factor    categor~           4 TRUE       contr.tr~</span>
-<span class="co">#&gt;  7 stage1 stage    T Stage   factor    categor~           4 FALSE      contr.tr~</span>
-<span class="co">#&gt;  8 stage2 stage    T Stage   factor    categor~           4 FALSE      contr.tr~</span>
-<span class="co">#&gt;  9 stage3 stage    T Stage   factor    categor~           4 FALSE      contr.tr~</span>
-<span class="co">#&gt; 10 stage4 stage    T Stage   factor    categor~           4 FALSE      contr.tr~</span>
-<span class="co">#&gt; 11 &lt;NA&gt;   grade    Grade     factor    categor~           3 TRUE       contr.sum</span>
-<span class="co">#&gt; 12 grade1 grade    Grade     factor    categor~           3 FALSE      contr.sum</span>
-<span class="co">#&gt; 13 grade2 grade    Grade     factor    categor~           3 FALSE      contr.sum</span>
-<span class="co">#&gt; 14 grade3 grade    Grade     factor    categor~           3 FALSE      contr.sum</span>
-<span class="co">#&gt; 15 &lt;NA&gt;   trt      Chemothe~ character dichoto~           2 TRUE       contr.tr~</span>
-<span class="co">#&gt; 16 trtDr~ trt      Chemothe~ character dichoto~           2 FALSE      contr.tr~</span>
-<span class="co">#&gt; 17 trtDr~ trt      Chemothe~ character dichoto~           2 FALSE      contr.tr~</span>
-<span class="co">#&gt; 18 &lt;NA&gt;   grade:t~ Grade * ~ &lt;NA&gt;      interac~          NA TRUE       &lt;NA&gt;     </span>
-<span class="co">#&gt; 19 grade~ grade:t~ Grade * ~ &lt;NA&gt;      interac~          NA FALSE      &lt;NA&gt;     </span>
-<span class="co">#&gt; 20 grade~ grade:t~ Grade * ~ &lt;NA&gt;      interac~          NA FALSE      &lt;NA&gt;     </span>
-<span class="co">#&gt; # ... with 9 more variables: contrasts_type &lt;chr&gt;, reference_row &lt;lgl&gt;,</span>
+<span class="co">#&gt;  1 (Inte… (Interc… (Interce… &lt;NA&gt;      interce…          NA NA         &lt;NA&gt;     </span>
+<span class="co">#&gt;  2 &lt;NA&gt;   age      Age in y… nmatrix.3 continu…          NA TRUE       &lt;NA&gt;     </span>
+<span class="co">#&gt;  3 poly(… age      Age in y… nmatrix.3 continu…          NA FALSE      &lt;NA&gt;     </span>
+<span class="co">#&gt;  4 poly(… age      Age in y… nmatrix.3 continu…          NA FALSE      &lt;NA&gt;     </span>
+<span class="co">#&gt;  5 poly(… age      Age in y… nmatrix.3 continu…          NA FALSE      &lt;NA&gt;     </span>
+<span class="co">#&gt;  6 &lt;NA&gt;   stage    T Stage   factor    categor…           4 TRUE       contr.tr…</span>
+<span class="co">#&gt;  7 stage1 stage    T Stage   factor    categor…           4 FALSE      contr.tr…</span>
+<span class="co">#&gt;  8 stage2 stage    T Stage   factor    categor…           4 FALSE      contr.tr…</span>
+<span class="co">#&gt;  9 stage3 stage    T Stage   factor    categor…           4 FALSE      contr.tr…</span>
+<span class="co">#&gt; 10 stage4 stage    T Stage   factor    categor…           4 FALSE      contr.tr…</span>
+<span class="co">#&gt; 11 &lt;NA&gt;   grade    Grade     factor    categor…           3 TRUE       contr.sum</span>
+<span class="co">#&gt; 12 grade1 grade    Grade     factor    categor…           3 FALSE      contr.sum</span>
+<span class="co">#&gt; 13 grade2 grade    Grade     factor    categor…           3 FALSE      contr.sum</span>
+<span class="co">#&gt; 14 grade3 grade    Grade     factor    categor…           3 FALSE      contr.sum</span>
+<span class="co">#&gt; 15 &lt;NA&gt;   trt      Chemothe… character dichoto…           2 TRUE       contr.tr…</span>
+<span class="co">#&gt; 16 trtDr… trt      Chemothe… character dichoto…           2 FALSE      contr.tr…</span>
+<span class="co">#&gt; 17 trtDr… trt      Chemothe… character dichoto…           2 FALSE      contr.tr…</span>
+<span class="co">#&gt; 18 &lt;NA&gt;   grade:t… Grade * … &lt;NA&gt;      interac…          NA TRUE       &lt;NA&gt;     </span>
+<span class="co">#&gt; 19 grade… grade:t… Grade * … &lt;NA&gt;      interac…          NA FALSE      &lt;NA&gt;     </span>
+<span class="co">#&gt; 20 grade… grade:t… Grade * … &lt;NA&gt;      interac…          NA FALSE      &lt;NA&gt;     </span>
+<span class="co">#&gt; # … with 9 more variables: contrasts_type &lt;chr&gt;, reference_row &lt;lgl&gt;,</span>
 <span class="co">#&gt; #   label &lt;chr&gt;, estimate &lt;dbl&gt;, std.error &lt;dbl&gt;, statistic &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;</span>
 <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">ex4</span><span class="op">)</span>
 <span class="co">#&gt; Rows: 20</span>
 <span class="co">#&gt; Columns: 17</span>
-<span class="co">#&gt; $ term           &lt;chr&gt; "(Intercept)", NA, "poly(age, 3)1", "poly(age, 3)2", "p~</span>
-<span class="co">#&gt; $ variable       &lt;chr&gt; "(Intercept)", "age", "age", "age", "age", "stage", "st~</span>
-<span class="co">#&gt; $ var_label      &lt;chr&gt; "(Intercept)", "Age in years", "Age in years", "Age in ~</span>
-<span class="co">#&gt; $ var_class      &lt;chr&gt; NA, "nmatrix.3", "nmatrix.3", "nmatrix.3", "nmatrix.3",~</span>
-<span class="co">#&gt; $ var_type       &lt;chr&gt; "intercept", "continuous", "continuous", "continuous", ~</span>
-<span class="co">#&gt; $ var_nlevels    &lt;int&gt; NA, NA, NA, NA, NA, 4, 4, 4, 4, 4, 3, 3, 3, 3, 2, 2, 2,~</span>
-<span class="co">#&gt; $ header_row     &lt;lgl&gt; NA, TRUE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, FALS~</span>
-<span class="co">#&gt; $ contrasts      &lt;chr&gt; NA, NA, NA, NA, NA, "contr.treatment(base=3)", "contr.t~</span>
-<span class="co">#&gt; $ contrasts_type &lt;chr&gt; NA, NA, NA, NA, NA, "treatment", "treatment", "treatmen~</span>
-<span class="co">#&gt; $ reference_row  &lt;lgl&gt; NA, NA, NA, NA, NA, NA, FALSE, FALSE, TRUE, FALSE, NA, ~</span>
-<span class="co">#&gt; $ label          &lt;chr&gt; "(Intercept)", "Age in years", "Age in years", "Age in ~</span>
-<span class="co">#&gt; $ estimate       &lt;dbl&gt; 0.5266376, NA, 20.2416394, 1.2337899, 0.4931553, NA, 1.~</span>
-<span class="co">#&gt; $ std.error      &lt;dbl&gt; 0.4130930, NA, 2.3254455, 2.3512842, 2.3936657, NA, 0.4~</span>
-<span class="co">#&gt; $ statistic      &lt;dbl&gt; -1.55229592, NA, 1.29340459, 0.08935144, -0.29533409, N~</span>
-<span class="co">#&gt; $ p.value        &lt;dbl&gt; 0.1205914, NA, 0.1958712, 0.9288026, 0.7677387, NA, 0.9~</span>
-<span class="co">#&gt; $ conf.low       &lt;dbl&gt; 0.227717775, NA, 0.225454425, 0.007493208, 0.004745694,~</span>
-<span class="co">#&gt; $ conf.high      &lt;dbl&gt; 1.164600, NA, 2315.587655, 100.318341, 74.226179, NA, 2~</span></code></pre></div>
+<span class="co">#&gt; $ term           &lt;chr&gt; "(Intercept)", NA, "poly(age, 3)1", "poly(age, 3)2", "p…</span>
+<span class="co">#&gt; $ variable       &lt;chr&gt; "(Intercept)", "age", "age", "age", "age", "stage", "st…</span>
+<span class="co">#&gt; $ var_label      &lt;chr&gt; "(Intercept)", "Age in years", "Age in years", "Age in …</span>
+<span class="co">#&gt; $ var_class      &lt;chr&gt; NA, "nmatrix.3", "nmatrix.3", "nmatrix.3", "nmatrix.3",…</span>
+<span class="co">#&gt; $ var_type       &lt;chr&gt; "intercept", "continuous", "continuous", "continuous", …</span>
+<span class="co">#&gt; $ var_nlevels    &lt;int&gt; NA, NA, NA, NA, NA, 4, 4, 4, 4, 4, 3, 3, 3, 3, 2, 2, 2,…</span>
+<span class="co">#&gt; $ header_row     &lt;lgl&gt; NA, TRUE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, FALS…</span>
+<span class="co">#&gt; $ contrasts      &lt;chr&gt; NA, NA, NA, NA, NA, "contr.treatment(base=3)", "contr.t…</span>
+<span class="co">#&gt; $ contrasts_type &lt;chr&gt; NA, NA, NA, NA, NA, "treatment", "treatment", "treatmen…</span>
+<span class="co">#&gt; $ reference_row  &lt;lgl&gt; NA, NA, NA, NA, NA, NA, FALSE, FALSE, TRUE, FALSE, NA, …</span>
+<span class="co">#&gt; $ label          &lt;chr&gt; "(Intercept)", "Age in years", "Age in years", "Age in …</span>
+<span class="co">#&gt; $ estimate       &lt;dbl&gt; 0.5266376, NA, 20.2416394, 1.2337899, 0.4931553, NA, 1.…</span>
+<span class="co">#&gt; $ std.error      &lt;dbl&gt; 0.4130930, NA, 2.3254455, 2.3512842, 2.3936657, NA, 0.4…</span>
+<span class="co">#&gt; $ statistic      &lt;dbl&gt; -1.55229592, NA, 1.29340459, 0.08935144, -0.29533409, N…</span>
+<span class="co">#&gt; $ p.value        &lt;dbl&gt; 0.1205914, NA, 0.1958712, 0.9288026, 0.7677387, NA, 0.9…</span>
+<span class="co">#&gt; $ conf.low       &lt;dbl&gt; 0.227717775, NA, 0.225454425, 0.007493208, 0.004745694,…</span>
+<span class="co">#&gt; $ conf.high      &lt;dbl&gt; 1.164600, NA, 2315.587655, 100.318341, 74.226179, NA, 2…</span></code></pre></div>
 </div>
 </div>
 </div>
