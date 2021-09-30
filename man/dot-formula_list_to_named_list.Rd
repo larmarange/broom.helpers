@@ -27,6 +27,18 @@ helps in the error messaging. Default is NULL.}
 variable. Default is \code{FALSE}}
 }
 \description{
-Functions takes a list of formulas, e.g. \code{list(starts_with("age") ~ "continuous")},
-and returns a named list, e.g. \code{list(age = "continuous")}.
+Functions takes a list of formulas, a named list, or a combination of named
+elements with formula elements and returns a named list.
+For example, \code{list(age = 1, starts_with("stage") ~ 2)}.
 }
+\section{Shortcuts}{
+
+A shortcut for specifying an option be applied to all columns/variables
+is omitting the LHS of the formula.
+For example, \code{list(~ 1)} is equivalent to passing \code{list(everything() ~ 1)}.
+
+Additionally, a single formula may be passed instead of placing a single
+formula in a list; e.g. \code{everything() ~ 1} is equivalent to
+passing \code{list(everything() ~ 1)}
+}
+
