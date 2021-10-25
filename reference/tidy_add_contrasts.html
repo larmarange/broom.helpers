@@ -181,14 +181,14 @@ categorical variable and a <code>contrasts_type</code> column equal to
   <span class='fu'><a href='tidy_attach_model.html'>tidy_and_attach</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>tidy_add_contrasts</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 6 × 13</span>
-#&gt;   term        variable    var_class var_type    var_nlevels contrasts contrasts_type
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>         
-#&gt; <span style='color: #BCBCBC;'>1</span> (Intercept) (Intercept) <span style='color: #BB0000;'>NA</span>        intercept            <span style='color: #BB0000;'>NA</span> <span style='color: #BB0000;'>NA</span>        <span style='color: #BB0000;'>NA</span>            
-#&gt; <span style='color: #BCBCBC;'>2</span> Class1      Class       character categorical           4 contr.he… helmert       
-#&gt; <span style='color: #BCBCBC;'>3</span> Class2      Class       character categorical           4 contr.he… helmert       
-#&gt; <span style='color: #BCBCBC;'>4</span> Class3      Class       character categorical           4 contr.he… helmert       
-#&gt; <span style='color: #BCBCBC;'>5</span> Age1        Age         character dichotomous           2 contr.sum sum           
-#&gt; <span style='color: #BCBCBC;'>6</span> SexMale     Sex         character dichotomous           2 contr.tr… treatment     
+#&gt;   term        variable  var_class var_type var_nlevels contrasts  contrasts_type
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>         
+#&gt; <span style='color: #BCBCBC;'>1</span> (Intercept) (Interce… <span style='color: #BB0000;'>NA</span>        interce…          <span style='color: #BB0000;'>NA</span> <span style='color: #BB0000;'>NA</span>         <span style='color: #BB0000;'>NA</span>            
+#&gt; <span style='color: #BCBCBC;'>2</span> Class1      Class     character categor…           4 contr.hel… helmert       
+#&gt; <span style='color: #BCBCBC;'>3</span> Class2      Class     character categor…           4 contr.hel… helmert       
+#&gt; <span style='color: #BCBCBC;'>4</span> Class3      Class     character categor…           4 contr.hel… helmert       
+#&gt; <span style='color: #BCBCBC;'>5</span> Age1        Age       character dichoto…           2 contr.sum  sum           
+#&gt; <span style='color: #BCBCBC;'>6</span> SexMale     Sex       character dichoto…           2 contr.tre… treatment     
 #&gt; <span style='color: #949494;'># … with 6 more variables: estimate &lt;dbl&gt;, std.error &lt;dbl&gt;, statistic &lt;dbl&gt;,</span>
 #&gt; <span style='color: #949494;'>#   p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;</span></div></pre>
   </div>
