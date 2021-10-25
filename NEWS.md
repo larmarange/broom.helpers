@@ -1,5 +1,7 @@
 # broom.helpers (development version)
 
+- Bug fix for identifying the levels of a logical variable (#125)
+
 # broom.helpers 1.4.0
 
 **New supported models**

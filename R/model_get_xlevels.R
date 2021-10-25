@@ -13,21 +13,34 @@ model_get_xlevels <- function(model) {
 #' @export
 #' @rdname model_get_xlevels
 model_get_xlevels.default <- function(model) {
-  tryCatch(
+  xlevels <- tryCatch(
     model %>% purrr::chuck("xlevels"),
     error = function(e) {
       NULL # nocov
     }
   )
+  xlevels %>% .add_xlevels_for_logical_variables(model)
 }
 
+.add_xlevels_for_logical_variables <- function(xlevels, model) {
+  log_vars <- model %>%
+    model_list_variables() %>%
+    dplyr::filter(.data$var_class == "logical") %>%
+    purrr::pluck("variable")
+
+  for (v in setdiff(log_vars, names(xlevels)))
+    xlevels[[v]] <- c("FALSE", "TRUE")
+
+  xlevels
+}
 
 #' @export
 #' @rdname model_get_xlevels
 model_get_xlevels.lmerMod <- function(model) {
   xlevels <- stats::model.frame(model) %>% lapply(levels)
   selection <- !(xlevels %>% lapply(is.null) %>% unlist())
-  xlevels[selection] # keep only not null
+  xlevels[selection] %>% # keep only not null
+    .add_xlevels_for_logical_variables(model)
 }
 
 
