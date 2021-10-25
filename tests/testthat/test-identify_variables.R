@@ -101,7 +101,7 @@ test_that("model_dientify_variables() works well with logical variables", {
     2
   )
   expect_equivalent(
-    model_get_xlevels(model)$response,
+    model_get_xlevels(mod)$response,
     c("FALSE", "TRUE")
   )
 })
