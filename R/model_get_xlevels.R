@@ -28,7 +28,7 @@ model_get_xlevels.default <- function(model) {
     dplyr::filter(.data$var_class == "logical") %>%
     purrr::pluck("variable")
 
-  for (v in setdiff(log_var, names(xlevels)))
+  for (v in setdiff(log_vars, names(xlevels)))
     xlevels[[v]] <- c("FALSE", "TRUE")
 
   xlevels
