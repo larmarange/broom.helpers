@@ -85,6 +85,28 @@ test_that("test tidy_identify_variables() checks", {
   )
 })
 
+test_that("model_dientify_variables() works well with logical variables", {
+  mod <- lm(
+    age ~ response + marker,
+    data = gtsummary::trial %>%
+      dplyr::mutate(response = as.logical(response))
+  )
+  res <- model_identify_variables(mod)
+  expect_equivalent(
+    res %>% dplyr::filter(variable == "response") %>% purrr::pluck("var_type"),
+    "dichotomous"
+  )
+  expect_equivalent(
+    res %>% dplyr::filter(variable == "response") %>% purrr::pluck("var_nlevels"),
+    2
+  )
+  expect_equivalent(
+    model_get_xlevels(model)$response,
+    c("FALSE", "TRUE")
+  )
+})
+
+
 test_that("model_identify_variables() works with different contrasts", {
   mod <- glm(
     response ~ stage + grade * trt,
