@@ -1,6 +1,7 @@
 # broom.helpers (development version)
 
 - Bug fix for identifying the levels of a logical variable (#125)
+- New method `model_get_coefficients_type.tidycrr()` (#128)
 
 # broom.helpers 1.4.0
 

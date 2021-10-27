@@ -277,7 +277,7 @@ tibble::tribble(
   'exposure', '`tidy_add_n()`', 'Exposure time (for Poisson and Cox models)'
 ) %>%
     gt::gt() %>%
-  gt::fmt_markdown(columns = TRUE) %>%
+  gt::fmt_markdown(columns = everything()) %>%
   gt::tab_options(
     column_labels.font.weight = "bold"
   ) %>%
@@ -310,7 +310,7 @@ tibble::tribble(
   'Exposure', '`tidy_add_n()`', 'Total of exposure time'
 ) %>%
     gt::gt() %>%
-  gt::fmt_markdown(columns = TRUE) %>%
+  gt::fmt_markdown(columns = everything()) %>%
   gt::tab_options(
     column_labels.font.weight = "bold"
   ) %>%
@@ -341,21 +341,22 @@ tibble::tribble(
   '`mgcv::gam()`', 'Use default tidier `broom::tidy()` for smooth terms only, or `gtsummary::tidy_gam()` to include parametric terms',
   '`nnet::multinom()`', '',
   '`survey::svyglm()`', '',
-  '`survey::svycoxph()`', '',
+  '`survey::svycoxph∟()`', '',
   '`survey::svyolr()`', '',
   '`MASS::polr()`', '',
   '`MASS::glm.nb()`', '',
   '`mice::mira`', 'Limited support. If `mod` is a `mira` object, use `tidy_plus_plus(mod, tidy_fun = function(x, ...) mice::pool(x) %>% mice::tidy(...))`',
   '`lavaan::lavaan()`', 'Limited support for categorical variables',
-  '`cmprsk::crr()`', 'Limited support',
   '`stats::nls()`', 'Limited support',
   '`lfe::felm()`', '',
   '`rstanarm::stan_glm()`', '`broom.mixed` package required',
-  '`VGAM::vglm()`', 'Limited support. It is recommanded to use `tidy_parameters()` as `tidy_fun`.'
+  '`VGAM::vglm()`', 'Limited support. It is recommanded to use `tidy_parameters()` as `tidy_fun`.',
+  '`cmprsk::crr()`', 'Limited support. It is recommanded to use `tidycmprsk::crr()` instead.',
+  '`tidycmprsk::crr()`', ''
 ) %>%
   dplyr::arrange(Model) %>%
   gt::gt() %>%
-  gt::fmt_markdown(columns = TRUE) %>%
+  gt::fmt_markdown(columns = everything()) %>%
   gt::tab_options(column_labels.font.weight = "bold") %>%
   gt::opt_row_striping() %>%
   gt::tab_style("vertical-align:top; font-size: 12px;", gt::cells_body())

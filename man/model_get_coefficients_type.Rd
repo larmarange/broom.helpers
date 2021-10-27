@@ -14,6 +14,8 @@
 \alias{model_get_coefficients_type.clm}
 \alias{model_get_coefficients_type.clmm}
 \alias{model_get_coefficients_type.coxph}
+\alias{model_get_coefficients_type.crr}
+\alias{model_get_coefficients_type.tidycrr}
 \title{Get coefficient type}
 \usage{
 model_get_coefficients_type(model)
@@ -41,6 +43,10 @@ model_get_coefficients_type(model)
 \method{model_get_coefficients_type}{clmm}(model)
 
 \method{model_get_coefficients_type}{coxph}(model)
+
+\method{model_get_coefficients_type}{crr}(model)
+
+\method{model_get_coefficients_type}{tidycrr}(model)
 }
 \arguments{
 \item{model}{a model object}
