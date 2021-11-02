@@ -89,7 +89,7 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
     } else {
       # success of parameters
       cli::cli_alert_success("{.code tidy_parameters()} used instead.")
-      cli::cli_alert_info("Add {.code tidy_fun = tidy_parameters} to quiet these messages.")
+      cli::cli_alert_info("Add {.code tidy_fun = broom.helpers::tidy_parameters} to quiet these messages.")
     }
   }
   res
