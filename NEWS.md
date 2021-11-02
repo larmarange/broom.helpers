@@ -2,6 +2,8 @@
 
 - Bug fix for identifying the levels of a logical variable (#125)
 
+- Updated error messaging about using `broom.helpers::tidy_paramters()` to include the package prefix. This message sometimes appears while running `gtsummary::tbl_regression()` where some users may not be aware where the `tidy_paramters()` function lives.
+
 # broom.helpers 1.4.0
 
 **New supported models**
