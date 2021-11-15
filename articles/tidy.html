@@ -119,15 +119,15 @@
 <p>To create the figure, we’ll need to add some information to the tidy tibble, i.e. we’ll need to group the terms that belong to the same variable, add the reference row, etc. Parsing this information can be difficult, but the <code>broom.helper</code> package has made it simple.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tidy_forest</span> <span class="op">&lt;-</span>
-  <span class="va">model_logit</span> <span class="op">%&gt;%</span>
+  <span class="va">model_logit</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="co"># perform initial tidying of the model</span>
-  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="co"># adding in the reference row for categorical variables</span>
-  <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="co"># adding a reference value to appear in plot</span>
-  <span class="fu"><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="co"># adding the variable labels</span>
-  <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="co"># removing intercept estimate from model</span>
   <span class="fu"><a href="../reference/tidy_remove_intercept.html">tidy_remove_intercept</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">tidy_forest</span>
@@ -145,12 +145,12 @@
 <p><strong>Note:</strong> we used <code><a href="../reference/tidy_attach_model.html">tidy_and_attach()</a></code> instead of <code><a href="https://generics.r-lib.org/reference/tidy.html">broom::tidy()</a></code>. <code>broom.helpers</code> functions needs a copy of the original model. To avoid passing the model at each step, the easier way is to attach the model as an attribute of the tibble with <code><a href="../reference/tidy_attach_model.html">tidy_attach_model()</a></code>. <code><a href="../reference/tidy_attach_model.html">tidy_and_attach()</a></code> is simply a shortcut of <code>model %&gt;% broom::tidy() %&gt;% tidy_and_attach(model)</code>.</p>
 <p>We now have a tibble with every piece of information we need to create our forest plot using <code>ggplot2</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tidy_forest</span> <span class="op">%&gt;%</span>
+<code class="sourceCode R"><span class="va">tidy_forest</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>
-    plot_label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">var_label</span>, <span class="va">label</span>, sep <span class="op">=</span> <span class="st">":"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-      <span class="fu">forcats</span><span class="fu">::</span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_inorder.html">fct_inorder</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    plot_label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">var_label</span>, <span class="va">label</span>, sep <span class="op">=</span> <span class="st">":"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+      <span class="fu">forcats</span><span class="fu">::</span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_inorder.html">fct_inorder</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
       <span class="fu">forcats</span><span class="fu">::</span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_rev.html">fct_rev</a></span><span class="op">(</span><span class="op">)</span>
-  <span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">plot_label</span>, y <span class="op">=</span> <span class="va">estimate</span>, ymin <span class="op">=</span> <span class="va">conf.low</span>, ymax <span class="op">=</span> <span class="va">conf.high</span>, color <span class="op">=</span> <span class="va">variable</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">1</span>, linetype <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_pointrange</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
@@ -170,25 +170,25 @@
 <p>In addition to aiding in figure creation, the broom.helpers package can help summarize a model in a table. In the example below, we add header and reference rows, and utilize existing variable labels. Let’s change the labels shown in our summary table as well.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tidy_table</span> <span class="op">&lt;-</span>
-  <span class="va">model_logit</span> <span class="op">%&gt;%</span>
+  <span class="va">model_logit</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="co"># perform initial tidying of the model</span>
-  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="co"># adding in the reference row for categorical variables</span>
-  <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="co"># adding the variable labels</span>
-  <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="co"># add header row</span>
-  <span class="fu"><a href="../reference/tidy_add_header_rows.html">tidy_add_header_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/tidy_add_header_rows.html">tidy_add_header_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="co"># removing intercept estimate from model</span>
   <span class="fu"><a href="../reference/tidy_remove_intercept.html">tidy_remove_intercept</a></span><span class="op">(</span><span class="op">)</span> 
 
 <span class="co"># print summary table</span>
 <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>knitr.kable.NA <span class="op">=</span> <span class="st">''</span><span class="op">)</span>
-<span class="va">tidy_table</span> <span class="op">%&gt;%</span>
+<span class="va">tidy_table</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="co"># format model estimates</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">label</span>, <span class="va">estimate</span>, <span class="va">conf.low</span>, <span class="va">conf.high</span>, <span class="va">p.value</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html">all_of</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"estimate"</span>, <span class="st">"conf.low"</span>, <span class="st">"conf.high"</span><span class="op">)</span><span class="op">)</span>, <span class="va">style_ratio</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="va">p.value</span>, <span class="va">style_pvalue</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">label</span>, <span class="va">estimate</span>, <span class="va">conf.low</span>, <span class="va">conf.high</span>, <span class="va">p.value</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html">all_of</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"estimate"</span>, <span class="st">"conf.low"</span>, <span class="st">"conf.high"</span><span class="op">)</span><span class="op">)</span>, <span class="va">style_ratio</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="va">p.value</span>, <span class="va">style_pvalue</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu">print_table</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -202,7 +202,7 @@
 <a href="#all-in-one-function" class="anchor"></a>All-in-one function</h2>
 <p>There is also a handy wrapper, called <code><a href="../reference/tidy_plus_plus.html">tidy_plus_plus()</a></code>, for the most commonly used <code>tidy_*()</code> functions, and they can be executed with a single line of code:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model_logit</span> <span class="op">%&gt;%</span>
+<code class="sourceCode R"><span class="va">model_logit</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="../reference/tidy_plus_plus.html">tidy_plus_plus</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 5 × 18</span>
 <span class="co">#&gt;   term      variable var_label       var_class var_type  var_nlevels contrasts  </span>
@@ -216,8 +216,8 @@
 <span class="co">#&gt; #   label &lt;chr&gt;, n_obs &lt;dbl&gt;, n_event &lt;dbl&gt;, estimate &lt;dbl&gt;, std.error &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   statistic &lt;dbl&gt;, p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;</span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model_logit</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/tidy_plus_plus.html">tidy_plus_plus</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<code class="sourceCode R"><span class="va">model_logit</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/tidy_plus_plus.html">tidy_plus_plus</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu">print_table</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -237,12 +237,12 @@
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model_poly</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">response</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html">poly</a></span><span class="op">(</span><span class="va">age</span>, <span class="fl">3</span><span class="op">)</span> <span class="op">+</span> <span class="va">ttdeath</span>, <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="va">trial</span><span class="op">)</span>, family <span class="op">=</span> <span class="va">binomial</span><span class="op">)</span>
 
-<span class="va">model_poly</span> <span class="op">%&gt;%</span>
+<span class="va">model_poly</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="../reference/tidy_plus_plus.html">tidy_plus_plus</a></span><span class="op">(</span>
     exponentiate <span class="op">=</span> <span class="cn">TRUE</span>,
     add_header_rows <span class="op">=</span> <span class="cn">TRUE</span>,
     variable_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>age <span class="op">=</span> <span class="st">"Age in years"</span><span class="op">)</span>
-  <span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu">print_table</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -261,11 +261,11 @@
   family <span class="op">=</span> <span class="va">binomial</span>
 <span class="op">)</span>
 
-<span class="va">model_1</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<span class="va">model_1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu">print_table</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -285,11 +285,11 @@
   <span class="op">)</span>
 <span class="op">)</span>
 
-<span class="va">model_2</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<span class="va">model_2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu">print_table</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -309,11 +309,11 @@
   <span class="op">)</span>
 <span class="op">)</span>
 
-<span class="va">model_3</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<span class="va">model_3</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu">print_table</span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Loading required namespace: emmeans</span></code></pre></div>
 <div data-pagedtable="false">
@@ -334,11 +334,11 @@
   <span class="op">)</span>
 <span class="op">)</span>
 
-<span class="va">model_4</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<span class="va">model_4</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu">print_table</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -354,12 +354,12 @@
 <style>
 td {vertical-align: top;}
 </style>
-<div id="hbqsjlmruc" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="mlcpbdrlzu" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#hbqsjlmruc .gt_table {
+#mlcpbdrlzu .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -384,7 +384,7 @@ td {vertical-align: top;}
   border-left-color: #D3D3D3;
 }
 
-#hbqsjlmruc .gt_heading {
+#mlcpbdrlzu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -396,7 +396,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#hbqsjlmruc .gt_title {
+#mlcpbdrlzu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -406,7 +406,7 @@ td {vertical-align: top;}
   border-bottom-width: 0;
 }
 
-#hbqsjlmruc .gt_subtitle {
+#mlcpbdrlzu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -416,13 +416,13 @@ td {vertical-align: top;}
   border-top-width: 0;
 }
 
-#hbqsjlmruc .gt_bottom_border {
+#mlcpbdrlzu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#hbqsjlmruc .gt_col_headings {
+#mlcpbdrlzu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -437,7 +437,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#hbqsjlmruc .gt_col_heading {
+#mlcpbdrlzu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -457,7 +457,7 @@ td {vertical-align: top;}
   overflow-x: hidden;
 }
 
-#hbqsjlmruc .gt_column_spanner_outer {
+#mlcpbdrlzu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -469,15 +469,15 @@ td {vertical-align: top;}
   padding-right: 4px;
 }
 
-#hbqsjlmruc .gt_column_spanner_outer:first-child {
+#mlcpbdrlzu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#hbqsjlmruc .gt_column_spanner_outer:last-child {
+#mlcpbdrlzu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#hbqsjlmruc .gt_column_spanner {
+#mlcpbdrlzu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -489,7 +489,7 @@ td {vertical-align: top;}
   width: 100%;
 }
 
-#hbqsjlmruc .gt_group_heading {
+#mlcpbdrlzu .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -511,7 +511,7 @@ td {vertical-align: top;}
   vertical-align: middle;
 }
 
-#hbqsjlmruc .gt_empty_group_heading {
+#mlcpbdrlzu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -526,15 +526,15 @@ td {vertical-align: top;}
   vertical-align: middle;
 }
 
-#hbqsjlmruc .gt_from_md > :first-child {
+#mlcpbdrlzu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#hbqsjlmruc .gt_from_md > :last-child {
+#mlcpbdrlzu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#hbqsjlmruc .gt_row {
+#mlcpbdrlzu .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -553,7 +553,7 @@ td {vertical-align: top;}
   overflow-x: hidden;
 }
 
-#hbqsjlmruc .gt_stub {
+#mlcpbdrlzu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -565,7 +565,7 @@ td {vertical-align: top;}
   padding-left: 12px;
 }
 
-#hbqsjlmruc .gt_summary_row {
+#mlcpbdrlzu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -575,7 +575,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#hbqsjlmruc .gt_first_summary_row {
+#mlcpbdrlzu .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -585,7 +585,7 @@ td {vertical-align: top;}
   border-top-color: #D3D3D3;
 }
 
-#hbqsjlmruc .gt_grand_summary_row {
+#mlcpbdrlzu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -595,7 +595,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#hbqsjlmruc .gt_first_grand_summary_row {
+#mlcpbdrlzu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -605,11 +605,11 @@ td {vertical-align: top;}
   border-top-color: #D3D3D3;
 }
 
-#hbqsjlmruc .gt_striped {
+#mlcpbdrlzu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#hbqsjlmruc .gt_table_body {
+#mlcpbdrlzu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -618,7 +618,7 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#hbqsjlmruc .gt_footnotes {
+#mlcpbdrlzu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -632,13 +632,13 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#hbqsjlmruc .gt_footnote {
+#mlcpbdrlzu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#hbqsjlmruc .gt_sourcenotes {
+#mlcpbdrlzu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -652,41 +652,41 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#hbqsjlmruc .gt_sourcenote {
+#mlcpbdrlzu .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#hbqsjlmruc .gt_left {
+#mlcpbdrlzu .gt_left {
   text-align: left;
 }
 
-#hbqsjlmruc .gt_center {
+#mlcpbdrlzu .gt_center {
   text-align: center;
 }
 
-#hbqsjlmruc .gt_right {
+#mlcpbdrlzu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#hbqsjlmruc .gt_font_normal {
+#mlcpbdrlzu .gt_font_normal {
   font-weight: normal;
 }
 
-#hbqsjlmruc .gt_font_bold {
+#mlcpbdrlzu .gt_font_bold {
   font-weight: bold;
 }
 
-#hbqsjlmruc .gt_font_italic {
+#mlcpbdrlzu .gt_font_italic {
   font-style: italic;
 }
 
-#hbqsjlmruc .gt_super {
+#mlcpbdrlzu .gt_super {
   font-size: 65%;
 }
 
-#hbqsjlmruc .gt_footnote_marks {
+#mlcpbdrlzu .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -865,12 +865,12 @@ td {vertical-align: top;}
 <style>
 td {vertical-align: top;}
 </style>
-<div id="dhsxbefajx" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="xlhrrcmrci" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#dhsxbefajx .gt_table {
+#xlhrrcmrci .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -895,7 +895,7 @@ td {vertical-align: top;}
   border-left-color: #D3D3D3;
 }
 
-#dhsxbefajx .gt_heading {
+#xlhrrcmrci .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -907,7 +907,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#dhsxbefajx .gt_title {
+#xlhrrcmrci .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -917,7 +917,7 @@ td {vertical-align: top;}
   border-bottom-width: 0;
 }
 
-#dhsxbefajx .gt_subtitle {
+#xlhrrcmrci .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -927,13 +927,13 @@ td {vertical-align: top;}
   border-top-width: 0;
 }
 
-#dhsxbefajx .gt_bottom_border {
+#xlhrrcmrci .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#dhsxbefajx .gt_col_headings {
+#xlhrrcmrci .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -948,7 +948,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#dhsxbefajx .gt_col_heading {
+#xlhrrcmrci .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -968,7 +968,7 @@ td {vertical-align: top;}
   overflow-x: hidden;
 }
 
-#dhsxbefajx .gt_column_spanner_outer {
+#xlhrrcmrci .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -980,15 +980,15 @@ td {vertical-align: top;}
   padding-right: 4px;
 }
 
-#dhsxbefajx .gt_column_spanner_outer:first-child {
+#xlhrrcmrci .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#dhsxbefajx .gt_column_spanner_outer:last-child {
+#xlhrrcmrci .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#dhsxbefajx .gt_column_spanner {
+#xlhrrcmrci .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1000,7 +1000,7 @@ td {vertical-align: top;}
   width: 100%;
 }
 
-#dhsxbefajx .gt_group_heading {
+#xlhrrcmrci .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1022,7 +1022,7 @@ td {vertical-align: top;}
   vertical-align: middle;
 }
 
-#dhsxbefajx .gt_empty_group_heading {
+#xlhrrcmrci .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1037,15 +1037,15 @@ td {vertical-align: top;}
   vertical-align: middle;
 }
 
-#dhsxbefajx .gt_from_md > :first-child {
+#xlhrrcmrci .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#dhsxbefajx .gt_from_md > :last-child {
+#xlhrrcmrci .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#dhsxbefajx .gt_row {
+#xlhrrcmrci .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1064,7 +1064,7 @@ td {vertical-align: top;}
   overflow-x: hidden;
 }
 
-#dhsxbefajx .gt_stub {
+#xlhrrcmrci .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1076,7 +1076,7 @@ td {vertical-align: top;}
   padding-left: 12px;
 }
 
-#dhsxbefajx .gt_summary_row {
+#xlhrrcmrci .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1086,7 +1086,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#dhsxbefajx .gt_first_summary_row {
+#xlhrrcmrci .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1096,7 +1096,7 @@ td {vertical-align: top;}
   border-top-color: #D3D3D3;
 }
 
-#dhsxbefajx .gt_grand_summary_row {
+#xlhrrcmrci .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1106,7 +1106,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#dhsxbefajx .gt_first_grand_summary_row {
+#xlhrrcmrci .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1116,11 +1116,11 @@ td {vertical-align: top;}
   border-top-color: #D3D3D3;
 }
 
-#dhsxbefajx .gt_striped {
+#xlhrrcmrci .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#dhsxbefajx .gt_table_body {
+#xlhrrcmrci .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1129,7 +1129,7 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#dhsxbefajx .gt_footnotes {
+#xlhrrcmrci .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1143,13 +1143,13 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#dhsxbefajx .gt_footnote {
+#xlhrrcmrci .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#dhsxbefajx .gt_sourcenotes {
+#xlhrrcmrci .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1163,41 +1163,41 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#dhsxbefajx .gt_sourcenote {
+#xlhrrcmrci .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#dhsxbefajx .gt_left {
+#xlhrrcmrci .gt_left {
   text-align: left;
 }
 
-#dhsxbefajx .gt_center {
+#xlhrrcmrci .gt_center {
   text-align: center;
 }
 
-#dhsxbefajx .gt_right {
+#xlhrrcmrci .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#dhsxbefajx .gt_font_normal {
+#xlhrrcmrci .gt_font_normal {
   font-weight: normal;
 }
 
-#dhsxbefajx .gt_font_bold {
+#xlhrrcmrci .gt_font_bold {
   font-weight: bold;
 }
 
-#dhsxbefajx .gt_font_italic {
+#xlhrrcmrci .gt_font_italic {
   font-style: italic;
 }
 
-#dhsxbefajx .gt_super {
+#xlhrrcmrci .gt_super {
   font-size: 65%;
 }
 
-#dhsxbefajx .gt_footnote_marks {
+#xlhrrcmrci .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -1305,12 +1305,12 @@ td {vertical-align: top;}
 <div id="supported-models" class="section level2">
 <h2 class="hasAnchor">
 <a href="#supported-models" class="anchor"></a>Supported models</h2>
-<div id="kszyouhgup" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="iihivsagwk" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#kszyouhgup .gt_table {
+#iihivsagwk .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1335,7 +1335,7 @@ td {vertical-align: top;}
   border-left-color: #D3D3D3;
 }
 
-#kszyouhgup .gt_heading {
+#iihivsagwk .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1347,7 +1347,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#kszyouhgup .gt_title {
+#iihivsagwk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1357,7 +1357,7 @@ td {vertical-align: top;}
   border-bottom-width: 0;
 }
 
-#kszyouhgup .gt_subtitle {
+#iihivsagwk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1367,13 +1367,13 @@ td {vertical-align: top;}
   border-top-width: 0;
 }
 
-#kszyouhgup .gt_bottom_border {
+#iihivsagwk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kszyouhgup .gt_col_headings {
+#iihivsagwk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1388,7 +1388,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#kszyouhgup .gt_col_heading {
+#iihivsagwk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1408,7 +1408,7 @@ td {vertical-align: top;}
   overflow-x: hidden;
 }
 
-#kszyouhgup .gt_column_spanner_outer {
+#iihivsagwk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1420,15 +1420,15 @@ td {vertical-align: top;}
   padding-right: 4px;
 }
 
-#kszyouhgup .gt_column_spanner_outer:first-child {
+#iihivsagwk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kszyouhgup .gt_column_spanner_outer:last-child {
+#iihivsagwk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kszyouhgup .gt_column_spanner {
+#iihivsagwk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1440,7 +1440,7 @@ td {vertical-align: top;}
   width: 100%;
 }
 
-#kszyouhgup .gt_group_heading {
+#iihivsagwk .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1462,7 +1462,7 @@ td {vertical-align: top;}
   vertical-align: middle;
 }
 
-#kszyouhgup .gt_empty_group_heading {
+#iihivsagwk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1477,15 +1477,15 @@ td {vertical-align: top;}
   vertical-align: middle;
 }
 
-#kszyouhgup .gt_from_md > :first-child {
+#iihivsagwk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kszyouhgup .gt_from_md > :last-child {
+#iihivsagwk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kszyouhgup .gt_row {
+#iihivsagwk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1504,7 +1504,7 @@ td {vertical-align: top;}
   overflow-x: hidden;
 }
 
-#kszyouhgup .gt_stub {
+#iihivsagwk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1516,7 +1516,7 @@ td {vertical-align: top;}
   padding-left: 12px;
 }
 
-#kszyouhgup .gt_summary_row {
+#iihivsagwk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1526,7 +1526,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#kszyouhgup .gt_first_summary_row {
+#iihivsagwk .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1536,7 +1536,7 @@ td {vertical-align: top;}
   border-top-color: #D3D3D3;
 }
 
-#kszyouhgup .gt_grand_summary_row {
+#iihivsagwk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1546,7 +1546,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#kszyouhgup .gt_first_grand_summary_row {
+#iihivsagwk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1556,11 +1556,11 @@ td {vertical-align: top;}
   border-top-color: #D3D3D3;
 }
 
-#kszyouhgup .gt_striped {
+#iihivsagwk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kszyouhgup .gt_table_body {
+#iihivsagwk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1569,7 +1569,7 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#kszyouhgup .gt_footnotes {
+#iihivsagwk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1583,13 +1583,13 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#kszyouhgup .gt_footnote {
+#iihivsagwk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#kszyouhgup .gt_sourcenotes {
+#iihivsagwk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1603,41 +1603,41 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#kszyouhgup .gt_sourcenote {
+#iihivsagwk .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#kszyouhgup .gt_left {
+#iihivsagwk .gt_left {
   text-align: left;
 }
 
-#kszyouhgup .gt_center {
+#iihivsagwk .gt_center {
   text-align: center;
 }
 
-#kszyouhgup .gt_right {
+#iihivsagwk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kszyouhgup .gt_font_normal {
+#iihivsagwk .gt_font_normal {
   font-weight: normal;
 }
 
-#kszyouhgup .gt_font_bold {
+#iihivsagwk .gt_font_bold {
   font-weight: bold;
 }
 
-#kszyouhgup .gt_font_italic {
+#iihivsagwk .gt_font_italic {
   font-style: italic;
 }
 
-#kszyouhgup .gt_super {
+#iihivsagwk .gt_super {
   font-size: 65%;
 }
 
-#kszyouhgup .gt_footnote_marks {
+#iihivsagwk .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -1748,7 +1748,7 @@ td {vertical-align: top;}
 <p><code><a href="https://amices.org/mice/reference/mira-class.html">mice::mira</a></code></p>
 </div></td>
 <td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
-<p>Limited support. If <code>mod</code> is a <code>mira</code> object, use <code><a href="../reference/tidy_plus_plus.html">tidy_plus_plus(mod, tidy_fun = function(x, ...) mice::pool(x) %&gt;% mice::tidy(...))</a></code></p>
+<p>Limited support. If <code>mod</code> is a <code>mira</code> object, use <code>tidy_plus_plus(mod, tidy_fun = function(x, ...) mice::pool(x) %&gt;% mice::tidy(...))</code></p>
 </div></td>
 </tr>
 <tr>

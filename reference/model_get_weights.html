@@ -162,63 +162,69 @@
 <code><a href='model_list_variables.html'>model_list_variables</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Sepal.Width</span>, <span class='va'>iris</span><span class='op'>)</span>
-<span class='va'>mod</span> <span class='op'>%&gt;%</span> <span class='fu'>model_get_weights</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;   [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-#&gt;  [38] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-#&gt;  [75] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-#&gt; [112] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-#&gt; [149] 1 1</div><div class='input'>
-<span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>hp</span> <span class='op'>~</span> <span class='va'>mpg</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>cyl</span><span class='op'>)</span> <span class='op'>+</span> <span class='va'>disp</span><span class='op'>:</span><span class='va'>hp</span>, <span class='va'>mtcars</span>, weights <span class='op'>=</span> <span class='va'>mtcars</span><span class='op'>$</span><span class='va'>gear</span><span class='op'>)</span>
-<span class='va'>mod</span> <span class='op'>%&gt;%</span> <span class='fu'>model_get_weights</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] 4 4 4 3 3 3 3 4 4 4 4 3 3 3 3 3 3 4 4 4 3 3 3 3 3 4 5 5 5 5 5 4</div><div class='input'>
-<span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span>
-  <span class='va'>response</span> <span class='op'>~</span> <span class='va'>stage</span> <span class='op'>*</span> <span class='va'>grade</span> <span class='op'>+</span> <span class='va'>trt</span>,
-  <span class='fu'>gtsummary</span><span class='fu'>::</span><span class='va'><a href='http://www.danieldsjoberg.com/gtsummary//reference/trial.html'>trial</a></span>,
-  family <span class='op'>=</span> <span class='va'>binomial</span>
-<span class='op'>)</span>
-<span class='va'>mod</span> <span class='op'>%&gt;%</span> <span class='fu'>model_get_weights</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20 
-#&gt;   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 
-#&gt;  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35  37  38  39  40  41 
-#&gt;   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 
-#&gt;  42  43  44  45  46  47  48  49  50  51  52  53  54  55  56  57  58  59  60  61 
-#&gt;   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 
-#&gt;  62  63  64  66  67  68  69  70  71  72  73  74  75  76  77  78  79  80  81  82 
-#&gt;   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 
-#&gt;  83  84  85  86  87  88  89  90  91  92  93  94  95  96  97  98  99 100 101 102 
-#&gt;   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 
-#&gt; 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 
-#&gt;   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 
-#&gt; 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 140 141 142 143 144 
-#&gt;   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 
-#&gt; 145 146 147 148 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 
-#&gt;   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 
-#&gt; 166 167 168 169 170 171 172 173 174 175 176 177 178 180 181 182 183 184 185 186 
-#&gt;   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 
-#&gt; 187 188 189 190 191 192 193 194 196 197 198 199 200 
-#&gt;   1   1   1   1   1   1   1   1   1   1   1   1   1 </div><div class='input'>
-<span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span>
-  <span class='va'>Survived</span> <span class='op'>~</span> <span class='va'>Class</span> <span class='op'>*</span> <span class='va'>Age</span> <span class='op'>+</span> <span class='va'>Sex</span>,
-  data <span class='op'>=</span> <span class='va'>Titanic</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='op'>)</span>,
-  weights <span class='op'>=</span> <span class='va'>Freq</span>,
-  family <span class='op'>=</span> <span class='va'>binomial</span>
-<span class='op'>)</span>
-<span class='va'>mod</span> <span class='op'>%&gt;%</span> <span class='fu'>model_get_weights</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20 
-#&gt;   0   0  35   0   0   0  17   0 118 154 387 670   4  13  89   3   5  11  13   0 
-#&gt;  21  22  23  24  25  26  27  28  29  30  31  32 
-#&gt;   1  13  14   0  57  14  75 192 140  80  76  20 </div><div class='input'>
-<span class='va'>d</span> <span class='op'>&lt;-</span> <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble</a></span><span class='op'>(</span><span class='va'>Titanic</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>Class</span>, <span class='va'>Sex</span>, <span class='va'>Age</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarise</a></span><span class='op'>(</span>
-    n_survived <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>n</span> <span class='op'>*</span> <span class='op'>(</span><span class='va'>Survived</span> <span class='op'>==</span> <span class='st'>"Yes"</span><span class='op'>)</span><span class='op'>)</span>,
-    n_dead <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>n</span> <span class='op'>*</span> <span class='op'>(</span><span class='va'>Survived</span> <span class='op'>==</span> <span class='st'>"No"</span><span class='op'>)</span><span class='op'>)</span>
-  <span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>`summarise()` has grouped output by 'Class', 'Sex'. You can override using the `.groups` argument.</span></div><div class='input'><span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>n_survived</span>, <span class='va'>n_dead</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>Class</span> <span class='op'>*</span> <span class='va'>Age</span> <span class='op'>+</span> <span class='va'>Sex</span>, data <span class='op'>=</span> <span class='va'>d</span>, family <span class='op'>=</span> <span class='va'>binomial</span><span class='op'>)</span>
-<span class='va'>mod</span> <span class='op'>%&gt;%</span> <span class='fu'>model_get_weights</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16 
-#&gt; 144   1 175   5  93  13 168  11 165  31 462  48  23   0 862   0 </div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Sepal.Width</span>, <span class='va'>iris</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>mod</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'>model_get_weights</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [38] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [75] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [112] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [149] 1 1</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>hp</span> <span class='op'>~</span> <span class='va'>mpg</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>cyl</span><span class='op'>)</span> <span class='op'>+</span> <span class='va'>disp</span><span class='op'>:</span><span class='va'>hp</span>, <span class='va'>mtcars</span>, weights <span class='op'>=</span> <span class='va'>mtcars</span><span class='op'>$</span><span class='va'>gear</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>mod</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'>model_get_weights</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] 4 4 4 3 3 3 3 4 4 4 4 3 3 3 3 3 3 4 4 4 3 3 3 3 3 4 5 5 5 5 5 4</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span></span>
+<span class='r-in'>  <span class='va'>response</span> <span class='op'>~</span> <span class='va'>stage</span> <span class='op'>*</span> <span class='va'>grade</span> <span class='op'>+</span> <span class='va'>trt</span>,</span>
+<span class='r-in'>  <span class='fu'>gtsummary</span><span class='fu'>::</span><span class='va'><a href='http://www.danieldsjoberg.com/gtsummary//reference/trial.html'>trial</a></span>,</span>
+<span class='r-in'>  family <span class='op'>=</span> <span class='va'>binomial</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>mod</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'>model_get_weights</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35  37  38  39  40  41 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  42  43  44  45  46  47  48  49  50  51  52  53  54  55  56  57  58  59  60  61 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  62  63  64  66  67  68  69  70  71  72  73  74  75  76  77  78  79  80  81  82 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  83  84  85  86  87  88  89  90  91  92  93  94  95  96  97  98  99 100 101 102 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 140 141 142 143 144 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 145 146 147 148 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 166 167 168 169 170 171 172 173 174 175 176 177 178 180 181 182 183 184 185 186 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 187 188 189 190 191 192 193 194 196 197 198 199 200 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   1   1   1   1   1   1   1   1   1   1   1   1   1 </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span></span>
+<span class='r-in'>  <span class='va'>Survived</span> <span class='op'>~</span> <span class='va'>Class</span> <span class='op'>*</span> <span class='va'>Age</span> <span class='op'>+</span> <span class='va'>Sex</span>,</span>
+<span class='r-in'>  data <span class='op'>=</span> <span class='va'>Titanic</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='op'>)</span>,</span>
+<span class='r-in'>  weights <span class='op'>=</span> <span class='va'>Freq</span>,</span>
+<span class='r-in'>  family <span class='op'>=</span> <span class='va'>binomial</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>mod</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'>model_get_weights</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   0   0  35   0   0   0  17   0 118 154 387 670   4  13  89   3   5  11  13   0 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  21  22  23  24  25  26  27  28  29  30  31  32 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   1  13  14   0  57  14  75 192 140  80  76  20 </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>d</span> <span class='op'>&lt;-</span> <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble</a></span><span class='op'>(</span><span class='va'>Titanic</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>Class</span>, <span class='va'>Sex</span>, <span class='va'>Age</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarise</a></span><span class='op'>(</span></span>
+<span class='r-in'>    n_survived <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>n</span> <span class='op'>*</span> <span class='op'>(</span><span class='va'>Survived</span> <span class='op'>==</span> <span class='st'>"Yes"</span><span class='op'>)</span><span class='op'>)</span>,</span>
+<span class='r-in'>    n_dead <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>n</span> <span class='op'>*</span> <span class='op'>(</span><span class='va'>Survived</span> <span class='op'>==</span> <span class='st'>"No"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'>  <span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> `summarise()` has grouped output by 'Class', 'Sex'. You can override using the `.groups` argument.</span>
+<span class='r-in'><span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>n_survived</span>, <span class='va'>n_dead</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>Class</span> <span class='op'>*</span> <span class='va'>Age</span> <span class='op'>+</span> <span class='va'>Sex</span>, data <span class='op'>=</span> <span class='va'>d</span>, family <span class='op'>=</span> <span class='va'>binomial</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>mod</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'>model_get_weights</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 144   1 175   5  93  13 168  11 165  31 462  48  23   0 862   0 </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

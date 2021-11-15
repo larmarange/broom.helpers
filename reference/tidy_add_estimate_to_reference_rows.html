@@ -190,67 +190,69 @@ to the difference of each level with the grand mean.</p>
 <code><a href='tidy_select_variables.html'>tidy_select_variables</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>df</span> <span class='op'>&lt;-</span> <span class='va'>Titanic</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span><span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/across.html'>across</a></span><span class='op'>(</span><span class='fu'>where</span><span class='op'>(</span><span class='va'>is.character</span><span class='op'>)</span>, <span class='va'>factor</span><span class='op'>)</span><span class='op'>)</span>
-
-<span class='va'>df</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span>
-    <span class='va'>Survived</span> <span class='op'>~</span> <span class='va'>Class</span> <span class='op'>+</span> <span class='va'>Age</span> <span class='op'>+</span> <span class='va'>Sex</span>,
-    data <span class='op'>=</span> <span class='va'>.</span>, weights <span class='op'>=</span> <span class='va'>.</span><span class='op'>$</span><span class='va'>n</span>, family <span class='op'>=</span> <span class='va'>binomial</span>,
-    contrasts <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>Age <span class='op'>=</span> <span class='va'>contr.sum</span>, Class <span class='op'>=</span> <span class='st'>"contr.SAS"</span><span class='op'>)</span>
-  <span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='tidy_attach_model.html'>tidy_and_attach</a></span><span class='op'>(</span>exponentiate <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='tidy_add_reference_rows.html'>tidy_add_reference_rows</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>tidy_add_estimate_to_reference_rows</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 9 × 14</span>
-#&gt;   term        variable  var_class var_type var_nlevels contrasts  contrasts_type
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>         
-#&gt; <span style='color: #BCBCBC;'>1</span> (Intercept) (Interce… <span style='color: #BB0000;'>NA</span>        interce…          <span style='color: #BB0000;'>NA</span> <span style='color: #BB0000;'>NA</span>         <span style='color: #BB0000;'>NA</span>            
-#&gt; <span style='color: #BCBCBC;'>2</span> Class1st    Class     factor    categor…           4 contr.SAS  treatment     
-#&gt; <span style='color: #BCBCBC;'>3</span> Class2nd    Class     factor    categor…           4 contr.SAS  treatment     
-#&gt; <span style='color: #BCBCBC;'>4</span> Class3rd    Class     factor    categor…           4 contr.SAS  treatment     
-#&gt; <span style='color: #BCBCBC;'>5</span> ClassCrew   Class     factor    categor…           4 contr.SAS  treatment     
-#&gt; <span style='color: #BCBCBC;'>6</span> Age1        Age       factor    dichoto…           2 contr.sum  sum           
-#&gt; <span style='color: #BCBCBC;'>7</span> Age2        Age       factor    dichoto…           2 contr.sum  sum           
-#&gt; <span style='color: #BCBCBC;'>8</span> SexFemale   Sex       factor    dichoto…           2 contr.tre… treatment     
-#&gt; <span style='color: #BCBCBC;'>9</span> SexMale     Sex       factor    dichoto…           2 contr.tre… treatment     
-#&gt; <span style='color: #949494;'># … with 7 more variables: reference_row &lt;lgl&gt;, estimate &lt;dbl&gt;,</span>
-#&gt; <span style='color: #949494;'>#   std.error &lt;dbl&gt;, statistic &lt;dbl&gt;, p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;,</span>
-#&gt; <span style='color: #949494;'>#   conf.high &lt;dbl&gt;</span></div><div class='input'>
-<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"gtsummary"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span>
-    <span class='va'>response</span> <span class='op'>~</span> <span class='va'>stage</span> <span class='op'>+</span> <span class='va'>grade</span> <span class='op'>*</span> <span class='va'>trt</span>,
-    <span class='fu'>gtsummary</span><span class='fu'>::</span><span class='va'><a href='http://www.danieldsjoberg.com/gtsummary//reference/trial.html'>trial</a></span>,
-    family <span class='op'>=</span> <span class='va'>binomial</span>,
-    contrasts <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
-      stage <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/contrast.html'>contr.treatment</a></span><span class='op'>(</span><span class='fl'>4</span>, base <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>,
-      grade <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/contrast.html'>contr.treatment</a></span><span class='op'>(</span><span class='fl'>3</span>, base <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>,
-      trt <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/contrast.html'>contr.treatment</a></span><span class='op'>(</span><span class='fl'>2</span>, base <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
-    <span class='op'>)</span>
-  <span class='op'>)</span> <span class='op'>%&gt;%</span>
-    <span class='fu'><a href='tidy_attach_model.html'>tidy_and_attach</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-    <span class='fu'><a href='tidy_add_reference_rows.html'>tidy_add_reference_rows</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-    <span class='fu'>tidy_add_estimate_to_reference_rows</span><span class='op'>(</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 12 × 14</span>
-#&gt;    term        variable  var_class var_type var_nlevels contrasts contrasts_type
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>         
-#&gt; <span style='color: #BCBCBC;'> 1</span> (Intercept) (Interce… <span style='color: #BB0000;'>NA</span>        interce…          <span style='color: #BB0000;'>NA</span> <span style='color: #BB0000;'>NA</span>        <span style='color: #BB0000;'>NA</span>            
-#&gt; <span style='color: #BCBCBC;'> 2</span> stage1      stage     factor    categor…           4 contr.tr… treatment     
-#&gt; <span style='color: #BCBCBC;'> 3</span> stage2      stage     factor    categor…           4 contr.tr… treatment     
-#&gt; <span style='color: #BCBCBC;'> 4</span> stage3      stage     factor    categor…           4 contr.tr… treatment     
-#&gt; <span style='color: #BCBCBC;'> 5</span> stage4      stage     factor    categor…           4 contr.tr… treatment     
-#&gt; <span style='color: #BCBCBC;'> 6</span> grade1      grade     factor    categor…           3 contr.tr… treatment     
-#&gt; <span style='color: #BCBCBC;'> 7</span> grade2      grade     factor    categor…           3 contr.tr… treatment     
-#&gt; <span style='color: #BCBCBC;'> 8</span> grade3      grade     factor    categor…           3 contr.tr… treatment     
-#&gt; <span style='color: #BCBCBC;'> 9</span> trt1        trt       character dichoto…           2 contr.SAS treatment     
-#&gt; <span style='color: #BCBCBC;'>10</span> trt2        trt       character dichoto…           2 contr.SAS treatment     
-#&gt; <span style='color: #BCBCBC;'>11</span> grade1:trt1 grade:trt <span style='color: #BB0000;'>NA</span>        interac…          <span style='color: #BB0000;'>NA</span> <span style='color: #BB0000;'>NA</span>        <span style='color: #BB0000;'>NA</span>            
-#&gt; <span style='color: #BCBCBC;'>12</span> grade3:trt1 grade:trt <span style='color: #BB0000;'>NA</span>        interac…          <span style='color: #BB0000;'>NA</span> <span style='color: #BB0000;'>NA</span>        <span style='color: #BB0000;'>NA</span>            
-#&gt; <span style='color: #949494;'># … with 7 more variables: reference_row &lt;lgl&gt;, estimate &lt;dbl&gt;,</span>
-#&gt; <span style='color: #949494;'>#   std.error &lt;dbl&gt;, statistic &lt;dbl&gt;, p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;,</span>
-#&gt; <span style='color: #949494;'>#   conf.high &lt;dbl&gt;</span></div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>df</span> <span class='op'>&lt;-</span> <span class='va'>Titanic</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span><span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/across.html'>across</a></span><span class='op'>(</span><span class='fu'>where</span><span class='op'>(</span><span class='va'>is.character</span><span class='op'>)</span>, <span class='va'>factor</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>df</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span></span>
+<span class='r-in'>    <span class='va'>Survived</span> <span class='op'>~</span> <span class='va'>Class</span> <span class='op'>+</span> <span class='va'>Age</span> <span class='op'>+</span> <span class='va'>Sex</span>,</span>
+<span class='r-in'>    data <span class='op'>=</span> <span class='va'>.</span>, weights <span class='op'>=</span> <span class='va'>.</span><span class='op'>$</span><span class='va'>n</span>, family <span class='op'>=</span> <span class='va'>binomial</span>,</span>
+<span class='r-in'>    contrasts <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>Age <span class='op'>=</span> <span class='va'>contr.sum</span>, Class <span class='op'>=</span> <span class='st'>"contr.SAS"</span><span class='op'>)</span></span>
+<span class='r-in'>  <span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'><a href='tidy_attach_model.html'>tidy_and_attach</a></span><span class='op'>(</span>exponentiate <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'><a href='tidy_add_reference_rows.html'>tidy_add_reference_rows</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'>tidy_add_estimate_to_reference_rows</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 9 × 14</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   term        variable  var_class var_type var_nlevels contrasts  contrasts_type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>         </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> (Intercept) (Interce… <span style='color: #BB0000;'>NA</span>        interce…          <span style='color: #BB0000;'>NA</span> <span style='color: #BB0000;'>NA</span>         <span style='color: #BB0000;'>NA</span>            </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> Class1st    Class     factor    categor…           4 contr.SAS  treatment     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> Class2nd    Class     factor    categor…           4 contr.SAS  treatment     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> Class3rd    Class     factor    categor…           4 contr.SAS  treatment     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span> ClassCrew   Class     factor    categor…           4 contr.SAS  treatment     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>6</span> Age1        Age       factor    dichoto…           2 contr.sum  sum           </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>7</span> Age2        Age       factor    dichoto…           2 contr.sum  sum           </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>8</span> SexFemale   Sex       factor    dichoto…           2 contr.tre… treatment     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>9</span> SexMale     Sex       factor    dichoto…           2 contr.tre… treatment     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 7 more variables: reference_row &lt;lgl&gt;, estimate &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   std.error &lt;dbl&gt;, statistic &lt;dbl&gt;, p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   conf.high &lt;dbl&gt;</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"gtsummary"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>  <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span></span>
+<span class='r-in'>    <span class='va'>response</span> <span class='op'>~</span> <span class='va'>stage</span> <span class='op'>+</span> <span class='va'>grade</span> <span class='op'>*</span> <span class='va'>trt</span>,</span>
+<span class='r-in'>    <span class='fu'>gtsummary</span><span class='fu'>::</span><span class='va'><a href='http://www.danieldsjoberg.com/gtsummary//reference/trial.html'>trial</a></span>,</span>
+<span class='r-in'>    family <span class='op'>=</span> <span class='va'>binomial</span>,</span>
+<span class='r-in'>    contrasts <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span></span>
+<span class='r-in'>      stage <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/contrast.html'>contr.treatment</a></span><span class='op'>(</span><span class='fl'>4</span>, base <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>,</span>
+<span class='r-in'>      grade <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/contrast.html'>contr.treatment</a></span><span class='op'>(</span><span class='fl'>3</span>, base <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>,</span>
+<span class='r-in'>      trt <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/contrast.html'>contr.treatment</a></span><span class='op'>(</span><span class='fl'>2</span>, base <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span>
+<span class='r-in'>    <span class='op'>)</span></span>
+<span class='r-in'>  <span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>    <span class='fu'><a href='tidy_attach_model.html'>tidy_and_attach</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>    <span class='fu'><a href='tidy_add_reference_rows.html'>tidy_add_reference_rows</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>    <span class='fu'>tidy_add_estimate_to_reference_rows</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 12 × 14</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    term        variable  var_class var_type var_nlevels contrasts contrasts_type</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>         </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span> (Intercept) (Interce… <span style='color: #BB0000;'>NA</span>        interce…          <span style='color: #BB0000;'>NA</span> <span style='color: #BB0000;'>NA</span>        <span style='color: #BB0000;'>NA</span>            </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span> stage1      stage     factor    categor…           4 contr.tr… treatment     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span> stage2      stage     factor    categor…           4 contr.tr… treatment     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span> stage3      stage     factor    categor…           4 contr.tr… treatment     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span> stage4      stage     factor    categor…           4 contr.tr… treatment     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span> grade1      grade     factor    categor…           3 contr.tr… treatment     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span> grade2      grade     factor    categor…           3 contr.tr… treatment     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> grade3      grade     factor    categor…           3 contr.tr… treatment     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> trt1        trt       character dichoto…           2 contr.SAS treatment     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> trt2        trt       character dichoto…           2 contr.SAS treatment     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>11</span> grade1:trt1 grade:trt <span style='color: #BB0000;'>NA</span>        interac…          <span style='color: #BB0000;'>NA</span> <span style='color: #BB0000;'>NA</span>        <span style='color: #BB0000;'>NA</span>            </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>12</span> grade3:trt1 grade:trt <span style='color: #BB0000;'>NA</span>        interac…          <span style='color: #BB0000;'>NA</span> <span style='color: #BB0000;'>NA</span>        <span style='color: #BB0000;'>NA</span>            </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 7 more variables: reference_row &lt;lgl&gt;, estimate &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   std.error &lt;dbl&gt;, statistic &lt;dbl&gt;, p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   conf.high &lt;dbl&gt;</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

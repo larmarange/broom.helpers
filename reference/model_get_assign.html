@@ -165,49 +165,50 @@ stats::model.matrix()." />
 <code><a href='model_list_variables.html'>model_list_variables</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>hp</span> <span class='op'>~</span> <span class='va'>mpg</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>cyl</span><span class='op'>)</span>, <span class='va'>mtcars</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>model_get_assign</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 0 1 2 2
-#&gt; attr(,"model_matrix")
-#&gt;                     (Intercept)  mpg factor(cyl)6 factor(cyl)8
-#&gt; Mazda RX4                     1 21.0            1            0
-#&gt; Mazda RX4 Wag                 1 21.0            1            0
-#&gt; Datsun 710                    1 22.8            0            0
-#&gt; Hornet 4 Drive                1 21.4            1            0
-#&gt; Hornet Sportabout             1 18.7            0            1
-#&gt; Valiant                       1 18.1            1            0
-#&gt; Duster 360                    1 14.3            0            1
-#&gt; Merc 240D                     1 24.4            0            0
-#&gt; Merc 230                      1 22.8            0            0
-#&gt; Merc 280                      1 19.2            1            0
-#&gt; Merc 280C                     1 17.8            1            0
-#&gt; Merc 450SE                    1 16.4            0            1
-#&gt; Merc 450SL                    1 17.3            0            1
-#&gt; Merc 450SLC                   1 15.2            0            1
-#&gt; Cadillac Fleetwood            1 10.4            0            1
-#&gt; Lincoln Continental           1 10.4            0            1
-#&gt; Chrysler Imperial             1 14.7            0            1
-#&gt; Fiat 128                      1 32.4            0            0
-#&gt; Honda Civic                   1 30.4            0            0
-#&gt; Toyota Corolla                1 33.9            0            0
-#&gt; Toyota Corona                 1 21.5            0            0
-#&gt; Dodge Challenger              1 15.5            0            1
-#&gt; AMC Javelin                   1 15.2            0            1
-#&gt; Camaro Z28                    1 13.3            0            1
-#&gt; Pontiac Firebird              1 19.2            0            1
-#&gt; Fiat X1-9                     1 27.3            0            0
-#&gt; Porsche 914-2                 1 26.0            0            0
-#&gt; Lotus Europa                  1 30.4            0            0
-#&gt; Ford Pantera L                1 15.8            0            1
-#&gt; Ferrari Dino                  1 19.7            1            0
-#&gt; Maserati Bora                 1 15.0            0            1
-#&gt; Volvo 142E                    1 21.4            0            0
-#&gt; attr(,"model_matrix")attr(,"assign")
-#&gt; [1] 0 1 2 2
-#&gt; attr(,"model_matrix")attr(,"contrasts")
-#&gt; attr(,"model_matrix")attr(,"contrasts")$`factor(cyl)`
-#&gt; [1] "contr.treatment"
-#&gt; </div></pre>
+    <pre class="examples"><span class='r-in'><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>hp</span> <span class='op'>~</span> <span class='va'>mpg</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>cyl</span><span class='op'>)</span>, <span class='va'>mtcars</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'>model_get_assign</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0 1 2 2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> attr(,"model_matrix")</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                     (Intercept)  mpg factor(cyl)6 factor(cyl)8</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Mazda RX4                     1 21.0            1            0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Mazda RX4 Wag                 1 21.0            1            0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Datsun 710                    1 22.8            0            0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Hornet 4 Drive                1 21.4            1            0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Hornet Sportabout             1 18.7            0            1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Valiant                       1 18.1            1            0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Duster 360                    1 14.3            0            1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Merc 240D                     1 24.4            0            0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Merc 230                      1 22.8            0            0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Merc 280                      1 19.2            1            0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Merc 280C                     1 17.8            1            0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Merc 450SE                    1 16.4            0            1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Merc 450SL                    1 17.3            0            1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Merc 450SLC                   1 15.2            0            1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Cadillac Fleetwood            1 10.4            0            1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Lincoln Continental           1 10.4            0            1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chrysler Imperial             1 14.7            0            1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Fiat 128                      1 32.4            0            0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Honda Civic                   1 30.4            0            0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Toyota Corolla                1 33.9            0            0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Toyota Corona                 1 21.5            0            0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Dodge Challenger              1 15.5            0            1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> AMC Javelin                   1 15.2            0            1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Camaro Z28                    1 13.3            0            1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Pontiac Firebird              1 19.2            0            1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Fiat X1-9                     1 27.3            0            0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Porsche 914-2                 1 26.0            0            0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Lotus Europa                  1 30.4            0            0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Ford Pantera L                1 15.8            0            1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Ferrari Dino                  1 19.7            1            0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Maserati Bora                 1 15.0            0            1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Volvo 142E                    1 21.4            0            0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> attr(,"model_matrix")attr(,"assign")</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0 1 2 2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> attr(,"model_matrix")attr(,"contrasts")</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> attr(,"model_matrix")attr(,"contrasts")$`factor(cyl)`</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "contr.treatment"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

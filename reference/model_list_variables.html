@@ -183,54 +183,57 @@ with the label attribute (cf. <code><a href='http://larmarange.github.io/labelle
 <code><a href='model_list_terms_levels.html'>model_list_terms_levels</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>Titanic</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>Survived <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>Survived</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"No"</span>, <span class='st'>"Yes"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span>
-    <span class='va'>Survived</span> <span class='op'>~</span> <span class='va'>Class</span> <span class='op'>+</span> <span class='va'>Age</span> <span class='op'>:</span> <span class='va'>Sex</span>,
-    data <span class='op'>=</span> <span class='va'>.</span>, weights <span class='op'>=</span> <span class='va'>.</span><span class='op'>$</span><span class='va'>n</span>,
-    family <span class='op'>=</span> <span class='va'>binomial</span>
-  <span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>model_list_variables</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 6 × 4</span>
-#&gt;   variable  var_class label_attr var_label
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    
-#&gt; <span style='color: #BCBCBC;'>1</span> Survived  factor    <span style='color: #BB0000;'>NA</span>         Survived 
-#&gt; <span style='color: #BCBCBC;'>2</span> Class     character <span style='color: #BB0000;'>NA</span>         Class    
-#&gt; <span style='color: #BCBCBC;'>3</span> Age       character <span style='color: #BB0000;'>NA</span>         Age      
-#&gt; <span style='color: #BCBCBC;'>4</span> Sex       character <span style='color: #BB0000;'>NA</span>         Sex      
-#&gt; <span style='color: #BCBCBC;'>5</span> (weights) numeric   <span style='color: #BB0000;'>NA</span>         (weights)
-#&gt; <span style='color: #BCBCBC;'>6</span> Age:Sex   <span style='color: #BB0000;'>NA</span>        <span style='color: #BB0000;'>NA</span>         Age:Sex  </div><div class='input'>
-<span class='va'>iris</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span>
-    <span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/stats/poly.html'>poly</a></span><span class='op'>(</span><span class='va'>Sepal.Width</span>, <span class='fl'>2</span><span class='op'>)</span> <span class='op'>+</span> <span class='va'>Species</span>,
-    data <span class='op'>=</span> <span class='va'>.</span>,
-    contrasts <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>Species <span class='op'>=</span> <span class='va'>contr.sum</span><span class='op'>)</span>
-  <span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>model_list_variables</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 3 × 4</span>
-#&gt;   variable     var_class label_attr var_label   
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       
-#&gt; <span style='color: #BCBCBC;'>1</span> Sepal.Length numeric   <span style='color: #BB0000;'>NA</span>         Sepal.Length
-#&gt; <span style='color: #BCBCBC;'>2</span> Sepal.Width  nmatrix.2 <span style='color: #BB0000;'>NA</span>         Sepal.Width 
-#&gt; <span style='color: #BCBCBC;'>3</span> Species      factor    <span style='color: #BB0000;'>NA</span>         Species     </div><div class='input'>
-<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"gtsummary"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span>
-    <span class='va'>response</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/stats/poly.html'>poly</a></span><span class='op'>(</span><span class='va'>age</span>, <span class='fl'>3</span><span class='op'>)</span> <span class='op'>+</span> <span class='va'>stage</span> <span class='op'>+</span> <span class='va'>grade</span> <span class='op'>*</span> <span class='va'>trt</span>,
-    <span class='fu'><a href='https://rdrr.io/r/stats/na.fail.html'>na.omit</a></span><span class='op'>(</span><span class='fu'>gtsummary</span><span class='fu'>::</span><span class='va'><a href='http://www.danieldsjoberg.com/gtsummary//reference/trial.html'>trial</a></span><span class='op'>)</span>,
-    family <span class='op'>=</span> <span class='va'>binomial</span>,
-  <span class='op'>)</span> <span class='op'>%&gt;%</span>
-    <span class='fu'>model_list_variables</span><span class='op'>(</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 6 × 4</span>
-#&gt;   variable  var_class label_attr             var_label             
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                  <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                 
-#&gt; <span style='color: #BCBCBC;'>1</span> response  integer   Tumor Response         Tumor Response        
-#&gt; <span style='color: #BCBCBC;'>2</span> age       nmatrix.3 <span style='color: #BB0000;'>NA</span>                     age                   
-#&gt; <span style='color: #BCBCBC;'>3</span> stage     factor    T Stage                T Stage               
-#&gt; <span style='color: #BCBCBC;'>4</span> grade     factor    Grade                  Grade                 
-#&gt; <span style='color: #BCBCBC;'>5</span> trt       character Chemotherapy Treatment Chemotherapy Treatment
-#&gt; <span style='color: #BCBCBC;'>6</span> grade:trt <span style='color: #BB0000;'>NA</span>        <span style='color: #BB0000;'>NA</span>                     grade:trt             </div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>Titanic</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>Survived <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>Survived</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"No"</span>, <span class='st'>"Yes"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span></span>
+<span class='r-in'>    <span class='va'>Survived</span> <span class='op'>~</span> <span class='va'>Class</span> <span class='op'>+</span> <span class='va'>Age</span> <span class='op'>:</span> <span class='va'>Sex</span>,</span>
+<span class='r-in'>    data <span class='op'>=</span> <span class='va'>.</span>, weights <span class='op'>=</span> <span class='va'>.</span><span class='op'>$</span><span class='va'>n</span>,</span>
+<span class='r-in'>    family <span class='op'>=</span> <span class='va'>binomial</span></span>
+<span class='r-in'>  <span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'>model_list_variables</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 6 × 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   variable  var_class label_attr var_label</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> Survived  factor    <span style='color: #BB0000;'>NA</span>         Survived </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> Class     character <span style='color: #BB0000;'>NA</span>         Class    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> Age       character <span style='color: #BB0000;'>NA</span>         Age      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> Sex       character <span style='color: #BB0000;'>NA</span>         Sex      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span> (weights) numeric   <span style='color: #BB0000;'>NA</span>         (weights)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>6</span> Age:Sex   <span style='color: #BB0000;'>NA</span>        <span style='color: #BB0000;'>NA</span>         Age:Sex  </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>iris</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span></span>
+<span class='r-in'>    <span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/stats/poly.html'>poly</a></span><span class='op'>(</span><span class='va'>Sepal.Width</span>, <span class='fl'>2</span><span class='op'>)</span> <span class='op'>+</span> <span class='va'>Species</span>,</span>
+<span class='r-in'>    data <span class='op'>=</span> <span class='va'>.</span>,</span>
+<span class='r-in'>    contrasts <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>Species <span class='op'>=</span> <span class='va'>contr.sum</span><span class='op'>)</span></span>
+<span class='r-in'>  <span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'>model_list_variables</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 3 × 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   variable     var_class label_attr var_label   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> Sepal.Length numeric   <span style='color: #BB0000;'>NA</span>         Sepal.Length</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> Sepal.Width  nmatrix.2 <span style='color: #BB0000;'>NA</span>         Sepal.Width </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> Species      factor    <span style='color: #BB0000;'>NA</span>         Species     </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"gtsummary"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>  <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span></span>
+<span class='r-in'>    <span class='va'>response</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/stats/poly.html'>poly</a></span><span class='op'>(</span><span class='va'>age</span>, <span class='fl'>3</span><span class='op'>)</span> <span class='op'>+</span> <span class='va'>stage</span> <span class='op'>+</span> <span class='va'>grade</span> <span class='op'>*</span> <span class='va'>trt</span>,</span>
+<span class='r-in'>    <span class='fu'><a href='https://rdrr.io/r/stats/na.fail.html'>na.omit</a></span><span class='op'>(</span><span class='fu'>gtsummary</span><span class='fu'>::</span><span class='va'><a href='http://www.danieldsjoberg.com/gtsummary//reference/trial.html'>trial</a></span><span class='op'>)</span>,</span>
+<span class='r-in'>    family <span class='op'>=</span> <span class='va'>binomial</span>,</span>
+<span class='r-in'>  <span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>    <span class='fu'>model_list_variables</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 6 × 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   variable  var_class label_attr             var_label             </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                  <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> response  integer   Tumor Response         Tumor Response        </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> age       nmatrix.3 <span style='color: #BB0000;'>NA</span>                     age                   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> stage     factor    T Stage                T Stage               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> grade     factor    Grade                  Grade                 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span> trt       character Chemotherapy Treatment Chemotherapy Treatment</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>6</span> grade:trt <span style='color: #BB0000;'>NA</span>        <span style='color: #BB0000;'>NA</span>                     grade:trt             </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

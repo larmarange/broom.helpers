@@ -195,25 +195,27 @@ but a bad idea if there is no log or logit link; defaults to <code>FALSE</code><
 <code><a href='tidy_select_variables.html'>tidy_select_variables</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Sepal.Width</span> <span class='op'>+</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span>
-<span class='va'>tt</span> <span class='op'>&lt;-</span> <span class='va'>mod</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>tidy_and_attach</span><span class='op'>(</span>conf.int <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='va'>tt</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4 × 7</span>
-#&gt;   term              estimate std.error statistic  p.value conf.low conf.high
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> (Intercept)          2.25      0.370      6.09 9.57<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 9</span>    1.52       2.98
-#&gt; <span style='color: #BCBCBC;'>2</span> Sepal.Width          0.804     0.106      7.56 4.19<span style='color: #949494;'>e</span><span style='color: #BB0000;'>-12</span>    0.593      1.01
-#&gt; <span style='color: #BCBCBC;'>3</span> Speciesversicolor    1.46      0.112     13.0  3.48<span style='color: #949494;'>e</span><span style='color: #BB0000;'>-26</span>    1.24       1.68
-#&gt; <span style='color: #BCBCBC;'>4</span> Speciesvirginica     1.95      0.100     19.5  2.09<span style='color: #949494;'>e</span><span style='color: #BB0000;'>-42</span>    1.75       2.14</div><div class='input'><span class='fu'>tidy_get_model</span><span class='op'>(</span><span class='va'>tt</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; 
-#&gt; Call:
-#&gt; lm(formula = Sepal.Length ~ Sepal.Width + Species, data = iris)
-#&gt; 
-#&gt; Coefficients:
-#&gt;       (Intercept)        Sepal.Width  Speciesversicolor   Speciesvirginica  
-#&gt;            2.2514             0.8036             1.4587             1.9468  
-#&gt; </div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Sepal.Width</span> <span class='op'>+</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>tt</span> <span class='op'>&lt;-</span> <span class='va'>mod</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'>tidy_and_attach</span><span class='op'>(</span>conf.int <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>tt</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 4 × 7</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   term              estimate std.error statistic  p.value conf.low conf.high</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> (Intercept)          2.25      0.370      6.09 9.57<span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 9</span>    1.52       2.98</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> Sepal.Width          0.804     0.106      7.56 4.19<span style='color: #949494;'>e</span><span style='color: #BB0000;'>-12</span>    0.593      1.01</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> Speciesversicolor    1.46      0.112     13.0  3.48<span style='color: #949494;'>e</span><span style='color: #BB0000;'>-26</span>    1.24       1.68</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> Speciesvirginica     1.95      0.100     19.5  2.09<span style='color: #949494;'>e</span><span style='color: #BB0000;'>-42</span>    1.75       2.14</span>
+<span class='r-in'><span class='fu'>tidy_get_model</span><span class='op'>(</span><span class='va'>tt</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Call:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> lm(formula = Sepal.Length ~ Sepal.Width + Species, data = iris)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Coefficients:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       (Intercept)        Sepal.Width  Speciesversicolor   Speciesvirginica  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>            2.2514             0.8036             1.4587             1.9468  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

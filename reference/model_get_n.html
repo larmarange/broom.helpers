@@ -189,162 +189,174 @@ exposure time (<code>Exposure</code>) are stored as attributes of the returned t
 <code><a href='model_list_variables.html'>model_list_variables</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>hp</span> <span class='op'>~</span> <span class='va'>mpg</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>cyl</span><span class='op'>)</span> <span class='op'>+</span> <span class='va'>disp</span><span class='op'>:</span><span class='va'>hp</span>, <span class='va'>mtcars</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>model_get_n</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 6 × 2</span>
-#&gt;   term         n_obs
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> (Intercept)     32
-#&gt; <span style='color: #BCBCBC;'>2</span> mpg             32
-#&gt; <span style='color: #BCBCBC;'>3</span> factor(cyl)6     7
-#&gt; <span style='color: #BCBCBC;'>4</span> factor(cyl)8    14
-#&gt; <span style='color: #BCBCBC;'>5</span> hp:disp         32
-#&gt; <span style='color: #BCBCBC;'>6</span> factor(cyl)4    11</div><div class='input'>
-<span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span>
-  <span class='va'>response</span> <span class='op'>~</span> <span class='va'>stage</span> <span class='op'>*</span> <span class='va'>grade</span> <span class='op'>+</span> <span class='va'>trt</span>,
-  <span class='fu'>gtsummary</span><span class='fu'>::</span><span class='va'><a href='http://www.danieldsjoberg.com/gtsummary//reference/trial.html'>trial</a></span>,
-  family <span class='op'>=</span> <span class='va'>binomial</span>,
-  contrasts <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>stage <span class='op'>=</span> <span class='va'>contr.sum</span>, grade <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/contrast.html'>contr.treatment</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>2</span><span class='op'>)</span>, trt <span class='op'>=</span> <span class='st'>"contr.SAS"</span><span class='op'>)</span>
-<span class='op'>)</span>
-<span class='va'>mod</span> <span class='op'>%&gt;%</span> <span class='fu'>model_get_n</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 16 × 3</span>
-#&gt;    term          n_obs n_event
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span> (Intercept)     193      61
-#&gt; <span style='color: #BCBCBC;'> 2</span> stage1           52      18
-#&gt; <span style='color: #BCBCBC;'> 3</span> stage2           52      13
-#&gt; <span style='color: #BCBCBC;'> 4</span> stage3           40      15
-#&gt; <span style='color: #BCBCBC;'> 5</span> grade1           67      21
-#&gt; <span style='color: #BCBCBC;'> 6</span> grade3           63      21
-#&gt; <span style='color: #BCBCBC;'> 7</span> trtDrug A        95      28
-#&gt; <span style='color: #BCBCBC;'> 8</span> stage1:grade1    17       6
-#&gt; <span style='color: #BCBCBC;'> 9</span> stage2:grade1    17       4
-#&gt; <span style='color: #BCBCBC;'>10</span> stage3:grade1    18       7
-#&gt; <span style='color: #BCBCBC;'>11</span> stage1:grade3    13       6
-#&gt; <span style='color: #BCBCBC;'>12</span> stage2:grade3    19       5
-#&gt; <span style='color: #BCBCBC;'>13</span> stage3:grade3    13       4
-#&gt; <span style='color: #BCBCBC;'>14</span> stage4           49      15
-#&gt; <span style='color: #BCBCBC;'>15</span> grade2           63      19
-#&gt; <span style='color: #BCBCBC;'>16</span> trtDrug B        98      33</div><div class='input'>
-<span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span>
-  <span class='va'>Survived</span> <span class='op'>~</span> <span class='va'>Class</span> <span class='op'>*</span> <span class='va'>Age</span> <span class='op'>+</span> <span class='va'>Sex</span>, data <span class='op'>=</span> <span class='va'>Titanic</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='op'>)</span>,
-  weights <span class='op'>=</span> <span class='va'>Freq</span>, family <span class='op'>=</span> <span class='va'>binomial</span>
-<span class='op'>)</span>
-<span class='va'>mod</span> <span class='op'>%&gt;%</span> <span class='fu'>model_get_n</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 12 × 3</span>
-#&gt;    term               n_obs n_event
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span> (Intercept)         <span style='text-decoration: underline;'>2</span>201     711
-#&gt; <span style='color: #BCBCBC;'> 2</span> Class2nd             285     118
-#&gt; <span style='color: #BCBCBC;'> 3</span> Class3rd             706     178
-#&gt; <span style='color: #BCBCBC;'> 4</span> ClassCrew            885     212
-#&gt; <span style='color: #BCBCBC;'> 5</span> AgeAdult            <span style='text-decoration: underline;'>2</span>092     654
-#&gt; <span style='color: #BCBCBC;'> 6</span> SexFemale            470     344
-#&gt; <span style='color: #BCBCBC;'> 7</span> Class2nd:AgeAdult    261      94
-#&gt; <span style='color: #BCBCBC;'> 8</span> Class3rd:AgeAdult    627     151
-#&gt; <span style='color: #BCBCBC;'> 9</span> ClassCrew:AgeAdult   885     212
-#&gt; <span style='color: #BCBCBC;'>10</span> Class1st             325     203
-#&gt; <span style='color: #BCBCBC;'>11</span> AgeChild             109      57
-#&gt; <span style='color: #BCBCBC;'>12</span> SexMale             <span style='text-decoration: underline;'>1</span>731     367</div><div class='input'>
-<span class='va'>d</span> <span class='op'>&lt;-</span> <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble</a></span><span class='op'>(</span><span class='va'>Titanic</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>Class</span>, <span class='va'>Sex</span>, <span class='va'>Age</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarise</a></span><span class='op'>(</span>
-    n_survived <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>n</span> <span class='op'>*</span> <span class='op'>(</span><span class='va'>Survived</span> <span class='op'>==</span> <span class='st'>"Yes"</span><span class='op'>)</span><span class='op'>)</span>,
-    n_dead <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>n</span> <span class='op'>*</span> <span class='op'>(</span><span class='va'>Survived</span> <span class='op'>==</span> <span class='st'>"No"</span><span class='op'>)</span><span class='op'>)</span>
-  <span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>`summarise()` has grouped output by 'Class', 'Sex'. You can override using the `.groups` argument.</span></div><div class='input'><span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>n_survived</span>, <span class='va'>n_dead</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>Class</span> <span class='op'>*</span> <span class='va'>Age</span> <span class='op'>+</span> <span class='va'>Sex</span>, data <span class='op'>=</span> <span class='va'>d</span>, family <span class='op'>=</span> <span class='va'>binomial</span><span class='op'>)</span>
-<span class='va'>mod</span> <span class='op'>%&gt;%</span> <span class='fu'>model_get_n</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 12 × 3</span>
-#&gt;    term               n_obs n_event
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span> (Intercept)         <span style='text-decoration: underline;'>2</span>201     711
-#&gt; <span style='color: #BCBCBC;'> 2</span> Class2nd             285     118
-#&gt; <span style='color: #BCBCBC;'> 3</span> Class3rd             706     178
-#&gt; <span style='color: #BCBCBC;'> 4</span> ClassCrew            885     212
-#&gt; <span style='color: #BCBCBC;'> 5</span> AgeChild             109      57
-#&gt; <span style='color: #BCBCBC;'> 6</span> SexMale             <span style='text-decoration: underline;'>1</span>731     367
-#&gt; <span style='color: #BCBCBC;'> 7</span> Class2nd:AgeChild     24      24
-#&gt; <span style='color: #BCBCBC;'> 8</span> Class3rd:AgeChild     79      27
-#&gt; <span style='color: #BCBCBC;'> 9</span> ClassCrew:AgeChild     0       0
-#&gt; <span style='color: #BCBCBC;'>10</span> Class1st             325     203
-#&gt; <span style='color: #BCBCBC;'>11</span> AgeAdult            <span style='text-decoration: underline;'>2</span>092     654
-#&gt; <span style='color: #BCBCBC;'>12</span> SexFemale            470     344</div><div class='input'>
-<span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span><span class='va'>response</span> <span class='op'>~</span> <span class='va'>age</span> <span class='op'>+</span> <span class='va'>grade</span> <span class='op'>*</span> <span class='va'>trt</span>, <span class='fu'>gtsummary</span><span class='fu'>::</span><span class='va'><a href='http://www.danieldsjoberg.com/gtsummary//reference/trial.html'>trial</a></span>, family <span class='op'>=</span> <span class='va'>poisson</span><span class='op'>)</span>
-<span class='va'>mod</span> <span class='op'>%&gt;%</span> <span class='fu'>model_get_n</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 9 × 4</span>
-#&gt;   term               n_obs n_event exposure
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> (Intercept)          183      58      183
-#&gt; <span style='color: #BCBCBC;'>2</span> age                  183      58      183
-#&gt; <span style='color: #BCBCBC;'>3</span> gradeII               58      17       58
-#&gt; <span style='color: #BCBCBC;'>4</span> gradeIII              60      20       60
-#&gt; <span style='color: #BCBCBC;'>5</span> trtDrug B             94      31       94
-#&gt; <span style='color: #BCBCBC;'>6</span> gradeII:trtDrug B     29      10       29
-#&gt; <span style='color: #BCBCBC;'>7</span> gradeIII:trtDrug B    33       8       33
-#&gt; <span style='color: #BCBCBC;'>8</span> gradeI                65      21       65
-#&gt; <span style='color: #BCBCBC;'>9</span> trtDrug A             89      27       89</div><div class='input'>
-<span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span>
-  <span class='va'>response</span> <span class='op'>~</span> <span class='va'>trt</span> <span class='op'>*</span> <span class='va'>grade</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/stats/offset.html'>offset</a></span><span class='op'>(</span><span class='va'>ttdeath</span><span class='op'>)</span>,
-  <span class='fu'>gtsummary</span><span class='fu'>::</span><span class='va'><a href='http://www.danieldsjoberg.com/gtsummary//reference/trial.html'>trial</a></span>,
-  family <span class='op'>=</span> <span class='va'>poisson</span>
-<span class='op'>)</span>
-<span class='va'>mod</span> <span class='op'>%&gt;%</span> <span class='fu'>model_get_n</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 8 × 4</span>
-#&gt;   term               n_obs n_event exposure
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> (Intercept)          193      61  2.48<span style='color: #949494;'>e</span>12
-#&gt; <span style='color: #BCBCBC;'>2</span> trtDrug B             98      33  1.15<span style='color: #949494;'>e</span>12
-#&gt; <span style='color: #BCBCBC;'>3</span> gradeII               63      19  8.24<span style='color: #949494;'>e</span>11
-#&gt; <span style='color: #BCBCBC;'>4</span> gradeIII              63      21  6.31<span style='color: #949494;'>e</span>11
-#&gt; <span style='color: #BCBCBC;'>5</span> trtDrug B:gradeII     33      12  3.71<span style='color: #949494;'>e</span>11
-#&gt; <span style='color: #BCBCBC;'>6</span> trtDrug B:gradeIII    33       8  2.94<span style='color: #949494;'>e</span>11
-#&gt; <span style='color: #BCBCBC;'>7</span> trtDrug A             95      28  1.33<span style='color: #949494;'>e</span>12
-#&gt; <span style='color: #BCBCBC;'>8</span> gradeI                67      21  1.03<span style='color: #949494;'>e</span>12</div><div class='input'>
-<span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'>survival</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/survival/man/lung.html'>lung</a></span> <span class='op'>%&gt;%</span> <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>sex <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>sex</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'>survival</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/survival/man/coxph.html'>coxph</a></span><span class='op'>(</span><span class='fu'>survival</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/survival/man/Surv.html'>Surv</a></span><span class='op'>(</span><span class='va'>time</span>, <span class='va'>status</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>ph.ecog</span> <span class='op'>+</span> <span class='va'>age</span> <span class='op'>+</span> <span class='va'>sex</span>, data <span class='op'>=</span> <span class='va'>df</span><span class='op'>)</span>
-<span class='va'>mod</span> <span class='op'>%&gt;%</span> <span class='fu'>model_get_n</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 5 × 4</span>
-#&gt;   term        n_obs n_event exposure
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> (Intercept)   227     164    <span style='text-decoration: underline;'>69</span>522
-#&gt; <span style='color: #BCBCBC;'>2</span> ph.ecog       227     164    <span style='text-decoration: underline;'>69</span>522
-#&gt; <span style='color: #BCBCBC;'>3</span> age           227     164    <span style='text-decoration: underline;'>69</span>522
-#&gt; <span style='color: #BCBCBC;'>4</span> sex2           90      53    <span style='text-decoration: underline;'>30</span>507
-#&gt; <span style='color: #BCBCBC;'>5</span> sex1          137     111    <span style='text-decoration: underline;'>39</span>015</div><div class='input'>
-<span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'>lme4</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/lme4/man/lmer.html'>lmer</a></span><span class='op'>(</span><span class='va'>Reaction</span> <span class='op'>~</span> <span class='va'>Days</span> <span class='op'>+</span> <span class='op'>(</span><span class='va'>Days</span> <span class='op'>|</span> <span class='va'>Subject</span><span class='op'>)</span>, <span class='fu'>lme4</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/lme4/man/sleepstudy.html'>sleepstudy</a></span><span class='op'>)</span>
-<span class='va'>mod</span> <span class='op'>%&gt;%</span> <span class='fu'>model_get_n</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2 × 2</span>
-#&gt;   term        n_obs
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> (Intercept)   180
-#&gt; <span style='color: #BCBCBC;'>2</span> Days          180</div><div class='input'>
-<span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'>lme4</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/lme4/man/glmer.html'>glmer</a></span><span class='op'>(</span><span class='va'>response</span> <span class='op'>~</span> <span class='va'>trt</span> <span class='op'>*</span> <span class='va'>grade</span> <span class='op'>+</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>|</span> <span class='va'>stage</span><span class='op'>)</span>,
-  family <span class='op'>=</span> <span class='va'>binomial</span>, data <span class='op'>=</span> <span class='fu'>gtsummary</span><span class='fu'>::</span><span class='va'><a href='http://www.danieldsjoberg.com/gtsummary//reference/trial.html'>trial</a></span>
-<span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>boundary (singular) fit: see ?isSingular</span></div><div class='input'><span class='va'>mod</span> <span class='op'>%&gt;%</span> <span class='fu'>model_get_n</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 8 × 3</span>
-#&gt;   term               n_obs n_event
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> (Intercept)          193      61
-#&gt; <span style='color: #BCBCBC;'>2</span> trtDrug B             98      33
-#&gt; <span style='color: #BCBCBC;'>3</span> gradeII               63      19
-#&gt; <span style='color: #BCBCBC;'>4</span> gradeIII              63      21
-#&gt; <span style='color: #BCBCBC;'>5</span> trtDrug B:gradeII     33      12
-#&gt; <span style='color: #BCBCBC;'>6</span> trtDrug B:gradeIII    33       8
-#&gt; <span style='color: #BCBCBC;'>7</span> trtDrug A             95      28
-#&gt; <span style='color: #BCBCBC;'>8</span> gradeI                67      21</div><div class='input'>
-<span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'>lme4</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/lme4/man/glmer.html'>glmer</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>incidence</span>, <span class='va'>size</span> <span class='op'>-</span> <span class='va'>incidence</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>period</span> <span class='op'>+</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>|</span> <span class='va'>herd</span><span class='op'>)</span>,
-  family <span class='op'>=</span> <span class='va'>binomial</span>, data <span class='op'>=</span> <span class='fu'>lme4</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/lme4/man/cbpp.html'>cbpp</a></span>
-<span class='op'>)</span>
-<span class='va'>mod</span> <span class='op'>%&gt;%</span> <span class='fu'>model_get_n</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 5 × 3</span>
-#&gt;   term        n_obs n_event
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> (Intercept)   842      99
-#&gt; <span style='color: #BCBCBC;'>2</span> period2       212      17
-#&gt; <span style='color: #BCBCBC;'>3</span> period3       197      14
-#&gt; <span style='color: #BCBCBC;'>4</span> period4       155       7
-#&gt; <span style='color: #BCBCBC;'>5</span> period1       278      61</div></pre>
+    <pre class="examples"><span class='r-in'><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>hp</span> <span class='op'>~</span> <span class='va'>mpg</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>cyl</span><span class='op'>)</span> <span class='op'>+</span> <span class='va'>disp</span><span class='op'>:</span><span class='va'>hp</span>, <span class='va'>mtcars</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'>model_get_n</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 6 × 2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   term         n_obs</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> (Intercept)     32</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> mpg             32</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> factor(cyl)6     7</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> factor(cyl)8    14</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span> hp:disp         32</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>6</span> factor(cyl)4    11</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span></span>
+<span class='r-in'>  <span class='va'>response</span> <span class='op'>~</span> <span class='va'>stage</span> <span class='op'>*</span> <span class='va'>grade</span> <span class='op'>+</span> <span class='va'>trt</span>,</span>
+<span class='r-in'>  <span class='fu'>gtsummary</span><span class='fu'>::</span><span class='va'><a href='http://www.danieldsjoberg.com/gtsummary//reference/trial.html'>trial</a></span>,</span>
+<span class='r-in'>  family <span class='op'>=</span> <span class='va'>binomial</span>,</span>
+<span class='r-in'>  contrasts <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>stage <span class='op'>=</span> <span class='va'>contr.sum</span>, grade <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/contrast.html'>contr.treatment</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>2</span><span class='op'>)</span>, trt <span class='op'>=</span> <span class='st'>"contr.SAS"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>mod</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'>model_get_n</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 16 × 3</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    term          n_obs n_event</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span> (Intercept)     193      61</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span> stage1           52      18</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span> stage2           52      13</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span> stage3           40      15</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span> grade1           67      21</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span> grade3           63      21</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span> trtDrug A        95      28</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> stage1:grade1    17       6</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> stage2:grade1    17       4</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> stage3:grade1    18       7</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>11</span> stage1:grade3    13       6</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>12</span> stage2:grade3    19       5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>13</span> stage3:grade3    13       4</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>14</span> stage4           49      15</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>15</span> grade2           63      19</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>16</span> trtDrug B        98      33</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span></span>
+<span class='r-in'>  <span class='va'>Survived</span> <span class='op'>~</span> <span class='va'>Class</span> <span class='op'>*</span> <span class='va'>Age</span> <span class='op'>+</span> <span class='va'>Sex</span>, data <span class='op'>=</span> <span class='va'>Titanic</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='op'>)</span>,</span>
+<span class='r-in'>  weights <span class='op'>=</span> <span class='va'>Freq</span>, family <span class='op'>=</span> <span class='va'>binomial</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>mod</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'>model_get_n</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 12 × 3</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    term               n_obs n_event</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span> (Intercept)         <span style='text-decoration: underline;'>2</span>201     711</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span> Class2nd             285     118</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span> Class3rd             706     178</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span> ClassCrew            885     212</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span> AgeAdult            <span style='text-decoration: underline;'>2</span>092     654</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span> SexFemale            470     344</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span> Class2nd:AgeAdult    261      94</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> Class3rd:AgeAdult    627     151</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> ClassCrew:AgeAdult   885     212</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> Class1st             325     203</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>11</span> AgeChild             109      57</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>12</span> SexMale             <span style='text-decoration: underline;'>1</span>731     367</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>d</span> <span class='op'>&lt;-</span> <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble</a></span><span class='op'>(</span><span class='va'>Titanic</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>Class</span>, <span class='va'>Sex</span>, <span class='va'>Age</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarise</a></span><span class='op'>(</span></span>
+<span class='r-in'>    n_survived <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>n</span> <span class='op'>*</span> <span class='op'>(</span><span class='va'>Survived</span> <span class='op'>==</span> <span class='st'>"Yes"</span><span class='op'>)</span><span class='op'>)</span>,</span>
+<span class='r-in'>    n_dead <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>n</span> <span class='op'>*</span> <span class='op'>(</span><span class='va'>Survived</span> <span class='op'>==</span> <span class='st'>"No"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'>  <span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> `summarise()` has grouped output by 'Class', 'Sex'. You can override using the `.groups` argument.</span>
+<span class='r-in'><span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>n_survived</span>, <span class='va'>n_dead</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>Class</span> <span class='op'>*</span> <span class='va'>Age</span> <span class='op'>+</span> <span class='va'>Sex</span>, data <span class='op'>=</span> <span class='va'>d</span>, family <span class='op'>=</span> <span class='va'>binomial</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>mod</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'>model_get_n</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 12 × 3</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    term               n_obs n_event</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span> (Intercept)         <span style='text-decoration: underline;'>2</span>201     711</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span> Class2nd             285     118</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span> Class3rd             706     178</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span> ClassCrew            885     212</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span> AgeChild             109      57</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span> SexMale             <span style='text-decoration: underline;'>1</span>731     367</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span> Class2nd:AgeChild     24      24</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> Class3rd:AgeChild     79      27</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> ClassCrew:AgeChild     0       0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> Class1st             325     203</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>11</span> AgeAdult            <span style='text-decoration: underline;'>2</span>092     654</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>12</span> SexFemale            470     344</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span><span class='va'>response</span> <span class='op'>~</span> <span class='va'>age</span> <span class='op'>+</span> <span class='va'>grade</span> <span class='op'>*</span> <span class='va'>trt</span>, <span class='fu'>gtsummary</span><span class='fu'>::</span><span class='va'><a href='http://www.danieldsjoberg.com/gtsummary//reference/trial.html'>trial</a></span>, family <span class='op'>=</span> <span class='va'>poisson</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>mod</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'>model_get_n</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 9 × 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   term               n_obs n_event exposure</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> (Intercept)          183      58      183</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> age                  183      58      183</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> gradeII               58      17       58</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> gradeIII              60      20       60</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span> trtDrug B             94      31       94</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>6</span> gradeII:trtDrug B     29      10       29</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>7</span> gradeIII:trtDrug B    33       8       33</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>8</span> gradeI                65      21       65</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>9</span> trtDrug A             89      27       89</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span></span>
+<span class='r-in'>  <span class='va'>response</span> <span class='op'>~</span> <span class='va'>trt</span> <span class='op'>*</span> <span class='va'>grade</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/stats/offset.html'>offset</a></span><span class='op'>(</span><span class='va'>ttdeath</span><span class='op'>)</span>,</span>
+<span class='r-in'>  <span class='fu'>gtsummary</span><span class='fu'>::</span><span class='va'><a href='http://www.danieldsjoberg.com/gtsummary//reference/trial.html'>trial</a></span>,</span>
+<span class='r-in'>  family <span class='op'>=</span> <span class='va'>poisson</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>mod</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'>model_get_n</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 8 × 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   term               n_obs n_event exposure</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> (Intercept)          193      61  2.48<span style='color: #949494;'>e</span>12</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> trtDrug B             98      33  1.15<span style='color: #949494;'>e</span>12</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> gradeII               63      19  8.24<span style='color: #949494;'>e</span>11</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> gradeIII              63      21  6.31<span style='color: #949494;'>e</span>11</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span> trtDrug B:gradeII     33      12  3.71<span style='color: #949494;'>e</span>11</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>6</span> trtDrug B:gradeIII    33       8  2.94<span style='color: #949494;'>e</span>11</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>7</span> trtDrug A             95      28  1.33<span style='color: #949494;'>e</span>12</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>8</span> gradeI                67      21  1.03<span style='color: #949494;'>e</span>12</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'>survival</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/survival/man/lung.html'>lung</a></span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>sex <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>sex</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'>survival</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/survival/man/coxph.html'>coxph</a></span><span class='op'>(</span><span class='fu'>survival</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/survival/man/Surv.html'>Surv</a></span><span class='op'>(</span><span class='va'>time</span>, <span class='va'>status</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>ph.ecog</span> <span class='op'>+</span> <span class='va'>age</span> <span class='op'>+</span> <span class='va'>sex</span>, data <span class='op'>=</span> <span class='va'>df</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>mod</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'>model_get_n</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 5 × 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   term        n_obs n_event exposure</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> (Intercept)   227     164    <span style='text-decoration: underline;'>69</span>522</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> ph.ecog       227     164    <span style='text-decoration: underline;'>69</span>522</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> age           227     164    <span style='text-decoration: underline;'>69</span>522</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> sex2           90      53    <span style='text-decoration: underline;'>30</span>507</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span> sex1          137     111    <span style='text-decoration: underline;'>39</span>015</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'>lme4</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/lme4/man/lmer.html'>lmer</a></span><span class='op'>(</span><span class='va'>Reaction</span> <span class='op'>~</span> <span class='va'>Days</span> <span class='op'>+</span> <span class='op'>(</span><span class='va'>Days</span> <span class='op'>|</span> <span class='va'>Subject</span><span class='op'>)</span>, <span class='fu'>lme4</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/lme4/man/sleepstudy.html'>sleepstudy</a></span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>mod</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'>model_get_n</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 2 × 2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   term        n_obs</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> (Intercept)   180</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> Days          180</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'>lme4</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/lme4/man/glmer.html'>glmer</a></span><span class='op'>(</span><span class='va'>response</span> <span class='op'>~</span> <span class='va'>trt</span> <span class='op'>*</span> <span class='va'>grade</span> <span class='op'>+</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>|</span> <span class='va'>stage</span><span class='op'>)</span>,</span>
+<span class='r-in'>  family <span class='op'>=</span> <span class='va'>binomial</span>, data <span class='op'>=</span> <span class='fu'>gtsummary</span><span class='fu'>::</span><span class='va'><a href='http://www.danieldsjoberg.com/gtsummary//reference/trial.html'>trial</a></span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> boundary (singular) fit: see ?isSingular</span>
+<span class='r-in'><span class='va'>mod</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'>model_get_n</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 8 × 3</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   term               n_obs n_event</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> (Intercept)          193      61</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> trtDrug B             98      33</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> gradeII               63      19</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> gradeIII              63      21</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span> trtDrug B:gradeII     33      12</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>6</span> trtDrug B:gradeIII    33       8</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>7</span> trtDrug A             95      28</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>8</span> gradeI                67      21</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'>lme4</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/lme4/man/glmer.html'>glmer</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>incidence</span>, <span class='va'>size</span> <span class='op'>-</span> <span class='va'>incidence</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>period</span> <span class='op'>+</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>|</span> <span class='va'>herd</span><span class='op'>)</span>,</span>
+<span class='r-in'>  family <span class='op'>=</span> <span class='va'>binomial</span>, data <span class='op'>=</span> <span class='fu'>lme4</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/lme4/man/cbpp.html'>cbpp</a></span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>mod</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'>model_get_n</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 5 × 3</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   term        n_obs n_event</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> (Intercept)   842      99</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> period2       212      17</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> period3       197      14</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> period4       155       7</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span> period1       278      61</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

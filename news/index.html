@@ -122,9 +122,10 @@
 <a href="#broomhelpers-development-version" class="anchor"></a>broom.helpers (development version)<small> Unreleased </small>
 </h1>
 <ul>
-<li><p>Bug fix for identifying the levels of a logical variable (<a href='https://github.com/larmarange/broom.helpers/issues/125'>#125</a>)</p></li>
-<li><p>New method <code><a href="../reference/model_get_coefficients_type.html">model_get_coefficients_type.tidycrr()</a></code> (<a href='https://github.com/larmarange/broom.helpers/issues/128'>#128</a>)</p></li>
-<li><p>Updated error messaging about using <code>broom.helpers::tidy_paramters()</code> to include the package prefix. This message sometimes appears while running <code><a href="http://www.danieldsjoberg.com/gtsummary//reference/tbl_regression.html">gtsummary::tbl_regression()</a></code> where some users may not be aware where the <code>tidy_paramters()</code> function lives.</p></li>
+<li>New method <code><a href="../reference/model_get_coefficients_type.html">model_get_coefficients_type.tidycrr()</a></code> (<a href='https://github.com/larmarange/broom.helpers/issues/128'>#128</a>)</li>
+<li>Bug fix for identifying the levels of a logical variable (<a href='https://github.com/larmarange/broom.helpers/issues/125'>#125</a>)</li>
+<li>Bug fix for <code><a href="https://rdrr.io/pkg/nnet/man/multinom.html">nnet::multinom()</a></code> models with a binary outcome (<a href='https://github.com/larmarange/broom.helpers/issues/130'>#130</a>)</li>
+<li>Updated error messaging about using <code>broom.helpers::tidy_paramters()</code> to include the package prefix. This message sometimes appears while running <code><a href="http://www.danieldsjoberg.com/gtsummary//reference/tbl_regression.html">gtsummary::tbl_regression()</a></code> where some users may not be aware where the <code>tidy_paramters()</code> function lives.</li>
 </ul>
 </div>
     <div id="broomhelpers-140" class="section level1">
@@ -139,7 +140,7 @@
 <ul>
 <li>Function arguments that accept formula-list values now have more flexible inputs. (<a href='https://github.com/larmarange/broom.helpers/issues/121'>#121</a>)
 <ul>
-<li>The passed list may now be a combination of named lists and lists of formulas, e.g. <code><a href="https://rdrr.io/r/base/list.html">list(trt ~ 1, all_continuous() ~ 2)</a></code>.</li>
+<li>The passed list may now be a combination of named lists and lists of formulas, e.g. <code>list(trt ~ 1, all_continuous() ~ 2)</code>.</li>
 <li>The shortcut <code>~ &lt;value&gt;</code> may be now used to indicate <code>everything() ~ &lt;value&gt;</code>
 </li>
 </ul>
