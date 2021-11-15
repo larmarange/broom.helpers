@@ -263,6 +263,19 @@ test_that("tidy_plus_plus() works with nnet::multinom", {
     res <- mod %>% tidy_plus_plus(),
     NA
   )
+
+  # multinom model with binary outcome
+  suppressMessages(
+    mod <- nnet::multinom(
+      response ~ stage + marker + age, data = gtsummary::trial,
+      trace = FALSE
+    )
+  )
+  expect_error(
+    res <- mod %>% tidy_plus_plus(),
+    NA
+  )
+
 })
 
 test_that("tidy_plus_plus() works with survey::svyglm", {

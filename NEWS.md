@@ -1,9 +1,12 @@
 # broom.helpers (development version)
 
-- Bug fix for identifying the levels of a logical variable (#125)
 - New method `model_get_coefficients_type.tidycrr()` (#128)
-
-- Updated error messaging about using `broom.helpers::tidy_paramters()` to include the package prefix. This message sometimes appears while running `gtsummary::tbl_regression()` where some users may not be aware where the `tidy_paramters()` function lives.
+- Bug fix for identifying the levels of a logical variable (#125)
+- Bug fix for `nnet::multinom()` models with a binary outcome (#130)
+- Updated error messaging about using `broom.helpers::tidy_paramters()`
+  to include the package prefix. This message sometimes appears while
+  running `gtsummary::tbl_regression()` where some users may not be
+  aware where the `tidy_paramters()` function lives.
 
 # broom.helpers 1.4.0
 
