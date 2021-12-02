@@ -14,10 +14,15 @@
 #' passing `list(everything() ~ 1)`
 #'
 #' @param x list of selecting formulas
+#' @param type_check A predicate function that checks the elements passed on
+#' the RHS of the formulas in `x=` (or the element in a named list)
+#' satisfy the function.
 #' @inheritParams .select_to_varnames
+#'
 #' @export
 .formula_list_to_named_list <- function(x, data = NULL, var_info = NULL,
-                                        arg_name = NULL, select_single = FALSE) {
+                                        arg_name = NULL, select_single = FALSE,
+                                        type_check = NULL) {
   # if NULL provided, return NULL ----------------------------------------------
   if (is.null(x)) {
     return(NULL)
@@ -26,6 +31,16 @@
   # converting to list if single element passed --------------------------------
   if (inherits(x, "formula")) {
     x <- list(x)
+  }
+
+  # checking the input is a list -----------------------------------------------
+  if (!rlang::is_list(x)) {
+    stringr::str_glue(
+      "Error processing the `{argname}` argument. ",
+      "Expecting `x=` to be a list or formula. ",
+      "Review syntax details at",
+      "'https://www.danieldsjoberg.com/gtsummary/reference/syntax.html' ") %>%
+      stop(call. = FALSE)
   }
 
   # convert to a named list ----------------------------------------------------
@@ -41,7 +56,8 @@
                                 data = data,
                                 var_info = var_info,
                                 arg_name = arg_name,
-                                select_single = select_single) %>%
+                                select_single = select_single,
+                                type_check = type_check) %>%
         list()
     }
     else {
@@ -55,7 +71,8 @@
   named_list[tokeep]
 }
 
-.single_formula_to_list <- function(x, data, var_info, arg_name, select_single) {
+.single_formula_to_list <- function(x, data, var_info, arg_name,
+                                    select_single, type_check) {
   # for each formula extract lhs and rhs ---------------------------------
   # checking the LHS is not empty
   f_lhs_quo <- .f_side_as_quo(x, "lhs")
@@ -69,6 +86,14 @@
 
   # evaluate RHS of formula in the original formula environment
   rhs <- .f_side_as_quo(x, "rhs") %>% rlang::eval_tidy()
+
+  # check the type of RHS ------------------------------------------------------
+  if (!is.null(type_check) && !type_check(rhs)) {
+    stringr::str_glue(
+      "Error processing `{arg_name}` argument for element '{lhs[[1]]}'.",
+      "The value passed is not the expected type/class.") %>%
+      stop(call. = FALSE)
+  }
 
   # converting rhs and lhs into a named list
   purrr::map(lhs, ~ list(rhs) %>% rlang::set_names(.x)) %>%
