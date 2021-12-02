@@ -278,6 +278,20 @@ test_that("select_helpers: .formula_list_to_named_list ", {
     .formula_list_to_named_list(list(age ~ "Age", TRUE), var_info = tidy_mod)
   )
 
+  expect_error(
+    .formula_list_to_named_list(list(age ~ "Age"), var_info = tidy_mod,
+                                type_check = is.character),
+    NA
+  )
+  expect_error(
+    .formula_list_to_named_list(list(age ~ "Age"), var_info = tidy_mod,
+                                type_check = is.logical)
+  )
+  expect_error(
+    .formula_list_to_named_list(letters, var_info = tidy_mod,
+                                type_check = is.logical)
+  )
+
   expect_equal(
     .formula_list_to_named_list(age ~ "Age", var_info = tidy_mod),
     list(age = "Age")
