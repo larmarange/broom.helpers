@@ -34,7 +34,8 @@
   }
 
   # checking the input is a list -----------------------------------------------
-  if (!rlang::is_list(x)) {
+  if (!rlang::is_list(x) &&
+      !(rlang::is_bare_vector(x) && rlang::is_named(x))) {
     stringr::str_glue(
       "Error processing the `{argname %||% ''}` argument. ",
       "Expecting a list or formula. ",
