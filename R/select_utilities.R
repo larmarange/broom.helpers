@@ -36,8 +36,8 @@
   # checking the input is a list -----------------------------------------------
   if (!rlang::is_list(x)) {
     stringr::str_glue(
-      "Error processing the `{argname}` argument. ",
-      "Expecting `x=` to be a list or formula. ",
+      "Error processing the `{argname %||% ''}` argument. ",
+      "Expecting a list or formula. ",
       "Review syntax details at",
       "'https://www.danieldsjoberg.com/gtsummary/reference/syntax.html' ") %>%
       stop(call. = FALSE)
@@ -90,7 +90,7 @@
   # check the type of RHS ------------------------------------------------------
   if (!is.null(type_check) && !type_check(rhs)) {
     stringr::str_glue(
-      "Error processing `{arg_name}` argument for element '{lhs[[1]]}'.",
+      "Error processing `{arg_name %||% ''}` argument for element '{lhs[[1]]}'.",
       "The value passed is not the expected type/class.") %>%
       stop(call. = FALSE)
   }
