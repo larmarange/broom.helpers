@@ -79,10 +79,10 @@
         "'https://www.danieldsjoberg.com/gtsummary/reference/syntax.html'")
     if (tryCatch(do.call(type_check, list(x)), error = function(e) FALSE)) {
       x_string <-
-        tryCatch(
+        suppressWarnings(tryCatch(
           switch(rlang::is_string(x)) %||% as.character(deparse(x)),
           error = function(e) NULL
-        )
+        ))
       if (!is.null(x_string) && nchar(x_string) <= 50) {
         err_msg <-
           paste(
@@ -119,7 +119,7 @@
   if (!is.null(type_check) && !type_check(rhs)) {
     type_check_msg %||%
       stringr::str_glue(
-        "Error processing `{arg_name %||% ''}` argument for element '{lhs[[1]]}'.",
+        "Error processing `{arg_name %||% ''}` argument for element '{lhs[[1]]}'. ",
         "The value passed is not the expected type/class.") %>%
       stop(call. = FALSE)
   }
