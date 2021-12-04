@@ -24,7 +24,7 @@ jobs:
 
       - name: Query dependencies
         run: |
-          install.packages('remotes')
+          install.packages('remotes', repos = "http://cran.rstudio.com/")
           saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
           writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
         shell: Rscript {0}
@@ -38,9 +38,9 @@ jobs:
 
       - name: Install dependencies
         run: |
-          install.packages(c("remotes"))
-          remotes::install_deps(dependencies = TRUE, type = "binary")
-          remotes::install_cran("covr", type = "binary")
+          install.packages(c("remotes"), repos = "http://cran.rstudio.com/")
+          remotes::install_deps(dependencies = TRUE, type = "binary", repos = "http://cran.rstudio.com/")
+          remotes::install_cran("covr", type = "binary", repos = "http://cran.rstudio.com/")
         shell: Rscript {0}
 
       - name: Test coverage
