@@ -17,12 +17,15 @@
 #' @param type_check A predicate function that checks the elements passed on
 #' the RHS of the formulas in `x=` (or the element in a named list)
 #' satisfy the function.
+#' @param type_check_msg When the `type_check=` fails, the string provided
+#' here will be printed as the error message. When `NULL`, a generic
+#' error message will be printed.
 #' @inheritParams .select_to_varnames
 #'
 #' @export
 .formula_list_to_named_list <- function(x, data = NULL, var_info = NULL,
                                         arg_name = NULL, select_single = FALSE,
-                                        type_check = NULL) {
+                                        type_check = NULL, type_check_msg = NULL) {
   # if NULL provided, return NULL ----------------------------------------------
   if (is.null(x)) {
     return(NULL)
@@ -33,16 +36,8 @@
     x <- list(x)
   }
 
-  # checking the input is a list -----------------------------------------------
-  if (!rlang::is_list(x) &&
-      !(rlang::is_bare_vector(x) && rlang::is_named(x))) {
-    stringr::str_glue(
-      "Error processing the `{argname %||% ''}` argument. ",
-      "Expecting a list or formula. ",
-      "Review syntax details at",
-      "'https://www.danieldsjoberg.com/gtsummary/reference/syntax.html' ") %>%
-      stop(call. = FALSE)
-  }
+  # checking the input is valid ------------------------------------------------
+  .check_valid_input(x = x, arg_name = arg_name, type_check = type_check)
 
   # convert to a named list ----------------------------------------------------
   len_x <- length(x)
@@ -58,7 +53,8 @@
                                 var_info = var_info,
                                 arg_name = arg_name,
                                 select_single = select_single,
-                                type_check = type_check) %>%
+                                type_check = type_check,
+                                type_check_msg = type_check_msg) %>%
         list()
     }
     else {
@@ -72,8 +68,39 @@
   named_list[tokeep]
 }
 
+.check_valid_input <- function(x, arg_name, type_check) {
+  if (!rlang::is_list(x) &&
+      !(rlang::is_vector(x) && rlang::is_named(x))) {
+    err_msg <-
+      stringr::str_glue(
+        "Error processing the `{arg_name %||% ''}` argument. ",
+        "Expecting a list or formula.\n",
+        "Review syntax details at",
+        "'https://www.danieldsjoberg.com/gtsummary/reference/syntax.html'")
+    if (tryCatch(do.call(type_check, list(x)), error = function(e) FALSE)) {
+      x_string <-
+        tryCatch(
+          switch(rlang::is_string(x)) %||% as.character(deparse(x)),
+          error = function(e) NULL
+        )
+      if (!is.null(x_string) && nchar(x_string) <= 50) {
+        err_msg <-
+          paste(
+            err_msg,
+            stringr::str_glue("Did you mean `everything() ~ {x_string}`?"),
+            sep = "\n\n"
+          )
+      }
+    }
+
+    stop(err_msg, call. = FALSE)
+  }
+
+  return(invisible())
+}
+
 .single_formula_to_list <- function(x, data, var_info, arg_name,
-                                    select_single, type_check) {
+                                    select_single, type_check, type_check_msg) {
   # for each formula extract lhs and rhs ---------------------------------
   # checking the LHS is not empty
   f_lhs_quo <- .f_side_as_quo(x, "lhs")
@@ -90,9 +117,10 @@
 
   # check the type of RHS ------------------------------------------------------
   if (!is.null(type_check) && !type_check(rhs)) {
-    stringr::str_glue(
-      "Error processing `{arg_name %||% ''}` argument for element '{lhs[[1]]}'.",
-      "The value passed is not the expected type/class.") %>%
+    type_check_msg %||%
+      stringr::str_glue(
+        "Error processing `{arg_name %||% ''}` argument for element '{lhs[[1]]}'.",
+        "The value passed is not the expected type/class.") %>%
       stop(call. = FALSE)
   }
 
