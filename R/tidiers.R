@@ -7,16 +7,13 @@
 #' interval in the tidied output
 #' @param conf.level the confidence level to use for the confidence interval
 #' @param ... additional parameters passed to `parameters::model_parameters()`
-#' @examples
-#' if (require(parameters)) {
-#'   lm(Sepal.Length ~ Sepal.Width + Species, data = iris) %>%
-#'     tidy_parameters()
-#' }
+#' @examplesIf .assert_package("parameters", boolean = TRUE)
+#' lm(Sepal.Length ~ Sepal.Width + Species, data = iris) %>%
+#'   tidy_parameters()
 #' @export
 #' @family custom_tieders
 tidy_parameters <- function(x, conf.int = TRUE, conf.level = .95, ...) {
-  if (!requireNamespace("parameters", quietly = TRUE))
-    stop("You need to install 'parameters' to use 'tidy_parameters'.") #nocov
+  .assert_package("parameters", fn = "broom.helpers::tidy_parameters()")
 
   if (!conf.int) conf.level <- NULL
 
@@ -39,10 +36,8 @@ tidy_parameters <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 #' @family custom_tieders
 tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   # load broom.mixed if available
-  suppressMessages(requireNamespace("broom.mixed", quietly = TRUE))
   if (any(c("glmerMod", "lmerMod") %in% class(x))) {
-    if (!requireNamespace("broom.mixed", quietly = TRUE))
-      stop("'broom.mixed' package is required for such model.") # nocov
+    .assert_package("broom.mixed", fn = "broom.helpers::tidy_with_broom_or_parameters()")
   }
 
   tidy_args <- list(...)

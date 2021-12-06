@@ -49,7 +49,7 @@
 #' when requested output cannot be generated. Default is FALSE
 #' @param ... other arguments passed to `tidy_fun()`
 #' @family tidy_helpers
-#' @examples
+#' @examplesIf .assert_package("gtsummary", boolean = TRUE)
 #' ex1 <- lm(Sepal.Length ~ Sepal.Width + Species, data = iris) %>%
 #'   tidy_plus_plus()
 #' ex1
@@ -77,9 +77,8 @@
 #'   )
 #' ex2
 #'
-#' \dontrun{
-#' if (requireNamespace("gtsummary")) {
-#'   ex3 <- glm(
+#' ex3 <-
+#'   glm(
 #'     response ~ poly(age, 3) + stage + grade * trt,
 #'     na.omit(gtsummary::trial),
 #'     family = binomial,
@@ -88,17 +87,15 @@
 #'       grade = contr.sum
 #'     )
 #'   ) %>%
-#'     tidy_plus_plus(
-#'       exponentiate = TRUE,
-#'       variable_labels = c(age = "Age (in years)"),
-#'       add_header_rows = TRUE,
-#'       show_single_row = all_dichotomous(),
-#'       term_labels = c("poly(age, 3)3" = "Cubic age"),
-#'       keep_model = TRUE
-#'     )
-#'   ex3
-#' }
-#' }
+#'   tidy_plus_plus(
+#'     exponentiate = TRUE,
+#'     variable_labels = c(age = "Age (in years)"),
+#'     add_header_rows = TRUE,
+#'     show_single_row = all_dichotomous(),
+#'     term_labels = c("poly(age, 3)3" = "Cubic age"),
+#'     keep_model = TRUE
+#'   )
+#' ex3
 #' @export
 tidy_plus_plus <- function(
                            model,

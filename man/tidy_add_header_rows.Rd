@@ -51,6 +51,7 @@ If the \code{label} column is not yet available in \code{x},
 \code{\link[=tidy_add_term_labels]{tidy_add_term_labels()}} will be automatically applied.
 }
 \examples{
+\dontshow{if (.assert_package("gtsummary", boolean = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 df <- Titanic \%>\%
   dplyr::as_tibble() \%>\%
   dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
@@ -67,21 +68,20 @@ res <- df \%>\%
 res \%>\% tidy_add_header_rows()
 res \%>\% tidy_add_header_rows(show_single_row = all_dichotomous())
 
-if (requireNamespace("gtsummary")) {
-  glm(
-    response ~ stage + grade * trt,
-    gtsummary::trial,
-    family = binomial,
-    contrasts = list(
-      stage = contr.treatment(4, base = 3),
-      grade = contr.treatment(3, base = 2),
-      trt = contr.treatment(2, base = 2)
-    )
-  ) \%>\%
-    tidy_and_attach() \%>\%
-    tidy_add_reference_rows() \%>\%
-    tidy_add_header_rows()
-}
+glm(
+  response ~ stage + grade * trt,
+  gtsummary::trial,
+  family = binomial,
+  contrasts = list(
+    stage = contr.treatment(4, base = 3),
+    grade = contr.treatment(3, base = 2),
+    trt = contr.treatment(2, base = 2)
+  )
+) \%>\%
+  tidy_and_attach() \%>\%
+  tidy_add_reference_rows() \%>\%
+  tidy_add_header_rows()
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other tidy_helpers: 
