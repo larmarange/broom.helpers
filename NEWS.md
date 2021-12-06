@@ -9,6 +9,9 @@
   aware where the `tidy_paramters()` function lives. (#129)
 - `.formula_list_to_named_list()` improvement: it is now possible to add
   a type check (#132)
+- New functions `.assert_package()` and `.get_min_version_required()` to 
+  check for a package's installation status and whether the installed
+  version meets the minimum required version from the DESCRIPTION file.
 
 **Bug fixes**
 
