@@ -9,7 +9,9 @@
   data = NULL,
   var_info = NULL,
   arg_name = NULL,
-  select_single = FALSE
+  select_single = FALSE,
+  type_check = NULL,
+  type_check_msg = NULL
 )
 }
 \arguments{
@@ -25,6 +27,14 @@ helps in the error messaging. Default is NULL.}
 
 \item{select_single}{Logical indicating whether the result must be a single
 variable. Default is \code{FALSE}}
+
+\item{type_check}{A predicate function that checks the elements passed on
+the RHS of the formulas in \verb{x=} (or the element in a named list)
+satisfy the function.}
+
+\item{type_check_msg}{When the \verb{type_check=} fails, the string provided
+here will be printed as the error message. When \code{NULL}, a generic
+error message will be printed.}
 }
 \description{
 Functions takes a list of formulas, a named list, or a combination of named
