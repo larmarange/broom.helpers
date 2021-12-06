@@ -27,7 +27,7 @@
 #' @inheritParams tidy_plus_plus
 #' @export
 #' @family tidy_helpers
-#' @examples
+#' @examplesIf .assert_package("gtsummary", boolean = TRUE)
 #' df <- Titanic %>%
 #'   dplyr::as_tibble() %>%
 #'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
@@ -43,20 +43,19 @@
 #' res %>% tidy_add_reference_rows(no_reference_row = all_dichotomous())
 #' res %>% tidy_add_reference_rows(no_reference_row = "Class")
 #'
-#' if (requireNamespace("gtsummary")) {
-#'   glm(
-#'     response ~ stage + grade * trt,
-#'     gtsummary::trial,
-#'     family = binomial,
-#'     contrasts = list(
-#'       stage = contr.treatment(4, base = 3),
-#'       grade = contr.treatment(3, base = 2),
-#'       trt = contr.treatment(2, base = 2)
-#'     )
-#'   ) %>%
-#'     tidy_and_attach() %>%
-#'     tidy_add_reference_rows()
-#' }
+#' glm(
+#'   response ~ stage + grade * trt,
+#'   gtsummary::trial,
+#'   family = binomial,
+#'   contrasts = list(
+#'     stage = contr.treatment(4, base = 3),
+#'     grade = contr.treatment(3, base = 2),
+#'     trt = contr.treatment(2, base = 2)
+#'   )
+#' ) %>%
+#'   tidy_and_attach() %>%
+#'   tidy_add_reference_rows()
+
 tidy_add_reference_rows <- function(
   x, no_reference_row = NULL,
   model = tidy_get_model(x),

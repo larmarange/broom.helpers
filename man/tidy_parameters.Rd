@@ -21,10 +21,10 @@ Use \code{parameters::model_parameters()} to tidy a model and apply
 \code{parameters::standardize_names(style = "broom")} to the output
 }
 \examples{
-if (require(parameters)) {
-  lm(Sepal.Length ~ Sepal.Width + Species, data = iris) \%>\%
-    tidy_parameters()
-}
+\dontshow{if (.assert_package("parameters", boolean = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+lm(Sepal.Length ~ Sepal.Width + Species, data = iris) \%>\%
+  tidy_parameters()
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other custom_tieders: 

@@ -47,6 +47,7 @@ rather than before. Similarly, it is better to apply
 \code{tidy_add_reference_rows()} before \code{\link[=tidy_add_n]{tidy_add_n()}}.
 }
 \examples{
+\dontshow{if (.assert_package("gtsummary", boolean = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 df <- Titanic \%>\%
   dplyr::as_tibble() \%>\%
   dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
@@ -62,20 +63,19 @@ res \%>\% tidy_add_reference_rows()
 res \%>\% tidy_add_reference_rows(no_reference_row = all_dichotomous())
 res \%>\% tidy_add_reference_rows(no_reference_row = "Class")
 
-if (requireNamespace("gtsummary")) {
-  glm(
-    response ~ stage + grade * trt,
-    gtsummary::trial,
-    family = binomial,
-    contrasts = list(
-      stage = contr.treatment(4, base = 3),
-      grade = contr.treatment(3, base = 2),
-      trt = contr.treatment(2, base = 2)
-    )
-  ) \%>\%
-    tidy_and_attach() \%>\%
-    tidy_add_reference_rows()
-}
+glm(
+  response ~ stage + grade * trt,
+  gtsummary::trial,
+  family = binomial,
+  contrasts = list(
+    stage = contr.treatment(4, base = 3),
+    grade = contr.treatment(3, base = 2),
+    trt = contr.treatment(2, base = 2)
+  )
+) \%>\%
+  tidy_and_attach() \%>\%
+  tidy_add_reference_rows()
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other tidy_helpers: 

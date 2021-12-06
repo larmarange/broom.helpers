@@ -27,7 +27,7 @@
 #' @inheritParams tidy_plus_plus
 #' @export
 #' @family tidy_helpers
-#' @examples
+#' @examplesIf .assert_package("gtsummary", boolean = TRUE)
 #' df <- Titanic %>%
 #'   dplyr::as_tibble() %>%
 #'   dplyr::mutate(dplyr::across(where(is.character), factor))
@@ -42,21 +42,20 @@
 #'   tidy_add_reference_rows() %>%
 #'   tidy_add_estimate_to_reference_rows()
 #'
-#' if (requireNamespace("gtsummary")) {
-#'   glm(
-#'     response ~ stage + grade * trt,
-#'     gtsummary::trial,
-#'     family = binomial,
-#'     contrasts = list(
-#'       stage = contr.treatment(4, base = 3),
-#'       grade = contr.treatment(3, base = 2),
-#'       trt = contr.treatment(2, base = 2)
-#'     )
-#'   ) %>%
-#'     tidy_and_attach() %>%
-#'     tidy_add_reference_rows() %>%
-#'     tidy_add_estimate_to_reference_rows()
-#' }
+#' glm(
+#'   response ~ stage + grade * trt,
+#'   gtsummary::trial,
+#'   family = binomial,
+#'   contrasts = list(
+#'     stage = contr.treatment(4, base = 3),
+#'     grade = contr.treatment(3, base = 2),
+#'     trt = contr.treatment(2, base = 2)
+#'   )
+#' ) %>%
+#'   tidy_and_attach() %>%
+#'   tidy_add_reference_rows() %>%
+#'   tidy_add_estimate_to_reference_rows()
+
 tidy_add_estimate_to_reference_rows <- function(
   x, exponentiate = attr(x, "exponentiate"),
   model = tidy_get_model(x),
@@ -116,13 +115,8 @@ tidy_add_estimate_to_reference_rows <- function(
         "Reference row of variable '", variable, "' remained unchanged."
       ))
   } else {
-    if (!requireNamespace("emmeans")) {
-      stop( # nocov start
-        "'emmeans' package is required to add an estimate to reference rows ",
-        "of categorical variables coded with sum contrasts. ",
-        "Please install 'emmeans'."
-      ) # nocov end
-    }
+    .assert_package("emmeans", fn = "broom.helpers::tidy_add_estimate_to_reference_rows()")
+
     dc <- tryCatch(
       suppressMessages(
         emmeans::emmeans(model, specs = variable, contr = "eff")

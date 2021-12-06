@@ -18,7 +18,7 @@
 #'
 #' @export
 #' @family model_helpers
-#' @examples
+#' @examplesIf .assert_package("gtsummary", boolean = TRUE)
 #' Titanic %>%
 #'   dplyr::as_tibble() %>%
 #'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes"))) %>%
@@ -37,14 +37,12 @@
 #'   ) %>%
 #'   model_list_variables()
 #'
-#' if (requireNamespace("gtsummary")) {
-#'   glm(
-#'     response ~ poly(age, 3) + stage + grade * trt,
-#'     na.omit(gtsummary::trial),
-#'     family = binomial,
-#'   ) %>%
-#'     model_list_variables()
-#' }
+#' glm(
+#'   response ~ poly(age, 3) + stage + grade * trt,
+#'   na.omit(gtsummary::trial),
+#'   family = binomial,
+#' ) %>%
+#'   model_list_variables()
 model_list_variables <- function(model, labels = NULL, only_variable = FALSE) {
   UseMethod("model_list_variables")
 }

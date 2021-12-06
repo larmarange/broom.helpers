@@ -27,7 +27,7 @@
 #' @inheritParams tidy_plus_plus
 #' @export
 #' @family tidy_helpers
-#' @examples
+#' @examplesIf .assert_package("gtsummary", boolean = TRUE)
 #' df <- Titanic %>%
 #'   dplyr::as_tibble() %>%
 #'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
@@ -44,21 +44,19 @@
 #' res %>% tidy_add_header_rows()
 #' res %>% tidy_add_header_rows(show_single_row = all_dichotomous())
 #'
-#' if (requireNamespace("gtsummary")) {
-#'   glm(
-#'     response ~ stage + grade * trt,
-#'     gtsummary::trial,
-#'     family = binomial,
-#'     contrasts = list(
-#'       stage = contr.treatment(4, base = 3),
-#'       grade = contr.treatment(3, base = 2),
-#'       trt = contr.treatment(2, base = 2)
-#'     )
-#'   ) %>%
-#'     tidy_and_attach() %>%
-#'     tidy_add_reference_rows() %>%
-#'     tidy_add_header_rows()
-#' }
+#' glm(
+#'   response ~ stage + grade * trt,
+#'   gtsummary::trial,
+#'   family = binomial,
+#'   contrasts = list(
+#'     stage = contr.treatment(4, base = 3),
+#'     grade = contr.treatment(3, base = 2),
+#'     trt = contr.treatment(2, base = 2)
+#'   )
+#' ) %>%
+#'   tidy_and_attach() %>%
+#'   tidy_add_reference_rows() %>%
+#'   tidy_add_header_rows()
 tidy_add_header_rows <- function(x,
                                  show_single_row = NULL,
                                  model = tidy_get_model(x),

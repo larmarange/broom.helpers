@@ -36,6 +36,7 @@ with the label attribute (cf. \code{\link[labelled:var_label]{labelled::var_labe
 Including variables used only in an interaction.
 }
 \examples{
+\dontshow{if (.assert_package("gtsummary", boolean = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 Titanic \%>\%
   dplyr::as_tibble() \%>\%
   dplyr::mutate(Survived = factor(Survived, c("No", "Yes"))) \%>\%
@@ -54,14 +55,13 @@ iris \%>\%
   ) \%>\%
   model_list_variables()
 
-if (requireNamespace("gtsummary")) {
-  glm(
-    response ~ poly(age, 3) + stage + grade * trt,
-    na.omit(gtsummary::trial),
-    family = binomial,
-  ) \%>\%
-    model_list_variables()
-}
+glm(
+  response ~ poly(age, 3) + stage + grade * trt,
+  na.omit(gtsummary::trial),
+  family = binomial,
+) \%>\%
+  model_list_variables()
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other model_helpers: 
