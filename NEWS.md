@@ -11,7 +11,7 @@
   a type check (#132)
 - New functions `.assert_package()` and `.get_min_version_required()` to 
   check for a package's installation status and whether the installed
-  version meets the minimum required version from the DESCRIPTION file.
+  version meets the minimum required version from the DESCRIPTION file (#134)
 
 **Bug fixes**
 
