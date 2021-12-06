@@ -7,6 +7,8 @@
   to include the package prefix. This message sometimes appears while
   running `gtsummary::tbl_regression()` where some users may not be
   aware where the `tidy_paramters()` function lives.
+- `.formula_list_to_named_list()` improvement: it is now possible to add
+  a type check (#132)
 
 # broom.helpers 1.4.0
 
