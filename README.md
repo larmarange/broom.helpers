@@ -99,7 +99,6 @@ ex2 <- mod2 %>%
     add_header_rows = TRUE,
     show_single_row = "trt"
   )
-#> Loading required namespace: emmeans
 ex2
 #> # A tibble: 17 × 19
 #>    term   variable var_label var_class var_type var_nlevels header_row contrasts
