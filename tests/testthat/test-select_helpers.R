@@ -319,7 +319,14 @@ test_that("select_helpers: .formula_list_to_named_list ", {
   expect_error(
     .formula_list_to_named_list("Age", var_info = tidy_mod,
                                 type_check = rlang::is_string,
-                                arg_name = "label")
+                                arg_name = "label"),
+    "Did you mean `everything"
+  )
+  expect_error(
+    .formula_list_to_named_list("Age", var_info = tidy_mod,
+                                type_check = rlang::is_string,
+                                arg_name = "label"),
+    "Age"
   )
   expect_error(
     .formula_list_to_named_list(~ "Age", var_info = tidy_mod,
