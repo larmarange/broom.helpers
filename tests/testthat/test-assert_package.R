@@ -19,4 +19,8 @@ test_that(".assert_package() works", {
     .get_min_version_required("brms"),
     c(Suggests  = "2.13.0")
   )
+  expect_equal(
+    .get_min_version_required("brms", pkg_search = NULL),
+    NULL
+  )
 })
