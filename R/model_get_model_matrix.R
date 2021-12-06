@@ -68,7 +68,7 @@ model_get_model_matrix.brmsfit <- function(model, ...) {
 #' restricted model matrix, please refer to [glmmTMB::model.matrix.glmmTMB()].
 model_get_model_matrix.glmmTMB <- function(model, ...) {
   # load lme4 if available
-  .assert_package("lme4", fn = "model_get_model_matrix.glmmTMB()")
+  .assert_package("lme4", fn = "broom.helpers::model_get_model_matrix.glmmTMB()")
 
   stats::model.matrix(
     lme4::nobars(model$modelInfo$allForm$combForm),
