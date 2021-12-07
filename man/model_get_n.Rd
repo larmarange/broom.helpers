@@ -60,6 +60,7 @@ mod <- glm(
 )
 mod \%>\% model_get_n()
 
+\dontrun{
 mod <- glm(
   Survived ~ Class * Age + Sex, data = Titanic \%>\% as.data.frame(),
   weights = Freq, family = binomial
@@ -85,6 +86,7 @@ mod <- glm(
 )
 mod \%>\% model_get_n()
 
+dont
 df <- survival::lung \%>\% dplyr::mutate(sex = factor(sex))
 mod <- survival::coxph(survival::Surv(time, status) ~ ph.ecog + age + sex, data = df)
 mod \%>\% model_get_n()
@@ -101,6 +103,7 @@ mod <- lme4::glmer(cbind(incidence, size - incidence) ~ period + (1 | herd),
   family = binomial, data = lme4::cbpp
 )
 mod \%>\% model_get_n()
+}
 }
 \seealso{
 Other model_helpers: 
