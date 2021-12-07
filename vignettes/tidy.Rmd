@@ -40,7 +40,7 @@ print_table <- function(tab) {
 ```
 
 Our model predicts tumor response using chemotherapy treatment and tumor grade.
-The data set we're utilizing has already labelled the columns using the [labelled package](http://larmarange.github.io/labelled/).
+The data set we're utilizing has already labelled the columns using the [labelled package](https://larmarange.github.io/labelled/).
 The column labels will be carried through to our figure and table.
 
 ```{r}
@@ -124,7 +124,7 @@ tidy_table %>%
   print_table()
 ```
 
-**Note::** for more advanced and nicely formatted tables of model coefficients, look at `gtsummary::tbl_regression()` and its [dedicated vignette](http://www.danieldsjoberg.com/gtsummary/articles/tbl_regression.html). `gtsummary::tbl_regression()` internally uses `broom.helpers`.
+**Note::** for more advanced and nicely formatted tables of model coefficients, look at `gtsummary::tbl_regression()` and its [dedicated vignette](https://www.danieldsjoberg.com/gtsummary/articles/tbl_regression.html). `gtsummary::tbl_regression()` internally uses `broom.helpers`.
 
 ## All-in-one function
 

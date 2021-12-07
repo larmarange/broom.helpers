@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![R build status](https://github.com/larmarange/broom.helpers/workflows/R-CMD-check/badge.svg)](https://github.com/larmarange/broom.helpers/actions)
-[![Codecov test coverage](https://codecov.io/gh/larmarange/broom.helpers/branch/main/graph/badge.svg)](https://codecov.io/gh/larmarange/broom.helpers?branch=main)
+[![Codecov test coverage](https://codecov.io/gh/larmarange/broom.helpers/branch/main/graph/badge.svg)](https://app.codecov.io/gh/larmarange/broom.helpers?branch=main)
 [![CRAN status](https://www.r-pkg.org/badges/version/broom.helpers)](https://CRAN.R-project.org/package=broom.helpers)
 [![DOI](https://zenodo.org/badge/286680847.svg)](https://zenodo.org/badge/latestdoi/286680847)
 <!-- badges: end -->
@@ -27,7 +27,7 @@ The broom.helpers package provides suite of functions to work with regression mo
 
 The suite includes functions to group regression model terms by variable, insert reference and header rows for categorical variables, add variable labels, and more.
 
-`broom.helpers` is used, in particular, by `gtsummary::tbl_regression()` for producing [nice formatted tables of model coefficients](http://www.danieldsjoberg.com/gtsummary/articles/tbl_regression.html) and by `GGally::ggcoef_model()` for [plotting model coefficients](http://ggobi.github.io/ggally/articles/ggcoef_model.html).
+`broom.helpers` is used, in particular, by `gtsummary::tbl_regression()` for producing [nice formatted tables of model coefficients](https://www.danieldsjoberg.com/gtsummary/articles/tbl_regression.html) and by `GGally::ggcoef_model()` for [plotting model coefficients](https://ggobi.github.io/ggally/articles/ggcoef_model.html).
 
 
 ## Installation
