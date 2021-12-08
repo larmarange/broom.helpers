@@ -117,10 +117,10 @@
 
   # check the type of RHS ------------------------------------------------------
   if (!is.null(type_check) && !type_check(rhs)) {
-    type_check_msg %||%
-      stringr::str_glue(
-        "Error processing `{arg_name %||% ''}` argument for element '{lhs[[1]]}'. ",
-        "The value passed is not the expected type/class.") %>%
+    stringr::str_glue(
+      "Error processing `{arg_name %||% ''}` argument for element '{lhs[[1]]}'. ",
+      type_check_msg %||% "The value passed is not the expected type/class."
+    ) %>%
       stop(call. = FALSE)
   }
 

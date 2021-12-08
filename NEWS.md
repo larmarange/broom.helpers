@@ -1,5 +1,7 @@
 # broom.helpers (development version)
 
+- Better error message in `.formula_list_to_named_list()` (#136)
+
 # broom.helpers 1.5.0
 
 **New features**
