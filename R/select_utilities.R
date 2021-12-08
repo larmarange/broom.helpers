@@ -83,7 +83,7 @@
           switch(rlang::is_string(x)) %||% as.character(deparse(x)),
           error = function(e) NULL
         ))
-      if (!is.null(x_string) && nchar(x_string) <= 50) {
+      if (!is.null(x_string) && length(x_string) == 1 && nchar(x_string) <= 50) {
         err_msg <-
           paste(
             err_msg,
