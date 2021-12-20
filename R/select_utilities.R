@@ -64,6 +64,9 @@
     else {
       .formula_select_error(arg_name = arg_name)
     }
+
+    .rhs_checks(x = named_list[i][[1]], arg_name = arg_name, type_check = type_check,
+                type_check_msg = type_check_msg, null_allowed = null_allowed)
   }
   named_list <- purrr::flatten(named_list)
 
@@ -103,6 +106,35 @@
   return(invisible())
 }
 
+# checking the type/class/NULL of the RHS of formula
+.rhs_checks <- function(x, arg_name,
+                        type_check, type_check_msg,
+                        null_allowed) {
+  purrr::imap(
+    x,
+    function(rhs, lhs) {
+      if (!null_allowed && is.null(rhs)){
+        stringr::str_glue(
+          "Error processing `{arg_name %||% ''}` argument for element '{lhs[[1]]}'. ",
+          "A NULL value is not allowed."
+        ) %>%
+          stop(call. = FALSE)
+      }
+
+      # check the type of RHS ------------------------------------------------------
+      if (!is.null(type_check) && !is.null(rhs) && !type_check(rhs)) {
+        stringr::str_glue(
+          "Error processing `{arg_name %||% ''}` argument for element '{lhs[[1]]}'. ",
+          type_check_msg %||% "The value passed is not the expected type/class."
+        ) %>%
+          stop(call. = FALSE)
+      }
+    }
+  )
+
+  return(invisible())
+}
+
 .single_formula_to_list <- function(x, data, var_info, arg_name,
                                     select_single, type_check, type_check_msg,
                                     null_allowed) {
@@ -121,22 +153,7 @@
   rhs <- .f_side_as_quo(x, "rhs") %>% rlang::eval_tidy()
 
   # checking if RHS is NULL ----------------------------------------------------
-  if (!null_allowed && is.null(rhs)){
-    stringr::str_glue(
-      "Error processing `{arg_name %||% ''}` argument for element '{lhs[[1]]}'. ",
-      "A NULL value is not allowed."
-    ) %>%
-      stop(call. = FALSE)
-  }
 
-  # check the type of RHS ------------------------------------------------------
-  if (!is.null(type_check) && !is.null(rhs) && !type_check(rhs)) {
-    stringr::str_glue(
-      "Error processing `{arg_name %||% ''}` argument for element '{lhs[[1]]}'. ",
-      type_check_msg %||% "The value passed is not the expected type/class."
-    ) %>%
-      stop(call. = FALSE)
-  }
 
   # converting rhs and lhs into a named list
   purrr::map(lhs, ~ list(rhs) %>% rlang::set_names(.x)) %>%
