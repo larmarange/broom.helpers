@@ -20,12 +20,15 @@
 #' @param type_check_msg When the `type_check=` fails, the string provided
 #' here will be printed as the error message. When `NULL`, a generic
 #' error message will be printed.
+#' @param null_allowed Are `NULL` values accepted for the right hand side of
+#' formulas?
 #' @inheritParams .select_to_varnames
 #'
 #' @export
 .formula_list_to_named_list <- function(x, data = NULL, var_info = NULL,
                                         arg_name = NULL, select_single = FALSE,
-                                        type_check = NULL, type_check_msg = NULL) {
+                                        type_check = NULL, type_check_msg = NULL,
+                                        null_allowed = TRUE) {
   # if NULL provided, return NULL ----------------------------------------------
   if (is.null(x)) {
     return(NULL)
@@ -54,7 +57,8 @@
                                 arg_name = arg_name,
                                 select_single = select_single,
                                 type_check = type_check,
-                                type_check_msg = type_check_msg) %>%
+                                type_check_msg = type_check_msg,
+                                null_allowed = null_allowed) %>%
         list()
     }
     else {
@@ -100,8 +104,9 @@
 }
 
 .single_formula_to_list <- function(x, data, var_info, arg_name,
-                                    select_single, type_check, type_check_msg) {
-  # for each formula extract lhs and rhs ---------------------------------
+                                    select_single, type_check, type_check_msg,
+                                    null_allowed) {
+  # for each formula extract lhs and rhs ---------------------------------------
   # checking the LHS is not empty
   f_lhs_quo <- .f_side_as_quo(x, "lhs")
   if (rlang::quo_is_null(f_lhs_quo)) f_lhs_quo <- rlang::expr(everything())
@@ -115,8 +120,17 @@
   # evaluate RHS of formula in the original formula environment
   rhs <- .f_side_as_quo(x, "rhs") %>% rlang::eval_tidy()
 
+  # checking if RHS is NULL ----------------------------------------------------
+  if (!null_allowed && is.null(rhs)){
+    stringr::str_glue(
+      "Error processing `{arg_name %||% ''}` argument for element '{lhs[[1]]}'. ",
+      "A NULL value is not allowed."
+    ) %>%
+      stop(call. = FALSE)
+  }
+
   # check the type of RHS ------------------------------------------------------
-  if (!is.null(type_check) && !type_check(rhs)) {
+  if (!is.null(type_check) && !is.null(rhs) && !type_check(rhs)) {
     stringr::str_glue(
       "Error processing `{arg_name %||% ''}` argument for element '{lhs[[1]]}'. ",
       type_check_msg %||% "The value passed is not the expected type/class."

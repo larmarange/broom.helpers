@@ -335,6 +335,15 @@ test_that("select_helpers: .formula_list_to_named_list ", {
     NA
   )
 
+  expect_error(
+    .formula_list_to_named_list(list(age ~ NULL), var_info = tidy_mod,
+                                type_check = is.logical),
+    NA
+  )
+  expect_error(
+    .formula_list_to_named_list(list(age ~ NULL), var_info = tidy_mod,
+                                type_check = is.logical, null_allowed = FALSE)
+  )
 })
 
 
