@@ -19,7 +19,7 @@ For example, list(age = 1, starts_with("stage") ~ 2).'><!-- mathjax --><script s
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">broom.helpers</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.0.9001</span>
       </span>
     </div>
 
@@ -73,7 +73,8 @@ For example, <code>list(age = 1, starts_with("stage") ~ 2)</code>.</p>
   arg_name <span class="op">=</span> <span class="cn">NULL</span>,
   select_single <span class="op">=</span> <span class="cn">FALSE</span>,
   type_check <span class="op">=</span> <span class="cn">NULL</span>,
-  type_check_msg <span class="op">=</span> <span class="cn">NULL</span>
+  type_check_msg <span class="op">=</span> <span class="cn">NULL</span>,
+  null_allowed <span class="op">=</span> <span class="cn">TRUE</span>
 <span class="op">)</span></code></pre></div>
     </div>
 
@@ -100,6 +101,9 @@ satisfy the function.</p></dd>
 <dd><p>When the <code>type_check=</code> fails, the string provided
 here will be printed as the error message. When <code>NULL</code>, a generic
 error message will be printed.</p></dd>
+<dt>null_allowed</dt>
+<dd><p>Are <code>NULL</code> values accepted for the right hand side of
+formulas?</p></dd>
 </dl></div>
     <div id="shortcuts">
     <h2>Shortcuts</h2>
