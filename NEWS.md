@@ -1,9 +1,10 @@
 # broom.helpers (development version)
 
-- Added new argument `.formula_list_to_named_list(null_allowed=)` argument that works in conjunction with `type_check=` asserting the class/type of the RHS of the formula (or the value of the named list).
-
-- Fix so `.formula_list_to_named_list(type_check=)` checks RHS of a formula and the value of named list.
-
+- Added new argument `.formula_list_to_named_list(null_allowed=)` argument 
+  that works in conjunction with `type_check=` asserting the class/type of 
+  the RHS of the formula (or the value of the named list) (#137)
+- Fix so `.formula_list_to_named_list(type_check=)` checks RHS of a formula 
+  and the value of named list. (#138)
 - Better error message in `.formula_list_to_named_list()` (#136)
 
 # broom.helpers 1.5.0
