@@ -1,6 +1,6 @@
 Package: broom.helpers
 Title: Helpers for Model Coefficients Tibbles
-Version: 1.5.0.9000
+Version: 1.5.0.9001
 Authors@R: 
     c(person(given = "Joseph",
              family = "Larmarange",

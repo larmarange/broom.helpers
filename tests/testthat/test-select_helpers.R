@@ -335,6 +335,42 @@ test_that("select_helpers: .formula_list_to_named_list ", {
     NA
   )
 
+  expect_error(
+    .formula_list_to_named_list(list(age ~ NULL), var_info = tidy_mod,
+                                type_check = is.logical),
+    NA
+  )
+  expect_error(
+    .formula_list_to_named_list(list(age ~ NULL), var_info = tidy_mod,
+                                type_check = is.logical, null_allowed = FALSE)
+  )
+  expect_error(
+    select_test <-
+      .formula_list_to_named_list(
+        list(response = "Response", dplyr::contains("age") ~ "?AGE?", trt = NULL),
+        data = gtsummary::trial,
+        arg_name = "label",
+        type_check = rlang::is_string,
+        type_check_msg = NULL,
+        null_allowed = TRUE
+      ),
+    NA
+  )
+  expect_equal(
+    select_test,
+    list(response = "Response", age = "?AGE?", stage = "?AGE?", trt = NULL)
+  )
+
+  expect_error(
+    .formula_list_to_named_list(
+      list(response = "Response", dplyr::contains("age") ~ "?AGE?", trt = NULL),
+      data = gtsummary::trial,
+      arg_name = "label",
+      type_check = rlang::is_string,
+      type_check_msg = NULL,
+      null_allowed = FALSE
+    )
+  )
 })
 
 

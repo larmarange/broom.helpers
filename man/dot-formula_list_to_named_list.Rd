@@ -11,7 +11,8 @@
   arg_name = NULL,
   select_single = FALSE,
   type_check = NULL,
-  type_check_msg = NULL
+  type_check_msg = NULL,
+  null_allowed = TRUE
 )
 }
 \arguments{
@@ -35,6 +36,9 @@ satisfy the function.}
 \item{type_check_msg}{When the \verb{type_check=} fails, the string provided
 here will be printed as the error message. When \code{NULL}, a generic
 error message will be printed.}
+
+\item{null_allowed}{Are \code{NULL} values accepted for the right hand side of
+formulas?}
 }
 \description{
 Functions takes a list of formulas, a named list, or a combination of named
