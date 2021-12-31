@@ -1,5 +1,7 @@
 # broom.helpers (development version)
 
+- The `.formula_list_to_named_list()` now respects the `select_single=` 
+  argument for all inputs types. Previously, named lists were ignored.
 - Added new argument `.formula_list_to_named_list(null_allowed=)` argument 
   that works in conjunction with `type_check=` asserting the class/type of 
   the RHS of the formula (or the value of the named list) (#137)

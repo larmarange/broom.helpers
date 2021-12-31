@@ -72,7 +72,27 @@
 
   # removing duplicates (using the last one listed if variable occurs more than once)
   tokeep <- names(named_list) %>% rev() %>% {!duplicated(.)} %>% rev()
-  named_list[tokeep]
+  result <- named_list[tokeep]
+
+  if (isTRUE(select_single) && length(result) > 1) {
+    .select_single_error_msg(names(result), arg_name = arg_name)
+  }
+  result
+}
+
+.select_single_error_msg <- function(selected, arg_name) {
+  if (!rlang::is_empty(arg_name)) {
+    stringr::str_glue(
+      "Error in `{arg_name}=` argument--select only a single column. ",
+      "The following columns were selected, ",
+      "{paste(sQuote(selected), collapse = ', ')}") %>%
+      stop(call. = FALSE)
+  }
+  stringr::str_glue(
+    "Error in selector--select only a single column. ",
+    "The following columns were selected, ",
+    "{paste(sQuote(selected), collapse = ', ')}") %>%
+    stop(call. = FALSE)
 }
 
 .check_valid_input <- function(x, arg_name, type_check) {
@@ -228,11 +248,7 @@
 
   # assuring only a single column is selected
   if (select_single == TRUE && length(res) > 1) {
-    stop(stringr::str_glue(
-      "Error in `{arg_name}=` argument input--select only a single column. ",
-      "The following columns were selected, ",
-      "{paste(sQuote(res), collapse = ', ')}"
-    ), call. = FALSE)
+    .select_single_error_msg(res, arg_name = arg_name)
   }
 
   # if nothing is selected, return a NULL
