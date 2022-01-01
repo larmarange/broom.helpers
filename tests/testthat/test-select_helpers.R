@@ -371,6 +371,22 @@ test_that("select_helpers: .formula_list_to_named_list ", {
       null_allowed = FALSE
     )
   )
+
+  expect_error(
+    .formula_list_to_named_list(
+      list(response = "Response", dplyr::contains("age") ~ "?AGE?", trt = NULL),
+      data = gtsummary::trial,
+      arg_name = "label",
+      select_single = TRUE
+    )
+  )
+  expect_error(
+    .formula_list_to_named_list(
+      list(response = "Response", dplyr::contains("age") ~ "?AGE?", trt = NULL),
+      data = gtsummary::trial,
+      select_single = TRUE
+    )
+  )
 })
 
 
