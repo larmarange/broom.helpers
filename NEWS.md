@@ -1,13 +1,22 @@
 # broom.helpers (development version)
 
+**New supported models**
+
+- Support for `plm::plm()` models (#140)
+
+**New features**
+
 - The `.formula_list_to_named_list()` now respects the `select_single=` 
   argument for all inputs types. Previously, named lists were ignored.
 - Added new argument `.formula_list_to_named_list(null_allowed=)` argument 
   that works in conjunction with `type_check=` asserting the class/type of 
   the RHS of the formula (or the value of the named list) (#137)
+- Better error message in `.formula_list_to_named_list()` (#136)
+
+**Bug fixes**
+
 - Fix so `.formula_list_to_named_list(type_check=)` checks RHS of a formula 
   and the value of named list. (#138)
-- Better error message in `.formula_list_to_named_list()` (#136)
 
 # broom.helpers 1.5.0
 

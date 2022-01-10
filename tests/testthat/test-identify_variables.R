@@ -573,3 +573,32 @@ test_that("model_identify_variables() works with glmmTMB::glmmTMB", {
     NA
   )
 })
+
+
+test_that("model_identify_variables() works with plm::plm", {
+  skip_if_not_installed("plm")
+  skip_on_cran()
+
+  data("Grunfeld", package = "plm")
+  mod <- plm::plm(
+    inv ~ value + capital,
+    data = Grunfeld,
+    model = "within",
+    index = c("firm", "year")
+  )
+
+  res <- mod %>% model_identify_variables()
+  expect_equivalent(
+    mod %>% model_get_model_matrix() %>% colnames(),
+    c("(Intercept)", "value", "capital")
+  )
+  expect_equivalent(
+    res$term,
+    c("(Intercept)", "value", "capital")
+  )
+  expect_equivalent(
+    res$variable,
+    c(NA, "value", "capital")
+  )
+
+})

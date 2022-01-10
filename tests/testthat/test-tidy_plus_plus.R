@@ -539,3 +539,22 @@ test_that("tidy_plus_plus() works with VGAM::vglm", {
     NA
   )
 })
+
+
+test_that("tidy_plus_plus() works with plm::plm", {
+  skip_on_cran()
+  skip_if_not_installed("plm")
+
+  data("Grunfeld", package = "plm")
+  mod <- plm::plm(
+    inv ~ value + capital,
+    data = Grunfeld,
+    model = "within",
+    index = c("firm", "year")
+  )
+
+  expect_error(
+    res <- mod %>% tidy_plus_plus(),
+    NA
+  )
+})
