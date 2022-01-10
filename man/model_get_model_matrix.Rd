@@ -7,6 +7,7 @@
 \alias{model_get_model_matrix.clm}
 \alias{model_get_model_matrix.brmsfit}
 \alias{model_get_model_matrix.glmmTMB}
+\alias{model_get_model_matrix.plm}
 \title{Get the model matrix of a model}
 \usage{
 model_get_model_matrix(model, ...)
@@ -20,6 +21,8 @@ model_get_model_matrix(model, ...)
 \method{model_get_model_matrix}{brmsfit}(model, ...)
 
 \method{model_get_model_matrix}{glmmTMB}(model, ...)
+
+\method{model_get_model_matrix}{plm}(model, ...)
 }
 \arguments{
 \item{model}{a model object}
@@ -36,6 +39,8 @@ with the same structure as \code{\link[stats:model.matrix]{stats::model.matrix.d
 For models fitted with \code{\link[glmmTMB:glmmTMB]{glmmTMB::glmmTMB()}}, it will return a model matrix
 taking into account all components ("cond", "zi" and "disp"). For a more
 restricted model matrix, please refer to \code{\link[glmmTMB:glmmTMB_methods]{glmmTMB::model.matrix.glmmTMB()}}.
+
+For \code{\link[plm:plm]{plm::plm()}} models, constant colums are not removed.
 }
 \examples{
 lm(hp ~ mpg + factor(cyl), mtcars) \%>\%
