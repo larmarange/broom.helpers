@@ -58,10 +58,14 @@
 
     <div class="section level2">
 <h2 class="page-header" data-toc-text="development version" id="broomhelpers-development-version">broom.helpers (development version)<a class="anchor" aria-label="anchor" href="#broomhelpers-development-version"></a></h2>
+<p><strong>New supported models</strong></p>
+<ul><li>Support for <code><a href="https://rdrr.io/pkg/plm/man/plm.html" class="external-link">plm::plm()</a></code> models (<a href="https://github.com/larmarange/broom.helpers/issues/140" class="external-link">#140</a>)</li>
+</ul><p><strong>New features</strong></p>
 <ul><li>The <code><a href="../reference/dot-formula_list_to_named_list.html">.formula_list_to_named_list()</a></code> now respects the <code>select_single=</code> argument for all inputs types. Previously, named lists were ignored.</li>
 <li>Added new argument <code>.formula_list_to_named_list(null_allowed=)</code> argument that works in conjunction with <code>type_check=</code> asserting the class/type of the RHS of the formula (or the value of the named list) (<a href="https://github.com/larmarange/broom.helpers/issues/137" class="external-link">#137</a>)</li>
-<li>Fix so <code>.formula_list_to_named_list(type_check=)</code> checks RHS of a formula and the value of named list. (<a href="https://github.com/larmarange/broom.helpers/issues/138" class="external-link">#138</a>)</li>
 <li>Better error message in <code><a href="../reference/dot-formula_list_to_named_list.html">.formula_list_to_named_list()</a></code> (<a href="https://github.com/larmarange/broom.helpers/issues/136" class="external-link">#136</a>)</li>
+</ul><p><strong>Bug fixes</strong></p>
+<ul><li>Fix so <code>.formula_list_to_named_list(type_check=)</code> checks RHS of a formula and the value of named list. (<a href="https://github.com/larmarange/broom.helpers/issues/138" class="external-link">#138</a>)</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.5.0" id="broomhelpers-150">broom.helpers 1.5.0<small>2021-12-07</small><a class="anchor" aria-label="anchor" href="#broomhelpers-150"></a></h2>

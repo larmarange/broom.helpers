@@ -83,6 +83,9 @@ with the same structure as <code><a href="https://rdrr.io/r/stats/model.matrix.h
 <span class="fu">model_get_model_matrix</span><span class="op">(</span><span class="va">model</span>, <span class="va">...</span><span class="op">)</span>
 
 <span class="co"># S3 method for glmmTMB</span>
+<span class="fu">model_get_model_matrix</span><span class="op">(</span><span class="va">model</span>, <span class="va">...</span><span class="op">)</span>
+
+<span class="co"># S3 method for plm</span>
 <span class="fu">model_get_model_matrix</span><span class="op">(</span><span class="va">model</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
     </div>
 
@@ -98,6 +101,7 @@ with the same structure as <code><a href="https://rdrr.io/r/stats/model.matrix.h
     <p>For models fitted with <code><a href="https://rdrr.io/pkg/glmmTMB/man/glmmTMB.html" class="external-link">glmmTMB::glmmTMB()</a></code>, it will return a model matrix
 taking into account all components ("cond", "zi" and "disp"). For a more
 restricted model matrix, please refer to <code><a href="https://rdrr.io/pkg/glmmTMB/man/glmmTMB_methods.html" class="external-link">glmmTMB::model.matrix.glmmTMB()</a></code>.</p>
+<p>For <code><a href="https://rdrr.io/pkg/plm/man/plm.html" class="external-link">plm::plm()</a></code> models, constant colums are not removed.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
