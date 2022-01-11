@@ -57,6 +57,7 @@ Suggests:
     nnet,
     ordinal,
     parameters,
+    plm,
     rmarkdown,
     rstanarm,
     spelling,

@@ -352,7 +352,8 @@ tibble::tribble(
   '`rstanarm::stan_glm()`', '`broom.mixed` package required',
   '`VGAM::vglm()`', 'Limited support. It is recommanded to use `tidy_parameters()` as `tidy_fun`.',
   '`cmprsk::crr()`', 'Limited support. It is recommanded to use `tidycmprsk::crr()` instead.',
-  '`tidycmprsk::crr()`', ''
+  '`tidycmprsk::crr()`', '',
+  '`plm::plm()`',''
 ) %>%
   dplyr::arrange(Model) %>%
   gt::gt() %>%
