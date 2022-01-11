@@ -34,10 +34,12 @@ reference:
 
   - title: Add to tidy tibbles
   - contents:
-      - starts_with("tidy_")
-      - -tidy_plus_plus
-      - -tidy_parameters
-      - -tidy_with_broom_or_parameters
+      - starts_with("tidy_attach")
+      - starts_with("tidy_identify")
+      - starts_with("tidy_add")
+      - starts_with("tidy_disambiguate")
+      - starts_with("tidy_remove")
+      - starts_with("tidy_select")
 
   - title: Custom tidiers
   - contents:
