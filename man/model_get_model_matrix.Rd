@@ -40,7 +40,7 @@ For models fitted with \code{\link[glmmTMB:glmmTMB]{glmmTMB::glmmTMB()}}, it wil
 taking into account all components ("cond", "zi" and "disp"). For a more
 restricted model matrix, please refer to \code{\link[glmmTMB:glmmTMB_methods]{glmmTMB::model.matrix.glmmTMB()}}.
 
-For \code{\link[plm:plm]{plm::plm()}} models, constant colums are not removed.
+For \code{\link[plm:plm]{plm::plm()}} models, constant columns are not removed.
 }
 \examples{
 lm(hp ~ mpg + factor(cyl), mtcars) \%>\%

@@ -81,7 +81,7 @@ model_get_model_matrix.glmmTMB <- function(model, ...) {
 #' @export
 #' @rdname model_get_model_matrix
 #' @details
-#' For [plm::plm()] models, constant colums are not removed.
+#' For [plm::plm()] models, constant columns are not removed.
 model_get_model_matrix.plm <- function(model, ...) {
   stats::model.matrix(model, cstcovar.rm = "none", ...)
 }
