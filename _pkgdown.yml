@@ -39,7 +39,7 @@ reference:
       - -tidy_parameters
       - -tidy_with_broom_or_parameters
 
-  - title: Custome tidiers
+  - title: Custom tidiers
   - contents:
       - tidy_parameters
       - tidy_with_broom_or_parameters
