@@ -1,26 +1,28 @@
 # Platform
 
-|field    |value                        |
-|:--------|:----------------------------|
-|version  |R version 4.1.1 (2021-08-10) |
-|os       |Windows 10 x64               |
-|system   |x86_64, mingw32              |
-|ui       |RStudio                      |
-|language |(EN)                         |
-|collate  |French_France.1252           |
-|ctype    |French_France.1252           |
-|tz       |Europe/Paris                 |
-|date     |2021-12-06                   |
+|field    |value                                |
+|:--------|:------------------------------------|
+|version  |R version 4.1.2 (2021-11-01)         |
+|os       |Windows 10 x64 (build 22000)         |
+|system   |x86_64, mingw32                      |
+|ui       |RStudio                              |
+|language |(EN)                                 |
+|collate  |French_France.1252                   |
+|ctype    |French_France.1252                   |
+|tz       |Europe/Paris                         |
+|date     |2022-01-12                           |
+|rstudio  |2021.09.0+351 Ghost Orchid (desktop) |
+|pandoc   |NA                                   |
 
 # Dependencies
 
 |package       |old    |new        |<U+0394>  |
 |:-------------|:------|:----------|:--|
-|broom.helpers |1.4.0  |1.4.0.9001 |*  |
-|backports     |1.3.0  |1.3.0      |   |
+|broom.helpers |1.5.0  |1.5.0.9002 |*  |
+|backports     |1.4.1  |1.4.1      |   |
 |bit           |4.0.4  |4.0.4      |   |
 |bit64         |4.0.5  |4.0.5      |   |
-|broom         |0.7.10 |0.7.10     |   |
+|broom         |0.7.11 |0.7.11     |   |
 |cli           |3.1.0  |3.1.0      |   |
 |clipr         |0.7.1  |0.7.1      |   |
 |colorspace    |2.0-2  |2.0-2      |   |
@@ -34,7 +36,7 @@
 |forcats       |0.5.1  |0.5.1      |   |
 |generics      |0.1.1  |0.1.1      |   |
 |ggplot2       |3.3.5  |3.3.5      |   |
-|glue          |1.5.1  |1.5.1      |   |
+|glue          |1.6.0  |1.6.0      |   |
 |gtable        |0.3.0  |0.3.0      |   |
 |haven         |2.4.3  |2.4.3      |   |
 |hms           |1.1.1  |1.1.1      |   |
