@@ -1,4 +1,4 @@
-# broom.helpers (development version)
+# broom.helpers 1.6.0
 
 **New supported models**
 
