@@ -1,6 +1,6 @@
 ## Test environments
 
-* local R installation: R 4.1.1
+* local R installation: R 4.1.2
 * mac OS (on github actions): R-release, R-oldrel
 * windows (on github actions): R-release, R-oldrel
 * ubuntu 20.04 (on github actions): R-release
