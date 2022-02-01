@@ -220,3 +220,7 @@ model_get_n.coxph <- function(model) {
 #' @export
 #' @rdname model_get_n
 model_get_n.survreg <- model_get_n.coxph
+
+#' @export
+#' @rdname model_get_n
+model_get_n.tidycrr <- model_get_n.coxph
