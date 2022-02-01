@@ -18,7 +18,7 @@ three additional columns: variable, var_class, var_type and var_nlevels."><!-- m
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">broom.helpers</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.0.9000</span>
       </span>
     </div>
 
@@ -120,15 +120,15 @@ of original levels in the corresponding variables.</p>
 <span class="r-in">  <span class="fu"><a href="tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span class="r-in">  <span class="fu">tidy_identify_variables</span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 7 × 11</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   term     variable  var_class var_type var_nlevels estimate std.error statistic</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> (Interc… (Interce… <span style="color: #BB0000;">NA</span>        interce…          <span style="color: #BB0000;">NA</span>    2.18      0.176    12.4  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Class2nd Class     character categor…           4   -<span style="color: #BB0000;">1.03</span>      0.200    -<span style="color: #BB0000;">5.17</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Class3rd Class     character categor…           4   -<span style="color: #BB0000;">1.81</span>      0.176   -<span style="color: #BB0000;">10.3</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> ClassCr… Class     character categor…           4   -<span style="color: #BB0000;">0.803</span>     0.160    -<span style="color: #BB0000;">5.03</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> AgeChild Age       character dichoto…           2   -<span style="color: #BB0000;">0.110</span>     0.335    -<span style="color: #BB0000;">0.328</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> SexMale  Sex       character dichoto…           2   -<span style="color: #BB0000;">2.62</span>      0.151   -<span style="color: #BB0000;">17.3</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> AgeChil… Age:Sex   <span style="color: #BB0000;">NA</span>        interac…          <span style="color: #BB0000;">NA</span>    1.90      0.433     4.39 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   term      variable var_class var_type var_nlevels estimate std.error statistic</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> (Interce… (Interc… <span style="color: #BB0000;">NA</span>        interce…          <span style="color: #BB0000;">NA</span>    2.18      0.176    12.4  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Class2nd  Class    character categor…           4   -<span style="color: #BB0000;">1.03</span>      0.200    -<span style="color: #BB0000;">5.17</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Class3rd  Class    character categor…           4   -<span style="color: #BB0000;">1.81</span>      0.176   -<span style="color: #BB0000;">10.3</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> ClassCrew Class    character categor…           4   -<span style="color: #BB0000;">0.803</span>     0.160    -<span style="color: #BB0000;">5.03</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> AgeChild  Age      character dichoto…           2   -<span style="color: #BB0000;">0.110</span>     0.335    -<span style="color: #BB0000;">0.328</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> SexMale   Sex      character dichoto…           2   -<span style="color: #BB0000;">2.62</span>      0.151   -<span style="color: #BB0000;">17.3</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> AgeChild… Age:Sex  <span style="color: #BB0000;">NA</span>        interac…          <span style="color: #BB0000;">NA</span>    1.90      0.433     4.39 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 3 more variables: p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span></span>
@@ -139,13 +139,13 @@ of original levels in the corresponding variables.</p>
 <span class="r-in">  <span class="fu"><a href="tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>conf.int <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span class="r-in">  <span class="fu">tidy_identify_variables</span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 11</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   term     variable  var_class var_type var_nlevels estimate std.error statistic</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> (Interc… (Interce… <span style="color: #BB0000;">NA</span>        interce…          <span style="color: #BB0000;">NA</span>   5.84      0.035<span style="text-decoration: underline;">9</span>   163.   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> poly(Se… Sepal.Wi… nmatrix.2 continu…          <span style="color: #BB0000;">NA</span>   4.27      0.568      7.52 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> poly(Se… Sepal.Wi… nmatrix.2 continu…          <span style="color: #BB0000;">NA</span>  -<span style="color: #BB0000;">0.072</span><span style="color: #BB0000; text-decoration: underline;">0</span>    0.447     -<span style="color: #BB0000;">0.161</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Species1 Species   factor    categor…           3  -<span style="color: #BB0000;">1.13</span>      0.064<span style="text-decoration: underline;">7</span>   -<span style="color: #BB0000;">17.5</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Species2 Species   factor    categor…           3   0.324     0.059<span style="text-decoration: underline;">3</span>     5.46 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   term      variable var_class var_type var_nlevels estimate std.error statistic</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> (Interce… (Interc… <span style="color: #BB0000;">NA</span>        interce…          <span style="color: #BB0000;">NA</span>   5.84      0.035<span style="text-decoration: underline;">9</span>   163.   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> poly(Sep… Sepal.W… nmatrix.2 continu…          <span style="color: #BB0000;">NA</span>   4.27      0.568      7.52 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> poly(Sep… Sepal.W… nmatrix.2 continu…          <span style="color: #BB0000;">NA</span>  -<span style="color: #BB0000;">0.072</span><span style="color: #BB0000; text-decoration: underline;">0</span>    0.447     -<span style="color: #BB0000;">0.161</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Species1  Species  factor    categor…           3  -<span style="color: #BB0000;">1.13</span>      0.064<span style="text-decoration: underline;">7</span>   -<span style="color: #BB0000;">17.5</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Species2  Species  factor    categor…           3   0.324     0.059<span style="text-decoration: underline;">3</span>     5.46 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 3 more variables: p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;</span></span>
 </code></pre></div>
     </div>
@@ -161,7 +161,7 @@ of original levels in the corresponding variables.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer></div>
