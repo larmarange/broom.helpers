@@ -223,4 +223,25 @@ model_get_n.survreg <- model_get_n.coxph
 
 #' @export
 #' @rdname model_get_n
-model_get_n.tidycrr <- model_get_n.coxph
+model_get_n.tidycrr <- function(model) {
+  tcm <- model %>% model_compute_terms_contributions()
+  if (is.null(tcm)) return(NULL) # nocov
+
+  w <- model %>% model_get_weights()
+  n <- dplyr::tibble(
+    term = colnames(tcm),
+    n_obs = colSums(tcm * w)
+  )
+  attr(n, "N_obs") <- sum(w)
+
+  y <- model %>% model_get_response()
+  time <- y[, 1]
+  status <- as.integer(y[, 2] == model$failcode)
+
+  n$n_event <- colSums(tcm * status * w)
+  attr(n, "N_event") <- sum(status * w)
+  n$exposure <- colSums(tcm * time * w)
+  attr(n, "Exposure") <- sum(time * w)
+
+  n
+}
