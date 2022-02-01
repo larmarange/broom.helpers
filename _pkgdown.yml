@@ -58,3 +58,7 @@ reference:
   - contents:
       - starts_with("\\.")
 
+  - title: Supported models
+  - contents:
+      - supported_models
+
