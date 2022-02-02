@@ -61,6 +61,7 @@ Suggests:
     survey,
     survival,
     testthat,
+    tidycmprsk,
     VGAM
 VignetteBuilder: 
     knitr
