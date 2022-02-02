@@ -31,6 +31,7 @@ reference:
   - title: All-in-one function
   - contents:
       - tidy_plus_plus
+      - supported_models
 
   - title: Add to tidy tibbles
   - contents:
@@ -57,8 +58,4 @@ reference:
   - title: Exported utility functions
   - contents:
       - starts_with("\\.")
-
-  - title: Supported models
-  - contents:
-      - supported_models
 
