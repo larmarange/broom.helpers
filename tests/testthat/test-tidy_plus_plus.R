@@ -427,6 +427,17 @@ test_that("tidy_plus_plus() works with cmprsk::crr", {
   )
 })
 
+test_that("tidy_plus_plus() works with tidycmprsk::crr", {
+  skip_on_cran()
+  skip_if_not_installed("tidycmprsk")
+
+  mod <- tidycmprsk::crr(Surv(ttdeath, death_cr) ~ age + grade, tidycmprsk::trial)
+  expect_error(
+    res <- mod %>% tidy_plus_plus(quiet = TRUE),
+    NA
+  )
+})
+
 
 test_that("tidy_plus_plus() works with stats::nls", {
   mod <- stats::nls(
