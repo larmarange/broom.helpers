@@ -44,6 +44,9 @@ For Poisson models, will return the number of events and exposure time
 For Cox models (\code{\link[survival:coxph]{survival::coxph()}}), will return the number of events and
 exposure time.
 
+For competing risk regression models (\code{\link[tidycmprsk:crr]{tidycmprsk::crr()}}), \code{n_event} takes
+into account only the event of interest defined by \code{failcode.}
+
 See \code{\link[=tidy_add_n]{tidy_add_n()}} for more details.
 
 The total number of observations (\code{N_obs}), of events (\code{N_event}) and of

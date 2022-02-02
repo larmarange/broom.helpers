@@ -9,6 +9,9 @@
 #' For Cox models ([survival::coxph()]), will return the number of events and
 #' exposure time.
 #'
+#' For competing risk regression models ([tidycmprsk::crr()]), `n_event` takes
+#' into account only the event of interest defined by `failcode.`
+#'
 #' See [tidy_add_n()] for more details.
 #'
 #' The total number of observations (`N_obs`), of events (`N_event`) and of

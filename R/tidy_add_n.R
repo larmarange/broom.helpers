@@ -43,11 +43,14 @@
 #' with several observations (several rows). `n_obs` will correspond to the weighted
 #' number of observations which could be different from the number of
 #' individuals. `tidy_add_n()` will also compute a (weighted) number of events
-#' (`n_events`) according to the definition of the [survival::Surv()] object.
+#' (`n_event`) according to the definition of the [survival::Surv()] object.
 #' Exposure time is also returned in `exposure` column. It is equal to the
 #' (weighted) sum of the time variable if only one variable time is passed to
 #' [survival::Surv()], and to the (weighted) sum of `time2 - time` if two time
 #' variables are defined in [survival::Surv()].
+#'
+#' For competing risk regression models ([tidycmprsk::crr()]), `n_event` takes
+#' into account only the event of interest defined by `failcode.`
 #'
 #' The (weighted) total number of observations (`N_obs`), of events (`N_event`) and
 #' of exposure time (`Exposure`) are stored as attributes of the returned
