@@ -115,7 +115,7 @@ Exposure time is also returned in <code>exposure</code> column. It is equal to t
 (weighted) sum of the time variable if only one variable time is passed to
 <code><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">survival::Surv()</a></code>, and to the (weighted) sum of <code>time2 - time</code> if two time
 variables are defined in <code><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">survival::Surv()</a></code>.</p>
-<p>For competing risk regression models (<code>tidycmprsk::crr()</code>), <code>n_event</code> takes
+<p>For competing risk regression models (<code><a href="https://mskcc-epi-bio.github.io/tidycmprsk/reference/crr.html" class="external-link">tidycmprsk::crr()</a></code>), <code>n_event</code> takes
 into account only the event of interest defined by <code>failcode.</code></p>
 <p>The (weighted) total number of observations (<code>N_obs</code>), of events (<code>N_event</code>) and
 of exposure time (<code>Exposure</code>) are stored as attributes of the returned
