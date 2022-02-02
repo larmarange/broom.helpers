@@ -56,11 +56,14 @@ For Cox models (\code{\link[survival:coxph]{survival::coxph()}}), an individual 
 with several observations (several rows). \code{n_obs} will correspond to the weighted
 number of observations which could be different from the number of
 individuals. \code{tidy_add_n()} will also compute a (weighted) number of events
-(\code{n_events}) according to the definition of the \code{\link[survival:Surv]{survival::Surv()}} object.
+(\code{n_event}) according to the definition of the \code{\link[survival:Surv]{survival::Surv()}} object.
 Exposure time is also returned in \code{exposure} column. It is equal to the
 (weighted) sum of the time variable if only one variable time is passed to
 \code{\link[survival:Surv]{survival::Surv()}}, and to the (weighted) sum of \code{time2 - time} if two time
 variables are defined in \code{\link[survival:Surv]{survival::Surv()}}.
+
+For competing risk regression models (\code{\link[tidycmprsk:crr]{tidycmprsk::crr()}}), \code{n_event} takes
+into account only the event of interest defined by \code{failcode.}
 
 The (weighted) total number of observations (\code{N_obs}), of events (\code{N_event}) and
 of exposure time (\code{Exposure}) are stored as attributes of the returned

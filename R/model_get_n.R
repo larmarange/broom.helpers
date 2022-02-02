@@ -9,6 +9,9 @@
 #' For Cox models ([survival::coxph()]), will return the number of events and
 #' exposure time.
 #'
+#' For competing risk regression models ([tidycmprsk::crr()]), `n_event` takes
+#' into account only the event of interest defined by `failcode.`
+#'
 #' See [tidy_add_n()] for more details.
 #'
 #' The total number of observations (`N_obs`), of events (`N_event`) and of
@@ -220,3 +223,28 @@ model_get_n.coxph <- function(model) {
 #' @export
 #' @rdname model_get_n
 model_get_n.survreg <- model_get_n.coxph
+
+#' @export
+#' @rdname model_get_n
+model_get_n.tidycrr <- function(model) {
+  tcm <- model %>% model_compute_terms_contributions()
+  if (is.null(tcm)) return(NULL) # nocov
+
+  w <- model %>% model_get_weights()
+  n <- dplyr::tibble(
+    term = colnames(tcm),
+    n_obs = colSums(tcm * w)
+  )
+  attr(n, "N_obs") <- sum(w)
+
+  y <- model %>% model_get_response()
+  time <- y[, 1]
+  status <- as.integer(y[, 2] == model$failcode)
+
+  n$n_event <- colSums(tcm * status * w)
+  attr(n, "N_event") <- sum(status * w)
+  n$exposure <- colSums(tcm * time * w)
+  attr(n, "Exposure") <- sum(time * w)
+
+  n
+}

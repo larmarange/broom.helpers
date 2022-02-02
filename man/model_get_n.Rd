@@ -9,6 +9,7 @@
 \alias{model_get_n.multinom}
 \alias{model_get_n.coxph}
 \alias{model_get_n.survreg}
+\alias{model_get_n.tidycrr}
 \title{Get the number of observations}
 \usage{
 model_get_n(model)
@@ -26,6 +27,8 @@ model_get_n(model)
 \method{model_get_n}{coxph}(model)
 
 \method{model_get_n}{survreg}(model)
+
+\method{model_get_n}{tidycrr}(model)
 }
 \arguments{
 \item{model}{a model object}
@@ -40,6 +43,9 @@ For Poisson models, will return the number of events and exposure time
 
 For Cox models (\code{\link[survival:coxph]{survival::coxph()}}), will return the number of events and
 exposure time.
+
+For competing risk regression models (\code{\link[tidycmprsk:crr]{tidycmprsk::crr()}}), \code{n_event} takes
+into account only the event of interest defined by \code{failcode.}
 
 See \code{\link[=tidy_add_n]{tidy_add_n()}} for more details.
 

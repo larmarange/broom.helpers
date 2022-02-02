@@ -358,3 +358,14 @@ test_that("model_get_n() works with lavaan::lavaan", {
   expect_null(mod %>% model_compute_terms_contributions())
 })
 
+test_that("model_get_n() works with tidycmprsk::crr", {
+  skip_on_cran()
+  skip_if_not_installed("tidycmprsk")
+
+  mod <- tidycmprsk::crr(Surv(ttdeath, death_cr) ~ age + grade, tidycmprsk::trial)
+  res <- mod %>% tidy_plus_plus()
+  expect_equivalent(
+    res$n_event,
+    c(52, 16, 15, 21)
+  )
+})

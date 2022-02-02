@@ -1,5 +1,10 @@
 # broom.helpers (development version)
 
+**New features**
+
+- `tidy_add_n()` and `model_get_n()` support for `tidycmprsk::crr()` 
+  models (#143)
+
 # broom.helpers 1.6.0
 
 **New supported models**
