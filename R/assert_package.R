@@ -26,31 +26,18 @@ NULL
 .assert_package <- function(pkg, fn = NULL, pkg_search = "broom.helpers", boolean = FALSE) {
   # check if min version is required -------------------------------------------
   version <- .get_min_version_required(pkg, pkg_search)
-  if (is.null(version) && !requireNamespace(pkg, quietly = TRUE)) {
-    if (!is.null(fn)) {
-      cli_alert_danger("The {.val {pkg}} package is required for function {.code {fn}}.")
-    }
-    cli_ul("Install {.val {pkg}} with the code below.")
-    cli_code(glue::glue('install.packages("{pkg}")'))
-    if (isTRUE(boolean)) return(FALSE)
-    stop("Install required package", call. = FALSE)
+
+  # check installation TRUE/FALSE ----------------------------------------------
+  if (isTRUE(boolean)) {
+    return(rlang::is_installed(pkg = pkg, version = version))
   }
 
-  if (!is.null(version) &&
-      (!requireNamespace(pkg, quietly = TRUE) ||
-       (requireNamespace(pkg, quietly = TRUE) && utils::packageVersion(pkg) < version))) {
-    if (!is.null(fn)) {
-      paste("The {.val {pkg}} package {.field v{version}} or greater is",
-            "required for function {.code {fn}}.") %>%
-        cli_alert_danger()
-    }
-    cli_ul("Install/update {.val {pkg}} with the code below.")
-    cli_code(glue::glue('install.packages("{pkg}")'))
-    if (isTRUE(boolean)) return(FALSE)
-    stop("Install required package", call. = FALSE)
-  }
-
-  if (isTRUE(boolean)) return(TRUE)
+  # prompt user to install package ---------------------------------------------
+  rlang::check_installed(
+    pkg = pkg,
+    version = version,
+    reason = switch(!is.null(fn), stringr::str_glue("for `{fn}`"))
+  )
   invisible()
 }
 

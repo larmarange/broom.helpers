@@ -23,7 +23,7 @@ Imports:
     labelled,
     lifecycle,
     purrr,
-    rlang,
+    rlang (>= 1.0.1),
     stats,
     stringr,
     tibble,
