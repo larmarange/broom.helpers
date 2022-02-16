@@ -1,6 +1,6 @@
 Package: broom.helpers
 Title: Helpers for Model Coefficients Tibbles
-Version: 1.6.0.9000
+Version: 1.6.0.9001
 Authors@R: c(
     person("Joseph", "Larmarange", , "joseph@larmarange.net", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-7097-700X")),
@@ -23,7 +23,7 @@ Imports:
     labelled,
     lifecycle,
     purrr,
-    rlang,
+    rlang (>= 1.0.1),
     stats,
     stringr,
     tibble,
@@ -47,7 +47,7 @@ Suggests:
     knitr,
     lavaan,
     lfe,
-    lme4,
+    lme4 (>= 1.1.28),
     MASS,
     mgcv,
     mice,
