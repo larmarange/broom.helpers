@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">broom.helpers</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.0.9001</span>
       </span>
     </div>
 
@@ -59,7 +59,8 @@
     <div class="section level2">
 <h2 class="page-header" data-toc-text="development version" id="broomhelpers-development-version">broom.helpers (development version)<a class="anchor" aria-label="anchor" href="#broomhelpers-development-version"></a></h2>
 <p><strong>New features</strong></p>
-<ul><li>
+<ul><li>The <code><a href="../reference/assert_package.html">.assert_package()</a></code> now uses <code><a href="https://rlang.r-lib.org/reference/is_installed.html" class="external-link">rlang::check_installed()</a></code> and <code><a href="https://rlang.r-lib.org/reference/is_installed.html" class="external-link">rlang::is_installed()</a></code> to check whether needed packages are installed. The <code><a href="https://rlang.r-lib.org/reference/is_installed.html" class="external-link">rlang::check_installed()</a></code> prompts user to install needed package when run interactively. (<a href="https://github.com/larmarange/broom.helpers/issues/147" class="external-link">#147</a>)</li>
+<li>
 <code><a href="../reference/tidy_add_n.html">tidy_add_n()</a></code> and <code><a href="../reference/model_get_n.html">model_get_n()</a></code> support for <code><a href="https://mskcc-epi-bio.github.io/tidycmprsk/reference/crr.html" class="external-link">tidycmprsk::crr()</a></code> models (<a href="https://github.com/larmarange/broom.helpers/issues/143" class="external-link">#143</a>)</li>
 <li>Listing of supported models is now available in <code>supported_models</code> tibble (<a href="https://github.com/larmarange/broom.helpers/issues/145" class="external-link">#145</a>)</li>
 </ul></div>
