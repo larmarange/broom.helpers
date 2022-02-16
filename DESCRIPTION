@@ -47,7 +47,7 @@ Suggests:
     knitr,
     lavaan,
     lfe,
-    lme4,
+    lme4 (>= 1.1.28),
     MASS,
     mgcv,
     mice,
