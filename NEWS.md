@@ -2,6 +2,7 @@
 
 **New features**
 
+- The `.assert_package()` now uses `rlang::check_installed()` and `rlang::is_installed()` to check whether needed packages are installed. The `rlang::check_installed()` prompts user to install needed package when run interactively. (#147)
 - `tidy_add_n()` and `model_get_n()` support for `tidycmprsk::crr()` 
   models (#143)
 - Listing of supported models is now available in `supported_models` tibble (#145)
