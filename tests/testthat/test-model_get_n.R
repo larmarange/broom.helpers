@@ -369,3 +369,21 @@ test_that("model_get_n() works with tidycmprsk::crr", {
     c(52, 16, 15, 21)
   )
 })
+
+test_that("tidy_add_n() does not duplicates rows with gam model", {
+  skip_on_cran()
+  skip_if_not_installed("mgcv")
+  skip_if_not_installed("gtsummary")
+
+  mod <- mgcv::gam(
+    marker ~ s(age, bs = 'ad', k = -1) + grade + ti(age, by = grade, bs ='fs'),
+    data = gtsummary::trial,
+    method = 'REML',
+    family = gaussian
+  )
+
+  res <- mod %>%
+    tidy_and_attach(tidy_fun = gtsummary::tidy_gam) %>%
+    tidy_add_n()
+  expect_equal(nrow(res), 7L)
+})
