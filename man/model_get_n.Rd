@@ -4,7 +4,6 @@
 \alias{model_get_n}
 \alias{model_get_n.default}
 \alias{model_get_n.glm}
-\alias{model_get_n.gam}
 \alias{model_get_n.glmerMod}
 \alias{model_get_n.multinom}
 \alias{model_get_n.coxph}
@@ -17,8 +16,6 @@ model_get_n(model)
 \method{model_get_n}{default}(model)
 
 \method{model_get_n}{glm}(model)
-
-\method{model_get_n}{gam}(model)
 
 \method{model_get_n}{glmerMod}(model)
 

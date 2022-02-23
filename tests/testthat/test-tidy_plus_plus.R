@@ -497,6 +497,7 @@ test_that("tidy_plus_plus() error messaging", {
 
 test_that("tidy_plus_plus() works with mgcv::gam", {
   skip_on_cran()
+  skip_if_not_installed("mgcv")
   tidy_gam <- function(x, conf.int = FALSE, exponentiate = FALSE, ...) {
     broom::tidy(x,
                 conf.int = conf.int,

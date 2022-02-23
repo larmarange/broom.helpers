@@ -2,10 +2,18 @@
 
 **New features**
 
-- The `.assert_package()` now uses `rlang::check_installed()` and `rlang::is_installed()` to check whether needed packages are installed. The `rlang::check_installed()` prompts user to install needed package when run interactively. (#147)
+- The `.assert_package()` now uses `rlang::check_installed()` and 
+  `rlang::is_installed()` to check whether needed packages are installed. The 
+  `rlang::check_installed()` prompts user to install needed package when run 
+  interactively. (#147)
 - `tidy_add_n()` and `model_get_n()` support for `tidycmprsk::crr()` 
   models (#143)
 - Listing of supported models is now available in `supported_models` tibble (#145)
+
+**Bug fixes**
+
+- Avoiding duplicating rows when applying `tidy_add_n()` to a `mgcv::gam()`
+  model with smooth terms (#150)
 
 # broom.helpers 1.6.0
 
