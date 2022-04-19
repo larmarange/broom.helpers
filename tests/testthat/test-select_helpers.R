@@ -192,6 +192,7 @@ test_that("select_helpers: tidy_plus_plus", {
   )
 
   skip_on_cran()
+  skip_if_not_installed("lme4")
   mod3 <- lme4::lmer(age ~ stage + (stage|grade) + (1|grade), gtsummary::trial)
   res <- mod3 %>% tidy_plus_plus(
     tidy_fun = broom.mixed::tidy,
