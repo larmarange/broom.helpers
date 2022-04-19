@@ -51,7 +51,8 @@ functions for selecting columns of data frames (and other items as well).
 \item \code{all_contrasts()} selects variables in regression model based on their type
 of contrast
 \item \code{all_ran_pars()} and \code{all_ran_vals()} for random-effect parameters and
-values from a mixed model (see \href{https://cran.r-project.org/web/packages/broom.mixed/vignettes/broom_mixed_intro.html}{\code{broom.mixed}'s vignette})
+values from a mixed model
+(see \code{vignette("broom_mixed_intro", package = "broom.mixed")})
 }
 }
 \examples{
