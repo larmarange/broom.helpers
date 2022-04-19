@@ -220,6 +220,7 @@ test_that("test tidy_add_header_rows() bad single row request", {
 
 
 test_that("tidy_add_header_rows() and mixed model", {
+  skip_if_not_installed("lme4")
   mod <- lme4::lmer(
     age ~ stage + (stage|grade) + (1|grade),
     gtsummary::trial

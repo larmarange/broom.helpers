@@ -244,6 +244,7 @@ test_that("tidy_identify_variables() works with variables having non standard na
 
 test_that("model_identify_variables() works with lme4::lmer", {
   skip_on_cran()
+  skip_if_not_installed("lme4")
   mod <- lme4::lmer(Reaction ~ Days + (Days | Subject), lme4::sleepstudy)
   res <- mod %>% model_identify_variables()
   expect_equivalent(
@@ -271,6 +272,7 @@ test_that("model_identify_variables() works with lme4::lmer", {
 
 test_that("model_identify_variables() works with lme4::glmer", {
   skip_on_cran()
+  skip_if_not_installed("lme4")
   mod <- lme4::glmer(cbind(incidence, size - incidence) ~ period + (1 | herd),
     family = binomial, data = lme4::cbpp
   )
