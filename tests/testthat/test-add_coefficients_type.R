@@ -111,6 +111,7 @@ test_that("test tidy_add_coefficients_type() checks", {
 
 test_that("model_get_coefficients_type() works with lme4::lmer", {
   skip_on_cran()
+  skip_if_not_installed("lme4")
   mod <- lme4::lmer(Reaction ~ Days + (Days | Subject), lme4::sleepstudy)
   res <- mod %>% model_get_coefficients_type()
   expect_equivalent(res, "generic")
