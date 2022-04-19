@@ -48,7 +48,10 @@ functions for selecting columns of data frames (and other items as well).
 \item \code{all_dichotomous()} selects only type \code{"dichotomous"}
 \item \code{all_interaction()} selects interaction terms from a regression model
 \item \code{all_intercepts()} selects intercept terms from a regression model
-\item \code{all_contrasts()} selects variables in regression model based on their type of contrast
+\item \code{all_contrasts()} selects variables in regression model based on their type
+of contrast
+\item \code{all_ran_pars()} and \code{all_ran_vals()} for random-effect parameters and
+values from a mixed model (see \href{https://cran.r-project.org/web/packages/broom.mixed/vignettes/broom_mixed_intro.html}{\code{broom.mixed}'s vignette})
 }
 }
 \examples{

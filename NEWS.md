@@ -29,6 +29,7 @@
   that works in conjunction with `type_check=` asserting the class/type of 
   the RHS of the formula (or the value of the named list) (#137)
 - Better error message in `.formula_list_to_named_list()` (#136)
+- Two additional select helpers `all_ran_pars()` and `all_ran_vals()`
 
 **Bug fixes**
 
