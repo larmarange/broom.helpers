@@ -1,6 +1,6 @@
 ## Test environments
 
-* local R installation: R 4.1.2
+* local R installation: R 4.1.3
 * mac OS (on github actions): R-release, R-oldrel
 * windows (on github actions): R-release, R-oldrel
 * ubuntu 20.04 (on github actions): R-release
@@ -14,7 +14,7 @@ cf. https://github.com/larmarange/broom.helpers/actions
 
 ## revdepcheck results
 
-We checked 2 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 3 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
  * We saw 0 new problems
  * We failed to check 0 packages
