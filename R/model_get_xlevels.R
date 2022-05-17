@@ -63,3 +63,12 @@ model_get_xlevels.glmmTMB <- model_get_xlevels.lmerMod
 #' @export
 #' @rdname model_get_xlevels
 model_get_xlevels.plm <- model_get_xlevels.lmerMod
+
+#' @export
+#' @rdname model_get_xlevels
+model_get_xlevels.biglm <- function(model) {
+  stats::.getXlevels(
+    stats::terms(model),
+    model %>% model_get_model_frame()
+  )
+}

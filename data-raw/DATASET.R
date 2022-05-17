@@ -31,7 +31,9 @@ supported_models <-
     '`VGAM::vglm()`', 'Limited support. It is recommended to use `tidy_parameters()` as `tidy_fun`.',
     '`cmprsk::crr()`', 'Limited support. It is recommended to use `tidycmprsk::crr()` instead.',
     '`tidycmprsk::crr()`', '',
-    '`plm::plm()`',''
+    '`plm::plm()`','',
+    '`biglm::bigglm()`','',
+    '`biglmm::bigglm()`',''
   )
 
 usethis::use_data(supported_models, overwrite = TRUE)

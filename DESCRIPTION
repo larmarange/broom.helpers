@@ -29,6 +29,8 @@ Imports:
     tibble,
     tidyr
 Suggests: 
+    biglm,
+    biglmm,
     brms (>= 2.13.0),
     broom.mixed,
     cmprsk,

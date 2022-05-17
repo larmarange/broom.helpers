@@ -50,3 +50,13 @@ model_get_model_frame.survreg <- function(model) {
     }
   )
 }
+
+
+#' @export
+#' @rdname model_get_model_frame
+model_get_model_frame.biglm <- function(model) {
+  stats::model.frame(
+    stats::formula(model),
+    data = stats::model.frame.default(model)
+  )
+}

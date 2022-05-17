@@ -85,3 +85,16 @@ model_get_model_matrix.glmmTMB <- function(model, ...) {
 model_get_model_matrix.plm <- function(model, ...) {
   stats::model.matrix(model, cstcovar.rm = "none", ...)
 }
+
+
+#' @export
+#' @rdname model_get_model_matrix
+model_get_model_matrix.biglm <- function(model, ...) {
+  stats::model.matrix(
+    model,
+    data = stats::model.frame.default(model)
+  )
+}
+
+
+
