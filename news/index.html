@@ -58,7 +58,7 @@
 
     <div class="section level2">
 <h2 class="page-header" data-toc-text="development version" id="broomhelpers-development-version">broom.helpers (development version)<a class="anchor" aria-label="anchor" href="#broomhelpers-development-version"></a></h2>
-</div>
+<ul><li>Support for <code><a href="https://rdrr.io/pkg/biglm/man/bigglm.html" class="external-link">biglm::bigglm()</a></code> and <code><a href="https://rdrr.io/pkg/biglmm/man/bigglm.html" class="external-link">biglmm::bigglm()</a></code> models (<a href="https://github.com/larmarange/broom.helpers/issues/155" class="external-link">#155</a>)</li></ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.7.0" id="broomhelpers-170">broom.helpers 1.7.0<small>2022-04-22</small><a class="anchor" aria-label="anchor" href="#broomhelpers-170"></a></h2>
 <p><strong>New features</strong></p>
@@ -67,21 +67,18 @@
 <code><a href="../reference/tidy_add_n.html">tidy_add_n()</a></code> and <code><a href="../reference/model_get_n.html">model_get_n()</a></code> support for <code><a href="https://mskcc-epi-bio.github.io/tidycmprsk/reference/crr.html" class="external-link">tidycmprsk::crr()</a></code> models (<a href="https://github.com/larmarange/broom.helpers/issues/143" class="external-link">#143</a>)</li>
 <li>Listing of supported models is now available in <code>supported_models</code> tibble (<a href="https://github.com/larmarange/broom.helpers/issues/145" class="external-link">#145</a>)</li>
 </ul><p><strong>Bug fixes</strong></p>
-<ul><li>Avoiding duplicating rows when applying <code><a href="../reference/tidy_add_n.html">tidy_add_n()</a></code> to a <code><a href="https://rdrr.io/pkg/mgcv/man/gam.html" class="external-link">mgcv::gam()</a></code> model with smooth terms (<a href="https://github.com/larmarange/broom.helpers/issues/150" class="external-link">#150</a>)</li>
-</ul></div>
+<ul><li>Avoiding duplicating rows when applying <code><a href="../reference/tidy_add_n.html">tidy_add_n()</a></code> to a <code><a href="https://rdrr.io/pkg/mgcv/man/gam.html" class="external-link">mgcv::gam()</a></code> model with smooth terms (<a href="https://github.com/larmarange/broom.helpers/issues/150" class="external-link">#150</a>)</li></ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.6.0" id="broomhelpers-160">broom.helpers 1.6.0<small>2022-01-12</small><a class="anchor" aria-label="anchor" href="#broomhelpers-160"></a></h2>
 <p><strong>New supported models</strong></p>
-<ul><li>Support for <code><a href="https://rdrr.io/pkg/plm/man/plm.html" class="external-link">plm::plm()</a></code> models (<a href="https://github.com/larmarange/broom.helpers/issues/140" class="external-link">#140</a>)</li>
-</ul><p><strong>New features</strong></p>
+<ul><li>Support for <code><a href="https://rdrr.io/pkg/plm/man/plm.html" class="external-link">plm::plm()</a></code> models (<a href="https://github.com/larmarange/broom.helpers/issues/140" class="external-link">#140</a>)</li></ul><p><strong>New features</strong></p>
 <ul><li>The <code><a href="../reference/dot-formula_list_to_named_list.html">.formula_list_to_named_list()</a></code> now respects the <code>select_single=</code> argument for all inputs types. Previously, named lists were ignored.</li>
 <li>Added new argument <code>.formula_list_to_named_list(null_allowed=)</code> argument that works in conjunction with <code>type_check=</code> asserting the class/type of the RHS of the formula (or the value of the named list) (<a href="https://github.com/larmarange/broom.helpers/issues/137" class="external-link">#137</a>)</li>
 <li>Better error message in <code><a href="../reference/dot-formula_list_to_named_list.html">.formula_list_to_named_list()</a></code> (<a href="https://github.com/larmarange/broom.helpers/issues/136" class="external-link">#136</a>)</li>
 <li>Two additional select helpers <code><a href="../reference/select_helpers.html">all_ran_pars()</a></code> and <code><a href="../reference/select_helpers.html">all_ran_vals()</a></code>
 </li>
 </ul><p><strong>Bug fixes</strong></p>
-<ul><li>Fix so <code>.formula_list_to_named_list(type_check=)</code> checks RHS of a formula and the value of named list. (<a href="https://github.com/larmarange/broom.helpers/issues/138" class="external-link">#138</a>)</li>
-</ul></div>
+<ul><li>Fix so <code>.formula_list_to_named_list(type_check=)</code> checks RHS of a formula and the value of named list. (<a href="https://github.com/larmarange/broom.helpers/issues/138" class="external-link">#138</a>)</li></ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.5.0" id="broomhelpers-150">broom.helpers 1.5.0<small>2021-12-07</small><a class="anchor" aria-label="anchor" href="#broomhelpers-150"></a></h2>
 <p><strong>New features</strong></p>
@@ -97,14 +94,11 @@
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.4.0" id="broomhelpers-140">broom.helpers 1.4.0<small>2021-09-30</small><a class="anchor" aria-label="anchor" href="#broomhelpers-140"></a></h2>
 <p><strong>New supported models</strong></p>
-<ul><li>Support for <code><a href="https://rdrr.io/pkg/glmmTMB/man/glmmTMB.html" class="external-link">glmmTMB::glmmTMB()</a></code> models (<a href="https://github.com/larmarange/broom.helpers/issues/119" class="external-link">#119</a>)</li>
-</ul><p><strong>New features</strong></p>
-<ul><li>Function arguments that accept formula-list values now have more flexible inputs. (<a href="https://github.com/larmarange/broom.helpers/issues/121" class="external-link">#121</a>)
-<ul><li>The passed list may now be a combination of named lists and lists of formulas, e.g. <code>list(trt ~ 1, all_continuous() ~ 2)</code>.</li>
+<ul><li>Support for <code><a href="https://rdrr.io/pkg/glmmTMB/man/glmmTMB.html" class="external-link">glmmTMB::glmmTMB()</a></code> models (<a href="https://github.com/larmarange/broom.helpers/issues/119" class="external-link">#119</a>)</li></ul><p><strong>New features</strong></p>
+<ul><li>Function arguments that accept formula-list values now have more flexible inputs. (<a href="https://github.com/larmarange/broom.helpers/issues/121" class="external-link">#121</a>)<ul><li>The passed list may now be a combination of named lists and lists of formulas, e.g. <code>list(trt ~ 1, all_continuous() ~ 2)</code>.</li>
 <li>The shortcut <code>~ &lt;value&gt;</code> may be now used to indicate <code>everything() ~ &lt;value&gt;</code>
 </li>
-</ul></li>
-</ul><p><strong>Bug fixes</strong></p>
+</ul></li></ul><p><strong>Bug fixes</strong></p>
 <ul><li>Bug fix for computing n for some binomial models computed with <code><a href="https://rdrr.io/pkg/lme4/man/glmer.html" class="external-link">lme4::glmer()</a></code> (<a href="https://github.com/larmarange/broom.helpers/issues/116" class="external-link">#116</a>)</li>
 <li>Populating <strong>effect</strong> column when adding reference rows (<a href="https://github.com/larmarange/broom.helpers/issues/117" class="external-link">#117</a>)</li>
 </ul></div>
@@ -162,8 +156,7 @@
 <strong>Minor breaking changes:</strong> for intercepts terms, <code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code> now populates <code>variable</code> column by <code>term</code> content, instead of <code>NA</code> (<a href="https://github.com/larmarange/broom.helpers/issues/66" class="external-link">#66</a>)</li>
 <li>
 <strong>Minor breaking change:</strong> If the variables can’t be identified by <code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code>, the <code>variable</code> column is now populated with the content of the <code>term</code> column (<a href="https://github.com/larmarange/broom.helpers/issues/63" class="external-link">#63</a>)</li>
-<li>Exporting select helper utility functions (<a href="https://github.com/larmarange/broom.helpers/issues/65" class="external-link">#65</a>)
-<ul><li>
+<li>Exporting select helper utility functions (<a href="https://github.com/larmarange/broom.helpers/issues/65" class="external-link">#65</a>)<ul><li>
 <code><a href="../reference/dot-generic_selector.html">.generic_selector()</a></code>: makes it easy to create selecting functions like <code><a href="../reference/select_helpers.html">all_continuous()</a></code>.<br></li>
 <li>
 <code><a href="../reference/dot-select_to_varnames.html">.select_to_varnames()</a></code>: converts selecting syntax into character varnames</li>
@@ -205,8 +198,7 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.0" id="broomhelpers-100">broom.helpers 1.0.0<small>2020-09-18</small><a class="anchor" aria-label="anchor" href="#broomhelpers-100"></a></h2>
-<ul><li>Initial version</li>
-</ul></div>
+<ul><li>Initial version</li></ul></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -221,7 +213,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer></div>
