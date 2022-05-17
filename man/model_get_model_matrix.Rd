@@ -8,6 +8,7 @@
 \alias{model_get_model_matrix.brmsfit}
 \alias{model_get_model_matrix.glmmTMB}
 \alias{model_get_model_matrix.plm}
+\alias{model_get_model_matrix.biglm}
 \title{Get the model matrix of a model}
 \usage{
 model_get_model_matrix(model, ...)
@@ -23,6 +24,8 @@ model_get_model_matrix(model, ...)
 \method{model_get_model_matrix}{glmmTMB}(model, ...)
 
 \method{model_get_model_matrix}{plm}(model, ...)
+
+\method{model_get_model_matrix}{biglm}(model, ...)
 }
 \arguments{
 \item{model}{a model object}

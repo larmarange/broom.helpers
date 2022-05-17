@@ -53,6 +53,11 @@ model_get_coefficients_type.negbin <- function(model) {
 #' @rdname model_get_coefficients_type
 model_get_coefficients_type.geeglm <- model_get_coefficients_type.glm
 
+
+#' @export
+#' @rdname model_get_coefficients_type
+model_get_coefficients_type.biglm <- model_get_coefficients_type.glm
+
 #' @export
 #' @rdname model_get_coefficients_type
 model_get_coefficients_type.glmerMod <- function(model) {

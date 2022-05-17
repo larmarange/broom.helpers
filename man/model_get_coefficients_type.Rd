@@ -6,6 +6,7 @@
 \alias{model_get_coefficients_type.glm}
 \alias{model_get_coefficients_type.negbin}
 \alias{model_get_coefficients_type.geeglm}
+\alias{model_get_coefficients_type.biglm}
 \alias{model_get_coefficients_type.glmerMod}
 \alias{model_get_coefficients_type.clogit}
 \alias{model_get_coefficients_type.polr}
@@ -27,6 +28,8 @@ model_get_coefficients_type(model)
 \method{model_get_coefficients_type}{negbin}(model)
 
 \method{model_get_coefficients_type}{geeglm}(model)
+
+\method{model_get_coefficients_type}{biglm}(model)
 
 \method{model_get_coefficients_type}{glmerMod}(model)
 

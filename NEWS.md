@@ -1,5 +1,7 @@
 # broom.helpers (development version)
 
+- Support for `biglm::bigglm()` and `biglmm::bigglm()` models (#155)
+
 # broom.helpers 1.7.0
 
 **New features**

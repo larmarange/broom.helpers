@@ -5,6 +5,7 @@
 \alias{model_get_model_frame.default}
 \alias{model_get_model_frame.coxph}
 \alias{model_get_model_frame.survreg}
+\alias{model_get_model_frame.biglm}
 \title{Get the model frame of a model}
 \usage{
 model_get_model_frame(model)
@@ -14,6 +15,8 @@ model_get_model_frame(model)
 \method{model_get_model_frame}{coxph}(model)
 
 \method{model_get_model_frame}{survreg}(model)
+
+\method{model_get_model_frame}{biglm}(model)
 }
 \arguments{
 \item{model}{a model object}

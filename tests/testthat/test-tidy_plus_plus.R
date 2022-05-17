@@ -570,3 +570,40 @@ test_that("tidy_plus_plus() works with plm::plm", {
     NA
   )
 })
+
+
+test_that("tidy_plus_plus() works with biglm::bigglm", {
+  skip_on_cran()
+  skip_if_not_installed("biglm")
+
+  mod <- biglm::bigglm(response ~ age + trt, data = gtsummary::trial, family = binomial())
+
+  expect_error(
+    res <- mod %>% tidy_plus_plus(),
+    NA
+  )
+
+  # check that reference rows are properly added
+  expect_equal(
+    res %>% dplyr::filter(variable == "trt") %>% purrr::pluck("reference_row"),
+    c(TRUE, FALSE)
+  )
+})
+
+test_that("tidy_plus_plus() works with biglmm::bigglm", {
+  skip_on_cran()
+  skip_if_not_installed("biglmm")
+
+  mod <- biglmm::bigglm(response ~ age + trt, data = gtsummary::trial, family = binomial())
+
+  expect_error(
+    res <- mod %>% tidy_plus_plus(),
+    NA
+  )
+
+  # check that reference rows are properly added
+  expect_equal(
+    res %>% dplyr::filter(variable == "trt") %>% purrr::pluck("reference_row"),
+    c(TRUE, FALSE)
+  )
+})
