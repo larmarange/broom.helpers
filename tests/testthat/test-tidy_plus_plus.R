@@ -575,6 +575,7 @@ test_that("tidy_plus_plus() works with plm::plm", {
 test_that("tidy_plus_plus() works with biglm::bigglm", {
   skip_on_cran()
   skip_if_not_installed("biglm")
+  skip_if(compareVersion(as.character(getRversion()), "3.6") < 0)
 
   mod <- biglm::bigglm(
     response ~ age + trt,
@@ -597,6 +598,7 @@ test_that("tidy_plus_plus() works with biglm::bigglm", {
 test_that("tidy_plus_plus() works with biglmm::bigglm", {
   skip_on_cran()
   skip_if_not_installed("biglmm")
+  skip_if(compareVersion(as.character(getRversion()), "3.6") < 0)
 
   mod <- biglmm::bigglm(
     response ~ age + trt,
