@@ -16,11 +16,14 @@ test_that(".assert_package() works", {
   expect_false(.assert_package("br000000m", boolean = TRUE))
 
   expect_equal(
-    .get_min_version_required("brms"),
-    c(Suggests  = "2.13.0")
-  )
-  expect_equal(
     .get_min_version_required("brms", pkg_search = NULL),
     NULL
+  )
+
+  # execute test only if description of the package is available
+  skip_if(anyNA(utils::packageDescription("broom.helpers")))
+  expect_equal(
+    .get_min_version_required("brms"),
+    c(Suggests  = "2.13.0")
   )
 })
