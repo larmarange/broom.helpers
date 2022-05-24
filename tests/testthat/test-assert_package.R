@@ -16,6 +16,14 @@ test_that(".assert_package() works", {
   expect_false(.assert_package("br000000m", boolean = TRUE))
 
   expect_equal(
+    utils::packageDescription(
+      "broom.helpers",
+      fields = c("Imports", "Depends", "Suggests", "Enhances", "LinkingTo")
+    ),
+    "not_a_match"
+  )
+
+  expect_equal(
     .get_min_version_required("lme4"),
     c(Suggests  = "1.1.28")
   )
