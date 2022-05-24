@@ -19,8 +19,8 @@ test_that(".assert_package() works", {
     rlang::inject(!!utils::packageDescription(
       "broom.helpers",
       fields = c("Imports", "Depends", "Suggests", "Enhances", "LinkingTo")
-    )),
-    list(Imports = NA, Depends = NA, Suggests = NA, Enhances = NA, LinkingTo = NA)
+    ))[["Suggests"]],
+    "not_a_match"
   )
 
   expect_equal(
