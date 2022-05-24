@@ -15,14 +15,7 @@ test_that(".assert_package() works", {
   )
   expect_false(.assert_package("br000000m", boolean = TRUE))
 
-  expect_equal(
-    rlang::inject(!!utils::packageDescription(
-      "broom.helpers",
-      fields = c("Imports", "Depends", "Suggests", "Enhances", "LinkingTo")
-    )),
-    list(Imports = NA, Depends = NA, Suggests = NA, Enhances = NA, LinkingTo = NA)
-  )
-
+  skip_if(utils::packageDescription("broom.helpers", fields = "Imports") %>% unlist() %>% unclass() %>% anyNA())
   expect_equal(
     .get_min_version_required("lme4"),
     c(Suggests  = "1.1.28")
