@@ -231,6 +231,12 @@
   res <-
     tryCatch({
       if (select_input_starts_var) {
+        # `vars()` was deprecated on June 6, 2022, gtsummary will stop
+        # exporting `vars()` at some point as well.
+        paste("Use of {.code vars()} is now {.strong deprecated} and support will soon be removed.",
+              "Please replace calls to {.code vars()} with {.code c()}.") %>%
+          cli::cli_alert_warning()
+
         # `vars()` evaluates to a list of quosures; unquoting them in `select()`
         names(dplyr::select(data, !!!rlang::eval_tidy(select)))
       }
