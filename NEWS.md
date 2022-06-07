@@ -1,5 +1,9 @@
 # broom.helpers (development version)
 
+- Support for `dplyr::vars()` (also exported by {gtsummary}) as a selector has 
+  now been deprecated. Users will be warned that support for `vars()` will
+  eventually be removed from the package. (#154)
+
 - Support for `biglm::bigglm()` and `biglmm::bigglm()` models (#155)
 
 # broom.helpers 1.7.0
