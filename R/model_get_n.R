@@ -198,6 +198,12 @@ model_get_n.survreg <- model_get_n.coxph
 
 #' @export
 #' @rdname model_get_n
+model_get_n.model_fit <- function(model) {
+  model_get_n(model$fit)
+}
+
+#' @export
+#' @rdname model_get_n
 model_get_n.tidycrr <- function(model) {
   tcm <- model %>% model_compute_terms_contributions()
   if (is.null(tcm)) return(NULL) # nocov

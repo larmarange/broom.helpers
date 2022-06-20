@@ -5,6 +5,7 @@
 \alias{model_get_response.default}
 \alias{model_get_response.glm}
 \alias{model_get_response.glmerMod}
+\alias{model_get_response.model_fit}
 \title{Get model response}
 \usage{
 model_get_response(model)
@@ -14,6 +15,8 @@ model_get_response(model)
 \method{model_get_response}{glm}(model)
 
 \method{model_get_response}{glmerMod}(model)
+
+\method{model_get_response}{model_fit}(model)
 }
 \arguments{
 \item{model}{a model object}

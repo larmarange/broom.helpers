@@ -171,6 +171,12 @@ model_identify_variables.gam <- function(model) {
     )
 }
 
+#' @export
+#' @rdname model_identify_variables
+model_identify_variables.model_fit <- function(model) {
+  model_identify_variables(model$fit)
+}
+
 
 ## model_identify_variables() helpers --------------------------
 

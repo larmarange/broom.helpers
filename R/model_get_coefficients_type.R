@@ -129,3 +129,9 @@ model_get_coefficients_type.crr <- function(model) {
 model_get_coefficients_type.tidycrr <- function(model) {
   "prop_hazard"
 }
+
+#' @export
+#' @rdname model_get_coefficients_type
+model_get_coefficients_type.model_fit <- function(model) {
+  model_get_coefficients_type(model$fit)
+}

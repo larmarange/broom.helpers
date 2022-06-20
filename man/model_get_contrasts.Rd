@@ -2,9 +2,12 @@
 % Please edit documentation in R/model_get_contrasts.R
 \name{model_get_contrasts}
 \alias{model_get_contrasts}
+\alias{model_get_contrasts.model_fit}
 \title{Get contrasts used in the model}
 \usage{
 model_get_contrasts(model)
+
+\method{model_get_contrasts}{model_fit}(model)
 }
 \arguments{
 \item{model}{a model object}

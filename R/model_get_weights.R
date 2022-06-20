@@ -68,3 +68,10 @@ model_get_weights.default <- function(model) {
 model_get_weights.svyglm <- function(model) {
   stats::weights(model$survey.design)
 }
+
+#' @export
+#' @rdname model_get_weights
+model_get_weights.model_fit <- function(model) {
+  model_get_weights(model$fit)
+}
+

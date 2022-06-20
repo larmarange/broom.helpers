@@ -8,6 +8,7 @@
 \alias{model_get_n.multinom}
 \alias{model_get_n.coxph}
 \alias{model_get_n.survreg}
+\alias{model_get_n.model_fit}
 \alias{model_get_n.tidycrr}
 \title{Get the number of observations}
 \usage{
@@ -24,6 +25,8 @@ model_get_n(model)
 \method{model_get_n}{coxph}(model)
 
 \method{model_get_n}{survreg}(model)
+
+\method{model_get_n}{model_fit}(model)
 
 \method{model_get_n}{tidycrr}(model)
 }

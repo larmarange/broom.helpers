@@ -70,3 +70,10 @@ model_get_response.glm <- function(model) {
 #' @export
 #' @rdname model_get_response
 model_get_response.glmerMod <- model_get_response.glm
+
+#' @export
+#' @rdname model_get_response
+model_get_response.model_fit <- function(model) {
+  model_get_response(model$fit)
+}
+
