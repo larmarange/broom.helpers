@@ -28,7 +28,7 @@ model_get_model_matrix(model, ...)
 
 \method{model_get_model_matrix}{biglm}(model, ...)
 
-\method{model_get_model_matrix}{model_fit}(model)
+\method{model_get_model_matrix}{model_fit}(model, ...)
 }
 \arguments{
 \item{model}{a model object}

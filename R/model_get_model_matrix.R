@@ -98,7 +98,7 @@ model_get_model_matrix.biglm <- function(model, ...) {
 
 #' @export
 #' @rdname model_get_model_matrix
-model_get_model_matrix.model_fit <- function(model) {
-  model_get_model_matrix(model$fit)
+model_get_model_matrix.model_fit <- function(model, ...) {
+  model_get_model_matrix(model$fit, ...)
 }
 
