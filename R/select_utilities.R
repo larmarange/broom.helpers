@@ -273,14 +273,14 @@
 #' This helps with error messaging.
 #'
 #' @details
-#' `..is_selector_scoped()` checks if a selector has been properly registered
+#' `.is_selector_scoped()` checks if a selector has been properly registered
 #' in `env_variable_type$df_var_info`.
 #'
 #' @return custom selector functions
 #' @export
 .generic_selector <- function(variable_column, select_column, select_expr, fun_name) {
   # ensuring the proper data has been scoped to use this function
-  if (!..is_selector_scoped(variable_column, select_column)) {
+  if (!.is_selector_scoped(variable_column, select_column)) {
     cli_alert_danger("Cannot use selector '{fun_name}()' in this context.")
     stop("Invalid syntax", call. = FALSE)
   }
@@ -296,7 +296,7 @@
 
 #' @rdname dot-generic_selector
 #' @export
-..is_selector_scoped <- function(variable_column, select_column) {
+.is_selector_scoped <- function(variable_column, select_column) {
   exists("df_var_info", envir = env_variable_type) &&
     all(c(variable_column, select_column) %in% names(env_variable_type$df_var_info))
 }

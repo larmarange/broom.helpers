@@ -9,7 +9,7 @@
 - Support for `dplyr::vars()` (also exported by {gtsummary}) as a selector has 
   now been deprecated. Users will be warned that support for `vars()` will
   eventually be removed from the package (#154)
-- `..is_selector_scoped()`, an internal function used in generating custom
+- `.is_selector_scoped()`, an internal function used in generating custom
   selector functions, is now exported (#163)
 
 

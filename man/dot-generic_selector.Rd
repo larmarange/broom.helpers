@@ -2,12 +2,12 @@
 % Please edit documentation in R/select_utilities.R
 \name{.generic_selector}
 \alias{.generic_selector}
-\alias{..is_selector_scoped}
+\alias{.is_selector_scoped}
 \title{Generate a custom selector function}
 \usage{
 .generic_selector(variable_column, select_column, select_expr, fun_name)
 
-..is_selector_scoped(variable_column, select_column)
+.is_selector_scoped(variable_column, select_column)
 }
 \arguments{
 \item{variable_column}{string indicating column variable names are stored}
@@ -26,6 +26,6 @@ custom selector functions
 Generate a custom selector function
 }
 \details{
-\code{..is_selector_scoped()} checks if a selector has been properly registered
+\code{.is_selector_scoped()} checks if a selector has been properly registered
 in \code{env_variable_type$df_var_info}.
 }
