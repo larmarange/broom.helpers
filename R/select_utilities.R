@@ -272,13 +272,15 @@
 #' @param fun_name quoted name of function where `.generic_selector()` is being used.
 #' This helps with error messaging.
 #'
+#' @details
+#' `.is_selector_registered()` checks if a selector has been properly registered
+#' in `env_variable_type$df_var_info`.
+#'
 #' @return custom selector functions
 #' @export
 .generic_selector <- function(variable_column, select_column, select_expr, fun_name) {
   # ensuring the proper data has been scoped to use this function
-  if (!exists("df_var_info", envir = env_variable_type) ||
-      (exists("df_var_info", envir = env_variable_type) &&
-       !all(c(variable_column, select_column) %in% names(env_variable_type$df_var_info)))) {
+  if (!.is_selector_registered(variable_column, select_column)) {
     cli_alert_danger("Cannot use selector '{fun_name}()' in this context.")
     stop("Invalid syntax", call. = FALSE)
   }
@@ -292,6 +294,12 @@
     unique()
 }
 
+#' @rdname dot-generic_selector
+#' @export
+.is_selector_registered <- function(variable_column, select_column) {
+  exists("df_var_info", envir = env_variable_type) &&
+    all(c(variable_column, select_column) %in% names(env_variable_type$df_var_info))
+}
 
 # scoping the variable characteristics
 .scope_var_info <- function(x) {
