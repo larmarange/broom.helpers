@@ -85,21 +85,21 @@ values from a mixed model
 </ul></div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">all_continuous</span><span class="op">(</span><span class="op">)</span>
-
-<span class="fu">all_dichotomous</span><span class="op">(</span><span class="op">)</span>
-
-<span class="fu">all_categorical</span><span class="op">(</span>dichotomous <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="fu">all_interaction</span><span class="op">(</span><span class="op">)</span>
-
-<span class="fu">all_ran_pars</span><span class="op">(</span><span class="op">)</span>
-
-<span class="fu">all_ran_vals</span><span class="op">(</span><span class="op">)</span>
-
-<span class="fu">all_intercepts</span><span class="op">(</span><span class="op">)</span>
-
-<span class="fu">all_contrasts</span><span class="op">(</span>contrasts_type <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">all_continuous</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">all_dichotomous</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">all_categorical</span><span class="op">(</span>dichotomous <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">all_interaction</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">all_ran_pars</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">all_ran_vals</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">all_intercepts</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">all_contrasts</span><span class="op">(</span>contrasts_type <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -107,20 +107,25 @@ values from a mixed model
     <dl><dt>dichotomous</dt>
 <dd><p>Logical indicating whether to include dichotomous variables.
 Default is <code>TRUE</code></p></dd>
+
+
 <dt>contrasts_type</dt>
 <dd><p>type of contrast to select. When <code>NULL</code>, all variables with a
 contrast will be selected. Default is <code>NULL</code>.  Select among contrast types
 <code>c("treatment", "sum", "poly", "helmert", "other")</code></p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A character vector of column names selected</p>
+    
+
+<p>A character vector of column names selected</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">response</span> <span class="op">~</span> <span class="va">age</span> <span class="op">*</span> <span class="va">trt</span> <span class="op">+</span> <span class="va">grade</span>, <span class="fu">gtsummary</span><span class="fu">::</span><span class="va"><a href="https://www.danieldsjoberg.com/gtsummary/reference/trial.html" class="external-link">trial</a></span>, family <span class="op">=</span> <span class="va">binomial</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="tidy_plus_plus.html">tidy_plus_plus</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span>, include <span class="op">=</span> <span class="fu">all_categorical</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">response</span> <span class="op">~</span> <span class="va">age</span> <span class="op">*</span> <span class="va">trt</span> <span class="op">+</span> <span class="va">grade</span>, <span class="fu">gtsummary</span><span class="fu">::</span><span class="va"><a href="https://www.danieldsjoberg.com/gtsummary/reference/trial.html" class="external-link">trial</a></span>, family <span class="op">=</span> <span class="va">binomial</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="tidy_plus_plus.html">tidy_plus_plus</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span>, include <span class="op">=</span> <span class="fu">all_categorical</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 18</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   term      variable var_label          var_class var_type var_nlevels contrasts</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span>
@@ -132,13 +137,13 @@ contrast will be selected. Default is <code>NULL</code>.  Select among contrast 
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 11 more variables: contrasts_type &lt;chr&gt;, reference_row &lt;lgl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   label &lt;chr&gt;, n_obs &lt;dbl&gt;, n_event &lt;dbl&gt;, estimate &lt;dbl&gt;, std.error &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   statistic &lt;dbl&gt;, p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">response</span> <span class="op">~</span> <span class="va">age</span> <span class="op">+</span> <span class="va">trt</span> <span class="op">+</span> <span class="va">grade</span> <span class="op">+</span> <span class="va">stage</span>,</span>
-<span class="r-in">    <span class="fu">gtsummary</span><span class="fu">::</span><span class="va"><a href="https://www.danieldsjoberg.com/gtsummary/reference/trial.html" class="external-link">trial</a></span>,</span>
-<span class="r-in">    family <span class="op">=</span> <span class="va">binomial</span>,</span>
-<span class="r-in">    contrasts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>trt <span class="op">=</span> <span class="va">contr.SAS</span>, grade <span class="op">=</span> <span class="va">contr.sum</span>, stage <span class="op">=</span> <span class="va">contr.poly</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in"><span class="fu"><a href="tidy_plus_plus.html">tidy_plus_plus</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span class="r-in">               include <span class="op">=</span> <span class="fu">all_contrasts</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"treatment"</span>, <span class="st">"sum"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">response</span> <span class="op">~</span> <span class="va">age</span> <span class="op">+</span> <span class="va">trt</span> <span class="op">+</span> <span class="va">grade</span> <span class="op">+</span> <span class="va">stage</span>,</span></span>
+<span class="r-in"><span>    <span class="fu">gtsummary</span><span class="fu">::</span><span class="va"><a href="https://www.danieldsjoberg.com/gtsummary/reference/trial.html" class="external-link">trial</a></span>,</span></span>
+<span class="r-in"><span>    family <span class="op">=</span> <span class="va">binomial</span>,</span></span>
+<span class="r-in"><span>    contrasts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>trt <span class="op">=</span> <span class="va">contr.SAS</span>, grade <span class="op">=</span> <span class="va">contr.sum</span>, stage <span class="op">=</span> <span class="va">contr.poly</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span><span class="fu"><a href="tidy_plus_plus.html">tidy_plus_plus</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>               include <span class="op">=</span> <span class="fu">all_contrasts</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"treatment"</span>, <span class="st">"sum"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 18</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   term   variable var_label             var_class var_type var_nlevels contrasts</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span>
@@ -164,7 +169,7 @@ contrast will be selected. Default is <code>NULL</code>.  Select among contrast 
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

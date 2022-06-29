@@ -91,78 +91,78 @@
 <p>As a motivating example, let’s summarize a logistic regression model with a forest plot and in a table.</p>
 <p>To begin, let’s load our packages.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://larmarange.github.io/broom.helpers/">broom.helpers</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ddsjoberg/gtsummary" class="external-link">gtsummary</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
-
-<span class="co"># paged_table() was introduced only in rmarkdwon v1.2</span>
-<span class="va">print_table</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">tab</span><span class="op">)</span> <span class="op">{</span>
-  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html" class="external-link">packageVersion</a></span><span class="op">(</span><span class="st">"rmarkdown"</span><span class="op">)</span> <span class="op">&gt;=</span> <span class="fl">1.2</span><span class="op">)</span> <span class="op">{</span>
-    <span class="fu">rmarkdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgs.rstudio.com/rmarkdown/reference/paged_table.html" class="external-link">paged_table</a></span><span class="op">(</span><span class="va">tab</span><span class="op">)</span>
-  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
-    <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">tab</span><span class="op">)</span>
-  <span class="op">}</span>
-<span class="op">}</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://larmarange.github.io/broom.helpers/">broom.helpers</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ddsjoberg/gtsummary" class="external-link">gtsummary</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># paged_table() was introduced only in rmarkdwon v1.2</span></span>
+<span><span class="va">print_table</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">tab</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html" class="external-link">packageVersion</a></span><span class="op">(</span><span class="st">"rmarkdown"</span><span class="op">)</span> <span class="op">&gt;=</span> <span class="fl">1.2</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="fu">rmarkdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgs.rstudio.com/rmarkdown/reference/paged_table.html" class="external-link">paged_table</a></span><span class="op">(</span><span class="va">tab</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>    <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">tab</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 <p>Our model predicts tumor response using chemotherapy treatment and tumor grade. The data set we’re utilizing has already labelled the columns using the <a href="https://larmarange.github.io/labelled/" class="external-link">labelled package</a>. The column labels will be carried through to our figure and table.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model_logit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">response</span> <span class="op">~</span> <span class="va">trt</span> <span class="op">+</span> <span class="va">grade</span>, <span class="va">trial</span>, family <span class="op">=</span> <span class="va">binomial</span><span class="op">)</span>
-<span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">model_logit</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 5</span></span>
-<span class="co">#&gt;   term        estimate std.error statistic p.value</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> (Intercept)  -<span style="color: #BB0000;">0.879</span>      0.305    -<span style="color: #BB0000;">2.88</span>  0.004<span style="text-decoration: underline;">00</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> trtDrug B     0.194      0.311     0.625 0.532  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> gradeII      -<span style="color: #BB0000;">0.064</span><span style="color: #BB0000; text-decoration: underline;">7</span>     0.381    -<span style="color: #BB0000;">0.170</span> 0.865  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> gradeIII      0.082<span style="text-decoration: underline;">2</span>     0.376     0.219 0.827</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">model_logit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">response</span> <span class="op">~</span> <span class="va">trt</span> <span class="op">+</span> <span class="va">grade</span>, <span class="va">trial</span>, family <span class="op">=</span> <span class="va">binomial</span><span class="op">)</span></span>
+<span><span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">model_logit</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 5</span></span></span>
+<span><span class="co">#&gt;   term        estimate std.error statistic p.value</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> (Intercept)  -<span style="color: #BB0000;">0.879</span>      0.305    -<span style="color: #BB0000;">2.88</span>  0.004<span style="text-decoration: underline;">00</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> trtDrug B     0.194      0.311     0.625 0.532  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> gradeII      -<span style="color: #BB0000;">0.064</span><span style="color: #BB0000; text-decoration: underline;">7</span>     0.381    -<span style="color: #BB0000;">0.170</span> 0.865  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> gradeIII      0.082<span style="text-decoration: underline;">2</span>     0.376     0.219 0.827</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="forest-plot">Forest Plot<a class="anchor" aria-label="anchor" href="#forest-plot"></a>
 </h2>
 <p>To create the figure, we’ll need to add some information to the tidy tibble, i.e. we’ll need to group the terms that belong to the same variable, add the reference row, etc. Parsing this information can be difficult, but the <code>broom.helper</code> package has made it simple.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tidy_forest</span> <span class="op">&lt;-</span>
-  <span class="va">model_logit</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="co"># perform initial tidying of the model</span>
-  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="co"># adding in the reference row for categorical variables</span>
-  <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="co"># adding a reference value to appear in plot</span>
-  <span class="fu"><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="co"># adding the variable labels</span>
-  <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="co"># removing intercept estimate from model</span>
-  <span class="fu"><a href="../reference/tidy_remove_intercept.html">tidy_remove_intercept</a></span><span class="op">(</span><span class="op">)</span>
-<span class="va">tidy_forest</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 16</span></span>
-<span class="co">#&gt;   term      variable var_label          var_class var_type var_nlevels contrasts</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> trtDrug A trt      Chemotherapy Trea… character dichoto…           2 contr.tr…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> trtDrug B trt      Chemotherapy Trea… character dichoto…           2 contr.tr…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> gradeI    grade    Grade              factor    categor…           3 contr.tr…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> gradeII   grade    Grade              factor    categor…           3 contr.tr…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> gradeIII  grade    Grade              factor    categor…           3 contr.tr…</span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 9 more variables: contrasts_type &lt;chr&gt;, reference_row &lt;lgl&gt;,</span></span>
-<span class="co">#&gt; <span style="color: #949494;">#   label &lt;chr&gt;, estimate &lt;dbl&gt;, std.error &lt;dbl&gt;, statistic &lt;dbl&gt;,</span></span>
-<span class="co">#&gt; <span style="color: #949494;">#   p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tidy_forest</span> <span class="op">&lt;-</span></span>
+<span>  <span class="va">model_logit</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="co"># perform initial tidying of the model</span></span>
+<span>  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="co"># adding in the reference row for categorical variables</span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="co"># adding a reference value to appear in plot</span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="co"># adding the variable labels</span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="co"># removing intercept estimate from model</span></span>
+<span>  <span class="fu"><a href="../reference/tidy_remove_intercept.html">tidy_remove_intercept</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">tidy_forest</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 16</span></span></span>
+<span><span class="co">#&gt;   term      variable var_label          var_class var_type var_nlevels contrasts</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> trtDrug A trt      Chemotherapy Trea… character dichoto…           2 contr.tr…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> trtDrug B trt      Chemotherapy Trea… character dichoto…           2 contr.tr…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> gradeI    grade    Grade              factor    categor…           3 contr.tr…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> gradeII   grade    Grade              factor    categor…           3 contr.tr…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> gradeIII  grade    Grade              factor    categor…           3 contr.tr…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 9 more variables: contrasts_type &lt;chr&gt;, reference_row &lt;lgl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   label &lt;chr&gt;, estimate &lt;dbl&gt;, std.error &lt;dbl&gt;, statistic &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;</span></span></span></code></pre></div>
 <p><strong>Note:</strong> we used <code><a href="../reference/tidy_attach_model.html">tidy_and_attach()</a></code> instead of <code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">broom::tidy()</a></code>. <code>broom.helpers</code> functions needs a copy of the original model. To avoid passing the model at each step, the easier way is to attach the model as an attribute of the tibble with <code><a href="../reference/tidy_attach_model.html">tidy_attach_model()</a></code>. <code><a href="../reference/tidy_attach_model.html">tidy_and_attach()</a></code> is simply a shortcut of <code>model %&gt;% broom::tidy() %&gt;% tidy_and_attach(model)</code>.</p>
 <p>We now have a tibble with every piece of information we need to create our forest plot using <code>ggplot2</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tidy_forest</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>
-    plot_label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">var_label</span>, <span class="va">label</span>, sep <span class="op">=</span> <span class="st">":"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
-      <span class="fu">forcats</span><span class="fu">::</span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_inorder.html" class="external-link">fct_inorder</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-      <span class="fu">forcats</span><span class="fu">::</span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_rev.html" class="external-link">fct_rev</a></span><span class="op">(</span><span class="op">)</span>
-  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">plot_label</span>, y <span class="op">=</span> <span class="va">estimate</span>, ymin <span class="op">=</span> <span class="va">conf.low</span>, ymax <span class="op">=</span> <span class="va">conf.high</span>, color <span class="op">=</span> <span class="va">variable</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">1</span>, linetype <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html" class="external-link">geom_pointrange</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html" class="external-link">coord_flip</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>
-    y <span class="op">=</span> <span class="st">"Odds Ratio"</span>,
-    x <span class="op">=</span> <span class="st">" "</span>,
-    title <span class="op">=</span> <span class="st">"Forest Plot using broom.helpers"</span>
-  <span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tidy_forest</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
+<span>    plot_label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">var_label</span>, <span class="va">label</span>, sep <span class="op">=</span> <span class="st">":"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>      <span class="fu">forcats</span><span class="fu">::</span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_inorder.html" class="external-link">fct_inorder</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>      <span class="fu">forcats</span><span class="fu">::</span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_rev.html" class="external-link">fct_rev</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">plot_label</span>, y <span class="op">=</span> <span class="va">estimate</span>, ymin <span class="op">=</span> <span class="va">conf.low</span>, ymax <span class="op">=</span> <span class="va">conf.high</span>, color <span class="op">=</span> <span class="va">variable</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">1</span>, linetype <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html" class="external-link">geom_pointrange</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html" class="external-link">coord_flip</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
+<span>    y <span class="op">=</span> <span class="st">"Odds Ratio"</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">" "</span>,</span>
+<span>    title <span class="op">=</span> <span class="st">"Forest Plot using broom.helpers"</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 <p><img src="tidy_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
 <p><strong>Note::</strong> for more advanced and nicely formatted plots of model coefficients, look at <code>GGally::ggcoef_model()</code> and its <a href="https://ggobi.github.io/ggally/articles/ggcoef_model.html" class="external-link">dedicated vignette</a>. <code>GGally::ggcoef_model()</code> internally uses <code>broom.helpers</code>.</p>
 </div>
@@ -171,27 +171,27 @@
 </h2>
 <p>In addition to aiding in figure creation, the broom.helpers package can help summarize a model in a table. In the example below, we add header and reference rows, and utilize existing variable labels. Let’s change the labels shown in our summary table as well.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tidy_table</span> <span class="op">&lt;-</span>
-  <span class="va">model_logit</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="co"># perform initial tidying of the model</span>
-  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="co"># adding in the reference row for categorical variables</span>
-  <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="co"># adding the variable labels</span>
-  <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="co"># add header row</span>
-  <span class="fu"><a href="../reference/tidy_add_header_rows.html">tidy_add_header_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="co"># removing intercept estimate from model</span>
-  <span class="fu"><a href="../reference/tidy_remove_intercept.html">tidy_remove_intercept</a></span><span class="op">(</span><span class="op">)</span> 
-
-<span class="co"># print summary table</span>
-<span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>knitr.kable.NA <span class="op">=</span> <span class="st">''</span><span class="op">)</span>
-<span class="va">tidy_table</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="co"># format model estimates</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">label</span>, <span class="va">estimate</span>, <span class="va">conf.low</span>, <span class="va">conf.high</span>, <span class="va">p.value</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html" class="external-link">all_of</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"estimate"</span>, <span class="st">"conf.low"</span>, <span class="st">"conf.high"</span><span class="op">)</span><span class="op">)</span>, <span class="va">style_ratio</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="va">p.value</span>, <span class="va">style_pvalue</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu">print_table</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tidy_table</span> <span class="op">&lt;-</span></span>
+<span>  <span class="va">model_logit</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="co"># perform initial tidying of the model</span></span>
+<span>  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="co"># adding in the reference row for categorical variables</span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="co"># adding the variable labels</span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="co"># add header row</span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_header_rows.html">tidy_add_header_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="co"># removing intercept estimate from model</span></span>
+<span>  <span class="fu"><a href="../reference/tidy_remove_intercept.html">tidy_remove_intercept</a></span><span class="op">(</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="co"># print summary table</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>knitr.kable.NA <span class="op">=</span> <span class="st">''</span><span class="op">)</span></span>
+<span><span class="va">tidy_table</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="co"># format model estimates</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">label</span>, <span class="va">estimate</span>, <span class="va">conf.low</span>, <span class="va">conf.high</span>, <span class="va">p.value</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html" class="external-link">all_of</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"estimate"</span>, <span class="st">"conf.low"</span>, <span class="st">"conf.high"</span><span class="op">)</span><span class="op">)</span>, <span class="va">style_ratio</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="va">p.value</span>, <span class="va">style_pvalue</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">print_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["label"],"name":[1],"type":["chr"],"align":["left"]},{"label":["estimate"],"name":[2],"type":["chr"],"align":["left"]},{"label":["conf.low"],"name":[3],"type":["chr"],"align":["left"]},{"label":["conf.high"],"name":[4],"type":["chr"],"align":["left"]},{"label":["p.value"],"name":[5],"type":["chr"],"align":["left"]}],"data":[{"1":"Chemotherapy Treatment","2":"NA","3":"NA","4":"NA","5":"NA"},{"1":"Drug A","2":"NA","3":"NA","4":"NA","5":"NA"},{"1":"Drug B","2":"1.21","3":"0.66","4":"2.24","5":"0.5"},{"1":"Grade","2":"NA","3":"NA","4":"NA","5":"NA"},{"1":"I","2":"NA","3":"NA","4":"NA","5":"NA"},{"1":"II","2":"0.94","3":"0.44","4":"1.98","5":"0.9"},{"1":"III","2":"1.09","3":"0.52","4":"2.27","5":"0.8"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[25],"max":[25]},"pages":{}}}
@@ -204,23 +204,23 @@
 </h2>
 <p>There is also a handy wrapper, called <code><a href="../reference/tidy_plus_plus.html">tidy_plus_plus()</a></code>, for the most commonly used <code>tidy_*()</code> functions, and they can be executed with a single line of code:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model_logit</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/tidy_plus_plus.html">tidy_plus_plus</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 18</span></span>
-<span class="co">#&gt;   term      variable var_label          var_class var_type var_nlevels contrasts</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> trtDrug A trt      Chemotherapy Trea… character dichoto…           2 contr.tr…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> trtDrug B trt      Chemotherapy Trea… character dichoto…           2 contr.tr…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> gradeI    grade    Grade              factor    categor…           3 contr.tr…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> gradeII   grade    Grade              factor    categor…           3 contr.tr…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> gradeIII  grade    Grade              factor    categor…           3 contr.tr…</span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 11 more variables: contrasts_type &lt;chr&gt;, reference_row &lt;lgl&gt;,</span></span>
-<span class="co">#&gt; <span style="color: #949494;">#   label &lt;chr&gt;, n_obs &lt;dbl&gt;, n_event &lt;dbl&gt;, estimate &lt;dbl&gt;, std.error &lt;dbl&gt;,</span></span>
-<span class="co">#&gt; <span style="color: #949494;">#   statistic &lt;dbl&gt;, p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">model_logit</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/tidy_plus_plus.html">tidy_plus_plus</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 18</span></span></span>
+<span><span class="co">#&gt;   term      variable var_label          var_class var_type var_nlevels contrasts</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> trtDrug A trt      Chemotherapy Trea… character dichoto…           2 contr.tr…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> trtDrug B trt      Chemotherapy Trea… character dichoto…           2 contr.tr…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> gradeI    grade    Grade              factor    categor…           3 contr.tr…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> gradeII   grade    Grade              factor    categor…           3 contr.tr…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> gradeIII  grade    Grade              factor    categor…           3 contr.tr…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 11 more variables: contrasts_type &lt;chr&gt;, reference_row &lt;lgl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   label &lt;chr&gt;, n_obs &lt;dbl&gt;, n_event &lt;dbl&gt;, estimate &lt;dbl&gt;, std.error &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   statistic &lt;dbl&gt;, p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;</span></span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model_logit</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/tidy_plus_plus.html">tidy_plus_plus</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu">print_table</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">model_logit</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/tidy_plus_plus.html">tidy_plus_plus</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">print_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["term"],"name":[1],"type":["chr"],"align":["left"]},{"label":["variable"],"name":[2],"type":["chr"],"align":["left"]},{"label":["var_label"],"name":[3],"type":["chr"],"align":["left"]},{"label":["var_class"],"name":[4],"type":["chr"],"align":["left"]},{"label":["var_type"],"name":[5],"type":["chr"],"align":["left"]},{"label":["var_nlevels"],"name":[6],"type":["int"],"align":["right"]},{"label":["contrasts"],"name":[7],"type":["chr"],"align":["left"]},{"label":["contrasts_type"],"name":[8],"type":["chr"],"align":["left"]},{"label":["reference_row"],"name":[9],"type":["lgl"],"align":["right"]},{"label":["label"],"name":[10],"type":["chr"],"align":["left"]},{"label":["n_obs"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["n_event"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["estimate"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["std.error"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["statistic"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["p.value"],"name":[16],"type":["dbl"],"align":["right"]},{"label":["conf.low"],"name":[17],"type":["dbl"],"align":["right"]},{"label":["conf.high"],"name":[18],"type":["dbl"],"align":["right"]}],"data":[{"1":"trtDrug A","2":"trt","3":"Chemotherapy Treatment","4":"character","5":"dichotomous","6":"2","7":"contr.treatment","8":"treatment","9":"TRUE","10":"Drug A","11":"95","12":"28","13":"1.0000000","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","_row":"trtDrug A"},{"1":"trtDrug B","2":"trt","3":"Chemotherapy Treatment","4":"character","5":"dichotomous","6":"2","7":"contr.treatment","8":"treatment","9":"FALSE","10":"Drug B","11":"98","12":"33","13":"1.2145219","14":"0.3107827","15":"0.6253581","16":"0.5317360","17":"0.6610196","18":"2.242643","_row":"trtDrug B"},{"1":"gradeI","2":"grade","3":"Grade","4":"factor","5":"categorical","6":"3","7":"contr.treatment","8":"treatment","9":"TRUE","10":"I","11":"67","12":"21","13":"1.0000000","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","_row":"gradeI"},{"1":"gradeII","2":"grade","3":"Grade","4":"factor","5":"categorical","6":"3","7":"contr.treatment","8":"treatment","9":"FALSE","10":"II","11":"63","12":"19","13":"0.9373213","14":"0.3810833","15":"-0.1698556","16":"0.8651237","17":"0.4417302","18":"1.980028","_row":"gradeII"},{"1":"gradeIII","2":"grade","3":"Grade","4":"factor","5":"categorical","6":"3","7":"contr.treatment","8":"treatment","9":"FALSE","10":"III","11":"63","12":"21","13":"1.0856429","14":"0.3758553","15":"0.2186277","16":"0.8269401","17":"0.5183386","18":"2.274982","_row":"gradeIII"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[25],"max":[25]},"pages":{}}}
@@ -237,15 +237,15 @@
 </h3>
 <p>When polynomial terms of a continuous variable are defined with <code><a href="https://rdrr.io/r/stats/poly.html" class="external-link">stats::poly()</a></code>, <code>broom.helpers</code> will be able to identify the corresponding variable, create appropriate labels and add header rows.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model_poly</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">response</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html" class="external-link">poly</a></span><span class="op">(</span><span class="va">age</span>, <span class="fl">3</span><span class="op">)</span> <span class="op">+</span> <span class="va">ttdeath</span>, <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html" class="external-link">na.omit</a></span><span class="op">(</span><span class="va">trial</span><span class="op">)</span>, family <span class="op">=</span> <span class="va">binomial</span><span class="op">)</span>
-
-<span class="va">model_poly</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/tidy_plus_plus.html">tidy_plus_plus</a></span><span class="op">(</span>
-    exponentiate <span class="op">=</span> <span class="cn">TRUE</span>,
-    add_header_rows <span class="op">=</span> <span class="cn">TRUE</span>,
-    variable_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>age <span class="op">=</span> <span class="st">"Age in years"</span><span class="op">)</span>
-  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu">print_table</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">model_poly</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">response</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html" class="external-link">poly</a></span><span class="op">(</span><span class="va">age</span>, <span class="fl">3</span><span class="op">)</span> <span class="op">+</span> <span class="va">ttdeath</span>, <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html" class="external-link">na.omit</a></span><span class="op">(</span><span class="va">trial</span><span class="op">)</span>, family <span class="op">=</span> <span class="va">binomial</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">model_poly</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/tidy_plus_plus.html">tidy_plus_plus</a></span><span class="op">(</span></span>
+<span>    exponentiate <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    add_header_rows <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    variable_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>age <span class="op">=</span> <span class="st">"Age in years"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">print_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["term"],"name":[1],"type":["chr"],"align":["left"]},{"label":["variable"],"name":[2],"type":["chr"],"align":["left"]},{"label":["var_label"],"name":[3],"type":["chr"],"align":["left"]},{"label":["var_class"],"name":[4],"type":["chr"],"align":["left"]},{"label":["var_type"],"name":[5],"type":["chr"],"align":["left"]},{"label":["var_nlevels"],"name":[6],"type":["int"],"align":["right"]},{"label":["header_row"],"name":[7],"type":["lgl"],"align":["right"]},{"label":["contrasts"],"name":[8],"type":["chr"],"align":["left"]},{"label":["contrasts_type"],"name":[9],"type":["chr"],"align":["left"]},{"label":["reference_row"],"name":[10],"type":["lgl"],"align":["right"]},{"label":["label"],"name":[11],"type":["chr"],"align":["left"]},{"label":["n_obs"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["n_event"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["estimate"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["std.error"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["statistic"],"name":[16],"type":["dbl"],"align":["right"]},{"label":["p.value"],"name":[17],"type":["dbl"],"align":["right"]},{"label":["conf.low"],"name":[18],"type":["dbl"],"align":["right"]},{"label":["conf.high"],"name":[19],"type":["dbl"],"align":["right"]}],"data":[{"1":"NA","2":"age","3":"Age in years","4":"nmatrix.3","5":"continuous","6":"NA","7":"TRUE","8":"NA","9":"NA","10":"NA","11":"Age in years","12":"NA","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","_row":""},{"1":"poly(age, 3)1","2":"age","3":"Age in years","4":"nmatrix.3","5":"continuous","6":"NA","7":"FALSE","8":"NA","9":"NA","10":"NA","11":"Age in years","12":"92","13":"31","14":"73.3062595","15":"2.30181235","16":"1.8657672","17":"0.06207394","18":"0.877867149","19":"7995.690992","_row":"poly(age, 3)1"},{"1":"poly(age, 3)2","2":"age","3":"Age in years","4":"nmatrix.3","5":"continuous","6":"NA","7":"FALSE","8":"NA","9":"NA","10":"NA","11":"Age in years²","12":"56","13":"17","14":"1.4298872","15":"2.26221357","16":"0.1580733","17":"0.87439903","18":"0.011343886","19":"105.165741","_row":"poly(age, 3)2"},{"1":"poly(age, 3)3","2":"age","3":"Age in years","4":"nmatrix.3","5":"continuous","6":"NA","7":"FALSE","8":"NA","9":"NA","10":"NA","11":"Age in years³","12":"80","13":"22","14":"0.4002595","15":"2.23570427","16":"-0.4095543","17":"0.68213295","18":"0.004758251","19":"40.506175","_row":"poly(age, 3)3"},{"1":"ttdeath","2":"ttdeath","3":"Months to Death/Censor","4":"numeric","5":"continuous","6":"NA","7":"NA","8":"NA","9":"NA","10":"NA","11":"Months to Death/Censor","12":"173","13":"54","14":"1.1218874","15":"0.03951317","16":"2.9107373","17":"0.00360577","18":"1.042865358","19":"1.219078","_row":"ttdeath"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[25],"max":[25]},"pages":{}}}
@@ -257,18 +257,18 @@
 </h3>
 <p>By default, categorical variables are coded with a treatment contrasts (see <code><a href="https://rdrr.io/r/stats/contrast.html" class="external-link">stats::contr.treatment()</a></code>). With such contrasts, model coefficients correspond to the effect of a modality compared with the reference modality (by default, the first one). <code><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows()</a></code> allows to add a row for this reference modality and <code><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows()</a></code> will populate the estimate value of these references rows by 0 (or 1 if <code>exponentiate = TRUE</code>). <code><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels()</a></code> is able to retrieve the label of the factor level associated with a specific model term.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span>
-  <span class="va">response</span> <span class="op">~</span> <span class="va">stage</span> <span class="op">+</span> <span class="va">grade</span> <span class="op">*</span> <span class="va">trt</span>,
-  <span class="fu">gtsummary</span><span class="fu">::</span><span class="va"><a href="https://www.danieldsjoberg.com/gtsummary/reference/trial.html" class="external-link">trial</a></span>,
-  family <span class="op">=</span> <span class="va">binomial</span>
-<span class="op">)</span>
-
-<span class="va">model_1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu">print_table</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">model_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span></span>
+<span>  <span class="va">response</span> <span class="op">~</span> <span class="va">stage</span> <span class="op">+</span> <span class="va">grade</span> <span class="op">*</span> <span class="va">trt</span>,</span>
+<span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="va"><a href="https://www.danieldsjoberg.com/gtsummary/reference/trial.html" class="external-link">trial</a></span>,</span>
+<span>  family <span class="op">=</span> <span class="va">binomial</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">model_1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">print_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["term"],"name":[1],"type":["chr"],"align":["left"]},{"label":["variable"],"name":[2],"type":["chr"],"align":["left"]},{"label":["var_label"],"name":[3],"type":["chr"],"align":["left"]},{"label":["var_class"],"name":[4],"type":["chr"],"align":["left"]},{"label":["var_type"],"name":[5],"type":["chr"],"align":["left"]},{"label":["var_nlevels"],"name":[6],"type":["int"],"align":["right"]},{"label":["contrasts"],"name":[7],"type":["chr"],"align":["left"]},{"label":["contrasts_type"],"name":[8],"type":["chr"],"align":["left"]},{"label":["reference_row"],"name":[9],"type":["lgl"],"align":["right"]},{"label":["label"],"name":[10],"type":["chr"],"align":["left"]},{"label":["estimate"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["std.error"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["statistic"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["p.value"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["conf.low"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["conf.high"],"name":[16],"type":["dbl"],"align":["right"]}],"data":[{"1":"(Intercept)","2":"(Intercept)","3":"(Intercept)","4":"NA","5":"intercept","6":"NA","7":"NA","8":"NA","9":"NA","10":"(Intercept)","11":"0.3390697","12":"0.4895787","13":"-2.20914307","14":"0.02716469","15":"0.12268986","16":"0.8521510","_row":"(Intercept)"},{"1":"stageT1","2":"stage","3":"T Stage","4":"factor","5":"categorical","6":"4","7":"contr.treatment","8":"treatment","9":"TRUE","10":"T1","11":"1.0000000","12":"NA","13":"NA","14":"NA","15":"NA","16":"NA","_row":"stageT1"},{"1":"stageT2","2":"stage","3":"T Stage","4":"factor","5":"categorical","6":"4","7":"contr.treatment","8":"treatment","9":"FALSE","10":"T2","11":"0.5711409","12":"0.4467837","13":"-1.25367016","14":"0.20996192","15":"0.23380842","16":"1.3607135","_row":"stageT2"},{"1":"stageT3","2":"stage","3":"T Stage","4":"factor","5":"categorical","6":"4","7":"contr.treatment","8":"treatment","9":"FALSE","10":"T3","11":"1.1479106","12":"0.4552943","13":"0.30297648","14":"0.76190779","15":"0.46762420","16":"2.8108558","_row":"stageT3"},{"1":"stageT4","2":"stage","3":"T Stage","4":"factor","5":"categorical","6":"4","7":"contr.treatment","8":"treatment","9":"FALSE","10":"T4","11":"0.7341427","12":"0.4424990","13":"-0.69842376","14":"0.48491222","15":"0.30477787","16":"1.7420427","_row":"stageT4"},{"1":"gradeI","2":"grade","3":"Grade","4":"factor","5":"categorical","6":"3","7":"contr.treatment","8":"treatment","9":"TRUE","10":"I","11":"1.0000000","12":"NA","13":"NA","14":"NA","15":"NA","16":"NA","_row":"gradeI"},{"1":"gradeII","2":"grade","3":"Grade","4":"factor","5":"categorical","6":"3","7":"contr.treatment","8":"treatment","9":"FALSE","10":"II","11":"1.0391945","12":"0.6033177","13":"0.06372417","14":"0.94918986","15":"0.31139021","16":"3.4157424","_row":"gradeII"},{"1":"gradeIII","2":"grade","3":"Grade","4":"factor","5":"categorical","6":"3","7":"contr.treatment","8":"treatment","9":"FALSE","10":"III","11":"2.8780642","12":"0.5562107","13":"1.90057107","14":"0.05735822","15":"0.98607534","16":"8.8842750","_row":"gradeIII"},{"1":"trtDrug A","2":"trt","3":"Chemotherapy Treatment","4":"character","5":"dichotomous","6":"2","7":"contr.treatment","8":"treatment","9":"TRUE","10":"Drug A","11":"1.0000000","12":"NA","13":"NA","14":"NA","15":"NA","16":"NA","_row":"trtDrug A"},{"1":"trtDrug B","2":"trt","3":"Chemotherapy Treatment","4":"character","5":"dichotomous","6":"2","7":"contr.treatment","8":"treatment","9":"FALSE","10":"Drug B","11":"2.4343417","12":"0.5466956","13":"1.62737050","14":"0.10365843","15":"0.84778575","16":"7.3628321","_row":"trtDrug B"},{"1":"gradeII:trtDrug B","2":"grade:trt","3":"Grade * Chemotherapy Treatment","4":"NA","5":"interaction","6":"NA","7":"NA","8":"NA","9":"NA","10":"II * Drug B","11":"0.8352000","12":"0.7941115","13":"-0.22677430","14":"0.82059925","15":"0.17523374","16":"4.0083714","_row":"gradeII:trtDrug B"},{"1":"gradeIII:trtDrug B","2":"grade:trt","3":"Grade * Chemotherapy Treatment","4":"NA","5":"interaction","6":"NA","7":"NA","8":"NA","9":"NA","10":"III * Drug B","11":"0.1630675","12":"0.7817367","13":"-2.31995133","14":"0.02034351","15":"0.03403763","16":"0.7390355","_row":"gradeIII:trtDrug B"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[25],"max":[25]},"pages":{}}}
@@ -276,23 +276,23 @@
 </div>
 <p>Using <code><a href="https://rdrr.io/r/stats/contrast.html" class="external-link">stats::contr.treatment()</a></code>, it is possible to defined alternative reference rows. It will be properly managed by <code>broom.helpers</code>.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span>
-  <span class="va">response</span> <span class="op">~</span> <span class="va">stage</span> <span class="op">+</span> <span class="va">grade</span> <span class="op">*</span> <span class="va">trt</span>,
-  <span class="fu">gtsummary</span><span class="fu">::</span><span class="va"><a href="https://www.danieldsjoberg.com/gtsummary/reference/trial.html" class="external-link">trial</a></span>,
-  family <span class="op">=</span> <span class="va">binomial</span>,
-  contrasts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>
-    stage <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/contrast.html" class="external-link">contr.treatment</a></span><span class="op">(</span><span class="fl">4</span>, base <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,
-    grade <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/contrast.html" class="external-link">contr.treatment</a></span><span class="op">(</span><span class="fl">3</span>, base <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,
-    trt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/contrast.html" class="external-link">contr.treatment</a></span><span class="op">(</span><span class="fl">2</span>, base <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
-  <span class="op">)</span>
-<span class="op">)</span>
-
-<span class="va">model_2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu">print_table</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">model_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span></span>
+<span>  <span class="va">response</span> <span class="op">~</span> <span class="va">stage</span> <span class="op">+</span> <span class="va">grade</span> <span class="op">*</span> <span class="va">trt</span>,</span>
+<span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="va"><a href="https://www.danieldsjoberg.com/gtsummary/reference/trial.html" class="external-link">trial</a></span>,</span>
+<span>  family <span class="op">=</span> <span class="va">binomial</span>,</span>
+<span>  contrasts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    stage <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/contrast.html" class="external-link">contr.treatment</a></span><span class="op">(</span><span class="fl">4</span>, base <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span>
+<span>    grade <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/contrast.html" class="external-link">contr.treatment</a></span><span class="op">(</span><span class="fl">3</span>, base <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span>
+<span>    trt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/contrast.html" class="external-link">contr.treatment</a></span><span class="op">(</span><span class="fl">2</span>, base <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">model_2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">print_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["term"],"name":[1],"type":["chr"],"align":["left"]},{"label":["variable"],"name":[2],"type":["chr"],"align":["left"]},{"label":["var_label"],"name":[3],"type":["chr"],"align":["left"]},{"label":["var_class"],"name":[4],"type":["chr"],"align":["left"]},{"label":["var_type"],"name":[5],"type":["chr"],"align":["left"]},{"label":["var_nlevels"],"name":[6],"type":["int"],"align":["right"]},{"label":["contrasts"],"name":[7],"type":["chr"],"align":["left"]},{"label":["contrasts_type"],"name":[8],"type":["chr"],"align":["left"]},{"label":["reference_row"],"name":[9],"type":["lgl"],"align":["right"]},{"label":["label"],"name":[10],"type":["chr"],"align":["left"]},{"label":["estimate"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["std.error"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["statistic"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["p.value"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["conf.low"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["conf.high"],"name":[16],"type":["dbl"],"align":["right"]}],"data":[{"1":"(Intercept)","2":"(Intercept)","3":"(Intercept)","4":"NA","5":"intercept","6":"NA","7":"NA","8":"NA","9":"NA","10":"(Intercept)","11":"0.8223675","12":"0.4869667","13":"-0.4016042","14":"0.68797535","15":"0.3098506","16":"2.122271","_row":"(Intercept)"},{"1":"stage1","2":"stage","3":"T Stage","4":"factor","5":"categorical","6":"4","7":"contr.treatment(base=3)","8":"treatment","9":"FALSE","10":"T1","11":"0.8711480","12":"0.4552943","13":"-0.3029765","14":"0.76190779","15":"0.3557635","16":"2.138469","_row":"stage1"},{"1":"stage2","2":"stage","3":"T Stage","4":"factor","5":"categorical","6":"4","7":"contr.treatment(base=3)","8":"treatment","9":"FALSE","10":"T2","11":"0.4975482","12":"0.4712001","13":"-1.4814574","14":"0.13848473","15":"0.1945369","16":"1.247111","_row":"stage2"},{"1":"stage3","2":"stage","3":"T Stage","4":"factor","5":"categorical","6":"4","7":"contr.treatment(base=3)","8":"treatment","9":"TRUE","10":"T3","11":"1.0000000","12":"NA","13":"NA","14":"NA","15":"NA","16":"NA","_row":"stage3"},{"1":"stage4","2":"stage","3":"T Stage","4":"factor","5":"categorical","6":"4","7":"contr.treatment(base=3)","8":"treatment","9":"FALSE","10":"T4","11":"0.6395470","12":"0.4661781","13":"-0.9588507","14":"0.33763395","15":"0.2537235","16":"1.593204","_row":"stage4"},{"1":"grade1","2":"grade","3":"Grade","4":"factor","5":"categorical","6":"3","7":"contr.treatment(base=2)","8":"treatment","9":"FALSE","10":"I","11":"1.1521597","12":"0.5164934","13":"0.2742304","14":"0.78390760","15":"0.4173106","16":"3.199642","_row":"grade1"},{"1":"grade2","2":"grade","3":"Grade","4":"factor","5":"categorical","6":"3","7":"contr.treatment(base=2)","8":"treatment","9":"TRUE","10":"II","11":"1.0000000","12":"NA","13":"NA","14":"NA","15":"NA","16":"NA","_row":"grade2"},{"1":"grade3","2":"grade","3":"Grade","4":"factor","5":"categorical","6":"3","7":"contr.treatment(base=2)","8":"treatment","9":"FALSE","10":"III","11":"0.5407301","12":"0.5504584","13":"-1.1169507","14":"0.26401539","15":"0.1781855","16":"1.572186","_row":"grade3"},{"1":"trt1","2":"trt","3":"Chemotherapy Treatment","4":"character","5":"dichotomous","6":"2","7":"contr.SAS","8":"treatment","9":"FALSE","10":"Drug A","11":"0.4918447","12":"0.5750633","13":"-1.2339378","14":"0.21722610","15":"0.1529088","16":"1.490341","_row":"trt1"},{"1":"trt2","2":"trt","3":"Chemotherapy Treatment","4":"character","5":"dichotomous","6":"2","7":"contr.SAS","8":"treatment","9":"TRUE","10":"Drug B","11":"1.0000000","12":"NA","13":"NA","14":"NA","15":"NA","16":"NA","_row":"trt2"},{"1":"grade1:trt1","2":"grade:trt","3":"Grade * Chemotherapy Treatment","4":"NA","5":"interaction","6":"NA","7":"NA","8":"NA","9":"NA","10":"I * Drug A","11":"0.8352000","12":"0.7941115","13":"-0.2267743","14":"0.82059925","15":"0.1752337","16":"4.008371","_row":"grade1:trt1"},{"1":"grade3:trt1","2":"grade:trt","3":"Grade * Chemotherapy Treatment","4":"NA","5":"interaction","6":"NA","7":"NA","8":"NA","9":"NA","10":"III * Drug A","11":"5.1218052","12":"0.8026895","13":"2.0350421","14":"0.04184663","15":"1.0857885","16":"25.631149","_row":"grade3:trt1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[25],"max":[25]},"pages":{}}}
@@ -300,23 +300,23 @@
 </div>
 <p>You can also use sum contrasts (cf. <code><a href="https://rdrr.io/r/stats/contrast.html" class="external-link">stats::contr.sum()</a></code>). In that case, each model coefficient corresponds to the difference of that modality with the grand mean. A variable with 4 modalities will be coded with 3 terms. However, a value could be computed (using <code><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html" class="external-link">emmeans::emmeans()</a></code>) for the last modality, corresponding to the difference of that modality with the grand mean and equal to sum of all other coefficients multiplied by -1. <code>broom.helpers</code> will identify categorical variables coded with sum contrasts and could retrieve an estimate value for the reference term.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model_3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span>
-  <span class="va">response</span> <span class="op">~</span> <span class="va">stage</span> <span class="op">+</span> <span class="va">grade</span> <span class="op">*</span> <span class="va">trt</span>,
-  <span class="fu">gtsummary</span><span class="fu">::</span><span class="va"><a href="https://www.danieldsjoberg.com/gtsummary/reference/trial.html" class="external-link">trial</a></span>,
-  family <span class="op">=</span> <span class="va">binomial</span>,
-  contrasts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>
-    stage <span class="op">=</span> <span class="va">contr.sum</span>,
-    grade <span class="op">=</span> <span class="va">contr.sum</span>,
-    trt <span class="op">=</span> <span class="va">contr.sum</span>
-  <span class="op">)</span>
-<span class="op">)</span>
-
-<span class="va">model_3</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu">print_table</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">model_3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span></span>
+<span>  <span class="va">response</span> <span class="op">~</span> <span class="va">stage</span> <span class="op">+</span> <span class="va">grade</span> <span class="op">*</span> <span class="va">trt</span>,</span>
+<span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="va"><a href="https://www.danieldsjoberg.com/gtsummary/reference/trial.html" class="external-link">trial</a></span>,</span>
+<span>  family <span class="op">=</span> <span class="va">binomial</span>,</span>
+<span>  contrasts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    stage <span class="op">=</span> <span class="va">contr.sum</span>,</span>
+<span>    grade <span class="op">=</span> <span class="va">contr.sum</span>,</span>
+<span>    trt <span class="op">=</span> <span class="va">contr.sum</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">model_3</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">print_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["term"],"name":[1],"type":["chr"],"align":["left"]},{"label":["variable"],"name":[2],"type":["chr"],"align":["left"]},{"label":["var_label"],"name":[3],"type":["chr"],"align":["left"]},{"label":["var_class"],"name":[4],"type":["chr"],"align":["left"]},{"label":["var_type"],"name":[5],"type":["chr"],"align":["left"]},{"label":["var_nlevels"],"name":[6],"type":["int"],"align":["right"]},{"label":["contrasts"],"name":[7],"type":["chr"],"align":["left"]},{"label":["contrasts_type"],"name":[8],"type":["chr"],"align":["left"]},{"label":["reference_row"],"name":[9],"type":["lgl"],"align":["right"]},{"label":["label"],"name":[10],"type":["chr"],"align":["left"]},{"label":["estimate"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["std.error"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["statistic"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["p.value"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["conf.low"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["conf.high"],"name":[16],"type":["dbl"],"align":["right"]}],"data":[{"1":"(Intercept)","2":"(Intercept)","3":"(Intercept)","4":"NA","5":"intercept","6":"NA","7":"NA","8":"NA","9":"NA","10":"(Intercept)","11":"0.4553862","12":"0.1608512","13":"-4.8902924","14":"1.006863e-06","15":"0.3296951","16":"0.6204266","_row":"(Intercept)"},{"1":"stage1","2":"stage","3":"T Stage","4":"factor","5":"categorical","6":"4","7":"contr.sum","8":"sum","9":"FALSE","10":"T1","11":"1.2005826","12":"0.2695134","13":"0.6782852","14":"4.975909e-01","15":"0.7024512","16":"2.0305502","_row":"stage1"},{"1":"stage2","2":"stage","3":"T Stage","4":"factor","5":"categorical","6":"4","7":"contr.sum","8":"sum","9":"FALSE","10":"T2","11":"0.6857018","12":"0.2811013","13":"-1.3422651","14":"1.795101e-01","15":"0.3867939","16":"1.1721378","_row":"stage2"},{"1":"stage3","2":"stage","3":"T Stage","4":"factor","5":"categorical","6":"4","7":"contr.sum","8":"sum","9":"FALSE","10":"T3","11":"1.3781615","12":"0.2891714","13":"1.1092050","14":"2.673417e-01","15":"0.7746566","16":"2.4233463","_row":"stage3"},{"1":"stage4","2":"stage","3":"T Stage","4":"factor","5":"categorical","6":"4","7":"contr.sum","8":"sum","9":"TRUE","10":"T4","11":"0.8813990","12":"NA","13":"NA","14":"NA","15":"NA","16":"NA","_row":"stage4"},{"1":"grade1","2":"grade","3":"Grade","4":"factor","5":"categorical","6":"3","7":"contr.sum","8":"sum","9":"FALSE","10":"I","11":"0.9676268","12":"0.2258518","13":"-0.1457095","14":"8.841507e-01","15":"0.6162218","16":"1.4995855","_row":"grade1"},{"1":"grade2","2":"grade","3":"Grade","4":"factor","5":"categorical","6":"3","7":"contr.sum","8":"sum","9":"FALSE","10":"II","11":"0.9189672","12":"0.2318470","13":"-0.3644856","14":"7.154954e-01","15":"0.5769227","16":"1.4384652","_row":"grade2"},{"1":"grade3","2":"grade","3":"Grade","4":"factor","5":"categorical","6":"3","7":"contr.sum","8":"sum","9":"TRUE","10":"III","11":"1.1245845","12":"NA","13":"NA","14":"NA","15":"NA","16":"NA","_row":"grade3"},{"1":"trt1","2":"trt","3":"Chemotherapy Treatment","4":"character","5":"dichotomous","6":"2","7":"contr.sum","8":"sum","9":"FALSE","10":"Drug A","11":"0.8935446","12":"0.1604902","13":"-0.7013449","14":"4.830878e-01","15":"0.6504679","16":"1.2229322","_row":"trt1"},{"1":"trt2","2":"trt","3":"Chemotherapy Treatment","4":"character","5":"dichotomous","6":"2","7":"contr.sum","8":"sum","9":"TRUE","10":"Drug B","11":"1.1191383","12":"NA","13":"NA","14":"NA","15":"NA","16":"NA","_row":"trt2"},{"1":"grade1:trt1","2":"grade:trt","3":"Grade * Chemotherapy Treatment","4":"NA","5":"interaction","6":"NA","7":"NA","8":"NA","9":"NA","10":"I * Drug A","11":"0.7172870","12":"0.2260248","13":"-1.4701003","14":"1.415346e-01","15":"0.4570034","16":"1.1130409","_row":"grade1:trt1"},{"1":"grade2:trt1","2":"grade:trt","3":"Grade * Chemotherapy Treatment","4":"NA","5":"interaction","6":"NA","7":"NA","8":"NA","9":"NA","10":"II * Drug A","11":"0.7848700","12":"0.2320641","13":"-1.0438372","14":"2.965607e-01","15":"0.4932810","16":"1.2312797","_row":"grade2:trt1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[25],"max":[25]},"pages":{}}}
@@ -324,23 +324,23 @@
 </div>
 <p>Other types of contrasts exist, like Helmert (<code><a href="https://rdrr.io/r/stats/contrast.html" class="external-link">contr.helmert()</a></code>) or polynomial (<code><a href="https://rdrr.io/r/stats/contrast.html" class="external-link">contr.poly()</a></code>). They are more complex as a modality will be coded with a combination of terms. Therefore, for such contrasts, it will not be possible to associate a specific model term with a level of the original factor. <code>broom.helpers</code> will not add a reference term in such case.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model_4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span>
-  <span class="va">response</span> <span class="op">~</span> <span class="va">stage</span> <span class="op">+</span> <span class="va">grade</span> <span class="op">*</span> <span class="va">trt</span>,
-  <span class="fu">gtsummary</span><span class="fu">::</span><span class="va"><a href="https://www.danieldsjoberg.com/gtsummary/reference/trial.html" class="external-link">trial</a></span>,
-  family <span class="op">=</span> <span class="va">binomial</span>,
-  contrasts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>
-    stage <span class="op">=</span> <span class="va">contr.poly</span>,
-    grade <span class="op">=</span> <span class="va">contr.helmert</span>,
-    trt <span class="op">=</span> <span class="va">contr.poly</span>
-  <span class="op">)</span>
-<span class="op">)</span>
-
-<span class="va">model_4</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu">print_table</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">model_4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span></span>
+<span>  <span class="va">response</span> <span class="op">~</span> <span class="va">stage</span> <span class="op">+</span> <span class="va">grade</span> <span class="op">*</span> <span class="va">trt</span>,</span>
+<span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="va"><a href="https://www.danieldsjoberg.com/gtsummary/reference/trial.html" class="external-link">trial</a></span>,</span>
+<span>  family <span class="op">=</span> <span class="va">binomial</span>,</span>
+<span>  contrasts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    stage <span class="op">=</span> <span class="va">contr.poly</span>,</span>
+<span>    grade <span class="op">=</span> <span class="va">contr.helmert</span>,</span>
+<span>    trt <span class="op">=</span> <span class="va">contr.poly</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">model_4</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">print_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["term"],"name":[1],"type":["chr"],"align":["left"]},{"label":["variable"],"name":[2],"type":["chr"],"align":["left"]},{"label":["var_label"],"name":[3],"type":["chr"],"align":["left"]},{"label":["var_class"],"name":[4],"type":["chr"],"align":["left"]},{"label":["var_type"],"name":[5],"type":["chr"],"align":["left"]},{"label":["var_nlevels"],"name":[6],"type":["int"],"align":["right"]},{"label":["contrasts"],"name":[7],"type":["chr"],"align":["left"]},{"label":["contrasts_type"],"name":[8],"type":["chr"],"align":["left"]},{"label":["reference_row"],"name":[9],"type":["lgl"],"align":["right"]},{"label":["label"],"name":[10],"type":["chr"],"align":["left"]},{"label":["estimate"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["std.error"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["statistic"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["p.value"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["conf.low"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["conf.high"],"name":[16],"type":["dbl"],"align":["right"]}],"data":[{"1":"(Intercept)","2":"(Intercept)","3":"(Intercept)","4":"NA","5":"intercept","6":"NA","7":"NA","8":"NA","9":"NA","10":"(Intercept)","11":"0.4553862","12":"0.1608512","13":"-4.8902924","14":"1.006863e-06","15":"0.3296951","16":"0.6204266","_row":"(Intercept)"},{"1":"stage.L","2":"stage","3":"T Stage","4":"factor","5":"categorical","6":"4","7":"contr.poly","8":"poly","9":"NA","10":"stage.L","11":"0.9500633","12":"0.3142542","13":"-0.1630102","14":"8.705104e-01","15":"0.5099505","16":"1.7567778","_row":"stage.L"},{"1":"stage.Q","2":"stage","3":"T Stage","4":"factor","5":"categorical","6":"4","7":"contr.poly","8":"poly","9":"NA","10":"stage.Q","11":"1.0581923","12":"0.3213201","13":"0.1760303","14":"8.602701e-01","15":"0.5633860","16":"1.9929503","_row":"stage.Q"},{"1":"stage.C","2":"stage","3":"T Stage","4":"factor","5":"categorical","6":"4","7":"contr.poly","8":"poly","9":"NA","10":"stage.C","11":"0.5842765","12":"0.3319062","13":"-1.6190747","14":"1.054312e-01","15":"0.3017102","16":"1.1155816","_row":"stage.C"},{"1":"grade1","2":"grade","3":"Grade","4":"factor","5":"categorical","6":"3","7":"contr.helmert","8":"helmert","9":"NA","10":"grade1","11":"0.9745319","12":"0.1985734","13":"-0.1299170","14":"8.966321e-01","15":"0.6580991","16":"1.4395005","_row":"grade1"},{"1":"grade2","2":"grade","3":"Grade","4":"factor","5":"categorical","6":"3","7":"contr.helmert","8":"helmert","9":"NA","10":"grade2","11":"1.0604643","12":"0.1137965","13":"0.5158930","14":"6.059292e-01","15":"0.8455759","16":"1.3236930","_row":"grade2"},{"1":"trt.L","2":"trt","3":"Chemotherapy Treatment","4":"character","5":"dichotomous","6":"2","7":"contr.poly","8":"poly","9":"NA","10":"trt.L","11":"1.1725519","12":"0.2269674","13":"0.7013449","14":"4.830878e-01","15":"0.7523057","16":"1.8371240","_row":"trt.L"},{"1":"grade1:trt.L","2":"grade:trt","3":"Grade * Chemotherapy Treatment","4":"NA","5":"interaction","6":"NA","7":"NA","8":"NA","9":"NA","10":"grade1 * trt.L","11":"0.9383152","12":"0.2807608","13":"-0.2267743","14":"8.205992e-01","15":"0.5402297","16":"1.6337341","_row":"grade1:trt.L"},{"1":"grade2:trt.L","2":"grade:trt","3":"Grade * Chemotherapy Treatment","4":"NA","5":"interaction","6":"NA","7":"NA","8":"NA","9":"NA","10":"grade2 * trt.L","11":"0.6661473","12":"0.1615993","13":"-2.5138994","14":"1.194045e-02","15":"0.4818858","16":"0.9104706","_row":"grade2:trt.L"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[25],"max":[25]},"pages":{}}}
@@ -355,12 +355,12 @@
 <style>
 td {vertical-align: top;}
 </style>
-<div id="arfbpejesm" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="yqjiydvdby" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#arfbpejesm .gt_table {
+#yqjiydvdby .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -385,7 +385,7 @@ td {vertical-align: top;}
   border-left-color: #D3D3D3;
 }
 
-#arfbpejesm .gt_heading {
+#yqjiydvdby .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -397,7 +397,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#arfbpejesm .gt_title {
+#yqjiydvdby .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -409,7 +409,7 @@ td {vertical-align: top;}
   border-bottom-width: 0;
 }
 
-#arfbpejesm .gt_subtitle {
+#yqjiydvdby .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -421,13 +421,13 @@ td {vertical-align: top;}
   border-top-width: 0;
 }
 
-#arfbpejesm .gt_bottom_border {
+#yqjiydvdby .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#arfbpejesm .gt_col_headings {
+#yqjiydvdby .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -442,7 +442,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#arfbpejesm .gt_col_heading {
+#yqjiydvdby .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -462,7 +462,7 @@ td {vertical-align: top;}
   overflow-x: hidden;
 }
 
-#arfbpejesm .gt_column_spanner_outer {
+#yqjiydvdby .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -474,15 +474,15 @@ td {vertical-align: top;}
   padding-right: 4px;
 }
 
-#arfbpejesm .gt_column_spanner_outer:first-child {
+#yqjiydvdby .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#arfbpejesm .gt_column_spanner_outer:last-child {
+#yqjiydvdby .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#arfbpejesm .gt_column_spanner {
+#yqjiydvdby .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -494,7 +494,7 @@ td {vertical-align: top;}
   width: 100%;
 }
 
-#arfbpejesm .gt_group_heading {
+#yqjiydvdby .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -519,7 +519,7 @@ td {vertical-align: top;}
   vertical-align: middle;
 }
 
-#arfbpejesm .gt_empty_group_heading {
+#yqjiydvdby .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -534,15 +534,15 @@ td {vertical-align: top;}
   vertical-align: middle;
 }
 
-#arfbpejesm .gt_from_md > :first-child {
+#yqjiydvdby .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#arfbpejesm .gt_from_md > :last-child {
+#yqjiydvdby .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#arfbpejesm .gt_row {
+#yqjiydvdby .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -561,7 +561,7 @@ td {vertical-align: top;}
   overflow-x: hidden;
 }
 
-#arfbpejesm .gt_stub {
+#yqjiydvdby .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -574,7 +574,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#arfbpejesm .gt_stub_row_group {
+#yqjiydvdby .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -588,11 +588,11 @@ td {vertical-align: top;}
   vertical-align: top;
 }
 
-#arfbpejesm .gt_row_group_first td {
+#yqjiydvdby .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#arfbpejesm .gt_summary_row {
+#yqjiydvdby .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -602,16 +602,16 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#arfbpejesm .gt_first_summary_row {
+#yqjiydvdby .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#arfbpejesm .gt_first_summary_row.thick {
+#yqjiydvdby .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#arfbpejesm .gt_last_summary_row {
+#yqjiydvdby .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -621,7 +621,7 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#arfbpejesm .gt_grand_summary_row {
+#yqjiydvdby .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -631,7 +631,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#arfbpejesm .gt_first_grand_summary_row {
+#yqjiydvdby .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -641,11 +641,11 @@ td {vertical-align: top;}
   border-top-color: #D3D3D3;
 }
 
-#arfbpejesm .gt_striped {
+#yqjiydvdby .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#arfbpejesm .gt_table_body {
+#yqjiydvdby .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -654,7 +654,7 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#arfbpejesm .gt_footnotes {
+#yqjiydvdby .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -668,7 +668,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#arfbpejesm .gt_footnote {
+#yqjiydvdby .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -677,7 +677,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#arfbpejesm .gt_sourcenotes {
+#yqjiydvdby .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -691,7 +691,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#arfbpejesm .gt_sourcenote {
+#yqjiydvdby .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -699,36 +699,36 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#arfbpejesm .gt_left {
+#yqjiydvdby .gt_left {
   text-align: left;
 }
 
-#arfbpejesm .gt_center {
+#yqjiydvdby .gt_center {
   text-align: center;
 }
 
-#arfbpejesm .gt_right {
+#yqjiydvdby .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#arfbpejesm .gt_font_normal {
+#yqjiydvdby .gt_font_normal {
   font-weight: normal;
 }
 
-#arfbpejesm .gt_font_bold {
+#yqjiydvdby .gt_font_bold {
   font-weight: bold;
 }
 
-#arfbpejesm .gt_font_italic {
+#yqjiydvdby .gt_font_italic {
   font-style: italic;
 }
 
-#arfbpejesm .gt_super {
+#yqjiydvdby .gt_super {
   font-size: 65%;
 }
 
-#arfbpejesm .gt_two_val_uncert {
+#yqjiydvdby .gt_two_val_uncert {
   display: inline-block;
   line-height: 1em;
   text-align: right;
@@ -737,31 +737,31 @@ td {vertical-align: top;}
   margin-left: 0.1em;
 }
 
-#arfbpejesm .gt_footnote_marks {
+#yqjiydvdby .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#arfbpejesm .gt_asterisk {
+#yqjiydvdby .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#arfbpejesm .gt_slash_mark {
+#yqjiydvdby .gt_slash_mark {
   font-size: 0.7em;
   line-height: 0.7em;
   vertical-align: 0.15em;
 }
 
-#arfbpejesm .gt_fraction_numerator {
+#yqjiydvdby .gt_fraction_numerator {
   font-size: 0.6em;
   line-height: 0.6em;
   vertical-align: 0.45em;
 }
 
-#arfbpejesm .gt_fraction_denominator {
+#yqjiydvdby .gt_fraction_denominator {
   font-size: 0.6em;
   line-height: 0.6em;
   vertical-align: -0.05em;
@@ -940,12 +940,12 @@ td {vertical-align: top;}
 <style>
 td {vertical-align: top;}
 </style>
-<div id="gjjpnrybbc" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="oxvsgrrups" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#gjjpnrybbc .gt_table {
+#oxvsgrrups .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -970,7 +970,7 @@ td {vertical-align: top;}
   border-left-color: #D3D3D3;
 }
 
-#gjjpnrybbc .gt_heading {
+#oxvsgrrups .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -982,7 +982,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#gjjpnrybbc .gt_title {
+#oxvsgrrups .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -994,7 +994,7 @@ td {vertical-align: top;}
   border-bottom-width: 0;
 }
 
-#gjjpnrybbc .gt_subtitle {
+#oxvsgrrups .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1006,13 +1006,13 @@ td {vertical-align: top;}
   border-top-width: 0;
 }
 
-#gjjpnrybbc .gt_bottom_border {
+#oxvsgrrups .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#gjjpnrybbc .gt_col_headings {
+#oxvsgrrups .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1027,7 +1027,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#gjjpnrybbc .gt_col_heading {
+#oxvsgrrups .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1047,7 +1047,7 @@ td {vertical-align: top;}
   overflow-x: hidden;
 }
 
-#gjjpnrybbc .gt_column_spanner_outer {
+#oxvsgrrups .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1059,15 +1059,15 @@ td {vertical-align: top;}
   padding-right: 4px;
 }
 
-#gjjpnrybbc .gt_column_spanner_outer:first-child {
+#oxvsgrrups .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gjjpnrybbc .gt_column_spanner_outer:last-child {
+#oxvsgrrups .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gjjpnrybbc .gt_column_spanner {
+#oxvsgrrups .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1079,7 +1079,7 @@ td {vertical-align: top;}
   width: 100%;
 }
 
-#gjjpnrybbc .gt_group_heading {
+#oxvsgrrups .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1104,7 +1104,7 @@ td {vertical-align: top;}
   vertical-align: middle;
 }
 
-#gjjpnrybbc .gt_empty_group_heading {
+#oxvsgrrups .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1119,15 +1119,15 @@ td {vertical-align: top;}
   vertical-align: middle;
 }
 
-#gjjpnrybbc .gt_from_md > :first-child {
+#oxvsgrrups .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gjjpnrybbc .gt_from_md > :last-child {
+#oxvsgrrups .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gjjpnrybbc .gt_row {
+#oxvsgrrups .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1146,7 +1146,7 @@ td {vertical-align: top;}
   overflow-x: hidden;
 }
 
-#gjjpnrybbc .gt_stub {
+#oxvsgrrups .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1159,7 +1159,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#gjjpnrybbc .gt_stub_row_group {
+#oxvsgrrups .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1173,11 +1173,11 @@ td {vertical-align: top;}
   vertical-align: top;
 }
 
-#gjjpnrybbc .gt_row_group_first td {
+#oxvsgrrups .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#gjjpnrybbc .gt_summary_row {
+#oxvsgrrups .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1187,16 +1187,16 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#gjjpnrybbc .gt_first_summary_row {
+#oxvsgrrups .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#gjjpnrybbc .gt_first_summary_row.thick {
+#oxvsgrrups .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#gjjpnrybbc .gt_last_summary_row {
+#oxvsgrrups .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1206,7 +1206,7 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#gjjpnrybbc .gt_grand_summary_row {
+#oxvsgrrups .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1216,7 +1216,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#gjjpnrybbc .gt_first_grand_summary_row {
+#oxvsgrrups .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1226,11 +1226,11 @@ td {vertical-align: top;}
   border-top-color: #D3D3D3;
 }
 
-#gjjpnrybbc .gt_striped {
+#oxvsgrrups .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#gjjpnrybbc .gt_table_body {
+#oxvsgrrups .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1239,7 +1239,7 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#gjjpnrybbc .gt_footnotes {
+#oxvsgrrups .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1253,7 +1253,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#gjjpnrybbc .gt_footnote {
+#oxvsgrrups .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -1262,7 +1262,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#gjjpnrybbc .gt_sourcenotes {
+#oxvsgrrups .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1276,7 +1276,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#gjjpnrybbc .gt_sourcenote {
+#oxvsgrrups .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1284,36 +1284,36 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#gjjpnrybbc .gt_left {
+#oxvsgrrups .gt_left {
   text-align: left;
 }
 
-#gjjpnrybbc .gt_center {
+#oxvsgrrups .gt_center {
   text-align: center;
 }
 
-#gjjpnrybbc .gt_right {
+#oxvsgrrups .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gjjpnrybbc .gt_font_normal {
+#oxvsgrrups .gt_font_normal {
   font-weight: normal;
 }
 
-#gjjpnrybbc .gt_font_bold {
+#oxvsgrrups .gt_font_bold {
   font-weight: bold;
 }
 
-#gjjpnrybbc .gt_font_italic {
+#oxvsgrrups .gt_font_italic {
   font-style: italic;
 }
 
-#gjjpnrybbc .gt_super {
+#oxvsgrrups .gt_super {
   font-size: 65%;
 }
 
-#gjjpnrybbc .gt_two_val_uncert {
+#oxvsgrrups .gt_two_val_uncert {
   display: inline-block;
   line-height: 1em;
   text-align: right;
@@ -1322,31 +1322,31 @@ td {vertical-align: top;}
   margin-left: 0.1em;
 }
 
-#gjjpnrybbc .gt_footnote_marks {
+#oxvsgrrups .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#gjjpnrybbc .gt_asterisk {
+#oxvsgrrups .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#gjjpnrybbc .gt_slash_mark {
+#oxvsgrrups .gt_slash_mark {
   font-size: 0.7em;
   line-height: 0.7em;
   vertical-align: 0.15em;
 }
 
-#gjjpnrybbc .gt_fraction_numerator {
+#oxvsgrrups .gt_fraction_numerator {
   font-size: 0.6em;
   line-height: 0.6em;
   vertical-align: 0.45em;
 }
 
-#gjjpnrybbc .gt_fraction_denominator {
+#oxvsgrrups .gt_fraction_denominator {
   font-size: 0.6em;
   line-height: 0.6em;
   vertical-align: -0.05em;
@@ -1454,12 +1454,12 @@ td {vertical-align: top;}
 <div class="section level2">
 <h2 id="supported-models">Supported models<a class="anchor" aria-label="anchor" href="#supported-models"></a>
 </h2>
-<div id="svybnydiat" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="fxhptoxxbo" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#svybnydiat .gt_table {
+#fxhptoxxbo .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1484,7 +1484,7 @@ td {vertical-align: top;}
   border-left-color: #D3D3D3;
 }
 
-#svybnydiat .gt_heading {
+#fxhptoxxbo .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1496,7 +1496,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#svybnydiat .gt_title {
+#fxhptoxxbo .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1508,7 +1508,7 @@ td {vertical-align: top;}
   border-bottom-width: 0;
 }
 
-#svybnydiat .gt_subtitle {
+#fxhptoxxbo .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1520,13 +1520,13 @@ td {vertical-align: top;}
   border-top-width: 0;
 }
 
-#svybnydiat .gt_bottom_border {
+#fxhptoxxbo .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#svybnydiat .gt_col_headings {
+#fxhptoxxbo .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1541,7 +1541,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#svybnydiat .gt_col_heading {
+#fxhptoxxbo .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1561,7 +1561,7 @@ td {vertical-align: top;}
   overflow-x: hidden;
 }
 
-#svybnydiat .gt_column_spanner_outer {
+#fxhptoxxbo .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1573,15 +1573,15 @@ td {vertical-align: top;}
   padding-right: 4px;
 }
 
-#svybnydiat .gt_column_spanner_outer:first-child {
+#fxhptoxxbo .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#svybnydiat .gt_column_spanner_outer:last-child {
+#fxhptoxxbo .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#svybnydiat .gt_column_spanner {
+#fxhptoxxbo .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1593,7 +1593,7 @@ td {vertical-align: top;}
   width: 100%;
 }
 
-#svybnydiat .gt_group_heading {
+#fxhptoxxbo .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1618,7 +1618,7 @@ td {vertical-align: top;}
   vertical-align: middle;
 }
 
-#svybnydiat .gt_empty_group_heading {
+#fxhptoxxbo .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1633,15 +1633,15 @@ td {vertical-align: top;}
   vertical-align: middle;
 }
 
-#svybnydiat .gt_from_md > :first-child {
+#fxhptoxxbo .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#svybnydiat .gt_from_md > :last-child {
+#fxhptoxxbo .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#svybnydiat .gt_row {
+#fxhptoxxbo .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1660,7 +1660,7 @@ td {vertical-align: top;}
   overflow-x: hidden;
 }
 
-#svybnydiat .gt_stub {
+#fxhptoxxbo .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1673,7 +1673,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#svybnydiat .gt_stub_row_group {
+#fxhptoxxbo .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1687,11 +1687,11 @@ td {vertical-align: top;}
   vertical-align: top;
 }
 
-#svybnydiat .gt_row_group_first td {
+#fxhptoxxbo .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#svybnydiat .gt_summary_row {
+#fxhptoxxbo .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1701,16 +1701,16 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#svybnydiat .gt_first_summary_row {
+#fxhptoxxbo .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#svybnydiat .gt_first_summary_row.thick {
+#fxhptoxxbo .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#svybnydiat .gt_last_summary_row {
+#fxhptoxxbo .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1720,7 +1720,7 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#svybnydiat .gt_grand_summary_row {
+#fxhptoxxbo .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1730,7 +1730,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#svybnydiat .gt_first_grand_summary_row {
+#fxhptoxxbo .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1740,11 +1740,11 @@ td {vertical-align: top;}
   border-top-color: #D3D3D3;
 }
 
-#svybnydiat .gt_striped {
+#fxhptoxxbo .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#svybnydiat .gt_table_body {
+#fxhptoxxbo .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1753,7 +1753,7 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#svybnydiat .gt_footnotes {
+#fxhptoxxbo .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1767,7 +1767,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#svybnydiat .gt_footnote {
+#fxhptoxxbo .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -1776,7 +1776,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#svybnydiat .gt_sourcenotes {
+#fxhptoxxbo .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1790,7 +1790,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#svybnydiat .gt_sourcenote {
+#fxhptoxxbo .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1798,36 +1798,36 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#svybnydiat .gt_left {
+#fxhptoxxbo .gt_left {
   text-align: left;
 }
 
-#svybnydiat .gt_center {
+#fxhptoxxbo .gt_center {
   text-align: center;
 }
 
-#svybnydiat .gt_right {
+#fxhptoxxbo .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#svybnydiat .gt_font_normal {
+#fxhptoxxbo .gt_font_normal {
   font-weight: normal;
 }
 
-#svybnydiat .gt_font_bold {
+#fxhptoxxbo .gt_font_bold {
   font-weight: bold;
 }
 
-#svybnydiat .gt_font_italic {
+#fxhptoxxbo .gt_font_italic {
   font-style: italic;
 }
 
-#svybnydiat .gt_super {
+#fxhptoxxbo .gt_super {
   font-size: 65%;
 }
 
-#svybnydiat .gt_two_val_uncert {
+#fxhptoxxbo .gt_two_val_uncert {
   display: inline-block;
   line-height: 1em;
   text-align: right;
@@ -1836,31 +1836,31 @@ td {vertical-align: top;}
   margin-left: 0.1em;
 }
 
-#svybnydiat .gt_footnote_marks {
+#fxhptoxxbo .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#svybnydiat .gt_asterisk {
+#fxhptoxxbo .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#svybnydiat .gt_slash_mark {
+#fxhptoxxbo .gt_slash_mark {
   font-size: 0.7em;
   line-height: 0.7em;
   vertical-align: 0.15em;
 }
 
-#svybnydiat .gt_fraction_numerator {
+#fxhptoxxbo .gt_fraction_numerator {
   font-size: 0.6em;
   line-height: 0.6em;
   vertical-align: 0.45em;
 }
 
-#svybnydiat .gt_fraction_denominator {
+#fxhptoxxbo .gt_fraction_denominator {
   font-size: 0.6em;
   line-height: 0.6em;
   vertical-align: -0.05em;
@@ -2112,7 +2112,7 @@ td {vertical-align: top;}
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer>

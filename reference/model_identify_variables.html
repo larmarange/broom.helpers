@@ -62,35 +62,38 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">model_identify_variables</span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
-
-<span class="co"># S3 method for default</span>
-<span class="fu">model_identify_variables</span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
-
-<span class="co"># S3 method for lavaan</span>
-<span class="fu">model_identify_variables</span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
-
-<span class="co"># S3 method for aov</span>
-<span class="fu">model_identify_variables</span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
-
-<span class="co"># S3 method for clm</span>
-<span class="fu">model_identify_variables</span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
-
-<span class="co"># S3 method for clmm</span>
-<span class="fu">model_identify_variables</span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
-
-<span class="co"># S3 method for gam</span>
-<span class="fu">model_identify_variables</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">model_identify_variables</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for default</span></span>
+<span><span class="fu">model_identify_variables</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for lavaan</span></span>
+<span><span class="fu">model_identify_variables</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for aov</span></span>
+<span><span class="fu">model_identify_variables</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for clm</span></span>
+<span><span class="fu">model_identify_variables</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for clmm</span></span>
+<span><span class="fu">model_identify_variables</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for gam</span></span>
+<span><span class="fu">model_identify_variables</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>model</dt>
 <dd><p>a model object</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A tibble with four columns:</p><ul><li><p><code>term</code>: coefficients of the model</p></li>
+    
+
+<p>A tibble with four columns:</p><ul><li><p><code>term</code>: coefficients of the model</p></li>
 <li><p><code>variable</code>: the corresponding variable</p></li>
 <li><p><code>var_class</code>: class of the variable (cf. <code><a href="https://rdrr.io/r/stats/checkMFClasses.html" class="external-link">stats::.MFclass()</a></code>)</p></li>
 <li><p><code>var_type</code>: <code>"continuous"</code>, <code>"dichotomous"</code> (categorical variable with 2 levels),
@@ -123,15 +126,15 @@ or <code>"interaction"</code></p></li>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">Titanic</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>Survived <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">Survived</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"No"</span>, <span class="st">"Yes"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span></span>
-<span class="r-in">    <span class="va">Survived</span> <span class="op">~</span> <span class="va">Class</span> <span class="op">+</span> <span class="va">Age</span> <span class="op">*</span> <span class="va">Sex</span>,</span>
-<span class="r-in">    data <span class="op">=</span> <span class="va">.</span>, weights <span class="op">=</span> <span class="va">.</span><span class="op">$</span><span class="va">n</span>,</span>
-<span class="r-in">    family <span class="op">=</span> <span class="va">binomial</span></span>
-<span class="r-in">  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">model_identify_variables</span><span class="op">(</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">Titanic</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>Survived <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">Survived</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"No"</span>, <span class="st">"Yes"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="va">Survived</span> <span class="op">~</span> <span class="va">Class</span> <span class="op">+</span> <span class="va">Age</span> <span class="op">*</span> <span class="va">Sex</span>,</span></span>
+<span class="r-in"><span>    data <span class="op">=</span> <span class="va">.</span>, weights <span class="op">=</span> <span class="va">.</span><span class="op">$</span><span class="va">n</span>,</span></span>
+<span class="r-in"><span>    family <span class="op">=</span> <span class="va">binomial</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">model_identify_variables</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 7 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   term             variable var_class var_nlevels var_type   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
@@ -142,14 +145,14 @@ or <code>"interaction"</code></p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> AgeChild         Age      character           2 dichotomous</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> SexMale          Sex      character           2 dichotomous</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> AgeChild:SexMale Age:Sex  <span style="color: #BB0000;">NA</span>                 <span style="color: #BB0000;">NA</span> interaction</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span></span>
-<span class="r-in">    <span class="va">Sepal.Length</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html" class="external-link">poly</a></span><span class="op">(</span><span class="va">Sepal.Width</span>, <span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="va">Species</span>,</span>
-<span class="r-in">    data <span class="op">=</span> <span class="va">.</span>,</span>
-<span class="r-in">    contrasts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>Species <span class="op">=</span> <span class="va">contr.sum</span><span class="op">)</span></span>
-<span class="r-in">  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">model_identify_variables</span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="va">Sepal.Length</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html" class="external-link">poly</a></span><span class="op">(</span><span class="va">Sepal.Width</span>, <span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="va">Species</span>,</span></span>
+<span class="r-in"><span>    data <span class="op">=</span> <span class="va">.</span>,</span></span>
+<span class="r-in"><span>    contrasts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>Species <span class="op">=</span> <span class="va">contr.sum</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">model_identify_variables</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   term                  variable    var_class var_nlevels var_type   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
@@ -172,7 +175,7 @@ or <code>"interaction"</code></p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

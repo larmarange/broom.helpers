@@ -66,16 +66,17 @@ be taken into account in the estimate of the number of observations,
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">model_compute_terms_contributions</span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
-
-<span class="co"># S3 method for default</span>
-<span class="fu">model_compute_terms_contributions</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">model_compute_terms_contributions</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for default</span></span>
+<span><span class="fu">model_compute_terms_contributions</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>model</dt>
 <dd><p>a model object</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -105,8 +106,8 @@ be taken into account in the estimate of the number of observations,
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Sepal.Width</span>, <span class="va">iris</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">model_compute_terms_contributions</span><span class="op">(</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Sepal.Width</span>, <span class="va">iris</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">model_compute_terms_contributions</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     (Intercept) Sepal.Width</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1             1           1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2             1           1</span>
@@ -258,9 +259,9 @@ be taken into account in the estimate of the number of observations,
 <span class="r-out co"><span class="r-pr">#&gt;</span> 148           1           1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 149           1           1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 150           1           1</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">hp</span> <span class="op">~</span> <span class="va">mpg</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span> <span class="op">+</span> <span class="va">disp</span><span class="op">:</span><span class="va">hp</span>, <span class="va">mtcars</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">model_compute_terms_contributions</span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">hp</span> <span class="op">~</span> <span class="va">mpg</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span> <span class="op">+</span> <span class="va">disp</span><span class="op">:</span><span class="va">hp</span>, <span class="va">mtcars</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">model_compute_terms_contributions</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                     (Intercept) mpg factor(cyl)6 factor(cyl)8 hp:disp</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4                     1   1            1            0       1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4 Wag                 1   1            1            0       1</span>
@@ -327,18 +328,18 @@ be taken into account in the estimate of the number of observations,
 <span class="r-out co"><span class="r-pr">#&gt;</span> Ferrari Dino                   0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Maserati Bora                  0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Volvo 142E                     1</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="va">response</span> <span class="op">~</span> <span class="va">stage</span> <span class="op">*</span> <span class="va">grade</span> <span class="op">+</span> <span class="va">trt</span>,</span>
-<span class="r-in">  <span class="fu">gtsummary</span><span class="fu">::</span><span class="va"><a href="https://www.danieldsjoberg.com/gtsummary/reference/trial.html" class="external-link">trial</a></span>,</span>
-<span class="r-in">  family <span class="op">=</span> <span class="va">binomial</span>,</span>
-<span class="r-in">  contrasts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span class="r-in">    stage <span class="op">=</span> <span class="va">contr.sum</span>,</span>
-<span class="r-in">    grade <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/contrast.html" class="external-link">contr.treatment</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">2</span><span class="op">)</span>,</span>
-<span class="r-in">    trt <span class="op">=</span> <span class="st">"contr.SAS"</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">model_compute_terms_contributions</span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">response</span> <span class="op">~</span> <span class="va">stage</span> <span class="op">*</span> <span class="va">grade</span> <span class="op">+</span> <span class="va">trt</span>,</span></span>
+<span class="r-in"><span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="va"><a href="https://www.danieldsjoberg.com/gtsummary/reference/trial.html" class="external-link">trial</a></span>,</span></span>
+<span class="r-in"><span>  family <span class="op">=</span> <span class="va">binomial</span>,</span></span>
+<span class="r-in"><span>  contrasts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    stage <span class="op">=</span> <span class="va">contr.sum</span>,</span></span>
+<span class="r-in"><span>    grade <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/contrast.html" class="external-link">contr.treatment</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">2</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    trt <span class="op">=</span> <span class="st">"contr.SAS"</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">model_compute_terms_contributions</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     (Intercept) stage1 stage2 stage3 grade1 grade3 trtDrug A stage1:grade1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1             1      1      0      0      0      0         1             0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2             1      0      1      0      1      0         0             0</span>
@@ -921,14 +922,14 @@ be taken into account in the estimate of the number of observations,
 <span class="r-out co"><span class="r-pr">#&gt;</span> 198      0      0         0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 199      1      0         0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 200      0      0         0</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="va">response</span> <span class="op">~</span> <span class="va">stage</span> <span class="op">*</span> <span class="va">trt</span>,</span>
-<span class="r-in">  <span class="fu">gtsummary</span><span class="fu">::</span><span class="va"><a href="https://www.danieldsjoberg.com/gtsummary/reference/trial.html" class="external-link">trial</a></span>,</span>
-<span class="r-in">  family <span class="op">=</span> <span class="va">binomial</span>,</span>
-<span class="r-in">  contrasts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>stage <span class="op">=</span> <span class="va">contr.poly</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">model_compute_terms_contributions</span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">response</span> <span class="op">~</span> <span class="va">stage</span> <span class="op">*</span> <span class="va">trt</span>,</span></span>
+<span class="r-in"><span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="va"><a href="https://www.danieldsjoberg.com/gtsummary/reference/trial.html" class="external-link">trial</a></span>,</span></span>
+<span class="r-in"><span>  family <span class="op">=</span> <span class="va">binomial</span>,</span></span>
+<span class="r-in"><span>  contrasts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>stage <span class="op">=</span> <span class="va">contr.poly</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">model_compute_terms_contributions</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     (Intercept) stage.L stage.Q stage.C trtDrug B stage.L:trtDrug B</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1             1       1       1       1         0                 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2             1       1       1       1         1                 1</span>
@@ -1317,13 +1318,13 @@ be taken into account in the estimate of the number of observations,
 <span class="r-out co"><span class="r-pr">#&gt;</span> 198                 0                 0         1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 199                 0                 0         1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 200                 0                 0         1</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="va">Survived</span> <span class="op">~</span> <span class="va">Class</span> <span class="op">*</span> <span class="va">Age</span> <span class="op">+</span> <span class="va">Sex</span>,</span>
-<span class="r-in">  data <span class="op">=</span> <span class="va">Titanic</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span class="r-in">  weights <span class="op">=</span> <span class="va">Freq</span>, family <span class="op">=</span> <span class="va">binomial</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">model_compute_terms_contributions</span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">Survived</span> <span class="op">~</span> <span class="va">Class</span> <span class="op">*</span> <span class="va">Age</span> <span class="op">+</span> <span class="va">Sex</span>,</span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">Titanic</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  weights <span class="op">=</span> <span class="va">Freq</span>, family <span class="op">=</span> <span class="va">binomial</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">model_compute_terms_contributions</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    (Intercept) Class2nd Class3rd ClassCrew AgeAdult SexFemale Class2nd:AgeAdult</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1            1        0        0         0        0         0                 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2            1        1        0         0        0         0                 0</span>
@@ -1390,17 +1391,17 @@ be taken into account in the estimate of the number of observations,
 <span class="r-out co"><span class="r-pr">#&gt;</span> 30                 0                  0        0        0       0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 31                 1                  0        0        0       0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 32                 0                  1        0        0       0</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="va">Titanic</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">Class</span>, <span class="va">Sex</span>, <span class="va">Age</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span></span>
-<span class="r-in">    n_survived <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">n</span> <span class="op">*</span> <span class="op">(</span><span class="va">Survived</span> <span class="op">==</span> <span class="st">"Yes"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">    n_dead <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">n</span> <span class="op">*</span> <span class="op">(</span><span class="va">Survived</span> <span class="op">==</span> <span class="st">"No"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">  <span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="va">Titanic</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">Class</span>, <span class="va">Sex</span>, <span class="va">Age</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    n_survived <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">n</span> <span class="op">*</span> <span class="op">(</span><span class="va">Survived</span> <span class="op">==</span> <span class="st">"Yes"</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    n_dead <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">n</span> <span class="op">*</span> <span class="op">(</span><span class="va">Survived</span> <span class="op">==</span> <span class="st">"No"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> `summarise()` has grouped output by 'Class', 'Sex'. You can override using the</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> `.groups` argument.</span>
-<span class="r-in"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">n_survived</span>, <span class="va">n_dead</span><span class="op">)</span> <span class="op">~</span> <span class="va">Class</span> <span class="op">*</span> <span class="va">Age</span> <span class="op">+</span> <span class="va">Sex</span>, data <span class="op">=</span> <span class="va">d</span>, family <span class="op">=</span> <span class="va">binomial</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">model_compute_terms_contributions</span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">n_survived</span>, <span class="va">n_dead</span><span class="op">)</span> <span class="op">~</span> <span class="va">Class</span> <span class="op">*</span> <span class="va">Age</span> <span class="op">+</span> <span class="va">Sex</span>, data <span class="op">=</span> <span class="va">d</span>, family <span class="op">=</span> <span class="va">binomial</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">model_compute_terms_contributions</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    (Intercept) Class2nd Class3rd ClassCrew AgeChild SexMale Class2nd:AgeChild</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1            1        0        0         0        0       0                 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2            1        0        0         0        1       0                 0</span>
@@ -1449,7 +1450,7 @@ be taken into account in the estimate of the number of observations,
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

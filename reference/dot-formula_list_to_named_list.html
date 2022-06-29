@@ -66,44 +66,59 @@ For example, <code>list(age = 1, starts_with("stage") ~ 2)</code>.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">.formula_list_to_named_list</span><span class="op">(</span>
-  <span class="va">x</span>,
-  data <span class="op">=</span> <span class="cn">NULL</span>,
-  var_info <span class="op">=</span> <span class="cn">NULL</span>,
-  arg_name <span class="op">=</span> <span class="cn">NULL</span>,
-  select_single <span class="op">=</span> <span class="cn">FALSE</span>,
-  type_check <span class="op">=</span> <span class="cn">NULL</span>,
-  type_check_msg <span class="op">=</span> <span class="cn">NULL</span>,
-  null_allowed <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">.formula_list_to_named_list</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  var_info <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  arg_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  select_single <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  type_check <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  type_check_msg <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  null_allowed <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>list of selecting formulas</p></dd>
+
+
 <dt>data</dt>
 <dd><p>A data frame to select columns from. Default is NULL</p></dd>
+
+
 <dt>var_info</dt>
 <dd><p>A data frame of variable names and attributes. May also pass
 a character vector of variable names. Default is NULL</p></dd>
+
+
 <dt>arg_name</dt>
 <dd><p>Optional string indicating the source argument name. This
 helps in the error messaging. Default is NULL.</p></dd>
+
+
 <dt>select_single</dt>
 <dd><p>Logical indicating whether the result must be a single
 variable. Default is <code>FALSE</code></p></dd>
+
+
 <dt>type_check</dt>
 <dd><p>A predicate function that checks the elements passed on
 the RHS of the formulas in <code>x=</code> (or the element in a named list)
 satisfy the function.</p></dd>
+
+
 <dt>type_check_msg</dt>
 <dd><p>When the <code>type_check=</code> fails, the string provided
 here will be printed as the error message. When <code>NULL</code>, a generic
 error message will be printed.</p></dd>
+
+
 <dt>null_allowed</dt>
 <dd><p>Are <code>NULL</code> values accepted for the right hand side of
 formulas?</p></dd>
+
 </dl></div>
     <div id="shortcuts">
     <h2>Shortcuts</h2>
@@ -129,7 +144,7 @@ passing <code>list(everything() ~ 1)</code></p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

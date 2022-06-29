@@ -66,13 +66,13 @@ and additional selector functions defined within the package</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">.select_to_varnames</span><span class="op">(</span>
-  <span class="va">select</span>,
-  data <span class="op">=</span> <span class="cn">NULL</span>,
-  var_info <span class="op">=</span> <span class="cn">NULL</span>,
-  arg_name <span class="op">=</span> <span class="cn">NULL</span>,
-  select_single <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">.select_to_varnames</span><span class="op">(</span></span>
+<span>  <span class="va">select</span>,</span>
+<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  var_info <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  arg_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  select_single <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -80,21 +80,32 @@ and additional selector functions defined within the package</p>
     <dl><dt>select</dt>
 <dd><p>A single object selecting variables, e.g. <code>c(age, stage)</code>,
 <code>starts_with("age")</code></p></dd>
+
+
 <dt>data</dt>
 <dd><p>A data frame to select columns from. Default is NULL</p></dd>
+
+
 <dt>var_info</dt>
 <dd><p>A data frame of variable names and attributes. May also pass
 a character vector of variable names. Default is NULL</p></dd>
+
+
 <dt>arg_name</dt>
 <dd><p>Optional string indicating the source argument name. This
 helps in the error messaging. Default is NULL.</p></dd>
+
+
 <dt>select_single</dt>
 <dd><p>Logical indicating whether the result must be a single
 variable. Default is <code>FALSE</code></p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A character vector of variable names</p>
+    
+
+<p>A character vector of variable names</p>
     </div>
 
   </div>
@@ -109,7 +120,7 @@ variable. Default is <code>FALSE</code></p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

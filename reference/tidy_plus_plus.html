@@ -91,91 +91,134 @@ tidy_detach_model()
 </ul></div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">tidy_plus_plus</span><span class="op">(</span>
-  <span class="va">model</span>,
-  tidy_fun <span class="op">=</span> <span class="va">tidy_with_broom_or_parameters</span>,
-  conf.int <span class="op">=</span> <span class="cn">TRUE</span>,
-  exponentiate <span class="op">=</span> <span class="cn">FALSE</span>,
-  variable_labels <span class="op">=</span> <span class="cn">NULL</span>,
-  term_labels <span class="op">=</span> <span class="cn">NULL</span>,
-  interaction_sep <span class="op">=</span> <span class="st">" * "</span>,
-  categorical_terms_pattern <span class="op">=</span> <span class="st">"{level}"</span>,
-  disambiguate_terms <span class="op">=</span> <span class="cn">TRUE</span>,
-  disambiguate_sep <span class="op">=</span> <span class="st">"."</span>,
-  add_reference_rows <span class="op">=</span> <span class="cn">TRUE</span>,
-  no_reference_row <span class="op">=</span> <span class="cn">NULL</span>,
-  add_estimate_to_reference_rows <span class="op">=</span> <span class="cn">TRUE</span>,
-  add_header_rows <span class="op">=</span> <span class="cn">FALSE</span>,
-  show_single_row <span class="op">=</span> <span class="cn">NULL</span>,
-  add_n <span class="op">=</span> <span class="cn">TRUE</span>,
-  intercept <span class="op">=</span> <span class="cn">FALSE</span>,
-  include <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span>,
-  keep_model <span class="op">=</span> <span class="cn">FALSE</span>,
-  quiet <span class="op">=</span> <span class="cn">FALSE</span>,
-  strict <span class="op">=</span> <span class="cn">FALSE</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">tidy_plus_plus</span><span class="op">(</span></span>
+<span>  <span class="va">model</span>,</span>
+<span>  tidy_fun <span class="op">=</span> <span class="va">tidy_with_broom_or_parameters</span>,</span>
+<span>  conf.int <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  exponentiate <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  variable_labels <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  term_labels <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  interaction_sep <span class="op">=</span> <span class="st">" * "</span>,</span>
+<span>  categorical_terms_pattern <span class="op">=</span> <span class="st">"{level}"</span>,</span>
+<span>  disambiguate_terms <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  disambiguate_sep <span class="op">=</span> <span class="st">"."</span>,</span>
+<span>  add_reference_rows <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  no_reference_row <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  add_estimate_to_reference_rows <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  add_header_rows <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  show_single_row <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  add_n <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  intercept <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  include <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  keep_model <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  quiet <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  strict <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>model</dt>
 <dd><p>a model to be attached/tidied</p></dd>
+
+
 <dt>tidy_fun</dt>
 <dd><p>option to specify a custom tidier function</p></dd>
+
+
 <dt>conf.int</dt>
-<dd><p>should confidence intervals be computed? (see <code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">broom::tidy()</a></code>)</p></dd>
+<dd><p>should confidence intervals be computed? (see <code><a href="https://broom.tidymodels.org/reference/reexports.html" class="external-link">broom::tidy()</a></code>)</p></dd>
+
+
 <dt>exponentiate</dt>
 <dd><p>logical indicating whether or not to exponentiate the
 coefficient estimates. This is typical for logistic, Poisson and Cox models,
 but a bad idea if there is no log or logit link; defaults to <code>FALSE</code>.</p></dd>
+
+
 <dt>variable_labels</dt>
 <dd><p>a named list or a named vector of custom variable labels</p></dd>
+
+
 <dt>term_labels</dt>
 <dd><p>a named list or a named vector of custom term labels</p></dd>
+
+
 <dt>interaction_sep</dt>
 <dd><p>separator for interaction terms</p></dd>
+
+
 <dt>categorical_terms_pattern</dt>
 <dd><p>a <a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue pattern</a> for
 labels of categorical terms with treatment or sum contrasts
 (see <code><a href="model_list_terms_levels.html">model_list_terms_levels()</a></code>)</p></dd>
+
+
 <dt>disambiguate_terms</dt>
 <dd><p>should terms be disambiguated with
 <code><a href="tidy_disambiguate_terms.html">tidy_disambiguate_terms()</a></code>? (default <code>TRUE</code>)</p></dd>
+
+
 <dt>disambiguate_sep</dt>
 <dd><p>separator for <code><a href="tidy_disambiguate_terms.html">tidy_disambiguate_terms()</a></code></p></dd>
+
+
 <dt>add_reference_rows</dt>
 <dd><p>should reference rows be added?</p></dd>
+
+
 <dt>no_reference_row</dt>
 <dd><p>variables (accepts <a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">tidyselect</a> notation)
 for those no reference row should be added, when <code>add_reference_rows = TRUE</code></p></dd>
+
+
 <dt>add_estimate_to_reference_rows</dt>
 <dd><p>should an estimate value be added to reference rows?</p></dd>
+
+
 <dt>add_header_rows</dt>
 <dd><p>should header rows be added?</p></dd>
+
+
 <dt>show_single_row</dt>
 <dd><p>variables that should be displayed
 on a single row (accepts <a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">tidyselect</a> notation), when
 <code>add_header_rows</code> is <code>TRUE</code></p></dd>
+
+
 <dt>add_n</dt>
 <dd><p>should the number of observations be added?</p></dd>
+
+
 <dt>intercept</dt>
 <dd><p>should the intercept(s) be included?</p></dd>
+
+
 <dt>include</dt>
 <dd><p>variables to include. Accepts <a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">tidyselect</a>
 syntax. Use <code>-</code> to remove a variable. Default is <code><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything()</a></code>.
 See also <code><a href="select_helpers.html">all_continuous()</a></code>, <code><a href="select_helpers.html">all_categorical()</a></code>, <code><a href="select_helpers.html">all_dichotomous()</a></code>
 and <code><a href="select_helpers.html">all_interaction()</a></code></p></dd>
+
+
 <dt>keep_model</dt>
 <dd><p>should the model be kept as an attribute of the final result?</p></dd>
+
+
 <dt>quiet</dt>
 <dd><p>logical argument whether broom.helpers should not return a message
 when requested output cannot be generated. Default is FALSE</p></dd>
+
+
 <dt>strict</dt>
 <dd><p>logical argument whether broom.helpers should return an error
 when requested output cannot be generated. Default is FALSE</p></dd>
+
+
 <dt>...</dt>
 <dd><p>other arguments passed to <code>tidy_fun()</code></p></dd>
+
 </dl></div>
     <div id="see-also">
     <h2>See also</h2>
@@ -197,9 +240,9 @@ when requested output cannot be generated. Default is FALSE</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">ex1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Sepal.Width</span> <span class="op">+</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">tidy_plus_plus</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">ex1</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">ex1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Sepal.Width</span> <span class="op">+</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">tidy_plus_plus</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ex1</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 17</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   term              variable  var_label var_class var_type var_nlevels contrasts</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span>
@@ -210,29 +253,29 @@ when requested output cannot be generated. Default is FALSE</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 10 more variables: contrasts_type &lt;chr&gt;, reference_row &lt;lgl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   label &lt;chr&gt;, n_obs &lt;dbl&gt;, estimate &lt;dbl&gt;, std.error &lt;dbl&gt;, statistic &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">Titanic</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
-<span class="r-in">    Survived <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">Survived</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"No"</span>, <span class="st">"Yes"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">labelled</span><span class="fu">::</span><span class="fu"><a href="http://larmarange.github.io/labelled/reference/var_label.html" class="external-link">set_variable_labels</a></span><span class="op">(</span></span>
-<span class="r-in">    Class <span class="op">=</span> <span class="st">"Passenger's class"</span>,</span>
-<span class="r-in">    Sex <span class="op">=</span> <span class="st">"Gender"</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">ex2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="va">Survived</span> <span class="op">~</span> <span class="va">Class</span> <span class="op">+</span> <span class="va">Age</span> <span class="op">*</span> <span class="va">Sex</span>,</span>
-<span class="r-in">  data <span class="op">=</span> <span class="va">df</span>, weights <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">n</span>,</span>
-<span class="r-in">  family <span class="op">=</span> <span class="va">binomial</span></span>
-<span class="r-in"><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">tidy_plus_plus</span><span class="op">(</span></span>
-<span class="r-in">    exponentiate <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span class="r-in">    add_reference_rows <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span class="r-in">    categorical_terms_pattern <span class="op">=</span> <span class="st">"{level} / {reference_level}"</span>,</span>
-<span class="r-in">    add_n <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"><span class="va">ex2</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">Titanic</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    Survived <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">Survived</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"No"</span>, <span class="st">"Yes"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">labelled</span><span class="fu">::</span><span class="fu"><a href="http://larmarange.github.io/labelled/reference/var_label.html" class="external-link">set_variable_labels</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    Class <span class="op">=</span> <span class="st">"Passenger's class"</span>,</span></span>
+<span class="r-in"><span>    Sex <span class="op">=</span> <span class="st">"Gender"</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">ex2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">Survived</span> <span class="op">~</span> <span class="va">Class</span> <span class="op">+</span> <span class="va">Age</span> <span class="op">*</span> <span class="va">Sex</span>,</span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">df</span>, weights <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">n</span>,</span></span>
+<span class="r-in"><span>  family <span class="op">=</span> <span class="va">binomial</span></span></span>
+<span class="r-in"><span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">tidy_plus_plus</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    exponentiate <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>    add_reference_rows <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>    categorical_terms_pattern <span class="op">=</span> <span class="st">"{level} / {reference_level}"</span>,</span></span>
+<span class="r-in"><span>    add_n <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ex2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 17</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   term             variable var_label   var_class var_type var_nlevels contrasts</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span>
@@ -245,26 +288,26 @@ when requested output cannot be generated. Default is FALSE</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 10 more variables: contrasts_type &lt;chr&gt;, label &lt;chr&gt;, n_obs &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   n_event &lt;dbl&gt;, estimate &lt;dbl&gt;, std.error &lt;dbl&gt;, statistic &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">ex3</span> <span class="op">&lt;-</span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span></span>
-<span class="r-in">    <span class="va">response</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html" class="external-link">poly</a></span><span class="op">(</span><span class="va">age</span>, <span class="fl">3</span><span class="op">)</span> <span class="op">+</span> <span class="va">stage</span> <span class="op">+</span> <span class="va">grade</span> <span class="op">*</span> <span class="va">trt</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html" class="external-link">na.omit</a></span><span class="op">(</span><span class="fu">gtsummary</span><span class="fu">::</span><span class="va"><a href="https://www.danieldsjoberg.com/gtsummary/reference/trial.html" class="external-link">trial</a></span><span class="op">)</span>,</span>
-<span class="r-in">    family <span class="op">=</span> <span class="va">binomial</span>,</span>
-<span class="r-in">    contrasts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span class="r-in">      stage <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/contrast.html" class="external-link">contr.treatment</a></span><span class="op">(</span><span class="fl">4</span>, base <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span>
-<span class="r-in">      grade <span class="op">=</span> <span class="va">contr.sum</span></span>
-<span class="r-in">    <span class="op">)</span></span>
-<span class="r-in">  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">tidy_plus_plus</span><span class="op">(</span></span>
-<span class="r-in">    exponentiate <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span class="r-in">    variable_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>age <span class="op">=</span> <span class="st">"Age (in years)"</span><span class="op">)</span>,</span>
-<span class="r-in">    add_header_rows <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span class="r-in">    show_single_row <span class="op">=</span> <span class="fu"><a href="select_helpers.html">all_dichotomous</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span class="r-in">    term_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"poly(age, 3)3"</span> <span class="op">=</span> <span class="st">"Cubic age"</span><span class="op">)</span>,</span>
-<span class="r-in">    keep_model <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"><span class="va">ex3</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">ex3</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="va">response</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html" class="external-link">poly</a></span><span class="op">(</span><span class="va">age</span>, <span class="fl">3</span><span class="op">)</span> <span class="op">+</span> <span class="va">stage</span> <span class="op">+</span> <span class="va">grade</span> <span class="op">*</span> <span class="va">trt</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html" class="external-link">na.omit</a></span><span class="op">(</span><span class="fu">gtsummary</span><span class="fu">::</span><span class="va"><a href="https://www.danieldsjoberg.com/gtsummary/reference/trial.html" class="external-link">trial</a></span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    family <span class="op">=</span> <span class="va">binomial</span>,</span></span>
+<span class="r-in"><span>    contrasts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      stage <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/contrast.html" class="external-link">contr.treatment</a></span><span class="op">(</span><span class="fl">4</span>, base <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      grade <span class="op">=</span> <span class="va">contr.sum</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">tidy_plus_plus</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    exponentiate <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>    variable_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>age <span class="op">=</span> <span class="st">"Age (in years)"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    add_header_rows <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>    show_single_row <span class="op">=</span> <span class="fu"><a href="select_helpers.html">all_dichotomous</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    term_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"poly(age, 3)3"</span> <span class="op">=</span> <span class="st">"Cubic age"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    keep_model <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ex3</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 17 × 19</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    term   variable var_label var_class var_type var_nlevels header_row contrasts</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span>
@@ -302,7 +345,7 @@ when requested output cannot be generated. Default is FALSE</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

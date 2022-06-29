@@ -72,20 +72,27 @@ is kept in a new column <code>original_term</code>.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">tidy_disambiguate_terms</span><span class="op">(</span><span class="va">x</span>, sep <span class="op">=</span> <span class="st">"."</span>, model <span class="op">=</span> <span class="fu"><a href="tidy_attach_model.html">tidy_get_model</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, quiet <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">tidy_disambiguate_terms</span><span class="op">(</span><span class="va">x</span>, sep <span class="op">=</span> <span class="st">"."</span>, model <span class="op">=</span> <span class="fu"><a href="tidy_attach_model.html">tidy_get_model</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, quiet <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>a tidy tibble</p></dd>
+
+
 <dt>sep</dt>
 <dd><p>character, separator added between group name and term</p></dd>
+
+
 <dt>model</dt>
 <dd><p>the corresponding model, if not attached to <code>x</code></p></dd>
+
+
 <dt>quiet</dt>
 <dd><p>logical argument whether broom.helpers should not return a message
 when requested output cannot be generated. Default is FALSE</p></dd>
+
 </dl></div>
     <div id="see-also">
     <h2>See also</h2>
@@ -107,9 +114,9 @@ when requested output cannot be generated. Default is FALSE</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">lme4</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span><span class="va">marker</span> <span class="op">~</span> <span class="va">stage</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">|</span><span class="va">grade</span><span class="op">)</span> <span class="op">+</span> <span class="op">(</span><span class="va">death</span><span class="op">|</span><span class="va">response</span><span class="op">)</span>, <span class="fu">gtsummary</span><span class="fu">::</span><span class="va"><a href="https://www.danieldsjoberg.com/gtsummary/reference/trial.html" class="external-link">trial</a></span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">lme4</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span><span class="va">marker</span> <span class="op">~</span> <span class="va">stage</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">|</span><span class="va">grade</span><span class="op">)</span> <span class="op">+</span> <span class="op">(</span><span class="va">death</span><span class="op">|</span><span class="va">response</span><span class="op">)</span>, <span class="fu">gtsummary</span><span class="fu">::</span><span class="va"><a href="https://www.danieldsjoberg.com/gtsummary/reference/trial.html" class="external-link">trial</a></span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> boundary (singular) fit: see help('isSingular')</span>
-<span class="r-in"><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">tidy_disambiguate_terms</span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">tidy_disambiguate_terms</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 9 × 9</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   term          original_term effect group estimate std.error statistic conf.low</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
@@ -137,7 +144,7 @@ when requested output cannot be generated. Default is FALSE</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>
