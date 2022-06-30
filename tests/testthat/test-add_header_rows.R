@@ -15,11 +15,6 @@ test_that("tidy_add_header_rows() works as expected", {
       "I * Drug A", "II * Drug A")
   )
   expect_equivalent(
-    res$term,
-    c("(Intercept)", NA, "stage2", "stage3", "stage4", NA, "grade1",
-      "grade2", NA, "trt1", NA, "grade1:trt1", "grade2:trt1")
-  )
-  expect_equivalent(
     res$header_row,
     c(NA, TRUE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, TRUE, FALSE,
       TRUE, FALSE, FALSE)
@@ -41,13 +36,6 @@ test_that("tidy_add_header_rows() works as expected", {
       "II * Drug A")
   )
   expect_equivalent(
-    res$term,
-    c(
-      "(Intercept)", NA, "stage2", "stage3", "stage4", NA, "grade1",
-      "grade2", "trt1", NA, "grade1:trt1", "grade2:trt1"
-    )
-  )
-  expect_equivalent(
     res$header_row,
     c(
       NA, TRUE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, NA, TRUE,
@@ -66,14 +54,6 @@ test_that("tidy_add_header_rows() works as expected", {
       "(Intercept)", "T Stage", "T1", "T2", "T3", "T4", "Grade",
       "I", "II", "III", "Chemotherapy Treatment", "Drug A", "Drug B",
       "Grade * Chemotherapy Treatment", "I * Drug A", "II * Drug A"
-    )
-  )
-  expect_equivalent(
-    res$term,
-    c(
-      "(Intercept)", NA, "stage1", "stage2", "stage3", "stage4",
-      NA, "grade1", "grade2", "grade3", NA, "trt1", "trt2", NA, "grade1:trt1",
-      "grade2:trt1"
     )
   )
   expect_equivalent(

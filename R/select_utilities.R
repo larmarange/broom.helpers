@@ -231,6 +231,12 @@
   res <-
     tryCatch({
       if (select_input_starts_var) {
+        # `vars()` was deprecated on June 6, 2022, gtsummary will stop
+        # exporting `vars()` at some point as well.
+        paste("Use of {.code vars()} is now {.strong deprecated} and support will soon be removed.",
+              "Please replace calls to {.code vars()} with {.code c()}.") %>%
+          cli::cli_alert_warning()
+
         # `vars()` evaluates to a list of quosures; unquoting them in `select()`
         names(dplyr::select(data, !!!rlang::eval_tidy(select)))
       }
@@ -266,13 +272,15 @@
 #' @param fun_name quoted name of function where `.generic_selector()` is being used.
 #' This helps with error messaging.
 #'
+#' @details
+#' `.is_selector_scoped()` checks if a selector has been properly registered
+#' in `env_variable_type$df_var_info`.
+#'
 #' @return custom selector functions
 #' @export
 .generic_selector <- function(variable_column, select_column, select_expr, fun_name) {
   # ensuring the proper data has been scoped to use this function
-  if (!exists("df_var_info", envir = env_variable_type) ||
-      (exists("df_var_info", envir = env_variable_type) &&
-       !all(c(variable_column, select_column) %in% names(env_variable_type$df_var_info)))) {
+  if (!.is_selector_scoped(variable_column, select_column)) {
     cli_alert_danger("Cannot use selector '{fun_name}()' in this context.")
     stop("Invalid syntax", call. = FALSE)
   }
@@ -286,6 +294,12 @@
     unique()
 }
 
+#' @rdname dot-generic_selector
+#' @export
+.is_selector_scoped <- function(variable_column, select_column) {
+  exists("df_var_info", envir = env_variable_type) &&
+    all(c(variable_column, select_column) %in% names(env_variable_type$df_var_info))
+}
 
 # scoping the variable characteristics
 .scope_var_info <- function(x) {

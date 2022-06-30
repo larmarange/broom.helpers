@@ -140,11 +140,20 @@ test_that("model_get_n() works with different contrasts", {
   )
   expect_error(res <- mod %>% model_get_n(), NA)
   expect_equivalent(names(res), c("term", "n_obs", "n_event"))
-  expect_equivalent(
-    res$term,
-    c("(Intercept)", "stage2", "stage3", "stage4", "grade1", "grade2",
-      "trt1", "grade1:trt1", "grade2:trt1", "stage1", "grade3", "trt2")
-  )
+  if ("stage2" %in% names(coef(mod))) {
+    expect_equivalent(
+      res$term,
+      c("(Intercept)", "stage2", "stage3", "stage4", "grade1", "grade2",
+        "trt1", "grade1:trt1", "grade2:trt1", "stage1", "grade3", "trt2")
+    )
+  } else {
+    expect_equivalent(
+      res$term,
+      c("(Intercept)", "stageT2", "stageT3", "stageT4", "gradeI", "gradeII",
+        "trtDrug A", "gradeI:trtDrug A", "gradeII:trtDrug A", "stageT1",
+        "gradeIII", "trtDrug B")
+    )
+  }
   expect_equivalent(
     res$n_obs,
     c(193, 52, 40, 49, 67, 63, 95, 35, 30, 52, 63, 98)
