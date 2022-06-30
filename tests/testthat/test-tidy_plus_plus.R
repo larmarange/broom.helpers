@@ -627,7 +627,7 @@ test_that("tidy_plus_plus() works with parsnip::model_fit object", {
   mod1 <- glm(response ~ stage + grade + trt, d, family = binomial)
   mod2 <- parsnip::logistic_reg() %>%
     parsnip::set_engine("glm") %>%
-    fit(response ~ stage + grade + trt, data = d)
+    parsnip::fit(response ~ stage + grade + trt, data = d)
 
   res1 <- mod1 %>% tidy_plus_plus(exponentiate = TRUE)
   expect_error(
