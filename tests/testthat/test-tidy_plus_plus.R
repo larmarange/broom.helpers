@@ -617,3 +617,22 @@ test_that("tidy_plus_plus() works with biglmm::bigglm", {
     c(TRUE, FALSE)
   )
 })
+
+test_that("tidy_plus_plus() works with parsnip::model_fit object", {
+  skip_on_cran()
+  skip_if_not_installed("parsnip")
+
+  d <- gtsummary::trial
+  d$response <- as.factor(d$response)
+  mod1 <- glm(response ~ stage + grade + trt, d, family = binomial)
+  mod2 <- parsnip::logistic_reg() %>%
+    parsnip::set_engine("glm") %>%
+    fit(response ~ stage + grade + trt, data = d)
+
+  res1 <- mod1 %>% tidy_plus_plus(exponentiate = TRUE)
+  expect_error(
+    res2 <- mod2 %>% tidy_plus_plus(exponentiate = TRUE),
+    NA
+  )
+  expect_equivalent(res1, res2)
+})

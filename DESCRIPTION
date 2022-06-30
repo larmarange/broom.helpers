@@ -56,6 +56,7 @@ Suggests:
     nnet,
     ordinal,
     parameters,
+    parsnip,
     plm,
     rmarkdown,
     rstanarm,
