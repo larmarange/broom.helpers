@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">broom.helpers</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.0.9002</span>
       </span>
     </div>
 
@@ -62,7 +62,9 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">.generic_selector</span><span class="op">(</span><span class="va">variable_column</span>, <span class="va">select_column</span>, <span class="va">select_expr</span>, <span class="va">fun_name</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">.generic_selector</span><span class="op">(</span><span class="va">variable_column</span>, <span class="va">select_column</span>, <span class="va">select_expr</span>, <span class="va">fun_name</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">.is_selector_scoped</span><span class="op">(</span><span class="va">variable_column</span>, <span class="va">select_column</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -89,6 +91,11 @@ This helps with error messaging.</p></dd>
     
 
 <p>custom selector functions</p>
+    </div>
+    <div id="details">
+    <h2>Details</h2>
+    <p><code>.is_selector_scoped()</code> checks if a selector has been properly registered
+in <code>env_variable_type$df_var_info</code>.</p>
     </div>
 
   </div>
