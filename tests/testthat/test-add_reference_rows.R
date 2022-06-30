@@ -8,13 +8,25 @@ test_that("tidy_add_reference_rows() works as expected", {
   res <- mod %>%
     tidy_and_attach() %>%
     tidy_add_reference_rows()
-  expect_equivalent(
-    res$term,
-    c(
-      "(Intercept)", "stage1", "stage2", "stage3", "stage4", "grade1",
-      "grade2", "grade3", "trt1", "trt2", "grade1:trt1", "grade2:trt1"
+  if ("stage2" %in% names(coef(mod))) {
+    expect_equivalent(
+      res$term,
+      c(
+        "(Intercept)", "stage1", "stage2", "stage3", "stage4", "grade1",
+        "grade2", "grade3", "trt1", "trt2", "grade1:trt1", "grade2:trt1"
+      )
     )
-  )
+  } else {
+    expect_equivalent(
+      res$term,
+      c(
+        "(Intercept)", "stageT1", "stageT2", "stageT3", "stageT4",
+        "gradeI", "gradeII", "gradeIII", "trt1", "trt2", "gradeI:trt1",
+        "gradeII:trt1"
+      )
+    )
+  }
+
   expect_equivalent(
     res$reference_row,
     c(
@@ -70,13 +82,26 @@ test_that("tidy_add_reference_rows() works as expected", {
   res <- mod %>%
     tidy_and_attach() %>%
     tidy_add_reference_rows(no_reference_row = c("stage", "grade"))
-  expect_equivalent(
-    res$term,
-    c(
-      "(Intercept)", "stage2", "stage3", "stage4", "grade1", "grade2",
-      "trt1", "trt2", "grade1:trt1", "grade2:trt1"
+  if ("stage2" %in% names(coef(mod))) {
+    expect_equivalent(
+      res$term,
+      c(
+        "(Intercept)", "stage2", "stage3", "stage4", "grade1", "grade2",
+        "trt1", "trt2", "grade1:trt1", "grade2:trt1"
+      )
     )
-  )
+  } else {
+    expect_equivalent(
+      res$term,
+      c(
+        "(Intercept)", "stageT2", "stageT3", "stageT4", "gradeI", "gradeII",
+        "trt1", "trt2", "gradeI:trt1", "gradeII:trt1"
+      )
+    )
+  }
+
+
+
   expect_equivalent(
     res$reference_row,
     c(NA, NA, NA, NA, NA, NA, FALSE, TRUE, NA, NA)
@@ -136,13 +161,25 @@ test_that("tidy_add_reference_rows() works with different values of base in cont
   res <- mod %>%
     tidy_and_attach() %>%
     tidy_add_reference_rows()
-  expect_equivalent(
-    res$term,
-    c(
-      "(Intercept)", "stage1", "stage2", "stage3", "stage4", "grade1",
-      "grade2", "grade3", "trt1", "trt2", "grade1:trt1", "grade3:trt1"
+  if ("stage2" %in% names(coef(mod))) {
+    expect_equivalent(
+      res$term,
+      c(
+        "(Intercept)", "stage1", "stage2", "stage3", "stage4", "grade1",
+        "grade2", "grade3", "trt1", "trt2", "grade1:trt1", "grade3:trt1"
+      )
     )
-  )
+  } else {
+    expect_equivalent(
+      res$term,
+      c(
+        "(Intercept)", "stageT1", "stageT2", "stageT3", "stageT4", "gradeI",
+        "gradeII", "gradeIII", "trt1", "trt2", "gradeI:trt1", "gradeIII:trt1"
+      )
+    )
+  }
+
+
   expect_equivalent(
     res$reference_row,
     c(

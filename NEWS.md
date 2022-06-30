@@ -5,6 +5,15 @@
 - Support for `parsnip::model_fit` objects (#161)
 - Support for `biglm::bigglm()` and `biglmm::bigglm()` models (#155)
 
+**New features**
+
+- Support for `dplyr::vars()` (also exported by {gtsummary}) as a selector has 
+  now been deprecated. Users will be warned that support for `vars()` will
+  eventually be removed from the package (#154)
+- `.is_selector_scoped()`, an internal function used in generating custom
+  selector functions, is now exported (#163)
+
+
 # broom.helpers 1.7.0
 
 **New features**
