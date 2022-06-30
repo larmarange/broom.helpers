@@ -35,6 +35,7 @@ supported_models <-
     '`biglm::bigglm()`','',
     '`biglmm::bigglm()`','',
     '`parsnip::model_fit`', 'Supported as long as the type of model and the engine is supported.',
-  )
+  ) %>%
+  dplyr::arrange(.data$model)
 
 usethis::use_data(supported_models, overwrite = TRUE)
