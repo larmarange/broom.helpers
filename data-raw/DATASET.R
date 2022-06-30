@@ -33,7 +33,8 @@ supported_models <-
     '`tidycmprsk::crr()`', '',
     '`plm::plm()`','',
     '`biglm::bigglm()`','',
-    '`biglmm::bigglm()`',''
+    '`biglmm::bigglm()`','',
+    '`parsnip::model_fit`', 'Supported as long as the type of model and the engine is supported.',
   )
 
 usethis::use_data(supported_models, overwrite = TRUE)

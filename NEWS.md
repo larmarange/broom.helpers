@@ -1,5 +1,8 @@
 # broom.helpers (development version)
 
+**New supported models**
+
+- Support for `parsnip::model_fit` objects (#161)
 - Support for `biglm::bigglm()` and `biglmm::bigglm()` models (#155)
 
 # broom.helpers 1.7.0
