@@ -636,3 +636,20 @@ test_that("tidy_plus_plus() works with parsnip::model_fit object", {
   )
   expect_equivalent(res1, res2)
 })
+
+test_that("tidy_plus_plus() works with fixest models", {
+  skip_on_cran()
+  skip_if_not_installed("fixest")
+
+  mod <- fixest::feols(fml = mpg ~ am + factor(carb), data = mtcars)
+  expect_error(
+    res <- mod %>% tidy_plus_plus(),
+    NA
+  )
+
+  mod <- fixest::feglm(Sepal.Length ~ Sepal.Width + Petal.Length | Species, iris, "poisson")
+  expect_error(
+    res <- mod %>% tidy_plus_plus(),
+    NA
+  )
+})

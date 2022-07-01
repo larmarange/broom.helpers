@@ -35,6 +35,10 @@ supported_models <-
     '`biglm::bigglm()`','',
     '`biglmm::bigglm()`','',
     '`parsnip::model_fit`', 'Supported as long as the type of model and the engine is supported.',
+    '`fixest::feglm()`','',
+    '`fixest::femlm()`','',
+    '`fixest::feols()`','',
+    '`fixest::feNmlm()`','',
   ) %>%
   dplyr::arrange(.data$model)
 

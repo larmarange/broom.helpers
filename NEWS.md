@@ -4,6 +4,8 @@
 
 - Support for `parsnip::model_fit` objects (#161)
 - Support for `biglm::bigglm()` and `biglmm::bigglm()` models (#155)
+- Support for `fixest::feglm()`, `fixest::femlm()`, `fixest::feols()`
+  and `fixest::feNmlm()` (#167)
 
 **New features**
 
