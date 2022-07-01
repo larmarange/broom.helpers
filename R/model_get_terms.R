@@ -43,3 +43,9 @@ model_get_terms.brmsfit <- function(model) {
 model_get_terms.glmmTMB <- function(model) {
   model$modelInfo$allForm$combForm %>% stats::terms()
 }
+
+#' @export
+#' @rdname model_get_terms
+model_get_terms.model_fit <- function(model) {
+  model_get_terms(model$fit)
+}

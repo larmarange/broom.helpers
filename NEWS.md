@@ -2,6 +2,7 @@
 
 **New supported models**
 
+- Support for `parsnip::model_fit` objects (#161)
 - Support for `biglm::bigglm()` and `biglmm::bigglm()` models (#155)
 
 **New features**

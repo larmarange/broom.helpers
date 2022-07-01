@@ -48,3 +48,9 @@ model_get_assign.vglm <- function(model) {
   attr(assign, "model_matrix") <- model_matrix
   assign
 }
+
+#' @export
+#' @rdname model_get_assign
+model_get_assign.model_fit <- function(model) {
+  model_get_assign(model$fit)
+}

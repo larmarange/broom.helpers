@@ -72,3 +72,9 @@ model_get_xlevels.biglm <- function(model) {
     model %>% model_get_model_frame()
   )
 }
+
+#' @export
+#' @rdname model_get_xlevels
+model_get_xlevels.model_fit <- function(model) {
+  model_get_xlevels(model$fit)
+}

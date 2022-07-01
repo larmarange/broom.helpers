@@ -60,3 +60,9 @@ model_get_model_frame.biglm <- function(model) {
     data = stats::model.frame.default(model)
   )
 }
+
+#' @export
+#' @rdname model_get_model_frame
+model_get_model_frame.model_fit <- function(model) {
+  model_get_model_frame(model$fit)
+}
