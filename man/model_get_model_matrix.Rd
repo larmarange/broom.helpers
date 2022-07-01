@@ -31,7 +31,7 @@ model_get_model_matrix(model, ...)
 
 \method{model_get_model_matrix}{model_fit}(model, ...)
 
-\method{model_get_model_matrix}{fixest}(model)
+\method{model_get_model_matrix}{fixest}(model, ...)
 }
 \arguments{
 \item{model}{a model object}
