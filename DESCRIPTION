@@ -37,7 +37,7 @@ Suggests:
     covr,
     datasets,
     emmeans,
-    fixest,
+    fixest (>= 0.10.0),
     forcats,
     gam,
     gee,
