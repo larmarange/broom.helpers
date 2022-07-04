@@ -640,6 +640,7 @@ test_that("tidy_plus_plus() works with parsnip::model_fit object", {
 test_that("tidy_plus_plus() works with fixest models", {
   skip_on_cran()
   skip_if_not_installed("fixest")
+  skip_if(compareVersion(as.character(getRversion()), "4.0") < 0)
 
   mod <- fixest::feols(fml = mpg ~ am + factor(carb), data = mtcars)
   expect_error(
