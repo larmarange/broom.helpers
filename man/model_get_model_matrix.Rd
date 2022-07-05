@@ -10,6 +10,7 @@
 \alias{model_get_model_matrix.plm}
 \alias{model_get_model_matrix.biglm}
 \alias{model_get_model_matrix.model_fit}
+\alias{model_get_model_matrix.fixest}
 \title{Get the model matrix of a model}
 \usage{
 model_get_model_matrix(model, ...)
@@ -29,6 +30,8 @@ model_get_model_matrix(model, ...)
 \method{model_get_model_matrix}{biglm}(model, ...)
 
 \method{model_get_model_matrix}{model_fit}(model, ...)
+
+\method{model_get_model_matrix}{fixest}(model, ...)
 }
 \arguments{
 \item{model}{a model object}

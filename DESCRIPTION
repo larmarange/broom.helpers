@@ -1,6 +1,6 @@
 Package: broom.helpers
 Title: Helpers for Model Coefficients Tibbles
-Version: 1.7.0.9003
+Version: 1.7.0.9004
 Authors@R: c(
     person("Joseph", "Larmarange", , "joseph@larmarange.net", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-7097-700X")),
@@ -37,6 +37,7 @@ Suggests:
     covr,
     datasets,
     emmeans,
+    fixest (>= 0.10.0),
     forcats,
     gam,
     gee,
