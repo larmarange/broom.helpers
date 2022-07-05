@@ -24,10 +24,10 @@ Listing of Supported Models
    \code{biglmm::bigglm()} \tab  \cr
    \code{brms::brm()} \tab \code{broom.mixed} package required \cr
    \code{cmprsk::crr()} \tab Limited support. It is recommended to use \code{tidycmprsk::crr()} instead. \cr
-   \code{fixest::feglm()} \tab  \cr
-   \code{fixest::femlm()} \tab  \cr
-   \code{fixest::feNmlm()} \tab  \cr
-   \code{fixest::feols()} \tab  \cr
+   \code{fixest::feglm()} \tab May fail with R <= 4.0. \cr
+   \code{fixest::femlm()} \tab May fail with R <= 4.0. \cr
+   \code{fixest::feNmlm()} \tab May fail with R <= 4.0. \cr
+   \code{fixest::feols()} \tab May fail with R <= 4.0. \cr
    \code{gam::gam()} \tab  \cr
    \code{geepack::geeglm()} \tab  \cr
    \code{glmmTMB::glmmTMB()} \tab \code{broom.mixed} package required \cr
