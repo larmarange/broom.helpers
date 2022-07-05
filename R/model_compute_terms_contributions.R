@@ -12,7 +12,7 @@
 #' @param model a model object
 #' @export
 #' @family model_helpers
-#' @examples
+#' @examplesIf interactive()
 #' mod <- lm(Sepal.Length ~ Sepal.Width, iris)
 #' mod %>% model_compute_terms_contributions()
 #'

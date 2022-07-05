@@ -60,7 +60,7 @@
 #' @param model the corresponding model, if not attached to `x`
 #' @export
 #' @family tidy_helpers
-#' @examples
+#' @examplesIf interactive()
 #' lm(Petal.Length ~ ., data = iris) %>%
 #'   tidy_and_attach() %>%
 #'   tidy_add_n()
