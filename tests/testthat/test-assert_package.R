@@ -19,6 +19,20 @@ test_that(".assert_package() works", {
     NULL
   )
 
+  expect_error(
+    df_deps <- .get_package_dependencies(),
+    NA
+  )
+
+  expect_true(
+    df_deps %>% inherits("data.frame")
+  )
+
+  expect_equal(
+    names(df_deps),
+    c("pkg_search", "pkg_search_version", "dependency_type", "pkg", "version", "compare")
+  )
+
   skip_if(interactive())
   # expect an error msg for pkg that doesn't exist
   # note: if interactive(), user will be invited to install the missing pkg
