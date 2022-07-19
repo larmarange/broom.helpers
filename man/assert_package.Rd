@@ -9,7 +9,10 @@
 \usage{
 .assert_package(pkg, fn = NULL, pkg_search = "broom.helpers", boolean = FALSE)
 
-.get_package_dependencies(pkg_search = "broom.helpers")
+.get_package_dependencies(
+  pkg_search = "broom.helpers",
+  remove_duplicates = FALSE
+)
 
 .get_min_version_required(pkg, pkg_search = "broom.helpers")
 }
@@ -25,6 +28,9 @@ required version from.}
 \item{boolean}{logical indicating whether to return a \code{TRUE}/\code{FALSE}, rather
 than error when package/package version not available. Default is \code{FALSE},
 which will return an error if \code{pkg} is not installed.}
+
+\item{remove_duplicates}{if several versions of a package are installed,
+should only the most recent one be returned?}
 }
 \value{
 logical or error
