@@ -1,5 +1,13 @@
 # broom.helpers (development version)
 
+**New features**
+
+- New function `.get_package_dependencies()` listing all dependencies, including
+  minimum version required, of a package. (#171)
+- Improvement of `.assert_package()` now taking into account the comparison
+  operator (> or >=) when a minimum version is required (#171)
+
+
 # broom.helpers 1.8.0
 
 **New supported models**
