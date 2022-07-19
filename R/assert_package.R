@@ -53,6 +53,10 @@ NULL
   utils::installed.packages() %>%
     tibble::as_tibble() %>%
     dplyr::filter(.data$Package %in% .env$pkg_search) %>%
+    # in some cases, there could be two versions of the same package
+    # only the most recent one is kept
+    dplyr::arrange(.data$Package, dplyr::desc(.data$Version)) %>%
+    dplyr::distinct(.data$Package, .keep_all = TRUE) %>%
     dplyr::select(dplyr::all_of(c("Package", "Imports", "Depends", "Suggests", "Enhances", "LinkingTo"))) %>%
     dplyr::rename(pkg_search = "Package") %>%
     tidyr::pivot_longer(-.data$pkg_search, values_to = "pkg", names_to = "dependency_type") %>%
