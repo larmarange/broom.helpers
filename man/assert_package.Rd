@@ -3,10 +3,13 @@
 \name{assert_package}
 \alias{assert_package}
 \alias{.assert_package}
+\alias{.get_package_dependencies}
 \alias{.get_min_version_required}
 \title{Check a package installation status or minimum required version}
 \usage{
 .assert_package(pkg, fn = NULL, pkg_search = "broom.helpers", boolean = FALSE)
+
+.get_package_dependencies(pkg_search = "broom.helpers")
 
 .get_min_version_required(pkg, pkg_search = "broom.helpers")
 }
@@ -33,6 +36,6 @@ will check whether a minimum version of a package is required.
 }
 \examples{
 .assert_package("broom", boolean = TRUE)
-
+.get_package_dependencies()
 .get_min_version_required("brms")
 }
