@@ -1,8 +1,12 @@
 #' Check a package installation status or minimum required version
 #'
-#' The function checks whether a package is installed and returns an error
-#' or `FALSE` if not available. If a package search is provided, the function
-#' will check whether a minimum version of a package is required.
+#' The function `.assert_package()` checks whether a package is installed and
+#' returns an error or `FALSE` if not available. If a package search is provided,
+#' the function will check whether a minimum version of a package is required.
+#' The function `.get_package_dependencies()` returns a tibble with all
+#' dependencies of a specific package. Finally, `.get_min_version_required()`
+#' will return, if any, the minimum version of `pkg` required by `pkg_search`,
+#' `NULL` if no minimum version required.
 #'
 #' @param pkg Package required
 #' @param fn Calling function from the user perspective. Used to write
@@ -11,7 +15,7 @@
 #' required version from.
 #' @param boolean logical indicating whether to return a `TRUE`/`FALSE`, rather
 #' than error when package/package version not available. Default is `FALSE`,
-#' which will return an error if pkg is not installed.
+#' which will return an error if `pkg` is not installed.
 #'
 #' @return logical or error
 #' @name assert_package

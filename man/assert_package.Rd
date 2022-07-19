@@ -24,15 +24,19 @@ required version from.}
 
 \item{boolean}{logical indicating whether to return a \code{TRUE}/\code{FALSE}, rather
 than error when package/package version not available. Default is \code{FALSE},
-which will return an error if pkg is not installed.}
+which will return an error if \code{pkg} is not installed.}
 }
 \value{
 logical or error
 }
 \description{
-The function checks whether a package is installed and returns an error
-or \code{FALSE} if not available. If a package search is provided, the function
-will check whether a minimum version of a package is required.
+The function \code{.assert_package()} checks whether a package is installed and
+returns an error or \code{FALSE} if not available. If a package search is provided,
+the function will check whether a minimum version of a package is required.
+The function \code{.get_package_dependencies()} returns a tibble with all
+dependencies of a specific package. Finally, \code{.get_min_version_required()}
+will return, if any, the minimum version of \code{pkg} required by \code{pkg_search},
+\code{NULL} if no minimum version required.
 }
 \examples{
 .assert_package("broom", boolean = TRUE)
