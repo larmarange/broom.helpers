@@ -74,5 +74,6 @@ NULL
     dplyr::filter(.data$pkg == .env$pkg & !is.na(.data$version))
   version <- res %>% purrr::pluck("version")
   attr(version, "compare") <- res %>% purrr::pluck("compare")
+  if (length(version) >= 1) names(version) <- res %>% purrr::pluck("dependency_type")
   version
 }
