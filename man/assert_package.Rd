@@ -30,7 +30,7 @@ than error when package/package version not available. Default is \code{FALSE},
 which will return an error if \code{pkg} is not installed.}
 
 \item{remove_duplicates}{if several versions of a package are installed,
-should only the most recent one be returned?}
+should only the first one be returned?}
 }
 \value{
 logical or error

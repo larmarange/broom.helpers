@@ -17,7 +17,7 @@
 #' than error when package/package version not available. Default is `FALSE`,
 #' which will return an error if `pkg` is not installed.
 #' @param remove_duplicates if several versions of a package are installed,
-#' should only the most recent one be returned?
+#' should only the first one be returned?
 #'
 #' @return logical or error
 #' @name assert_package
@@ -59,8 +59,7 @@ NULL
     dplyr::select(dplyr::all_of(
       c("Package", "Version", "Imports", "Depends", "Suggests", "Enhances", "LinkingTo")
     )) %>%
-    dplyr::rename(pkg_search = "Package", pkg_search_version = "Version") %>%
-    dplyr::arrange(.data$pkg_search, dplyr::desc(.data$pkg_search_version))
+    dplyr::rename(pkg_search = "Package", pkg_search_version = "Version")
 
   if (remove_duplicates)
     deps <- deps %>% dplyr::distinct(.data$pkg_search, .keep_all = TRUE)
