@@ -30,7 +30,7 @@ test_that(".assert_package() works", {
 
   expect_equal(
     names(df_deps),
-    c("pkg_search", "pkg_search_version", "dependency_type", "pkg", "version", "compare")
+    c("pkg_search", "pkg_search_version", "lib_path", "dependency_type", "pkg", "version", "compare")
   )
 
   skip_if(interactive())

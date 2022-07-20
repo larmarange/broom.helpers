@@ -62,16 +62,20 @@ NULL
     tibble::as_tibble() %>%
     dplyr::filter(.data$Package %in% .env$pkg_search) %>%
     dplyr::select(dplyr::all_of(
-      c("Package", "Version", "Imports", "Depends", "Suggests", "Enhances", "LinkingTo")
+      c("Package", "Version", "LibPath", "Imports", "Depends", "Suggests", "Enhances", "LinkingTo")
     )) %>%
-    dplyr::rename(pkg_search = "Package", pkg_search_version = "Version")
+    dplyr::rename(
+      pkg_search = "Package",
+      pkg_search_version = "Version",
+      lib_path = "LibPath"
+    )
 
   if (remove_duplicates)
     deps <- deps %>% dplyr::distinct(.data$pkg_search, .keep_all = TRUE)
 
   deps %>%
     tidyr::pivot_longer(
-      c(-.data$pkg_search, -.data$pkg_search_version),
+      c(-.data$pkg_search, -.data$pkg_search_version, -.data$lib_path),
       values_to = "pkg",
       names_to = "dependency_type"
     ) %>%
