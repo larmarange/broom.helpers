@@ -18,6 +18,8 @@
 #' which will return an error if `pkg` is not installed.
 #' @param remove_duplicates if several versions of a package are installed,
 #' should only the first one be returned?
+#' @param lib.loc location of `R` library trees to search through, see
+#' `utils::installed.packages()`.
 #'
 #' @return logical or error
 #' @name assert_package
@@ -51,9 +53,12 @@ NULL
 
 #' @rdname assert_package
 #' @export
-.get_package_dependencies <- function(pkg_search = "broom.helpers", remove_duplicates = FALSE) {
+.get_package_dependencies <- function(
+    pkg_search = "broom.helpers",
+    remove_duplicates = FALSE,
+    lib.loc = NULL) {
   deps <-
-    utils::installed.packages() %>%
+    utils::installed.packages(lib.loc = lib.loc) %>%
     tibble::as_tibble() %>%
     dplyr::filter(.data$Package %in% .env$pkg_search) %>%
     dplyr::select(dplyr::all_of(

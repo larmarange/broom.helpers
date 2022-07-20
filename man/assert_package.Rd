@@ -11,7 +11,8 @@
 
 .get_package_dependencies(
   pkg_search = "broom.helpers",
-  remove_duplicates = FALSE
+  remove_duplicates = FALSE,
+  lib.loc = NULL
 )
 
 .get_min_version_required(pkg, pkg_search = "broom.helpers")
@@ -31,6 +32,9 @@ which will return an error if \code{pkg} is not installed.}
 
 \item{remove_duplicates}{if several versions of a package are installed,
 should only the first one be returned?}
+
+\item{lib.loc}{location of \code{R} library trees to search through, see
+\code{utils::installed.packages()}.}
 }
 \value{
 logical or error
