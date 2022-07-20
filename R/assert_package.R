@@ -73,7 +73,7 @@ NULL
     )
 
   if (!is.null(pkg_search))
-    deps <- deps %>% dplyr::filter(.data$Package %in% .env$pkg_search)
+    deps <- deps %>% dplyr::filter(.data$pkg_search %in% .env$pkg_search)
   if (remove_duplicates)
     deps <- deps %>% dplyr::distinct(.data$pkg_search, .keep_all = TRUE)
 
