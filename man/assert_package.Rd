@@ -3,10 +3,17 @@
 \name{assert_package}
 \alias{assert_package}
 \alias{.assert_package}
+\alias{.get_package_dependencies}
 \alias{.get_min_version_required}
 \title{Check a package installation status or minimum required version}
 \usage{
 .assert_package(pkg, fn = NULL, pkg_search = "broom.helpers", boolean = FALSE)
+
+.get_package_dependencies(
+  pkg_search = "broom.helpers",
+  remove_duplicates = FALSE,
+  lib.loc = NULL
+)
 
 .get_min_version_required(pkg, pkg_search = "broom.helpers")
 }
@@ -21,18 +28,32 @@ required version from.}
 
 \item{boolean}{logical indicating whether to return a \code{TRUE}/\code{FALSE}, rather
 than error when package/package version not available. Default is \code{FALSE},
-which will return an error if pkg is not installed.}
+which will return an error if \code{pkg} is not installed.}
+
+\item{remove_duplicates}{if several versions of a package are installed,
+should only the first one be returned?}
+
+\item{lib.loc}{location of \code{R} library trees to search through, see
+\code{utils::installed.packages()}.}
 }
 \value{
 logical or error
 }
 \description{
-The function checks whether a package is installed and returns an error
-or \code{FALSE} if not available. If a package search is provided, the function
-will check whether a minimum version of a package is required.
+The function \code{.assert_package()} checks whether a package is installed and
+returns an error or \code{FALSE} if not available. If a package search is provided,
+the function will check whether a minimum version of a package is required.
+The function \code{.get_package_dependencies()} returns a tibble with all
+dependencies of a specific package. Finally, \code{.get_min_version_required()}
+will return, if any, the minimum version of \code{pkg} required by \code{pkg_search},
+\code{NULL} if no minimum version required.
+}
+\details{
+\code{.get_package_dependencies()} accepts \code{pkg_search = NULL} and will return, in
+that case, the list of dependencies of all installed packages.
 }
 \examples{
 .assert_package("broom", boolean = TRUE)
-
+.get_package_dependencies()
 .get_min_version_required("brms")
 }
