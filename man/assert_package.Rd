@@ -37,7 +37,9 @@ should only the first one be returned?}
 \code{utils::installed.packages()}.}
 }
 \value{
-logical or error
+logical or error for \code{.assert_package()}, \code{NULL} or character with
+the minimum version required for \code{.get_min_version_required()}, a tibble for
+\code{.get_package_dependencies()}.
 }
 \description{
 The function \code{.assert_package()} checks whether a package is installed and

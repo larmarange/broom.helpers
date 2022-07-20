@@ -24,7 +24,10 @@
 #' `.get_package_dependencies()` accepts `pkg_search = NULL` and will return, in
 #' that case, the list of dependencies of all installed packages.
 #'
-#' @return logical or error
+#' @return logical or error for `.assert_package()`, `NULL` or character with
+#' the minimum version required for `.get_min_version_required()`, a tibble for
+#' `.get_package_dependencies()`.
+#'
 #' @name assert_package
 #' @examples
 #' .assert_package("broom", boolean = TRUE)
