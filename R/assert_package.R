@@ -20,6 +20,9 @@
 #' should only the first one be returned?
 #' @param lib.loc location of `R` library trees to search through, see
 #' `utils::installed.packages()`.
+#' @details
+#' `.get_package_dependencies()` accepts `pkg_search = NULL` and will return, in
+#' that case, the list of dependencies of all installed packages.
 #'
 #' @return logical or error
 #' @name assert_package
@@ -60,7 +63,6 @@ NULL
   deps <-
     utils::installed.packages(lib.loc = lib.loc) %>%
     tibble::as_tibble() %>%
-    dplyr::filter(.data$Package %in% .env$pkg_search) %>%
     dplyr::select(dplyr::all_of(
       c("Package", "Version", "LibPath", "Imports", "Depends", "Suggests", "Enhances", "LinkingTo")
     )) %>%
@@ -70,6 +72,8 @@ NULL
       lib_path = "LibPath"
     )
 
+  if (!is.null(pkg_search))
+    deps <- deps %>% dplyr::filter(.data$Package %in% .env$pkg_search)
   if (remove_duplicates)
     deps <- deps %>% dplyr::distinct(.data$pkg_search, .keep_all = TRUE)
 

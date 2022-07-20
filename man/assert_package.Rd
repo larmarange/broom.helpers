@@ -48,6 +48,10 @@ dependencies of a specific package. Finally, \code{.get_min_version_required()}
 will return, if any, the minimum version of \code{pkg} required by \code{pkg_search},
 \code{NULL} if no minimum version required.
 }
+\details{
+\code{.get_package_dependencies()} accepts \code{pkg_search = NULL} and will return, in
+that case, the list of dependencies of all installed packages.
+}
 \examples{
 .assert_package("broom", boolean = TRUE)
 .get_package_dependencies()
