@@ -71,14 +71,13 @@ model_identify_variables.default <- function(model) {
     ) %>%
     dplyr::left_join(
       model_list_variables(model) %>%
-        dplyr::select(dplyr::all_of(c("variable", "var_class"))),
+        dplyr::select("variable", "var_class"),
       by = "variable"
     ) %>%
     dplyr::left_join(
       model_get_nlevels(model),
       by = "variable"
     ) %>%
-
     .compute_var_type()
 }
 

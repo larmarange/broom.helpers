@@ -290,7 +290,7 @@
     dplyr::select(all_of(c(variable_column, select_column))) %>%
     dplyr::filter(stats::complete.cases(.)) %>%
     dplyr::filter({{ select_expr }}) %>%
-    dplyr::pull(!!rlang::sym(variable_column)) %>%
+    dplyr::pull(dplyr::all_of(variable_column)) %>%
     unique()
 }
 

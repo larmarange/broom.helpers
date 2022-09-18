@@ -14,9 +14,9 @@ knitr::opts_chunk$set(
   rows.print = 25
 )
 
-# one of the functions below needs emmeans, so don't build vignette on old R versions where emmeans is not available
+# one of the functions below needs emmeans, so dont evaluate code check in vignette on old R versions where emmeans is not available
 if (!rlang::is_installed("emmeans")) {
-  knitr::knit_exit()
+  knitr::opts_chunk$set(eval = FALSE)
 }
 ```
 
