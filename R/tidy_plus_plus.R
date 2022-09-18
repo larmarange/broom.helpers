@@ -63,39 +63,40 @@
 #'     Class = "Passenger's class",
 #'     Sex = "Gender"
 #'   )
-#'
-#' ex2 <- glm(
-#'   Survived ~ Class + Age * Sex,
-#'   data = df, weights = df$n,
-#'   family = binomial
-#' ) %>%
-#'   tidy_plus_plus(
-#'     exponentiate = TRUE,
-#'     add_reference_rows = FALSE,
-#'     categorical_terms_pattern = "{level} / {reference_level}",
-#'     add_n = TRUE
-#'   )
-#' ex2
-#'
-#' ex3 <-
-#'   glm(
-#'     response ~ poly(age, 3) + stage + grade * trt,
-#'     na.omit(gtsummary::trial),
-#'     family = binomial,
-#'     contrasts = list(
-#'       stage = contr.treatment(4, base = 3),
-#'       grade = contr.sum
-#'     )
+#' if (interactive()) {
+#'   ex2 <- glm(
+#'     Survived ~ Class + Age * Sex,
+#'     data = df, weights = df$n,
+#'     family = binomial
 #'   ) %>%
-#'   tidy_plus_plus(
-#'     exponentiate = TRUE,
-#'     variable_labels = c(age = "Age (in years)"),
-#'     add_header_rows = TRUE,
-#'     show_single_row = all_dichotomous(),
-#'     term_labels = c("poly(age, 3)3" = "Cubic age"),
-#'     keep_model = TRUE
-#'   )
-#' ex3
+#'     tidy_plus_plus(
+#'       exponentiate = TRUE,
+#'       add_reference_rows = FALSE,
+#'       categorical_terms_pattern = "{level} / {reference_level}",
+#'       add_n = TRUE
+#'     )
+#'   ex2
+#'
+#'   ex3 <-
+#'     glm(
+#'       response ~ poly(age, 3) + stage + grade * trt,
+#'       na.omit(gtsummary::trial),
+#'       family = binomial,
+#'       contrasts = list(
+#'         stage = contr.treatment(4, base = 3),
+#'         grade = contr.sum
+#'       )
+#'     ) %>%
+#'     tidy_plus_plus(
+#'       exponentiate = TRUE,
+#'       variable_labels = c(age = "Age (in years)"),
+#'       add_header_rows = TRUE,
+#'       show_single_row = all_dichotomous(),
+#'       term_labels = c("poly(age, 3)3" = "Cubic age"),
+#'       keep_model = TRUE
+#'     )
+#'   ex3
+#' }
 #' @export
 tidy_plus_plus <- function(
                            model,

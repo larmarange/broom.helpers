@@ -19,6 +19,17 @@ model_get_xlevels.default <- function(model) {
       NULL # nocov
     }
   )
+  if (is.null(xlevels)) {
+    xlevels <- tryCatch(
+      stats::.getXlevels(
+        stats::terms(model),
+        model %>% model_get_model_frame()
+      ),
+      error = function(e) {
+        NULL # nocov
+      }
+    )
+  }
   xlevels %>% .add_xlevels_for_logical_variables(model)
 }
 
@@ -66,15 +77,7 @@ model_get_xlevels.plm <- model_get_xlevels.lmerMod
 
 #' @export
 #' @rdname model_get_xlevels
-model_get_xlevels.biglm <- function(model) {
-  stats::.getXlevels(
-    stats::terms(model),
-    model %>% model_get_model_frame()
-  )
-}
-
-#' @export
-#' @rdname model_get_xlevels
 model_get_xlevels.model_fit <- function(model) {
   model_get_xlevels(model$fit)
 }
+

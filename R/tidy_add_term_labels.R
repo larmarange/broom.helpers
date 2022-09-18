@@ -27,7 +27,7 @@
 #' @inheritParams tidy_plus_plus
 #' @export
 #' @family tidy_helpers
-#' @examples
+#' @examplesIf interactive()
 #' df <- Titanic %>%
 #'   dplyr::as_tibble() %>%
 #'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes"))) %>%

@@ -21,7 +21,7 @@
 #' `c("treatment", "sum", "poly", "helmert", "other")`
 #'
 #' @return A character vector of column names selected
-#' @examples
+#' @examplesIf interactive()
 #' glm(response ~ age * trt + grade, gtsummary::trial, family = binomial) %>%
 #'   tidy_plus_plus(exponentiate = TRUE, include = all_categorical())
 #'

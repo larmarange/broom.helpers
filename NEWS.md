@@ -1,9 +1,21 @@
 # broom.helpers (development version)
 
+**New features**
+
+- New function `.get_package_dependencies()` listing all dependencies, including
+  minimum version required, of a package. (#171)
+- Improvement of `.assert_package()` now taking into account the comparison
+  operator (> or >=) when a minimum version is required (#171)
+
+
+# broom.helpers 1.8.0
+
 **New supported models**
 
 - Support for `parsnip::model_fit` objects (#161)
 - Support for `biglm::bigglm()` and `biglmm::bigglm()` models (#155)
+- Support for `fixest::feglm()`, `fixest::femlm()`, `fixest::feols()`
+  and `fixest::feNmlm()` (requires R>=4.1) (#167)
 
 **New features**
 

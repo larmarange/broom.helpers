@@ -102,3 +102,8 @@ model_get_model_matrix.model_fit <- function(model, ...) {
   model_get_model_matrix(model$fit, ...)
 }
 
+#' @export
+#' @rdname model_get_model_matrix
+model_get_model_matrix.fixest <- function(model, ...) {
+  stats::model.matrix.default(model$fml, data = get(model$call$data, model$call_env), ...)
+}

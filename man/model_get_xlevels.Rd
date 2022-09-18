@@ -9,7 +9,6 @@
 \alias{model_get_xlevels.brmsfit}
 \alias{model_get_xlevels.glmmTMB}
 \alias{model_get_xlevels.plm}
-\alias{model_get_xlevels.biglm}
 \alias{model_get_xlevels.model_fit}
 \title{Get xlevels used in the model}
 \usage{
@@ -28,8 +27,6 @@ model_get_xlevels(model)
 \method{model_get_xlevels}{glmmTMB}(model)
 
 \method{model_get_xlevels}{plm}(model)
-
-\method{model_get_xlevels}{biglm}(model)
 
 \method{model_get_xlevels}{model_fit}(model)
 }
