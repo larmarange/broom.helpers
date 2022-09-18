@@ -27,7 +27,7 @@
 #' @inheritParams tidy_plus_plus
 #' @export
 #' @family tidy_helpers
-#' @examplesIf .assert_package("gtsummary", boolean = TRUE)
+#' @examplesIf .assert_package("gtsummary", boolean = TRUE) && .assert_package("emmeans", boolean = TRUE)
 #' df <- Titanic %>%
 #'   dplyr::as_tibble() %>%
 #'   dplyr::mutate(dplyr::across(where(is.character), factor))
