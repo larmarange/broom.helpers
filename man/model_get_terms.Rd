@@ -26,9 +26,9 @@ Return the result of \code{\link[stats:terms]{stats::terms()}} applied to the mo
 or \code{NULL} if it is not possible to get terms from \code{model}.
 }
 \details{
-For models fitted with \code{\link[glmmTMB:glmmTMB]{glmmTMB::glmmTMB()}}, it will return a terms object
+For models fitted with \code{glmmTMB::glmmTMB()}, it will return a terms object
 taking into account all components ("cond" and "zi"). For a more
-restricted terms object, please refer to \code{\link[glmmTMB:glmmTMB_methods]{glmmTMB::terms.glmmTMB()}}.
+restricted terms object, please refer to \code{glmmTMB::terms.glmmTMB()}.
 }
 \examples{
 lm(hp ~ mpg + factor(cyl), mtcars) \%>\%

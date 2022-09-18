@@ -8,7 +8,7 @@
 #' For categorical variables with a sum contrast ([stats::contr.sum()]),
 #' the estimate value of the reference row will be equal to the sum of
 #' all other coefficients multiplied by `-1` (eventually exponentiated if
-#' `exponentiate = TRUE`), and obtained with [emmeans::emmeans()].
+#' `exponentiate = TRUE`), and obtained with `emmeans::emmeans()`.
 #' The `emmeans` package should therefore be installed.
 #' For sum contrasts, the model coefficient corresponds
 #' to the difference of each level with the grand mean.
