@@ -34,7 +34,7 @@ tidy_add_contrasts <- function(x, model = tidy_get_model(x), quiet = FALSE) {
   .attributes <- .save_attributes(x)
 
   if ("contrasts" %in% names(x)) {
-    x <- x %>% dplyr::select(-.data$contrasts)
+    x <- x %>% dplyr::select(-dplyr::all_of("contrasts"))
   }
 
   if (!"variable" %in% names(x)) {
@@ -51,7 +51,7 @@ tidy_add_contrasts <- function(x, model = tidy_get_model(x), quiet = FALSE) {
     x <- x %>%
       dplyr::left_join(
         contrasts_list %>%
-          dplyr::select(.data$variable, .data$contrasts, .data$contrasts_type),
+          dplyr::select(dplyr::all_of(c("variable", "contrasts", "contrasts_type"))),
         by = "variable"
       )
   }

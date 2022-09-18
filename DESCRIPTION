@@ -70,6 +70,7 @@ VignetteBuilder:
     knitr
 RdMacros: 
     lifecycle
+Remotes: r-lib/tidyselect, tidyverse/tidyr
 Encoding: UTF-8
 Language: en-US
 LazyData: true

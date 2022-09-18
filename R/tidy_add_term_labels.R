@@ -65,7 +65,7 @@ tidy_add_term_labels <- function(x,
   .attributes <- .save_attributes(x)
 
   if ("label" %in% names(x)) {
-    x <- x %>% dplyr::select(-.data$label)
+    x <- x %>% dplyr::select(-dplyr::all_of("label"))
   }
 
   if (is.list(labels)) {

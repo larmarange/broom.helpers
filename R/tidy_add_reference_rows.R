@@ -154,10 +154,10 @@ tidy_add_reference_rows <- function(
   ref_rows <- terms_levels %>%
     dplyr::filter(.data$reference) %>%
     dplyr::mutate(reference_row = TRUE) %>%
-    dplyr::select(.data$term, .data$variable, .data$label, .data$reference_row, .data$rank)
+    dplyr::select(dplyr::all_of(c("term", "variable", "label", "reference_row", "rank")))
 
   if (!"label" %in% names(x))
-    ref_rows <- ref_rows %>% dplyr::select(-.data$label)
+    ref_rows <- ref_rows %>% dplyr::select(-all_of("label"))
 
   # populate effect column for mixed models
   tmp <- x
@@ -193,23 +193,23 @@ tidy_add_reference_rows <- function(
         .data$rank
       )
     ) %>%
-    dplyr::select(-.data$var_min_rank, -.data$var_max_rank)
+    dplyr::select(-dplyr::all_of(c("var_min_rank", "var_max_rank")))
 
   if (!"effect" %in% names(x))
-    ref_rows <- ref_rows %>% dplyr::select(-.data$effect)
+    ref_rows <- ref_rows %>% dplyr::select(-dplyr::all_of("effect"))
 
   x <- x %>%
     dplyr::bind_rows(ref_rows)
   if (!is.null(group))
     x[[group]] <- x$.group_by_var
-  x <- x %>% dplyr::select(-.data$.group_by_var)
+  x <- x %>% dplyr::select(-dplyr::all_of(".group_by_var"))
 
   if (!has_var_label) {
-    x <- x %>% dplyr::select(-.data$var_label)
+    x <- x %>% dplyr::select(-dplyr::all_of("var_label"))
   }
 
   x %>%
     dplyr::arrange(.data$rank) %>%
-    dplyr::select(-.data$rank) %>%
+    dplyr::select(-dplyr::all_of("rank")) %>%
     tidy_attach_model(model = model, .attributes = .attributes)
 }
