@@ -72,7 +72,7 @@ VignetteBuilder:
 RdMacros: 
     lifecycle
 Remotes: 
-    r-lib/tidyselect@all-of-deprecate, 
+    r-lib/tidyselect, 
     tidyverse/tidyr
 Encoding: UTF-8
 Language: en-US
