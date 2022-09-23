@@ -33,7 +33,7 @@ to the reference row.
 For categorical variables with a sum contrast (\code{\link[stats:contrast]{stats::contr.sum()}}),
 the estimate value of the reference row will be equal to the sum of
 all other coefficients multiplied by \code{-1} (eventually exponentiated if
-\code{exponentiate = TRUE}), and obtained with \code{\link[emmeans:emmeans]{emmeans::emmeans()}}.
+\code{exponentiate = TRUE}), and obtained with \code{emmeans::emmeans()}.
 The \code{emmeans} package should therefore be installed.
 For sum contrasts, the model coefficient corresponds
 to the difference of each level with the grand mean.
@@ -44,7 +44,7 @@ If the \code{reference_row} column is not yet available in \code{x},
 \code{\link[=tidy_add_reference_rows]{tidy_add_reference_rows()}} will be automatically applied.
 }
 \examples{
-\dontshow{if (.assert_package("gtsummary", boolean = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (.assert_package("gtsummary", boolean = TRUE) && .assert_package("emmeans", boolean = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 df <- Titanic \%>\%
   dplyr::as_tibble() \%>\%
   dplyr::mutate(dplyr::across(where(is.character), factor))

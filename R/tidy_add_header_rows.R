@@ -148,7 +148,7 @@ tidy_add_header_rows <- function(x,
   }
 
   if (!has_reference_row)
-    x <- x %>% dplyr::select(-.data$reference_row)
+    x <- x %>% dplyr::select(-dplyr::all_of("reference_row"))
 
   # computing header rows ---------------
 
@@ -178,7 +178,7 @@ tidy_add_header_rows <- function(x,
           .groups = "drop_last"
         ) %>%
         dplyr::filter(.data$var_nrow >= 2 | .data$var_test > 0) %>%
-        dplyr::select(-.data$var_nrow, -.data$var_test) %>%
+        dplyr::select(-dplyr::all_of(c("var_nrow", "var_test"))) %>%
         dplyr::mutate(
           header_row = TRUE,
           label = .data$var_label
@@ -209,7 +209,7 @@ tidy_add_header_rows <- function(x,
           .groups = "drop_last"
         ) %>%
         dplyr::filter(.data$var_nrow >= 2 | .data$var_test > 0) %>%
-        dplyr::select(-.data$var_nrow, -.data$var_test) %>%
+        dplyr::select(-dplyr::all_of(c("var_nrow", "var_test"))) %>%
         dplyr::mutate(
           header_row = TRUE,
           label = .data$var_label
@@ -222,7 +222,7 @@ tidy_add_header_rows <- function(x,
     ) %>%
     dplyr::bind_rows(header_rows) %>%
     dplyr::arrange(.data$rank) %>%
-    dplyr::select(-.data$rank)
+    dplyr::select(-dplyr::all_of("rank"))
 
   x %>%
     tidy_attach_model(model = model, .attributes = .attributes)

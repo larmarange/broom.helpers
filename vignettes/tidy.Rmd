@@ -13,6 +13,11 @@ knitr::opts_chunk$set(
   comment = "#>",
   rows.print = 25
 )
+
+# one of the functions below needs emmeans, so dont evaluate code check in vignette on old R versions where emmeans is not available
+if (!rlang::is_installed("emmeans")) {
+  knitr::opts_chunk$set(eval = FALSE)
+}
 ```
 
 The `broom.helpers` package offers a suite of functions that make easy to interact, add information, and manipulate tibbles created with `broom::tidy()` (and friends).

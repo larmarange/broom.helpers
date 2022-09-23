@@ -508,7 +508,7 @@ test_that("tidy_plus_plus() works with mgcv::gam", {
         broom::tidy(x, parametric = FALSE, ...) %>%
           dplyr::mutate(parametric = FALSE)
       ) %>%
-      dplyr::relocate(.data$parametric, .after = dplyr::last_col())
+      dplyr::relocate(parametric, .after = dplyr::last_col())
   }
 
   gam_logistic <- mgcv::gam(response ~ s(marker, ttdeath) + grade + age, data = gtsummary::trial, family = binomial)
