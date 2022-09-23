@@ -107,7 +107,7 @@ This function will apply sequentially:
 }
 }
 \examples{
-\dontshow{if (.assert_package("gtsummary", boolean = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive() && .assert_package("gtsummary", boolean = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 ex1 <- lm(Sepal.Length ~ Sepal.Width + Species, data = iris) \%>\%
   tidy_plus_plus()
 ex1

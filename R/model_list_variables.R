@@ -18,7 +18,7 @@
 #'
 #' @export
 #' @family model_helpers
-#' @examplesIf .assert_package("gtsummary", boolean = TRUE) && interactive()
+#' @examplesIf interactive() && .assert_package("gtsummary", boolean = TRUE)
 #' Titanic %>%
 #'   dplyr::as_tibble() %>%
 #'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes"))) %>%

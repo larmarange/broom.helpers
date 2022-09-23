@@ -49,7 +49,7 @@
 #' when requested output cannot be generated. Default is FALSE
 #' @param ... other arguments passed to `tidy_fun()`
 #' @family tidy_helpers
-#' @examplesIf .assert_package("gtsummary", boolean = TRUE)
+#' @examplesIf interactive() && .assert_package("gtsummary", boolean = TRUE)
 #' ex1 <- lm(Sepal.Length ~ Sepal.Width + Species, data = iris) %>%
 #'   tidy_plus_plus()
 #' ex1

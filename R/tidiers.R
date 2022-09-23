@@ -7,7 +7,7 @@
 #' interval in the tidied output
 #' @param conf.level the confidence level to use for the confidence interval
 #' @param ... additional parameters passed to `parameters::model_parameters()`
-#' @examplesIf .assert_package("parameters", boolean = TRUE)
+#' @examplesIf interactive() && .assert_package("parameters", boolean = TRUE)
 #' lm(Sepal.Length ~ Sepal.Width + Species, data = iris) %>%
 #'   tidy_parameters()
 #' @export

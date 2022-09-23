@@ -36,7 +36,7 @@ with the label attribute (cf. \code{\link[labelled:var_label]{labelled::var_labe
 Including variables used only in an interaction.
 }
 \examples{
-\dontshow{if (.assert_package("gtsummary", boolean = TRUE) && interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive() && .assert_package("gtsummary", boolean = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 Titanic \%>\%
   dplyr::as_tibble() \%>\%
   dplyr::mutate(Survived = factor(Survived, c("No", "Yes"))) \%>\%

@@ -27,7 +27,7 @@
 #' @inheritParams tidy_plus_plus
 #' @export
 #' @family tidy_helpers
-#' @examplesIf .assert_package("gtsummary", boolean = TRUE) & interactive()
+#' @examplesIf interactive() && .assert_package("gtsummary", boolean = TRUE)
 #' df <- Titanic %>%
 #'   dplyr::as_tibble() %>%
 #'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
