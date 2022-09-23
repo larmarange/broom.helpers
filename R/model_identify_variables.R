@@ -164,7 +164,8 @@ model_identify_variables.clmm <- model_identify_variables.clm
 model_identify_variables.gam <- function(model) {
   model_identify_variables.default(model) %>%
     dplyr::bind_rows(
-      broom::tidy(model, parametric = FALSE) %>%
+      # suppressWarnings to avoid a warning when the result is an empty tibble
+      suppressWarnings(broom::tidy(model, parametric = FALSE)) %>%
         dplyr::bind_rows(tibble::tibble(term = character(0))) %>%
         dplyr::select(.data$term) %>%
         dplyr::mutate(variable = .data$term, var_type = "continuous")
