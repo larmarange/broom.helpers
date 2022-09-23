@@ -9,6 +9,7 @@
   
 **Bug fixes and improvements**
 
+- Compatibility with upcoming `tidyselect` v1.2.0 (#173)
 - Avoid an unwanted warning for some `mgcv::gam()` models (#175)
 
 
