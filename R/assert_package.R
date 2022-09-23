@@ -29,7 +29,7 @@
 #' `.get_package_dependencies()`.
 #'
 #' @name assert_package
-#' @examples
+#' @examplesIf interactive()
 #' .assert_package("broom", boolean = TRUE)
 #' .get_package_dependencies()
 #' .get_min_version_required("brms")
