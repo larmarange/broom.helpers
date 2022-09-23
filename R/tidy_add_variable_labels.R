@@ -56,7 +56,7 @@ tidy_add_variable_labels <- function(x,
   .attributes <- .save_attributes(x)
 
   if ("var_label" %in% names(x)) {
-    x <- x %>% dplyr::select(-.data$var_label)
+    x <- x %>% dplyr::select(-dplyr::all_of("var_label"))
   }
 
   if (!"variable" %in% names(x)) {

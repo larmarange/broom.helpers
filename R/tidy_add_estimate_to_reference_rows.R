@@ -8,7 +8,7 @@
 #' For categorical variables with a sum contrast ([stats::contr.sum()]),
 #' the estimate value of the reference row will be equal to the sum of
 #' all other coefficients multiplied by `-1` (eventually exponentiated if
-#' `exponentiate = TRUE`), and obtained with [emmeans::emmeans()].
+#' `exponentiate = TRUE`), and obtained with `emmeans::emmeans()`.
 #' The `emmeans` package should therefore be installed.
 #' For sum contrasts, the model coefficient corresponds
 #' to the difference of each level with the grand mean.
@@ -27,7 +27,7 @@
 #' @inheritParams tidy_plus_plus
 #' @export
 #' @family tidy_helpers
-#' @examplesIf .assert_package("gtsummary", boolean = TRUE)
+#' @examplesIf .assert_package("gtsummary", boolean = TRUE) && .assert_package("emmeans", boolean = TRUE)
 #' df <- Titanic %>%
 #'   dplyr::as_tibble() %>%
 #'   dplyr::mutate(dplyr::across(where(is.character), factor))

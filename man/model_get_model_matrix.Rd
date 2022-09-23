@@ -45,9 +45,9 @@ could slightly differ for certain types of models.
 with the same structure as \code{\link[stats:model.matrix]{stats::model.matrix.default()}}.
 }
 \details{
-For models fitted with \code{\link[glmmTMB:glmmTMB]{glmmTMB::glmmTMB()}}, it will return a model matrix
+For models fitted with \code{glmmTMB::glmmTMB()}, it will return a model matrix
 taking into account all components ("cond", "zi" and "disp"). For a more
-restricted model matrix, please refer to \code{\link[glmmTMB:glmmTMB_methods]{glmmTMB::model.matrix.glmmTMB()}}.
+restricted model matrix, please refer to \code{glmmTMB::model.matrix.glmmTMB()}.
 
 For \code{\link[plm:plm]{plm::plm()}} models, constant columns are not removed.
 }

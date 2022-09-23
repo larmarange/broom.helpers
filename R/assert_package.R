@@ -78,15 +78,15 @@ NULL
   if (!is.null(pkg_search))
     deps <- deps %>% dplyr::filter(.data$pkg_search %in% .env$pkg_search)
   if (remove_duplicates)
-    deps <- deps %>% dplyr::distinct(.data$pkg_search, .keep_all = TRUE)
+    deps <- deps %>% dplyr::distinct("pkg_search", .keep_all = TRUE)
 
   deps %>%
     tidyr::pivot_longer(
-      c(-.data$pkg_search, -.data$pkg_search_version, -.data$lib_path),
+      -dplyr::all_of(c("pkg_search", "pkg_search_version", "lib_path")),
       values_to = "pkg",
-      names_to = "dependency_type"
+      names_to = "dependency_type",
     ) %>%
-    tidyr::separate_rows(.data$pkg, sep = ",") %>%
+    tidyr::separate_rows("pkg", sep = ",") %>%
     dplyr::mutate(pkg = stringr::str_squish(.data$pkg)) %>%
     dplyr::filter(!is.na(.data$pkg)) %>%
     tidyr::separate(.data$pkg, into = c("pkg", "version"), sep = " ", extra = "merge", fill = "right") %>%

@@ -191,5 +191,5 @@ model_list_variables.lavaan <- function(model, labels = NULL, only_variable = FA
       TRUE ~ .data$variable
     )
   ) %>%
-    dplyr::select(-.data$var_custom_label)
+    dplyr::select(-dplyr::all_of("var_custom_label"))
 }

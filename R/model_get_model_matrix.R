@@ -63,9 +63,9 @@ model_get_model_matrix.brmsfit <- function(model, ...) {
 #' @export
 #' @rdname model_get_model_matrix
 #' @details
-#' For models fitted with [glmmTMB::glmmTMB()], it will return a model matrix
+#' For models fitted with `glmmTMB::glmmTMB()`, it will return a model matrix
 #' taking into account all components ("cond", "zi" and "disp"). For a more
-#' restricted model matrix, please refer to [glmmTMB::model.matrix.glmmTMB()].
+#' restricted model matrix, please refer to `glmmTMB::model.matrix.glmmTMB()`.
 model_get_model_matrix.glmmTMB <- function(model, ...) {
   # load lme4 if available
   .assert_package("lme4", fn = "broom.helpers::model_get_model_matrix.glmmTMB()")
