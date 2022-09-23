@@ -176,7 +176,6 @@ model_identify_variables.model_fit <- function(model) {
   model_identify_variables(model$fit)
 }
 
-
 ## model_identify_variables() helpers --------------------------
 
 .compute_var_type <- function(x) {
