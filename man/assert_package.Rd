@@ -18,7 +18,7 @@
   lib.loc = NULL
 )
 
-.get_min_version_required(pkg, pkg_search = NULL)
+.get_min_version_required(pkg, pkg_search = "broom.helpers")
 }
 \arguments{
 \item{pkg}{Package required}
