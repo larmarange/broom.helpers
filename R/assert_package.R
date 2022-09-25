@@ -132,7 +132,7 @@ NULL
 
 #' @rdname assert_package
 #' @export
-.get_min_version_required <- function(pkg, pkg_search = NULL) {
+.get_min_version_required <- function(pkg, pkg_search = "broom.helpers") {
   if (is.null(pkg_search)) return(NULL)
   res <- .get_package_dependencies(pkg_search) %>%
     dplyr::filter(.data$pkg == .env$pkg & !is.na(.data$version))
