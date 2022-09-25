@@ -62,7 +62,7 @@ NULL
 .get_package_dependencies <- function(pkg_search = "broom.helpers") {
   if (is.null(pkg_search)) return(NULL)
   description <- utils::packageDescription(pkg_search)
-  if (identical(deps, NA)) return(NULL)
+  if (identical(description, NA)) return(NULL)
   description %>%
     unclass() %>%
     tibble::as_tibble() %>%
