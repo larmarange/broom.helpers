@@ -21,8 +21,8 @@
 #' @param lib.loc location of `R` library trees to search through, see
 #' `utils::installed.packages()`.
 #' @details
-#' `.get_package_dependencies()` accepts `pkg_search = NULL` and will return, in
-#' that case, the list of dependencies of all installed packages.
+#' `get_all_packages_dependencies()` could be used to get the list of
+#' dependencies of all installed packages.
 #'
 #' @return logical or error for `.assert_package()`, `NULL` or character with
 #' the minimum version required for `.get_min_version_required()`, a tibble for
@@ -59,8 +59,42 @@ NULL
 
 #' @rdname assert_package
 #' @export
-.get_package_dependencies <- function(
-    pkg_search = "broom.helpers",
+.get_package_dependencies <- function(pkg_search = "broom.helpers") {
+  if (is.null(pkg_search)) return(NULL)
+  description <- utils::packageDescription(pkg_search)
+  if (identical(deps, NA)) return(NULL)
+  description %>%
+    unclass() %>%
+    tibble::as_tibble() %>%
+    dplyr::select(dplyr::any_of(
+      c(
+        "Package", "Version", "Imports", "Depends",
+        "Suggests", "Enhances", "LinkingTo"
+      )
+    )) %>%
+    dplyr::rename(
+      pkg_search = "Package",
+      pkg_search_version = "Version"
+    ) %>%
+    tidyr::pivot_longer(
+      -dplyr::all_of(c("pkg_search", "pkg_search_version")),
+      values_to = "pkg",
+      names_to = "dependency_type",
+    ) %>%
+    tidyr::separate_rows("pkg", sep = ",") %>%
+    dplyr::mutate(pkg = stringr::str_squish(.data$pkg)) %>%
+    dplyr::filter(!is.na(.data$pkg)) %>%
+    tidyr::separate(.data$pkg, into = c("pkg", "version"), sep = " ", extra = "merge", fill = "right") %>%
+    dplyr::mutate(
+      compare = .data$version %>% stringr::str_extract(pattern = "[>=<]+"),
+      version = .data$version %>% stringr::str_remove_all(pattern = "[\\(\\) >=<]")
+    )
+}
+
+#' @rdname assert_package
+#' @export
+.get_all_packages_dependencies <- function(
+    pkg_search = NULL,
     remove_duplicates = FALSE,
     lib.loc = NULL) {
   deps <-
@@ -98,9 +132,9 @@ NULL
 
 #' @rdname assert_package
 #' @export
-.get_min_version_required <- function(pkg, pkg_search = "broom.helpers") {
+.get_min_version_required <- function(pkg, pkg_search = NULL) {
   if (is.null(pkg_search)) return(NULL)
-  res <- .get_package_dependencies(pkg_search, remove_duplicates = TRUE) %>%
+  res <- .get_package_dependencies(pkg_search) %>%
     dplyr::filter(.data$pkg == .env$pkg & !is.na(.data$version))
   version <- res %>% purrr::pluck("version")
   attr(version, "compare") <- res %>% purrr::pluck("compare")
