@@ -4,6 +4,7 @@
 \alias{model_list_variables}
 \alias{model_list_variables.default}
 \alias{model_list_variables.lavaan}
+\alias{model_list_variables.logitr}
 \title{List all the variables used in a model}
 \usage{
 model_list_variables(model, labels = NULL, only_variable = FALSE)
@@ -11,6 +12,8 @@ model_list_variables(model, labels = NULL, only_variable = FALSE)
 \method{model_list_variables}{default}(model, labels = NULL, only_variable = FALSE)
 
 \method{model_list_variables}{lavaan}(model, labels = NULL, only_variable = FALSE)
+
+\method{model_list_variables}{logitr}(model, labels = NULL, only_variable = FALSE)
 }
 \arguments{
 \item{model}{a model object}
