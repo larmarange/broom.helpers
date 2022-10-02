@@ -1,5 +1,9 @@
 # broom.helpers (development version)
 
+**New supported models**
+
+- Support for `logitr::logitr()` models (#179)
+
 # broom.helpers 1.9.0
 
 **New features**
