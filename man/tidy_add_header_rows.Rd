@@ -51,7 +51,8 @@ If the \code{label} column is not yet available in \code{x},
 \code{\link[=tidy_add_term_labels]{tidy_add_term_labels()}} will be automatically applied.
 }
 \examples{
-\dontshow{if (interactive() && .assert_package("gtsummary", boolean = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+if (.assert_package("gtsummary", boolean = TRUE)) {
 df <- Titanic \%>\%
   dplyr::as_tibble() \%>\%
   dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
@@ -81,6 +82,7 @@ glm(
   tidy_and_attach() \%>\%
   tidy_add_reference_rows() \%>\%
   tidy_add_header_rows()
+}
 \dontshow{\}) # examplesIf}
 }
 \seealso{

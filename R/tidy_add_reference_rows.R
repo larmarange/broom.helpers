@@ -27,7 +27,8 @@
 #' @inheritParams tidy_plus_plus
 #' @export
 #' @family tidy_helpers
-#' @examplesIf interactive() && .assert_package("gtsummary", boolean = TRUE)
+#' @examplesIf interactive()
+#' if (.assert_package("gtsummary", boolean = TRUE)) {
 #' df <- Titanic %>%
 #'   dplyr::as_tibble() %>%
 #'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
@@ -55,7 +56,7 @@
 #' ) %>%
 #'   tidy_and_attach() %>%
 #'   tidy_add_reference_rows()
-
+#' }
 tidy_add_reference_rows <- function(
   x, no_reference_row = NULL,
   model = tidy_get_model(x),
