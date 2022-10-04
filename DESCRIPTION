@@ -51,6 +51,7 @@ Suggests:
     lavaan,
     lfe,
     lme4 (>= 1.1.28),
+    logitr (>= 0.8.0),
     MASS,
     mgcv,
     mice,

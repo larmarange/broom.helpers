@@ -177,6 +177,24 @@ model_identify_variables.model_fit <- function(model) {
   model_identify_variables(model$fit)
 }
 
+#' @rdname model_identify_variables
+#' @importFrom dplyr add_row
+#' @export
+model_identify_variables.logitr <- function(model) {
+  res <- model_identify_variables.default(model)
+  if (!is.null(model$data$scalePar))
+    res <- res %>%
+      dplyr::add_row(
+        term = "scalePar",
+        variable = "scalePar",
+        var_class = "numeric",
+        var_nlevels = NA,
+        var_type = "continuous"
+      )
+  res
+}
+
+
 ## model_identify_variables() helpers --------------------------
 
 .compute_var_type <- function(x) {

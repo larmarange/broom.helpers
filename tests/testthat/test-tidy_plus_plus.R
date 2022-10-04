@@ -654,3 +654,23 @@ test_that("tidy_plus_plus() works with fixest models", {
     NA
   )
 })
+
+test_that("tidy_plus_plus() works with logitr models", {
+  skip_on_cran()
+  skip_if_not(.assert_package("logitr", boolean = TRUE))
+
+  mod <- logitr::logitr(
+    data           = logitr::yogurt %>% head(100),
+    outcome        = "choice",
+    obsID          = "obsID",
+    pars           = c("feat", "brand"),
+    scalePar       = "price",
+    randScale      = "n",
+    numMultiStarts = 1
+  )
+  expect_error(
+    res <- mod %>% tidy_plus_plus(),
+    NA
+  )
+  expect_true("scalePar" %in% res$variable)
+})

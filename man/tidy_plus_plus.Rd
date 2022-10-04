@@ -107,7 +107,7 @@ This function will apply sequentially:
 }
 }
 \examples{
-\dontshow{if (interactive() && .assert_package("gtsummary", boolean = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 ex1 <- lm(Sepal.Length ~ Sepal.Width + Species, data = iris) \%>\%
   tidy_plus_plus()
 ex1
@@ -121,7 +121,6 @@ df <- Titanic \%>\%
     Class = "Passenger's class",
     Sex = "Gender"
   )
-if (interactive()) {
   ex2 <- glm(
     Survived ~ Class + Age * Sex,
     data = df, weights = df$n,
@@ -134,7 +133,7 @@ if (interactive()) {
       add_n = TRUE
     )
   ex2
-
+if (.assert_package("gtsummary", boolean = TRUE)) {
   ex3 <-
     glm(
       response ~ poly(age, 3) + stage + grade * trt,

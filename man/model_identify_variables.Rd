@@ -9,6 +9,7 @@
 \alias{model_identify_variables.clmm}
 \alias{model_identify_variables.gam}
 \alias{model_identify_variables.model_fit}
+\alias{model_identify_variables.logitr}
 \title{Identify for each coefficient of a model the corresponding variable}
 \usage{
 model_identify_variables(model)
@@ -26,6 +27,8 @@ model_identify_variables(model)
 \method{model_identify_variables}{gam}(model)
 
 \method{model_identify_variables}{model_fit}(model)
+
+\method{model_identify_variables}{logitr}(model)
 }
 \arguments{
 \item{model}{a model object}

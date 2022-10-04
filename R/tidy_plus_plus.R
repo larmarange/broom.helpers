@@ -49,7 +49,7 @@
 #' when requested output cannot be generated. Default is FALSE
 #' @param ... other arguments passed to `tidy_fun()`
 #' @family tidy_helpers
-#' @examplesIf interactive() && .assert_package("gtsummary", boolean = TRUE)
+#' @examplesIf interactive()
 #' ex1 <- lm(Sepal.Length ~ Sepal.Width + Species, data = iris) %>%
 #'   tidy_plus_plus()
 #' ex1
@@ -63,7 +63,6 @@
 #'     Class = "Passenger's class",
 #'     Sex = "Gender"
 #'   )
-#' if (interactive()) {
 #'   ex2 <- glm(
 #'     Survived ~ Class + Age * Sex,
 #'     data = df, weights = df$n,
@@ -76,7 +75,7 @@
 #'       add_n = TRUE
 #'     )
 #'   ex2
-#'
+#' if (.assert_package("gtsummary", boolean = TRUE)) {
 #'   ex3 <-
 #'     glm(
 #'       response ~ poly(age, 3) + stage + grade * trt,

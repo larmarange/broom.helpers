@@ -18,7 +18,8 @@
 #'
 #' @export
 #' @family model_helpers
-#' @examplesIf interactive() && .assert_package("gtsummary", boolean = TRUE)
+#' @examplesIf interactive()
+#' if (.assert_package("gtsummary", boolean = TRUE)) {
 #' Titanic %>%
 #'   dplyr::as_tibble() %>%
 #'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes"))) %>%
@@ -43,6 +44,7 @@
 #'   family = binomial,
 #' ) %>%
 #'   model_list_variables()
+#' }
 model_list_variables <- function(model, labels = NULL, only_variable = FALSE) {
   UseMethod("model_list_variables")
 }
@@ -53,7 +55,7 @@ model_list_variables.default <- function(model, labels = NULL, only_variable = F
   model_frame <- model_get_model_frame(model)
   model_terms <- model_get_terms(model)
 
-  if (!is.null(model_terms)) {
+  if (!is.null(model_terms) & inherits(model_terms, "terms")) {
     variable_names <- attr(model_terms, "term.labels")
     dataClasses <- purrr::map(model_frame, .MFclass2) %>% unlist()
 
@@ -112,6 +114,36 @@ model_list_variables.lavaan <- function(model, labels = NULL, only_variable = FA
     ) %>%
     .add_label_attr(model) %>%
     .compute_var_label(labels)
+
+  if (only_variable) return(res$variable)
+
+  res
+}
+
+#' @rdname model_list_variables
+#' @export
+model_list_variables.logitr <- function(model, labels = NULL, only_variable = FALSE) {
+  res <- model_list_variables.default(model, labels, FALSE)
+
+  if (!is.null(model$data$scalePar)) {
+    label_scalePar <- labels %>% purrr::pluck("scalePar")
+    res <- res %>%
+      dplyr::add_row(
+        variable = "scalePar",
+        var_class = "numeric",
+        label_attr = ifelse(
+          is.null(label_scalePar),
+          NA,
+          label_scalePar
+        ),
+        var_label = ifelse(
+          is.null(label_scalePar),
+          "scalePar",
+          label_scalePar
+        )
+      )
+  }
+
 
   if (only_variable) return(res$variable)
 
