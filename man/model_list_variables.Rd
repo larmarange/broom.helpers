@@ -4,6 +4,7 @@
 \alias{model_list_variables}
 \alias{model_list_variables.default}
 \alias{model_list_variables.lavaan}
+\alias{model_list_variables.logitr}
 \title{List all the variables used in a model}
 \usage{
 model_list_variables(model, labels = NULL, only_variable = FALSE)
@@ -11,6 +12,8 @@ model_list_variables(model, labels = NULL, only_variable = FALSE)
 \method{model_list_variables}{default}(model, labels = NULL, only_variable = FALSE)
 
 \method{model_list_variables}{lavaan}(model, labels = NULL, only_variable = FALSE)
+
+\method{model_list_variables}{logitr}(model, labels = NULL, only_variable = FALSE)
 }
 \arguments{
 \item{model}{a model object}
@@ -36,7 +39,8 @@ with the label attribute (cf. \code{\link[labelled:var_label]{labelled::var_labe
 Including variables used only in an interaction.
 }
 \examples{
-\dontshow{if (interactive() && .assert_package("gtsummary", boolean = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+if (.assert_package("gtsummary", boolean = TRUE)) {
 Titanic \%>\%
   dplyr::as_tibble() \%>\%
   dplyr::mutate(Survived = factor(Survived, c("No", "Yes"))) \%>\%
@@ -61,6 +65,7 @@ glm(
   family = binomial,
 ) \%>\%
   model_list_variables()
+}
 \dontshow{\}) # examplesIf}
 }
 \seealso{

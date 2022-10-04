@@ -21,9 +21,11 @@ Use \code{parameters::model_parameters()} to tidy a model and apply
 \code{parameters::standardize_names(style = "broom")} to the output
 }
 \examples{
-\dontshow{if (interactive() && .assert_package("parameters", boolean = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+if (.assert_package("parameters", boolean = TRUE)) {
 lm(Sepal.Length ~ Sepal.Width + Species, data = iris) \%>\%
   tidy_parameters()
+}
 \dontshow{\}) # examplesIf}
 }
 \seealso{

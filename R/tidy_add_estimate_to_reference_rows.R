@@ -27,7 +27,8 @@
 #' @inheritParams tidy_plus_plus
 #' @export
 #' @family tidy_helpers
-#' @examplesIf interactive() && .assert_package("gtsummary", boolean = TRUE) && .assert_package("emmeans", boolean = TRUE)
+#' @examplesIf interactive()
+#' if (.assert_package("gtsummary", boolean = TRUE) && .assert_package("emmeans", boolean = TRUE)) {
 #' df <- Titanic %>%
 #'   dplyr::as_tibble() %>%
 #'   dplyr::mutate(dplyr::across(where(is.character), factor))
@@ -55,7 +56,7 @@
 #'   tidy_and_attach() %>%
 #'   tidy_add_reference_rows() %>%
 #'   tidy_add_estimate_to_reference_rows()
-
+#' }
 tidy_add_estimate_to_reference_rows <- function(
   x, exponentiate = attr(x, "exponentiate"),
   model = tidy_get_model(x),
