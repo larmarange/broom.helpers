@@ -124,7 +124,7 @@ model_list_variables.logitr <- function(model, labels = NULL, only_variable = FA
   res <- model_list_variables.default(model, labels, FALSE)
 
   if (!is.null(model$data$scalePar)) {
-    label_scalePar <- labels |> purrr::pluck("scalePar")
+    label_scalePar <- labels %>% purrr::pluck("scalePar")
     res <- res %>%
       dplyr::add_row(
         variable = "scalePar",
