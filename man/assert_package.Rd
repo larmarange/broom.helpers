@@ -4,13 +4,16 @@
 \alias{assert_package}
 \alias{.assert_package}
 \alias{.get_package_dependencies}
+\alias{.get_all_packages_dependencies}
 \alias{.get_min_version_required}
 \title{Check a package installation status or minimum required version}
 \usage{
 .assert_package(pkg, fn = NULL, pkg_search = "broom.helpers", boolean = FALSE)
 
-.get_package_dependencies(
-  pkg_search = "broom.helpers",
+.get_package_dependencies(pkg_search = "broom.helpers")
+
+.get_all_packages_dependencies(
+  pkg_search = NULL,
   remove_duplicates = FALSE,
   lib.loc = NULL
 )
@@ -51,8 +54,8 @@ will return, if any, the minimum version of \code{pkg} required by \code{pkg_sea
 \code{NULL} if no minimum version required.
 }
 \details{
-\code{.get_package_dependencies()} accepts \code{pkg_search = NULL} and will return, in
-that case, the list of dependencies of all installed packages.
+\code{get_all_packages_dependencies()} could be used to get the list of
+dependencies of all installed packages.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
