@@ -14,9 +14,11 @@ test_that(".assert_package() works", {
     .get_min_version_required("lme4"),
     mv
   )
-  expect_equal(
-    .get_min_version_required("brms", pkg_search = NULL),
-    NULL
+  expect_null(
+    .get_min_version_required("brms", pkg_search = NULL)
+  )
+  expect_null(
+    .get_min_version_required("broom", pkg_search = NULL)
   )
 
   expect_error(
@@ -32,6 +34,12 @@ test_that(".assert_package() works", {
     names(df_deps),
     c("pkg_search", "pkg_search_version", "dependency_type", "pkg", "version", "compare")
   )
+
+  expect_error(
+    deps <- .get_all_packages_dependencies(),
+    NA
+  )
+  expect_true(nrow(deps) > 100)
 
   skip_if(interactive())
   # expect an error msg for pkg that doesn't exist
