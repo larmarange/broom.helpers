@@ -136,8 +136,9 @@ NULL
   if (is.null(pkg_search)) return(NULL)
   res <- .get_package_dependencies(pkg_search) %>%
     dplyr::filter(.data$pkg == .env$pkg & !is.na(.data$version))
+  if (nrow(res) == 0) return(NULL)
   version <- res %>% purrr::pluck("version")
   attr(version, "compare") <- res %>% purrr::pluck("compare")
-  if (length(version) >= 1) names(version) <- res %>% purrr::pluck("dependency_type")
+  names(version) <- res %>% purrr::pluck("dependency_type")
   version
 }
