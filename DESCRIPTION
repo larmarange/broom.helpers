@@ -68,7 +68,6 @@ Suggests:
     testthat,
     tidycmprsk,
     VGAM
-Remotes: tidyverse/purrr
 VignetteBuilder: 
     knitr
 RdMacros: 
