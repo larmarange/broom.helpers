@@ -16,6 +16,10 @@ and \code{\link[=all_interaction]{all_interaction()}}}
 
 \item{model}{the corresponding model, if not attached to \code{x}}
 }
+\value{
+The \code{x} tibble limited to the included variables (and eventually the intercept),
+sorted according to the \code{include} parameter.
+}
 \description{
 Will remove unselected variables from the results.
 To remove the intercept, use \code{\link[=tidy_remove_intercept]{tidy_remove_intercept()}}.
