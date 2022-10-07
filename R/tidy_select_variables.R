@@ -55,6 +55,8 @@ tidy_select_variables <- function(
       .data$var_type == "intercept" |
         .data$variable %in% include
     ) %>%
+    dplyr::mutate(fct_variable = factor(.data$variable, levels = include)) %>%
+    dplyr::arrange(.data$fct_variable) %>%
+    dplyr::select(-.data$fct_variable) %>%
     tidy_attach_model(model = model, .attributes = .attributes)
-
 }
