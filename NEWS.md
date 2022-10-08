@@ -1,5 +1,9 @@
 # broom.helpers (development version)
 
+**New features**
+
+- `tidy_select_variables()` now sorts the variables according to `include` (#183)
+
 **New supported models**
 
 - Support for `logitr::logitr()` models (#179)

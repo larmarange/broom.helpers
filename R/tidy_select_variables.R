@@ -11,6 +11,9 @@
 #' syntax. Use `-` to remove a variable. Default is `everything()`.
 #' See also [all_continuous()], [all_categorical()], [all_dichotomous()]
 #' and [all_interaction()]
+#' @return
+#' The `x` tibble limited to the included variables (and eventually the intercept),
+#' sorted according to the `include` parameter.
 #'
 #' @param model the corresponding model, if not attached to `x`
 #' @export
@@ -50,11 +53,17 @@ tidy_select_variables <- function(
   # obtain character vector of selected variables
   include <- .select_to_varnames({{ include }}, var_info = x, arg_name = "include")
 
+  # order result, intercept first then by the order of include
   x %>%
     dplyr::filter(
       .data$var_type == "intercept" |
         .data$variable %in% include
     ) %>%
+    dplyr::mutate(
+      log_intercept = .data$var_type == "intercept",
+      fct_variable = factor(.data$variable, levels = include)
+    ) %>%
+    dplyr::arrange(dplyr::desc(.data$log_intercept), .data$fct_variable) %>%
+    dplyr::select(-.data$log_intercept, -.data$fct_variable) %>%
     tidy_attach_model(model = model, .attributes = .attributes)
-
 }

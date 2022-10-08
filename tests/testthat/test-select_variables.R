@@ -20,6 +20,18 @@ test_that("tidy_select_variables() works for basic models", {
     c("(Intercept)", "grade", "grade", "trt")
   )
 
+  res2 <- res %>% tidy_select_variables(include = c("trt", "grade"))
+  expect_equivalent(
+    res2$variable,
+    c("(Intercept)", "trt", "grade", "grade")
+  )
+
+  res2 <- res %>% tidy_select_variables(include = c(trt, grade, dplyr::everything()))
+  expect_equivalent(
+    res2$variable,
+    c("(Intercept)", "trt", "grade", "grade", "stage", "stage", "stage")
+  )
+
   # select and de-select
   expect_equivalent(
     res %>% tidy_select_variables(include = stage),
@@ -51,6 +63,21 @@ test_that("tidy_select_variables() works for basic models", {
     res %>% tidy_select_variables(include = where(is.character)),
     NA
   )
+
+  # interaction
+  mod <- glm(response ~ stage + grade * trt, gtsummary::trial, family = binomial)
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_identify_variables()
+  res2 <- res %>% tidy_select_variables(include = c(trt, grade, dplyr::everything()))
+  expect_equivalent(
+    res2$variable,
+    c(
+      "(Intercept)", "trt", "grade", "grade", "stage", "stage", "stage",
+      "grade:trt", "grade:trt"
+    )
+  )
+
 })
 
 
