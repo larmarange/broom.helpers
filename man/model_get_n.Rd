@@ -6,6 +6,7 @@
 \alias{model_get_n.glm}
 \alias{model_get_n.glmerMod}
 \alias{model_get_n.multinom}
+\alias{model_get_n.LORgee}
 \alias{model_get_n.coxph}
 \alias{model_get_n.survreg}
 \alias{model_get_n.model_fit}
@@ -21,6 +22,8 @@ model_get_n(model)
 \method{model_get_n}{glmerMod}(model)
 
 \method{model_get_n}{multinom}(model)
+
+\method{model_get_n}{LORgee}(model)
 
 \method{model_get_n}{coxph}(model)
 

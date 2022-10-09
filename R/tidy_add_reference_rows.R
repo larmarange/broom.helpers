@@ -147,7 +147,9 @@ tidy_add_reference_rows <- function(
   group <- NULL
   if ("component" %in% names(x))
     group <- "component"
-  if ("y.level" %in% names(x) & inherits(model, "multinom")) # specific case for nnet::multinom
+  if ("y.level" %in% names(x) &&
+      # specific case for multinomial models
+      (inherits(model, "multinom") || inherits(model, "LORgee")))
     group <- "y.level"
   if (!is.null(group)) x$.group_by_var <- x[[group]]
   else x$.group_by_var <- ""

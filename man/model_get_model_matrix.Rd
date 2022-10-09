@@ -11,6 +11,7 @@
 \alias{model_get_model_matrix.biglm}
 \alias{model_get_model_matrix.model_fit}
 \alias{model_get_model_matrix.fixest}
+\alias{model_get_model_matrix.LORgee}
 \title{Get the model matrix of a model}
 \usage{
 model_get_model_matrix(model, ...)
@@ -32,6 +33,8 @@ model_get_model_matrix(model, ...)
 \method{model_get_model_matrix}{model_fit}(model, ...)
 
 \method{model_get_model_matrix}{fixest}(model, ...)
+
+\method{model_get_model_matrix}{LORgee}(model, ...)
 }
 \arguments{
 \item{model}{a model object}

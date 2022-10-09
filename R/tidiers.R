@@ -42,6 +42,13 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
     .assert_package("broom.mixed", fn = "broom.helpers::tidy_with_broom_or_parameters()")
   }
 
+  if (inherits(x, "LORgee")) {
+    cli::cli_alert_info("{.pkg multgee} model detected.")
+    cli::cli_alert_success("{.code tidy_multgee()} used instead.")
+    cli::cli_alert_info("Add {.code tidy_fun = broom.helpers::tidy_multgee} to quiet these messages.")
+    return(tidy_multgee(x, conf.int = conf.int, conf.level = conf.level, ...))
+  }
+
   tidy_args <- list(...)
   tidy_args$x <- x
   tidy_args$conf.int <- conf.int
@@ -90,4 +97,51 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
     }
   }
   res
+}
+
+#' Tidy a `multgee` model
+#'
+#' `r lifecycle::badge("experimental")`
+#' @param x a [multgee::nomLORgee()] or a [multgee::ordLORgee()] model
+#' @param conf.int logical indicating whether or not to include a confidence
+#' interval in the tidied output
+#' @param conf.level the confidence level to use for the confidence interval
+#' @param ... additional parameters passed to [parameters::model_parameters()]
+#' @export
+#' @family custom_tieders
+tidy_multgee <- function(x, conf.int = TRUE, conf.level = .95, ...) {
+  if (!inherits(x, "LORgee"))
+    cli::cli_abort(paste(
+      "Only {.fn multgee::nomLORgee} and {.fn multgee::ordLORgee} models",
+      "are supported."
+    ))
+
+  res <- tidy_parameters(x, conf.int = conf.int, conf.level = conf.level, ...)
+  res$original_term <- res$term
+
+  # multinomial model
+  if (x$call[[1]] == "nomLORgee") {
+    mf <- x %>% model_get_model_frame()
+    if (!is.factor(mf[[1]]))
+      mf[[1]] <- factor(mf[[1]])
+    y.levels <- levels(mf[[1]])[-1]
+
+    mm <- x %>% model_get_model_matrix()
+    t <- colnames(mm)
+
+    res$term <- rep.int(t, times = length(y.levels))
+    res$y.level <- rep(y.levels, each = length(t))
+
+    return(res)
+  }
+
+  if (x$call[[1]] == "ordLORgee") {
+    mm <- x %>% model_get_model_matrix()
+    t <- colnames(mm)
+    t <- t[t != "(Intercept)"]
+    b <- res$term[stringr::str_starts(res$term, "beta")]
+    res$term <- c(b, t)
+    return(res)
+  }
+  cli::cli_abort("Type of model not covered")
 }

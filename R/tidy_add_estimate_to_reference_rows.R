@@ -115,6 +115,13 @@ tidy_add_estimate_to_reference_rows <- function(
         "Sum contrasts are not supported for 'multinom' models.\n",
         "Reference row of variable '", variable, "' remained unchanged."
       ))
+  } else if (inherits(model, "LORgee")) {
+    dc <- NULL
+    if (!quiet)
+      cli_alert_info(paste0(
+        "Sum contrasts are not supported for {.pkg multgee} models.\n",
+        "Reference row of variable '", variable, "' remained unchanged."
+      ))
   } else {
     .assert_package("emmeans", fn = "broom.helpers::tidy_add_estimate_to_reference_rows()")
 

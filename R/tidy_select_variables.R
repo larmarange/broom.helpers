@@ -54,6 +54,11 @@ tidy_select_variables <- function(
   include <- .select_to_varnames({{ include }}, var_info = x, arg_name = "include")
 
   # order result, intercept first then by the order of include
+  if ("y.level" %in% names(x))
+    x$group_order <- factor(x$y.level) %>% forcats::fct_inorder()
+  else
+    x$group_order <- 1
+
   x %>%
     dplyr::filter(
       .data$var_type == "intercept" |
@@ -63,7 +68,15 @@ tidy_select_variables <- function(
       log_intercept = .data$var_type == "intercept",
       fct_variable = factor(.data$variable, levels = include)
     ) %>%
-    dplyr::arrange(dplyr::desc(.data$log_intercept), .data$fct_variable) %>%
-    dplyr::select(-.data$log_intercept, -.data$fct_variable) %>%
+    dplyr::arrange(
+      .data$group_order,
+      dplyr::desc(.data$log_intercept),
+      .data$fct_variable
+    ) %>%
+    dplyr::select(
+      -.data$group_order,
+      -.data$log_intercept,
+      -.data$fct_variable
+    ) %>%
     tidy_attach_model(model = model, .attributes = .attributes)
 }

@@ -91,7 +91,9 @@ tidy_add_header_rows <- function(x,
     x$reference_row <- FALSE
 
   xx <- x
-  if ("y.level" %in% names(x)& inherits(model, "multinom")) { # specific case for multinom
+  if ("y.level" %in% names(x) &&
+      # specific case for multinomial models
+      (inherits(model, "multinom") || inherits(model, "LORgee"))) {
     xx <- xx %>%
       dplyr::filter(.data$y.level == x$y.level[1])
   }
@@ -159,7 +161,9 @@ tidy_add_header_rows <- function(x,
       rank = 1:dplyr::n() # for sorting table at the end
     )
 
-  if ("y.level" %in% names(x) & inherits(model, "multinom")) { # specific case for nnet::multinom
+  if ("y.level" %in% names(x) &&
+      # specific case for multinomial models
+      (inherits(model, "multinom") || inherits(model, "LORgee"))) {
     header_rows <- x %>%
       dplyr::filter(!is.na(.data$variable) & !.data$variable %in% show_single_row)
 

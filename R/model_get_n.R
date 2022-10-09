@@ -161,7 +161,15 @@ model_get_n.multinom <- function(model) {
 
   n
 }
-
+#' @export
+#' @rdname model_get_n
+model_get_n.LORgee <- function(model) {
+  if (model$call[[1]] == "nomLORgee") {
+    model_get_n.multinom(model)
+  } else {
+    model_get_n.default(model)
+  }
+}
 
 #' @export
 #' @rdname model_get_n
