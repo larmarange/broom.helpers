@@ -19,7 +19,7 @@ interval in the tidied output}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 A tidier for models generated with \code{multgee::nomLORgee()} or \code{multgee::ordLORgee()}.
-Term names will be updated to be consisent with generic models. The original
+Term names will be updated to be consistent with generic models. The original
 term names are preserved in an \code{"original_term"} column.
 }
 \examples{
