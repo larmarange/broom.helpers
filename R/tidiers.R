@@ -118,6 +118,8 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
 #' @family custom_tieders
 #' @examplesIf interactive()
 #' if (.assert_package("multgee", boolean = TRUE)) {
+#'   library(multgee)
+#'
 #'   mod <- multgee::nomLORgee(
 #'     y ~ factor(time) * sec,
 #'     data = multgee::housing,
