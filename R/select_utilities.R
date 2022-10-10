@@ -69,7 +69,7 @@
   named_list <- purrr::flatten(named_list)
 
   # removing duplicates (using the last one listed if variable occurs more than once)
-  tokeep <- names(named_list) %>% rev() %>% {!duplicated(.)} %>% rev()
+  tokeep <- names(named_list) %>% rev() %>% {!duplicated(.)} %>% rev() # nolint
   result <- named_list[tokeep]
 
   if (isTRUE(select_single) && length(result) > 1) {

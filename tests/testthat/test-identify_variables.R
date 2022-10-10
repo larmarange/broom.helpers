@@ -431,6 +431,7 @@ test_that("model_identify_variables() works with ordinal::clm", {
     c("threshold.1", "spacing", "temp", "contact", "temp:contact")
   )
 
+  # nolint start
   # wait for https://github.com/runehaubo/ordinal/issues/37
   # before testing nominal predictors
 
@@ -442,6 +443,7 @@ test_that("model_identify_variables() works with ordinal::clm", {
   #     "contact", "contact", "contact", "contact", "temp", "contactyes",
   #     "temp:contact")
   # )
+  # nolint end
 
 
 })

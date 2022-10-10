@@ -265,6 +265,7 @@ td {vertical-align: top;}
 </style>
 
 ```{r, echo=FALSE}
+# nolint start
 tibble::tribble(
   ~Column, ~Function, ~Description,
   "original_term", "`tidy_disambiguate_terms()`", "Original term before disambiguation. This columns is added only when disambiguation is needed (i.e. for mixed models). Also used for \"multgee\" models.",
@@ -289,6 +290,7 @@ tibble::tribble(
   ) %>%
   gt::opt_row_striping() %>%
   gt::tab_style("vertical-align:top; font-size: 12px;", gt::cells_body())
+# nolint end
 ```
 
 Note: `tidy_add_estimate_to_reference_rows()` does not create an additional column; rather, it populates the 'estimate' column for reference rows.
