@@ -140,3 +140,23 @@ model_get_coefficients_type.tidycrr <- function(model) {
 model_get_coefficients_type.model_fit <- function(model) {
   model_get_coefficients_type(model$fit)
 }
+
+#' @export
+#' @rdname model_get_coefficients_type
+model_get_coefficients_type.LORgee <- function(model) {
+  if (stringr::str_detect(
+      model$link,
+      stringr::regex("logit", ignore_case = TRUE)
+    ))
+    return("logistic")
+  if (stringr::str_detect(
+    model$link,
+    stringr::regex("cloglog", ignore_case = TRUE)
+  ))
+    return("prop_hazard")
+
+  "generic"
+}
+
+
+
