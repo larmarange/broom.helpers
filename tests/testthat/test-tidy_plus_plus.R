@@ -695,7 +695,7 @@ test_that("tidy_plus_plus() works with logitr models", {
 
 test_that("tidy_plus_plus() works with multgee models", {
   skip_on_cran()
-  skip_if_not(.assert_package("multgee", boolean = TRUE))
+  skip_if_not_installed("multgee")
 
   library(multgee)
   mod <- multgee::nomLORgee(
