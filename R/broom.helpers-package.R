@@ -29,7 +29,6 @@ utils::globalVariables(c(".", "where"))
 }
 
 # return superscript character
-# .superscript_numbers(0:20)
 .superscript_numbers <- function(x) {
   if (!is.character(x)) {
     x <- as.character(x)
@@ -72,4 +71,3 @@ utils::globalVariables(c(".", "where"))
   )
   .attributes[.attributes_names]
 }
-

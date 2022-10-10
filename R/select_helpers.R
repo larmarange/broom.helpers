@@ -96,14 +96,14 @@ all_intercepts <- function() {
 #' @export
 all_contrasts <- function(contrasts_type = NULL) {
   # if no types specified, select all contrasts
-  if (is.null(contrasts_type))
+  if (is.null(contrasts_type)) {
     return(
       .generic_selector("variable", "contrasts_type",
                         !is.na(.data$contrasts_type),
                         fun_name = "all_contrasts")
     )
   # otherwise, select those specified in `contrasts_type=`
-  else {
+  } else {
     contrasts_type <-
       match.arg(contrasts_type,
                 c("treatment", "sum", "poly", "helmert", "other"),

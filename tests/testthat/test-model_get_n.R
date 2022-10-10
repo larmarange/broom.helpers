@@ -387,9 +387,9 @@ test_that("tidy_add_n() does not duplicates rows with gam model", {
   skip_if_not_installed("gtsummary")
 
   mod <- mgcv::gam(
-    marker ~ s(age, bs = 'ad', k = -1) + grade + ti(age, by = grade, bs ='fs'),
+    marker ~ s(age, bs = "ad", k = -1) + grade + ti(age, by = grade, bs = "fs"),
     data = gtsummary::trial,
-    method = 'REML',
+    method = "REML",
     family = gaussian
   )
 

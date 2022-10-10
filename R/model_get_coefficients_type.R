@@ -157,6 +157,3 @@ model_get_coefficients_type.LORgee <- function(model) {
 
   "generic"
 }
-
-
-

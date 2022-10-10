@@ -84,7 +84,10 @@ NULL
     tidyr::separate_rows("pkg", sep = ",") %>%
     dplyr::mutate(pkg = stringr::str_squish(.data$pkg)) %>%
     dplyr::filter(!is.na(.data$pkg)) %>%
-    tidyr::separate(.data$pkg, into = c("pkg", "version"), sep = " ", extra = "merge", fill = "right") %>%
+    tidyr::separate(
+      .data$pkg, into = c("pkg", "version"),
+      sep = " ", extra = "merge", fill = "right"
+    ) %>%
     dplyr::mutate(
       compare = .data$version %>% stringr::str_extract(pattern = "[>=<]+"),
       version = .data$version %>% stringr::str_remove_all(pattern = "[\\(\\) >=<]")
@@ -123,7 +126,10 @@ NULL
     tidyr::separate_rows("pkg", sep = ",") %>%
     dplyr::mutate(pkg = stringr::str_squish(.data$pkg)) %>%
     dplyr::filter(!is.na(.data$pkg)) %>%
-    tidyr::separate(.data$pkg, into = c("pkg", "version"), sep = " ", extra = "merge", fill = "right") %>%
+    tidyr::separate(
+      .data$pkg, into = c("pkg", "version"),
+      sep = " ", extra = "merge", fill = "right"
+    ) %>%
     dplyr::mutate(
       compare = .data$version %>% stringr::str_extract(pattern = "[>=<]+"),
       version = .data$version %>% stringr::str_remove_all(pattern = "[\\(\\) >=<]")

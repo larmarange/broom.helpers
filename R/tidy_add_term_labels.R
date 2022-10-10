@@ -81,7 +81,7 @@ tidy_add_term_labels <- function(x,
 
   # specific case for nnet::multinom
   # keeping only one level for computing term_labels
-  if ("y.level" %in% names(x) & inherits(model, "multinom")) {
+  if ("y.level" %in% names(x) && inherits(model, "multinom")) {
     xx <- x %>%
       dplyr::filter(.data$y.level == x$y.level[1])
   } else {
@@ -190,7 +190,9 @@ tidy_add_term_labels <- function(x,
 
   # labels for polynomial terms
   poly_terms <- xx %>%
-    dplyr::filter(.data$term %>% stringr::str_starts("poly\\(")) %>%
+    dplyr::filter(
+      .data$term %>% stringr::str_starts("poly\\(")
+    ) %>%
     dplyr::mutate(
       degree = .data$term %>% stringr::str_replace("poly\\(.+\\)([0-9]+)", "\\1"),
       label = paste0(.data$var_label, .superscript_numbers(.data$degree))

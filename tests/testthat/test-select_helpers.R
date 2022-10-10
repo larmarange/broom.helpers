@@ -193,7 +193,7 @@ test_that("select_helpers: tidy_plus_plus", {
 
   skip_on_cran()
   skip_if_not_installed("lme4")
-  mod3 <- lme4::lmer(age ~ stage + (stage|grade) + (1|grade), gtsummary::trial)
+  mod3 <- lme4::lmer(age ~ stage + (stage | grade) + (1 | grade), gtsummary::trial)
   res <- mod3 %>% tidy_plus_plus(
     tidy_fun = broom.mixed::tidy,
     include = all_ran_pars()
@@ -414,4 +414,3 @@ test_that("select_helpers: .var_info_to_df ", {
     .var_info_to_df(mod_tidy %>% tidy_identify_variables() %>% dplyr::select(-var_class)), NA
   )
 })
-

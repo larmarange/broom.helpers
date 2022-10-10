@@ -77,7 +77,10 @@ tidy_add_reference_rows <- function(
 
   if ("reference_row" %in% names(x)) {
     if (!quiet)
-      cli_alert_danger("{.code tidy_add_reference_rows()} has already been applied. x has been returned unchanged.")
+      cli_alert_danger(paste(
+        "{.code tidy_add_reference_rows()} has already been applied.",
+        "x has been returned unchanged."
+      ))
     return(x)
   }
 
@@ -104,7 +107,11 @@ tidy_add_reference_rows <- function(
   }
 
   # obtain character vector of selected variables
-  no_reference_row <- .select_to_varnames({{ no_reference_row }}, var_info = x, arg_name = "no_reference_row")
+  no_reference_row <- .select_to_varnames(
+    {{ no_reference_row }},
+    var_info = x,
+    arg_name = "no_reference_row"
+  )
 
   terms_levels <- model_list_terms_levels(model)
 
@@ -127,7 +134,7 @@ tidy_add_reference_rows <- function(
 
   terms_levels <- terms_levels %>%
     dplyr::group_by(.data$variable) %>%
-    dplyr::mutate(rank = 1:dplyr::n())
+    dplyr::mutate(rank = seq_len(dplyr::n()))
 
   has_var_label <- "var_label" %in% names(x)
   if (!has_var_label) {
@@ -141,7 +148,7 @@ tidy_add_reference_rows <- function(
         FALSE,
         NA
       ),
-      rank = 1:dplyr::n() # for sorting table at the end
+      rank = seq_len(dplyr::n()) # for sorting table at the end
     )
 
   group <- NULL
@@ -188,7 +195,7 @@ tidy_add_reference_rows <- function(
       by = "variable"
     ) %>%
     dplyr::mutate(
-      rank = .data$var_min_rank -1.25 + .data$rank,
+      rank = .data$var_min_rank - 1.25 + .data$rank,
       # if last, reduce by .5 to avoid overlap with next variable
       rank = dplyr::if_else(
         .data$rank > .data$var_max_rank,

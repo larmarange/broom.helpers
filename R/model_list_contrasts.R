@@ -52,11 +52,14 @@ model_list_contrasts.default <- function(model) {
 
     if (n_levels == n_terms) {
       contrasts_list$contrasts[[i]] <- "no.contrast"
-    } else if (is.character(model_contrasts[[i]]) & length(is.character(model_contrasts[[i]]) == 1)) {
+    } else if (
+      is.character(model_contrasts[[i]]) &&
+      length(is.character(model_contrasts[[i]]) == 1)
+    ) {
       contrasts_list$contrasts[[i]] <- model_contrasts[[i]]
       if (model_contrasts[[i]] == "contr.treatment")
         contrasts_list$reference[[i]] <- 1
-      if (model_contrasts[[i]] == "contr.SAS" | model_contrasts[[i]] == "contr.sum")
+      if (model_contrasts[[i]] == "contr.SAS" || model_contrasts[[i]] == "contr.sum")
         contrasts_list$reference[[i]] <- n_levels
     } else if (all(model_contrasts[[i]] == stats::contr.treatment(n_levels))) {
       contrasts_list$contrasts[[i]] <- "contr.treatment"
@@ -98,4 +101,3 @@ model_list_contrasts.default <- function(model) {
       )
     )
 }
-

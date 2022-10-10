@@ -45,7 +45,9 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
   if (inherits(x, "LORgee")) {
     cli::cli_alert_info("{.pkg multgee} model detected.")
     cli::cli_alert_success("{.code tidy_multgee()} used instead.")
-    cli::cli_alert_info("Add {.code tidy_fun = broom.helpers::tidy_multgee} to quiet these messages.")
+    cli::cli_alert_info(
+      "Add {.code tidy_fun = broom.helpers::tidy_multgee} to quiet these messages."
+    )
     return(tidy_multgee(x, conf.int = conf.int, conf.level = conf.level, ...))
   }
 
@@ -93,7 +95,9 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
     } else {
       # success of parameters
       cli::cli_alert_success("{.code tidy_parameters()} used instead.")
-      cli::cli_alert_info("Add {.code tidy_fun = broom.helpers::tidy_parameters} to quiet these messages.")
+      cli::cli_alert_info(
+        "Add {.code tidy_fun = broom.helpers::tidy_parameters} to quiet these messages."
+      )
     }
   }
   res

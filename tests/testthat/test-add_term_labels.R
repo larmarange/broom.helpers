@@ -340,4 +340,3 @@ test_that("tidy_add_term_labels() works with lavaan::lavaan", {
   )
   expect_error(mod %>% tidy_and_attach() %>% tidy_add_term_labels(), NA)
 })
-

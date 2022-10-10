@@ -116,7 +116,8 @@ test_that("test tidy_add_variable_labels() checks", {
 
   # cannot be applied after tidy_add_header_rows()
   expect_error(
-    mod %>% tidy_and_attach() %>%
+    mod %>%
+      tidy_and_attach() %>%
       tidy_add_header_rows() %>%
       tidy_add_variable_labels()
   )
@@ -197,7 +198,12 @@ test_that("tidy_add_variable_labels() works with lme4::lmer", {
   skip_on_cran()
   skip_if_not_installed("lme4")
   mod <- lme4::lmer(Reaction ~ Days + (Days | Subject), lme4::sleepstudy)
-  expect_error(mod %>% tidy_and_attach(tidy_fun = broom.mixed::tidy) %>% tidy_add_variable_labels(), NA)
+  expect_error(
+    mod %>%
+      tidy_and_attach(tidy_fun = broom.mixed::tidy) %>%
+      tidy_add_variable_labels(),
+    NA
+  )
 })
 
 
@@ -207,7 +213,12 @@ test_that("tidy_add_variable_labels() works with lme4::glmer", {
   mod <- lme4::glmer(cbind(incidence, size - incidence) ~ period + (1 | herd),
     family = binomial, data = lme4::cbpp
   )
-  expect_error(mod %>% tidy_and_attach(tidy_fun = broom.mixed::tidy) %>% tidy_add_variable_labels(), NA)
+  expect_error(
+    mod %>%
+      tidy_and_attach(tidy_fun = broom.mixed::tidy)
+    %>% tidy_add_variable_labels(),
+    NA
+  )
 })
 
 

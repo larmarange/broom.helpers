@@ -80,4 +80,3 @@ model_get_xlevels.plm <- model_get_xlevels.lmerMod
 model_get_xlevels.model_fit <- function(model) {
   model_get_xlevels(model$fit)
 }
-

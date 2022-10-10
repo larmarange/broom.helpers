@@ -144,7 +144,7 @@ tidy_plus_plus <- function(
     )
   }
 
-  if (add_reference_rows & add_estimate_to_reference_rows) {
+  if (add_reference_rows && add_estimate_to_reference_rows) {
     res <- res %>%
       tidy_add_estimate_to_reference_rows(exponentiate = exponentiate, quiet = quiet)
   }

@@ -74,7 +74,7 @@ model_list_terms_levels.default <- function(
     )
   xlevels <- model_get_xlevels(model)
 
-  if (nrow(contrasts_list) == 0 | length(xlevels) == 0)
+  if (nrow(contrasts_list) == 0 || length(xlevels) == 0)
     return(NULL)
 
   model_terms <- model_identify_variables(model) %>%

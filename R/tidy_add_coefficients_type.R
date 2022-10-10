@@ -31,7 +31,7 @@ tidy_add_coefficients_type <- function(
   x, exponentiate = attr(x, "exponentiate"),
   model = tidy_get_model(x)
 ) {
-  if (is.null(exponentiate) | !is.logical(exponentiate))
+  if (is.null(exponentiate) || !is.logical(exponentiate))
     stop("'exponentiate' is not provided. You need to pass it explicitely.")
 
   if (is.null(model)) {

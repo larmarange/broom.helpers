@@ -48,8 +48,7 @@
   for (i in seq_len(len_x)) {
     if (rlang::is_named(x[i])) {
       named_list[i] <- list(x[i])
-    }
-    else if (rlang::is_formula(x[[i]])) {
+    } else if (rlang::is_formula(x[[i]])) {
       named_list[i] <-
         .single_formula_to_list(x[[i]],
                                 data = data,
@@ -60,8 +59,7 @@
                                 type_check_msg = type_check_msg,
                                 null_allowed = null_allowed) %>%
         list()
-    }
-    else {
+    } else {
       .formula_select_error(arg_name = arg_name)
     }
 
@@ -133,7 +131,7 @@
   purrr::imap(
     x,
     function(rhs, lhs) {
-      if (!null_allowed && is.null(rhs)){
+      if (!null_allowed && is.null(rhs)) {
         stringr::str_glue(
           "Error processing `{arg_name %||% ''}` argument for element '{lhs[[1]]}'. ",
           "A NULL value is not allowed."
@@ -176,7 +174,10 @@
 
 
   # converting rhs and lhs into a named list
-  purrr::map(lhs, ~ list(rhs) %>% rlang::set_names(.x)) %>%
+  purrr::map(
+    lhs,
+    ~ list(rhs) %>% rlang::set_names(.x)
+    ) %>%
     purrr::flatten()
 }
 
@@ -239,8 +240,7 @@
 
         # `vars()` evaluates to a list of quosures; unquoting them in `select()`
         names(dplyr::select(data, !!!rlang::eval_tidy(select)))
-      }
-      else {
+      } else {
         names(dplyr::select(data, !!select))
       }
     },
@@ -342,13 +342,11 @@
             purrr::set_names(var)
         }
       )
-  }
-  # if a data.frame
-  else if (inherits(x, "data.frame") && "variable" %in% names(x)) {
+  } else if (inherits(x, "data.frame") && "variable" %in% names(x)) {
+    # if a data.frame
     df <- purrr::map_dfc(unique(x$variable), ~data.frame(NA) %>% purrr::set_names(.x))
-  }
-  # if only a vector of names were passed, converting them to a data frame
-  else if (rlang::is_vector(x) && !is.list(x)) {
+  } else if (rlang::is_vector(x) && !is.list(x)) {
+    # if only a vector of names were passed, converting them to a data frame
     df <- purrr::map_dfc(unique(x), ~data.frame(NA) %>% purrr::set_names(.x))
   }
   # return data frame with variables as column names
@@ -390,8 +388,13 @@ formula_select_examples <- list(
   labels = "labels = list(age ~ \"Age, years\", response ~ \"Tumor Response\")",
   label = "label = list(age ~ \"Age, years\", response ~ \"Tumor Response\")",
   type = "type = list(age ~ \"continuous\", where(is.integer) ~ \"categorical\")",
-  statistic = c("statistic = list(all_continuous() ~ \"{mean} ({sd})\", all_categorical() ~ \"{n} / {N} ({p}%)\")",
-                "statistic = list(age ~ \"{median}\")"),
+  statistic = c(
+    paste(
+      "statistic = list(all_continuous() ~ \"{mean} ({sd})\",",
+      "all_categorical() ~ \"{n} / {N} ({p}%)\")"
+    ),
+    "statistic = list(age ~ \"{median}\")"
+  ),
   digits = c("digits = list(age ~ 2)", "digits = list(all_continuous() ~ 2)"),
   value = c("value = list(grade ~ \"III\")", "value = list(all_logical() ~ FALSE)"),
   test = c("test = list(all_continuous() ~ \"t.test\")", "test = list(age ~ \"kruskal.test\")")
@@ -399,4 +402,3 @@ formula_select_examples <- list(
 
 # set new environment for new tidyselect funs
 env_variable_type <- rlang::new_environment()
-

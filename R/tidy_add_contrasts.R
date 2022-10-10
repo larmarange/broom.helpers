@@ -10,7 +10,8 @@
 #'
 #' @param x a tidy tibble
 #' @param model the corresponding model, if not attached to `x`
-#' @param quiet logical argument whether broom.helpers should not return a message when `tidy_disambiguate_terms()` was already applied
+#' @param quiet logical argument whether broom.helpers should not return a message
+#' when `tidy_disambiguate_terms()` was already applied
 #' @export
 #' @family tidy_helpers
 #' @examples
