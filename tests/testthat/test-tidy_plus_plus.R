@@ -263,6 +263,16 @@ test_that("tidy_plus_plus() works with nnet::multinom", {
     res <- mod %>% tidy_plus_plus(),
     NA
   )
+  expect_equivalent(
+    res$y.level,
+    c("II", "II", "II", "II", "II", "II",
+      "III", "III", "III", "III", "III", "III")
+  )
+  expect_equivalent(
+    res$term,
+    c("stageT1", "stageT2", "stageT3", "stageT4", "marker", "age",
+      "stageT1", "stageT2", "stageT3", "stageT4", "marker", "age")
+  )
 
   # multinom model with binary outcome
   suppressMessages(
@@ -680,4 +690,45 @@ test_that("tidy_plus_plus() works with logitr models", {
     NA
   )
   expect_true("scalePar" %in% res$variable)
+})
+
+
+test_that("tidy_plus_plus() works with multgee models", {
+  skip_on_cran()
+  skip_if_not(.assert_package("multgee", boolean = TRUE))
+
+  mod <- multgee::nomLORgee(
+    y ~ factor(time) * sec,
+    data = multgee::housing,
+    id = id,
+    repeated = time,
+  )
+  expect_error(
+    res <- mod %>% tidy_plus_plus(),
+    NA
+  )
+  expect_equivalent(
+    res$y.level,
+    c("1", "1", "1", "1", "1", "1", "1", "1",
+      "2", "2", "2", "2", "2", "2", "2", "2")
+  )
+  expect_equivalent(
+    res$term,
+    c("factor(time)0", "factor(time)6", "factor(time)12", "factor(time)24",
+      "sec", "factor(time)6:sec", "factor(time)12:sec", "factor(time)24:sec",
+      "factor(time)0", "factor(time)6", "factor(time)12", "factor(time)24",
+      "sec", "factor(time)6:sec", "factor(time)12:sec", "factor(time)24:sec")
+  )
+
+  mod2 <- ordLORgee(
+    formula = y ~ factor(time) + factor(trt) + factor(baseline),
+    data = multgee::arthritis,
+    id = id,
+    repeated = time,
+    LORstr = "uniform"
+  )
+  expect_error(
+    res <- mod2 %>% tidy_plus_plus(),
+    NA
+  )
 })
