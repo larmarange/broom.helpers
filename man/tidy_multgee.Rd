@@ -14,10 +14,35 @@ interval in the tidied output}
 
 \item{conf.level}{the confidence level to use for the confidence interval}
 
-\item{...}{additional parameters passed to \code{\link[parameters:model_parameters]{parameters::model_parameters()}}}
+\item{...}{additional parameters passed to \code{parameters::model_parameters()}}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+A tidier for models generated with \code{multgee::nomLORgee()} or \code{multgee::ordLORgee()}.
+Term names will be updated to be consisent with generic models. The original
+term names are preserved in an \code{"original_term"} column.
+}
+\examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+if (.assert_package("multgee", boolean = TRUE)) {
+  mod <- multgee::nomLORgee(
+    y ~ factor(time) * sec,
+    data = multgee::housing,
+    id = id,
+    repeated = time,
+  )
+  mod \%>\% tidy_multgee()
+
+  mod2 <- ordLORgee(
+    formula = y ~ factor(time) + factor(trt) + factor(baseline),
+    data = multgee::arthritis,
+    id = id,
+    repeated = time,
+    LORstr = "uniform"
+  )
+  mod2 \%>\% tidy_multgee()
+}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other custom_tieders: 

@@ -106,13 +106,35 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
 #' Tidy a `multgee` model
 #'
 #' `r lifecycle::badge("experimental")`
+#' A tidier for models generated with `multgee::nomLORgee()` or `multgee::ordLORgee()`.
+#' Term names will be updated to be consisent with generic models. The original
+#' term names are preserved in an `"original_term"` column.
 #' @param x a `multgee::nomLORgee()` or a `multgee::ordLORgee()` model
 #' @param conf.int logical indicating whether or not to include a confidence
 #' interval in the tidied output
 #' @param conf.level the confidence level to use for the confidence interval
-#' @param ... additional parameters passed to [parameters::model_parameters()]
+#' @param ... additional parameters passed to `parameters::model_parameters()`
 #' @export
 #' @family custom_tieders
+#' @examplesIf interactive()
+#' if (.assert_package("multgee", boolean = TRUE)) {
+#'   mod <- multgee::nomLORgee(
+#'     y ~ factor(time) * sec,
+#'     data = multgee::housing,
+#'     id = id,
+#'     repeated = time,
+#'   )
+#'   mod %>% tidy_multgee()
+#'
+#'   mod2 <- ordLORgee(
+#'     formula = y ~ factor(time) + factor(trt) + factor(baseline),
+#'     data = multgee::arthritis,
+#'     id = id,
+#'     repeated = time,
+#'     LORstr = "uniform"
+#'   )
+#'   mod2 %>% tidy_multgee()
+#' }
 tidy_multgee <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   if (!inherits(x, "LORgee"))
     cli::cli_abort(paste(
@@ -124,7 +146,7 @@ tidy_multgee <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   res$original_term <- res$term
 
   # multinomial model
-  if (x$call[[1]] == "nomLORgee") {
+  if (stringr::str_detect(x$title, "NOMINAL")) {
     mf <- x %>% model_get_model_frame()
     if (!is.factor(mf[[1]]))
       mf[[1]] <- factor(mf[[1]])
@@ -137,9 +159,7 @@ tidy_multgee <- function(x, conf.int = TRUE, conf.level = .95, ...) {
     res$y.level <- rep(y.levels, each = length(t))
 
     return(res)
-  }
-
-  if (x$call[[1]] == "ordLORgee") {
+  } else {
     mm <- x %>% model_get_model_matrix()
     t <- colnames(mm)
     t <- t[t != "(Intercept)"]
@@ -147,5 +167,4 @@ tidy_multgee <- function(x, conf.int = TRUE, conf.level = .95, ...) {
     res$term <- c(b, t)
     return(res)
   }
-  cli::cli_abort("Type of model not covered")
 }
