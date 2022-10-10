@@ -7,7 +7,7 @@
 tidy_multgee(x, conf.int = TRUE, conf.level = 0.95, ...)
 }
 \arguments{
-\item{x}{a \code{\link[multgee:nomLORgee]{multgee::nomLORgee()}} or a \code{\link[multgee:ordLORgee]{multgee::ordLORgee()}} model}
+\item{x}{a \code{multgee::nomLORgee()} or a \code{multgee::ordLORgee()} model}
 
 \item{conf.int}{logical indicating whether or not to include a confidence
 interval in the tidied output}

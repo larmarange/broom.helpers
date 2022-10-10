@@ -102,7 +102,7 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
 #' Tidy a `multgee` model
 #'
 #' `r lifecycle::badge("experimental")`
-#' @param x a [multgee::nomLORgee()] or a [multgee::ordLORgee()] model
+#' @param x a `multgee::nomLORgee()` or a `multgee::ordLORgee()` model
 #' @param conf.int logical indicating whether or not to include a confidence
 #' interval in the tidied output
 #' @param conf.level the confidence level to use for the confidence interval
