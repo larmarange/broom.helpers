@@ -97,7 +97,7 @@ tidy_forest %>%
   )
 ```
 
-**Note::** for more advanced and nicely formatted plots of model coefficients, look at `GGally::ggcoef_model()` and its [dedicated vignette](https://ggobi.github.io/ggally/articles/ggcoef_model.html). `GGally::ggcoef_model()` internally uses `broom.helpers`.
+**Note::** for more advanced and nicely formatted plots of model coefficients, look at `ggstats::ggcoef_model()` and its [dedicated vignette](https://larmarange.github.io/ggstats/articles/ggcoef_model.html). `ggstats::ggcoef_model()` internally uses `broom.helpers`.
 
 ## Table Summary
 
