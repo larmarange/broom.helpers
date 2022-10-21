@@ -26,8 +26,8 @@ add variable labels, and more.
 `broom.helpers` is used, in particular, by `gtsummary::tbl_regression()`
 for producing [nice formatted tables of model
 coefficients](https://www.danieldsjoberg.com/gtsummary/articles/tbl_regression.html)
-and by `GGally::ggcoef_model()` for [plotting model
-coefficients](https://ggobi.github.io/ggally/articles/ggcoef_model.html).
+and by `ggstats::ggcoef_model()` for [plotting model
+coefficients](https://larmarange.github.io/ggstats/articles/ggcoef_model.html).
 
 ## Installation
 
