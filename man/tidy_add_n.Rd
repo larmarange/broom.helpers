@@ -40,7 +40,7 @@ corresponding number of events (\code{n_event}) for each term, taking into accou
 any defined weights. Observed proportions could be obtained as \code{n_obs / n_event}.
 
 Similarly, a number of events will be computed for multinomial logistic
-models (\code{\link[nnet:multinom]{nnet::multinom()}}) for each level of the outcome (\code{y.level}),
+models (\code{nnet::multinom()}) for each level of the outcome (\code{y.level}),
 corresponding to the number of observations equal to that outcome level.
 
 For Poisson models, \code{n_event} will be equal to the number of counts per term.

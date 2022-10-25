@@ -113,7 +113,7 @@ model_get_n.glm <- function(model) {
 
   ct <- model %>% model_get_coefficients_type()
 
-  if(ct %in% c("logistic", "poisson")) {
+  if (ct %in% c("logistic", "poisson")) {
     y <- model %>% model_get_response()
     if (is.factor(y)) {
       # the first level denotes failure and all others success
@@ -161,7 +161,15 @@ model_get_n.multinom <- function(model) {
 
   n
 }
-
+#' @export
+#' @rdname model_get_n
+model_get_n.LORgee <- function(model) {
+  if (stringr::str_detect(model$title, "NOMINAL")) {
+    model_get_n.multinom(model)
+  } else {
+    model_get_n.default(model)
+  }
+}
 
 #' @export
 #' @rdname model_get_n

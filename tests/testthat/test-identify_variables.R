@@ -251,10 +251,15 @@ test_that("model_identify_variables() works with lme4::lmer", {
     res$variable,
     c(NA, "Days")
   )
-  expect_error(mod %>% tidy_and_attach(tidy_fun = broom.mixed::tidy) %>% tidy_identify_variables(), NA)
+  expect_error(
+    mod %>%
+      tidy_and_attach(tidy_fun = broom.mixed::tidy) %>%
+      tidy_identify_variables(),
+    NA
+  )
 
   mod <- lme4::lmer(
-    age ~ stage + (stage|grade) + (1|grade),
+    age ~ stage + (stage | grade) + (1 | grade),
     gtsummary::trial
   )
   res <- mod %>%
@@ -281,7 +286,12 @@ test_that("model_identify_variables() works with lme4::glmer", {
     res$variable,
     c(NA, "period", "period", "period")
   )
-  expect_error(mod %>% tidy_and_attach(tidy_fun = broom.mixed::tidy) %>% tidy_identify_variables(), NA)
+  expect_error(
+    mod %>%
+      tidy_and_attach(tidy_fun = broom.mixed::tidy) %>%
+      tidy_identify_variables(),
+    NA
+  )
 })
 
 
@@ -421,6 +431,7 @@ test_that("model_identify_variables() works with ordinal::clm", {
     c("threshold.1", "spacing", "temp", "contact", "temp:contact")
   )
 
+  # nolint start
   # wait for https://github.com/runehaubo/ordinal/issues/37
   # before testing nominal predictors
 
@@ -432,6 +443,7 @@ test_that("model_identify_variables() works with ordinal::clm", {
   #     "contact", "contact", "contact", "contact", "temp", "contactyes",
   #     "temp:contact")
   # )
+  # nolint end
 
 
 })
@@ -523,16 +535,17 @@ test_that("model_identify_variables() works with lavaan::lavaan", {
 })
 
 test_that("model_identify_variables() message when failure", {
+  skip_if_not_installed("survival")
   df_models <-
     tibble::tibble(grade = c("I", "II", "III")) %>%
-    dplyr::mutate(df_model = purrr::map(grade, ~trial %>% dplyr::filter(grade == ..1))) %>%
     dplyr::mutate(
+      df_model = purrr::map(grade, ~trial %>% dplyr::filter(grade == ..1)),
       mv_formula_char = "Surv(ttdeath, death) ~ trt + age + marker",
       mv_formula = purrr::map(mv_formula_char, as.formula),
       mv_model_form =
         purrr::map2(
           mv_formula, df_model,
-          ~ coxph(..1, data = ..2)
+          ~ survival::coxph(..1, data = ..2)
         )
     )
   expect_message(

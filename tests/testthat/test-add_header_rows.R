@@ -132,7 +132,8 @@ test_that("test tidy_add_header_rows() checks", {
 
   # warning if applied twice
   expect_message(
-    mod %>% tidy_and_attach() %>%
+    mod %>%
+      tidy_and_attach() %>%
       tidy_add_header_rows() %>%
       tidy_add_header_rows()
   )
@@ -202,7 +203,7 @@ test_that("test tidy_add_header_rows() bad single row request", {
 test_that("tidy_add_header_rows() and mixed model", {
   skip_if_not_installed("lme4")
   mod <- lme4::lmer(
-    age ~ stage + (stage|grade) + (1|grade),
+    age ~ stage + (stage | grade) + (1 | grade),
     gtsummary::trial
   )
   res <- mod %>%

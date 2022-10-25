@@ -107,3 +107,12 @@ model_get_model_matrix.model_fit <- function(model, ...) {
 model_get_model_matrix.fixest <- function(model, ...) {
   stats::model.matrix.default(model$fml, data = get(model$call$data, model$call_env), ...)
 }
+
+#' @export
+#' @rdname model_get_model_matrix
+model_get_model_matrix.LORgee <- function(model, ...) {
+  stats::model.matrix.default(
+    model,
+    data = stats::model.frame(model)
+  )
+}

@@ -7,6 +7,8 @@
 **New supported models**
 
 - Support for `logitr::logitr()` models (#179)
+- Experimental support for `multgee::nomLORgee()` and `multgee::ordLORgee()`
+  models (#185)
 
 **Bug fixes and improvements**
 

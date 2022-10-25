@@ -42,7 +42,7 @@ model_identify_variables.default <- function(model) {
   assign <- model %>% model_get_assign()
   model_matrix <- attr(assign, "model_matrix")
 
-  if (is.null(model_matrix) | is.null(assign)) {
+  if (is.null(model_matrix) || is.null(assign)) {
     # return an empty tibble
     return(
       dplyr::tibble(
@@ -120,7 +120,10 @@ model_identify_variables.aov <- function(model) {
     model_list_variables() %>%
     dplyr::mutate(term = .data$variable) %>%
     dplyr::select(dplyr::all_of(c("term", "variable", "var_class"))) %>%
-    dplyr::left_join(model %>% model_get_nlevels(), by = "variable") %>%
+    dplyr::left_join(
+      model %>% model_get_nlevels(),
+      by = "variable"
+    ) %>%
     .compute_var_type()
 }
 

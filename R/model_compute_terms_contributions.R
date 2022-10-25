@@ -135,7 +135,7 @@ contr.poly.abs <- function(...) {
       dplyr::filter(.data$variable == v & !.data$reference) %>%
       purrr::chuck("term")
 
-    if (ct == "treatment" & all(nonref_terms %in% colnames(tcm))) {
+    if (ct == "treatment" && all(nonref_terms %in% colnames(tcm))) {
       tcm <- cbind(
         tcm,
         matrix(
@@ -148,7 +148,7 @@ contr.poly.abs <- function(...) {
         )
       )
     }
-    if (ct == "sum" & all(nonref_terms %in% colnames(tcm))) {
+    if (ct == "sum" && all(nonref_terms %in% colnames(tcm))) {
       tcm <- cbind(
         tcm,
         matrix(
@@ -164,4 +164,3 @@ contr.poly.abs <- function(...) {
   }
   tcm
 }
-

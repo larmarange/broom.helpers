@@ -70,7 +70,10 @@ tidy_add_header_rows <- function(x,
 
   if ("header_row" %in% names(x)) {
     if (!quiet)
-      cli_alert_danger("{.code tidy_add_header_rows()} has already been applied. x has been returned unchanged.")
+      cli_alert_danger(paste(
+        "{.code tidy_add_header_rows()} has already been applied.",
+        "x has been returned unchanged."
+      ))
     return(x)
   }
 
@@ -84,14 +87,20 @@ tidy_add_header_rows <- function(x,
   # if reference_rows have been defined, removal of reference row
   variables_to_simplify <- NULL
   # obtain character vector of selected variables
-  show_single_row <- .select_to_varnames({{ show_single_row }}, var_info = x, arg_name = "show_single_row")
+  show_single_row <- .select_to_varnames(
+    {{ show_single_row }},
+    var_info = x,
+    arg_name = "show_single_row"
+  )
 
   has_reference_row <- "reference_row" %in% names(x)
   if (!has_reference_row)
     x$reference_row <- FALSE
 
   xx <- x
-  if ("y.level" %in% names(x)& inherits(model, "multinom")) { # specific case for multinom
+  if ("y.level" %in% names(x) &&
+      # specific case for multinomial models
+      (inherits(model, "multinom") || inherits(model, "LORgee"))) {
     xx <- xx %>%
       dplyr::filter(.data$y.level == x$y.level[1])
   }
@@ -156,10 +165,12 @@ tidy_add_header_rows <- function(x,
 
   x <- x %>%
     dplyr::mutate(
-      rank = 1:dplyr::n() # for sorting table at the end
+      rank = seq_len(dplyr::n()) # for sorting table at the end
     )
 
-  if ("y.level" %in% names(x) & inherits(model, "multinom")) { # specific case for nnet::multinom
+  if ("y.level" %in% names(x) &&
+      # specific case for multinomial models
+      (inherits(model, "multinom") || inherits(model, "LORgee"))) {
     header_rows <- x %>%
       dplyr::filter(!is.na(.data$variable) & !.data$variable %in% show_single_row)
 
@@ -206,7 +217,8 @@ tidy_add_header_rows <- function(x,
           contrasts = dplyr::first(.data$contrasts),
           contrasts_type = dplyr::first(.data$contrasts_type),
           var_nrow = dplyr::n(),
-          var_test = sum(.data$term_cleaned != .data$variable), # for dichotomous variables with no reference row
+          # for dichotomous variables with no reference row
+          var_test = sum(.data$term_cleaned != .data$variable),
           rank = min(.data$rank) - .25,
           .groups = "drop_last"
         ) %>%

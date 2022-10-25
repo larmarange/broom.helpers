@@ -18,7 +18,11 @@ test_that("tidy_add_estimate_to_reference_rows() works for basic models", {
 
   mod <- glm(response ~ stage + grade + trt, gtsummary::trial,
     family = binomial,
-    contrasts = list(stage = contr.treatment(4, base = 3), grade = contr.treatment(3, base = 2), trt = contr.SAS)
+    contrasts = list(
+      stage = contr.treatment(4, base = 3),
+      grade = contr.treatment(3, base = 2),
+      trt = contr.SAS
+    )
   )
   res <- mod %>%
     tidy_and_attach() %>%
@@ -107,8 +111,17 @@ test_that("test tidy_add_estimate_to_reference_rows() checks", {
   expect_error(mod %>% broom::tidy() %>% tidy_add_estimate_to_reference_rows(exponentiate = TRUE))
 
   # expect an error if no value for exponentiate
-  expect_error(mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows(exponentiate = NULL))
-  expect_error(mod %>% broom::tidy() %>% tidy_attach_model(mod) %>% tidy_add_estimate_to_reference_rows())
+  expect_error(
+    mod %>%
+      tidy_and_attach() %>%
+      tidy_add_estimate_to_reference_rows(exponentiate = NULL)
+  )
+  expect_error(
+    mod %>%
+      broom::tidy() %>%
+      tidy_attach_model(mod) %>%
+      tidy_add_estimate_to_reference_rows()
+  )
 
   skip_if_not_installed("emmeans")
 
@@ -138,7 +151,11 @@ test_that("tidy_add_estimate_to_reference_rows() works with character variables"
 
   mod <- glm(response ~ stage + grade + trt, df,
     family = binomial,
-    contrasts = list(stage = contr.treatment(4, base = 3), grade = contr.treatment(3, base = 2), trt = contr.SAS)
+    contrasts = list(
+      stage = contr.treatment(4, base = 3),
+      grade = contr.treatment(3, base = 2),
+      trt = contr.SAS
+    )
   )
   res <- mod %>%
     tidy_and_attach() %>%
@@ -182,7 +199,8 @@ test_that("tidy_add_estimate_to_reference_rows() handles variables having non st
     contrasts = list(`grade of kids` = contr.sum)
   )
   expect_message(
-    res <- mod %>% tidy_and_attach(tidy_fun = broom::tidy) %>%
+    res <- mod %>%
+      tidy_and_attach(tidy_fun = broom::tidy) %>%
       tidy_add_estimate_to_reference_rows(),
     NA
   )
@@ -210,7 +228,12 @@ test_that("tidy_add_estimate_to_reference_rows() works with lme4::lmer", {
   df$stage <- as.character(df$stage)
   df$group <- rep.int(1:2, 100)
   mod <- lme4::lmer(marker ~ stage + grade + (1 | group), df)
-  expect_error(mod %>% tidy_and_attach(tidy_fun = broom.mixed::tidy) %>% tidy_add_estimate_to_reference_rows(), NA)
+  expect_error(
+    mod %>%
+      tidy_and_attach(tidy_fun = broom.mixed::tidy) %>%
+      tidy_add_estimate_to_reference_rows(),
+    NA
+  )
 })
 
 
@@ -223,7 +246,12 @@ test_that("tidy_add_estimate_to_reference_rows() works with lme4::glmer", {
   suppressMessages(
     mod <- lme4::glmer(response ~ stage + grade + (1 | group), df, family = binomial)
   )
-  expect_error(mod %>% tidy_and_attach(tidy_fun = broom.mixed::tidy) %>% tidy_add_estimate_to_reference_rows(), NA)
+  expect_error(
+    mod %>%
+      tidy_and_attach(tidy_fun = broom.mixed::tidy) %>%
+      tidy_add_estimate_to_reference_rows(),
+    NA
+  )
 })
 
 
@@ -314,4 +342,3 @@ test_that("tidy_add_estimate_to_reference_rows() works with lavaan::lavaan", {
   )
   expect_error(mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows(), NA)
 })
-

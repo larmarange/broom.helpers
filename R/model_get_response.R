@@ -61,7 +61,7 @@ model_get_response.glm <- function(model) {
 
   # model defined with cbind
   if (is.matrix(y) && ncol(y) == 2) {
-    y <- y[,1] / rowSums(y)
+    y <- y[, 1] / rowSums(y)
     y[is.nan(y)] <- 0
   }
   y
@@ -76,4 +76,3 @@ model_get_response.glmerMod <- model_get_response.glm
 model_get_response.model_fit <- function(model) {
   model_get_response(model$fit)
 }
-

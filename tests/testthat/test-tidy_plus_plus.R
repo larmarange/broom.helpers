@@ -55,8 +55,8 @@ test_that("tidy_plus_plus() and functionnal programming", {
   # works with glm
   expect_error(
     res <- dplyr::tibble(grade = c("I", "II", "III")) %>%
-      dplyr::mutate(df_model = purrr::map(grade, ~ gtsummary::trial %>% dplyr::filter(grade == ..1))) %>%
       dplyr::mutate(
+        df_model = purrr::map(grade, ~ gtsummary::trial %>% dplyr::filter(grade == ..1)),
         mv_formula_char = "response ~ trt + age + marker",
         mv_formula = purrr::map(mv_formula_char, ~ as.formula(.x)),
         mv_model_form =
@@ -79,8 +79,8 @@ test_that("tidy_plus_plus() and functionnal programming", {
   expect_message(
     suppressWarnings(
       res <- dplyr::tibble(grade = c("I", "II", "III")) %>%
-        dplyr::mutate(df_model = purrr::map(grade, ~ gtsummary::trial %>% dplyr::filter(grade == ..1))) %>%
         dplyr::mutate(
+          df_model = purrr::map(grade, ~ gtsummary::trial %>% dplyr::filter(grade == ..1)),
           mv_formula_char = "survival::Surv(ttdeath, death) ~ trt + age + marker",
           mv_formula = purrr::map(mv_formula_char, ~ as.formula(.x)),
           mv_model_form =
@@ -152,7 +152,7 @@ test_that("tidy_plus_plus() with tidyselect", {
 })
 
 test_that("tidy_plus_plus() works with stats::aov", {
-  mod <- aov(yield ~ block + N*P*K, npk)
+  mod <- aov(yield ~ block + N * P * K, npk)
   expect_error(
     res <- tidy_plus_plus(mod),
     NA
@@ -202,7 +202,7 @@ test_that("tidy_plus_plus() works with lme4::glmer.nb", {
   skip_if_not_installed("MASS")
   library(lme4)
   suppressMessages(
-    mod <- lme4::glmer.nb(Days ~ Age + Eth + (1|Sex), data = MASS::quine)
+    mod <- lme4::glmer.nb(Days ~ Age + Eth + (1 | Sex), data = MASS::quine)
   )
   skip_if_not_installed("broom.mixed")
   expect_error(
@@ -239,9 +239,9 @@ test_that("tidy_plus_plus() works with survival::clogit", {
   resp <- levels(survival::logan$occupation)
   n <- nrow(survival::logan)
   indx <- rep(1:n, length(resp))
-  logan2 <- data.frame(survival::logan[indx,],
+  logan2 <- data.frame(survival::logan[indx, ],
                        id = indx,
-                       tocc = factor(rep(resp, each=n)))
+                       tocc = factor(rep(resp, each = n)))
   logan2$case <- (logan2$occupation == logan2$tocc)
   mod <- survival::clogit(case ~ tocc + tocc:education + strata(id), logan2)
   expect_error(
@@ -262,6 +262,16 @@ test_that("tidy_plus_plus() works with nnet::multinom", {
   expect_error(
     res <- mod %>% tidy_plus_plus(),
     NA
+  )
+  expect_equivalent(
+    res$y.level,
+    c("II", "II", "II", "II", "II", "II",
+      "III", "III", "III", "III", "III", "III")
+  )
+  expect_equivalent(
+    res$term,
+    c("stageT1", "stageT2", "stageT3", "stageT4", "marker", "age",
+      "stageT1", "stageT2", "stageT3", "stageT4", "marker", "age")
   )
 
   # multinom model with binary outcome
@@ -293,7 +303,10 @@ test_that("tidy_plus_plus() works with survey::svycoxph", {
   skip_if_not_installed("survey")
   skip_on_cran()
   dpbc <- survey::svydesign(id = ~ 1, prob = ~ 1, strata = ~ edema, data = survival::pbc)
-  mod <- survey::svycoxph(Surv(time, status>0) ~ log(bili) + protime + albumin, design = dpbc)
+  mod <- survey::svycoxph(
+    Surv(time, status > 0) ~ log(bili) + protime + albumin,
+    design = dpbc
+  )
   expect_error(
     res <- mod %>% tidy_plus_plus(),
     NA
@@ -304,9 +317,9 @@ test_that("tidy_plus_plus() works with survey::svyolr", {
   skip_if_not_installed("survey")
   skip_on_cran()
   data(api, package = "survey")
-  fpc <- survey::svydesign(id=~dnum, weights=~pw, data=apiclus1, fpc=~fpc)
-  fpc <- update(fpc, mealcat=cut(meals,c(0,25,50,75,100)))
-  mod <- survey::svyolr(mealcat~avg.ed+mobility+stype, design = fpc)
+  fpc <- survey::svydesign(id = ~ dnum, weights = ~ pw, data = apiclus1, fpc = ~ fpc)
+  fpc <- update(fpc, mealcat = cut(meals, c(0, 25, 50, 75, 100)))
+  mod <- survey::svyolr(mealcat ~ avg.ed + mobility + stype, design = fpc)
   expect_error(
     res <- mod %>% tidy_plus_plus(),
     NA
@@ -386,7 +399,7 @@ test_that("tidy_plus_plus() works with brms::brm", {
   skip_if(packageVersion("brms") < 2.13)
   skip_if_not_installed("rstanarm")
 
-  load(system.file("extdata", "brms_example.rda", package="broom.mixed"))
+  load(system.file("extdata", "brms_example.rda", package = "broom.mixed"))
   mod <- brms_crossedRE
   expect_error(
     res <- mod %>% tidy_plus_plus(),
@@ -417,10 +430,10 @@ test_that("tidy_plus_plus() works with cmprsk::crr", {
   skip_if(packageVersion("broom") < "0.7.4")
 
   ftime <- rexp(200)
-  fstatus <- sample(0:2,200,replace=TRUE)
-  cov <- matrix(runif(600),nrow=200)
-  dimnames(cov)[[2]] <- c('x1','x2','x3')
-  mod <- cmprsk::crr(ftime,fstatus,cov)
+  fstatus <- sample(0:2, 200, replace = TRUE)
+  cov <- matrix(runif(600), nrow = 200)
+  dimnames(cov)[[2]] <- c("x1", "x2", "x3")
+  mod <- cmprsk::crr(ftime, fstatus, cov)
   expect_error(
     res <- mod %>% tidy_plus_plus(quiet = TRUE),
     NA
@@ -511,7 +524,11 @@ test_that("tidy_plus_plus() works with mgcv::gam", {
       dplyr::relocate(parametric, .after = dplyr::last_col())
   }
 
-  gam_logistic <- mgcv::gam(response ~ s(marker, ttdeath) + grade + age, data = gtsummary::trial, family = binomial)
+  gam_logistic <- mgcv::gam(
+    response ~ s(marker, ttdeath) + grade + age,
+    data = gtsummary::trial,
+    family = binomial
+  )
   gam_linear <- mgcv::gam(response ~ s(marker, ttdeath) + grade, data = gtsummary::trial)
   gam_smooth_only <- mgcv::gam(response ~ s(marker, ttdeath), data = gtsummary::trial)
   gam_param_only <- mgcv::gam(response ~ grade, data = gtsummary::trial)
@@ -538,7 +555,7 @@ test_that("tidy_plus_plus() works with VGAM::vglm", {
   df <- data.frame(
     treatment = gl(3, 3),
     outcome = gl(3, 1, 9),
-    counts = c(18,17,15,20,10,20,25,13,12)
+    counts = c(18, 17, 15, 20, 10, 20, 25, 13, 12)
   )
   mod <- VGAM::vglm(
     counts ~ outcome + treatment,
@@ -673,4 +690,47 @@ test_that("tidy_plus_plus() works with logitr models", {
     NA
   )
   expect_true("scalePar" %in% res$variable)
+})
+
+
+test_that("tidy_plus_plus() works with multgee models", {
+  skip_on_cran()
+  skip_if_not_installed("multgee")
+  skip_if_not_installed("parameters")
+
+  library(multgee)
+  mod <- multgee::nomLORgee(
+    y ~ factor(time) * sec,
+    data = multgee::housing,
+    id = id,
+    repeated = time,
+  )
+  expect_error(
+    res <- mod %>% tidy_plus_plus(),
+    NA
+  )
+  expect_equivalent(
+    res$y.level,
+    c("1", "1", "1", "1", "1", "1", "1", "1",
+      "2", "2", "2", "2", "2", "2", "2", "2")
+  )
+  expect_equivalent(
+    res$term,
+    c("factor(time)0", "factor(time)6", "factor(time)12", "factor(time)24",
+      "sec", "factor(time)6:sec", "factor(time)12:sec", "factor(time)24:sec",
+      "factor(time)0", "factor(time)6", "factor(time)12", "factor(time)24",
+      "sec", "factor(time)6:sec", "factor(time)12:sec", "factor(time)24:sec")
+  )
+
+  mod2 <- ordLORgee(
+    formula = y ~ factor(time) + factor(trt) + factor(baseline),
+    data = multgee::arthritis,
+    id = id,
+    repeated = time,
+    LORstr = "uniform"
+  )
+  expect_error(
+    res <- mod2 %>% tidy_plus_plus(),
+    NA
+  )
 })

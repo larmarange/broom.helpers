@@ -46,7 +46,7 @@ tidy_and_attach <- function(
 ) {
   # exponentiate cannot be used with lm models
   # but broom will not produce an error and will return unexponentiated estimates
-  if (identical(class(model), "lm") & exponentiate)
+  if (identical(class(model), "lm") && exponentiate)
     stop("`exponentiate = TRUE` is not valid for this type of model.")
 
   # test if exponentiate can be passed to tidy_fun, and if tidy_fun runs without error
@@ -66,7 +66,9 @@ tidy_and_attach <- function(
             tidy_fun(model, ...) %>%
             tidy_attach_model(model, .attributes = list(exponentiate = FALSE))
           if (exponentiate)
-            cli::cli_alert_warning("`exponentiate=TRUE` is not valid for this type of model and was ignored.")
+            cli::cli_alert_warning(
+              "`exponentiate=TRUE` is not valid for this type of model and was ignored."
+            )
           xx
         },
         error = function(e) {

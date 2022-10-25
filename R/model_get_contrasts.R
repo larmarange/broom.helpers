@@ -58,5 +58,3 @@ model_get_contrasts_3 <- function(model) {
 model_get_contrasts.model_fit <- function(model) {
   model_get_contrasts(model$fit)
 }
-
-

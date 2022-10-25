@@ -48,7 +48,7 @@ model_get_weights.default <- function(model) {
       NULL
     }
   )
-  if (is.null(w) | length(w) == 0) {
+  if (is.null(w) || length(w) == 0) {
     mf <- model %>% model_get_model_frame()
     if (!is.null(mf)) {
       if ("(weights)" %in% names(mf)) {
@@ -74,4 +74,3 @@ model_get_weights.svyglm <- function(model) {
 model_get_weights.model_fit <- function(model) {
   model_get_weights(model$fit)
 }
-

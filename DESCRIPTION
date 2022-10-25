@@ -55,6 +55,7 @@ Suggests:
     MASS,
     mgcv,
     mice,
+    multgee,
     nnet,
     ordinal,
     parameters,

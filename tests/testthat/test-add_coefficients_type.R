@@ -167,9 +167,9 @@ test_that("model_get_coefficients_type() works with survival::clogit", {
   resp <- levels(survival::logan$occupation)
   n <- nrow(survival::logan)
   indx <- rep(1:n, length(resp))
-  logan2 <- data.frame(survival::logan[indx,],
+  logan2 <- data.frame(survival::logan[indx, ],
                        id = indx,
-                       tocc = factor(rep(resp, each=n)))
+                       tocc = factor(rep(resp, each = n)))
   logan2$case <- (logan2$occupation == logan2$tocc)
   mod <- survival::clogit(case ~ tocc + tocc:education + strata(id), logan2)
 
@@ -196,7 +196,10 @@ test_that("model_get_coefficients_type() works with survey::svyglm", {
 test_that("model_get_coefficients_type() works with survey::svycoxph", {
   skip_if_not_installed("survey")
   dpbc <- survey::svydesign(id = ~ 1, prob = ~ 1, strata = ~ edema, data = survival::pbc)
-  mod <- survey::svycoxph(Surv(time, status>0) ~ log(bili) + protime + albumin, design = dpbc)
+  mod <- survey::svycoxph(
+    Surv(time, status > 0) ~ log(bili) + protime + albumin,
+    design = dpbc
+  )
   res <- mod %>% model_get_coefficients_type()
   expect_equivalent(res, "prop_hazard")
 })
@@ -204,9 +207,9 @@ test_that("model_get_coefficients_type() works with survey::svycoxph", {
 test_that("tidy_plus_plus() works with survey::svyolr", {
   skip_if_not_installed("survey")
   data(api, package = "survey")
-  fpc <- survey::svydesign(id=~dnum, weights=~pw, data=apiclus1, fpc=~fpc)
-  fpc <- update(fpc, mealcat=cut(meals,c(0,25,50,75,100)))
-  mod <- survey::svyolr(mealcat~avg.ed+mobility+stype, design = fpc)
+  fpc <- survey::svydesign(id = ~ dnum, weights = ~ pw, data = apiclus1, fpc = ~ fpc)
+  fpc <- update(fpc, mealcat = cut(meals, c(0, 25, 50, 75, 100)))
+  mod <- survey::svyolr(mealcat ~ avg.ed + mobility + stype, design = fpc)
   res <- mod %>% model_get_coefficients_type()
   expect_equivalent(res, "logistic")
 })
@@ -230,7 +233,12 @@ test_that("model_get_coefficients_type() works with MASS::polr", {
   res <- mod %>% model_get_coefficients_type()
   expect_equivalent(res, "logistic")
 
-  mod <- MASS::polr(Sat ~ Infl + Type + Cont, weights = Freq, data = MASS::housing, method = "probit")
+  mod <- MASS::polr(
+    Sat ~ Infl + Type + Cont,
+    weights = Freq,
+    data = MASS::housing,
+    method = "probit"
+  )
   res <- mod %>% model_get_coefficients_type()
   expect_equivalent(res, "generic")
 })

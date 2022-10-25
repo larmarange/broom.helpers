@@ -27,7 +27,7 @@
 #' any defined weights. Observed proportions could be obtained as `n_obs / n_event`.
 #'
 #' Similarly, a number of events will be computed for multinomial logistic
-#' models ([nnet::multinom()]) for each level of the outcome (`y.level`),
+#' models (`nnet::multinom()`) for each level of the outcome (`y.level`),
 #' corresponding to the number of observations equal to that outcome level.
 #'
 #' For Poisson models, `n_event` will be equal to the number of counts per term.

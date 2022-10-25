@@ -55,7 +55,7 @@ model_list_variables.default <- function(model, labels = NULL, only_variable = F
   model_frame <- model_get_model_frame(model)
   model_terms <- model_get_terms(model)
 
-  if (!is.null(model_terms) & inherits(model_terms, "terms")) {
+  if (!is.null(model_terms) && inherits(model_terms, "terms")) {
     variable_names <- attr(model_terms, "term.labels")
     dataClasses <- purrr::map(model_frame, .MFclass2) %>% unlist()
 
@@ -180,8 +180,7 @@ model_list_variables.logitr <- function(model, labels = NULL, only_variable = FA
 }
 
 # stats::.MFclass do not distinct integer and numeric
-.MFclass2 <- function (x)
-{
+.MFclass2 <- function(x) {
   if (is.logical(x))
     return("logical")
   if (is.ordered(x))

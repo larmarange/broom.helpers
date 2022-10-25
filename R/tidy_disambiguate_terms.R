@@ -30,8 +30,12 @@ tidy_disambiguate_terms <- function(x, sep = ".", model = tidy_get_model(x), qui
   }
 
   if ("original_term" %in% names(x)) {
-    if (!quiet) {
-      cli_alert_danger("{.code tidy_disambiguate_terms()} has already been applied. x has been returned unchanged.")
+    if (!quiet && !inherits(model, "LORgee")) {
+      # no alert for multgee models
+      cli_alert_danger(paste(
+        "{.code tidy_disambiguate_terms()} has already been applied.",
+        "x has been returned unchanged."
+      ))
     }
     return(x)
   }

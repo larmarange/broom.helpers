@@ -92,4 +92,3 @@ test_that("test tidy_select_variables() checks", {
     NA
   )
 })
-
