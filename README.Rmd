@@ -30,20 +30,23 @@ The suite includes functions to group regression model terms by variable, insert
 `broom.helpers` is used, in particular, by `gtsummary::tbl_regression()` for producing [nice formatted tables of model coefficients](https://www.danieldsjoberg.com/gtsummary/articles/tbl_regression.html) and by `ggstats::ggcoef_model()` for [plotting model coefficients](https://larmarange.github.io/ggstats/articles/ggcoef_model.html).
 
 
-## Installation
+## Installation & Documentation
 
-To install stable version:
+To install **stable version**:
 
 ```{r eval=FALSE}
 install.packages("broom.helpers")
 ```
 
+Documentation of stable version: <https://larmarange.github.io/broom.helpers/>
 
-To install development version:
+To install **development version**:
 
 ```{r eval=FALSE}
-devtools::install_github("larmarange/broom.helpers")
+remotes::install_github("larmarange/broom.helpers")
 ```
+
+Documentation of development version: <https://larmarange.github.io/broom.helpers/dev/>
 
 ## Examples
 
