@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">broom.helpers</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.9.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.9.0</span>
       </span>
     </div>
 
@@ -150,7 +150,7 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tidy_forest</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
-<span>    plot_label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">var_label</span>, <span class="va">label</span>, sep <span class="op">=</span> <span class="st">":"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    plot_label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">var_label</span>, <span class="va">label</span>, sep <span class="op">=</span> <span class="st">":"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>      <span class="fu">forcats</span><span class="fu">::</span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_inorder.html" class="external-link">fct_inorder</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>      <span class="fu">forcats</span><span class="fu">::</span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_rev.html" class="external-link">fct_rev</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -165,7 +165,7 @@
 <span>    title <span class="op">=</span> <span class="st">"Forest Plot using broom.helpers"</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <p><img src="tidy_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
-<p><strong>Note::</strong> for more advanced and nicely formatted plots of model coefficients, look at <code>ggstats::ggcoef_model()</code> and its <a href="https://larmarange.github.io/ggstats/articles/ggcoef_model.html" class="external-link">dedicated vignette</a>. <code>ggstats::ggcoef_model()</code> internally uses <code>broom.helpers</code>.</p>
+<p><strong>Note::</strong> for more advanced and nicely formatted plots of model coefficients, look at <code>GGally::ggcoef_model()</code> and its <a href="https://ggobi.github.io/ggally/articles/ggcoef_model.html" class="external-link">dedicated vignette</a>. <code>GGally::ggcoef_model()</code> internally uses <code>broom.helpers</code>.</p>
 </div>
 <div class="section level2">
 <h2 id="table-summary">Table Summary<a class="anchor" aria-label="anchor" href="#table-summary"></a>
@@ -183,10 +183,10 @@
 <span>  <span class="co"># add header row</span></span>
 <span>  <span class="fu"><a href="../reference/tidy_add_header_rows.html">tidy_add_header_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="co"># removing intercept estimate from model</span></span>
-<span>  <span class="fu"><a href="../reference/tidy_remove_intercept.html">tidy_remove_intercept</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/tidy_remove_intercept.html">tidy_remove_intercept</a></span><span class="op">(</span><span class="op">)</span> </span>
 <span></span>
 <span><span class="co"># print summary table</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>knitr.kable.NA <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>knitr.kable.NA <span class="op">=</span> <span class="st">''</span><span class="op">)</span></span>
 <span><span class="va">tidy_table</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="co"># format model estimates</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">label</span>, <span class="va">estimate</span>, <span class="va">conf.low</span>, <span class="va">conf.high</span>, <span class="va">p.value</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -358,12 +358,12 @@
 <style>
 td {vertical-align: top;}
 </style>
-<div id="meupktwqbc" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="meqhjxexha" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#meupktwqbc .gt_table {
+#meqhjxexha .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -388,7 +388,7 @@ td {vertical-align: top;}
   border-left-color: #D3D3D3;
 }
 
-#meupktwqbc .gt_heading {
+#meqhjxexha .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -400,7 +400,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#meupktwqbc .gt_title {
+#meqhjxexha .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -412,7 +412,7 @@ td {vertical-align: top;}
   border-bottom-width: 0;
 }
 
-#meupktwqbc .gt_subtitle {
+#meqhjxexha .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -424,13 +424,13 @@ td {vertical-align: top;}
   border-top-width: 0;
 }
 
-#meupktwqbc .gt_bottom_border {
+#meqhjxexha .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#meupktwqbc .gt_col_headings {
+#meqhjxexha .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -445,7 +445,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#meupktwqbc .gt_col_heading {
+#meqhjxexha .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -465,7 +465,7 @@ td {vertical-align: top;}
   overflow-x: hidden;
 }
 
-#meupktwqbc .gt_column_spanner_outer {
+#meqhjxexha .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -477,15 +477,15 @@ td {vertical-align: top;}
   padding-right: 4px;
 }
 
-#meupktwqbc .gt_column_spanner_outer:first-child {
+#meqhjxexha .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#meupktwqbc .gt_column_spanner_outer:last-child {
+#meqhjxexha .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#meupktwqbc .gt_column_spanner {
+#meqhjxexha .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -497,7 +497,7 @@ td {vertical-align: top;}
   width: 100%;
 }
 
-#meupktwqbc .gt_group_heading {
+#meqhjxexha .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -522,7 +522,7 @@ td {vertical-align: top;}
   vertical-align: middle;
 }
 
-#meupktwqbc .gt_empty_group_heading {
+#meqhjxexha .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -537,15 +537,15 @@ td {vertical-align: top;}
   vertical-align: middle;
 }
 
-#meupktwqbc .gt_from_md > :first-child {
+#meqhjxexha .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#meupktwqbc .gt_from_md > :last-child {
+#meqhjxexha .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#meupktwqbc .gt_row {
+#meqhjxexha .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -564,7 +564,7 @@ td {vertical-align: top;}
   overflow-x: hidden;
 }
 
-#meupktwqbc .gt_stub {
+#meqhjxexha .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -577,7 +577,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#meupktwqbc .gt_stub_row_group {
+#meqhjxexha .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -591,11 +591,11 @@ td {vertical-align: top;}
   vertical-align: top;
 }
 
-#meupktwqbc .gt_row_group_first td {
+#meqhjxexha .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#meupktwqbc .gt_summary_row {
+#meqhjxexha .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -605,16 +605,16 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#meupktwqbc .gt_first_summary_row {
+#meqhjxexha .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#meupktwqbc .gt_first_summary_row.thick {
+#meqhjxexha .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#meupktwqbc .gt_last_summary_row {
+#meqhjxexha .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -624,7 +624,7 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#meupktwqbc .gt_grand_summary_row {
+#meqhjxexha .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -634,7 +634,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#meupktwqbc .gt_first_grand_summary_row {
+#meqhjxexha .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -644,11 +644,11 @@ td {vertical-align: top;}
   border-top-color: #D3D3D3;
 }
 
-#meupktwqbc .gt_striped {
+#meqhjxexha .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#meupktwqbc .gt_table_body {
+#meqhjxexha .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -657,7 +657,7 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#meupktwqbc .gt_footnotes {
+#meqhjxexha .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -671,7 +671,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#meupktwqbc .gt_footnote {
+#meqhjxexha .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -680,7 +680,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#meupktwqbc .gt_sourcenotes {
+#meqhjxexha .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -694,7 +694,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#meupktwqbc .gt_sourcenote {
+#meqhjxexha .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -702,64 +702,64 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#meupktwqbc .gt_left {
+#meqhjxexha .gt_left {
   text-align: left;
 }
 
-#meupktwqbc .gt_center {
+#meqhjxexha .gt_center {
   text-align: center;
 }
 
-#meupktwqbc .gt_right {
+#meqhjxexha .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#meupktwqbc .gt_font_normal {
+#meqhjxexha .gt_font_normal {
   font-weight: normal;
 }
 
-#meupktwqbc .gt_font_bold {
+#meqhjxexha .gt_font_bold {
   font-weight: bold;
 }
 
-#meupktwqbc .gt_font_italic {
+#meqhjxexha .gt_font_italic {
   font-style: italic;
 }
 
-#meupktwqbc .gt_super {
+#meqhjxexha .gt_super {
   font-size: 65%;
 }
 
-#meupktwqbc .gt_footnote_marks {
+#meqhjxexha .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#meupktwqbc .gt_asterisk {
+#meqhjxexha .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#meupktwqbc .gt_indent_1 {
+#meqhjxexha .gt_indent_1 {
   text-indent: 5px;
 }
 
-#meupktwqbc .gt_indent_2 {
+#meqhjxexha .gt_indent_2 {
   text-indent: 10px;
 }
 
-#meupktwqbc .gt_indent_3 {
+#meqhjxexha .gt_indent_3 {
   text-indent: 15px;
 }
 
-#meupktwqbc .gt_indent_4 {
+#meqhjxexha .gt_indent_4 {
   text-indent: 20px;
 }
 
-#meupktwqbc .gt_indent_5 {
+#meqhjxexha .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -778,7 +778,7 @@ td {vertical-align: top;}
 <p><code><a href="../reference/tidy_disambiguate_terms.html">tidy_disambiguate_terms()</a></code></p>
 </div></td>
 <td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
-<p>Original term before disambiguation. This columns is added only when disambiguation is needed (i.e. for mixed models). Also used for "multgee" models.</p>
+<p>Original term before disambiguation. This columns is added only when disambiguation is needed (i.e. for mixed models).</p>
 </div></td>
 </tr>
 <tr>
@@ -811,7 +811,7 @@ td {vertical-align: top;}
 <p><code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code></p>
 </div></td>
 <td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
-<p>One of "intercept", "continuous", "dichotomous", "categorical", "interaction", "ran_pars" or "ran_vals"</p>
+<p>One of 'intercept', 'continuous', 'dichotomous', 'categorical', 'interaction', 'ran_pars' or 'ran_vals'</p>
 </div></td>
 </tr>
 <tr>
@@ -833,7 +833,7 @@ td {vertical-align: top;}
 <p><code><a href="../reference/tidy_add_contrasts.html">tidy_add_contrasts()</a></code></p>
 </div></td>
 <td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
-<p>Contrasts used for categorical variables.<br><em>Require "variable" column. If needed, will automatically apply <code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code>.</em></p>
+<p>Contrasts used for categorical variables.<br><em>Require 'variable' column. If needed, will automatically apply <code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code>.</em></p>
 </div></td>
 </tr>
 <tr>
@@ -844,7 +844,7 @@ td {vertical-align: top;}
 <p><code><a href="../reference/tidy_add_contrasts.html">tidy_add_contrasts()</a></code></p>
 </div></td>
 <td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
-<p>Type of contrasts ("treatment", "sum", "poly", "helmert", "other" or "no.contrast")</p>
+<p>Type of contrasts ('treatment', 'sum', 'poly', 'helmert', 'other' or 'no.contrast')</p>
 </div></td>
 </tr>
 <tr>
@@ -855,7 +855,7 @@ td {vertical-align: top;}
 <p><code><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows()</a></code></p>
 </div></td>
 <td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
-<p>Logical indicating if a row is a reference row for categorical variables using a treatment or a sum contrast. Is equal to <code>NA</code> for variables who do not have a reference row.<br><em>Require "contrasts" column. If needed, will automatically apply <code><a href="../reference/tidy_add_contrasts.html">tidy_add_contrasts()</a></code>.<br><code><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows()</a></code> will not populate the label of the reference term. It is therefore better to apply <code><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels()</a></code> after <code><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows()</a></code> rather than before.</em></p>
+<p>Logical indicating if a row is a reference row for categorical variables using a treatment or a sum contrast. Is equal to <code>NA</code> for variables who do not have a reference row.<br><em>Require 'contrasts' column. If needed, will automatically apply <code><a href="../reference/tidy_add_contrasts.html">tidy_add_contrasts()</a></code>.<br><code><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows()</a></code> will not populate the label of the reference term. It is therefore better to apply <code><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels()</a></code> after <code><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows()</a></code> rather than before.</em></p>
 </div></td>
 </tr>
 <tr>
@@ -866,7 +866,7 @@ td {vertical-align: top;}
 <p><code><a href="../reference/tidy_add_variable_labels.html">tidy_add_variable_labels()</a></code></p>
 </div></td>
 <td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
-<p>String of variable labels from the model. Columns labelled with the <code>labelled</code> package are retained. It is possible to pass a custom label for an interaction term with the <code>labels</code> argument. <br><em>Require "variable" column. If needed, will automatically apply <code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code>.</em></p>
+<p>String of variable labels from the model. Columns labelled with the <code>labelled</code> package are retained. It is possible to pass a custom label for an interaction term with the <code>labels</code> argument. <br><em>Require 'variable' column. If needed, will automatically apply <code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code>.</em></p>
 </div></td>
 </tr>
 <tr>
@@ -877,7 +877,7 @@ td {vertical-align: top;}
 <p><code><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels()</a></code></p>
 </div></td>
 <td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
-<p>String of term labels based on (1) labels provided in <code>labels</code> argument if provided; (2) factor levels for categorical variables coded with treatment, SAS or sum contrasts; (3) variable labels when there is only one term per variable; and (4) term name otherwise.<br><em>Require "variable_label" column. If needed, will automatically apply <code><a href="../reference/tidy_add_variable_labels.html">tidy_add_variable_labels()</a></code>.<br>Require "contrasts" column. If needed, will automatically apply <code><a href="../reference/tidy_add_contrasts.html">tidy_add_contrasts()</a></code>.</em></p>
+<p>String of term labels based on (1) labels provided in <code>labels</code> argument if provided; (2) factor levels for categorical variables coded with treatment, SAS or sum contrasts; (3) variable labels when there is only one term per variable; and (4) term name otherwise.<br><em>Require 'variable_label' column. If needed, will automatically apply <code><a href="../reference/tidy_add_variable_labels.html">tidy_add_variable_labels()</a></code>.<br>Require 'contrasts' column. If needed, will automatically apply <code><a href="../reference/tidy_add_contrasts.html">tidy_add_contrasts()</a></code>.</em></p>
 </div></td>
 </tr>
 <tr>
@@ -888,7 +888,7 @@ td {vertical-align: top;}
 <p><code><a href="../reference/tidy_add_header_rows.html">tidy_add_header_rows()</a></code></p>
 </div></td>
 <td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
-<p>Logical indicating if a row is a header row for variables with several terms. Is equal to <code>NA</code> for variables who do not have an header row.<em>Require "label" column. If needed, will automatically apply <code><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels()</a></code>.<br>It is better to apply <code><a href="../reference/tidy_add_header_rows.html">tidy_add_header_rows()</a></code> after other <code>tidy_*</code> functions</em></p>
+<p>Logical indicating if a row is a header row for variables with several terms. Is equal to <code>NA</code> for variables who do not have an header row.<em>Require 'label' column. If needed, will automatically apply <code><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels()</a></code>.<br>It is better to apply <code><a href="../reference/tidy_add_header_rows.html">tidy_add_header_rows()</a></code> after other <code>tidy_*</code> functions</em></p>
 </div></td>
 </tr>
 <tr>
@@ -936,12 +936,12 @@ td {vertical-align: top;}
 <style>
 td {vertical-align: top;}
 </style>
-<div id="kjkfdrkxko" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="tywvxnkkjt" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#kjkfdrkxko .gt_table {
+#tywvxnkkjt .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -966,7 +966,7 @@ td {vertical-align: top;}
   border-left-color: #D3D3D3;
 }
 
-#kjkfdrkxko .gt_heading {
+#tywvxnkkjt .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -978,7 +978,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#kjkfdrkxko .gt_title {
+#tywvxnkkjt .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -990,7 +990,7 @@ td {vertical-align: top;}
   border-bottom-width: 0;
 }
 
-#kjkfdrkxko .gt_subtitle {
+#tywvxnkkjt .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1002,13 +1002,13 @@ td {vertical-align: top;}
   border-top-width: 0;
 }
 
-#kjkfdrkxko .gt_bottom_border {
+#tywvxnkkjt .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kjkfdrkxko .gt_col_headings {
+#tywvxnkkjt .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1023,7 +1023,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#kjkfdrkxko .gt_col_heading {
+#tywvxnkkjt .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1043,7 +1043,7 @@ td {vertical-align: top;}
   overflow-x: hidden;
 }
 
-#kjkfdrkxko .gt_column_spanner_outer {
+#tywvxnkkjt .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1055,15 +1055,15 @@ td {vertical-align: top;}
   padding-right: 4px;
 }
 
-#kjkfdrkxko .gt_column_spanner_outer:first-child {
+#tywvxnkkjt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kjkfdrkxko .gt_column_spanner_outer:last-child {
+#tywvxnkkjt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kjkfdrkxko .gt_column_spanner {
+#tywvxnkkjt .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1075,7 +1075,7 @@ td {vertical-align: top;}
   width: 100%;
 }
 
-#kjkfdrkxko .gt_group_heading {
+#tywvxnkkjt .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1100,7 +1100,7 @@ td {vertical-align: top;}
   vertical-align: middle;
 }
 
-#kjkfdrkxko .gt_empty_group_heading {
+#tywvxnkkjt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1115,15 +1115,15 @@ td {vertical-align: top;}
   vertical-align: middle;
 }
 
-#kjkfdrkxko .gt_from_md > :first-child {
+#tywvxnkkjt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kjkfdrkxko .gt_from_md > :last-child {
+#tywvxnkkjt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kjkfdrkxko .gt_row {
+#tywvxnkkjt .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1142,7 +1142,7 @@ td {vertical-align: top;}
   overflow-x: hidden;
 }
 
-#kjkfdrkxko .gt_stub {
+#tywvxnkkjt .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1155,7 +1155,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#kjkfdrkxko .gt_stub_row_group {
+#tywvxnkkjt .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1169,11 +1169,11 @@ td {vertical-align: top;}
   vertical-align: top;
 }
 
-#kjkfdrkxko .gt_row_group_first td {
+#tywvxnkkjt .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kjkfdrkxko .gt_summary_row {
+#tywvxnkkjt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1183,16 +1183,16 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#kjkfdrkxko .gt_first_summary_row {
+#tywvxnkkjt .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kjkfdrkxko .gt_first_summary_row.thick {
+#tywvxnkkjt .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kjkfdrkxko .gt_last_summary_row {
+#tywvxnkkjt .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1202,7 +1202,7 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#kjkfdrkxko .gt_grand_summary_row {
+#tywvxnkkjt .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1212,7 +1212,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#kjkfdrkxko .gt_first_grand_summary_row {
+#tywvxnkkjt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1222,11 +1222,11 @@ td {vertical-align: top;}
   border-top-color: #D3D3D3;
 }
 
-#kjkfdrkxko .gt_striped {
+#tywvxnkkjt .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kjkfdrkxko .gt_table_body {
+#tywvxnkkjt .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1235,7 +1235,7 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#kjkfdrkxko .gt_footnotes {
+#tywvxnkkjt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1249,7 +1249,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#kjkfdrkxko .gt_footnote {
+#tywvxnkkjt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -1258,7 +1258,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#kjkfdrkxko .gt_sourcenotes {
+#tywvxnkkjt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1272,7 +1272,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#kjkfdrkxko .gt_sourcenote {
+#tywvxnkkjt .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1280,64 +1280,64 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#kjkfdrkxko .gt_left {
+#tywvxnkkjt .gt_left {
   text-align: left;
 }
 
-#kjkfdrkxko .gt_center {
+#tywvxnkkjt .gt_center {
   text-align: center;
 }
 
-#kjkfdrkxko .gt_right {
+#tywvxnkkjt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kjkfdrkxko .gt_font_normal {
+#tywvxnkkjt .gt_font_normal {
   font-weight: normal;
 }
 
-#kjkfdrkxko .gt_font_bold {
+#tywvxnkkjt .gt_font_bold {
   font-weight: bold;
 }
 
-#kjkfdrkxko .gt_font_italic {
+#tywvxnkkjt .gt_font_italic {
   font-style: italic;
 }
 
-#kjkfdrkxko .gt_super {
+#tywvxnkkjt .gt_super {
   font-size: 65%;
 }
 
-#kjkfdrkxko .gt_footnote_marks {
+#tywvxnkkjt .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#kjkfdrkxko .gt_asterisk {
+#tywvxnkkjt .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kjkfdrkxko .gt_indent_1 {
+#tywvxnkkjt .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kjkfdrkxko .gt_indent_2 {
+#tywvxnkkjt .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kjkfdrkxko .gt_indent_3 {
+#tywvxnkkjt .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kjkfdrkxko .gt_indent_4 {
+#tywvxnkkjt .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kjkfdrkxko .gt_indent_5 {
+#tywvxnkkjt .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1443,12 +1443,12 @@ td {vertical-align: top;}
 <div class="section level2">
 <h2 id="supported-models">Supported models<a class="anchor" aria-label="anchor" href="#supported-models"></a>
 </h2>
-<div id="gjjwdfdyoe" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="smvjazuvku" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#gjjwdfdyoe .gt_table {
+#smvjazuvku .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1473,7 +1473,7 @@ td {vertical-align: top;}
   border-left-color: #D3D3D3;
 }
 
-#gjjwdfdyoe .gt_heading {
+#smvjazuvku .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1485,7 +1485,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#gjjwdfdyoe .gt_title {
+#smvjazuvku .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1497,7 +1497,7 @@ td {vertical-align: top;}
   border-bottom-width: 0;
 }
 
-#gjjwdfdyoe .gt_subtitle {
+#smvjazuvku .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1509,13 +1509,13 @@ td {vertical-align: top;}
   border-top-width: 0;
 }
 
-#gjjwdfdyoe .gt_bottom_border {
+#smvjazuvku .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#gjjwdfdyoe .gt_col_headings {
+#smvjazuvku .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1530,7 +1530,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#gjjwdfdyoe .gt_col_heading {
+#smvjazuvku .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1550,7 +1550,7 @@ td {vertical-align: top;}
   overflow-x: hidden;
 }
 
-#gjjwdfdyoe .gt_column_spanner_outer {
+#smvjazuvku .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1562,15 +1562,15 @@ td {vertical-align: top;}
   padding-right: 4px;
 }
 
-#gjjwdfdyoe .gt_column_spanner_outer:first-child {
+#smvjazuvku .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gjjwdfdyoe .gt_column_spanner_outer:last-child {
+#smvjazuvku .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gjjwdfdyoe .gt_column_spanner {
+#smvjazuvku .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1582,7 +1582,7 @@ td {vertical-align: top;}
   width: 100%;
 }
 
-#gjjwdfdyoe .gt_group_heading {
+#smvjazuvku .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1607,7 +1607,7 @@ td {vertical-align: top;}
   vertical-align: middle;
 }
 
-#gjjwdfdyoe .gt_empty_group_heading {
+#smvjazuvku .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1622,15 +1622,15 @@ td {vertical-align: top;}
   vertical-align: middle;
 }
 
-#gjjwdfdyoe .gt_from_md > :first-child {
+#smvjazuvku .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gjjwdfdyoe .gt_from_md > :last-child {
+#smvjazuvku .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gjjwdfdyoe .gt_row {
+#smvjazuvku .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1649,7 +1649,7 @@ td {vertical-align: top;}
   overflow-x: hidden;
 }
 
-#gjjwdfdyoe .gt_stub {
+#smvjazuvku .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1662,7 +1662,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#gjjwdfdyoe .gt_stub_row_group {
+#smvjazuvku .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1676,11 +1676,11 @@ td {vertical-align: top;}
   vertical-align: top;
 }
 
-#gjjwdfdyoe .gt_row_group_first td {
+#smvjazuvku .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#gjjwdfdyoe .gt_summary_row {
+#smvjazuvku .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1690,16 +1690,16 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#gjjwdfdyoe .gt_first_summary_row {
+#smvjazuvku .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#gjjwdfdyoe .gt_first_summary_row.thick {
+#smvjazuvku .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#gjjwdfdyoe .gt_last_summary_row {
+#smvjazuvku .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1709,7 +1709,7 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#gjjwdfdyoe .gt_grand_summary_row {
+#smvjazuvku .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1719,7 +1719,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#gjjwdfdyoe .gt_first_grand_summary_row {
+#smvjazuvku .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1729,11 +1729,11 @@ td {vertical-align: top;}
   border-top-color: #D3D3D3;
 }
 
-#gjjwdfdyoe .gt_striped {
+#smvjazuvku .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#gjjwdfdyoe .gt_table_body {
+#smvjazuvku .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1742,7 +1742,7 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#gjjwdfdyoe .gt_footnotes {
+#smvjazuvku .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1756,7 +1756,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#gjjwdfdyoe .gt_footnote {
+#smvjazuvku .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -1765,7 +1765,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#gjjwdfdyoe .gt_sourcenotes {
+#smvjazuvku .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1779,7 +1779,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#gjjwdfdyoe .gt_sourcenote {
+#smvjazuvku .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1787,64 +1787,64 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#gjjwdfdyoe .gt_left {
+#smvjazuvku .gt_left {
   text-align: left;
 }
 
-#gjjwdfdyoe .gt_center {
+#smvjazuvku .gt_center {
   text-align: center;
 }
 
-#gjjwdfdyoe .gt_right {
+#smvjazuvku .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gjjwdfdyoe .gt_font_normal {
+#smvjazuvku .gt_font_normal {
   font-weight: normal;
 }
 
-#gjjwdfdyoe .gt_font_bold {
+#smvjazuvku .gt_font_bold {
   font-weight: bold;
 }
 
-#gjjwdfdyoe .gt_font_italic {
+#smvjazuvku .gt_font_italic {
   font-style: italic;
 }
 
-#gjjwdfdyoe .gt_super {
+#smvjazuvku .gt_super {
   font-size: 65%;
 }
 
-#gjjwdfdyoe .gt_footnote_marks {
+#smvjazuvku .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#gjjwdfdyoe .gt_asterisk {
+#smvjazuvku .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#gjjwdfdyoe .gt_indent_1 {
+#smvjazuvku .gt_indent_1 {
   text-indent: 5px;
 }
 
-#gjjwdfdyoe .gt_indent_2 {
+#smvjazuvku .gt_indent_2 {
   text-indent: 10px;
 }
 
-#gjjwdfdyoe .gt_indent_3 {
+#smvjazuvku .gt_indent_3 {
   text-indent: 15px;
 }
 
-#gjjwdfdyoe .gt_indent_4 {
+#smvjazuvku .gt_indent_4 {
   text-indent: 20px;
 }
 
-#gjjwdfdyoe .gt_indent_5 {
+#smvjazuvku .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1974,175 +1974,151 @@ td {vertical-align: top;}
 </tr>
 <tr>
 <td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/logitr/man/logitr.html" class="external-link">logitr::logitr()</a></code></p>
-</div></td>
-<td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
-<p>Requires logitr &gt;= 0.8.0</p>
-</div></td>
-</tr>
-<tr>
-<td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
 <p><code><a href="https://rdrr.io/pkg/MASS/man/glm.nb.html" class="external-link">MASS::glm.nb()</a></code></p>
-</div></td>
-<td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md"></div></td>
-</tr>
-<tr>
-<td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/MASS/man/polr.html" class="external-link">MASS::polr()</a></code></p>
 </div></td>
 <td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md"></div></td>
 </tr>
 <tr>
 <td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
+<p><code><a href="https://rdrr.io/pkg/MASS/man/polr.html" class="external-link">MASS::polr()</a></code></p>
+</div></td>
+<td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md"></div></td>
+</tr>
+<tr>
+<td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
 <p><code><a href="https://rdrr.io/pkg/mgcv/man/gam.html" class="external-link">mgcv::gam()</a></code></p>
 </div></td>
-<td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
+<td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
 <p>Use default tidier <code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">broom::tidy()</a></code> for smooth terms only, or <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/custom_tidiers.html" class="external-link">gtsummary::tidy_gam()</a></code> to include parametric terms</p>
 </div></td>
 </tr>
 <tr>
-<td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
+<td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
 <p><code><a href="https://amices.org/mice/reference/mira-class.html" class="external-link">mice::mira</a></code></p>
 </div></td>
-<td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
+<td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
 <p>Limited support. If <code>mod</code> is a <code>mira</code> object, use <code>tidy_plus_plus(mod, tidy_fun = function(x, ...) mice::pool(x) %&gt;% mice::tidy(...))</code></p>
 </div></td>
 </tr>
 <tr>
-<td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/multgee/man/nomLORgee.html" class="external-link">multgee::nomLORgee()</a></code></p>
-</div></td>
-<td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
-<p>Experimental support. Use <code><a href="../reference/tidy_multgee.html">tidy_multgee()</a></code> as <code>tidy_fun</code>.</p>
-</div></td>
-</tr>
-<tr>
 <td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/multgee/man/ordLORgee.html" class="external-link">multgee::ordLORgee()</a></code></p>
-</div></td>
-<td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
-<p>Experimental support. Use <code><a href="../reference/tidy_multgee.html">tidy_multgee()</a></code> as <code>tidy_fun</code>.</p>
-</div></td>
-</tr>
-<tr>
-<td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
 <p><code><a href="https://rdrr.io/pkg/nnet/man/multinom.html" class="external-link">nnet::multinom()</a></code></p>
 </div></td>
-<td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md"></div></td>
+<td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md"></div></td>
 </tr>
 <tr>
-<td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
+<td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
 <p><code><a href="https://rdrr.io/pkg/ordinal/man/clm.html" class="external-link">ordinal::clm()</a></code></p>
 </div></td>
-<td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
+<td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
 <p>Limited support for models with nominal predictors.</p>
 </div></td>
 </tr>
 <tr>
-<td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
+<td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
 <p><code><a href="https://rdrr.io/pkg/ordinal/man/clmm.html" class="external-link">ordinal::clmm()</a></code></p>
 </div></td>
-<td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
+<td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
 <p>Limited support for models with nominal predictors.</p>
 </div></td>
 </tr>
 <tr>
-<td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
+<td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
 <p><code><a href="https://parsnip.tidymodels.org/reference/model_fit.html" class="external-link">parsnip::model_fit</a></code></p>
 </div></td>
-<td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
+<td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
 <p>Supported as long as the type of model and the engine is supported.</p>
 </div></td>
 </tr>
 <tr>
-<td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
+<td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
 <p><code><a href="https://rdrr.io/pkg/plm/man/plm.html" class="external-link">plm::plm()</a></code></p>
 </div></td>
-<td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md"></div></td>
+<td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md"></div></td>
 </tr>
 <tr>
-<td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
+<td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
 <p><code><a href="https://mc-stan.org/rstanarm/reference/stan_glm.html" class="external-link">rstanarm::stan_glm()</a></code></p>
 </div></td>
-<td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
+<td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
 <p><code>broom.mixed</code> package required</p>
 </div></td>
 </tr>
 <tr>
-<td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
+<td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
 <p><code><a href="https://rdrr.io/r/stats/aov.html" class="external-link">stats::aov()</a></code></p>
 </div></td>
-<td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
+<td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
 <p>Reference rows are not relevant for such models.</p>
 </div></td>
 </tr>
 <tr>
-<td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">stats::glm()</a></code></p>
-</div></td>
-<td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md"></div></td>
-</tr>
-<tr>
 <td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">stats::lm()</a></code></p>
+<p><code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">stats::glm()</a></code></p>
 </div></td>
 <td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md"></div></td>
 </tr>
 <tr>
 <td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
+<p><code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">stats::lm()</a></code></p>
+</div></td>
+<td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md"></div></td>
+</tr>
+<tr>
+<td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
 <p><code><a href="https://rdrr.io/r/stats/nls.html" class="external-link">stats::nls()</a></code></p>
 </div></td>
-<td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
+<td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
 <p>Limited support</p>
 </div></td>
 </tr>
 <tr>
-<td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
+<td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
 <p><code><a href="https://rdrr.io/pkg/survey/man/svycoxph.html" class="external-link">survey::svycoxph()</a></code></p>
 </div></td>
-<td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md"></div></td>
+<td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md"></div></td>
 </tr>
 <tr>
-<td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
+<td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
 <p><code><a href="https://rdrr.io/pkg/survey/man/svyglm.html" class="external-link">survey::svyglm()</a></code></p>
 </div></td>
-<td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md"></div></td>
+<td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md"></div></td>
 </tr>
 <tr>
-<td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
+<td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
 <p><code><a href="https://rdrr.io/pkg/survey/man/svyolr.html" class="external-link">survey::svyolr()</a></code></p>
 </div></td>
-<td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md"></div></td>
+<td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md"></div></td>
 </tr>
 <tr>
-<td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
+<td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
 <p><code><a href="https://rdrr.io/pkg/survival/man/clogit.html" class="external-link">survival::clogit()</a></code></p>
 </div></td>
-<td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md"></div></td>
+<td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md"></div></td>
 </tr>
 <tr>
-<td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
+<td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
 <p><code><a href="https://rdrr.io/pkg/survival/man/coxph.html" class="external-link">survival::coxph()</a></code></p>
 </div></td>
+<td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md"></div></td>
+</tr>
+<tr>
+<td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
+<p><code><a href="https://rdrr.io/pkg/survival/man/survreg.html" class="external-link">survival::survreg()</a></code></p>
+</div></td>
 <td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md"></div></td>
 </tr>
 <tr>
 <td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/survival/man/survreg.html" class="external-link">survival::survreg()</a></code></p>
+<p><code><a href="https://mskcc-epi-bio.github.io/tidycmprsk/reference/crr.html" class="external-link">tidycmprsk::crr()</a></code></p>
 </div></td>
 <td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md"></div></td>
 </tr>
 <tr>
 <td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
-<p><code><a href="https://mskcc-epi-bio.github.io/tidycmprsk/reference/crr.html" class="external-link">tidycmprsk::crr()</a></code></p>
-</div></td>
-<td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md"></div></td>
-</tr>
-<tr>
-<td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
 <p><code><a href="https://rdrr.io/pkg/VGAM/man/vglm.html" class="external-link">VGAM::vglm()</a></code></p>
 </div></td>
-<td class="gt_row gt_left" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
+<td class="gt_row gt_left gt_striped" style="vertical-align: top; font-size:  12px;"><div class="gt_from_md">
 <p>Limited support. It is recommended to use <code><a href="../reference/tidy_parameters.html">tidy_parameters()</a></code> as <code>tidy_fun</code>.</p>
 </div></td>
 </tr>

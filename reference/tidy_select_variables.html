@@ -18,7 +18,7 @@ To remove the intercept, use tidy_remove_intercept()."><!-- mathjax --><script s
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">broom.helpers</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.9.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.9.0</span>
       </span>
     </div>
 
@@ -84,13 +84,6 @@ and <code><a href="select_helpers.html">all_interaction()</a></code></p></dd>
 <dd><p>the corresponding model, if not attached to <code>x</code></p></dd>
 
 </dl></div>
-    <div id="value">
-    <h2>Value</h2>
-    
-
-<p>The <code>x</code> tibble limited to the included variables (and eventually the intercept),
-sorted according to the <code>include</code> parameter.</p>
-    </div>
     <div id="details">
     <h2>Details</h2>
     <p>If the <code>variable</code> column is not yet available in <code>x</code>,
@@ -223,10 +216,10 @@ sorted according to the <code>include</code> parameter.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   term  varia…¹ var_c…² var_t…³ var_n…⁴ estim…⁵ std.e…⁶ stati…⁷  p.value conf.…⁸</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> (Int… (Inter… <span style="color: #BB0000;">NA</span>      interc…      <span style="color: #BB0000;">NA</span>   2.18    0.176  12.4   3.08<span style="color: #949494;">e</span><span style="color: #BB0000;">-35</span>   1.84 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> AgeC… Age     charac… dichot…       2  -<span style="color: #BB0000;">0.110</span>   0.335  -<span style="color: #BB0000;">0.328</span> 7.43<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span>  -<span style="color: #BB0000;">0.759</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Clas… Class   charac… catego…       4  -<span style="color: #BB0000;">1.03</span>    0.200  -<span style="color: #BB0000;">5.17</span>  2.29<span style="color: #949494;">e</span><span style="color: #BB0000;">- 7</span>  -<span style="color: #BB0000;">1.43</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Clas… Class   charac… catego…       4  -<span style="color: #BB0000;">1.81</span>    0.176 -<span style="color: #BB0000;">10.3</span>   7.79<span style="color: #949494;">e</span><span style="color: #BB0000;">-25</span>  -<span style="color: #BB0000;">2.16</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Clas… Class   charac… catego…       4  -<span style="color: #BB0000;">0.803</span>   0.160  -<span style="color: #BB0000;">5.03</span>  4.99<span style="color: #949494;">e</span><span style="color: #BB0000;">- 7</span>  -<span style="color: #BB0000;">1.12</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Clas… Class   charac… catego…       4  -<span style="color: #BB0000;">1.03</span>    0.200  -<span style="color: #BB0000;">5.17</span>  2.29<span style="color: #949494;">e</span><span style="color: #BB0000;">- 7</span>  -<span style="color: #BB0000;">1.43</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Clas… Class   charac… catego…       4  -<span style="color: #BB0000;">1.81</span>    0.176 -<span style="color: #BB0000;">10.3</span>   7.79<span style="color: #949494;">e</span><span style="color: #BB0000;">-25</span>  -<span style="color: #BB0000;">2.16</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Clas… Class   charac… catego…       4  -<span style="color: #BB0000;">0.803</span>   0.160  -<span style="color: #BB0000;">5.03</span>  4.99<span style="color: #949494;">e</span><span style="color: #BB0000;">- 7</span>  -<span style="color: #BB0000;">1.12</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> AgeC… Age     charac… dichot…       2  -<span style="color: #BB0000;">0.110</span>   0.335  -<span style="color: #BB0000;">0.328</span> 7.43<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span>  -<span style="color: #BB0000;">0.759</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> AgeC… Age:Sex <span style="color: #BB0000;">NA</span>      intera…      <span style="color: #BB0000;">NA</span>   1.90    0.433   4.39  1.12<span style="color: #949494;">e</span><span style="color: #BB0000;">- 5</span>   1.04 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 1 more variable: conf.high &lt;dbl&gt;, and abbreviated variable names</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ¹​variable, ²​var_class, ³​var_type, ⁴​var_nlevels, ⁵​estimate, ⁶​std.error,</span></span>

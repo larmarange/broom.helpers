@@ -36,7 +36,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">broom.helpers</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.9.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.9.0</span>
       </span>
     </div>
 
@@ -83,7 +83,7 @@
 <!-- badges: start -->
 <p>The broom.helpers package provides suite of functions to work with regression model <code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">broom::tidy()</a></code> tibbles.</p>
 <p>The suite includes functions to group regression model terms by variable, insert reference and header rows for categorical variables, add variable labels, and more.</p>
-<p><code>broom.helpers</code> is used, in particular, by <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html" class="external-link">gtsummary::tbl_regression()</a></code> for producing <a href="https://www.danieldsjoberg.com/gtsummary/articles/tbl_regression.html" class="external-link">nice formatted tables of model coefficients</a> and by <code>ggstats::ggcoef_model()</code> for <a href="https://larmarange.github.io/ggstats/articles/ggcoef_model.html" class="external-link">plotting model coefficients</a>.</p>
+<p><code>broom.helpers</code> is used, in particular, by <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html" class="external-link">gtsummary::tbl_regression()</a></code> for producing <a href="https://www.danieldsjoberg.com/gtsummary/articles/tbl_regression.html" class="external-link">nice formatted tables of model coefficients</a> and by <code>GGally::ggcoef_model()</code> for <a href="https://ggobi.github.io/ggally/articles/ggcoef_model.html" class="external-link">plotting model coefficients</a>.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -106,16 +106,15 @@
 <span><span class="va">ex1</span> <span class="op">&lt;-</span> <span class="va">mod1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="reference/tidy_plus_plus.html">tidy_plus_plus</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">ex1</span></span>
 <span><span class="co">#&gt; # A tibble: 4 × 17</span></span>
-<span><span class="co">#&gt;   term     varia…¹ var_l…² var_c…³ var_t…⁴ var_n…⁵ contr…⁶ contr…⁷ refer…⁸ label</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;lgl&gt;   &lt;chr&gt;</span></span>
-<span><span class="co">#&gt; 1 Sepal.W… Sepal.… Sepal.… numeric contin…      NA &lt;NA&gt;    &lt;NA&gt;    NA      Sepa…</span></span>
-<span><span class="co">#&gt; 2 Species… Species Species factor  catego…       3 contr.… treatm… TRUE    seto…</span></span>
-<span><span class="co">#&gt; 3 Species… Species Species factor  catego…       3 contr.… treatm… FALSE   vers…</span></span>
-<span><span class="co">#&gt; 4 Species… Species Species factor  catego…       3 contr.… treatm… FALSE   virg…</span></span>
-<span><span class="co">#&gt; # … with 7 more variables: n_obs &lt;dbl&gt;, estimate &lt;dbl&gt;, std.error &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   statistic &lt;dbl&gt;, p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;, and</span></span>
-<span><span class="co">#&gt; #   abbreviated variable names ¹​variable, ²​var_label, ³​var_class, ⁴​var_type,</span></span>
-<span><span class="co">#&gt; #   ⁵​var_nlevels, ⁶​contrasts, ⁷​contrasts_type, ⁸​reference_row</span></span>
+<span><span class="co">#&gt;   term              variable  var_label var_class var_type var_nlevels contrasts</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;             &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;          &lt;int&gt; &lt;chr&gt;    </span></span>
+<span><span class="co">#&gt; 1 Sepal.Width       Sepal.Wi… Sepal.Wi… numeric   continu…          NA &lt;NA&gt;     </span></span>
+<span><span class="co">#&gt; 2 Speciessetosa     Species   Species   factor    categor…           3 contr.tr…</span></span>
+<span><span class="co">#&gt; 3 Speciesversicolor Species   Species   factor    categor…           3 contr.tr…</span></span>
+<span><span class="co">#&gt; 4 Speciesvirginica  Species   Species   factor    categor…           3 contr.tr…</span></span>
+<span><span class="co">#&gt; # … with 10 more variables: contrasts_type &lt;chr&gt;, reference_row &lt;lgl&gt;,</span></span>
+<span><span class="co">#&gt; #   label &lt;chr&gt;, n_obs &lt;dbl&gt;, estimate &lt;dbl&gt;, std.error &lt;dbl&gt;, statistic &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;</span></span>
 <span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">ex1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Rows: 4</span></span>
 <span><span class="co">#&gt; Columns: 17</span></span>
@@ -155,30 +154,28 @@
 <span>  <span class="op">)</span></span>
 <span><span class="va">ex2</span></span>
 <span><span class="co">#&gt; # A tibble: 17 × 19</span></span>
-<span><span class="co">#&gt;    term  varia…¹ var_l…² var_c…³ var_t…⁴ var_n…⁵ heade…⁶ contr…⁷ contr…⁸ refer…⁹</span></span>
-<span><span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;int&gt; &lt;lgl&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;lgl&gt;  </span></span>
-<span><span class="co">#&gt;  1 &lt;NA&gt;  age     Age (i… nmatri… contin…      NA TRUE    &lt;NA&gt;    &lt;NA&gt;    NA     </span></span>
-<span><span class="co">#&gt;  2 poly… age     Age (i… nmatri… contin…      NA FALSE   &lt;NA&gt;    &lt;NA&gt;    NA     </span></span>
-<span><span class="co">#&gt;  3 poly… age     Age (i… nmatri… contin…      NA FALSE   &lt;NA&gt;    &lt;NA&gt;    NA     </span></span>
-<span><span class="co">#&gt;  4 poly… age     Age (i… nmatri… contin…      NA FALSE   &lt;NA&gt;    &lt;NA&gt;    NA     </span></span>
-<span><span class="co">#&gt;  5 &lt;NA&gt;  stage   T Stage factor  catego…       4 TRUE    contr.… treatm… NA     </span></span>
-<span><span class="co">#&gt;  6 stag… stage   T Stage factor  catego…       4 FALSE   contr.… treatm… FALSE  </span></span>
-<span><span class="co">#&gt;  7 stag… stage   T Stage factor  catego…       4 FALSE   contr.… treatm… FALSE  </span></span>
-<span><span class="co">#&gt;  8 stag… stage   T Stage factor  catego…       4 FALSE   contr.… treatm… TRUE   </span></span>
-<span><span class="co">#&gt;  9 stag… stage   T Stage factor  catego…       4 FALSE   contr.… treatm… FALSE  </span></span>
-<span><span class="co">#&gt; 10 &lt;NA&gt;  grade   Grade   factor  catego…       3 TRUE    contr.… sum     NA     </span></span>
-<span><span class="co">#&gt; 11 grad… grade   Grade   factor  catego…       3 FALSE   contr.… sum     FALSE  </span></span>
-<span><span class="co">#&gt; 12 grad… grade   Grade   factor  catego…       3 FALSE   contr.… sum     FALSE  </span></span>
-<span><span class="co">#&gt; 13 grad… grade   Grade   factor  catego…       3 FALSE   contr.… sum     TRUE   </span></span>
-<span><span class="co">#&gt; 14 trtD… trt     Chemot… charac… dichot…       2 NA      contr.… treatm… FALSE  </span></span>
-<span><span class="co">#&gt; 15 &lt;NA&gt;  grade:… Grade … &lt;NA&gt;    intera…      NA TRUE    &lt;NA&gt;    &lt;NA&gt;    NA     </span></span>
-<span><span class="co">#&gt; 16 grad… grade:… Grade … &lt;NA&gt;    intera…      NA FALSE   &lt;NA&gt;    &lt;NA&gt;    NA     </span></span>
-<span><span class="co">#&gt; 17 grad… grade:… Grade … &lt;NA&gt;    intera…      NA FALSE   &lt;NA&gt;    &lt;NA&gt;    NA     </span></span>
-<span><span class="co">#&gt; # … with 9 more variables: label &lt;chr&gt;, n_obs &lt;dbl&gt;, n_event &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   estimate &lt;dbl&gt;, std.error &lt;dbl&gt;, statistic &lt;dbl&gt;, p.value &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;, and abbreviated variable names ¹​variable,</span></span>
-<span><span class="co">#&gt; #   ²​var_label, ³​var_class, ⁴​var_type, ⁵​var_nlevels, ⁶​header_row, ⁷​contrasts,</span></span>
-<span><span class="co">#&gt; #   ⁸​contrasts_type, ⁹​reference_row</span></span>
+<span><span class="co">#&gt;    term   variable var_label var_class var_type var_nlevels header_row contrasts</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;          &lt;int&gt; &lt;lgl&gt;      &lt;chr&gt;    </span></span>
+<span><span class="co">#&gt;  1 &lt;NA&gt;   age      Age (in … nmatrix.3 continu…          NA TRUE       &lt;NA&gt;     </span></span>
+<span><span class="co">#&gt;  2 poly(… age      Age (in … nmatrix.3 continu…          NA FALSE      &lt;NA&gt;     </span></span>
+<span><span class="co">#&gt;  3 poly(… age      Age (in … nmatrix.3 continu…          NA FALSE      &lt;NA&gt;     </span></span>
+<span><span class="co">#&gt;  4 poly(… age      Age (in … nmatrix.3 continu…          NA FALSE      &lt;NA&gt;     </span></span>
+<span><span class="co">#&gt;  5 &lt;NA&gt;   stage    T Stage   factor    categor…           4 TRUE       contr.tr…</span></span>
+<span><span class="co">#&gt;  6 stage1 stage    T Stage   factor    categor…           4 FALSE      contr.tr…</span></span>
+<span><span class="co">#&gt;  7 stage2 stage    T Stage   factor    categor…           4 FALSE      contr.tr…</span></span>
+<span><span class="co">#&gt;  8 stage3 stage    T Stage   factor    categor…           4 FALSE      contr.tr…</span></span>
+<span><span class="co">#&gt;  9 stage4 stage    T Stage   factor    categor…           4 FALSE      contr.tr…</span></span>
+<span><span class="co">#&gt; 10 &lt;NA&gt;   grade    Grade     factor    categor…           3 TRUE       contr.sum</span></span>
+<span><span class="co">#&gt; 11 grade1 grade    Grade     factor    categor…           3 FALSE      contr.sum</span></span>
+<span><span class="co">#&gt; 12 grade2 grade    Grade     factor    categor…           3 FALSE      contr.sum</span></span>
+<span><span class="co">#&gt; 13 grade3 grade    Grade     factor    categor…           3 FALSE      contr.sum</span></span>
+<span><span class="co">#&gt; 14 trtDr… trt      Chemothe… character dichoto…           2 NA         contr.tr…</span></span>
+<span><span class="co">#&gt; 15 &lt;NA&gt;   grade:t… Grade * … &lt;NA&gt;      interac…          NA TRUE       &lt;NA&gt;     </span></span>
+<span><span class="co">#&gt; 16 grade… grade:t… Grade * … &lt;NA&gt;      interac…          NA FALSE      &lt;NA&gt;     </span></span>
+<span><span class="co">#&gt; 17 grade… grade:t… Grade * … &lt;NA&gt;      interac…          NA FALSE      &lt;NA&gt;     </span></span>
+<span><span class="co">#&gt; # … with 11 more variables: contrasts_type &lt;chr&gt;, reference_row &lt;lgl&gt;,</span></span>
+<span><span class="co">#&gt; #   label &lt;chr&gt;, n_obs &lt;dbl&gt;, n_event &lt;dbl&gt;, estimate &lt;dbl&gt;, std.error &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   statistic &lt;dbl&gt;, p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;</span></span>
 <span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">ex2</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Rows: 17</span></span>
 <span><span class="co">#&gt; Columns: 19</span></span>
@@ -217,16 +214,15 @@
 <span>  <span class="va">tidy_remove_intercept</span></span>
 <span><span class="va">ex3</span></span>
 <span><span class="co">#&gt; # A tibble: 4 × 16</span></span>
-<span><span class="co">#&gt;   term     varia…¹ var_l…² var_c…³ var_t…⁴ var_n…⁵ contr…⁶ contr…⁷ refer…⁸ label</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;lgl&gt;   &lt;chr&gt;</span></span>
-<span><span class="co">#&gt; 1 Sepal.W… Sepal.… Sepal.… numeric contin…      NA &lt;NA&gt;    &lt;NA&gt;    NA      Sepa…</span></span>
-<span><span class="co">#&gt; 2 Species… Species Species factor  catego…       3 contr.… treatm… TRUE    seto…</span></span>
-<span><span class="co">#&gt; 3 Species… Species Species factor  catego…       3 contr.… treatm… FALSE   vers…</span></span>
-<span><span class="co">#&gt; 4 Species… Species Species factor  catego…       3 contr.… treatm… FALSE   virg…</span></span>
-<span><span class="co">#&gt; # … with 6 more variables: estimate &lt;dbl&gt;, std.error &lt;dbl&gt;, statistic &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;, and abbreviated variable</span></span>
-<span><span class="co">#&gt; #   names ¹​variable, ²​var_label, ³​var_class, ⁴​var_type, ⁵​var_nlevels,</span></span>
-<span><span class="co">#&gt; #   ⁶​contrasts, ⁷​contrasts_type, ⁸​reference_row</span></span>
+<span><span class="co">#&gt;   term              variable  var_label var_class var_type var_nlevels contrasts</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;             &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;          &lt;int&gt; &lt;chr&gt;    </span></span>
+<span><span class="co">#&gt; 1 Sepal.Width       Sepal.Wi… Sepal.Wi… numeric   continu…          NA &lt;NA&gt;     </span></span>
+<span><span class="co">#&gt; 2 Speciessetosa     Species   Species   factor    categor…           3 contr.tr…</span></span>
+<span><span class="co">#&gt; 3 Speciesversicolor Species   Species   factor    categor…           3 contr.tr…</span></span>
+<span><span class="co">#&gt; 4 Speciesvirginica  Species   Species   factor    categor…           3 contr.tr…</span></span>
+<span><span class="co">#&gt; # … with 9 more variables: contrasts_type &lt;chr&gt;, reference_row &lt;lgl&gt;,</span></span>
+<span><span class="co">#&gt; #   label &lt;chr&gt;, estimate &lt;dbl&gt;, std.error &lt;dbl&gt;, statistic &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;</span></span>
 <span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">ex3</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Rows: 4</span></span>
 <span><span class="co">#&gt; Columns: 16</span></span>
@@ -260,32 +256,31 @@
 <span>  <span class="fu"><a href="reference/tidy_add_header_rows.html">tidy_add_header_rows</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">ex4</span></span>
 <span><span class="co">#&gt; # A tibble: 20 × 17</span></span>
-<span><span class="co">#&gt;    term  varia…¹ var_l…² var_c…³ var_t…⁴ var_n…⁵ heade…⁶ contr…⁷ contr…⁸ refer…⁹</span></span>
-<span><span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;int&gt; &lt;lgl&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;lgl&gt;  </span></span>
-<span><span class="co">#&gt;  1 (Int… (Inter… (Inter… &lt;NA&gt;    interc…      NA NA      &lt;NA&gt;    &lt;NA&gt;    NA     </span></span>
-<span><span class="co">#&gt;  2 &lt;NA&gt;  age     Age in… nmatri… contin…      NA TRUE    &lt;NA&gt;    &lt;NA&gt;    NA     </span></span>
-<span><span class="co">#&gt;  3 poly… age     Age in… nmatri… contin…      NA FALSE   &lt;NA&gt;    &lt;NA&gt;    NA     </span></span>
-<span><span class="co">#&gt;  4 poly… age     Age in… nmatri… contin…      NA FALSE   &lt;NA&gt;    &lt;NA&gt;    NA     </span></span>
-<span><span class="co">#&gt;  5 poly… age     Age in… nmatri… contin…      NA FALSE   &lt;NA&gt;    &lt;NA&gt;    NA     </span></span>
-<span><span class="co">#&gt;  6 &lt;NA&gt;  stage   T Stage factor  catego…       4 TRUE    contr.… treatm… NA     </span></span>
-<span><span class="co">#&gt;  7 stag… stage   T Stage factor  catego…       4 FALSE   contr.… treatm… FALSE  </span></span>
-<span><span class="co">#&gt;  8 stag… stage   T Stage factor  catego…       4 FALSE   contr.… treatm… FALSE  </span></span>
-<span><span class="co">#&gt;  9 stag… stage   T Stage factor  catego…       4 FALSE   contr.… treatm… TRUE   </span></span>
-<span><span class="co">#&gt; 10 stag… stage   T Stage factor  catego…       4 FALSE   contr.… treatm… FALSE  </span></span>
-<span><span class="co">#&gt; 11 &lt;NA&gt;  grade   Grade   factor  catego…       3 TRUE    contr.… sum     NA     </span></span>
-<span><span class="co">#&gt; 12 grad… grade   Grade   factor  catego…       3 FALSE   contr.… sum     FALSE  </span></span>
-<span><span class="co">#&gt; 13 grad… grade   Grade   factor  catego…       3 FALSE   contr.… sum     FALSE  </span></span>
-<span><span class="co">#&gt; 14 grad… grade   Grade   factor  catego…       3 FALSE   contr.… sum     TRUE   </span></span>
-<span><span class="co">#&gt; 15 &lt;NA&gt;  trt     Chemot… charac… dichot…       2 TRUE    contr.… treatm… NA     </span></span>
-<span><span class="co">#&gt; 16 trtD… trt     Chemot… charac… dichot…       2 FALSE   contr.… treatm… TRUE   </span></span>
-<span><span class="co">#&gt; 17 trtD… trt     Chemot… charac… dichot…       2 FALSE   contr.… treatm… FALSE  </span></span>
-<span><span class="co">#&gt; 18 &lt;NA&gt;  grade:… Grade … &lt;NA&gt;    intera…      NA TRUE    &lt;NA&gt;    &lt;NA&gt;    NA     </span></span>
-<span><span class="co">#&gt; 19 grad… grade:… Grade … &lt;NA&gt;    intera…      NA FALSE   &lt;NA&gt;    &lt;NA&gt;    NA     </span></span>
-<span><span class="co">#&gt; 20 grad… grade:… Grade … &lt;NA&gt;    intera…      NA FALSE   &lt;NA&gt;    &lt;NA&gt;    NA     </span></span>
-<span><span class="co">#&gt; # … with 7 more variables: label &lt;chr&gt;, estimate &lt;dbl&gt;, std.error &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   statistic &lt;dbl&gt;, p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;, and</span></span>
-<span><span class="co">#&gt; #   abbreviated variable names ¹​variable, ²​var_label, ³​var_class, ⁴​var_type,</span></span>
-<span><span class="co">#&gt; #   ⁵​var_nlevels, ⁶​header_row, ⁷​contrasts, ⁸​contrasts_type, ⁹​reference_row</span></span>
+<span><span class="co">#&gt;    term   variable var_label var_class var_type var_nlevels header_row contrasts</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;          &lt;int&gt; &lt;lgl&gt;      &lt;chr&gt;    </span></span>
+<span><span class="co">#&gt;  1 (Inte… (Interc… (Interce… &lt;NA&gt;      interce…          NA NA         &lt;NA&gt;     </span></span>
+<span><span class="co">#&gt;  2 &lt;NA&gt;   age      Age in y… nmatrix.3 continu…          NA TRUE       &lt;NA&gt;     </span></span>
+<span><span class="co">#&gt;  3 poly(… age      Age in y… nmatrix.3 continu…          NA FALSE      &lt;NA&gt;     </span></span>
+<span><span class="co">#&gt;  4 poly(… age      Age in y… nmatrix.3 continu…          NA FALSE      &lt;NA&gt;     </span></span>
+<span><span class="co">#&gt;  5 poly(… age      Age in y… nmatrix.3 continu…          NA FALSE      &lt;NA&gt;     </span></span>
+<span><span class="co">#&gt;  6 &lt;NA&gt;   stage    T Stage   factor    categor…           4 TRUE       contr.tr…</span></span>
+<span><span class="co">#&gt;  7 stage1 stage    T Stage   factor    categor…           4 FALSE      contr.tr…</span></span>
+<span><span class="co">#&gt;  8 stage2 stage    T Stage   factor    categor…           4 FALSE      contr.tr…</span></span>
+<span><span class="co">#&gt;  9 stage3 stage    T Stage   factor    categor…           4 FALSE      contr.tr…</span></span>
+<span><span class="co">#&gt; 10 stage4 stage    T Stage   factor    categor…           4 FALSE      contr.tr…</span></span>
+<span><span class="co">#&gt; 11 &lt;NA&gt;   grade    Grade     factor    categor…           3 TRUE       contr.sum</span></span>
+<span><span class="co">#&gt; 12 grade1 grade    Grade     factor    categor…           3 FALSE      contr.sum</span></span>
+<span><span class="co">#&gt; 13 grade2 grade    Grade     factor    categor…           3 FALSE      contr.sum</span></span>
+<span><span class="co">#&gt; 14 grade3 grade    Grade     factor    categor…           3 FALSE      contr.sum</span></span>
+<span><span class="co">#&gt; 15 &lt;NA&gt;   trt      Chemothe… character dichoto…           2 TRUE       contr.tr…</span></span>
+<span><span class="co">#&gt; 16 trtDr… trt      Chemothe… character dichoto…           2 FALSE      contr.tr…</span></span>
+<span><span class="co">#&gt; 17 trtDr… trt      Chemothe… character dichoto…           2 FALSE      contr.tr…</span></span>
+<span><span class="co">#&gt; 18 &lt;NA&gt;   grade:t… Grade * … &lt;NA&gt;      interac…          NA TRUE       &lt;NA&gt;     </span></span>
+<span><span class="co">#&gt; 19 grade… grade:t… Grade * … &lt;NA&gt;      interac…          NA FALSE      &lt;NA&gt;     </span></span>
+<span><span class="co">#&gt; 20 grade… grade:t… Grade * … &lt;NA&gt;      interac…          NA FALSE      &lt;NA&gt;     </span></span>
+<span><span class="co">#&gt; # … with 9 more variables: contrasts_type &lt;chr&gt;, reference_row &lt;lgl&gt;,</span></span>
+<span><span class="co">#&gt; #   label &lt;chr&gt;, estimate &lt;dbl&gt;, std.error &lt;dbl&gt;, statistic &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;</span></span>
 <span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">ex4</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Rows: 20</span></span>
 <span><span class="co">#&gt; Columns: 17</span></span>
