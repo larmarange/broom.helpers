@@ -13,4 +13,4 @@
 ^revdep$
 ^CRAN-SUBMISSION$
 ^data-raw$
-^.lintr
+^.lintr$
