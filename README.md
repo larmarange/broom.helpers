@@ -29,19 +29,25 @@ coefficients](https://www.danieldsjoberg.com/gtsummary/articles/tbl_regression.h
 and by `ggstats::ggcoef_model()` for [plotting model
 coefficients](https://larmarange.github.io/ggstats/articles/ggcoef_model.html).
 
-## Installation
+## Installation & Documentation
 
-To install stable version:
+To install **stable version**:
 
 ``` r
 install.packages("broom.helpers")
 ```
 
-To install development version:
+Documentation of stable version:
+<https://larmarange.github.io/broom.helpers/>
+
+To install **development version**:
 
 ``` r
-devtools::install_github("larmarange/broom.helpers")
+remotes::install_github("larmarange/broom.helpers")
 ```
+
+Documentation of development version:
+<https://larmarange.github.io/broom.helpers/dev/>
 
 ## Examples
 
