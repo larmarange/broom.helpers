@@ -12,6 +12,7 @@ tidy_attach_model(x, model, .attributes = NULL)
 tidy_and_attach(
   model,
   tidy_fun = tidy_with_broom_or_parameters,
+  conf.level = 0.95,
   exponentiate = FALSE,
   ...
 )
@@ -28,6 +29,8 @@ tidy_detach_model(x)
 \item{.attributes}{named list of additional attributes to be attached to \code{x}}
 
 \item{tidy_fun}{option to specify a custom tidier function}
+
+\item{conf.level}{level of confidence for confidence intervals (default: 95\%)}
 
 \item{exponentiate}{logical indicating whether or not to exponentiate the
 coefficient estimates. This is typical for logistic, Poisson and Cox models,
@@ -61,6 +64,7 @@ Other tidy_helpers:
 \code{\link{tidy_add_estimate_to_reference_rows}()},
 \code{\link{tidy_add_header_rows}()},
 \code{\link{tidy_add_n}()},
+\code{\link{tidy_add_pairwise_contrasts}()},
 \code{\link{tidy_add_reference_rows}()},
 \code{\link{tidy_add_term_labels}()},
 \code{\link{tidy_add_variable_labels}()},

@@ -8,6 +8,7 @@ tidy_plus_plus(
   model,
   tidy_fun = tidy_with_broom_or_parameters,
   conf.int = TRUE,
+  conf.level = 0.95,
   exponentiate = FALSE,
   variable_labels = NULL,
   term_labels = NULL,
@@ -17,6 +18,11 @@ tidy_plus_plus(
   disambiguate_sep = ".",
   add_reference_rows = TRUE,
   no_reference_row = NULL,
+  add_pairwise_contrasts = FALSE,
+  pairwise_variables = all_categorical(),
+  keep_model_terms = TRUE,
+  pairwise_reverse = TRUE,
+  emmeans_args = list(),
   add_estimate_to_reference_rows = TRUE,
   add_header_rows = FALSE,
   show_single_row = NULL,
@@ -35,6 +41,8 @@ tidy_plus_plus(
 \item{tidy_fun}{option to specify a custom tidier function}
 
 \item{conf.int}{should confidence intervals be computed? (see \code{\link[broom:reexports]{broom::tidy()}})}
+
+\item{conf.level}{level of confidence for confidence intervals (default: 95\%)}
 
 \item{exponentiate}{logical indicating whether or not to exponentiate the
 coefficient estimates. This is typical for logistic, Poisson and Cox models,
@@ -60,7 +68,19 @@ labels of categorical terms with treatment or sum contrasts
 \item{no_reference_row}{variables (accepts \link[dplyr:select]{tidyselect} notation)
 for those no reference row should be added, when \code{add_reference_rows = TRUE}}
 
-\item{add_estimate_to_reference_rows}{should an estimate value be added to reference rows?}
+\item{add_pairwise_contrasts}{apply \code{\link[=tidy_add_pairwise_contrasts]{tidy_add_pairwise_contrasts()}}?}
+
+\item{pairwise_variables}{variables to add pairwise contrats
+(accepts \link[dplyr:select]{tidyselect} notation)}
+
+\item{keep_model_terms}{keep original model terms for variables where
+pairwise contrasts are added?}
+
+\item{emmeans_args}{list of additional parameter to pass to \code{\link[emmeans:emmeans]{emmeans::emmeans()}}
+when computing pairwise contrasts}
+
+\item{add_estimate_to_reference_rows}{should an estimate value be added
+to reference rows?}
 
 \item{add_header_rows}{should header rows be added?}
 
@@ -95,6 +115,7 @@ This function will apply sequentially:
 \item \code{\link[=tidy_identify_variables]{tidy_identify_variables()}}
 \item \code{\link[=tidy_add_contrasts]{tidy_add_contrasts()}}
 \item \code{\link[=tidy_add_reference_rows]{tidy_add_reference_rows()}}
+\item \code{\link[=tidy_add_pairwise_contrasts]{tidy_add_pairwise_contrasts()}}
 \item \code{\link[=tidy_add_estimate_to_reference_rows]{tidy_add_estimate_to_reference_rows()}}
 \item \code{\link[=tidy_add_variable_labels]{tidy_add_variable_labels()}}
 \item \code{\link[=tidy_add_term_labels]{tidy_add_term_labels()}}
@@ -163,6 +184,7 @@ Other tidy_helpers:
 \code{\link{tidy_add_estimate_to_reference_rows}()},
 \code{\link{tidy_add_header_rows}()},
 \code{\link{tidy_add_n}()},
+\code{\link{tidy_add_pairwise_contrasts}()},
 \code{\link{tidy_add_reference_rows}()},
 \code{\link{tidy_add_term_labels}()},
 \code{\link{tidy_add_variable_labels}()},
