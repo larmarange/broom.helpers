@@ -37,12 +37,14 @@
 #' @param no_reference_row variables (accepts [tidyselect][dplyr::select] notation)
 #' for those no reference row should be added, when `add_reference_rows = TRUE`
 #' @param add_pairwise_contrasts apply [tidy_add_pairwise_contrasts()]?
-#' @param pairwise_variables variables to add pairwise contrats
+#' @param pairwise_variables variables to add pairwise contrasts
 #' (accepts [tidyselect][dplyr::select] notation)
 #' @param keep_model_terms keep original model terms for variables where
-#' pairwise contrasts are added?
-#' @param emmeans_args list of additional parameter to pass to [emmeans::emmeans()]
-#' when computing pairwise contrasts
+#' pairwise contrasts are added? (default is `FALSE`)
+#' @param pairwise_reverse determines whether to use `"pairwise"` (if `TRUE`)
+#' or `"revpairwise"` (if `FALSE`), see [emmeans::contrast()]
+#' @param emmeans_args list of additional parameter to pass to
+#' [emmeans::emmeans()] when computing pairwise contrasts
 #' @param add_estimate_to_reference_rows should an estimate value be added
 #' to reference rows?
 #' @param add_header_rows should header rows be added?
@@ -52,11 +54,12 @@
 #' @param add_n should the number of observations be added?
 #' @param intercept should the intercept(s) be included?
 #' @inheritParams tidy_select_variables
-#' @param keep_model should the model be kept as an attribute of the final result?
-#' @param quiet logical argument whether broom.helpers should not return a message
-#' when requested output cannot be generated. Default is FALSE
+#' @param keep_model should the model be kept as an attribute of the final
+#' result?
+#' @param quiet logical argument whether broom.helpers should not return
+#' a message when requested output cannot be generated. Default is `FALSE`
 #' @param strict logical argument whether broom.helpers should return an error
-#' when requested output cannot be generated. Default is FALSE
+#' when requested output cannot be generated. Default is `FALSE`
 #' @param ... other arguments passed to `tidy_fun()`
 #' @family tidy_helpers
 #' @examplesIf interactive()
@@ -123,7 +126,7 @@ tidy_plus_plus <- function(
                            no_reference_row = NULL,
                            add_pairwise_contrasts = FALSE,
                            pairwise_variables = all_categorical(),
-                           keep_model_terms = TRUE,
+                           keep_model_terms = FALSE,
                            pairwise_reverse = TRUE,
                            emmeans_args = list(),
                            add_estimate_to_reference_rows = TRUE,

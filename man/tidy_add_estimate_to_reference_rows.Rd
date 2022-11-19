@@ -20,8 +20,8 @@ coefficient estimates. It should be consistent with the original call to
 
 \item{model}{the corresponding model, if not attached to \code{x}}
 
-\item{quiet}{logical argument whether broom.helpers should not return a message
-when requested output cannot be generated. Default is FALSE}
+\item{quiet}{logical argument whether broom.helpers should not return
+a message when requested output cannot be generated. Default is \code{FALSE}}
 }
 \description{
 For categorical variables with a treatment contrast

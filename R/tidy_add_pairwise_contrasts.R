@@ -11,8 +11,8 @@
 #' @param keep_model_terms keep terms from the model?
 #' @param pairwise_reverse determines whether to use `"pairwise"` (if `TRUE`)
 #' or `"revpairwise"` (if `FALSE`), see [emmeans::contrast()]
-#' @param conf.level confidence level, if `NULL` use the same value as
-#' [tidy_and_attach()]
+#' @param conf.level confidence level, if `NULL` use the value indicated
+#' previously in [tidy_and_attach()]
 #' @param model the corresponding model, if not attached to `x`
 #' @inheritParams tidy_plus_plus
 #' @export
@@ -20,7 +20,7 @@
 tidy_add_pairwise_contrasts <- function(
   x,
   variables = all_categorical(),
-  keep_model_terms = TRUE,
+  keep_model_terms = FALSE,
   pairwise_reverse = TRUE,
   conf.level = NULL,
   emmeans_args = list(),

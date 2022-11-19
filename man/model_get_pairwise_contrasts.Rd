@@ -7,7 +7,6 @@
 model_get_pairwise_contrasts(
   model,
   variables,
-  keep_model_terms = TRUE,
   pairwise_reverse = TRUE,
   conf.level = 0.95,
   emmeans_args = list()
@@ -15,6 +14,17 @@ model_get_pairwise_contrasts(
 }
 \arguments{
 \item{model}{a model object}
+
+\item{variables}{variables to add pairwise contrasts
+(accepts \link[dplyr:select]{tidyselect} notation)}
+
+\item{pairwise_reverse}{determines whether to use \code{"pairwise"} (if \code{TRUE})
+or \code{"revpairwise"} (if \code{FALSE}), see \code{\link[emmeans:contrast]{emmeans::contrast()}}}
+
+\item{conf.level}{level of confidence for confidence intervals}
+
+\item{emmeans_args}{list of additional parameter to pass to
+\code{\link[emmeans:emmeans]{emmeans::emmeans()}} when computing pairwise contrasts}
 }
 \description{
 It is computed with \code{\link[emmeans:emmeans]{emmeans::emmeans()}}.

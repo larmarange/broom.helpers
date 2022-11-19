@@ -7,7 +7,7 @@
 tidy_add_pairwise_contrasts(
   x,
   variables = all_categorical(),
-  keep_model_terms = TRUE,
+  keep_model_terms = FALSE,
   pairwise_reverse = TRUE,
   conf.level = NULL,
   emmeans_args = list(),
@@ -27,16 +27,16 @@ Accepts \link[dplyr:select]{tidyselect} syntax. Default is  \code{\link[=all_cat
 \item{pairwise_reverse}{determines whether to use \code{"pairwise"} (if \code{TRUE})
 or \code{"revpairwise"} (if \code{FALSE}), see \code{\link[emmeans:contrast]{emmeans::contrast()}}}
 
-\item{conf.level}{confidence level, if \code{NULL} use the same value as
-\code{\link[=tidy_and_attach]{tidy_and_attach()}}}
+\item{conf.level}{confidence level, if \code{NULL} use the value indicated
+previously in \code{\link[=tidy_and_attach]{tidy_and_attach()}}}
 
-\item{emmeans_args}{list of additional parameter to pass to \code{\link[emmeans:emmeans]{emmeans::emmeans()}}
-when computing pairwise contrasts}
+\item{emmeans_args}{list of additional parameter to pass to
+\code{\link[emmeans:emmeans]{emmeans::emmeans()}} when computing pairwise contrasts}
 
 \item{model}{the corresponding model, if not attached to \code{x}}
 
-\item{quiet}{logical argument whether broom.helpers should not return a message
-when requested output cannot be generated. Default is FALSE}
+\item{quiet}{logical argument whether broom.helpers should not return
+a message when requested output cannot be generated. Default is \code{FALSE}}
 }
 \description{
 If the \code{contrasts} column is not yet available in \code{x},

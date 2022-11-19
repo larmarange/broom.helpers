@@ -20,7 +20,7 @@ tidy_plus_plus(
   no_reference_row = NULL,
   add_pairwise_contrasts = FALSE,
   pairwise_variables = all_categorical(),
-  keep_model_terms = TRUE,
+  keep_model_terms = FALSE,
   pairwise_reverse = TRUE,
   emmeans_args = list(),
   add_estimate_to_reference_rows = TRUE,
@@ -70,14 +70,17 @@ for those no reference row should be added, when \code{add_reference_rows = TRUE
 
 \item{add_pairwise_contrasts}{apply \code{\link[=tidy_add_pairwise_contrasts]{tidy_add_pairwise_contrasts()}}?}
 
-\item{pairwise_variables}{variables to add pairwise contrats
+\item{pairwise_variables}{variables to add pairwise contrasts
 (accepts \link[dplyr:select]{tidyselect} notation)}
 
 \item{keep_model_terms}{keep original model terms for variables where
-pairwise contrasts are added?}
+pairwise contrasts are added? (default is \code{FALSE})}
 
-\item{emmeans_args}{list of additional parameter to pass to \code{\link[emmeans:emmeans]{emmeans::emmeans()}}
-when computing pairwise contrasts}
+\item{pairwise_reverse}{determines whether to use \code{"pairwise"} (if \code{TRUE})
+or \code{"revpairwise"} (if \code{FALSE}), see \code{\link[emmeans:contrast]{emmeans::contrast()}}}
+
+\item{emmeans_args}{list of additional parameter to pass to
+\code{\link[emmeans:emmeans]{emmeans::emmeans()}} when computing pairwise contrasts}
 
 \item{add_estimate_to_reference_rows}{should an estimate value be added
 to reference rows?}
@@ -97,13 +100,14 @@ syntax. Use \code{-} to remove a variable. Default is \code{everything()}.
 See also \code{\link[=all_continuous]{all_continuous()}}, \code{\link[=all_categorical]{all_categorical()}}, \code{\link[=all_dichotomous]{all_dichotomous()}}
 and \code{\link[=all_interaction]{all_interaction()}}}
 
-\item{keep_model}{should the model be kept as an attribute of the final result?}
+\item{keep_model}{should the model be kept as an attribute of the final
+result?}
 
-\item{quiet}{logical argument whether broom.helpers should not return a message
-when requested output cannot be generated. Default is FALSE}
+\item{quiet}{logical argument whether broom.helpers should not return
+a message when requested output cannot be generated. Default is \code{FALSE}}
 
 \item{strict}{logical argument whether broom.helpers should return an error
-when requested output cannot be generated. Default is FALSE}
+when requested output cannot be generated. Default is \code{FALSE}}
 
 \item{...}{other arguments passed to \code{tidy_fun()}}
 }

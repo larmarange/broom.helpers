@@ -22,11 +22,11 @@ See also \code{\link[=all_dichotomous]{all_dichotomous()}}}
 
 \item{model}{the corresponding model, if not attached to \code{x}}
 
-\item{quiet}{logical argument whether broom.helpers should not return a message
-when requested output cannot be generated. Default is FALSE}
+\item{quiet}{logical argument whether broom.helpers should not return
+a message when requested output cannot be generated. Default is \code{FALSE}}
 
 \item{strict}{logical argument whether broom.helpers should return an error
-when requested output cannot be generated. Default is FALSE}
+when requested output cannot be generated. Default is \code{FALSE}}
 }
 \description{
 For variables with several terms (usually categorical variables but
