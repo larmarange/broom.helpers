@@ -48,6 +48,27 @@ results tibble. Works only with models supported by \code{emmeans}, see
 If the \code{contrasts} column is not yet available in \code{x},
 \code{\link[=tidy_add_contrasts]{tidy_add_contrasts()}} will be automatically applied.
 }
+\examples{
+mod1 <- lm(Sepal.Length ~ Species, data = iris)
+mod1 \%>\%
+  tidy_and_attach() \%>\%
+  tidy_add_pairwise_contrasts()
+
+mod1 \%>\%
+  tidy_and_attach() \%>\%
+  tidy_add_pairwise_contrasts(pairwise_reverse = FALSE)
+
+mod1 \%>\%
+  tidy_and_attach() \%>\%
+  tidy_add_pairwise_contrasts(keep_model_terms = TRUE)
+
+if (.assert_package("gtsummary", boolean = TRUE)) {
+  mod2 <- glm(response ~ age + trt + grade, trial, family = binomial)
+  mod2 \%>\%
+    tidy_and_attach(exponentiate = TRUE) \%>\%
+    tidy_add_pairwise_contrasts()
+}
+}
 \seealso{
 Other tidy_helpers: 
 \code{\link{tidy_add_coefficients_type}()},

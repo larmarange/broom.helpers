@@ -15,8 +15,7 @@ model_get_pairwise_contrasts(
 \arguments{
 \item{model}{a model object}
 
-\item{variables}{variables to add pairwise contrasts
-(accepts \link[dplyr:select]{tidyselect} notation)}
+\item{variables}{names of variables to add pairwise contrasts}
 
 \item{pairwise_reverse}{determines whether to use \code{"pairwise"} (if \code{TRUE})
 or \code{"revpairwise"} (if \code{FALSE}), see \code{\link[emmeans:contrast]{emmeans::contrast()}}}
@@ -28,6 +27,10 @@ or \code{"revpairwise"} (if \code{FALSE}), see \code{\link[emmeans:contrast]{emm
 }
 \description{
 It is computed with \code{\link[emmeans:emmeans]{emmeans::emmeans()}}.
+}
+\examples{
+mod <- lm(Sepal.Length ~ Species, data = iris)
+mod \%>\% model_get_pairwise_contrasts(variables = "Species")
 }
 \seealso{
 Other model_helpers: 

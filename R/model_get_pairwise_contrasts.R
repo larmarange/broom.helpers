@@ -3,8 +3,7 @@
 #' It is computed with [emmeans::emmeans()].
 #'
 #' @param model a model object
-#' @param variables variables to add pairwise contrasts
-#' (accepts [tidyselect][dplyr::select] notation)
+#' @param variables names of variables to add pairwise contrasts
 #' @param pairwise_reverse determines whether to use `"pairwise"` (if `TRUE`)
 #' or `"revpairwise"` (if `FALSE`), see [emmeans::contrast()]
 #' @param conf.level level of confidence for confidence intervals
@@ -12,6 +11,9 @@
 #' [emmeans::emmeans()] when computing pairwise contrasts
 #' @family model_helpers
 #' @export
+#' @examples
+#' mod <- lm(Sepal.Length ~ Species, data = iris)
+#' mod %>% model_get_pairwise_contrasts(variables = "Species")
 model_get_pairwise_contrasts <- function(
   model,
   variables,

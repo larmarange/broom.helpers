@@ -22,6 +22,26 @@
 #' @inheritParams tidy_plus_plus
 #' @export
 #' @family tidy_helpers
+#' @examples
+#' mod1 <- lm(Sepal.Length ~ Species, data = iris)
+#' mod1 %>%
+#'   tidy_and_attach() %>%
+#'   tidy_add_pairwise_contrasts()
+#'
+#' mod1 %>%
+#'   tidy_and_attach() %>%
+#'   tidy_add_pairwise_contrasts(pairwise_reverse = FALSE)
+#'
+#' mod1 %>%
+#'   tidy_and_attach() %>%
+#'   tidy_add_pairwise_contrasts(keep_model_terms = TRUE)
+#'
+#' if (.assert_package("gtsummary", boolean = TRUE)) {
+#'   mod2 <- glm(response ~ age + trt + grade, trial, family = binomial)
+#'   mod2 %>%
+#'     tidy_and_attach(exponentiate = TRUE) %>%
+#'     tidy_add_pairwise_contrasts()
+#' }
 tidy_add_pairwise_contrasts <- function(
   x,
   variables = all_categorical(),
