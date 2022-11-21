@@ -37,7 +37,11 @@
 #'   tidy_add_pairwise_contrasts(keep_model_terms = TRUE)
 #'
 #' if (.assert_package("gtsummary", boolean = TRUE)) {
-#'   mod2 <- glm(response ~ age + trt + grade, trial, family = binomial)
+#'   mod2 <- glm(
+#'     response ~ age + trt + grade,
+#'     data = gtsummary::trial,
+#'     family = binomial
+#'   )
 #'   mod2 %>%
 #'     tidy_and_attach(exponentiate = TRUE) %>%
 #'     tidy_add_pairwise_contrasts()

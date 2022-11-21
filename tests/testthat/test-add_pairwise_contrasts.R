@@ -1,6 +1,7 @@
 test_that("tidy_add_pairwise_contrasts() works for glm", {
   skip_on_cran()
   skip_if_not_installed("emmeans")
+  skip_if_not_installed("gtsummary")
 
   mod <- glm(response ~ stage + trt, gtsummary::trial, family = binomial)
 
