@@ -40,7 +40,7 @@ a message when requested output cannot be generated. Default is \code{FALSE}}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
-Computes pairwaise contrasts with \code{\link[emmeans:emmeans]{emmeans::emmeans()}} and add them to the
+Computes pairwise contrasts with \code{\link[emmeans:emmeans]{emmeans::emmeans()}} and add them to the
 results tibble. Works only with models supported by \code{emmeans}, see
 \code{vignette("models", package = "emmeans")}.
 }
@@ -49,29 +49,33 @@ If the \code{contrasts} column is not yet available in \code{x},
 \code{\link[=tidy_add_contrasts]{tidy_add_contrasts()}} will be automatically applied.
 }
 \examples{
-mod1 <- lm(Sepal.Length ~ Species, data = iris)
-mod1 \%>\%
-  tidy_and_attach() \%>\%
-  tidy_add_pairwise_contrasts()
-
-mod1 \%>\%
-  tidy_and_attach() \%>\%
-  tidy_add_pairwise_contrasts(pairwise_reverse = FALSE)
-
-mod1 \%>\%
-  tidy_and_attach() \%>\%
-  tidy_add_pairwise_contrasts(keep_model_terms = TRUE)
-
-if (.assert_package("gtsummary", boolean = TRUE)) {
-  mod2 <- glm(
-    response ~ age + trt + grade,
-    data = gtsummary::trial,
-    family = binomial
-  )
-  mod2 \%>\%
-    tidy_and_attach(exponentiate = TRUE) \%>\%
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+if (.assert_package("emmeans", boolean = TRUE)) {
+  mod1 <- lm(Sepal.Length ~ Species, data = iris)
+  mod1 \%>\%
+    tidy_and_attach() \%>\%
     tidy_add_pairwise_contrasts()
+
+  mod1 \%>\%
+    tidy_and_attach() \%>\%
+    tidy_add_pairwise_contrasts(pairwise_reverse = FALSE)
+
+  mod1 \%>\%
+    tidy_and_attach() \%>\%
+    tidy_add_pairwise_contrasts(keep_model_terms = TRUE)
+
+  if (.assert_package("gtsummary", boolean = TRUE)) {
+    mod2 <- glm(
+      response ~ age + trt + grade,
+      data = gtsummary::trial,
+      family = binomial
+    )
+    mod2 \%>\%
+      tidy_and_attach(exponentiate = TRUE) \%>\%
+      tidy_add_pairwise_contrasts()
+  }
 }
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other tidy_helpers: 

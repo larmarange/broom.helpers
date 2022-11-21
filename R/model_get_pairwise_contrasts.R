@@ -11,9 +11,11 @@
 #' [emmeans::emmeans()] when computing pairwise contrasts
 #' @family model_helpers
 #' @export
-#' @examples
-#' mod <- lm(Sepal.Length ~ Species, data = iris)
-#' mod %>% model_get_pairwise_contrasts(variables = "Species")
+#' @examplesIf interactive()
+#' if (.assert_package("emmeans", boolean = TRUE)) {
+#'   mod <- lm(Sepal.Length ~ Species, data = iris)
+#'   mod %>% model_get_pairwise_contrasts(variables = "Species")
+#' }
 model_get_pairwise_contrasts <- function(
   model,
   variables,

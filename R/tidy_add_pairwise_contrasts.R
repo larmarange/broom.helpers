@@ -1,7 +1,7 @@
 #' Add pairwise contrasts for categorical variables
 #'
 #' `r lifecycle::badge("experimental")`
-#' Computes pairwaise contrasts with [emmeans::emmeans()] and add them to the
+#' Computes pairwise contrasts with [emmeans::emmeans()] and add them to the
 #' results tibble. Works only with models supported by `emmeans`, see
 #' `vignette("models", package = "emmeans")`.
 #'
@@ -22,29 +22,31 @@
 #' @inheritParams tidy_plus_plus
 #' @export
 #' @family tidy_helpers
-#' @examples
-#' mod1 <- lm(Sepal.Length ~ Species, data = iris)
-#' mod1 %>%
-#'   tidy_and_attach() %>%
-#'   tidy_add_pairwise_contrasts()
-#'
-#' mod1 %>%
-#'   tidy_and_attach() %>%
-#'   tidy_add_pairwise_contrasts(pairwise_reverse = FALSE)
-#'
-#' mod1 %>%
-#'   tidy_and_attach() %>%
-#'   tidy_add_pairwise_contrasts(keep_model_terms = TRUE)
-#'
-#' if (.assert_package("gtsummary", boolean = TRUE)) {
-#'   mod2 <- glm(
-#'     response ~ age + trt + grade,
-#'     data = gtsummary::trial,
-#'     family = binomial
-#'   )
-#'   mod2 %>%
-#'     tidy_and_attach(exponentiate = TRUE) %>%
+#' @examplesIf interactive()
+#' if (.assert_package("emmeans", boolean = TRUE)) {
+#'   mod1 <- lm(Sepal.Length ~ Species, data = iris)
+#'   mod1 %>%
+#'     tidy_and_attach() %>%
 #'     tidy_add_pairwise_contrasts()
+#'
+#'   mod1 %>%
+#'     tidy_and_attach() %>%
+#'     tidy_add_pairwise_contrasts(pairwise_reverse = FALSE)
+#'
+#'   mod1 %>%
+#'     tidy_and_attach() %>%
+#'     tidy_add_pairwise_contrasts(keep_model_terms = TRUE)
+#'
+#'   if (.assert_package("gtsummary", boolean = TRUE)) {
+#'     mod2 <- glm(
+#'       response ~ age + trt + grade,
+#'       data = gtsummary::trial,
+#'       family = binomial
+#'     )
+#'     mod2 %>%
+#'       tidy_and_attach(exponentiate = TRUE) %>%
+#'       tidy_add_pairwise_contrasts()
+#'   }
 #' }
 tidy_add_pairwise_contrasts <- function(
   x,

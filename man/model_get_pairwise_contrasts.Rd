@@ -29,8 +29,12 @@ or \code{"revpairwise"} (if \code{FALSE}), see \code{\link[emmeans:contrast]{emm
 It is computed with \code{\link[emmeans:emmeans]{emmeans::emmeans()}}.
 }
 \examples{
-mod <- lm(Sepal.Length ~ Species, data = iris)
-mod \%>\% model_get_pairwise_contrasts(variables = "Species")
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+if (.assert_package("emmeans", boolean = TRUE)) {
+  mod <- lm(Sepal.Length ~ Species, data = iris)
+  mod \%>\% model_get_pairwise_contrasts(variables = "Species")
+}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other model_helpers: 
