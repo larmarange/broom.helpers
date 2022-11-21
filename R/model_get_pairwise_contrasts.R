@@ -46,7 +46,7 @@ model_get_pairwise_contrasts.default <- function(
   pairwise_reverse = TRUE,
   conf.level = .95,
   emmeans_args = list()
-){
+) {
   .assert_package(
     "emmeans",
     fn = "broom.helpers::model_get_pairwise_contrasts()"

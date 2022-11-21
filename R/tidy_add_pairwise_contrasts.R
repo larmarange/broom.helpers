@@ -1,6 +1,10 @@
 #' Add pairwise contrasts for categorical variables
 #'
+#' Computes pairwaise contrasts with [emmeans::emmeans()] and add them to the
+#' results tibble. Works only with models supported by `emmeans`, see
+#' `vignette("models", package = "emmeans")`.
 #'
+#' @note
 #' If the `contrasts` column is not yet available in `x`,
 #' [tidy_add_contrasts()] will be automatically applied.
 #'
