@@ -37,6 +37,7 @@
 #' @param no_reference_row variables (accepts [tidyselect][dplyr::select] notation)
 #' for those no reference row should be added, when `add_reference_rows = TRUE`
 #' @param add_pairwise_contrasts apply [tidy_add_pairwise_contrasts()]?
+#' `r lifecycle::badge("experimental")`
 #' @param pairwise_variables variables to add pairwise contrasts
 #' (accepts [tidyselect][dplyr::select] notation)
 #' @param keep_model_terms keep original model terms for variables where

@@ -1,5 +1,6 @@
 #' Add pairwise contrasts for categorical variables
 #'
+#' `r lifecycle::badge("experimental")`
 #' Computes pairwaise contrasts with [emmeans::emmeans()] and add them to the
 #' results tibble. Works only with models supported by `emmeans`, see
 #' `vignette("models", package = "emmeans")`.

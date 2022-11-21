@@ -39,6 +39,7 @@ previously in \code{\link[=tidy_and_attach]{tidy_and_attach()}}}
 a message when requested output cannot be generated. Default is \code{FALSE}}
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 Computes pairwaise contrasts with \code{\link[emmeans:emmeans]{emmeans::emmeans()}} and add them to the
 results tibble. Works only with models supported by \code{emmeans}, see
 \code{vignette("models", package = "emmeans")}.

@@ -68,7 +68,8 @@ labels of categorical terms with treatment or sum contrasts
 \item{no_reference_row}{variables (accepts \link[dplyr:select]{tidyselect} notation)
 for those no reference row should be added, when \code{add_reference_rows = TRUE}}
 
-\item{add_pairwise_contrasts}{apply \code{\link[=tidy_add_pairwise_contrasts]{tidy_add_pairwise_contrasts()}}?}
+\item{add_pairwise_contrasts}{apply \code{\link[=tidy_add_pairwise_contrasts]{tidy_add_pairwise_contrasts()}}?
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}}
 
 \item{pairwise_variables}{variables to add pairwise contrasts
 (accepts \link[dplyr:select]{tidyselect} notation)}
