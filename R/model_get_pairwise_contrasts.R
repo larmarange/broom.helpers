@@ -74,7 +74,7 @@ model_get_pairwise_contrasts.default <- function(
   ci <- stats::confint(e, level = conf.level) %>%
     dplyr::as_tibble()
   if (!is.numeric(ci[[2]])) { # if by
-    ci %>%
+    ci <- ci %>%
       tidyr::unite("term", 1:2, sep = " | ")
   }
   ci <- ci[, c(1, ncol(ci) - 1, ncol(ci))]
