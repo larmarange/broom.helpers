@@ -61,7 +61,7 @@ model_get_pairwise_contrasts.default <- function(
     graphics::pairs(reverse = pairwise_reverse)
   r <- e %>%
     dplyr::as_tibble()
-  if (!is.numeric(colnames(r)[2])) { # if by
+  if (!is.numeric(r[[2]])) { # if by
     r <- r %>%
       tidyr::unite("term", 1:2, sep = " | ")
   }
@@ -73,7 +73,7 @@ model_get_pairwise_contrasts.default <- function(
 
   ci <- stats::confint(e, level = conf.level) %>%
     dplyr::as_tibble()
-  if (!is.numeric(colnames(ci)[2])) { # if by
+  if (!is.numeric(ci[[2]])) { # if by
     ci %>%
       tidyr::unite("term", 1:2, sep = " | ")
   }
