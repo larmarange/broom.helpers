@@ -25,6 +25,8 @@ term names are preserved in an \code{"original_term"} column.
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 if (.assert_package("multgee", boolean = TRUE)) {
+  library(multgee)
+
   mod <- multgee::nomLORgee(
     y ~ factor(time) * sec,
     data = multgee::housing,
