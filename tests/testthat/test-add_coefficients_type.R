@@ -260,6 +260,7 @@ test_that("model_get_coefficients_type() works with geepack::geeglm", {
 
 
 test_that("model_get_coefficients_type() works with gam::gam", {
+  skip_if_not_installed("gam")
   data(kyphosis, package = "gam")
   mod <- gam::gam(Kyphosis ~ gam::s(Age, 4) + Number, family = binomial, data = kyphosis)
   res <- mod %>% model_get_coefficients_type()
