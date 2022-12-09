@@ -49,7 +49,7 @@ tidy_add_coefficients_type <- function(
   } else if (isTRUE(.attributes$coefficients_type == "marginal_effects")) {
     coefficients_type <- "marginal_effects"
     coefficients_label <- "Marginal Effects"
-  }  else if (isTRUE(.attributes$coefficients_type == "marginal_effects")) {
+  }  else if (isTRUE(.attributes$coefficients_type == "conditional_effects")) {
     coefficients_type <- "conditional_effects"
     coefficients_label <- "Conditional Effects"
   } else {
