@@ -204,7 +204,7 @@ tidy_all_effects <- function(x, conf.level = .95, ...) {
     x
   }
   res <- mod %>%
-    allEffects(confidence.level = conf.level, ...) %>%
+    effects::allEffects(confidence.level = conf.level, ...) %>%
     as.data.frame() %>%
     purrr::map(.clean) %>%
     dplyr::bind_rows(.id = "variable")
@@ -216,7 +216,7 @@ tidy_all_effects <- function(x, conf.level = .95, ...) {
 tidy_ggpredict <- function(x, conf.level = .95, ...) {
   .assert_package("ggeffects")
   res <- x %>%
-    ggpredict(ci.lvl = conf.level) %>%
+    ggeffects::ggpredict(ci.lvl = conf.level) %>%
     purrr::map(
       ~ .x %>%
         dplyr::as_tibble() %>%
