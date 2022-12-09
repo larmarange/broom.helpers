@@ -14,7 +14,7 @@
 #' }
 #' @export
 #' @family custom_tieders
-tidy_parameters <- function(x, conf.int = TRUE, conf.level = .95, ...) {
+tidy_parameters <- function(x, conf.level = .95, ...) {
   .assert_package("parameters", fn = "broom.helpers::tidy_parameters()")
 
   if (!conf.int) conf.level <- NULL
@@ -169,4 +169,65 @@ tidy_multgee <- function(x, conf.int = TRUE, conf.level = .95, ...) {
     res$term <- c(b, t)
     return(res)
   }
+}
+
+#' Marginal Effects Estimation
+#'
+#' Use `margins::margins()` to estimate "marginal effects" and return a tibble
+#' tidied in a way that could be used by `broom.helpers`functions
+#'
+#' @param x a model
+#' @param conf.int logical indicating whether or not to include a confidence
+#' interval in the tidied output
+#' @param conf.level the confidence level to use for the confidence interval
+#' @param ... additional parameters passed to `margins::margins()`
+#' @family custom_tieders
+#' @export
+tidy_margins <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
+  .assert_package("margins")
+  res <- broom::tidy(
+    margins::margins(x, ...),
+    conf.int = conf.int,
+    conf.level = conf.level
+  )
+  attr(res, "coefficients_type") <- "average_marginal_effects"
+  res
+}
+
+#' @export
+tidy_all_effects <- function(x, conf.level = .95, ...) {
+  .assert_package("effects")
+  .clean <- function(x) {
+    names(x) <- c("term", "estimate", "std.error", "conf.low", "conf.high")
+    x$term <- as.character(x$term)
+    rownames(x) <- NULL
+    x
+  }
+  res <- mod %>%
+    allEffects(confidence.level = conf.level, ...) %>%
+    as.data.frame() %>%
+    purrr::map(.clean) %>%
+    dplyr::bind_rows(.id = "variable")
+  attr(res, "coefficients_type") <- "marginal_effects"
+  res
+}
+
+#' @export
+tidy_ggpredict <- function(x, conf.level = .95, ...) {
+  .assert_package("ggeffects")
+  res <- x %>%
+    ggpredict(ci.lvl = conf.level) %>%
+    purrr::map(
+      ~ .x %>%
+        dplyr::as_tibble() %>%
+        dplyr::mutate(x = as.character(.data$x))
+    ) %>%
+    dplyr::bind_rows() %>%
+    dplyr::rename(
+      variable = "group",
+      term = "x",
+      estimate = "predicted"
+    )
+  attr(res, "coefficients_type") <- "conditional_effects"
+  res
 }

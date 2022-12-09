@@ -41,23 +41,36 @@ tidy_add_coefficients_type <- function(
   .attributes <- .save_attributes(x)
   .attributes$exponentiate <- exponentiate
 
-  coefficients_type <- model_get_coefficients_type(model)
-  if (exponentiate)
-    coefficients_label <- dplyr::case_when(
-      coefficients_type == "logistic" ~ "OR",
-      coefficients_type == "poisson" ~ "IRR",
-      coefficients_type == "relative_risk" ~ "RR",
-      coefficients_type == "prop_hazard" ~ "HR",
-      TRUE ~ "exp(Beta)"
-    )
-  else
-    coefficients_label <- dplyr::case_when(
-      coefficients_type == "logistic" ~ "log(OR)",
-      coefficients_type == "poisson" ~ "log(IRR)",
-      coefficients_type == "relative_risk" ~ "log(RR)",
-      coefficients_type == "prop_hazard" ~ "log(HR)",
-      TRUE ~ "Beta"
-    )
+  # specific case for marginal models where coefficients_type
+  # is already define by the tidier
+  if (isTRUE(.attributes$coefficients_type == "average_marginal_effects")) {
+    coefficients_type <- "average_marginal_effects"
+    coefficients_label <- "Average Marginal Effects"
+  } else if (isTRUE(.attributes$coefficients_type == "marginal_effects")) {
+    coefficients_type <- "marginal_effects"
+    coefficients_label <- "Marginal Effects"
+  }  else if (isTRUE(.attributes$coefficients_type == "marginal_effects")) {
+    coefficients_type <- "conditional_effects"
+    coefficients_label <- "Conditional Effects"
+  } else {
+    coefficients_type <- model_get_coefficients_type(model)
+    if (exponentiate)
+      coefficients_label <- dplyr::case_when(
+        coefficients_type == "logistic" ~ "OR",
+        coefficients_type == "poisson" ~ "IRR",
+        coefficients_type == "relative_risk" ~ "RR",
+        coefficients_type == "prop_hazard" ~ "HR",
+        TRUE ~ "exp(Beta)"
+      )
+    else
+      coefficients_label <- dplyr::case_when(
+        coefficients_type == "logistic" ~ "log(OR)",
+        coefficients_type == "poisson" ~ "log(IRR)",
+        coefficients_type == "relative_risk" ~ "log(RR)",
+        coefficients_type == "prop_hazard" ~ "log(HR)",
+        TRUE ~ "Beta"
+      )
+  }
 
   attr(x, "coefficients_type") <- coefficients_type
   attr(x, "coefficients_label") <- coefficients_label

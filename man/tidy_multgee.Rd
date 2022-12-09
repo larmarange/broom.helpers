@@ -48,6 +48,7 @@ if (.assert_package("multgee", boolean = TRUE)) {
 }
 \seealso{
 Other custom_tieders: 
+\code{\link{tidy_margins}()},
 \code{\link{tidy_parameters}()},
 \code{\link{tidy_with_broom_or_parameters}()}
 }

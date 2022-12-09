@@ -23,6 +23,7 @@ model using \code{parameters::model_parameters()} through \code{tidy_parameters(
 }
 \seealso{
 Other custom_tieders: 
+\code{\link{tidy_margins}()},
 \code{\link{tidy_multgee}()},
 \code{\link{tidy_parameters}()}
 }

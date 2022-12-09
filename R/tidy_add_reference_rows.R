@@ -66,8 +66,18 @@ tidy_add_reference_rows <- function(
     stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
   }
 
+  .attributes <- .save_attributes(x)
+
   # adding reference rows is not meaningful for stats::aov
   if (inherits(model, "aov")) {
+    return(x %>% dplyr::mutate(reference_row = NA))
+  }
+  # adding reference rows is not meaningful for marginal effects
+  if (isTRUE(.attributes$coefficients_type == "marginal_effects")) {
+    return(x %>% dplyr::mutate(reference_row = NA))
+  }
+  # adding reference rows is not meaningful for conditional effects
+  if (isTRUE(.attributes$coefficients_type == "conditional_effects")) {
     return(x %>% dplyr::mutate(reference_row = NA))
   }
 
@@ -83,8 +93,6 @@ tidy_add_reference_rows <- function(
       ))
     return(x)
   }
-
-  .attributes <- .save_attributes(x)
 
   if ("label" %in% names(x)) {
     if (!quiet)
