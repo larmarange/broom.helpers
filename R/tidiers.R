@@ -215,6 +215,8 @@ tidy_margins <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 tidy_all_effects <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   .assert_package("effects")
   .clean <- function(x) {
+    # merge first columns if interaction
+    x <- tidyr::unite(x, "term", 1:(ncol(x) - 4), sep = ":")
     names(x) <- c("term", "estimate", "std.error", "conf.low", "conf.high")
     x$term <- as.character(x$term)
     rownames(x) <- NULL

@@ -215,7 +215,17 @@ tidy_add_term_labels <- function(x,
   names(interaction_terms) <- interaction_terms
   interaction_terms <-
     interaction_terms %>%
-    strsplit(":") %>%
+    strsplit(":")
+
+  # check if some terms are missing in term_labels
+  missing_terms <- setdiff(unname(unlist(interaction_terms)), names(term_labels))
+  if (length(missing_terms) > 0) {
+    names(missing_terms) <- missing_terms
+    term_labels <- term_labels %>%
+      .update_vector(missing_terms)
+  }
+
+  interaction_terms <- interaction_terms %>%
     lapply(function(x) {
       paste(term_labels[x], collapse = interaction_sep)
     }) %>%
