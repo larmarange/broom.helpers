@@ -255,6 +255,7 @@ test_that("tidy_add_n() works with geepack::geeglm", {
 
 
 test_that("tidy_add_n() works with gam::gam", {
+  skip_if_not_installed("gam")
   data(kyphosis, package = "gam")
   mod <- gam::gam(Kyphosis ~ gam::s(Age, 4) + Number, family = binomial, data = kyphosis)
   expect_error(mod %>% tidy_and_attach() %>% tidy_add_n(), NA)

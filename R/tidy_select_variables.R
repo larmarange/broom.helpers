@@ -74,9 +74,7 @@ tidy_select_variables <- function(
       .data$fct_variable
     ) %>%
     dplyr::select(
-      -.data$group_order,
-      -.data$log_intercept,
-      -.data$fct_variable
+      -dplyr::any_of(c("group_order", "log_intercept", "fct_variable"))
     ) %>%
     tidy_attach_model(model = model, .attributes = .attributes)
 }

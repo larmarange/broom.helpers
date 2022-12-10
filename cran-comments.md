@@ -1,6 +1,6 @@
 ## Test environments
 
-* local R installation: R 4.2.1
+* local R installation: R 4.2.2
 * mac OS (on github actions): R-release
 * windows (on github actions): R-release, 3.6
 * ubuntu 18.04 (on github actions): R-devel, R-release, R-oldrel-1
@@ -13,10 +13,16 @@ cf. https://github.com/larmarange/broom.helpers/actions
 
 ## revdepcheck results
 
-We checked 4 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 5 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
  * We saw 0 new problems
- * We failed to check 0 packages
+ * We failed to check 1 packages
+
+Issues with CRAN packages are summarised below.
+
+### Failed to check
+
+* GGally (NA)
 
 ## Additional checks
 

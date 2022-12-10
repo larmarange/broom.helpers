@@ -1,5 +1,7 @@
 # broom.helpers (development version)
 
+# broom.helpers 1.10.0
+
 **New features**
 
 - New functions `tidy_add_pairwise_contrasts()` and `model_get_pairwise_contrasts()`

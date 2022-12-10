@@ -1,6 +1,6 @@
 Package: broom.helpers
 Title: Helpers for Model Coefficients Tibbles
-Version: 1.9.0.9000
+Version: 1.10.0.9000
 Authors@R: c(
     person("Joseph", "Larmarange", , "joseph@larmarange.net", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-7097-700X")),
@@ -77,4 +77,4 @@ Encoding: UTF-8
 Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.2
