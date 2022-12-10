@@ -218,14 +218,20 @@ tidy_add_term_labels <- function(x,
     strsplit(":")
 
   # check if some terms are missing in term_labels
-  missing_terms <- setdiff(
-    unique(unname(interaction_terms[interaction_terms != ""])),
-    names(term_labels)
-  )
-  if (length(missing_terms) > 0) {
-    names(missing_terms) <- missing_terms
-    term_labels <- term_labels %>%
-      .update_vector(missing_terms)
+  # in the case of marginal/conditional effects
+  if (
+    isTRUE(.attributes$coefficients_type == "marginal_effects") ||
+    isTRUE(.attributes$coefficients_type == "conditional_effects")
+  ) {
+    missing_terms <- setdiff(
+      unique(unname(interaction_terms[interaction_terms != ""])),
+      names(term_labels)
+    )
+    if (length(missing_terms) > 0) {
+      names(missing_terms) <- missing_terms
+      term_labels <- term_labels %>%
+        .update_vector(missing_terms)
+    }
   }
 
   interaction_terms <- interaction_terms %>%
