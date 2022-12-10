@@ -19,6 +19,8 @@ interval in the tidied output}
 \description{
 Use \code{ggeffects::ggpredict()} to estimate "conditional effects" and return a
 tibble tidied in a way that could be used by \code{broom.helpers}functions.
+See \url{https://strengejacke.github.io/ggeffects/} for a list of supported
+models.
 }
 \seealso{
 \code{ggeffects::ggpredict()}

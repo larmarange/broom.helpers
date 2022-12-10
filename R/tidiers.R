@@ -174,7 +174,8 @@ tidy_multgee <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 #' Average Marginal Effects Estimation
 #'
 #' Use `margins::margins()` to estimate "average marginal effects" and return a
-#' tibble tidied in a way that could be used by `broom.helpers`functions.
+#' tibble tidied in a way that could be used by `broom.helpers`functions. See
+#' `margins::margins()` for a list of supported models.
 #' @param x a model
 #' @param conf.int logical indicating whether or not to include a confidence
 #' interval in the tidied output
@@ -198,6 +199,8 @@ tidy_margins <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 #'
 #' Use `effects::allEffects()` to estimate "marginal effects" and return a
 #' tibble tidied in a way that could be used by `broom.helpers`functions.
+#' See `vignette("functions-supported-by-effects", package = "effects")` for
+#' a list of supported models.
 #' @param x a model
 #' @param conf.int logical indicating whether or not to include a confidence
 #' interval in the tidied output
@@ -227,6 +230,8 @@ tidy_all_effects <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 #'
 #' Use `ggeffects::ggpredict()` to estimate "conditional effects" and return a
 #' tibble tidied in a way that could be used by `broom.helpers`functions.
+#' See <https://strengejacke.github.io/ggeffects/> for a list of supported
+#' models.
 #' @param x a model
 #' @param conf.int logical indicating whether or not to include a confidence
 #' interval in the tidied output

@@ -18,7 +18,8 @@ interval in the tidied output}
 }
 \description{
 Use \code{margins::margins()} to estimate "average marginal effects" and return a
-tibble tidied in a way that could be used by \code{broom.helpers}functions.
+tibble tidied in a way that could be used by \code{broom.helpers}functions. See
+\code{margins::margins()} for a list of supported models.
 }
 \seealso{
 \code{margins::margins()}

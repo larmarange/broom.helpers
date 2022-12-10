@@ -19,6 +19,8 @@ interval in the tidied output}
 \description{
 Use \code{effects::allEffects()} to estimate "marginal effects" and return a
 tibble tidied in a way that could be used by \code{broom.helpers}functions.
+See \code{vignette("functions-supported-by-effects", package = "effects")} for
+a list of supported models.
 }
 \seealso{
 \code{effects::allEffects()}
