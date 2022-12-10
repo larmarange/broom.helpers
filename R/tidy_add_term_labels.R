@@ -217,8 +217,9 @@ tidy_add_term_labels <- function(x,
     interaction_terms %>%
     strsplit(":")
 
-  # check if some terms are missing in term_labels
   # in the case of marginal/conditional effects
+  # interaction terms are not prefixed by variable names
+  # => need to identify them from interaction_terms directly
   if (
     isTRUE(.attributes$coefficients_type == "marginal_effects") ||
     isTRUE(.attributes$coefficients_type == "conditional_effects")
