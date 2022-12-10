@@ -14,7 +14,7 @@
 #' }
 #' @export
 #' @family custom_tieders
-tidy_parameters <- function(x, conf.level = .95, ...) {
+tidy_parameters <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   .assert_package("parameters", fn = "broom.helpers::tidy_parameters()")
 
   if (!conf.int) conf.level <- NULL
@@ -203,7 +203,7 @@ tidy_all_effects <- function(x, conf.level = .95, ...) {
     rownames(x) <- NULL
     x
   }
-  res <- mod %>%
+  res <- x %>%
     effects::allEffects(confidence.level = conf.level, ...) %>%
     as.data.frame() %>%
     purrr::map(.clean) %>%
