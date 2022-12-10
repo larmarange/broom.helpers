@@ -50,6 +50,9 @@ reference:
       - tidy_parameters
       - tidy_with_broom_or_parameters
       - tidy_multgee
+      - tidy_margins
+      - tidy_all_effects
+      - tidy_ggpredict
 
   - title: Get information from model objects
   - contents:
