@@ -189,6 +189,11 @@ tidy_multgee <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 #' @export
 tidy_margins <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
   .assert_package("margins")
+
+  dots <- rlang::dots_list(...)
+  if (isTRUE(dots$exponentiate))
+    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_margins}.") # nolint
+
   res <- broom::tidy(
     margins::margins(x, ...),
     conf.int = conf.int,
@@ -214,6 +219,11 @@ tidy_margins <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 #' @export
 tidy_all_effects <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   .assert_package("effects")
+
+  dots <- rlang::dots_list(...)
+  if (isTRUE(dots$exponentiate))
+    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_all_effects}.") # nolint
+
   .clean <- function(x) {
     # merge first columns if interaction
     x <- tidyr::unite(x, "term", 1:(ncol(x) - 4), sep = ":")
@@ -247,6 +257,11 @@ tidy_all_effects <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 #' @export
 tidy_ggpredict <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   .assert_package("ggeffects")
+
+  dots <- rlang::dots_list(...)
+  if (isTRUE(dots$exponentiate))
+    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_ggpredict}.") # nolint
+
   if (isFALSE(conf.int)) conf.level <- NA
   res <- x %>%
     ggeffects::ggpredict(ci.lvl = conf.level, ...) %>%
