@@ -171,17 +171,17 @@ tidy_multgee <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   }
 }
 
-#' Marginal Effects Estimation
+#' Average Marginal Effects Estimation
 #'
-#' Use `margins::margins()` to estimate "marginal effects" and return a tibble
-#' tidied in a way that could be used by `broom.helpers`functions
-#'
+#' Use `margins::margins()` to estimate "average marginal effects" and return a
+#' tibble tidied in a way that could be used by `broom.helpers`functions.
 #' @param x a model
 #' @param conf.int logical indicating whether or not to include a confidence
 #' interval in the tidied output
 #' @param conf.level the confidence level to use for the confidence interval
 #' @param ... additional parameters passed to `margins::margins()`
 #' @family custom_tieders
+#' @seealso `margins::margins()`
 #' @export
 tidy_margins <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
   .assert_package("margins")
@@ -194,8 +194,19 @@ tidy_margins <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
   res
 }
 
+#' Marginal Effects Estimation
+#'
+#' Use `effects::allEffects()` to estimate "marginal effects" and return a
+#' tibble tidied in a way that could be used by `broom.helpers`functions.
+#' @param x a model
+#' @param conf.int logical indicating whether or not to include a confidence
+#' interval in the tidied output
+#' @param conf.level the confidence level to use for the confidence interval
+#' @param ... additional parameters passed to `effects::allEffects()`
+#' @family custom_tieders
+#' @seealso `effects::allEffects()`
 #' @export
-tidy_all_effects <- function(x, conf.level = .95, ...) {
+tidy_all_effects <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   .assert_package("effects")
   .clean <- function(x) {
     names(x) <- c("term", "estimate", "std.error", "conf.low", "conf.high")
@@ -204,7 +215,7 @@ tidy_all_effects <- function(x, conf.level = .95, ...) {
     x
   }
   res <- x %>%
-    effects::allEffects(confidence.level = conf.level, ...) %>%
+    effects::allEffects(se = conf.int, level = conf.level, ...) %>%
     as.data.frame() %>%
     purrr::map(.clean) %>%
     dplyr::bind_rows(.id = "variable")
@@ -212,11 +223,23 @@ tidy_all_effects <- function(x, conf.level = .95, ...) {
   res
 }
 
+#' Conditional Effects Estimation
+#'
+#' Use `ggeffects::ggpredict()` to estimate "conditional effects" and return a
+#' tibble tidied in a way that could be used by `broom.helpers`functions.
+#' @param x a model
+#' @param conf.int logical indicating whether or not to include a confidence
+#' interval in the tidied output
+#' @param conf.level the confidence level to use for the confidence interval
+#' @param ... additional parameters passed to `ggeffects::ggpredict()`
+#' @family custom_tieders
+#' @seealso `ggeffects::ggpredict()`
 #' @export
-tidy_ggpredict <- function(x, conf.level = .95, ...) {
+tidy_ggpredict <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   .assert_package("ggeffects")
+  if (isFALSE(conf.int)) conf.level <- NA
   res <- x %>%
-    ggeffects::ggpredict(ci.lvl = conf.level) %>%
+    ggeffects::ggpredict(ci.lvl = conf.level, ...) %>%
     purrr::map(
       ~ .x %>%
         dplyr::as_tibble() %>%

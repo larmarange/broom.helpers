@@ -4,17 +4,17 @@
 \alias{tidy_parameters}
 \title{Tidy a model with parameters package}
 \usage{
-tidy_parameters(x, conf.level = 0.95, ...)
+tidy_parameters(x, conf.int = TRUE, conf.level = 0.95, ...)
 }
 \arguments{
 \item{x}{a model}
 
+\item{conf.int}{logical indicating whether or not to include a confidence
+interval in the tidied output}
+
 \item{conf.level}{the confidence level to use for the confidence interval}
 
 \item{...}{additional parameters passed to \code{parameters::model_parameters()}}
-
-\item{conf.int}{logical indicating whether or not to include a confidence
-interval in the tidied output}
 }
 \description{
 Use \code{parameters::model_parameters()} to tidy a model and apply
@@ -30,6 +30,8 @@ lm(Sepal.Length ~ Sepal.Width + Species, data = iris) \%>\%
 }
 \seealso{
 Other custom_tieders: 
+\code{\link{tidy_all_effects}()},
+\code{\link{tidy_ggpredict}()},
 \code{\link{tidy_margins}()},
 \code{\link{tidy_multgee}()},
 \code{\link{tidy_with_broom_or_parameters}()}
