@@ -176,6 +176,9 @@ tidy_multgee <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 #' Use `margins::margins()` to estimate "average marginal effects" and return a
 #' tibble tidied in a way that could be used by `broom.helpers`functions. See
 #' `margins::margins()` for a list of supported models.
+#' @note When applying `margins::margins()`, custom contrasts are ignored.
+#' Treatment contrasts (`stats::contr.treatment()`) are applied to all
+#' categorical variables. Interactions are also ignored.
 #' @param x a model
 #' @param conf.int logical indicating whether or not to include a confidence
 #' interval in the tidied output

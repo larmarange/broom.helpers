@@ -21,6 +21,11 @@ Use \code{margins::margins()} to estimate "average marginal effects" and return 
 tibble tidied in a way that could be used by \code{broom.helpers}functions. See
 \code{margins::margins()} for a list of supported models.
 }
+\note{
+When applying \code{margins::margins()}, custom contrasts are ignored.
+Treatment contrasts (\code{stats::contr.treatment()}) are applied to all
+categorical variables. Interactions are also ignored.
+}
 \seealso{
 \code{margins::margins()}
 
