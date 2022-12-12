@@ -65,7 +65,7 @@ utils::globalVariables(c(".", "where"))
   .attributes_names <- intersect(
     names(.attributes),
     c(
-      "exponentiate", "coefficients_type", "coefficients_label",
+      "exponentiate", "conf.level", "coefficients_type", "coefficients_label",
       "variable_labels", "term_labels", "N_obs", "N_event", "Exposure"
       )
   )

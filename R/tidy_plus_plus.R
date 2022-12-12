@@ -6,6 +6,7 @@
 #' * [tidy_identify_variables()]
 #' * [tidy_add_contrasts()]
 #' * [tidy_add_reference_rows()]
+#' * [tidy_add_pairwise_contrasts()]
 #' * [tidy_add_estimate_to_reference_rows()]
 #' * [tidy_add_variable_labels()]
 #' * [tidy_add_term_labels()]
@@ -19,6 +20,7 @@
 #' @param model a model to be attached/tidied
 #' @param tidy_fun option to specify a custom tidier function
 #' @param conf.int should confidence intervals be computed? (see [broom::tidy()])
+#' @param conf.level level of confidence for confidence intervals (default: 95%)
 #' @param exponentiate logical indicating whether or not to exponentiate the
 #' coefficient estimates. This is typical for logistic, Poisson and Cox models,
 #' but a bad idea if there is no log or logit link; defaults to `FALSE`.
@@ -29,12 +31,23 @@
 #' labels of categorical terms with treatment or sum contrasts
 #' (see [model_list_terms_levels()])
 #' @param disambiguate_terms should terms be disambiguated with
-#' [`tidy_disambiguate_terms()`]? (default `TRUE`)
-#' @param disambiguate_sep separator for [`tidy_disambiguate_terms()`]
+#' [tidy_disambiguate_terms()]? (default `TRUE`)
+#' @param disambiguate_sep separator for [tidy_disambiguate_terms()]
 #' @param add_reference_rows should reference rows be added?
 #' @param no_reference_row variables (accepts [tidyselect][dplyr::select] notation)
 #' for those no reference row should be added, when `add_reference_rows = TRUE`
-#' @param add_estimate_to_reference_rows should an estimate value be added to reference rows?
+#' @param add_pairwise_contrasts apply [tidy_add_pairwise_contrasts()]?
+#' `r lifecycle::badge("experimental")`
+#' @param pairwise_variables variables to add pairwise contrasts
+#' (accepts [tidyselect][dplyr::select] notation)
+#' @param keep_model_terms keep original model terms for variables where
+#' pairwise contrasts are added? (default is `FALSE`)
+#' @param pairwise_reverse determines whether to use `"pairwise"` (if `TRUE`)
+#' or `"revpairwise"` (if `FALSE`), see [emmeans::contrast()]
+#' @param emmeans_args list of additional parameter to pass to
+#' [emmeans::emmeans()] when computing pairwise contrasts
+#' @param add_estimate_to_reference_rows should an estimate value be added
+#' to reference rows?
 #' @param add_header_rows should header rows be added?
 #' @param show_single_row variables that should be displayed
 #' on a single row (accepts [tidyselect][dplyr::select] notation), when
@@ -42,11 +55,12 @@
 #' @param add_n should the number of observations be added?
 #' @param intercept should the intercept(s) be included?
 #' @inheritParams tidy_select_variables
-#' @param keep_model should the model be kept as an attribute of the final result?
-#' @param quiet logical argument whether broom.helpers should not return a message
-#' when requested output cannot be generated. Default is FALSE
+#' @param keep_model should the model be kept as an attribute of the final
+#' result?
+#' @param quiet logical argument whether broom.helpers should not return
+#' a message when requested output cannot be generated. Default is `FALSE`
 #' @param strict logical argument whether broom.helpers should return an error
-#' when requested output cannot be generated. Default is FALSE
+#' when requested output cannot be generated. Default is `FALSE`
 #' @param ... other arguments passed to `tidy_fun()`
 #' @family tidy_helpers
 #' @examplesIf interactive()
@@ -101,6 +115,7 @@ tidy_plus_plus <- function(
                            model,
                            tidy_fun = tidy_with_broom_or_parameters,
                            conf.int = TRUE,
+                           conf.level = .95,
                            exponentiate = FALSE,
                            variable_labels = NULL,
                            term_labels = NULL,
@@ -110,6 +125,11 @@ tidy_plus_plus <- function(
                            disambiguate_sep = ".",
                            add_reference_rows = TRUE,
                            no_reference_row = NULL,
+                           add_pairwise_contrasts = FALSE,
+                           pairwise_variables = all_categorical(),
+                           keep_model_terms = FALSE,
+                           pairwise_reverse = TRUE,
+                           emmeans_args = list(),
                            add_estimate_to_reference_rows = TRUE,
                            add_header_rows = FALSE,
                            show_single_row = NULL,
@@ -124,6 +144,7 @@ tidy_plus_plus <- function(
     tidy_and_attach(
       tidy_fun = tidy_fun,
       conf.int = conf.int,
+      conf.level = conf.level,
       exponentiate = exponentiate,
       ...
     )
@@ -142,6 +163,16 @@ tidy_plus_plus <- function(
       no_reference_row = {{ no_reference_row }},
       quiet = quiet
     )
+  }
+
+  if (add_pairwise_contrasts) {
+    res <- res %>%
+      tidy_add_pairwise_contrasts(
+        variables = {{ pairwise_variables }},
+        keep_model_terms = keep_model_terms,
+        pairwise_reverse = pairwise_reverse,
+        emmeans_args = emmeans_args
+      )
   }
 
   if (add_reference_rows && add_estimate_to_reference_rows) {

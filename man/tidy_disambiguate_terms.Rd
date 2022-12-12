@@ -13,8 +13,8 @@ tidy_disambiguate_terms(x, sep = ".", model = tidy_get_model(x), quiet = FALSE)
 
 \item{model}{the corresponding model, if not attached to \code{x}}
 
-\item{quiet}{logical argument whether broom.helpers should not return a message
-when requested output cannot be generated. Default is FALSE}
+\item{quiet}{logical argument whether broom.helpers should not return
+a message when requested output cannot be generated. Default is \code{FALSE}}
 }
 \description{
 For mixed models, the \code{term} column returned by \code{broom.mixed} may have
@@ -43,6 +43,7 @@ Other tidy_helpers:
 \code{\link{tidy_add_estimate_to_reference_rows}()},
 \code{\link{tidy_add_header_rows}()},
 \code{\link{tidy_add_n}()},
+\code{\link{tidy_add_pairwise_contrasts}()},
 \code{\link{tidy_add_reference_rows}()},
 \code{\link{tidy_add_term_labels}()},
 \code{\link{tidy_add_variable_labels}()},
