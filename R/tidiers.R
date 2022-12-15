@@ -91,27 +91,8 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
     }
   }
 
-  # trying without confidence intervals
-  if (is.null(res) && conf.int) {
-    tidy_args2 <- tidy_args
-    tidy_args2$conf.int <- NULL
-    tidy_args2$conf.level <- NULL
-    res <- tryCatch(
-      do.call(tidy_broom, tidy_args2),
-      error = function(e) {
-        NULL
-      }
-    )
-    if (is.null(res)) {
-      cli::cli_alert_warning("{.code broom::tidy()} failed to tidy the model.")
-    } else {
-      cli::cli_alert_warning(
-        "`conf.int = TRUE` is not valid for this type of model and was ignored."
-      )
-    }
-  }
-
   if (is.null(res)) {
+    cli::cli_alert_warning("{.code broom::tidy()} failed to tidy the model.")
     res <- tryCatch(
       do.call(tidy_parameters, tidy_args),
       error = function(e) {
