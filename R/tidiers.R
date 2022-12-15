@@ -38,7 +38,7 @@ tidy_parameters <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 #' @family custom_tieders
 tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   # load broom.mixed if available
-  if (any(c("glmerMod", "lmerMod") %in% class(x))) {
+  if (any(c("glmerMod", "lmerMod", "glmmTMB", "glmmadmb", "stanreg", "brmsfit") %in% class(x))) {
     .assert_package("broom.mixed", fn = "broom.helpers::tidy_with_broom_or_parameters()")
   }
 
