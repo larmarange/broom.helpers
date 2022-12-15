@@ -468,6 +468,7 @@ test_that("tidy_plus_plus() works with stats::nls", {
 
 test_that("tidy_plus_plus() works with lavaan::lavaan", {
   skip_on_cran()
+  skip_if_not_installed("lavaan")
   df <- lavaan::HolzingerSwineford1939
   df$grade <- factor(df$grade, ordered = TRUE)
   HS.model <- "visual  =~ x1 + x2 + x3
@@ -678,7 +679,7 @@ test_that("tidy_plus_plus() works with logitr models", {
   skip_if_not(.assert_package("logitr", boolean = TRUE))
 
   mod <- logitr::logitr(
-    data           = logitr::yogurt %>% head(100),
+    data           = logitr::yogurt %>% head(1000),
     outcome        = "choice",
     obsID          = "obsID",
     pars           = c("feat", "brand"),
