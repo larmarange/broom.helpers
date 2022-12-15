@@ -54,7 +54,7 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
   tidy_args <- list(...)
   tidy_args$x <- x
   tidy_args$conf.int <- conf.int
-  tidy_args$conf.level <- conf.level
+  if (conf.int) tidy_args$conf.level <- conf.level
 
   res <- tryCatch(
     do.call(.tidy_broom, tidy_args),
