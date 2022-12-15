@@ -8,6 +8,8 @@ tidy_broom(x, ...)
 }
 \arguments{
 \item{x}{a model to tidy}
+
+\item{...}{additional parameters passed to \code{broom::tidy()}}
 }
 \description{
 Tidy with \code{broom::tidy()} and checks that all arguments are used

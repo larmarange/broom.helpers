@@ -29,7 +29,7 @@ tidy_parameters <- function(x, conf.int = TRUE, conf.level = .95, ...) {
         dplyr::rename(y.level = "response")
     } else {
       # binary
-      res$y.level <- x$lev %>% tail(n = 1)
+      res$y.level <- x$lev %>% utils::tail(n = 1)
     }
   }
 
@@ -117,6 +117,7 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
 #' Tidy with `broom::tidy()` and checks that all arguments are used
 #'
 #' @param x a model to tidy
+#' @param ... additional parameters passed to `broom::tidy()`
 #' @family custom_tieders
 #' @export
 tidy_broom <- function(x, ...) {
