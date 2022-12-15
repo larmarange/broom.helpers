@@ -53,11 +53,9 @@ tidy_and_attach <- function(
   # test if exponentiate can be passed to tidy_fun, and if tidy_fun runs without error
   result <-
     tryCatch(
-      suppressWarnings(
-        tidy_fun(
-          model, exponentiate = exponentiate,
-          conf.level = conf.level, ...
-        )
+      tidy_fun(
+        model, exponentiate = exponentiate,
+        conf.level = conf.level, ...
       ) %>%
         tidy_attach_model(
           model,
