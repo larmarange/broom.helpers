@@ -23,7 +23,7 @@ tidy_parameters <- function(x, conf.int = TRUE, conf.level = .95, ...) {
     parameters::model_parameters(ci = conf.level, ...) %>%
     parameters::standardize_names(style = "broom")
 
-  if (inherits(x, "multinom"))
+  if (inherits(x, "multinom") && "response" %in% colnames(res))
     res <- res %>%
       dplyr::rename(y.level = "response")
 
