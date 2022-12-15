@@ -30,6 +30,7 @@ lm(Sepal.Length ~ Sepal.Width + Species, data = iris) \%>\%
 }
 \seealso{
 Other custom_tieders: 
+\code{\link{tidy_broom}()},
 \code{\link{tidy_multgee}()},
 \code{\link{tidy_with_broom_or_parameters}()}
 }

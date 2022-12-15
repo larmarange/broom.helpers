@@ -63,7 +63,7 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
   if (conf.int) tidy_args$conf.level <- conf.level
 
   res <- tryCatch(
-    do.call(.tidy_broom, tidy_args),
+    do.call(tidy_broom, tidy_args),
     error = function(e) {
       NULL
     }
@@ -74,7 +74,7 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
     tidy_args2 <- tidy_args
     tidy_args2$exponentiate <- NULL
     res <- tryCatch(
-      do.call(.tidy_broom, tidy_args2),
+      do.call(tidy_broom, tidy_args2),
       error = function(e) {
         NULL
       }
@@ -110,8 +110,12 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
   res
 }
 
-# use tidy::broom() and checks dots used
-.tidy_broom <- function(x, ...) {
+#' Tidy with `broom::tidy()` and checks that all arguments are used
+#'
+#' @param x a model to tidy
+#' @family custom_tieders
+#' @export
+tidy_broom <- function(x, ...) {
   rlang::check_dots_used()
   broom::tidy(x, ...)
 }
