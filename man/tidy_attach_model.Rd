@@ -12,6 +12,7 @@ tidy_attach_model(x, model, .attributes = NULL)
 tidy_and_attach(
   model,
   tidy_fun = tidy_with_broom_or_parameters,
+  conf.int = TRUE,
   conf.level = 0.95,
   exponentiate = FALSE,
   ...
@@ -29,6 +30,9 @@ tidy_detach_model(x)
 \item{.attributes}{named list of additional attributes to be attached to \code{x}}
 
 \item{tidy_fun}{option to specify a custom tidier function}
+
+\item{conf.int}{logical indicating whether or not to include a confidence
+interval in the tidied output}
 
 \item{conf.level}{level of confidence for confidence intervals (default: 95\%)}
 

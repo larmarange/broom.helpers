@@ -19,9 +19,15 @@ tidy_parameters <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 
   if (!conf.int) conf.level <- NULL
 
-  x %>%
+  res <- x %>%
     parameters::model_parameters(ci = conf.level, ...) %>%
     parameters::standardize_names(style = "broom")
+
+  if (inherits(x, "multinom"))
+    res <- res %>%
+      dplyr::rename(y.level = "response")
+
+  res
 }
 
 #' Tidy a model with broom or parameters
@@ -70,11 +76,12 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
     res <- tryCatch(
       do.call(.tidy_broom, tidy_args2),
       error = function(e) {
-        cli::cli_alert_warning("{.code broom::tidy()} failed to tidy the model.")
-        cli::cli_alert_danger(e)
         NULL
       }
     )
+    if (is.null(res)) {
+      cli::cli_alert_warning("{.code broom::tidy()} failed to tidy the model.")
+    }
     if (!is.null(res) && !is.null(tidy_args$exponentiate) && tidy_args$exponentiate) {
       # changing to FALSE is managed by tidy_and_attch()
       stop("'exponentiate = TRUE' is not valid for this type of model.")
