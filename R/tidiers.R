@@ -79,12 +79,29 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
         NULL
       }
     )
-    if (is.null(res)) {
-      cli::cli_alert_warning("{.code broom::tidy()} failed to tidy the model.")
-    }
     if (!is.null(res) && !is.null(tidy_args$exponentiate) && tidy_args$exponentiate) {
       # changing to FALSE is managed by tidy_and_attch()
-      stop("'exponentiate = TRUE' is not valid for this type of model.")
+      cli::cli_abort("'exponentiate = TRUE' is not valid for this type of model.")
+    }
+  }
+
+  # trying without confidence intervals
+  if (is.null(res) && conf.int) {
+    tidy_args2 <- tidy_args
+    tidy_args2$conf.int <- NULL
+    tidy_args2$conf.level <- NULL
+    res <- tryCatch(
+      do.call(tidy_broom, tidy_args2),
+      error = function(e) {
+        NULL
+      }
+    )
+    if (is.null(res)) {
+      cli::cli_alert_warning("{.code broom::tidy()} failed to tidy the model.")
+    } else {
+      cli::cli_alert_warning(
+        "`conf.int = TRUE` is not valid for this type of model and was ignored."
+      )
     }
   }
 
