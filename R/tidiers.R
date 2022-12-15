@@ -57,7 +57,7 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
   tidy_args$conf.level <- conf.level
 
   res <- tryCatch(
-    do.call(broom::tidy, tidy_args),
+    do.call(.tidy_broom, tidy_args),
     error = function(e) {
       NULL
     }
@@ -68,7 +68,7 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
     tidy_args2 <- tidy_args
     tidy_args2$exponentiate <- NULL
     res <- tryCatch(
-      do.call(broom::tidy, tidy_args2),
+      do.call(.tidy_broom, tidy_args2),
       error = function(e) {
         cli::cli_alert_warning("{.code broom::tidy()} failed to tidy the model.")
         cli::cli_alert_danger(e)
@@ -101,6 +101,12 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
     }
   }
   res
+}
+
+# use tidy::broom() and checks dots used
+.tidy_broom <- function(x, ...) {
+  rlang::check_dots_used()
+  broom::tidy(x, ...)
 }
 
 #' Tidy a `multgee` model
