@@ -11,6 +11,13 @@ test_that("tidy_margins()", {
     res <- tidy_plus_plus(mod, tidy_fun = tidy_margins),
     NA
   )
+  expect_error(
+    tidy_plus_plus(
+      mod,
+      tidy_fun = tidy_margins,
+      add_pairwise_contrasts = TRUE
+    )
+  )
 })
 
 test_that("tidy_all_effects()", {
@@ -26,6 +33,13 @@ test_that("tidy_all_effects()", {
     res <- tidy_plus_plus(mod, tidy_fun = tidy_all_effects),
     NA
   )
+  expect_error(
+    tidy_plus_plus(
+      mod,
+      tidy_fun = tidy_all_effects,
+      add_pairwise_contrasts = TRUE
+    )
+  )
 })
 
 test_that("tidy_ggpredict()", {
@@ -40,5 +54,12 @@ test_that("tidy_ggpredict()", {
   expect_error(
     res <- tidy_plus_plus(mod, tidy_fun = tidy_ggpredict),
     NA
+  )
+  expect_error(
+    tidy_plus_plus(
+      mod,
+      tidy_fun = tidy_ggpredict,
+      add_pairwise_contrasts = TRUE
+    )
   )
 })
