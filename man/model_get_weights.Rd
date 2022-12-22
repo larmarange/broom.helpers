@@ -64,6 +64,7 @@ Other model_helpers:
 \code{\link{model_get_nlevels}()},
 \code{\link{model_get_n}()},
 \code{\link{model_get_offset}()},
+\code{\link{model_get_pairwise_contrasts}()},
 \code{\link{model_get_response}()},
 \code{\link{model_get_terms}()},
 \code{\link{model_get_xlevels}()},

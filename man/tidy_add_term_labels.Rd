@@ -28,11 +28,11 @@ labels of categorical terms with treatment or sum contrasts
 
 \item{model}{the corresponding model, if not attached to \code{x}}
 
-\item{quiet}{logical argument whether broom.helpers should not return a message
-when requested output cannot be generated. Default is FALSE}
+\item{quiet}{logical argument whether broom.helpers should not return
+a message when requested output cannot be generated. Default is \code{FALSE}}
 
 \item{strict}{logical argument whether broom.helpers should return an error
-when requested output cannot be generated. Default is FALSE}
+when requested output cannot be generated. Default is \code{FALSE}}
 }
 \description{
 Will add term labels in a \code{label} column, based on:
@@ -84,6 +84,7 @@ Other tidy_helpers:
 \code{\link{tidy_add_estimate_to_reference_rows}()},
 \code{\link{tidy_add_header_rows}()},
 \code{\link{tidy_add_n}()},
+\code{\link{tidy_add_pairwise_contrasts}()},
 \code{\link{tidy_add_reference_rows}()},
 \code{\link{tidy_add_variable_labels}()},
 \code{\link{tidy_attach_model}()},
