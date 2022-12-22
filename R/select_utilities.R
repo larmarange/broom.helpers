@@ -105,7 +105,7 @@
     if (tryCatch(do.call(type_check, list(x)), error = function(e) FALSE)) {
       x_string <-
         suppressWarnings(tryCatch(
-          switch(rlang::is_string(x)) %||% as.character(deparse(x)),
+          switch(rlang::is_string(x), x) %||% as.character(deparse(x)),
           error = function(e) NULL
         ))
       if (!is.null(x_string) && length(x_string) == 1 && nchar(x_string) <= 50) {
