@@ -26,6 +26,17 @@ When applying \code{margins::margins()}, custom contrasts are ignored.
 Treatment contrasts (\code{stats::contr.treatment()}) are applied to all
 categorical variables. Interactions are also ignored.
 }
+\examples{
+df <- Titanic \%>\%
+  dplyr::as_tibble() \%>\%
+  dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
+mod <- glm(
+  Survived ~ Class + Age + Sex,
+  data = df, weights = df$n, family = binomial
+)
+tidy_margins(mod)
+tidy_plus_plus(mod, tidy_fun = tidy_margins)
+}
 \seealso{
 \code{margins::margins()}
 

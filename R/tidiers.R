@@ -187,6 +187,16 @@ tidy_multgee <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 #' @family custom_tieders
 #' @seealso `margins::margins()`
 #' @export
+#' @examples
+#' df <- Titanic %>%
+#'   dplyr::as_tibble() %>%
+#'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
+#' mod <- glm(
+#'   Survived ~ Class + Age + Sex,
+#'   data = df, weights = df$n, family = binomial
+#' )
+#' tidy_margins(mod)
+#' tidy_plus_plus(mod, tidy_fun = tidy_margins)
 tidy_margins <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
   .assert_package("margins")
 
@@ -217,6 +227,16 @@ tidy_margins <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 #' @family custom_tieders
 #' @seealso `effects::allEffects()`
 #' @export
+#' @examples
+#' df <- Titanic %>%
+#'   dplyr::as_tibble() %>%
+#'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
+#' mod <- glm(
+#'   Survived ~ Class + Age + Sex,
+#'   data = df, weights = df$n, family = binomial
+#' )
+#' tidy_all_effects(mod)
+#' tidy_plus_plus(mod, tidy_fun = tidy_all_effects)
 tidy_all_effects <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   .assert_package("effects")
 
@@ -255,6 +275,16 @@ tidy_all_effects <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 #' @family custom_tieders
 #' @seealso `ggeffects::ggpredict()`
 #' @export
+#' @examples
+#' df <- Titanic %>%
+#'   dplyr::as_tibble() %>%
+#'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
+#' mod <- glm(
+#'   Survived ~ Class + Age + Sex,
+#'   data = df, weights = df$n, family = binomial
+#' )
+#' tidy_ggpredict(mod)
+#' tidy_plus_plus(mod, tidy_fun = tidy_ggpredict)
 tidy_ggpredict <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   .assert_package("ggeffects")
 

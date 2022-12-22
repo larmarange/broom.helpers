@@ -22,6 +22,17 @@ tibble tidied in a way that could be used by \code{broom.helpers}functions.
 See \code{vignette("functions-supported-by-effects", package = "effects")} for
 a list of supported models.
 }
+\examples{
+df <- Titanic \%>\%
+  dplyr::as_tibble() \%>\%
+  dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
+mod <- glm(
+  Survived ~ Class + Age + Sex,
+  data = df, weights = df$n, family = binomial
+)
+tidy_all_effects(mod)
+tidy_plus_plus(mod, tidy_fun = tidy_all_effects)
+}
 \seealso{
 \code{effects::allEffects()}
 
