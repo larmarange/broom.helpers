@@ -215,7 +215,27 @@ tidy_add_term_labels <- function(x,
   names(interaction_terms) <- interaction_terms
   interaction_terms <-
     interaction_terms %>%
-    strsplit(":") %>%
+    strsplit(":")
+
+  # in the case of marginal/conditional effects
+  # interaction terms are not prefixed by variable names
+  # => need to identify them from interaction_terms directly
+  if (
+    isTRUE(.attributes$coefficients_type == "marginal_effects") ||
+    isTRUE(.attributes$coefficients_type == "conditional_effects")
+  ) {
+    missing_terms <- setdiff(
+      unique(unname(interaction_terms[interaction_terms != ""])),
+      names(term_labels)
+    )
+    if (length(missing_terms) > 0) {
+      names(missing_terms) <- missing_terms
+      term_labels <- term_labels %>%
+        .update_vector(missing_terms)
+    }
+  }
+
+  interaction_terms <- interaction_terms %>%
     lapply(function(x) {
       paste(term_labels[x], collapse = interaction_sep)
     }) %>%

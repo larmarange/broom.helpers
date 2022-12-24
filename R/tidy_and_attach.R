@@ -31,7 +31,15 @@ tidy_attach_model <- function(x, model, .attributes = NULL) {
     dplyr::as_tibble() %>%
     .order_tidy_columns()
   class(x) <- c("broom.helpers", class(x))
-  attr(x, "model") <- model_get_model(model)
+  model <- model_get_model(model)
+
+  # if average_marginal_effects, force contr.treatment contrasts
+  if (isTRUE(attr(x, "coefficients_type") == "average_marginal_effects")) {
+    for (v in names(model$contrasts))
+      model$contrasts[[v]] <- "contr.treatment"
+  }
+
+  attr(x, "model") <- model
   for (a in names(.attributes)) {
     if (!is.null(.attributes[[a]]))
       attr(x, a) <- .attributes[[a]]
