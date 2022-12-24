@@ -9,6 +9,10 @@
 - New tidier `tidy_all_effects()` to display Marginal Effects (#195)
 - New tidier `tidy_ggpredict()` to display Conditional Effects (#195)
 
+**Bug fixes and improvements**
+
+- Better messages when `exponentiate` argument is not apppropriate (#197)
+
 # broom.helpers 1.10.0
 
 **New features**
@@ -23,7 +27,6 @@
 
 **Bug fixes and improvements**
 
-- Better messages when `exponentiate` argument is not apppropriate (#197)
 - Improvement of `.get_package_dependencies()` to be more efficient. It now 
   looks only at a single package description file (#178)
 - New function `.get_all_packages_dependencies()` to list all dependencies of
