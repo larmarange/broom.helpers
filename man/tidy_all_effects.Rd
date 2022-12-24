@@ -37,6 +37,7 @@ tidy_plus_plus(mod, tidy_fun = tidy_all_effects)
 \code{effects::allEffects()}
 
 Other custom_tieders: 
+\code{\link{tidy_broom}()},
 \code{\link{tidy_ggpredict}()},
 \code{\link{tidy_margins}()},
 \code{\link{tidy_multgee}()},
