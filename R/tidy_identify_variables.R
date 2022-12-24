@@ -52,6 +52,21 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x),
 
   .attributes <- .save_attributes(x)
 
+  if (
+    isTRUE(.attributes$coefficients_type == "marginal_effects") ||
+    isTRUE(.attributes$coefficients_type == "conditional_effects")
+  ) {
+    variables_list <- model_identify_variables(model) %>%
+      dplyr::select(-dplyr::all_of("term")) %>%
+      dplyr::distinct(.data$variable, .keep_all = TRUE) %>%
+      dplyr::filter(!is.na(.data$variable))
+
+    x <- x %>%
+      dplyr::left_join(variables_list, by = "variable") %>%
+      tidy_attach_model(model = model, .attributes = .attributes)
+    return(x)
+  }
+
   if ("variable" %in% names(x)) {
     x <- x %>% dplyr::select(
       -any_of(c("variable", "var_class", "var_type", "var_nlevels"))
