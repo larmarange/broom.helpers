@@ -133,13 +133,22 @@
     <loc>https://larmarange.github.io/broom.helpers/reference/tidy_add_variable_labels.html</loc>
   </url>
   <url>
+    <loc>https://larmarange.github.io/broom.helpers/reference/tidy_all_effects.html</loc>
+  </url>
+  <url>
     <loc>https://larmarange.github.io/broom.helpers/reference/tidy_attach_model.html</loc>
   </url>
   <url>
     <loc>https://larmarange.github.io/broom.helpers/reference/tidy_disambiguate_terms.html</loc>
   </url>
   <url>
+    <loc>https://larmarange.github.io/broom.helpers/reference/tidy_ggpredict.html</loc>
+  </url>
+  <url>
     <loc>https://larmarange.github.io/broom.helpers/reference/tidy_identify_variables.html</loc>
+  </url>
+  <url>
+    <loc>https://larmarange.github.io/broom.helpers/reference/tidy_margins.html</loc>
   </url>
   <url>
     <loc>https://larmarange.github.io/broom.helpers/reference/tidy_multgee.html</loc>
