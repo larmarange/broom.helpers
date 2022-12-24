@@ -1,16 +1,19 @@
 # broom.helpers (development version)
 
-# broom.helpers 1.10.0
-
 **New features**
 
 - New functions `tidy_add_pairwise_contrasts()` and `model_get_pairwise_contrasts()`
   to compute pairwise contrasts of categorical variables with `emmeans`,
   and corresponding new arguments in `tidy_plus_plus()` (#192)
-- `tidy_select_variables()` now sorts the variables according to `include` (#183)
 - New tidier `tidy_margins()` to display Average Marginal Effects (#195)
 - New tidier `tidy_all_effects()` to display Marginal Effects (#195)
 - New tidier `tidy_ggpredict()` to display Conditional Effects (#195)
+
+# broom.helpers 1.10.0
+
+**New features**
+
+- `tidy_select_variables()` now sorts the variables according to `include` (#183)
 
 **New supported models**
 
