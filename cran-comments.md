@@ -15,19 +15,18 @@ cf. https://github.com/larmarange/broom.helpers/actions
 
 We checked 5 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 0 new problems
- * We failed to check 1 packages
+ * We saw 1 new problems
+ * We failed to check 0 packages
 
 Issues with CRAN packages are summarised below.
 
-### Failed to check
+### New problems
+(This reports the first line of each new failure)
 
-* GGally (NA)
-
-## Additional checks
-
-* ubuntu 18.04 (on github actions): R-oldrel-2, R-oldrel-3, R-oldrel-4
-    - with `_R_CHECK_FORCE_SUGGESTS_: false`
-    - using historical snapshots of CRAN
-
-cf. https://github.com/larmarange/broom.helpers/actions
+* ggstats
+  checking tests ...
+  
+The developer of `ggtstats` is aware of the issue
+(see https://github.com/larmarange/ggstats/pull/15) and a new release of `ggstats`
+is planned once `broom.helpers` 1.11.0 on CRAN.
+  
