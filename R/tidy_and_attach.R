@@ -64,8 +64,7 @@ tidy_and_attach <- function(
   tidy_args$x <- model
   tidy_args$conf.int <- conf.int
   if (conf.int) tidy_args$conf.level <- conf.level
-  # pass exponentiate only if TRUE
-  if (exponentiate) tidy_args$exponentiate <- exponentiate
+  tidy_args$exponentiate <- exponentiate
 
   # test if exponentiate can be passed to tidy_fun, and if tidy_fun runs without error
   result <-
