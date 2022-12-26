@@ -11,7 +11,7 @@
 
 **Bug fixes and improvements**
 
-- Better messages when `exponentiate` argument is not apppropriate (#197)
+- Better messages when `exponentiate` argument is not appropriate (#197)
 
 # broom.helpers 1.10.0
 
