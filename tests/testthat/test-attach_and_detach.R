@@ -18,6 +18,7 @@ test_that("Attach and Detach models works", {
 })
 
 test_that("tidy_and_attach() handles models without exponentiate arguments", {
+  skip_if_not_installed("lavaan")
   df <- lavaan::HolzingerSwineford1939
   df$grade <- factor(df$grade, ordered = TRUE)
   HS.model <- "visual  =~ x1 + x2 + x3
@@ -28,6 +29,6 @@ test_that("tidy_and_attach() handles models without exponentiate arguments", {
                         auto.var = TRUE, auto.fix.first = TRUE,
                         auto.cov.lv.x = TRUE
   )
-  expect_message(mod %>% tidy_and_attach(exponentiate = TRUE))
+  expect_warning(mod %>% tidy_and_attach(exponentiate = TRUE))
   expect_error(mod %>% tidy_and_attach(), NA)
 })

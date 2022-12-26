@@ -47,6 +47,7 @@ reference:
 
   - title: Custom tidiers
   - contents:
+      - tidy_broom
       - tidy_parameters
       - tidy_with_broom_or_parameters
       - tidy_multgee

@@ -12,6 +12,8 @@
 #' @param model a model to be attached/tidied
 #' @param x a tibble of model terms
 #' @param tidy_fun option to specify a custom tidier function
+#' @param conf.int logical indicating whether or not to include a confidence
+#' interval in the tidied output
 #' @param conf.level level of confidence for confidence intervals (default: 95%)
 #' @param exponentiate logical indicating whether or not to exponentiate the
 #' coefficient estimates. This is typical for logistic, Poisson and Cox models,
@@ -51,22 +53,23 @@ tidy_attach_model <- function(x, model, .attributes = NULL) {
 #' @export
 tidy_and_attach <- function(
   model, tidy_fun = tidy_with_broom_or_parameters,
-  conf.level = .95, exponentiate = FALSE, ...
+  conf.int = TRUE, conf.level = .95, exponentiate = FALSE, ...
 ) {
   # exponentiate cannot be used with lm models
   # but broom will not produce an error and will return unexponentiated estimates
   if (identical(class(model), "lm") && exponentiate)
     stop("`exponentiate = TRUE` is not valid for this type of model.")
 
+  tidy_args <- list(...)
+  tidy_args$x <- model
+  tidy_args$conf.int <- conf.int
+  if (conf.int) tidy_args$conf.level <- conf.level
+  tidy_args$exponentiate <- exponentiate
+
   # test if exponentiate can be passed to tidy_fun, and if tidy_fun runs without error
   result <-
     tryCatch(
-      suppressWarnings(
-        tidy_fun(
-          model, exponentiate = exponentiate,
-          conf.level = conf.level, ...
-        )
-      ) %>%
+      do.call(tidy_fun, tidy_args) %>%
         tidy_attach_model(
           model,
           .attributes = list(
@@ -82,15 +85,16 @@ tidy_and_attach <- function(
         #       - in this case, we print a message explaining the likely source of error
         # first attempting to run without `exponentiate=` argument
         tryCatch({
+          tidy_args$exponentiate <- NULL
           xx <-
-            tidy_fun(model, conf.level = conf.level, ...) %>%
+            do.call(tidy_fun, tidy_args) %>%
             tidy_attach_model(
               model,
               .attributes = list(exponentiate = FALSE, conf.level = conf.level)
             )
           if (exponentiate)
             cli::cli_alert_warning(
-              "`exponentiate=TRUE` is not valid for this type of model and was ignored."
+              "`exponentiate = TRUE` is not valid for this type of model and was ignored."
             )
           xx
         },

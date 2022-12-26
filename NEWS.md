@@ -9,6 +9,10 @@
 - New tidier `tidy_all_effects()` to display Marginal Effects (#195)
 - New tidier `tidy_ggpredict()` to display Conditional Effects (#195)
 
+**Bug fixes and improvements**
+
+- Better messages when `exponentiate` argument is not apppropriate (#197)
+
 # broom.helpers 1.10.0
 
 **New features**
