@@ -19,6 +19,7 @@ knitr::opts_chunk$set(
 library(broom.helpers)
 if (
   !.assert_package("gtsummary", boolean = TRUE) ||
+  !.assert_package("ggstats", boolean = TRUE) ||
   !.assert_package("margins", boolean = TRUE) ||
   !.assert_package("emmeans", boolean = TRUE) ||
   !.assert_package("effects", boolean = TRUE) ||
