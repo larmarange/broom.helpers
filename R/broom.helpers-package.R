@@ -66,8 +66,26 @@ utils::globalVariables(c(".", "where"))
     names(.attributes),
     c(
       "exponentiate", "conf.level", "coefficients_type", "coefficients_label",
-      "variable_labels", "term_labels", "N_obs", "N_event", "Exposure"
+      "variable_labels", "term_labels", "N_obs", "N_event", "Exposure",
+      "force_contr.treatment", "skip_add_reference_rows",
+      "find_missing_interaction_terms"
       )
   )
   .attributes[.attributes_names]
+}
+
+#' Sequence generation between min and max
+#'
+#' @param x a numeric vector
+#' @param length.out desired length of the sequence
+#' @details
+#' `seq_range(x, length.out)` is a shortcut for
+#' `seq(min(x, na.rm = TRUE), max(x, na.rm = TRUE), length.out = length.out)`
+#' @return
+#' a numeric vector
+#' @export
+#' @examples
+#' seq_range(iris$Petal.Length)
+seq_range <- function(x, length.out = 25) {
+  seq(min(x, na.rm = TRUE), max(x, na.rm = TRUE), length.out = length.out)
 }

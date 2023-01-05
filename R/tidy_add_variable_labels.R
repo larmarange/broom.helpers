@@ -59,7 +59,7 @@ tidy_add_variable_labels <- function(x,
     x <- x %>% dplyr::select(-dplyr::all_of("var_label"))
   }
 
-  if (!"variable" %in% names(x)) {
+  if (!"variable" %in% names(x) || !"var_type" %in% names(x) ) {
     x <- x %>% tidy_identify_variables(model = model)
   }
 

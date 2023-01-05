@@ -35,8 +35,8 @@ tidy_attach_model <- function(x, model, .attributes = NULL) {
   class(x) <- c("broom.helpers", class(x))
   model <- model_get_model(model)
 
-  # if average_marginal_effects, force contr.treatment contrasts
-  if (isTRUE(attr(x, "coefficients_type") == "average_marginal_effects")) {
+  # if force_contr.treatment
+  if (isTRUE(attr(x, "force_contr.treatment"))) {
     for (v in names(model$contrasts))
       model$contrasts[[v]] <- "contr.treatment"
   }

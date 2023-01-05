@@ -1,3 +1,12 @@
+**New features**
+
+- New method `model_list_higher_order_variables()` to list the highest order
+  combinations of variables
+- New method `model_get_response_variable()` to get the name of the response
+  variable
+- New helper function `seq_range()` to generate a sequence of values between
+  the minimum and the maximum of a vector
+
 # broom.helpers 1.11.0
 
 **New features**
