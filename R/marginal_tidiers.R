@@ -845,4 +845,3 @@ tidy_marginalcontrasts <- function(x, variables_list = "auto",
     tidyr::unite(col = "term", sep = " * ", dplyr::starts_with("contrast")) %>%
     dplyr::relocate("variable", "term")
 }
-

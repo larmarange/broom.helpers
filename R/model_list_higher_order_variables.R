@@ -40,10 +40,10 @@ model_list_higher_order_variables.default <- function(model) {
 
   terms <- strsplit(variables, ":")
   # count the number of times a combination of terms appear
-  .count_combination <- function (i) {
+  .count_combination <- function(i) {
     lapply(
       terms,
-      function(x){
+      function(x) {
         all(i %in% x)
       }
     ) %>%

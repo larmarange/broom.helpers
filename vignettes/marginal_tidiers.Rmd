@@ -58,7 +58,7 @@ library(gtsummary, quietly = TRUE)
 library(dplyr, quietly = TRUE)
 d <- trial %>%
   filter(complete.cases(response, trt, marker, grade, age))
-  
+
 mod <- glm(
   response ~ trt * marker + stage + poly(age, 2),
   data = d,
