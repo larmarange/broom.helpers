@@ -1,11 +1,21 @@
 **New features**
 
+- Set of functions to support marginal predictions, contrasts and effects (#202):
+    - A dedicated vignette presenting the concepts and the different functions
+      has been added
+    - Several tidiers are provided to tidy results in a way that it could be 
+      used by `broom.helpers` functions.
+    - **Marginal Predictions:** `tidy_marginalpredictions()`,
+      `plot_marginalpredictions()`, `tidy_all_effects()`, and `tidy_ggpredict()`
+    - **Marginal Means:** `tidy_marginalmeans()`
+    - **Marginal Contrasts:** `tidy_marginalcontrasts()` and `tidy_comparisons()`
+    - **Marginal Effects:** `tidy_marginaleffects()` and `tidy_margins()`
 - New method `model_list_higher_order_variables()` to list the highest order
-  combinations of variables
+  combinations of variables (#202)
 - New method `model_get_response_variable()` to get the name of the response
-  variable
+  variable (#202)
 - New helper function `seq_range()` to generate a sequence of values between
-  the minimum and the maximum of a vector
+  the minimum and the maximum of a vector (#202)
 
 # broom.helpers 1.11.0
 
