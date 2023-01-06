@@ -11,7 +11,7 @@ Description: Provides suite of functions to work with regression model
     'broom::tidy()' tibbles.  The suite includes functions to group
     regression model terms by variable, insert reference and header rows
     for categorical variables, add variable labels, and more.
-License: GPL-3
+License: GPL (>= 3)
 URL: https://larmarange.github.io/broom.helpers/
 BugReports: https://github.com/larmarange/broom.helpers/issues
 Depends:
