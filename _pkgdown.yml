@@ -47,12 +47,17 @@ reference:
 
   - title: Custom tidiers
   - contents:
-      - tidy_margins
-      - tidy_all_effects
-      - tidy_ggpredict
+      - tidy_broom
+      - tidy_parameters
+      - tidy_with_broom_or_parameters
+      - tidy_multgee
 
   - title: Tidiers for marginal effects / means
   - contents:
+      - tidy_marginalpredictions
+      - tidy_comparisons
+      - tidy_marginalcontrasts
+      - tidy_marginalmeans
       - tidy_marginaleffects
       - tidy_margins
       - tidy_all_effects
