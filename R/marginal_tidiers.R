@@ -398,7 +398,9 @@ tidy_marginalmeans <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
       variable = "term",
       term = "value",
       estimate = "marginalmean"
-    )
+    ) %>%
+    dplyr::mutate(term = as.character(.data$term))
+
 
   attr(res, "coefficients_type") <- "marginal_means"
   attr(res, "skip_add_reference_rows") <- TRUE
