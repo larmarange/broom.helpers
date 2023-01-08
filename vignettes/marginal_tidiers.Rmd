@@ -350,7 +350,7 @@ mod %>%
   bold_labels()
 ```
 
-Marginal means are defined only for categorical variables. However, we can define **marginal predictions at marginal means** for such variables, with `tidy_marginalpredictions()` with the option `newdata = "marginalmeans"`.
+Marginal means are defined only for categorical variables. However, we can define **marginal predictions at marginal means** for both continuous and categorical variables, calling `tidy_marginalpredictions()` with the option `newdata = "marginalmeans"`. For categorical variables, marginal predictions at marginal means will be equal to marginal means.
 
 ```{r}
 mod %>%
