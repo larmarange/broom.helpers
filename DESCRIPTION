@@ -45,7 +45,7 @@ Suggests:
     geepack,
     ggplot2,
     ggeffects,
-    ggstats,
+    ggstats (>= 0.2.0),
     glmmTMB,
     glue,
     gt,

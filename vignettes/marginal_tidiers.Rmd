@@ -229,6 +229,21 @@ p + patchwork::plot_annotation(
 )
 ```
 
+Alternatively, you can use `ggstats::ggcoef_model()`, using `tidy_args` to pass arguments to `broom.helpers::tidy_marginalpredictions()`.
+
+```{r}
+ggstats::ggcoef_model(
+  mod,
+  tidy_fun = tidy_marginalpredictions,
+  tidy_args = list(newdata = "mean", variables_list = "no_interaction"),
+  vline = FALSE,
+  show_p_values = FALSE,
+  signif_stars = FALSE,
+  significance = NULL
+)
+```
+
+
 ### Average Marginal Predictions
 
 Instead of averaging observed values to generate "typical observations" before predicting the outcome, an alternative consists to predict the outcome on the overall observed values before averaging the results.
@@ -504,6 +519,19 @@ mod %>%
   bold_labels()
 ```
 
+For `ggstats::ggcoef_model()`, use `tidy_args` to pass `newdata = "mean"`.
+
+```{r}
+mod %>%
+  ggstats::ggcoef_model(
+    tidy_fun = tidy_comparisons,
+    tidy_args = list(newdata = "mean")
+  ) +
+  ggplot2::scale_x_continuous(
+    labels = scales::label_percent(style_positive = "plus")
+  )
+```
+
 ### Alternative approaches
 
 Other assumptions, such as `"marginalmeans"` or `"median"`, could be defined using `newdata`. See the documentation of `marginaleffects::comparisons()`.
@@ -516,6 +544,17 @@ mod %>%
     estimate_fun = scales::label_percent(style_positive = "plus")
   ) %>%
   bold_labels()
+```
+
+```{r}
+mod %>%
+  ggstats::ggcoef_model(
+    tidy_fun = tidy_comparisons,
+    tidy_args = list(newdata = "marginalmeans")
+  ) +
+  ggplot2::scale_x_continuous(
+    labels = scales::label_percent(style_positive = "plus")
+  )
 ```
 
 ### Dealing with interactions
@@ -587,6 +626,16 @@ mod %>%
   bold_labels()
 ```
 
+```{r}
+mod %>%
+  ggstats::ggcoef_model(
+    tidy_fun = tidy_marginaleffects
+  ) +
+  ggplot2::scale_x_continuous(
+    labels = scales::label_percent(style_positive = "plus")
+  )
+```
+
 Please note that for categorical variables, marginal contrasts are returned.
 
 Same results could be obtained with `margins::margins()` function inspired by **Stata**'s `margins` command. As `margins::margins()` is not compatible with `stats::poly()`, we will rewrite our model, replacing `poly(age, 2)` by `age + age^2`.
@@ -627,6 +676,17 @@ mod %>%
   bold_labels()
 ```
 
+```{r}
+mod %>%
+  ggstats::ggcoef_model(
+    tidy_fun = tidy_marginaleffects,
+    tidy_args = list(newdata = "mean")
+  ) +
+  ggplot2::scale_x_continuous(
+    labels = scales::label_percent(style_positive = "plus")
+  )
+```
+
 ### Marginal Effects at Marginal Means
 
 Simply use `newdata = "marginalmeans"`.
@@ -640,6 +700,18 @@ mod %>%
   ) %>%
   bold_labels()
 ```
+
+```{r}
+mod %>%
+  ggstats::ggcoef_model(
+    tidy_fun = tidy_marginaleffects,
+    tidy_args = list(newdata = "marginalmeans")
+  ) +
+  ggplot2::scale_x_continuous(
+    labels = scales::label_percent(style_positive = "plus")
+  )
+```
+
 
 ## Further readings
 
