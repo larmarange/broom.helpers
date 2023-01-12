@@ -243,7 +243,6 @@ ggstats::ggcoef_model(
 )
 ```
 
-
 ### Average Marginal Predictions
 
 Instead of averaging observed values to generate "typical observations" before predicting the outcome, an alternative consists to predict the outcome on the overall observed values before averaging the results.
@@ -711,7 +710,6 @@ mod %>%
     labels = scales::label_percent(style_positive = "plus")
   )
 ```
-
 
 ## Further readings
 
