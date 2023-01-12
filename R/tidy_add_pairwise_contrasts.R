@@ -68,18 +68,14 @@ tidy_add_pairwise_contrasts <- function(
 
   .attributes <- .save_attributes(x)
 
-  if (isTRUE(.attributes$coefficients_type == "average_marginal_effects"))
-    cli::cli_abort("Pairwise contrasts are not compatible with Average Marginal Effects.") # nolint
-  if (isTRUE(.attributes$coefficients_type == "marginal_effects"))
-    cli::cli_abort("Pairwise contrasts are not compatible with Marginal Effects.") # nolint
-  if (isTRUE(.attributes$coefficients_type == "conditional_effects"))
-    cli::cli_abort("Pairwise contrasts are not compatible with Conditional Effects.") # nolint
+  if (isTRUE(stringr::str_starts(.attributes$coefficients_type, "marginal")))
+    cli::cli_abort("Pairwise contrasts are not compatible with marginal effects / contrasts / means / predictions.") # nolint
 
   if (is.null(conf.level))
     conf.level <- .attributes$conf.level
 
   if (is.null(conf.level))
-    stop("Please specify conf.level")
+    cli::cli_abort("Please specify {.arg conf.level}")
 
   # obtain character vector of selected variables
   variables <- .select_to_varnames(

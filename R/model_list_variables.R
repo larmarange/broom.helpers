@@ -7,6 +7,7 @@
 #' custom variable labels
 #' @param only_variable if `TRUE`, will return only "variable"
 #' column
+#' @param add_var_type if `TRUE`, add `var_nlevels` and `var_type` columns
 #' @return
 #' A tibble with three columns:
 #' * `variable`: the corresponding variable
@@ -15,6 +16,12 @@
 #'    with the label attribute (cf. [labelled::var_label()])
 #' * `var_label`: a variable label (by priority, `labels` if defined,
 #'   `label_attr` if available, otherwise `variable`)
+#'
+#' If `add_var_type = TRUE`:
+#' * `var_type`: `"continuous"`, `"dichotomous"` (categorical variable with 2 levels),
+#'   `"categorical"` (categorical variable with 3 or more levels), `"intercept"`
+#'   or `"interaction"`
+#' * `var_nlevels`: number of original levels for categorical variables
 #'
 #' @export
 #' @family model_helpers
@@ -45,13 +52,15 @@
 #' ) %>%
 #'   model_list_variables()
 #' }
-model_list_variables <- function(model, labels = NULL, only_variable = FALSE) {
+model_list_variables <- function(model, labels = NULL,
+                                 only_variable = FALSE, add_var_type = FALSE) {
   UseMethod("model_list_variables")
 }
 
 #' @rdname model_list_variables
 #' @export
-model_list_variables.default <- function(model, labels = NULL, only_variable = FALSE) {
+model_list_variables.default <- function(model, labels = NULL,
+                                         only_variable = FALSE, add_var_type = FALSE) {
   model_frame <- model_get_model_frame(model)
   model_terms <- model_get_terms(model)
 
@@ -88,13 +97,16 @@ model_list_variables.default <- function(model, labels = NULL, only_variable = F
 
   if (only_variable) return(res$variable)
 
+  if (add_var_type) return(.add_var_type(res, model))
+
   res
 }
 
 
 #' @rdname model_list_variables
 #' @export
-model_list_variables.lavaan <- function(model, labels = NULL, only_variable = FALSE) {
+model_list_variables.lavaan <- function(model, labels = NULL,
+                                        only_variable = FALSE, add_var_type = FALSE) {
   res <- tibble::tibble(
     variable = .clean_backticks(unique(model@ParTable$lhs))
   ) %>%
@@ -117,12 +129,15 @@ model_list_variables.lavaan <- function(model, labels = NULL, only_variable = FA
 
   if (only_variable) return(res$variable)
 
+  if (add_var_type) return(.add_var_type(res, model))
+
   res
 }
 
 #' @rdname model_list_variables
 #' @export
-model_list_variables.logitr <- function(model, labels = NULL, only_variable = FALSE) {
+model_list_variables.logitr <- function(model, labels = NULL,
+                                        only_variable = FALSE, add_var_type = FALSE) {
   res <- model_list_variables.default(model, labels, FALSE)
 
   if (!is.null(model$data$scalePar)) {
@@ -146,6 +161,8 @@ model_list_variables.logitr <- function(model, labels = NULL, only_variable = FA
 
 
   if (only_variable) return(res$variable)
+
+  if (add_var_type) return(.add_var_type(res, model))
 
   res
 }
@@ -223,4 +240,13 @@ model_list_variables.logitr <- function(model, labels = NULL, only_variable = FA
     )
   ) %>%
     dplyr::select(-dplyr::all_of("var_custom_label"))
+}
+
+.add_var_type <- function(x, model) {
+  x <- x %>%
+    dplyr::left_join(
+      model_get_nlevels(model),
+      by = "variable"
+    )
+  x %>% .compute_var_type()
 }

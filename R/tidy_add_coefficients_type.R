@@ -41,17 +41,39 @@ tidy_add_coefficients_type <- function(
   .attributes <- .save_attributes(x)
   .attributes$exponentiate <- exponentiate
 
-  # specific case for marginal models where coefficients_type
-  # is already define by the tidier
-  if (isTRUE(.attributes$coefficients_type == "average_marginal_effects")) {
-    coefficients_type <- "average_marginal_effects"
-    coefficients_label <- "Average Marginal Effects"
-  } else if (isTRUE(.attributes$coefficients_type == "marginal_effects")) {
-    coefficients_type <- "marginal_effects"
-    coefficients_label <- "Marginal Effects"
-  }  else if (isTRUE(.attributes$coefficients_type == "conditional_effects")) {
-    coefficients_type <- "conditional_effects"
-    coefficients_label <- "Conditional Effects"
+  # specific case for marginal effects / means / contrasts / prediction
+  # where coefficients_type is already define by the tidier
+  if (isTRUE(stringr::str_starts(.attributes$coefficients_type, "marginal"))) {
+    coefficients_type <- .attributes$coefficients_type
+    coefficients_label <- dplyr::case_when(
+      coefficients_type == "marginal_effects_average" ~
+        "Average Marginal Effects",
+      coefficients_type == "marginal_effects_at_mean" ~
+        "Marginal Effects at the Mean",
+      coefficients_type == "marginal_effects_at_marginalmeans" ~
+        "Marginal Effects at Marginal Means",
+      stringr::str_starts(coefficients_type, "marginal_effects") ~
+        "Marginal Effects",
+      coefficients_type == "marginal_contrasts_average" ~
+        "Average Marginal Contrasts",
+      coefficients_type == "marginal_contrasts_at_mean" ~
+        "Marginal Contrasts at the Mean",
+      coefficients_type == "marginal_contrasts_at_marginalmeans" ~
+        "Marginal Contrasts at Marginal Means",
+      stringr::str_starts(coefficients_type, "marginal_contrasts") ~
+        "Marginal Contrasts",
+      stringr::str_starts(coefficients_type, "marginal_means") ~
+        "Marginal Means",
+      coefficients_type == "marginal_predictions_average" ~
+        "Average Marginal Predictions",
+      coefficients_type == "marginal_predictions_at_mean" ~
+        "Marginal Predictions at the Mean",
+      coefficients_type == "marginal_predictions_at_marginalmeans" ~
+        "Marginal Predictions at Marginal Means",
+      stringr::str_starts(coefficients_type, "marginal_predictions") ~
+        "Marginal Predictions",
+      TRUE ~ "Marginal values"
+    )
   } else {
     coefficients_type <- model_get_coefficients_type(model)
     if (exponentiate)

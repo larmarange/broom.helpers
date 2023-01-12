@@ -1,7 +1,15 @@
+AME
+Arel
+Bundock
+CMD
 Codecov
 DOI
+Heiss
 Helmert
 Lifecycle
+Lüdecke
+MEM
+Stata
 Tibbles
 cloglog
 cond
@@ -9,6 +17,7 @@ dev
 disambiguated
 disambiguating
 disp
+emmeans
 exponentiate
 github
 gtsummary
@@ -19,8 +28,11 @@ labelled
 larmarange
 logitr
 poisson
+quartile
+quartiles
 tibble
 tibbles
+tidiers
 tidyselect
 tieder
 tieders

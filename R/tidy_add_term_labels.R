@@ -217,17 +217,12 @@ tidy_add_term_labels <- function(x,
     interaction_terms %>%
     strsplit(":")
 
-  # in the case of marginal/conditional effects
+  # in some cases (e.g. marginal predictions)
   # interaction terms are not prefixed by variable names
   # => need to identify them from interaction_terms directly
-  if (
-    isTRUE(.attributes$coefficients_type == "marginal_effects") ||
-    isTRUE(.attributes$coefficients_type == "conditional_effects")
-  ) {
-    missing_terms <- setdiff(
-      unique(unname(interaction_terms[interaction_terms != ""])),
-      names(term_labels)
-    )
+  if (isTRUE(.attributes$find_missing_interaction_terms)) {
+    it <- unname(unlist(interaction_terms))
+    missing_terms <- setdiff(it[it != ""], names(term_labels))
     if (length(missing_terms) > 0) {
       names(missing_terms) <- missing_terms
       term_labels <- term_labels %>%

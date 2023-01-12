@@ -7,13 +7,33 @@
 \alias{model_list_variables.logitr}
 \title{List all the variables used in a model}
 \usage{
-model_list_variables(model, labels = NULL, only_variable = FALSE)
+model_list_variables(
+  model,
+  labels = NULL,
+  only_variable = FALSE,
+  add_var_type = FALSE
+)
 
-\method{model_list_variables}{default}(model, labels = NULL, only_variable = FALSE)
+\method{model_list_variables}{default}(
+  model,
+  labels = NULL,
+  only_variable = FALSE,
+  add_var_type = FALSE
+)
 
-\method{model_list_variables}{lavaan}(model, labels = NULL, only_variable = FALSE)
+\method{model_list_variables}{lavaan}(
+  model,
+  labels = NULL,
+  only_variable = FALSE,
+  add_var_type = FALSE
+)
 
-\method{model_list_variables}{logitr}(model, labels = NULL, only_variable = FALSE)
+\method{model_list_variables}{logitr}(
+  model,
+  labels = NULL,
+  only_variable = FALSE,
+  add_var_type = FALSE
+)
 }
 \arguments{
 \item{model}{a model object}
@@ -23,6 +43,8 @@ custom variable labels}
 
 \item{only_variable}{if \code{TRUE}, will return only "variable"
 column}
+
+\item{add_var_type}{if \code{TRUE}, add \code{var_nlevels} and \code{var_type} columns}
 }
 \value{
 A tibble with three columns:
@@ -33,6 +55,14 @@ A tibble with three columns:
 with the label attribute (cf. \code{\link[labelled:var_label]{labelled::var_label()}})
 \item \code{var_label}: a variable label (by priority, \code{labels} if defined,
 \code{label_attr} if available, otherwise \code{variable})
+}
+
+If \code{add_var_type = TRUE}:
+\itemize{
+\item \code{var_type}: \code{"continuous"}, \code{"dichotomous"} (categorical variable with 2 levels),
+\code{"categorical"} (categorical variable with 3 or more levels), \code{"intercept"}
+or \code{"interaction"}
+\item \code{var_nlevels}: number of original levels for categorical variables
 }
 }
 \description{
@@ -81,12 +111,14 @@ Other model_helpers:
 \code{\link{model_get_n}()},
 \code{\link{model_get_offset}()},
 \code{\link{model_get_pairwise_contrasts}()},
+\code{\link{model_get_response_variable}()},
 \code{\link{model_get_response}()},
 \code{\link{model_get_terms}()},
 \code{\link{model_get_weights}()},
 \code{\link{model_get_xlevels}()},
 \code{\link{model_identify_variables}()},
 \code{\link{model_list_contrasts}()},
+\code{\link{model_list_higher_order_variables}()},
 \code{\link{model_list_terms_levels}()}
 }
 \concept{model_helpers}

@@ -7,8 +7,7 @@
 
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
-[![R build
-status](https://github.com/larmarange/broom.helpers/workflows/R-CMD-check/badge.svg)](https://github.com/larmarange/broom.helpers/actions)
+[![R-CMD-check](https://github.com/larmarange/broom.helpers/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/larmarange/broom.helpers/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/larmarange/broom.helpers/branch/main/graph/badge.svg)](https://app.codecov.io/gh/larmarange/broom.helpers?branch=main)
 [![CRAN

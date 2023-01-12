@@ -51,9 +51,17 @@ reference:
       - tidy_parameters
       - tidy_with_broom_or_parameters
       - tidy_multgee
-      - tidy_margins
+
+  - title: Tidiers for marginal predictions, contrasts, and effects
+  - contents:
+      - tidy_marginalpredictions
       - tidy_all_effects
       - tidy_ggpredict
+      - tidy_marginalmeans
+      - tidy_marginalcontrasts
+      - tidy_comparisons
+      - tidy_marginaleffects
+      - tidy_margins
 
   - title: Get information from model objects
   - contents:
@@ -66,4 +74,5 @@ reference:
   - title: Exported utility functions
   - contents:
       - starts_with("\\.")
+      - seq_range
 
