@@ -597,9 +597,9 @@ mod %>%
 
 As before, to display marginal contrasts at the mean, indicate `newdata = "mean"`. For more information on the way to customize the combination of variables, see the documentation and examples of `tidy_marginalcontrasts()`.
 
-## Marginal Effects
+## Marginal Effects / Marginal Slopes
 
-Marginal effects are similar to marginal contrasts with a subtle difference. For a continuous regressor, a marginal contrast could be seen as a difference while a marginal effect is a partial derivative. Put differently, the marginal effect of a continuous regression $x$ is the slope of the prediction function $y$, measured at a specific value of $x$, i.e. ${\partial y}/{\partial x}$.
+Marginal effects are similar to marginal contrasts with a subtle difference. For a continuous regressor, a marginal contrast could be seen as a difference while a marginal effect is a partial derivative. Put differently, the marginal effect of a continuous regressor $x$ is the **slope** of the prediction function $y$, measured at a specific value of $x$, i.e. ${\partial y}/{\partial x}$.
 
 Marginal effects are expressed according to the scale of the model and represent the expected change on the outcome for an increase of one unit of the regressor.
 
