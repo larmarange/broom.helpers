@@ -366,3 +366,66 @@ test_that("tidy_marginalmeans()", {
     )
   )
 })
+
+test_that("tidy_comparisons()", {
+  skip_on_cran()
+  skip_if_not_installed("marginaleffects")
+
+  mod <- lm(Petal.Length ~ Petal.Width * Species + Sepal.Length, data = iris)
+  expect_error(
+    t <- tidy_comparisons(mod),
+    NA
+  )
+  expect_error(
+    tidy_comparisons(mod, exponentiate = TRUE)
+  )
+  expect_error(
+    res <- tidy_plus_plus(mod, tidy_fun = tidy_comparisons),
+    NA
+  )
+  expect_equal(
+    nrow(res),
+    nrow(t)
+  )
+  expect_equal(
+    attr(res, "coefficients_label"),
+    "Average Marginal Contrasts"
+  )
+  expect_error(
+    tidy_plus_plus(
+      mod,
+      tidy_fun = tidy_comparisons,
+      add_pairwise_contrasts = TRUE
+    )
+  )
+
+  expect_error(
+    t <- tidy_comparisons(mod, newdata = "mean"),
+    NA
+  )
+  expect_error(
+    res <- tidy_plus_plus(
+      mod,
+      tidy_fun = tidy_comparisons,
+      newdata = "mean"
+    ),
+    NA
+  )
+  expect_equal(
+    attr(res, "coefficients_label"),
+    "Marginal Contrasts at the Mean"
+  )
+
+  expect_error(
+    res <- tidy_plus_plus(
+      mod,
+      tidy_fun = tidy_comparisons,
+      newdata = "marginalmeans"
+    ),
+    NA
+  )
+  expect_equal(
+    attr(res, "coefficients_label"),
+    "Marginal Contrasts at Marginal Means"
+  )
+})
