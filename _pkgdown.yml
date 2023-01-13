@@ -22,6 +22,8 @@ navbar:
     href: reference/index.html
   - text: Getting Started
     href: articles/tidy.html
+  - text: Marginal estimates
+    href: articles/marginal_tidiers.html
   - text: News
     href: news/index.html
   right:
