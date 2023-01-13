@@ -46,7 +46,7 @@ In `{broom.helpers}`, we tried to adopt a terminology consistent with the [`{mar
 
 **Marginal Means** are adjusted predictions of a model, averaged across a "reference grid" of categorical predictors. They are similar to marginal predictions, but with subtle differences.
 
-`{broom.helpers}` embed several custom tidiers to compute such quantities and to return a tibble compatible with `tidy_plus_plus()` and all others `{broom.helpers}`'s `tidy_*()` function. Therefore, it is possible to produce nicely formatted tables with `gtsummary::tbl_regression()` or forest plots with `ggtstats::ggcoef_model()`.
+`{broom.helpers}` embed several custom tidiers to compute such quantities and to return a tibble compatible with `tidy_plus_plus()` and all others `{broom.helpers}`'s `tidy_*()` function. Therefore, it is possible to produce nicely formatted tables with `gtsummary::tbl_regression()` or forest plots with `ggstats::ggcoef_model()`.
 
 ## Data preparation
 
