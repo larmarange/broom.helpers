@@ -844,6 +844,7 @@ tidy_marginal_contrasts <- function(x, variables_list = "auto",
 
 .tidy_one_marginal_contrast <- function(variables, dots) {
   dots$variables <- variables
+  dots$cross <- TRUE
   do.call(marginaleffects::avg_comparisons, dots) %>%
     dplyr::select(-dplyr::any_of("term")) %>%
     dplyr::mutate(variable = paste(names(variables), collapse = ":")) %>%
