@@ -54,11 +54,11 @@ tidy_plus_plus(mod, tidy_fun = tidy_ggpredict)
 
 Other marginal_tieders: 
 \code{\link{tidy_all_effects}()},
-\code{\link{tidy_comparisons}()},
-\code{\link{tidy_marginalcontrasts}()},
-\code{\link{tidy_marginaleffects}()},
-\code{\link{tidy_marginalmeans}()},
-\code{\link{tidy_marginalpredictions}()},
+\code{\link{tidy_avg_comparisons}()},
+\code{\link{tidy_avg_slopes}()},
+\code{\link{tidy_marginal_contrasts}()},
+\code{\link{tidy_marginal_means}()},
+\code{\link{tidy_marginal_predictions}()},
 \code{\link{tidy_margins}()}
 }
 \concept{marginal_tieders}

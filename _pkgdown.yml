@@ -56,13 +56,13 @@ reference:
 
   - title: Tidiers for marginal predictions, contrasts, and effects
   - contents:
-      - tidy_marginalpredictions
+      - tidy_marginal_predictions
       - tidy_all_effects
       - tidy_ggpredict
-      - tidy_marginalmeans
-      - tidy_marginalcontrasts
-      - tidy_comparisons
-      - tidy_marginaleffects
+      - tidy_marginal_means
+      - tidy_marginal_contrasts
+      - tidy_avg_comparisons
+      - tidy_avg_slopes
       - tidy_margins
 
   - title: Get information from model objects

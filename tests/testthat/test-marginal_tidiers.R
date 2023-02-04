@@ -97,20 +97,20 @@ test_that("tidy_ggpredict()", {
   )
 })
 
-test_that("tidy_marginalpredictions()", {
+test_that("tidy_marginal_predictions()", {
   skip_on_cran()
   skip_if_not_installed("marginaleffects")
 
   mod <- lm(Petal.Length ~ Petal.Width * Species + Sepal.Length, data = iris)
   expect_error(
-    t <- tidy_marginalpredictions(mod),
+    t <- tidy_marginal_predictions(mod),
     NA
   )
   expect_error(
-    tidy_marginalpredictions(mod, exponentiate = TRUE)
+    tidy_marginal_predictions(mod, exponentiate = TRUE)
   )
   expect_error(
-    res <- tidy_plus_plus(mod, tidy_fun = tidy_marginalpredictions),
+    res <- tidy_plus_plus(mod, tidy_fun = tidy_marginal_predictions),
     NA
   )
   expect_equal(
@@ -125,19 +125,19 @@ test_that("tidy_marginalpredictions()", {
   expect_error(
     tidy_plus_plus(
       mod,
-      tidy_fun = tidy_marginalpredictions,
+      tidy_fun = tidy_marginal_predictions,
       add_pairwise_contrasts = TRUE
     )
   )
 
   expect_error(
-    t <- tidy_marginalpredictions(mod, "no_interaction"),
+    t <- tidy_marginal_predictions(mod, "no_interaction"),
     NA
   )
   expect_error(
     res <- tidy_plus_plus(
       mod,
-      tidy_fun = tidy_marginalpredictions,
+      tidy_fun = tidy_marginal_predictions,
       variables_list = "no_interaction"
     ),
     NA
@@ -149,13 +149,13 @@ test_that("tidy_marginalpredictions()", {
   expect_false(any(res$var_type == "interaction"))
 
   expect_error(
-    t <- tidy_marginalpredictions(mod, newdata = "mean"),
+    t <- tidy_marginal_predictions(mod, newdata = "mean"),
     NA
   )
   expect_error(
     res <- tidy_plus_plus(
       mod,
-      tidy_fun = tidy_marginalpredictions,
+      tidy_fun = tidy_marginal_predictions,
       newdata = "mean"
     ),
     NA
@@ -168,7 +168,7 @@ test_that("tidy_marginalpredictions()", {
   expect_error(
     res <- tidy_plus_plus(
       mod,
-      tidy_fun = tidy_marginalpredictions,
+      tidy_fun = tidy_marginal_predictions,
       newdata = "marginalmeans"
     ),
     NA
@@ -178,31 +178,31 @@ test_that("tidy_marginalpredictions()", {
     "Marginal Predictions at Marginal Means"
   )
   expect_type(
-    p <- plot_marginalpredictions(mod),
+    p <- plot_marginal_predictions(mod),
     "list"
   )
   expect_length(p, 2)
   expect_type(
-    p <- plot_marginalpredictions(mod, variables_list = "no_interaction"),
+    p <- plot_marginal_predictions(mod, variables_list = "no_interaction"),
     "list"
   )
   expect_length(p, 3)
 })
 
-test_that("tidy_marginaleffects()", {
+test_that("tidy_avg_slopes()", {
   skip_on_cran()
   skip_if_not_installed("marginaleffects")
 
   mod <- lm(Petal.Length ~ Petal.Width * Species + Sepal.Length, data = iris)
   expect_error(
-    t <- tidy_marginaleffects(mod),
+    t <- tidy_avg_slopes(mod),
     NA
   )
   expect_error(
-    tidy_marginaleffects(mod, exponentiate = TRUE)
+    tidy_avg_slopes(mod, exponentiate = TRUE)
   )
   expect_error(
-    res <- tidy_plus_plus(mod, tidy_fun = tidy_marginaleffects),
+    res <- tidy_plus_plus(mod, tidy_fun = tidy_avg_slopes),
     NA
   )
   expect_equal(
@@ -216,19 +216,19 @@ test_that("tidy_marginaleffects()", {
   expect_error(
     tidy_plus_plus(
       mod,
-      tidy_fun = tidy_marginaleffects,
+      tidy_fun = tidy_avg_slopes,
       add_pairwise_contrasts = TRUE
     )
   )
 
   expect_error(
-    t <- tidy_marginaleffects(mod, newdata = "mean"),
+    t <- tidy_avg_slopes(mod, newdata = "mean"),
     NA
   )
   expect_error(
     res <- tidy_plus_plus(
       mod,
-      tidy_fun = tidy_marginaleffects,
+      tidy_fun = tidy_avg_slopes,
       newdata = "mean"
     ),
     NA
@@ -241,7 +241,7 @@ test_that("tidy_marginaleffects()", {
   expect_error(
     res <- tidy_plus_plus(
       mod,
-      tidy_fun = tidy_marginaleffects,
+      tidy_fun = tidy_avg_slopes,
       newdata = "marginalmeans"
     ),
     NA
@@ -252,20 +252,20 @@ test_that("tidy_marginaleffects()", {
   )
 })
 
-test_that("tidy_marginalcontrasts()", {
+test_that("tidy_marginal_contrasts()", {
   skip_on_cran()
   skip_if_not_installed("marginaleffects")
 
   mod <- lm(Petal.Length ~ Petal.Width * Species + Sepal.Length, data = iris)
   expect_error(
-    t <- tidy_marginalcontrasts(mod),
+    t <- tidy_marginal_contrasts(mod),
     NA
   )
   expect_error(
-    tidy_marginalcontrasts(mod, exponentiate = TRUE)
+    tidy_marginal_contrasts(mod, exponentiate = TRUE)
   )
   expect_error(
-    res <- tidy_plus_plus(mod, tidy_fun = tidy_marginalcontrasts),
+    res <- tidy_plus_plus(mod, tidy_fun = tidy_marginal_contrasts),
     NA
   )
   expect_equal(
@@ -280,19 +280,19 @@ test_that("tidy_marginalcontrasts()", {
   expect_error(
     tidy_plus_plus(
       mod,
-      tidy_fun = tidy_marginalcontrasts,
+      tidy_fun = tidy_marginal_contrasts,
       add_pairwise_contrasts = TRUE
     )
   )
 
   expect_error(
-    t <- tidy_marginalcontrasts(mod, "no_interaction"),
+    t <- tidy_marginal_contrasts(mod, "no_interaction"),
     NA
   )
   expect_error(
     res <- tidy_plus_plus(
       mod,
-      tidy_fun = tidy_marginalcontrasts,
+      tidy_fun = tidy_marginal_contrasts,
       variables_list = "no_interaction"
     ),
     NA
@@ -304,13 +304,13 @@ test_that("tidy_marginalcontrasts()", {
   expect_false(any(res$var_type == "interaction"))
 
   expect_error(
-    t <- tidy_marginalcontrasts(mod, newdata = "mean"),
+    t <- tidy_marginal_contrasts(mod, newdata = "mean"),
     NA
   )
   expect_error(
     res <- tidy_plus_plus(
       mod,
-      tidy_fun = tidy_marginalcontrasts,
+      tidy_fun = tidy_marginal_contrasts,
       newdata = "mean"
     ),
     NA
@@ -323,7 +323,7 @@ test_that("tidy_marginalcontrasts()", {
   expect_error(
     res <- tidy_plus_plus(
       mod,
-      tidy_fun = tidy_marginalcontrasts,
+      tidy_fun = tidy_marginal_contrasts,
       newdata = "marginalmeans"
     ),
     NA
@@ -334,20 +334,20 @@ test_that("tidy_marginalcontrasts()", {
   )
 })
 
-test_that("tidy_marginalmeans()", {
+test_that("tidy_marginal_means()", {
   skip_on_cran()
   skip_if_not_installed("marginaleffects")
 
   mod <- lm(Petal.Length ~ Petal.Width * Species + Sepal.Length, data = iris)
   expect_error(
-    t <- tidy_marginalmeans(mod),
+    t <- tidy_marginal_means(mod),
     NA
   )
   expect_error(
-    tidy_marginalmeans(mod, exponentiate = TRUE)
+    tidy_marginal_means(mod, exponentiate = TRUE)
   )
   expect_error(
-    res <- tidy_plus_plus(mod, tidy_fun = tidy_marginalmeans),
+    res <- tidy_plus_plus(mod, tidy_fun = tidy_marginal_means),
     NA
   )
   expect_equal(
@@ -361,26 +361,26 @@ test_that("tidy_marginalmeans()", {
   expect_error(
     tidy_plus_plus(
       mod,
-      tidy_fun = tidy_marginalmeans,
+      tidy_fun = tidy_marginal_means,
       add_pairwise_contrasts = TRUE
     )
   )
 })
 
-test_that("tidy_comparisons()", {
+test_that("tidy_avg_comparisons()", {
   skip_on_cran()
   skip_if_not_installed("marginaleffects")
 
   mod <- lm(Petal.Length ~ Petal.Width * Species + Sepal.Length, data = iris)
   expect_error(
-    t <- tidy_comparisons(mod),
+    t <- tidy_avg_comparisons(mod),
     NA
   )
   expect_error(
-    tidy_comparisons(mod, exponentiate = TRUE)
+    tidy_avg_comparisons(mod, exponentiate = TRUE)
   )
   expect_error(
-    res <- tidy_plus_plus(mod, tidy_fun = tidy_comparisons),
+    res <- tidy_plus_plus(mod, tidy_fun = tidy_avg_comparisons),
     NA
   )
   expect_equal(
@@ -394,19 +394,19 @@ test_that("tidy_comparisons()", {
   expect_error(
     tidy_plus_plus(
       mod,
-      tidy_fun = tidy_comparisons,
+      tidy_fun = tidy_avg_comparisons,
       add_pairwise_contrasts = TRUE
     )
   )
 
   expect_error(
-    t <- tidy_comparisons(mod, newdata = "mean"),
+    t <- tidy_avg_comparisons(mod, newdata = "mean"),
     NA
   )
   expect_error(
     res <- tidy_plus_plus(
       mod,
-      tidy_fun = tidy_comparisons,
+      tidy_fun = tidy_avg_comparisons,
       newdata = "mean"
     ),
     NA
@@ -419,7 +419,7 @@ test_that("tidy_comparisons()", {
   expect_error(
     res <- tidy_plus_plus(
       mod,
-      tidy_fun = tidy_comparisons,
+      tidy_fun = tidy_avg_comparisons,
       newdata = "marginalmeans"
     ),
     NA
