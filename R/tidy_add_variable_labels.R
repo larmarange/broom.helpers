@@ -46,11 +46,17 @@ tidy_add_variable_labels <- function(x,
                                      quiet = FALSE,
                                      strict = FALSE) {
   if (is.null(model)) {
-    stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
+    cli::cli_abort(c(
+      "{.arg model} is not provided.",
+      "You need to pass it or to use {.fn tidy_and_attach}."
+    ))
   }
 
   if ("header_row" %in% names(x)) {
-    stop("`tidy_add_variable_labels()` cannot be applied after `tidy_add_header_rows().`")
+    cli::cli_abort(paste(
+      "{.fn tidy_add_variable_labels} cannot be applied",
+      "after {.fn tidy_add_header_rows}."
+    ))
   }
 
   .attributes <- .save_attributes(x)
@@ -92,7 +98,7 @@ tidy_add_variable_labels <- function(x,
     cli_alert_danger("{.code {not_found}} terms have not been found in {.code x}.")
   }
   if (length(not_found) > 0 && strict) {
-    stop("Incorrect call with `labels=`. Quitting execution.", call. = FALSE)
+    cli::cli_abort("Incorrect call with `labels=`. Quitting execution.", call = NULL)
   }
 
   var_labels <- var_labels %>%

@@ -84,13 +84,13 @@
       "Error in `{arg_name}=` argument--select only a single column. ",
       "The following columns were selected, ",
       "{paste(sQuote(selected), collapse = ', ')}") %>%
-      stop(call. = FALSE)
+      cli::cli_abort(call = NULL)
   }
   stringr::str_glue(
     "Error in selector--select only a single column. ",
     "The following columns were selected, ",
     "{paste(sQuote(selected), collapse = ', ')}") %>%
-    stop(call. = FALSE)
+    cli::cli_abort(call = NULL)
 }
 
 .check_valid_input <- function(x, arg_name, type_check) {
@@ -118,7 +118,7 @@
       }
     }
 
-    stop(err_msg, call. = FALSE)
+    cli::cli_abort(err_msg, call = NULL)
   }
 
   return(invisible())
@@ -136,7 +136,7 @@
           "Error processing `{arg_name %||% ''}` argument for element '{lhs[[1]]}'. ",
           "A NULL value is not allowed."
         ) %>%
-          stop(call. = FALSE)
+          cli::cli_abort(call = NULL)
       }
 
       # check the type of RHS ------------------------------------------------------
@@ -145,7 +145,7 @@
           "Error processing `{arg_name %||% ''}` argument for element '{lhs[[1]]}'. ",
           type_check_msg %||% "The value passed is not the expected type/class."
         ) %>%
-          stop(call. = FALSE)
+          cli::cli_abort(call = NULL)
       }
     }
   )
@@ -203,7 +203,7 @@
 .select_to_varnames <- function(select, data = NULL, var_info = NULL,
                                 arg_name = NULL, select_single = FALSE) {
   if (is.null(data) && is.null(var_info))
-    stop("At least one of `data=` and `var_info=` must be specified.")
+    cli::cli_abort("At least one of {.arg data} or {.arg var_info} must be specified.")
 
   select <- rlang::enquo(select)
 
@@ -249,7 +249,7 @@
         error_msg <- stringr::str_glue("Error in `{arg_name}=` argument input. Select from ",
                                        "{paste(sQuote(names(data)), collapse = ', ')}")
       else error_msg <- as.character(e) # nocov
-      stop(error_msg, call. = FALSE)
+      cli::cli_abort(error_msg, call = NULL)
     })
 
   # assuring only a single column is selected
@@ -282,7 +282,7 @@
   # ensuring the proper data has been scoped to use this function
   if (!.is_selector_scoped(variable_column, select_column)) {
     cli_alert_danger("Cannot use selector '{fun_name}()' in this context.")
-    stop("Invalid syntax", call. = FALSE)
+    cli::cli_abort("Invalid syntax", call = NULL)
   }
 
   # selecting the variable from the variable information data frame
@@ -381,7 +381,7 @@
     cli_alert_danger("There was a problem with one of the function argument inputs.")
   cli_alert_info("Below is an example of correct syntax.")
   cli_code(example_text)
-  stop("Invalid argument syntax", call. = FALSE)
+  cli::cli_abort("Invalid argument syntax", call = NULL)
 }
 
 formula_select_examples <- list(

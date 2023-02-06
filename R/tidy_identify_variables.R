@@ -43,11 +43,17 @@
 tidy_identify_variables <- function(x, model = tidy_get_model(x),
                                     quiet = FALSE) {
   if (is.null(model)) {
-    stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
+    cli::cli_abort(c(
+      "{.arg model} is not provided.",
+      "You need to pass it or to use {.fn tidy_and_attach}."
+    ))
   }
 
   if ("header_row" %in% names(x)) {
-    stop("`tidy_identify_variables()` cannot be applied after `tidy_add_header_rows().`")
+    cli::cli_abort(paste(
+      "{.fn tidy_identify_variables} cannot be applied",
+      "after {.fn tidy_add_header_rows}."
+    ))
   }
 
   .attributes <- .save_attributes(x)

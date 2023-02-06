@@ -32,10 +32,10 @@ tidy_add_coefficients_type <- function(
   model = tidy_get_model(x)
 ) {
   if (is.null(exponentiate) || !is.logical(exponentiate))
-    stop("'exponentiate' is not provided. You need to pass it explicitely.")
+    cli::cli_abort("'exponentiate' is not provided. You need to pass it explicitely.")
 
   if (is.null(model)) {
-    stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
+    cli::cli_abort("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
   }
 
   .attributes <- .save_attributes(x)

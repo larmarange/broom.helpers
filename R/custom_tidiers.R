@@ -102,7 +102,7 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
       }
     )
     if (is.null(res)) {
-      stop("Unable to tidy `x`.")
+      cli::cli_abort("Unable to tidy {.arg x}.")
     } else {
       # success of parameters
       cli::cli_alert_success("{.code tidy_parameters()} used instead.")
