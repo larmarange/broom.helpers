@@ -35,7 +35,10 @@ tidy_add_coefficients_type <- function(
     cli::cli_abort("'exponentiate' is not provided. You need to pass it explicitely.")
 
   if (is.null(model)) {
-    cli::cli_abort("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
+    cli::cli_abort(c(
+      "{.arg model} is not provided.",
+      "You need to pass it or to use {.fn tidy_and_attach}."
+    ))
   }
 
   .attributes <- .save_attributes(x)
