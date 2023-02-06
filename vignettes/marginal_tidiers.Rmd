@@ -557,20 +557,30 @@ mod %>%
 
 ### Dealing with interactions
 
-In our model, we defined an interaction between `trt` and `marker`. Therefore, we could be interested to compute the contrast of `marker` for each value of `trt`. For a specific combination of variables defined in `variables`, using `cross = TRUE` in `marginaleffects::avg_comparisons()` will generate contrasts for each combination of contrasts.
+In our model, we defined an interaction between `trt` and `marker`. Therefore, we could be interested to compute the contrast of `marker` for each value of `trt`.
 
 ```{r}
 avg_comparisons(
   mod,
   variables = list(marker = 1),
-  by = "trt"
+  newdata = datagridcf(trt = unique),
+  by = "trt",
 )
 ```
 
-The tidier `tidy_marginal_contrasts()` allows to compute directly several combinations of variables and to stack all the results in a unique tibble. By default, they are determined with `model_list_higher_order_variables()`.
+Alternatively, it is possible to compute "cross-contrasts" showing what is happening when both `marker` and `trt` are changing.
 
 ```{r}
-mod %>% model_list_higher_order_variables()
+avg_comparisons(
+  mod,
+  variables = list(marker = 1, trt = "reference"),
+  cross = TRUE
+)
+```
+
+The tidier `tidy_marginal_contrasts()` allows to compute directly several combinations of variables and to stack all the results in a unique tibble.
+
+```{r}
 mod %>%
   tbl_regression(
     tidy_fun = tidy_marginal_contrasts,
@@ -583,6 +593,20 @@ mod %>%
 ggstats::ggcoef_model(mod, tidy_fun = tidy_marginal_contrasts)
 ```
 
+By default, when there is an interaction, contrasts are computed for the last variable of the interaction according to the different values of the first variables (if one of this variable is continuous, using Tukey's five numbers).
+
+The option `variables_list = "cross"` could be used to get "cross-contrasts" for interactions.
+
+```{r}
+mod %>%
+  tbl_regression(
+    tidy_fun = tidy_marginal_contrasts,
+    variables_list = "cross",
+    estimate_fun = scales::label_percent(style_positive = "plus")
+  ) %>%
+  bold_labels()
+```
+
 The option `variables_list = "no_interaction"` could be used to get the average marginal contrasts for each variable without considering interactions.
 
 ```{r}
@@ -593,6 +617,14 @@ mod %>%
     estimate_fun = scales::label_percent(style_positive = "plus")
   ) %>%
   bold_labels()
+```
+
+```{r}
+ggstats::ggcoef_model(
+  mod,
+  tidy_fun = tidy_marginal_contrasts,
+  tidy_args = list(variables_list = "no_interaction")
+)
 ```
 
 As before, to display marginal contrasts at the mean, indicate `newdata = "mean"`. For more information on the way to customize the combination of variables, see the documentation and examples of `tidy_marginal_contrasts()`.

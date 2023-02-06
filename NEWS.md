@@ -10,8 +10,8 @@
     - **Marginal Predictions:** `tidy_marginal_predictions()`,
       `plot_marginal_predictions()`, `tidy_all_effects()`, and `tidy_ggpredict()`
     - **Marginal Means:** `tidy_marginal_means()`
-    - **Marginal Contrasts:** `tidy_marginal_contrasts()` and 
-      `tidy_avg_comparisons()`
+    - **Marginal Contrasts:** `tidy_avg_comparisons()` and
+      `tidy_marginal_contrasts()`
     - **Marginal Effects:** `tidy_avg_slopes()` and `tidy_margins()`
 - New method `model_list_higher_order_variables()` to list the highest order
   combinations of variables (#202)

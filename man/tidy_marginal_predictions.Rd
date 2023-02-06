@@ -18,7 +18,7 @@ variables_to_predict(
   model,
   interactions = TRUE,
   categorical = unique,
-  continuous = "fivenum"
+  continuous = fivenum
 )
 
 plot_marginal_predictions(x, variables_list = "auto", conf.level = 0.95, ...)
@@ -84,7 +84,7 @@ sequentially to the \code{variables} argument of \code{marginaleffects::avg_pred
 
 The helper function \code{variables_to_predict()} could be used to automatically
 generate a suitable list to be used with \code{variables_list}. By default, all
-unique values are retained for categorical variables and \code{"fivenum"} (i.e.
+unique values are retained for categorical variables and \code{fivenum} (i.e.
 Tukey's five numbers, minimum, quartiles and maximum) for continuous variables.
 When \code{interactions = FALSE}, \code{variables_to_predict()} will return a list of
 all individual variables used in the model. If \code{interactions = FALSE}, it

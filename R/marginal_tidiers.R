@@ -439,7 +439,7 @@ tidy_marginal_means <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 #'
 #' The helper function `variables_to_predict()` could be used to automatically
 #' generate a suitable list to be used with `variables_list`. By default, all
-#' unique values are retained for categorical variables and `"fivenum"` (i.e.
+#' unique values are retained for categorical variables and `fivenum` (i.e.
 #' Tukey's five numbers, minimum, quartiles and maximum) for continuous variables.
 #' When `interactions = FALSE`, `variables_to_predict()` will return a list of
 #' all individual variables used in the model. If `interactions = FALSE`, it
@@ -583,7 +583,7 @@ tidy_marginal_predictions <- function(x, variables_list = "auto",
 #' @param continuous default value for continuous variables
 #' @rdname tidy_marginal_predictions
 variables_to_predict <- function(model, interactions = TRUE,
-                                 categorical = unique, continuous = "fivenum") {
+                                 categorical = unique, continuous = fivenum) {
   variables <- model %>%
     model_list_variables(add_var_type = TRUE)
 
@@ -722,15 +722,43 @@ plot_marginal_predictions <- function(x, variables_list = "auto",
 #' See `marginaleffects::avg_comparisons()` for a list of supported models.
 #' @details
 #' Marginal contrasts are obtained by calling, for each variable or combination
-#' of variables, `marginaleffects::avg_comparisons()` with the option `cross = TRUE`.
+#' of variables, `marginaleffects::avg_comparisons()`.
 #'
-#' Considering a categorical variable named `cat`, `tidy_marginal_contrasts()`
+#' `tidy_marginal_contrasts()` will compute marginal contrasts for each
+#' variable or combination of variables, before stacking the results in a unique
+#' tibble. This is why `tidy_marginal_contrasts()` has a `variables_list`
+#' argument consisting of a list of specifications that will be passed
+#' sequentially to the `variables` and the `by` argument of
+#' `marginaleffects::avg_comparisons()`.
+#'
+#' Considering a single categorical variable named `cat`, `tidy_marginal_contrasts()`
 #' will call `avg_comparisons(model, variables = list(cat = "reference"))`
 #' to obtain average marginal contrasts for this variable.
 #'
-#' Considering a continuous variable named `cont`, `tidy_marginalcontrasts()`
+#' Considering a single continuous variable named `cont`, `tidy_marginalcontrasts()`
 #' will call `avg_comparisons(model, variables = list(cont = 1))`
 #' to obtain average marginal contrasts for an increase of one unit.
+#'
+#' For a combination of variables, there are several possibilities. You could
+#' compute "cross-contrasts" by providing simultaneously several variables
+#' to `variables` and specifying `cross = TRUE` to
+#' `marginaleffects::avg_comparisons()`. Alternatively, you could compute the
+#' contrasts of a first variable specified to `variables` for the
+#' different values of a second variable specified to `by`.
+#'
+#' The helper function `variables_to_contrast()` could be used to automatically
+#' generate a suitable list to be used with `variables_list`. Each combination
+#' of variables should be a list with two named elements: `"variables"` a list
+#' of named elements passed to `variables` and `"by"` a list of named elements
+#' used for creating a relevant `datagrid` and whose names are passed to `by`.
+#'
+#' `variables_list`'s default value, `"auto"`, calls
+#' `variables_to_contrast(interactions = TRUE, cross = FALSE)` while
+#' `"no_interaction"` is a shortcut for
+#' `variables_to_contrast(interactions = FALSE)`. `"cross"` calls
+#' `variables_to_contrast(interactions = TRUE, cross = TRUE)`
+#'
+#' You can also provide custom specifications (see examples).
 #'
 #' By default, *average marginal contrasts* are computed: contrasts are computed
 #' using a counterfactual grid for each value of the variable of interest,
@@ -738,27 +766,11 @@ plot_marginal_predictions <- function(x, variables_list = "auto",
 #' obtained by indicating `newdata = "mean"`. Other assumptions are possible,
 #' see the help file of `marginaleffects::avg_comparisons()`.
 #'
-#' `tidy_marginal_contrasts()` will compute marginal contrasts for each
-#' variable or combination of variables, before stacking the results in a unique
-#' tibble. This is why `tidy_marginal_contrasts()` has a `variables_list`
-#' argument consisting of a list of specifications that will be passed
-#' sequentially to the `variables` argument of `marginaleffects::avg_comparisons()`.
-#'
-#' The helper function `variables_to_predict()` could be used to automatically
-#' generate a suitable list to be used with `variables_list`.
-#'
-#' `variables_list`'s default value, `"auto"`, calls
-#' `variables_to_predict(interactions = TRUE)` while `"no_interaction"` is a
-#' shortcut for `variables_to_predict(interactions = FALSE)`. `"reference"` is
-#' used for categorical variables and `1` for continuous variables.
-#'
-#' You can also provide custom specifications (see examples).
-#'
 #' For more information, see `vignette("marginal_tidiers", "broom.helpers")`.
 #' @param x a model
 #' @param variables_list a list whose elements will be sequentially passed to
 #' `variables` in `marginaleffects::avg_comparisons()` (see details below);
-#' alternatively, it could also be the string `"auto"` (default) or
+#' alternatively, it could also be the string `"auto"` (default), `"cross"` or
 #' `"no_interaction"`
 #' @param conf.int logical indicating whether or not to include a confidence
 #' interval in the tidied output
@@ -799,9 +811,35 @@ plot_marginal_predictions <- function(x, variables_list = "auto",
 #' )
 #' tidy_marginal_contrasts(mod3)
 #' tidy_marginal_contrasts(mod3, "no_interaction")
+#' tidy_marginal_contrasts(mod3, "cross")
+#' tidy_marginal_contrasts(
+#'   mod3,
+#'   variables_list = list(
+#'     list(variables = list(Class = "pairwise"), by = list(Sex = unique)),
+#'     list(variables = list(Age = "all")),
+#'     list(variables = list(Class = "sequential", Sex = "reference"))
+#'   )
+#' )
+#'
+#' mod4 <- lm(Sepal.Length ~ Petal.Length * Petal.Width + Species, data = iris)
+#' tidy_marginal_contrasts(mod4)
+#' tidy_marginal_contrasts(
+#'   mod4,
+#'   variables_list = list(
+#'     list(
+#'       variables = list(Species = "sequential"),
+#'       by = list(Petal.Length = c(2, 5))
+#'     ),
+#'     list(
+#'       variables = list(Petal.Length = 2),
+#'       by = list(Species = unique, Petal.Width = 2:4)
+#'     )
+#'   )
+#' )
 #'
 #' # Marginal Contrasts at the Mean
 #' tidy_marginal_contrasts(mod, newdata = "mean")
+#' tidy_marginal_contrasts(mod3, newdata = "mean")
 tidy_marginal_contrasts <- function(x, variables_list = "auto",
                                      conf.int = TRUE, conf.level = 0.95, ...) {
   .assert_package("marginaleffects")
@@ -814,18 +852,21 @@ tidy_marginal_contrasts <- function(x, variables_list = "auto",
   dots$model <- x
 
   if (is.character(variables_list) && variables_list == "auto")
-    variables_list <- variables_to_predict(
+    variables_list <- variables_to_contrast(
       x,
       interactions = TRUE,
-      categorical = "reference",
-      continuous = 1
+      cross = FALSE
     )
   if (is.character(variables_list) && variables_list == "no_interaction")
-    variables_list <- variables_to_predict(
+    variables_list <- variables_to_contrast(
       x,
-      interactions = FALSE,
-      categorical = "reference",
-      continuous = 1
+      interactions = FALSE
+    )
+  if (is.character(variables_list) && variables_list == "cross")
+    variables_list <- variables_to_contrast(
+      x,
+      interactions = TRUE,
+      cross = TRUE
     )
   if (!is.list(variables_list))
     cli::cli_abort("{.arg variables_list} should be a list or \"auto\" or \"no_interaction\".")
@@ -843,11 +884,115 @@ tidy_marginal_contrasts <- function(x, variables_list = "auto",
 }
 
 .tidy_one_marginal_contrast <- function(variables, dots) {
-  dots$variables <- variables
+  # allowing passing directly variables names
+  if (length(variables) > 0 && !all(names(variables) %in% c("variables", "by")))
+    variables <- list(variables = variables)
+
+  dots$variables <- variables$variables
   dots$cross <- TRUE
-  do.call(marginaleffects::avg_comparisons, dots) %>%
-    dplyr::select(-dplyr::any_of("term")) %>%
-    dplyr::mutate(variable = paste(names(variables), collapse = ":")) %>%
-    tidyr::unite(col = "term", sep = " * ", dplyr::starts_with("contrast")) %>%
+  if (!is.null(variables$by))
+    dots$by <- names(variables$by)
+
+  if (!is.null(variables$by) && is.null(dots$newdata)) {
+    args <- variables$by
+    args$model <- dots$model
+    dots$newdata <- do.call(marginaleffects::datagridcf, args)
+  }
+
+  if (!is.null(variables$by) && identical(dots$newdata, "mean")) {
+    args <- variables$by
+    args$model <- dots$model
+    dots$newdata <- do.call(marginaleffects::datagrid, args)
+  }
+
+  res <- do.call(marginaleffects::avg_comparisons, dots) %>%
+    dplyr::select(-dplyr::any_of("term"))
+  if (is.null(variables$by))
+    res <- res %>%
+      dplyr::mutate(
+        variable = paste(names(variables$variables), collapse = ":")
+      )
+  else
+    res <- res %>%
+      dplyr::mutate(
+        variable = paste(
+          paste(names(variables$by), collapse = ":"),
+          paste(names(variables$variables), collapse = ":"),
+          sep = ":"
+        )
+      )
+
+  res <- res %>%
+    tidyr::unite(
+      col = "term",
+      sep = " * ",
+      dplyr::all_of(names(variables$by)),
+      dplyr::starts_with("contrast")
+    ) %>%
     dplyr::relocate("variable", "term")
+}
+
+#' @export
+#' @param model a model
+#' @param interactions should combinations of variables corresponding to
+#' interactions be returned?
+#' @param cross if `interaction` is `TRUE`, should "cross-contrasts" be
+#' computed? (if `FALSE`, only the last term of an interaction is passed to
+#' `variable` and the other terms are passed to `by`)
+#' @param var_categorical default `variable` value for categorical variables
+#' @param var_continuous default `variable` value for continuous variables
+#' @param by_categorical default `by` value for categorical variables
+#' @param by_continuous default `by` value for continuous variables
+#' @rdname tidy_marginal_contrasts
+variables_to_contrast <- function(model,
+                                  interactions = TRUE,
+                                  cross = FALSE,
+                                  var_categorical = "reference",
+                                  var_continuous = 1,
+                                  by_categorical = unique,
+                                  by_continuous = fivenum) {
+  variables <- model %>%
+    model_list_variables(add_var_type = TRUE)
+
+  if (interactions) {
+    keep <- model_list_higher_order_variables(model)
+  } else {
+    keep <- variables[variables$var_type != "interaction", ]$variable
+  }
+
+  response_variable <- model %>% model_get_response_variable()
+  if (!is.null(response_variable))
+    keep <- keep[keep != response_variable]
+
+  var_ret <- list(
+    categorical = var_categorical,
+    dichotomous = var_categorical,
+    continuous = var_continuous
+  )
+  by_ret <- list(
+    categorical = by_categorical,
+    dichotomous = by_categorical,
+    continuous = by_continuous
+  )
+  variables <- variables %>%
+    tibble::column_to_rownames("variable")
+
+  one_element <- function(v) {
+    v <- strsplit(v, ":") %>% unlist()
+    if (length(v) == 1 || isTRUE(cross)) {
+      one_variables <- variables[v, "var_type"]
+      one_variables <- var_ret[one_variables]
+      names(one_variables) <- v
+      one_by <- NULL
+    } else {
+      one_variables <- variables[tail(v, 1), "var_type"]
+      one_variables <- var_ret[one_variables]
+      names(one_variables) <- tail(v, 1)
+      one_by <- variables[head(v, -1), "var_type"]
+      one_by <- by_ret[one_by]
+      names(one_by) <- head(v, -1)
+    }
+    list(variables = one_variables, by = one_by)
+  }
+  lapply(keep, one_element)
 }

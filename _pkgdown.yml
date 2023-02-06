@@ -59,11 +59,11 @@ reference:
       - tidy_marginal_predictions
       - tidy_all_effects
       - tidy_ggpredict
-      - tidy_marginal_means
-      - tidy_marginal_contrasts
       - tidy_avg_comparisons
+      - tidy_marginal_contrasts
       - tidy_avg_slopes
       - tidy_margins
+      - tidy_marginal_means
 
   - title: Get information from model objects
   - contents:

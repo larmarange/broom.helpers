@@ -2,6 +2,7 @@
 % Please edit documentation in R/marginal_tidiers.R
 \name{tidy_marginal_contrasts}
 \alias{tidy_marginal_contrasts}
+\alias{variables_to_contrast}
 \title{Marginal Contrasts with \code{marginaleffects::avg_comparisons()}}
 \usage{
 tidy_marginal_contrasts(
@@ -11,13 +12,23 @@ tidy_marginal_contrasts(
   conf.level = 0.95,
   ...
 )
+
+variables_to_contrast(
+  model,
+  interactions = TRUE,
+  cross = FALSE,
+  var_categorical = "reference",
+  var_continuous = 1,
+  by_categorical = unique,
+  by_continuous = fivenum
+)
 }
 \arguments{
 \item{x}{a model}
 
 \item{variables_list}{a list whose elements will be sequentially passed to
 \code{variables} in \code{marginaleffects::avg_comparisons()} (see details below);
-alternatively, it could also be the string \code{"auto"} (default) or
+alternatively, it could also be the string \code{"auto"} (default), \code{"cross"} or
 \code{"no_interaction"}}
 
 \item{conf.int}{logical indicating whether or not to include a confidence
@@ -27,6 +38,23 @@ interval in the tidied output}
 
 \item{...}{additional parameters passed to
 \code{marginaleffects::avg_comparisons()}}
+
+\item{model}{a model}
+
+\item{interactions}{should combinations of variables corresponding to
+interactions be returned?}
+
+\item{cross}{if \code{interaction} is \code{TRUE}, should "cross-contrasts" be
+computed? (if \code{FALSE}, only the last term of an interaction is passed to
+\code{variable} and the other terms are passed to \code{by})}
+
+\item{var_categorical}{default \code{variable} value for categorical variables}
+
+\item{var_continuous}{default \code{variable} value for continuous variables}
+
+\item{by_categorical}{default \code{by} value for categorical variables}
+
+\item{by_continuous}{default \code{by} value for continuous variables}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
@@ -37,37 +65,49 @@ See \code{marginaleffects::avg_comparisons()} for a list of supported models.
 }
 \details{
 Marginal contrasts are obtained by calling, for each variable or combination
-of variables, \code{marginaleffects::avg_comparisons()} with the option \code{cross = TRUE}.
+of variables, \code{marginaleffects::avg_comparisons()}.
 
-Considering a categorical variable named \code{cat}, \code{tidy_marginal_contrasts()}
+\code{tidy_marginal_contrasts()} will compute marginal contrasts for each
+variable or combination of variables, before stacking the results in a unique
+tibble. This is why \code{tidy_marginal_contrasts()} has a \code{variables_list}
+argument consisting of a list of specifications that will be passed
+sequentially to the \code{variables} and the \code{by} argument of
+\code{marginaleffects::avg_comparisons()}.
+
+Considering a single categorical variable named \code{cat}, \code{tidy_marginal_contrasts()}
 will call \code{avg_comparisons(model, variables = list(cat = "reference"))}
 to obtain average marginal contrasts for this variable.
 
-Considering a continuous variable named \code{cont}, \code{tidy_marginalcontrasts()}
+Considering a single continuous variable named \code{cont}, \code{tidy_marginalcontrasts()}
 will call \code{avg_comparisons(model, variables = list(cont = 1))}
 to obtain average marginal contrasts for an increase of one unit.
+
+For a combination of variables, there are several possibilities. You could
+compute "cross-contrasts" by providing simultaneously several variables
+to \code{variables} and specifying \code{cross = TRUE} to
+\code{marginaleffects::avg_comparisons()}. Alternatively, you could compute the
+contrasts of a first variable specified to \code{variables} for the
+different values of a second variable specified to \code{by}.
+
+The helper function \code{variables_to_contrast()} could be used to automatically
+generate a suitable list to be used with \code{variables_list}. Each combination
+of variables should be a list with two named elements: \code{"variables"} a list
+of named elements passed to \code{variables} and \code{"by"} a list of named elements
+used for creating a relevant \code{datagrid} and whose names are passed to \code{by}.
+
+\code{variables_list}'s default value, \code{"auto"}, calls
+\code{variables_to_contrast(interactions = TRUE, cross = FALSE)} while
+\code{"no_interaction"} is a shortcut for
+\code{variables_to_contrast(interactions = FALSE)}. \code{"cross"} calls
+\code{variables_to_contrast(interactions = TRUE, cross = TRUE)}
+
+You can also provide custom specifications (see examples).
 
 By default, \emph{average marginal contrasts} are computed: contrasts are computed
 using a counterfactual grid for each value of the variable of interest,
 before averaging the results. \emph{Marginal contrasts at the mean} could be
 obtained by indicating \code{newdata = "mean"}. Other assumptions are possible,
 see the help file of \code{marginaleffects::avg_comparisons()}.
-
-\code{tidy_marginal_contrasts()} will compute marginal contrasts for each
-variable or combination of variables, before stacking the results in a unique
-tibble. This is why \code{tidy_marginal_contrasts()} has a \code{variables_list}
-argument consisting of a list of specifications that will be passed
-sequentially to the \code{variables} argument of \code{marginaleffects::avg_comparisons()}.
-
-The helper function \code{variables_to_predict()} could be used to automatically
-generate a suitable list to be used with \code{variables_list}.
-
-\code{variables_list}'s default value, \code{"auto"}, calls
-\code{variables_to_predict(interactions = TRUE)} while \code{"no_interaction"} is a
-shortcut for \code{variables_to_predict(interactions = FALSE)}. \code{"reference"} is
-used for categorical variables and \code{1} for continuous variables.
-
-You can also provide custom specifications (see examples).
 
 For more information, see \code{vignette("marginal_tidiers", "broom.helpers")}.
 }
@@ -103,9 +143,35 @@ mod3 <- glm(
 )
 tidy_marginal_contrasts(mod3)
 tidy_marginal_contrasts(mod3, "no_interaction")
+tidy_marginal_contrasts(mod3, "cross")
+tidy_marginal_contrasts(
+  mod3,
+  variables_list = list(
+    list(variables = list(Class = "pairwise"), by = list(Sex = unique)),
+    list(variables = list(Age = "all")),
+    list(variables = list(Class = "sequential", Sex = "reference"))
+  )
+)
+
+mod4 <- lm(Sepal.Length ~ Petal.Length * Petal.Width + Species, data = iris)
+tidy_marginal_contrasts(mod4)
+tidy_marginal_contrasts(
+  mod4,
+  variables_list = list(
+    list(
+      variables = list(Species = "sequential"),
+      by = list(Petal.Length = c(2, 5))
+    ),
+    list(
+      variables = list(Petal.Length = 2),
+      by = list(Species = unique, Petal.Width = 2:4)
+    )
+  )
+)
 
 # Marginal Contrasts at the Mean
 tidy_marginal_contrasts(mod, newdata = "mean")
+tidy_marginal_contrasts(mod3, newdata = "mean")
 \dontshow{\}) # examplesIf}
 }
 \seealso{
