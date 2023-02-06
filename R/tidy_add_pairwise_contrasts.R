@@ -59,7 +59,10 @@ tidy_add_pairwise_contrasts <- function(
   quiet = FALSE
 ) {
   if (is.null(model)) {
-    stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
+    cli::cli_abort(c(
+      "{.arg model} is not provided.",
+      "You need to pass it or to use {.fn tidy_and_attach}."
+    ))
   }
 
   if (!"contrasts" %in% names(x)) {

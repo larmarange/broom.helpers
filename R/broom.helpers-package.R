@@ -16,7 +16,7 @@ utils::globalVariables(c(".", "where"))
     return(x)
   }
   if (is.null(names(y)) || any(names(y) == "")) {
-    stop("All elements of y should be named.")
+    cli::cli_abort("All elements of y should be named.")
   }
   for (i in names(y)) {
     if (utils::hasName(x, i)) {
