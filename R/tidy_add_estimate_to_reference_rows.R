@@ -63,10 +63,13 @@ tidy_add_estimate_to_reference_rows <- function(
   quiet = FALSE
 ) {
   if (is.null(exponentiate) || !is.logical(exponentiate))
-    stop("'exponentiate' is not provided. You need to pass it explicitely.")
+    cli::cli_abort("{.arg exponentiate} is not provided. You need to pass it explicitely.")
 
   if (is.null(model)) {
-    stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
+    cli::cli_abort(c(
+      "{.arg model} is not provided.",
+      "You need to pass it or to use {.fn tidy_and_attach}."
+    ))
   }
 
   .attributes <- .save_attributes(x)

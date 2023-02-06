@@ -65,7 +65,10 @@ tidy_add_header_rows <- function(x,
                                  quiet = FALSE,
                                  strict = FALSE) {
   if (is.null(model)) {
-    stop("'model' is not provided. You need to pass it or to use 'tidy_and_attach()'.")
+    cli::cli_abort(c(
+      "{.arg model} is not provided.",
+      "You need to pass it or to use {.fn tidy_and_attach}."
+    ))
   }
 
   if ("header_row" %in% names(x)) {
@@ -119,7 +122,11 @@ tidy_add_header_rows <- function(x,
       paste("Variable(s) {paste(shQuote(bad_single_row), collapse = \", \")} were",
             "incorrectly requested to be printed on a single row.") %>%
       cli_alert_danger()
-    if (strict) stop("Incorrect call with `show_single_row=`. Quitting execution.", call. = FALSE)
+    if (strict)
+      cli::cli_abort(
+        "Incorrect call with `show_single_row=`. Quitting execution.",
+        call = NULL
+      )
     show_single_row <- setdiff(show_single_row, bad_single_row)
   }
 
