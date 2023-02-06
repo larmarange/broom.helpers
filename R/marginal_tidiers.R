@@ -583,7 +583,8 @@ tidy_marginal_predictions <- function(x, variables_list = "auto",
 #' @param continuous default value for continuous variables
 #' @rdname tidy_marginal_predictions
 variables_to_predict <- function(model, interactions = TRUE,
-                                 categorical = unique, continuous = fivenum) {
+                                 categorical = unique,
+                                 continuous = stats::fivenum) {
   variables <- model %>%
     model_list_variables(add_var_type = TRUE)
 
@@ -950,7 +951,7 @@ variables_to_contrast <- function(model,
                                   var_categorical = "reference",
                                   var_continuous = 1,
                                   by_categorical = unique,
-                                  by_continuous = fivenum) {
+                                  by_continuous = stats::fivenum) {
   variables <- model %>%
     model_list_variables(add_var_type = TRUE)
 
@@ -985,12 +986,12 @@ variables_to_contrast <- function(model,
       names(one_variables) <- v
       one_by <- NULL
     } else {
-      one_variables <- variables[tail(v, 1), "var_type"]
+      one_variables <- variables[utils::tail(v, 1), "var_type"]
       one_variables <- var_ret[one_variables]
-      names(one_variables) <- tail(v, 1)
-      one_by <- variables[head(v, -1), "var_type"]
+      names(one_variables) <- utils::tail(v, 1)
+      one_by <- variables[utils::head(v, -1), "var_type"]
       one_by <- by_ret[one_by]
-      names(one_by) <- head(v, -1)
+      names(one_by) <- utils::head(v, -1)
     }
     list(variables = one_variables, by = one_by)
   }

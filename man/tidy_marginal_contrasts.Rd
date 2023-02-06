@@ -20,7 +20,7 @@ variables_to_contrast(
   var_categorical = "reference",
   var_continuous = 1,
   by_categorical = unique,
-  by_continuous = fivenum
+  by_continuous = stats::fivenum
 )
 }
 \arguments{

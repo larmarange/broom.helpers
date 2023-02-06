@@ -18,7 +18,7 @@ variables_to_predict(
   model,
   interactions = TRUE,
   categorical = unique,
-  continuous = fivenum
+  continuous = stats::fivenum
 )
 
 plot_marginal_predictions(x, variables_list = "auto", conf.level = 0.95, ...)
