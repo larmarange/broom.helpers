@@ -55,4 +55,10 @@ test_that("tidy_add_pairwise_contrasts() works for glm", {
     c("T2 / T1", "T3 / T1", "T3 / T2", "T4 / T1", "T4 / T2", "T4 / T3",
       "Drug B / Drug A")
   )
+
+  res1 <- mod %>%
+    tidy_plus_plus(add_pairwise_contrasts = TRUE)
+  res2 <- mod %>%
+    tidy_plus_plus(add_pairwise_contrasts = TRUE, contrasts_adjust = "none")
+  expect_false(identical(res1, res2))
 })
