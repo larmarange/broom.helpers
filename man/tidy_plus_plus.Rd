@@ -22,6 +22,7 @@ tidy_plus_plus(
   pairwise_variables = all_categorical(),
   keep_model_terms = FALSE,
   pairwise_reverse = TRUE,
+  contrasts_adjust = NULL,
   emmeans_args = list(),
   add_estimate_to_reference_rows = TRUE,
   add_header_rows = FALSE,
@@ -79,6 +80,9 @@ pairwise contrasts are added? (default is \code{FALSE})}
 
 \item{pairwise_reverse}{determines whether to use \code{"pairwise"} (if \code{TRUE})
 or \code{"revpairwise"} (if \code{FALSE}), see \code{\link[emmeans:contrast]{emmeans::contrast()}}}
+
+\item{contrasts_adjust}{optional adjustment method when computing contrasts,
+see \code{\link[emmeans:contrast]{emmeans::contrast()}} (if \code{NULL}, use \code{emmeans} default)}
 
 \item{emmeans_args}{list of additional parameter to pass to
 \code{\link[emmeans:emmeans]{emmeans::emmeans()}} when computing pairwise contrasts}

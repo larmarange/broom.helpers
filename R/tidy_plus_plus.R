@@ -44,6 +44,8 @@
 #' pairwise contrasts are added? (default is `FALSE`)
 #' @param pairwise_reverse determines whether to use `"pairwise"` (if `TRUE`)
 #' or `"revpairwise"` (if `FALSE`), see [emmeans::contrast()]
+#' @param contrasts_adjust optional adjustment method when computing contrasts,
+#' see [emmeans::contrast()] (if `NULL`, use `emmeans` default)
 #' @param emmeans_args list of additional parameter to pass to
 #' [emmeans::emmeans()] when computing pairwise contrasts
 #' @param add_estimate_to_reference_rows should an estimate value be added
@@ -129,6 +131,7 @@ tidy_plus_plus <- function(
                            pairwise_variables = all_categorical(),
                            keep_model_terms = FALSE,
                            pairwise_reverse = TRUE,
+                           contrasts_adjust = NULL,
                            emmeans_args = list(),
                            add_estimate_to_reference_rows = TRUE,
                            add_header_rows = FALSE,
@@ -171,6 +174,7 @@ tidy_plus_plus <- function(
         variables = {{ pairwise_variables }},
         keep_model_terms = keep_model_terms,
         pairwise_reverse = pairwise_reverse,
+        contrasts_adjust = contrasts_adjust,
         emmeans_args = emmeans_args
       )
   }

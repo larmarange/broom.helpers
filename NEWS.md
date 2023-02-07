@@ -19,6 +19,9 @@
   variable (#202)
 - New helper function `seq_range()` to generate a sequence of values between
   the minimum and the maximum of a vector (#202)
+- New argument `contrasts_adjust` in `tidy_plus_plus()`,
+  `tidy_add_pairwise_contrasts()` and `model_get_pairwise_contrasts()` allowing
+  to change the adjustment method used to compute pairwise contrasts (#204)
 
 # broom.helpers 1.11.0
 

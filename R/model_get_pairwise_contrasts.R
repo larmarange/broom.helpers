@@ -6,6 +6,8 @@
 #' @param variables names of variables to add pairwise contrasts
 #' @param pairwise_reverse determines whether to use `"pairwise"` (if `TRUE`)
 #' or `"revpairwise"` (if `FALSE`), see [emmeans::contrast()]
+#' @param contrasts_adjust optional adjustment method when computing contrasts,
+#' see [emmeans::contrast()] (if `NULL`, use `emmeans` default)
 #' @param conf.level level of confidence for confidence intervals
 #' @param emmeans_args list of additional parameter to pass to
 #' [emmeans::emmeans()] when computing pairwise contrasts
@@ -15,11 +17,13 @@
 #' if (.assert_package("emmeans", boolean = TRUE)) {
 #'   mod <- lm(Sepal.Length ~ Species, data = iris)
 #'   mod %>% model_get_pairwise_contrasts(variables = "Species")
+#'   mod %>% model_get_pairwise_contrasts(variables = "Species", contrasts_adjust = "none")
 #' }
 model_get_pairwise_contrasts <- function(
   model,
   variables,
   pairwise_reverse = TRUE,
+  contrasts_adjust = NULL,
   conf.level = .95,
   emmeans_args = list()
 ) {
@@ -31,6 +35,7 @@ model_get_pairwise_contrasts.default <- function(
   model,
   variables,
   pairwise_reverse = TRUE,
+  contrasts_adjust = NULL,
   conf.level = .95,
   emmeans_args = list()
 ) {
@@ -39,6 +44,7 @@ model_get_pairwise_contrasts.default <- function(
     .get_pairwise_contrasts_one_var,
     model = model,
     pairwise_reverse = pairwise_reverse,
+    contrasts_adjust = contrasts_adjust,
     conf.level = conf.level,
     emmeans_args = emmeans_args
   )
@@ -48,6 +54,7 @@ model_get_pairwise_contrasts.default <- function(
   model,
   variable,
   pairwise_reverse = TRUE,
+  contrasts_adjust = NULL,
   conf.level = .95,
   emmeans_args = list()
 ) {
@@ -57,8 +64,15 @@ model_get_pairwise_contrasts.default <- function(
   )
   emmeans_args$object <- model
   emmeans_args$specs <- variable
-  e <- do.call(emmeans::emmeans, emmeans_args) %>%
-    graphics::pairs(reverse = pairwise_reverse)
+  e <- do.call(emmeans::emmeans, emmeans_args)
+
+  if (is.null(contrasts_adjust))
+    e <- e %>%
+      graphics::pairs(reverse = pairwise_reverse)
+  else
+    e <- e %>%
+      graphics::pairs(reverse = pairwise_reverse, adjust = contrasts_adjust)
+
   r <- e %>%
     dplyr::as_tibble()
   if (!is.numeric(r[[2]])) { # if by

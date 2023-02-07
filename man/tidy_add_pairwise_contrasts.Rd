@@ -9,6 +9,7 @@ tidy_add_pairwise_contrasts(
   variables = all_categorical(),
   keep_model_terms = FALSE,
   pairwise_reverse = TRUE,
+  contrasts_adjust = NULL,
   conf.level = NULL,
   emmeans_args = list(),
   model = tidy_get_model(x),
@@ -26,6 +27,9 @@ Accepts \link[dplyr:select]{tidyselect} syntax. Default is  \code{\link[=all_cat
 
 \item{pairwise_reverse}{determines whether to use \code{"pairwise"} (if \code{TRUE})
 or \code{"revpairwise"} (if \code{FALSE}), see \code{\link[emmeans:contrast]{emmeans::contrast()}}}
+
+\item{contrasts_adjust}{optional adjustment method when computing contrasts,
+see \code{\link[emmeans:contrast]{emmeans::contrast()}} (if \code{NULL}, use \code{emmeans} default)}
 
 \item{conf.level}{confidence level, if \code{NULL} use the value indicated
 previously in \code{\link[=tidy_and_attach]{tidy_and_attach()}}}
@@ -63,6 +67,10 @@ if (.assert_package("emmeans", boolean = TRUE)) {
   mod1 \%>\%
     tidy_and_attach() \%>\%
     tidy_add_pairwise_contrasts(keep_model_terms = TRUE)
+
+  mod1 \%>\%
+    tidy_and_attach() \%>\%
+    tidy_add_pairwise_contrasts(contrasts_adjust = "none")
 
   if (.assert_package("gtsummary", boolean = TRUE)) {
     mod2 <- glm(

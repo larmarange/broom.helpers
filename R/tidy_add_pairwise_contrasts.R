@@ -16,6 +16,8 @@
 #' @param keep_model_terms keep terms from the model?
 #' @param pairwise_reverse determines whether to use `"pairwise"` (if `TRUE`)
 #' or `"revpairwise"` (if `FALSE`), see [emmeans::contrast()]
+#' @param contrasts_adjust optional adjustment method when computing contrasts,
+#' see [emmeans::contrast()] (if `NULL`, use `emmeans` default)
 #' @param conf.level confidence level, if `NULL` use the value indicated
 #' previously in [tidy_and_attach()]
 #' @param model the corresponding model, if not attached to `x`
@@ -37,6 +39,10 @@
 #'     tidy_and_attach() %>%
 #'     tidy_add_pairwise_contrasts(keep_model_terms = TRUE)
 #'
+#'   mod1 %>%
+#'     tidy_and_attach() %>%
+#'     tidy_add_pairwise_contrasts(contrasts_adjust = "none")
+#'
 #'   if (.assert_package("gtsummary", boolean = TRUE)) {
 #'     mod2 <- glm(
 #'       response ~ age + trt + grade,
@@ -53,6 +59,7 @@ tidy_add_pairwise_contrasts <- function(
   variables = all_categorical(),
   keep_model_terms = FALSE,
   pairwise_reverse = TRUE,
+  contrasts_adjust = NULL,
   conf.level = NULL,
   emmeans_args = list(),
   model = tidy_get_model(x),
@@ -94,6 +101,7 @@ tidy_add_pairwise_contrasts <- function(
     model = model,
     variables = variables,
     pairwise_reverse = pairwise_reverse,
+    contrasts_adjust = contrasts_adjust,
     conf.level = conf.level,
     emmeans_args = emmeans_args
   )
