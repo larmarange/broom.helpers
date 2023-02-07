@@ -7,11 +7,12 @@
       has been added
     - Several tidiers are provided to tidy results in a way that it could be 
       used by `broom.helpers` functions.
-    - **Marginal Predictions:** `tidy_marginalpredictions()`,
-      `plot_marginalpredictions()`, `tidy_all_effects()`, and `tidy_ggpredict()`
-    - **Marginal Means:** `tidy_marginalmeans()`
-    - **Marginal Contrasts:** `tidy_marginalcontrasts()` and `tidy_comparisons()`
-    - **Marginal Effects:** `tidy_marginaleffects()` and `tidy_margins()`
+    - **Marginal Predictions:** `tidy_marginal_predictions()`,
+      `plot_marginal_predictions()`, `tidy_all_effects()`, and `tidy_ggpredict()`
+    - **Marginal Means:** `tidy_marginal_means()`
+    - **Marginal Contrasts:** `tidy_avg_comparisons()` and
+      `tidy_marginal_contrasts()`
+    - **Marginal Effects:** `tidy_avg_slopes()` and `tidy_margins()`
 - New method `model_list_higher_order_variables()` to list the highest order
   combinations of variables (#202)
 - New method `model_get_response_variable()` to get the name of the response

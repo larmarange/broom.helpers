@@ -178,33 +178,30 @@ tidy_ggpredict <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   res
 }
 
-#' Marginal Effects with `marginaleffects::marginaleffects()`
+#' Marginal Slopes / Effects with `marginaleffects::avg_slopes()`
 #'
 #' `r lifecycle::badge("experimental")`
-#' Use `marginaleffects::marginaleffects()` to estimate marginal effects and
+#' Use `marginaleffects::avg_slopes()` to estimate marginal slopes / effects and
 #' return a tibble tidied in a way that it could be used by `broom.helpers`
-#' functions. See `marginaleffects::marginaleffects()` for a list of supported
+#' functions. See `marginaleffects::avg_slopes()` for a list of supported
 #' models.
 #' @details
-#' By default, `marginaleffects::marginaleffects()` estimate average marginal
+#' By default, `marginaleffects::avg_slopes()` estimate average marginal
 #' effects (AME): an effect is computed for each observed value in the original
 #' dataset before being averaged. Marginal Effects at the Mean (MEM) could be
 #' computed by specifying `newdata = "mean"`. Other types of marginal effects
 #' could be computed. Please refer to the documentation page of
-#' `marginaleffects::marginaleffects()`.
+#' `marginaleffects::avg_slopes()`.
 #'
 #' For more information, see `vignette("marginal_tidiers", "broom.helpers")`.
-#' @note When applying `marginaleffects::marginaleffects()`, custom contrasts
-#' are ignored. Treatment contrasts is considered by default to
-#' all categorical variables. Interactions are also ignored.
 #' @param x a model
 #' @param conf.int logical indicating whether or not to include a confidence
 #' interval in the tidied output
 #' @param conf.level the confidence level to use for the confidence interval
 #' @param ... additional parameters passed to
-#' `marginaleffects::marginaleffects()`
+#' `marginaleffects::avg_slopes()`
 #' @family marginal_tieders
-#' @seealso `marginaleffects::marginaleffects()`
+#' @seealso `marginaleffects::avg_slopes()`
 #' @export
 #' @examplesIf interactive()
 #' # Average Marginal Effects (AME)
@@ -217,27 +214,26 @@ tidy_ggpredict <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 #'   Survived ~ Class + Age + Sex,
 #'   data = df, family = binomial
 #' )
-#' tidy_marginaleffects(mod)
-#' tidy_plus_plus(mod, tidy_fun = tidy_marginaleffects)
+#' tidy_avg_slopes(mod)
+#' tidy_plus_plus(mod, tidy_fun = tidy_avg_slopes)
 #'
 #' mod2 <- lm(Petal.Length ~ poly(Petal.Width, 2) + Species, data = iris)
-#' tidy_marginaleffects(mod2)
+#' tidy_avg_slopes(mod2)
 #'
 #' # Marginal Effects at the Mean (MEM)
-#' tidy_marginaleffects(mod, newdata = "mean")
-#' tidy_plus_plus(mod, tidy_fun = tidy_marginaleffects, newdata = "mean")
-tidy_marginaleffects <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
+#' tidy_avg_slopes(mod, newdata = "mean")
+#' tidy_plus_plus(mod, tidy_fun = tidy_avg_slopes, newdata = "mean")
+tidy_avg_slopes <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
   .assert_package("marginaleffects")
 
   dots <- rlang::dots_list(...)
   if (isTRUE(dots$exponentiate))
-    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_marginaleffects}.") # nolint
+    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_avg_slopes}.") # nolint
   dots$exponentiate <- NULL
   dots$conf_level <- conf.level
   dots$model <- x
 
-  res <- do.call(marginaleffects::marginaleffects, dots) %>%
-    marginaleffects::tidy() %>%
+  res <- do.call(marginaleffects::avg_slopes, dots) %>%
     dplyr::rename(variable = "term")
   if ("contrast" %in% names(res))
     res <- res %>% dplyr::rename(term = "contrast")
@@ -257,34 +253,32 @@ tidy_marginaleffects <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
   res
 }
 
-#' Marginal Contrasts with `marginaleffects::comparisons()`
+#' Marginal Contrasts with `marginaleffects::avg_comparisons()`
 #'
 #' `r lifecycle::badge("experimental")`
-#' Use `marginaleffects::comparisons()` to estimate marginal contrasts and
+#' Use `marginaleffects::avg_comparisons()` to estimate marginal contrasts and
 #' return a tibble tidied in a way that it could be used by `broom.helpers`
-#' functions. See `marginaleffects::comparisons()()` for a list of supported
+#' functions. See `marginaleffects::avg_comparisons()` for a list of supported
 #' models.
 #' @details
-#' By default, `marginaleffects::comparisons()` estimate average marginal
+#' By default, `marginaleffects::avg_comparisons()` estimate average marginal
 #' contrasts: a contrast is computed for each observed value in the original
 #' dataset (counterfactual approach) before being averaged.
 #' Marginal Contrasts at the Mean could be computed by specifying
 #' `newdata = "mean"`. The `variables` argument can be used to select the
 #' contrasts to be computed. Please refer to the documentation page of
-#' `marginaleffects::comparisons()`.
+#' `marginaleffects::avg_comparisons()`.
 #'
+#' See also `tidy_marginal_contrasts()` for taking into account interactions.
 #' For more information, see `vignette("marginal_tidiers", "broom.helpers")`.
-#' @note When applying `marginaleffects::comparisons()`, custom contrasts used
-#' in the model are ignored. Treatment contrasts is considered by default to
-#' all categorical variables. Interactions are also ignored.
 #' @param x a model
 #' @param conf.int logical indicating whether or not to include a confidence
 #' interval in the tidied output
 #' @param conf.level the confidence level to use for the confidence interval
 #' @param ... additional parameters passed to
-#' `marginaleffects::comparisons()`
+#' `marginaleffects::avg_comparisons()`
 #' @family marginal_tieders
-#' @seealso `marginaleffects::comparisons()`
+#' @seealso `marginaleffects::avg_comparisons()`
 #' @export
 #' @examplesIf interactive()
 #' # Average Marginal Contrasts
@@ -297,33 +291,32 @@ tidy_marginaleffects <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 #'   Survived ~ Class + Age + Sex,
 #'   data = df, family = binomial
 #' )
-#' tidy_comparisons(mod)
-#' tidy_plus_plus(mod, tidy_fun = tidy_comparisons)
+#' tidy_avg_comparisons(mod)
+#' tidy_plus_plus(mod, tidy_fun = tidy_avg_comparisons)
 #'
 #' mod2 <- lm(Petal.Length ~ poly(Petal.Width, 2) + Species, data = iris)
-#' tidy_comparisons(mod2)
+#' tidy_avg_comparisons(mod2)
 #'
 #' # Custumizing the type of contrasts
-#' tidy_comparisons(
+#' tidy_avg_comparisons(
 #'   mod2,
 #'   variables = list(Petal.Width = 2, Species = "pairwise")
 #' )
 #'
-#' # Marginal Contrasts at the Mean (MEM)
-#' tidy_comparisons(mod, newdata = "mean")
-#' tidy_plus_plus(mod, tidy_fun = tidy_comparisons, newdata = "mean")
-tidy_comparisons <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
+#' # Marginal Contrasts at the Mean
+#' tidy_avg_comparisons(mod, newdata = "mean")
+#' tidy_plus_plus(mod, tidy_fun = tidy_avg_comparisons, newdata = "mean")
+tidy_avg_comparisons <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
   .assert_package("marginaleffects")
 
   dots <- rlang::dots_list(...)
   if (isTRUE(dots$exponentiate))
-    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_comparisons}.") # nolint
+    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_avg_comparisons}.") # nolint
   dots$exponentiate <- NULL
   dots$conf_level <- conf.level
   dots$model <- x
 
-  res <- do.call(marginaleffects::comparisons, dots) %>%
-    marginaleffects::tidy() %>%
+  res <- do.call(marginaleffects::avg_comparisons, dots) %>%
     dplyr::rename(variable = "term")
   if ("contrast" %in% names(res))
     res <- res %>% dplyr::rename(term = "contrast")
@@ -343,18 +336,18 @@ tidy_comparisons <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
   res
 }
 
-#' Marginal Means with `marginaleffects::marginalmeans()`
+#' Marginal Means with `marginaleffects::marginal_means()`
 #'
 #' `r lifecycle::badge("experimental")`
-#' Use `marginaleffects::marginalmeans()` to estimate marginal means and
+#' Use `marginaleffects::marginal_means()` to estimate marginal means and
 #' return a tibble tidied in a way that it could be used by `broom.helpers`
-#' functions. See `marginaleffects::marginalmeans()()` for a list of supported
+#' functions. See `marginaleffects::marginal_means()()` for a list of supported
 #' models.
 #' @details
-#' `marginaleffects::marginalmeans()` estimate marginal means:
+#' `marginaleffects::marginal_means()` estimate marginal means:
 #' adjusted predictions, averaged across a grid of categorical predictors,
 #' holding other numeric predictors at their means. Please refer to the
-#' documentation page of `marginaleffects::marginalmeans()`. Marginal means
+#' documentation page of `marginaleffects::marginal_means()`. Marginal means
 #' are defined only for categorical variables.
 #'
 #' For more information, see `vignette("marginal_tidiers", "broom.helpers")`.
@@ -363,9 +356,9 @@ tidy_comparisons <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 #' interval in the tidied output
 #' @param conf.level the confidence level to use for the confidence interval
 #' @param ... additional parameters passed to
-#' `marginaleffects::marginalmeans()`
+#' `marginaleffects::marginal_means()`
 #' @family marginal_tieders
-#' @seealso `marginaleffects::marginalmeans()`
+#' @seealso `marginaleffects::marginal_means()`
 #' @export
 #' @examplesIf interactive()
 #' # Average Marginal Means
@@ -378,26 +371,25 @@ tidy_comparisons <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 #'   Survived ~ Class + Age + Sex,
 #'   data = df, family = binomial
 #' )
-#' tidy_marginalmeans(mod)
-#' tidy_plus_plus(mod, tidy_fun = tidy_marginalmeans)
+#' tidy_marginal_means(mod)
+#' tidy_plus_plus(mod, tidy_fun = tidy_marginal_means)
 #'
 #' mod2 <- lm(Petal.Length ~ poly(Petal.Width, 2) + Species, data = iris)
-#' tidy_marginalmeans(mod2)
-tidy_marginalmeans <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
+#' tidy_marginal_means(mod2)
+tidy_marginal_means <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
   .assert_package("marginaleffects")
 
   dots <- rlang::dots_list(...)
   if (isTRUE(dots$exponentiate))
-    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_marginalmeans}.") # nolint
+    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_marginal_means}.") # nolint
   dots$exponentiate <- NULL
   dots$conf_level <- conf.level
   dots$model <- x
 
-  res <- do.call(marginaleffects::marginalmeans, dots) %>%
+  res <- do.call(marginaleffects::marginal_means, dots) %>%
     dplyr::rename(
       variable = "term",
-      term = "value",
-      estimate = "marginalmean"
+      term = "value"
     ) %>%
     dplyr::mutate(term = as.character(.data$term))
 
@@ -407,24 +399,28 @@ tidy_marginalmeans <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
   res
 }
 
-#' Marginal Predictions with `marginaleffects::predictions()`
+
+
+
+
+#' Marginal Predictions with `marginaleffects::avg_predictions()`
 #'
 #' `r lifecycle::badge("experimental")`
-#' Use `marginaleffects::predictions()` to estimate marginal predictions for
+#' Use `marginaleffects::avg_predictions()` to estimate marginal predictions for
 #' each variable of a model and return a tibble tidied in a way that it could
 #' be used by `broom.helpers` functions.
-#' See `marginaleffects::predictions()` for a list of supported models.
+#' See `marginaleffects::avg_predictions()` for a list of supported models.
 #' @details
 #' Marginal predictions are obtained by calling, for each variable,
-#' `marginaleffects::predictions()` with the same variable being used for the
-#' `variables` and the `by` argument.
+#' `marginaleffects::avg_predictions()` with the same variable being used for
+#' the `variables` and the `by` argument.
 #'
-#' Considering a categorical variable named `cat`, `tidy_marginalpredictions()`
-#' will call `predictions(model, variables = list(cat = unique), by = "cat")` to
-#' obtain average marginal predictions for this variable.
+#' Considering a categorical variable named `cat`, `tidy_marginal_predictions()`
+#' will call `avg_predictions(model, variables = list(cat = unique), by = "cat")`
+#' to obtain average marginal predictions for this variable.
 #'
-#' Considering a continuous variable named `cont`, `tidy_marginalpredictions()`
-#' will call `predictions(model, variables = list(cont = "fivenum"), by = "cont")`
+#' Considering a continuous variable named `cont`, `tidy_marginal_predictions()`
+#' will call `avg_predictions(model, variables = list(cont = "fivenum"), by = "cont")`
 #' to obtain average marginal predictions for this variable at the minimum, the
 #' first quartile, the median, the third quartile and the maximum of the observed
 #' values of `cont`.
@@ -433,17 +429,17 @@ tidy_marginalmeans <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 #' using a counterfactual grid for each value of the variable of interest,
 #' before averaging the results. *Marginal predictions at the mean* could be
 #' obtained by indicating `newdata = "mean"`. Other assumptions are possible,
-#' see the help file of `marginaleffects::predictions()`.
+#' see the help file of `marginaleffects::avg_predictions()`.
 #'
-#' `tidy_marginalpredictions()` will compute marginal predictions for each
+#' `tidy_marginal_predictions()` will compute marginal predictions for each
 #' variable or combination of variables, before stacking the results in a unique
-#' tibble. This is why `tidy_marginalpredictions()` has a `variables_list`
+#' tibble. This is why `tidy_marginal_predictions()` has a `variables_list`
 #' argument consisting of a list of specifications that will be passed
-#' sequentially to the `variables` argument of `marginaleffects::predictions()`.
+#' sequentially to the `variables` argument of `marginaleffects::avg_predictions()`.
 #'
 #' The helper function `variables_to_predict()` could be used to automatically
 #' generate a suitable list to be used with `variables_list`. By default, all
-#' unique values are retained for categorical variables and `"fivenum"` (i.e.
+#' unique values are retained for categorical variables and `fivenum` (i.e.
 #' Tukey's five numbers, minimum, quartiles and maximum) for continuous variables.
 #' When `interactions = FALSE`, `variables_to_predict()` will return a list of
 #' all individual variables used in the model. If `interactions = FALSE`, it
@@ -456,22 +452,22 @@ tidy_marginalmeans <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 #'
 #' You can also provide custom specifications (see examples).
 #'
-#' `plot_marginalpredictions()` works in a similar way and returns a list of
+#' `plot_marginal_predictions()` works in a similar way and returns a list of
 #' plots that could be combined with `patchwork::wrap_plots()` (see examples).
 #'
 #' For more information, see `vignette("marginal_tidiers", "broom.helpers")`.
 #' @param x a model
 #' @param variables_list a list whose elements will be sequentially passed to
-#' `variables` in `marginaleffects::predictions()` (see details below);
+#' `variables` in `marginaleffects::avg_predictions()` (see details below);
 #' alternatively, it could also be the string `"auto"` (default) or
 #' `"no_interaction"`
 #' @param conf.int logical indicating whether or not to include a confidence
 #' interval in the tidied output
 #' @param conf.level the confidence level to use for the confidence interval
 #' @param ... additional parameters passed to
-#' `marginaleffects::predictions()`
+#' `marginaleffects::avg_predictions()`
 #' @family marginal_tieders
-#' @seealso `marginaleffects::predictions()`
+#' @seealso `marginaleffects::avg_predictions()`
 #' @export
 #' @examplesIf interactive()
 #' # Average Marginal Predictions
@@ -483,28 +479,32 @@ tidy_marginalmeans <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 #'   Survived ~ Class + Age + Sex,
 #'   data = df, family = binomial
 #' )
-#' tidy_marginalpredictions(mod)
-#' tidy_plus_plus(mod, tidy_fun = tidy_marginalpredictions)
-#' plot_marginalpredictions(mod) %>% patchwork::wrap_plots()
-#' plot_marginalpredictions(mod) %>%
-#'   patchwork::wrap_plots() &
-#'   ggplot2::scale_y_continuous(limits = c(0, 1), label = scales::percent)
+#' tidy_marginal_predictions(mod)
+#' tidy_plus_plus(mod, tidy_fun = tidy_marginal_predictions)
+#' if (require("patchwork")) {
+#'   plot_marginal_predictions(mod) %>% patchwork::wrap_plots()
+#'   plot_marginal_predictions(mod) %>%
+#'     patchwork::wrap_plots() &
+#'     ggplot2::scale_y_continuous(limits = c(0, 1), label = scales::percent)
+#' }
 #'
 #' mod2 <- lm(Petal.Length ~ poly(Petal.Width, 2) + Species, data = iris)
-#' tidy_marginalpredictions(mod2)
-#' plot_marginalpredictions(mod2) %>% patchwork::wrap_plots()
-#' tidy_marginalpredictions(
+#' tidy_marginal_predictions(mod2)
+#' if (require("patchwork")) {
+#'   plot_marginal_predictions(mod2) %>% patchwork::wrap_plots()
+#' }
+#' tidy_marginal_predictions(
 #'   mod2,
 #'   variables_list = variables_to_predict(mod2, continuous = "threenum")
 #' )
-#' tidy_marginalpredictions(
+#' tidy_marginal_predictions(
 #'   mod2,
 #'   variables_list = list(
 #'     list(Petal.Width = c(0, 1, 2, 3)),
 #'     list(Species = unique)
 #'   )
 #' )
-#' tidy_marginalpredictions(
+#' tidy_marginal_predictions(
 #'   mod2,
 #'   variables_list = list(list(Species = unique, Petal.Width = 1:3))
 #' )
@@ -514,11 +514,15 @@ tidy_marginalmeans <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 #'   Survived ~ Sex * Age + Class,
 #'   data = df, family = binomial
 #' )
-#' tidy_marginalpredictions(mod3)
-#' plot_marginalpredictions(mod3) %>% patchwork::wrap_plots()
-#' tidy_marginalpredictions(mod3, "no_interaction")
-#' plot_marginalpredictions(mod3, "no_interaction") %>% patchwork::wrap_plots()
-#' tidy_marginalpredictions(
+#' tidy_marginal_predictions(mod3)
+#' tidy_marginal_predictions(mod3, "no_interaction")
+#' if (require("patchwork")) {
+#'   plot_marginal_predictions(mod3) %>%
+#'     patchwork::wrap_plots()
+#'   plot_marginal_predictions(mod3, "no_interaction") %>%
+#'     patchwork::wrap_plots()
+#' }
+#' tidy_marginal_predictions(
 #'   mod3,
 #'   variables_list = list(
 #'     list(Class = unique, Sex = "Female"),
@@ -527,15 +531,18 @@ tidy_marginalmeans <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 #' )
 #'
 #' # Marginal Predictions at the Mean
-#' tidy_marginalpredictions(mod, newdata = "mean")
-#' plot_marginalpredictions(mod, newdata = "mean") %>% patchwork::wrap_plots()
-tidy_marginalpredictions <- function(x, variables_list = "auto",
+#' tidy_marginal_predictions(mod, newdata = "mean")
+#' if (require("patchwork")) {
+#'   plot_marginal_predictions(mod, newdata = "mean") %>%
+#'     patchwork::wrap_plots()
+#' }
+tidy_marginal_predictions <- function(x, variables_list = "auto",
                                      conf.int = TRUE, conf.level = 0.95, ...) {
   .assert_package("marginaleffects")
 
   dots <- rlang::dots_list(...)
   if (isTRUE(dots$exponentiate))
-    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_marginalpredictions}.") # nolint
+    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_marginal_predictions}.") # nolint
   dots$exponentiate <- NULL
   dots$conf_level <- conf.level
   dots$model <- x
@@ -562,8 +569,7 @@ tidy_marginalpredictions <- function(x, variables_list = "auto",
 .tidy_one_marginal_prediction <- function(variables, dots) {
   dots$variables <- variables
   dots$by <- names(variables)
-  do.call(marginaleffects::predictions, dots) %>%
-    marginaleffects::tidy() %>%
+  do.call(marginaleffects::avg_predictions, dots) %>%
     dplyr::mutate(variable = paste(names(variables), collapse = ":")) %>%
     tidyr::unite(col = "term", sep = " * ", dplyr::all_of(names(variables))) %>%
     dplyr::relocate("variable", "term")
@@ -575,9 +581,10 @@ tidy_marginalpredictions <- function(x, variables_list = "auto",
 #' interactions be returned?
 #' @param categorical default value for categorical variables
 #' @param continuous default value for continuous variables
-#' @rdname tidy_marginalpredictions
+#' @rdname tidy_marginal_predictions
 variables_to_predict <- function(model, interactions = TRUE,
-                                 categorical = unique, continuous = "fivenum") {
+                                 categorical = unique,
+                                 continuous = stats::fivenum) {
   variables <- model %>%
     model_list_variables(add_var_type = TRUE)
 
@@ -610,8 +617,8 @@ variables_to_predict <- function(model, interactions = TRUE,
 }
 
 #' @export
-#' @rdname tidy_marginalpredictions
-plot_marginalpredictions <- function(x, variables_list = "auto",
+#' @rdname tidy_marginal_predictions
+plot_marginal_predictions <- function(x, variables_list = "auto",
                                      conf.level = 0.95, ...) {
   .assert_package("marginaleffects")
   .assert_package("ggplot2")
@@ -635,7 +642,7 @@ plot_marginalpredictions <- function(x, variables_list = "auto",
 .plot_one_marginal_prediction <- function(variables, dots) {
   if (length(variables) >= 4)
     cli::cli_abort(paste(
-      "Combination of 4 or more variables. {.fun plot_marginalpredictions} can",
+      "Combination of 4 or more variables. {.fun plot_marginal_predictions} can",
       "manage only combinations of 3 variables or less."
     ))
 
@@ -653,8 +660,7 @@ plot_marginalpredictions <- function(x, variables_list = "auto",
     variables[[1]] <- broom.helpers::seq_range
   dots$variables <- variables
   dots$by <- names(variables)
-  d <- do.call(marginaleffects::predictions, dots) %>%
-    marginaleffects::tidy()
+  d <- do.call(marginaleffects::avg_predictions, dots)
 
   mapping <- ggplot2::aes(
     x = .data[[x_variable]],
@@ -708,60 +714,72 @@ plot_marginalpredictions <- function(x, variables_list = "auto",
     ggplot2::theme(legend.position = "bottom")
 }
 
-#' Marginal Contrasts with `marginaleffects::comparisons()`
+#' Marginal Contrasts with `marginaleffects::avg_comparisons()`
 #'
 #' `r lifecycle::badge("experimental")`
-#' Use `marginaleffects::comparisons()` to estimate marginal contrasts for
+#' Use `marginaleffects::avg_comparisons()` to estimate marginal contrasts for
 #' each variable of a model and return a tibble tidied in a way that it could
 #' be used by `broom.helpers` functions.
-#' See `marginaleffects::comparisons()` for a list of supported models.
+#' See `marginaleffects::avg_comparisons()` for a list of supported models.
 #' @details
 #' Marginal contrasts are obtained by calling, for each variable or combination
-#' of variables, `marginaleffects::comparisons()` with the option `cross = TRUE`.
+#' of variables, `marginaleffects::avg_comparisons()`.
 #'
-#' Considering a categorical variable named `cat`, `tidy_marginalcontrasts()`
-#' will call `comparisons(model, variables = list(cat = "reference")) %>% tidy()`
+#' `tidy_marginal_contrasts()` will compute marginal contrasts for each
+#' variable or combination of variables, before stacking the results in a unique
+#' tibble. This is why `tidy_marginal_contrasts()` has a `variables_list`
+#' argument consisting of a list of specifications that will be passed
+#' sequentially to the `variables` and the `by` argument of
+#' `marginaleffects::avg_comparisons()`.
+#'
+#' Considering a single categorical variable named `cat`, `tidy_marginal_contrasts()`
+#' will call `avg_comparisons(model, variables = list(cat = "reference"))`
 #' to obtain average marginal contrasts for this variable.
 #'
-#' Considering a continuous variable named `cont`, `tidy_marginalcontrasts()`
-#' will call `predictions(model, variables = list(cont = 1)) %>% tidy()`
+#' Considering a single continuous variable named `cont`, `tidy_marginalcontrasts()`
+#' will call `avg_comparisons(model, variables = list(cont = 1))`
 #' to obtain average marginal contrasts for an increase of one unit.
+#'
+#' For a combination of variables, there are several possibilities. You could
+#' compute "cross-contrasts" by providing simultaneously several variables
+#' to `variables` and specifying `cross = TRUE` to
+#' `marginaleffects::avg_comparisons()`. Alternatively, you could compute the
+#' contrasts of a first variable specified to `variables` for the
+#' different values of a second variable specified to `by`.
+#'
+#' The helper function `variables_to_contrast()` could be used to automatically
+#' generate a suitable list to be used with `variables_list`. Each combination
+#' of variables should be a list with two named elements: `"variables"` a list
+#' of named elements passed to `variables` and `"by"` a list of named elements
+#' used for creating a relevant `datagrid` and whose names are passed to `by`.
+#'
+#' `variables_list`'s default value, `"auto"`, calls
+#' `variables_to_contrast(interactions = TRUE, cross = FALSE)` while
+#' `"no_interaction"` is a shortcut for
+#' `variables_to_contrast(interactions = FALSE)`. `"cross"` calls
+#' `variables_to_contrast(interactions = TRUE, cross = TRUE)`
+#'
+#' You can also provide custom specifications (see examples).
 #'
 #' By default, *average marginal contrasts* are computed: contrasts are computed
 #' using a counterfactual grid for each value of the variable of interest,
 #' before averaging the results. *Marginal contrasts at the mean* could be
 #' obtained by indicating `newdata = "mean"`. Other assumptions are possible,
-#' see the help file of `marginaleffects::comparisons()`.
-#'
-#' `tidy_marginalcontrasts()` will compute marginal contrasts for each
-#' variable or combination of variables, before stacking the results in a unique
-#' tibble. This is why `tidy_marginalcontrasts()` has a `variables_list`
-#' argument consisting of a list of specifications that will be passed
-#' sequentially to the `variables` argument of `marginaleffects::comparisons()`.
-#'
-#' The helper function `variables_to_predict()` could be used to automatically
-#' generate a suitable list to be used with `variables_list`.
-#'
-#' `variables_list`'s default value, `"auto"`, calls
-#' `variables_to_predict(interactions = TRUE)` while `"no_interaction"` is a
-#' shortcut for `variables_to_predict(interactions = FALSE)`. `"reference"` is
-#' used for categorical variables and `1` for continuous variables.
-#'
-#' You can also provide custom specifications (see examples).
+#' see the help file of `marginaleffects::avg_comparisons()`.
 #'
 #' For more information, see `vignette("marginal_tidiers", "broom.helpers")`.
 #' @param x a model
 #' @param variables_list a list whose elements will be sequentially passed to
-#' `variables` in `marginaleffects::comparisons()` (see details below);
-#' alternatively, it could also be the string `"auto"` (default) or
+#' `variables` in `marginaleffects::avg_comparisons()` (see details below);
+#' alternatively, it could also be the string `"auto"` (default), `"cross"` or
 #' `"no_interaction"`
 #' @param conf.int logical indicating whether or not to include a confidence
 #' interval in the tidied output
 #' @param conf.level the confidence level to use for the confidence interval
 #' @param ... additional parameters passed to
-#' `marginaleffects::comparisons()`
+#' `marginaleffects::avg_comparisons()`
 #' @family marginal_tieders
-#' @seealso `marginaleffects::comparisons()`, `tidy_comparisons()`
+#' @seealso `marginaleffects::avg_comparisons()`, `tidy_avg_comparisons()`
 #' @export
 #' @examplesIf interactive()
 #' # Average Marginal Contrasts
@@ -773,12 +791,12 @@ plot_marginalpredictions <- function(x, variables_list = "auto",
 #'   Survived ~ Class + Age + Sex,
 #'   data = df, family = binomial
 #' )
-#' tidy_marginalcontrasts(mod)
-#' tidy_plus_plus(mod, tidy_fun = tidy_marginalcontrasts)
+#' tidy_marginal_contrasts(mod)
+#' tidy_plus_plus(mod, tidy_fun = tidy_marginal_contrasts)
 #'
 #' mod2 <- lm(Petal.Length ~ poly(Petal.Width, 2) + Species, data = iris)
-#' tidy_marginalcontrasts(mod2)
-#' tidy_marginalcontrasts(
+#' tidy_marginal_contrasts(mod2)
+#' tidy_marginal_contrasts(
 #'   mod2,
 #'   variables_list = variables_to_predict(
 #'     mod2,
@@ -792,35 +810,64 @@ plot_marginalpredictions <- function(x, variables_list = "auto",
 #'   Survived ~ Sex * Age + Class,
 #'   data = df, family = binomial
 #' )
-#' tidy_marginalcontrasts(mod3)
-#' tidy_marginalcontrasts(mod3, "no_interaction")
+#' tidy_marginal_contrasts(mod3)
+#' tidy_marginal_contrasts(mod3, "no_interaction")
+#' tidy_marginal_contrasts(mod3, "cross")
+#' tidy_marginal_contrasts(
+#'   mod3,
+#'   variables_list = list(
+#'     list(variables = list(Class = "pairwise"), by = list(Sex = unique)),
+#'     list(variables = list(Age = "all")),
+#'     list(variables = list(Class = "sequential", Sex = "reference"))
+#'   )
+#' )
+#'
+#' mod4 <- lm(Sepal.Length ~ Petal.Length * Petal.Width + Species, data = iris)
+#' tidy_marginal_contrasts(mod4)
+#' tidy_marginal_contrasts(
+#'   mod4,
+#'   variables_list = list(
+#'     list(
+#'       variables = list(Species = "sequential"),
+#'       by = list(Petal.Length = c(2, 5))
+#'     ),
+#'     list(
+#'       variables = list(Petal.Length = 2),
+#'       by = list(Species = unique, Petal.Width = 2:4)
+#'     )
+#'   )
+#' )
 #'
 #' # Marginal Contrasts at the Mean
-#' tidy_marginalcontrasts(mod, newdata = "mean")
-tidy_marginalcontrasts <- function(x, variables_list = "auto",
+#' tidy_marginal_contrasts(mod, newdata = "mean")
+#' tidy_marginal_contrasts(mod3, newdata = "mean")
+tidy_marginal_contrasts <- function(x, variables_list = "auto",
                                      conf.int = TRUE, conf.level = 0.95, ...) {
   .assert_package("marginaleffects")
 
   dots <- rlang::dots_list(...)
   if (isTRUE(dots$exponentiate))
-    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_marginalcontrasts}.") # nolint
+    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_marginal_contrasts}.") # nolint
   dots$exponentiate <- NULL
   dots$conf_level <- conf.level
   dots$model <- x
 
   if (is.character(variables_list) && variables_list == "auto")
-    variables_list <- variables_to_predict(
+    variables_list <- variables_to_contrast(
       x,
       interactions = TRUE,
-      categorical = "reference",
-      continuous = 1
+      cross = FALSE
     )
   if (is.character(variables_list) && variables_list == "no_interaction")
-    variables_list <- variables_to_predict(
+    variables_list <- variables_to_contrast(
       x,
-      interactions = FALSE,
-      categorical = "reference",
-      continuous = 1
+      interactions = FALSE
+    )
+  if (is.character(variables_list) && variables_list == "cross")
+    variables_list <- variables_to_contrast(
+      x,
+      interactions = TRUE,
+      cross = TRUE
     )
   if (!is.list(variables_list))
     cli::cli_abort("{.arg variables_list} should be a list or \"auto\" or \"no_interaction\".")
@@ -838,12 +885,115 @@ tidy_marginalcontrasts <- function(x, variables_list = "auto",
 }
 
 .tidy_one_marginal_contrast <- function(variables, dots) {
-  dots$variables <- variables
+  # allowing passing directly variables names
+  if (length(variables) > 0 && !all(names(variables) %in% c("variables", "by")))
+    variables <- list(variables = variables)
+
+  dots$variables <- variables$variables
   dots$cross <- TRUE
-  do.call(marginaleffects::comparisons, dots) %>%
-    marginaleffects::tidy() %>%
-    dplyr::select(-dplyr::any_of("term")) %>%
-    dplyr::mutate(variable = paste(names(variables), collapse = ":")) %>%
-    tidyr::unite(col = "term", sep = " * ", dplyr::starts_with("contrast")) %>%
+  if (!is.null(variables$by))
+    dots$by <- names(variables$by)
+
+  if (!is.null(variables$by) && is.null(dots$newdata)) {
+    args <- variables$by
+    args$model <- dots$model
+    dots$newdata <- do.call(marginaleffects::datagridcf, args)
+  }
+
+  if (!is.null(variables$by) && identical(dots$newdata, "mean")) {
+    args <- variables$by
+    args$model <- dots$model
+    dots$newdata <- do.call(marginaleffects::datagrid, args)
+  }
+
+  res <- do.call(marginaleffects::avg_comparisons, dots) %>%
+    dplyr::select(-dplyr::any_of("term"))
+  if (is.null(variables$by))
+    res <- res %>%
+      dplyr::mutate(
+        variable = paste(names(variables$variables), collapse = ":")
+      )
+  else
+    res <- res %>%
+      dplyr::mutate(
+        variable = paste(
+          paste(names(variables$by), collapse = ":"),
+          paste(names(variables$variables), collapse = ":"),
+          sep = ":"
+        )
+      )
+
+  res <- res %>%
+    tidyr::unite(
+      col = "term",
+      sep = " * ",
+      dplyr::all_of(names(variables$by)),
+      dplyr::starts_with("contrast")
+    ) %>%
     dplyr::relocate("variable", "term")
+}
+
+#' @export
+#' @param model a model
+#' @param interactions should combinations of variables corresponding to
+#' interactions be returned?
+#' @param cross if `interaction` is `TRUE`, should "cross-contrasts" be
+#' computed? (if `FALSE`, only the last term of an interaction is passed to
+#' `variable` and the other terms are passed to `by`)
+#' @param var_categorical default `variable` value for categorical variables
+#' @param var_continuous default `variable` value for continuous variables
+#' @param by_categorical default `by` value for categorical variables
+#' @param by_continuous default `by` value for continuous variables
+#' @rdname tidy_marginal_contrasts
+variables_to_contrast <- function(model,
+                                  interactions = TRUE,
+                                  cross = FALSE,
+                                  var_categorical = "reference",
+                                  var_continuous = 1,
+                                  by_categorical = unique,
+                                  by_continuous = stats::fivenum) {
+  variables <- model %>%
+    model_list_variables(add_var_type = TRUE)
+
+  if (interactions) {
+    keep <- model_list_higher_order_variables(model)
+  } else {
+    keep <- variables[variables$var_type != "interaction", ]$variable
+  }
+
+  response_variable <- model %>% model_get_response_variable()
+  if (!is.null(response_variable))
+    keep <- keep[keep != response_variable]
+
+  var_ret <- list(
+    categorical = var_categorical,
+    dichotomous = var_categorical,
+    continuous = var_continuous
+  )
+  by_ret <- list(
+    categorical = by_categorical,
+    dichotomous = by_categorical,
+    continuous = by_continuous
+  )
+  variables <- variables %>%
+    tibble::column_to_rownames("variable")
+
+  one_element <- function(v) {
+    v <- strsplit(v, ":") %>% unlist()
+    if (length(v) == 1 || isTRUE(cross)) {
+      one_variables <- variables[v, "var_type"]
+      one_variables <- var_ret[one_variables]
+      names(one_variables) <- v
+      one_by <- NULL
+    } else {
+      one_variables <- variables[utils::tail(v, 1), "var_type"]
+      one_variables <- var_ret[one_variables]
+      names(one_variables) <- utils::tail(v, 1)
+      one_by <- variables[utils::head(v, -1), "var_type"]
+      one_by <- by_ret[one_by]
+      names(one_by) <- utils::head(v, -1)
+    }
+    list(variables = one_variables, by = one_by)
+  }
+  lapply(keep, one_element)
 }
