@@ -22,7 +22,7 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::lintr, local::., glmmTMB=?ignore-before-r=4.9.0
+          extra-packages: any::lintr, local::.
           needs: lint
 
       - name: Lint
