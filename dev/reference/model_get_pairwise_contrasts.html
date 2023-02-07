@@ -69,6 +69,7 @@
 <span>  <span class="va">model</span>,</span>
 <span>  <span class="va">variables</span>,</span>
 <span>  pairwise_reverse <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  contrasts_adjust <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  conf.level <span class="op">=</span> <span class="fl">0.95</span>,</span>
 <span>  emmeans_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -87,6 +88,11 @@
 <dt>pairwise_reverse</dt>
 <dd><p>determines whether to use <code>"pairwise"</code> (if <code>TRUE</code>)
 or <code>"revpairwise"</code> (if <code>FALSE</code>), see <code><a href="https://rdrr.io/pkg/emmeans/man/contrast.html" class="external-link">emmeans::contrast()</a></code></p></dd>
+
+
+<dt>contrasts_adjust</dt>
+<dd><p>optional adjustment method when computing contrasts,
+see <code><a href="https://rdrr.io/pkg/emmeans/man/contrast.html" class="external-link">emmeans::contrast()</a></code> (if <code>NULL</code>, use <code>emmeans</code> default)</p></dd>
 
 
 <dt>conf.level</dt>
@@ -129,6 +135,7 @@ or <code>"revpairwise"</code> (if <code>FALSE</code>), see <code><a href="https:
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="assert_package.html">.assert_package</a></span><span class="op">(</span><span class="st">"emmeans"</span>, boolean <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">model_get_pairwise_contrasts</span><span class="op">(</span>variables <span class="op">=</span> <span class="st">"Species"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">model_get_pairwise_contrasts</span><span class="op">(</span>variables <span class="op">=</span> <span class="st">"Species"</span>, contrasts_adjust <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
