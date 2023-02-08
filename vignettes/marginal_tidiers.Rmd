@@ -749,4 +749,4 @@ mod %>%
 -   [Documentation of the `marginaleffects` package](https://vincentarelbundock.github.io/marginaleffects/) by Vincent Arel-Bundock
 -   [Marginalia: A guide to figuring out what the heck marginal effects, marginal slopes, average marginal effects, marginal effects at the mean, and all these other marginal things are](https://www.andrewheiss.com/blog/2022/05/20/marginalia/) by Andrew Heiss
 -   [Introduction to Adjusted Predictions and Marginal Effects in R](https://strengejacke.github.io/ggeffects/articles/introduction_marginal_effects.html) by Daniel Lüdecke
--   [An Introduction to `margins`](https://cran.r-project.org/web/packages/margins/vignettes/Introduction.html)
+-   [An Introduction to `margins`](https://cran.r-project.org/package=margins/vignettes/Introduction.html)
