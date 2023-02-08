@@ -10,6 +10,9 @@
     <loc>https://larmarange.github.io/broom.helpers/articles/index.html</loc>
   </url>
   <url>
+    <loc>https://larmarange.github.io/broom.helpers/articles/marginal_tidiers.html</loc>
+  </url>
+  <url>
     <loc>https://larmarange.github.io/broom.helpers/articles/tidy.html</loc>
   </url>
   <url>
@@ -79,6 +82,9 @@
     <loc>https://larmarange.github.io/broom.helpers/reference/model_get_response.html</loc>
   </url>
   <url>
+    <loc>https://larmarange.github.io/broom.helpers/reference/model_get_response_variable.html</loc>
+  </url>
+  <url>
     <loc>https://larmarange.github.io/broom.helpers/reference/model_get_terms.html</loc>
   </url>
   <url>
@@ -94,6 +100,9 @@
     <loc>https://larmarange.github.io/broom.helpers/reference/model_list_contrasts.html</loc>
   </url>
   <url>
+    <loc>https://larmarange.github.io/broom.helpers/reference/model_list_higher_order_variables.html</loc>
+  </url>
+  <url>
     <loc>https://larmarange.github.io/broom.helpers/reference/model_list_terms_levels.html</loc>
   </url>
   <url>
@@ -104,6 +113,9 @@
   </url>
   <url>
     <loc>https://larmarange.github.io/broom.helpers/reference/select_helpers.html</loc>
+  </url>
+  <url>
+    <loc>https://larmarange.github.io/broom.helpers/reference/seq_range.html</loc>
   </url>
   <url>
     <loc>https://larmarange.github.io/broom.helpers/reference/supported_models.html</loc>
@@ -142,6 +154,12 @@
     <loc>https://larmarange.github.io/broom.helpers/reference/tidy_attach_model.html</loc>
   </url>
   <url>
+    <loc>https://larmarange.github.io/broom.helpers/reference/tidy_avg_comparisons.html</loc>
+  </url>
+  <url>
+    <loc>https://larmarange.github.io/broom.helpers/reference/tidy_avg_slopes.html</loc>
+  </url>
+  <url>
     <loc>https://larmarange.github.io/broom.helpers/reference/tidy_broom.html</loc>
   </url>
   <url>
@@ -152,6 +170,15 @@
   </url>
   <url>
     <loc>https://larmarange.github.io/broom.helpers/reference/tidy_identify_variables.html</loc>
+  </url>
+  <url>
+    <loc>https://larmarange.github.io/broom.helpers/reference/tidy_marginal_contrasts.html</loc>
+  </url>
+  <url>
+    <loc>https://larmarange.github.io/broom.helpers/reference/tidy_marginal_means.html</loc>
+  </url>
+  <url>
+    <loc>https://larmarange.github.io/broom.helpers/reference/tidy_marginal_predictions.html</loc>
   </url>
   <url>
     <loc>https://larmarange.github.io/broom.helpers/reference/tidy_margins.html</loc>

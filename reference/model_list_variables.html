@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">broom.helpers</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.11.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.12.0</span>
       </span>
     </div>
 
@@ -33,6 +33,9 @@
 </li>
 <li>
   <a href="../articles/tidy.html">Getting Started</a>
+</li>
+<li>
+  <a href="../articles/marginal_tidiers.html">Marginal estimates</a>
 </li>
 <li>
   <a href="../news/index.html">News</a>
@@ -62,16 +65,36 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">model_list_variables</span><span class="op">(</span><span class="va">model</span>, labels <span class="op">=</span> <span class="cn">NULL</span>, only_variable <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">model_list_variables</span><span class="op">(</span></span>
+<span>  <span class="va">model</span>,</span>
+<span>  labels <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  only_variable <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  add_var_type <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for default</span></span>
-<span><span class="fu">model_list_variables</span><span class="op">(</span><span class="va">model</span>, labels <span class="op">=</span> <span class="cn">NULL</span>, only_variable <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu">model_list_variables</span><span class="op">(</span></span>
+<span>  <span class="va">model</span>,</span>
+<span>  labels <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  only_variable <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  add_var_type <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for lavaan</span></span>
-<span><span class="fu">model_list_variables</span><span class="op">(</span><span class="va">model</span>, labels <span class="op">=</span> <span class="cn">NULL</span>, only_variable <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu">model_list_variables</span><span class="op">(</span></span>
+<span>  <span class="va">model</span>,</span>
+<span>  labels <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  only_variable <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  add_var_type <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for logitr</span></span>
-<span><span class="fu">model_list_variables</span><span class="op">(</span><span class="va">model</span>, labels <span class="op">=</span> <span class="cn">NULL</span>, only_variable <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">model_list_variables</span><span class="op">(</span></span>
+<span>  <span class="va">model</span>,</span>
+<span>  labels <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  only_variable <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  add_var_type <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -89,6 +112,10 @@ custom variable labels</p></dd>
 <dd><p>if <code>TRUE</code>, will return only "variable"
 column</p></dd>
 
+
+<dt>add_var_type</dt>
+<dd><p>if <code>TRUE</code>, add <code>var_nlevels</code> and <code>var_type</code> columns</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -100,6 +127,10 @@ column</p></dd>
 with the label attribute (cf. <code><a href="http://larmarange.github.io/labelled/reference/var_label.html" class="external-link">labelled::var_label()</a></code>)</p></li>
 <li><p><code>var_label</code>: a variable label (by priority, <code>labels</code> if defined,
 <code>label_attr</code> if available, otherwise <code>variable</code>)</p></li>
+</ul><p>If <code>add_var_type = TRUE</code>:</p><ul><li><p><code>var_type</code>: <code>"continuous"</code>, <code>"dichotomous"</code> (categorical variable with 2 levels),
+<code>"categorical"</code> (categorical variable with 3 or more levels), <code>"intercept"</code>
+or <code>"interaction"</code></p></li>
+<li><p><code>var_nlevels</code>: number of original levels for categorical variables</p></li>
 </ul></div>
     <div id="see-also">
     <h2>See also</h2>
@@ -115,12 +146,14 @@ with the label attribute (cf. <code><a href="http://larmarange.github.io/labelle
 <code><a href="model_get_n.html">model_get_n</a>()</code>,
 <code><a href="model_get_offset.html">model_get_offset</a>()</code>,
 <code><a href="model_get_pairwise_contrasts.html">model_get_pairwise_contrasts</a>()</code>,
+<code><a href="model_get_response_variable.html">model_get_response_variable</a>()</code>,
 <code><a href="model_get_response.html">model_get_response</a>()</code>,
 <code><a href="model_get_terms.html">model_get_terms</a>()</code>,
 <code><a href="model_get_weights.html">model_get_weights</a>()</code>,
 <code><a href="model_get_xlevels.html">model_get_xlevels</a>()</code>,
 <code><a href="model_identify_variables.html">model_identify_variables</a>()</code>,
 <code><a href="model_list_contrasts.html">model_list_contrasts</a>()</code>,
+<code><a href="model_list_higher_order_variables.html">model_list_higher_order_variables</a>()</code>,
 <code><a href="model_list_terms_levels.html">model_list_terms_levels</a>()</code></p></div>
     </div>
 

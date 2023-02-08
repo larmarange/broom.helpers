@@ -34,7 +34,7 @@ tidy_detach_model()
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">broom.helpers</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.11.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.12.0</span>
       </span>
     </div>
 
@@ -50,6 +50,9 @@ tidy_detach_model()
 </li>
 <li>
   <a href="../articles/tidy.html">Getting Started</a>
+</li>
+<li>
+  <a href="../articles/marginal_tidiers.html">Marginal estimates</a>
 </li>
 <li>
   <a href="../news/index.html">News</a>
@@ -111,6 +114,7 @@ tidy_detach_model()
 <span>  pairwise_variables <span class="op">=</span> <span class="fu"><a href="select_helpers.html">all_categorical</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  keep_model_terms <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  pairwise_reverse <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  contrasts_adjust <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  emmeans_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  add_estimate_to_reference_rows <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  add_header_rows <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -203,6 +207,11 @@ pairwise contrasts are added? (default is <code>FALSE</code>)</p></dd>
 <dt>pairwise_reverse</dt>
 <dd><p>determines whether to use <code>"pairwise"</code> (if <code>TRUE</code>)
 or <code>"revpairwise"</code> (if <code>FALSE</code>), see <code><a href="https://rdrr.io/pkg/emmeans/man/contrast.html" class="external-link">emmeans::contrast()</a></code></p></dd>
+
+
+<dt>contrasts_adjust</dt>
+<dd><p>optional adjustment method when computing contrasts,
+see <code><a href="https://rdrr.io/pkg/emmeans/man/contrast.html" class="external-link">emmeans::contrast()</a></code> (if <code>NULL</code>, use <code>emmeans</code> default)</p></dd>
 
 
 <dt>emmeans_args</dt>

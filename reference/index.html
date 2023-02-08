@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">broom.helpers</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.11.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.12.0</span>
       </span>
     </div>
 
@@ -33,6 +33,9 @@
 </li>
 <li>
   <a href="../articles/tidy.html">Getting Started</a>
+</li>
+<li>
+  <a href="../articles/marginal_tidiers.html">Marginal estimates</a>
 </li>
 <li>
   <a href="../news/index.html">News</a>
@@ -147,18 +150,42 @@
           <p><code><a href="tidy_multgee.html">tidy_multgee()</a></code> </p>
         </td>
         <td><p>Tidy a <code>multgee</code> model</p></td>
-      </tr><tr><td>
-          <p><code><a href="tidy_margins.html">tidy_margins()</a></code> </p>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="tidiers-for-marginal-predictions-contrasts-and-effects">Tidiers for marginal predictions, contrasts, and effects <a href="#tidiers-for-marginal-predictions-contrasts-and-effects" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr></tbody><tbody><tr><td>
+          <p><code><a href="tidy_marginal_predictions.html">tidy_marginal_predictions()</a></code> <code><a href="tidy_marginal_predictions.html">variables_to_predict()</a></code> <code><a href="tidy_marginal_predictions.html">plot_marginal_predictions()</a></code> </p>
         </td>
-        <td><p>Average Marginal Effects Estimation</p></td>
+        <td><p>Marginal Predictions with <code><a href="https://vincentarelbundock.github.io/marginaleffects/reference/predictions.html" class="external-link">marginaleffects::avg_predictions()</a></code></p></td>
       </tr><tr><td>
           <p><code><a href="tidy_all_effects.html">tidy_all_effects()</a></code> </p>
         </td>
-        <td><p>Marginal Effects Estimation</p></td>
+        <td><p>Marginal Predictions at the mean with <code><a href="https://rdrr.io/pkg/effects/man/effect.html" class="external-link">effects::allEffects()</a></code></p></td>
       </tr><tr><td>
           <p><code><a href="tidy_ggpredict.html">tidy_ggpredict()</a></code> </p>
         </td>
-        <td><p>Conditional Effects Estimation</p></td>
+        <td><p>Marginal Predictions with <code><a href="https://strengejacke.github.io/ggeffects/reference/ggpredict.html" class="external-link">ggeffects::ggpredict()</a></code></p></td>
+      </tr><tr><td>
+          <p><code><a href="tidy_avg_comparisons.html">tidy_avg_comparisons()</a></code> </p>
+        </td>
+        <td><p>Marginal Contrasts with <code><a href="https://vincentarelbundock.github.io/marginaleffects/reference/comparisons.html" class="external-link">marginaleffects::avg_comparisons()</a></code></p></td>
+      </tr><tr><td>
+          <p><code><a href="tidy_marginal_contrasts.html">tidy_marginal_contrasts()</a></code> <code><a href="tidy_marginal_contrasts.html">variables_to_contrast()</a></code> </p>
+        </td>
+        <td><p>Marginal Contrasts with <code><a href="https://vincentarelbundock.github.io/marginaleffects/reference/comparisons.html" class="external-link">marginaleffects::avg_comparisons()</a></code></p></td>
+      </tr><tr><td>
+          <p><code><a href="tidy_avg_slopes.html">tidy_avg_slopes()</a></code> </p>
+        </td>
+        <td><p>Marginal Slopes / Effects with <code><a href="https://vincentarelbundock.github.io/marginaleffects/reference/slopes.html" class="external-link">marginaleffects::avg_slopes()</a></code></p></td>
+      </tr><tr><td>
+          <p><code><a href="tidy_margins.html">tidy_margins()</a></code> </p>
+        </td>
+        <td><p>Average Marginal Effects with <code><a href="https://rdrr.io/pkg/margins/man/margins.html" class="external-link">margins::margins()</a></code></p></td>
+      </tr><tr><td>
+          <p><code><a href="tidy_marginal_means.html">tidy_marginal_means()</a></code> </p>
+        </td>
+        <td><p>Marginal Means with <code><a href="https://vincentarelbundock.github.io/marginaleffects/reference/marginal_means.html" class="external-link">marginaleffects::marginal_means()</a></code></p></td>
       </tr></tbody><tbody><tr><th colspan="2">
           <h2 id="get-information-from-model-objects">Get information from model objects <a href="#get-information-from-model-objects" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p>
@@ -212,6 +239,10 @@
         </td>
         <td><p>Get model response</p></td>
       </tr><tr><td>
+          <p><code><a href="model_get_response_variable.html">model_get_response_variable()</a></code> </p>
+        </td>
+        <td><p>Get the name of the response variable</p></td>
+      </tr><tr><td>
           <p><code><a href="model_get_terms.html">model_get_terms()</a></code> </p>
         </td>
         <td><p>Get the terms of a model</p></td>
@@ -231,6 +262,10 @@
           <p><code><a href="model_list_contrasts.html">model_list_contrasts()</a></code> </p>
         </td>
         <td><p>List contrasts used by a model</p></td>
+      </tr><tr><td>
+          <p><code><a href="model_list_higher_order_variables.html">model_list_higher_order_variables()</a></code> </p>
+        </td>
+        <td><p>List higher order variables of a model</p></td>
       </tr><tr><td>
           <p><code><a href="model_list_terms_levels.html">model_list_terms_levels()</a></code> </p>
         </td>
@@ -276,6 +311,10 @@ meaning in a regular expression</p></td>
           <p><code><a href="dot-select_to_varnames.html">.select_to_varnames()</a></code> </p>
         </td>
         <td><p>Variable selector</p></td>
+      </tr><tr><td>
+          <p><code><a href="seq_range.html">seq_range()</a></code> </p>
+        </td>
+        <td><p>Sequence generation between min and max</p></td>
       </tr></tbody></table></div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
