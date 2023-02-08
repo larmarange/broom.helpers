@@ -1,9 +1,9 @@
 ## Test environments
 
-* local R installation: R 4.2.2
-* mac OS (on github actions): R-release
-* windows (on github actions): R-release
-* ubuntu 20.04 (on github actions): R-devel, R-release, R-oldrel-1, R-oldrel-2, R-oldrel-3
+* local R installation (windows 11): R 4.2.2
+* macos-latest (on github actions): R-release
+* windows-latest (on github actions): R-release
+* ubuntu-latest  (on github actions): R-devel, R-release, R-oldrel-1, R-oldrel-2, R-oldrel-3
 
 cf. https://github.com/larmarange/broom.helpers/actions
 
