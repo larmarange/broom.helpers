@@ -2,7 +2,8 @@
 
 **New features**
 
-- Set of functions to support marginal predictions, contrasts and effects (#202):
+- Set of functions to support marginal predictions, contrasts and slopes /
+  effects (#202):
     - A dedicated vignette presenting the concepts and the different functions
       has been added
     - Several tidiers are provided to tidy results in a way that it could be 
@@ -31,8 +32,8 @@
   to compute pairwise contrasts of categorical variables with `emmeans`,
   and corresponding new arguments in `tidy_plus_plus()` (#192)
 - New tidier `tidy_margins()` to display Average Marginal Effects (#195)
-- New tidier `tidy_all_effects()` to display Marginal Effects (#195)
-- New tidier `tidy_ggpredict()` to display Conditional Effects (#195)
+- New tidier `tidy_all_effects()` to display Marginal Predictions (#195)
+- New tidier `tidy_ggpredict()` to display Conditional Predictions (#195)
 
 **Bug fixes and improvements**
 
