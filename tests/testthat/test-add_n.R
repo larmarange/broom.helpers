@@ -208,7 +208,7 @@ test_that("tidy_add_n() works with nnet::multinom", {
   )
 
   # when y is not coded as a factor
-  mod <- nnet::multinom(race ~ age + lwt + bwt, data = MASS::birthwt)
+  mod <- nnet::multinom(race ~ age + lwt + bwt, data = MASS::birthwt, trace = FALSE)
   expect_error(
     mod %>% tidy_and_attach() %>% tidy_add_n(),
     NA

@@ -568,12 +568,12 @@ test_that("model_identify_variables() works with glmmTMB::glmmTMB", {
   skip_if_not_installed("broom.mixed")
   skip_on_cran()
 
-  mod <- glmmTMB::glmmTMB(count ~ mined + spp,
-                          ziformula = ~ mined + site,
-                          family = poisson,
-                          data = glmmTMB::Salamanders)
-
-
+  mod <- suppressWarnings(
+    glmmTMB::glmmTMB(count ~ mined + spp,
+                     ziformula = ~ mined + site,
+                     family = poisson,
+                     data = glmmTMB::Salamanders)
+  )
 
   res <- mod %>% model_identify_variables()
   expect_equivalent(
