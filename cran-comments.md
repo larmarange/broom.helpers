@@ -17,3 +17,10 @@ We checked 6 reverse dependencies, comparing R CMD check results across CRAN and
 
  * We saw 0 new problems
  * We failed to check 0 packages
+
+## resubmission
+
+We previously had a note *Overall checktime 17 min > 10 min*.
+
+Overall checktime has been reduced by reducing the number of tests to be executed on CRAN and by by converting a vignette into a pkgdown article.
+
