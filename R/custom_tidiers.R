@@ -68,6 +68,15 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
   tidy_args$conf.int <- conf.int
   if (conf.int) tidy_args$conf.level <- conf.level
 
+  # class of models known for tidy() not supporting exponentiate argument
+  # and for ignoring it
+  if (any(c("fixest", "plm", "felm", "lavaan", "nls", "survreg") %in% class(x))) {
+    if (isFALSE(tidy_args$exponentiate))
+      tidy_args$exponentiate <- NULL
+    else
+      cli::cli_abort("'exponentiate = TRUE' is not valid for this type of model.")
+  }
+
   res <- tryCatch(
     do.call(tidy_broom, tidy_args),
     error = function(e) {
@@ -86,7 +95,7 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
       }
     )
     if (!is.null(res) && !is.null(tidy_args$exponentiate) && tidy_args$exponentiate) {
-      # changing to FALSE is managed by tidy_and_attch()
+      # changing to FALSE is managed by tidy_and_attach()
       cli::cli_abort("'exponentiate = TRUE' is not valid for this type of model.")
     }
   }
