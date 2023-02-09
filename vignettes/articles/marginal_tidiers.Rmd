@@ -1,5 +1,5 @@
 ---
-title: "marginal_tidiers"
+title: "Marginal effects / slopes, contrasts, means and predictions with broom.helpers"
 ---
 
 ```{r, include = FALSE}
