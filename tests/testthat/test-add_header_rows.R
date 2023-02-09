@@ -140,6 +140,7 @@ test_that("test tidy_add_header_rows() checks", {
 })
 
 test_that("tidy_add_header_rows() works with nnet::multinom", {
+  skip_on_cran()
   mod <- nnet::multinom(grade ~ stage + marker + age + trt, data = gtsummary::trial, trace = FALSE)
   res <- mod %>%
     tidy_and_attach() %>%
@@ -201,6 +202,7 @@ test_that("test tidy_add_header_rows() bad single row request", {
 
 
 test_that("tidy_add_header_rows() and mixed model", {
+  skip_on_cran()
   skip_if_not_installed("lme4")
   mod <- lme4::lmer(
     age ~ stage + (stage | grade) + (1 | grade),

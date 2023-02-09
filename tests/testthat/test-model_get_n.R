@@ -180,6 +180,7 @@ test_that("model_get_n() works with different contrasts", {
 
 
 test_that("model_get_n() works with stats::poly()", {
+  skip_on_cran()
   mod <- lm(Sepal.Length ~ poly(Sepal.Width, 3) + poly(Petal.Length, 2), iris)
   expect_error(res <- mod %>% model_get_n(), NA)
   expect_equivalent(names(res), c("term", "n_obs"))
@@ -224,6 +225,7 @@ test_that("model_get_n() works with lme4::glmer", {
 
 
 test_that("model_get_n() works with survival::coxph", {
+  skip_on_cran()
   df <- survival::lung %>% dplyr::mutate(sex = factor(sex))
   mod <- survival::coxph(survival::Surv(time, status) ~ ph.ecog + age + sex, data = df)
   expect_error(res <- mod %>% model_get_n(), NA)
@@ -244,6 +246,7 @@ test_that("model_get_n() works with survival::coxph", {
 })
 
 test_that("model_get_n() works with survival::survreg", {
+  skip_on_cran()
   mod <- survival::survreg(
     survival::Surv(futime, fustat) ~ factor(ecog.ps) + rx,
     survival::ovarian,
@@ -254,6 +257,7 @@ test_that("model_get_n() works with survival::survreg", {
 })
 
 test_that("model_get_n() works with nnet::multinom", {
+  skip_on_cran()
   mod <- nnet::multinom(grade ~ stage + marker + age, data = gtsummary::trial, trace = FALSE)
   expect_error(res <- mod %>% model_get_n(), NA)
   expect_equivalent(names(res), c("y.level", "term", "n_obs", "n_event"))
@@ -277,6 +281,7 @@ test_that("model_get_n() works with nnet::multinom", {
 })
 
 test_that("model_get_n() works with survey::svyglm", {
+  skip_on_cran()
   skip_if_not_installed("survey")
   df <- survey::svydesign(~1, weights = ~1, data = gtsummary::trial)
   mod <- survey::svyglm(response ~ age + grade * trt, df, family = quasibinomial)
@@ -301,6 +306,7 @@ test_that("model_get_n() works with survey::svyglm", {
 })
 
 test_that("model_get_n() works with ordinal::clm", {
+  skip_on_cran()
   mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine)
   expect_error(res <- mod %>% model_get_n(), NA)
   expect_equivalent(names(res), c("term", "n_obs"))
@@ -309,6 +315,7 @@ test_that("model_get_n() works with ordinal::clm", {
 
 
 test_that("model_get_n() works with ordinal::clmm", {
+  skip_on_cran()
   mod <- ordinal::clmm(rating ~ temp * contact + (1 | judge), data = ordinal::wine)
   expect_error(res <- mod %>% model_get_n(), NA)
   expect_equivalent(names(res), c("term", "n_obs"))
@@ -316,6 +323,7 @@ test_that("model_get_n() works with ordinal::clmm", {
 
 
 test_that("model_get_n() works with MASS::polr", {
+  skip_on_cran()
   mod <- MASS::polr(Sat ~ Infl + Type + Cont, weights = Freq, data = MASS::housing)
   expect_error(res <- mod %>% model_get_n(), NA)
   expect_equivalent(names(res), c("term", "n_obs"))
@@ -323,6 +331,7 @@ test_that("model_get_n() works with MASS::polr", {
 
 
 test_that("model_get_n() works with geepack::geeglm", {
+  skip_on_cran()
   skip_if(packageVersion("geepack") < 1.3)
 
   df <- geepack::dietox
@@ -343,6 +352,7 @@ test_that("model_get_n() works with geepack::geeglm", {
 
 
 test_that("model_get_n() works with gam::gam", {
+  skip_on_cran()
   skip_if_not_installed("gam")
   data(kyphosis, package = "gam")
   mod <- gam::gam(Kyphosis ~ gam::s(Age, 4) + Number, family = binomial, data = kyphosis)
@@ -352,6 +362,7 @@ test_that("model_get_n() works with gam::gam", {
 
 
 test_that("model_get_n() works with lavaan::lavaan", {
+  skip_on_cran()
   skip_if_not_installed("lavaan")
   df <- lavaan::HolzingerSwineford1939
   df$grade <- factor(df$grade, ordered = TRUE)

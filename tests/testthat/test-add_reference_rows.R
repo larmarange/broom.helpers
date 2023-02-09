@@ -215,6 +215,7 @@ test_that("tidy_add_reference_rows() use var_label if available", {
 })
 
 test_that("tidy_add_reference_rows() works with nnet::multinom", {
+  skip_on_cran()
   mod <- nnet::multinom(grade ~ stage + marker + age, data = gtsummary::trial, trace = FALSE)
   res <- mod %>%
     tidy_and_attach() %>%
@@ -247,9 +248,9 @@ test_that("tidy_add_reference_rows() works with lme4::glmer", {
 
 
 test_that("tidy_add_reference_rows() works with glmmTMB::glmmTMB", {
+  skip_on_cran()
   skip_if_not_installed("glmmTMB")
   skip_if_not_installed("broom.mixed")
-  skip_on_cran()
 
   mod <- glmmTMB::glmmTMB(count ~ mined + spp,
                           ziformula = ~ mined,

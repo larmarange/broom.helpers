@@ -52,6 +52,7 @@ test_that("tidy_plus_plus() works with no intercept models", {
 })
 
 test_that("tidy_plus_plus() and functionnal programming", {
+  skip_on_cran()
   # works with glm
   expect_error(
     res <- dplyr::tibble(grade = c("I", "II", "III")) %>%
@@ -122,6 +123,7 @@ test_that("tidy_plus_plus() with mice objects", {
 
 
 test_that("tidy_plus_plus() with tidyselect", {
+  skip_on_cran()
   # build regression model
   mod <- lm(age ~ trt + marker + grade, gtsummary::trial)
 
@@ -152,6 +154,7 @@ test_that("tidy_plus_plus() with tidyselect", {
 })
 
 test_that("tidy_plus_plus() works with stats::aov", {
+  skip_on_cran()
   mod <- aov(yield ~ block + N * P * K, npk)
   expect_error(
     res <- tidy_plus_plus(mod),
@@ -212,6 +215,7 @@ test_that("tidy_plus_plus() works with lme4::glmer.nb", {
 })
 
 test_that("tidy_plus_plus() works with survival::coxph", {
+  skip_on_cran()
   df <- survival::lung %>% dplyr::mutate(sex = factor(sex))
   mod <- survival::coxph(survival::Surv(time, status) ~ ph.ecog + age + sex, data = df)
   expect_error(
@@ -221,6 +225,7 @@ test_that("tidy_plus_plus() works with survival::coxph", {
 })
 
 test_that("tidy_plus_plus() works with survival::survreg", {
+  skip_on_cran()
   mod <- survival::survreg(
     survival::Surv(futime, fustat) ~ ecog.ps + rx,
     survival::ovarian,
@@ -289,8 +294,8 @@ test_that("tidy_plus_plus() works with nnet::multinom", {
 })
 
 test_that("tidy_plus_plus() works with survey::svyglm", {
-  skip_if_not_installed("survey")
   skip_on_cran()
+  skip_if_not_installed("survey")
   df <- survey::svydesign(~1, weights = ~1, data = gtsummary::trial)
   mod <- survey::svyglm(response ~ age + grade * trt, df, family = quasibinomial)
   expect_error(
@@ -300,8 +305,8 @@ test_that("tidy_plus_plus() works with survey::svyglm", {
 })
 
 test_that("tidy_plus_plus() works with survey::svycoxph", {
-  skip_if_not_installed("survey")
   skip_on_cran()
+  skip_if_not_installed("survey")
   dpbc <- survey::svydesign(id = ~ 1, prob = ~ 1, strata = ~ edema, data = survival::pbc)
   mod <- survey::svycoxph(
     Surv(time, status > 0) ~ log(bili) + protime + albumin,
@@ -314,8 +319,8 @@ test_that("tidy_plus_plus() works with survey::svycoxph", {
 })
 
 test_that("tidy_plus_plus() works with survey::svyolr", {
-  skip_if_not_installed("survey")
   skip_on_cran()
+  skip_if_not_installed("survey")
   data(api, package = "survey")
   fpc <- survey::svydesign(id = ~ dnum, weights = ~ pw, data = apiclus1, fpc = ~ fpc)
   fpc <- update(fpc, mealcat = cut(meals, c(0, 25, 50, 75, 100)))
@@ -347,6 +352,7 @@ test_that("tidy_plus_plus() works with ordinal::clmm", {
 
 
 test_that("tidy_plus_plus() works with MASS::polr", {
+  skip_on_cran()
   mod <- MASS::polr(Sat ~ Infl + Type + Cont, weights = Freq, data = MASS::housing)
   expect_error(
     res <- mod %>% tidy_plus_plus(),
@@ -454,6 +460,7 @@ test_that("tidy_plus_plus() works with tidycmprsk::crr", {
 
 
 test_that("tidy_plus_plus() works with stats::nls", {
+  skip_on_cran()
   mod <- stats::nls(
     Petal.Width ~ a * Petal.Length - (Sepal.Width + Sepal.Length) / b + a^2,
     data = iris,

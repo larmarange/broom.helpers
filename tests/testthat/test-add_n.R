@@ -171,12 +171,14 @@ test_that("tidy_add_n() works with lme4::glmer", {
 
 
 test_that("tidy_add_n() works with survival::coxph", {
+  skip_on_cran()
   df <- survival::lung %>% dplyr::mutate(sex = factor(sex))
   mod <- survival::coxph(survival::Surv(time, status) ~ ph.ecog + age + sex, data = df)
   expect_error(mod %>% tidy_and_attach() %>% tidy_add_n(), NA)
 })
 
 test_that("tidy_add_n() works with survival::survreg", {
+  skip_on_cran()
   mod <- survival::survreg(
     survival::Surv(futime, fustat) ~ factor(ecog.ps) + rx,
     survival::ovarian,
@@ -186,6 +188,7 @@ test_that("tidy_add_n() works with survival::survreg", {
 })
 
 test_that("tidy_add_n() works with nnet::multinom", {
+  skip_on_cran()
   mod <- nnet::multinom(grade ~ stage + marker + age, data = gtsummary::trial, trace = FALSE)
   expect_error(mod %>% tidy_and_attach() %>% tidy_add_n(), NA)
 

@@ -184,6 +184,7 @@ test_that("tidy_add_term_labels() works with poly or helmert contrasts", {
 
 
 test_that("tidy_add_term_labels() works with variables having non standard name", {
+  skip_on_cran()
   df <- gtsummary::trial %>% dplyr::rename(
     `grade of kids...` = grade,
     `?? treatment ++ response ...` = response
@@ -222,6 +223,7 @@ test_that("tidy_add_term_labels() works with variables having non standard name"
 
 
 test_that("tidy_add_term_labels() works with stats::poly()", {
+  skip_on_cran()
   df <- iris %>% labelled::set_variable_labels(Petal.Length = "Length of petal")
   mod <- lm(Sepal.Length ~ poly(Sepal.Width, 3) + poly(Petal.Length, 2), df)
   res <- mod %>%
@@ -257,12 +259,14 @@ test_that("tidy_add_term_labels() works with lme4::glmer", {
 
 
 test_that("tidy_add_term_labels() works with survival::coxph", {
+  skip_on_cran()
   df <- survival::lung %>% dplyr::mutate(sex = factor(sex))
   mod <- survival::coxph(survival::Surv(time, status) ~ ph.ecog + age + sex, data = df)
   expect_error(mod %>% tidy_and_attach() %>% tidy_add_term_labels(), NA)
 })
 
 test_that("tidy_add_term_labels() works with survival::survreg", {
+  skip_on_cran()
   mod <- survival::survreg(
     survival::Surv(futime, fustat) ~ ecog.ps + rx,
     survival::ovarian,
@@ -272,11 +276,13 @@ test_that("tidy_add_term_labels() works with survival::survreg", {
 })
 
 test_that("tidy_add_term_labels() works with nnet::multinom", {
+  skip_on_cran()
   mod <- nnet::multinom(grade ~ stage + marker + age, data = gtsummary::trial, trace = FALSE)
   expect_error(mod %>% tidy_and_attach() %>% tidy_add_term_labels(), NA)
 })
 
 test_that("tidy_add_term_labels() works with survey::svyglm", {
+  skip_on_cran()
   skip_if_not_installed("survey")
   df <- survey::svydesign(~1, weights = ~1, data = gtsummary::trial)
   mod <- survey::svyglm(response ~ age + grade * trt, df, family = quasibinomial)
@@ -284,24 +290,28 @@ test_that("tidy_add_term_labels() works with survey::svyglm", {
 })
 
 test_that("tidy_add_term_labels() works with ordinal::clm", {
+  skip_on_cran()
   mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine)
   expect_error(mod %>% tidy_and_attach() %>% tidy_add_term_labels(), NA)
 })
 
 
 test_that("tidy_add_term_labels() works with ordinal::clmm", {
+  skip_on_cran()
   mod <- ordinal::clmm(rating ~ temp * contact + (1 | judge), data = ordinal::wine)
   expect_error(mod %>% tidy_and_attach() %>% tidy_add_term_labels(), NA)
 })
 
 
 test_that("tidy_add_term_labels() works with MASS::polr", {
+  skip_on_cran()
   mod <- MASS::polr(Sat ~ Infl + Type + Cont, weights = Freq, data = MASS::housing)
   expect_error(mod %>% tidy_and_attach() %>% tidy_add_term_labels(), NA)
 })
 
 
 test_that("tidy_add_term_labels() works with geepack::geeglm", {
+  skip_on_cran()
   skip_if(packageVersion("geepack") < 1.3)
 
   df <- geepack::dietox
@@ -315,6 +325,7 @@ test_that("tidy_add_term_labels() works with geepack::geeglm", {
 
 
 test_that("tidy_add_term_labels() works with gam::gam", {
+  skip_on_cran()
   skip_if_not_installed("gam")
   data(kyphosis, package = "gam")
   mod <- gam::gam(Kyphosis ~ gam::s(Age, 4) + Number, family = binomial, data = kyphosis)
@@ -329,6 +340,7 @@ test_that("tidy_add_term_labels() works with gam::gam", {
 
 
 test_that("tidy_add_term_labels() works with lavaan::lavaan", {
+  skip_on_cran()
   skip_if_not_installed("lavaan")
   df <- lavaan::HolzingerSwineford1939
   df$grade <- factor(df$grade, ordered = TRUE)
