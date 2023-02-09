@@ -4,8 +4,8 @@
 
 - Set of functions to support marginal predictions, contrasts and slopes /
   effects (#202):
-    - A dedicated vignette presenting the concepts and the different functions
-      has been added
+    - A dedicated article presenting the concepts and the different functions
+      has been added to the package documentation website
     - Several tidiers are provided to tidy results in a way that it could be 
       used by `broom.helpers` functions.
     - **Marginal Predictions:** `tidy_marginal_predictions()`,

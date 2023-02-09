@@ -1,10 +1,5 @@
 ---
-title: "Marginal effects, contrasts, means and predictions with broom.helpers"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Marginal effects, contrasts, means and predictions with broom.helpers}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+title: "marginal_tidiers"
 ---
 
 ```{r, include = FALSE}
@@ -15,7 +10,6 @@ knitr::opts_chunk$set(
 )
 
 # several packages required to compute the vignette
-# on old R versions where emmeans is not available
 library(broom.helpers)
 if (
   !.assert_package("gtsummary", boolean = TRUE) ||
