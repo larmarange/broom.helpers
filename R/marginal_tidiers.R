@@ -95,6 +95,9 @@ tidy_all_effects <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   if (isTRUE(dots$exponentiate))
     cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_all_effects}.") # nolint
 
+  if (inherits(x, "multinom"))
+    return(tidy_all_effects_multinom(x, conf.int, conf.level, ...))
+
   .clean <- function(x) {
     # merge first columns if interaction
     x <- tidyr::unite(x, "term", 1:(ncol(x) - 4), sep = ":")
@@ -113,6 +116,45 @@ tidy_all_effects <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   attr(res, "skip_add_reference_rows") <- TRUE
   attr(res, "find_missing_interaction_terms") <- TRUE
   res
+}
+
+tidy_all_effects_multinom <- function(x, conf.int = TRUE, conf.level = .95, ...) {
+  res <- x %>%
+    effects::allEffects(se = conf.int, level = conf.level) %>% # add ...
+    purrr::map(effpoly_to_df) %>%
+    dplyr::bind_rows(.id = "variable") %>%
+    dplyr::relocate("y.level", "variable", "term")
+  attr(res, "coefficients_type") <- "marginal_predictions_at_mean"
+  attr(res, "skip_add_reference_rows") <- TRUE
+  attr(res, "find_missing_interaction_terms") <- TRUE
+  res
+}
+
+effpoly_to_df <- function (x)
+{
+  factors <- sapply(x$variables, function(x) x$is.factor)
+  factor.levels <- lapply(x$variables[factors], function(x) x$levels)
+  if (!length(factor.levels) == 0) {
+    factor.names <- names(factor.levels)
+    for (fac in factor.names) {
+      x$x[[fac]] <- factor(x$x[[fac]], levels = factor.levels[[fac]],
+                           exclude = NULL)
+    }
+  }
+
+  result <- rep.int(list(x$x), length(x$y.levels))
+  names(result) <- x$y.levels
+  result <- result %>% dplyr::bind_rows(.id = "y.level")
+  # merge columns if interaction
+  result <- result %>%tidyr::unite("term", 2:ncol(result), sep = ":")
+  result$estimate <- as.vector(x$prob)
+  result$std.error <- as.vector(x$se.prob)
+
+  if (!is.null(x$confidence.level)) {
+    result$conf.low <- as.vector(x$lower.prob)
+    result$conf.high <- as.vector(x$upper.prob)
+  }
+  result
 }
 
 #' Marginal Predictions with `ggeffects::ggpredict()`
