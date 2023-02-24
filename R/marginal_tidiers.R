@@ -120,7 +120,7 @@ tidy_all_effects <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 
 tidy_all_effects_multinom <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   res <- x %>%
-    effects::allEffects(se = conf.int, level = conf.level) %>% # add ...
+    effects::allEffects(se = conf.int, level = conf.level, ...) %>%
     purrr::map(effpoly_to_df) %>%
     dplyr::bind_rows(.id = "variable") %>%
     dplyr::relocate("y.level", "variable", "term")
@@ -202,7 +202,7 @@ tidy_ggpredict <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 
   if (isFALSE(conf.int)) conf.level <- NA
   res <- x %>%
-    ggeffects::ggpredict(ci.lvl = conf.level, ...) %>%
+    ggeffects::ggpredict(ci.lvl = conf.level) %>% # add ...
     purrr::map(
       ~ .x %>%
         dplyr::as_tibble() %>%
@@ -215,6 +215,11 @@ tidy_ggpredict <- function(x, conf.int = TRUE, conf.level = .95, ...) {
       estimate = "predicted"
     ) %>%
     dplyr::relocate("variable", "term")
+  # multinomial models
+  if ("response.level" %in% names(res))
+    res <- res %>%
+    dplyr::rename(y.level = "response.level") %>%
+    dplyr::relocate("y.level")
   attr(res, "coefficients_type") <- "marginal_predictions"
   attr(res, "skip_add_reference_rows") <- TRUE
   res
