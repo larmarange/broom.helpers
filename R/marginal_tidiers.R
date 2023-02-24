@@ -290,6 +290,12 @@ tidy_avg_slopes <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
   res <- res %>%
     dplyr::relocate("variable", "term")
 
+  # multinomial models
+  if ("group" %in% names(res))
+    res <- res %>%
+    dplyr::rename(y.level = "group") %>%
+    dplyr::relocate("y.level")
+
   attr(res, "coefficients_type") <- dplyr::case_when(
     is.null(dots$newdata) ~ "marginal_effects_average",
     isTRUE(dots$newdata == "mean") ~ "marginal_effects_at_mean",
@@ -373,6 +379,12 @@ tidy_avg_comparisons <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
   res <- res %>%
     dplyr::relocate("variable", "term")
 
+  # multinomial models
+  if ("group" %in% names(res))
+    res <- res %>%
+    dplyr::rename(y.level = "group") %>%
+    dplyr::relocate("y.level")
+
   attr(res, "coefficients_type") <- dplyr::case_when(
     is.null(dots$newdata) ~ "marginal_contrasts_average",
     isTRUE(dots$newdata == "mean") ~ "marginal_contrasts_at_mean",
@@ -440,15 +452,16 @@ tidy_marginal_means <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
     ) %>%
     dplyr::mutate(term = as.character(.data$term))
 
+  # multinomial models
+  if ("group" %in% names(res))
+    res <- res %>%
+    dplyr::rename(y.level = "group") %>%
+    dplyr::relocate("y.level")
 
   attr(res, "coefficients_type") <- "marginal_means"
   attr(res, "skip_add_reference_rows") <- TRUE
   res
 }
-
-
-
-
 
 #' Marginal Predictions with `marginaleffects::avg_predictions()`
 #'
@@ -616,10 +629,21 @@ tidy_marginal_predictions <- function(x, variables_list = "auto",
 .tidy_one_marginal_prediction <- function(variables, dots) {
   dots$variables <- variables
   dots$by <- names(variables)
-  do.call(marginaleffects::avg_predictions, dots) %>%
+
+  if (inherits(dots$model, "multinom"))
+    dots$by <- c(dots$by, "group")
+
+  res <- do.call(marginaleffects::avg_predictions, dots) %>%
     dplyr::mutate(variable = paste(names(variables), collapse = ":")) %>%
     tidyr::unite(col = "term", sep = " * ", dplyr::all_of(names(variables))) %>%
     dplyr::relocate("variable", "term")
+
+  if ("group" %in% names(res))
+    res <- res %>%
+    dplyr::rename(y.level = "group") %>%
+    dplyr::relocate("y.level")
+
+  res
 }
 
 #' @export
@@ -707,6 +731,9 @@ plot_marginal_predictions <- function(x, variables_list = "auto",
     variables[[1]] <- broom.helpers::seq_range
   dots$variables <- variables
   dots$by <- names(variables)
+  if (inherits(dots$model, "multinom"))
+    dots$by <- c(dots$by, "group")
+
   d <- do.call(marginaleffects::avg_predictions, dots)
 
   mapping <- ggplot2::aes(
@@ -748,8 +775,19 @@ plot_marginal_predictions <- function(x, variables_list = "auto",
     p <- p +
       ggplot2::labs(colour = colour_label, fill = colour_label)
 
-  if (length(variables) >= 3) {
+  if (length(variables) == 3 && !inherits(dots$model, "multinom")) {
     facet_variable <- names(variables[3])
+    p <- p +
+      ggplot2::facet_wrap(facet_variable)
+  }
+
+  if (inherits(dots$model, "multinom") && length(variables) <= 2) {
+    p <- p +
+      ggplot2::facet_wrap("group")
+  }
+
+  if (inherits(dots$model, "multinom") && length(variables) == 3) {
+    facet_variable <- c("group", names(variables[3]))
     p <- p +
       ggplot2::facet_wrap(facet_variable)
   }
@@ -938,6 +976,7 @@ tidy_marginal_contrasts <- function(x, variables_list = "auto",
 
   dots$variables <- variables$variables
   dots$cross <- TRUE
+
   if (!is.null(variables$by))
     dots$by <- names(variables$by)
 
@@ -978,6 +1017,13 @@ tidy_marginal_contrasts <- function(x, variables_list = "auto",
       dplyr::starts_with("contrast")
     ) %>%
     dplyr::relocate("variable", "term")
+
+  if ("group" %in% names(res))
+    res <- res %>%
+    dplyr::rename(y.level = "group") %>%
+    dplyr::relocate("y.level")
+
+  res
 }
 
 #' @export
