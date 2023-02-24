@@ -260,15 +260,24 @@ predict(mod, newdata = dB, type = "response") %>% mean()
 We, then, obtain **Average Marginal Predictions** for `trt`. The same results could be computed with `marginaleffects::avg_predictions()`. Note that the counterfactual approach corresponds to the default behavior when no value is provided to `newdata`.
 
 ```{r}
-avg_predictions(mod, variables = "trt", by = "trt")
+avg_predictions(mod, variables = "trt", by = "trt", type = "response")
 ```
 
+**Important:** since version 0.10.0 of `marginaleffects`, we had to add `type = "response"` to get this result: for `glm` models, predictions are done on the response scale, before being averaged. If `type` are not specified, predictions will be made on the link scale, before being averaged and then back transformed on the response scale. Thus, the average prediction may not be exactly identical to the average of predictions.
+
+```{r}
+avg_predictions(mod, variables = "trt", by = "trt")
+b <- binomial()
+predict(mod, newdata = dA, type = "link") %>% mean() %>% b$linkinv()
+predict(mod, newdata = dB, type = "link") %>% mean() %>% b$linkinv()
+```
 We can use `tidy_marginal_predictions()` to get average marginal predictions for all variables and `plot_marginal_predictions()` for a visual representation.
 
 ```{r}
 mod %>%
   tbl_regression(
     tidy_fun = tidy_marginal_predictions,
+    type = "response",
     variables_list = "no_interaction",
     estimate_fun = scales::label_percent(accuracy = .1)
   ) %>%
@@ -279,13 +288,14 @@ mod %>%
 mod %>%
   tbl_regression(
     tidy_fun = tidy_marginal_predictions,
+    type = "response",
     estimate_fun = scales::label_percent(accuracy = .1)
   ) %>%
   bold_labels()
 ```
 
 ```{r}
-p <- plot_marginal_predictions(mod) %>%
+p <- plot_marginal_predictions(mod, type = "response") %>%
   patchwork::wrap_plots(ncol = 2) &
   ggplot2::scale_y_continuous(
     labels = scales::label_percent(),
@@ -401,7 +411,7 @@ Now that we have a way to estimate marginal predictions, we can easily compute *
 Let's consider first a categorical variable, e.g. `stage`. Average Marginal Predictions are obtained with `marginaleffects::avg_predictions()`.
 
 ```{r}
-pred <- avg_predictions(mod, variables = "stage", by = "stage")
+pred <- avg_predictions(mod, variables = "stage", by = "stage", type = "response")
 pred
 ```
 
