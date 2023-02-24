@@ -1,5 +1,8 @@
 # broom.helpers (development version)
 
+- Marginal predictions vignette has been updated to follow changes in
+  `marginaleffects` version 0.10.0 (#216)
+
 # broom.helpers 1.12.0
 
 **New features**
