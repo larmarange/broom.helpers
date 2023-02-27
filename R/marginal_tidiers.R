@@ -95,8 +95,9 @@ tidy_all_effects <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   if (isTRUE(dots$exponentiate))
     cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_all_effects}.") # nolint
 
-  if (inherits(x, "multinom"))
-    return(tidy_all_effects_multinom(x, conf.int, conf.level, ...))
+  if (inherits(x, "multinom") | inherits(x, "polr") |
+      inherits(x, "clm") | inherits(x, "clmm"))
+    return(tidy_all_effects_effpoly(x, conf.int, conf.level, ...))
 
   .clean <- function(x) {
     # merge first columns if interaction
@@ -118,7 +119,7 @@ tidy_all_effects <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   res
 }
 
-tidy_all_effects_multinom <- function(x, conf.int = TRUE, conf.level = .95, ...) {
+tidy_all_effects_effpoly <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   res <- x %>%
     effects::allEffects(se = conf.int, level = conf.level, ...) %>%
     purrr::map(effpoly_to_df) %>%
@@ -630,7 +631,8 @@ tidy_marginal_predictions <- function(x, variables_list = "auto",
   dots$variables <- variables
   dots$by <- names(variables)
 
-  if (inherits(dots$model, "multinom"))
+  if (inherits(dots$model, "multinom") | inherits(dots$model, "polr") |
+      inherits(dots$model, "clm") | inherits(dots$model, "clmm"))
     dots$by <- c(dots$by, "group")
 
   res <- do.call(marginaleffects::avg_predictions, dots) %>%
@@ -717,6 +719,9 @@ plot_marginal_predictions <- function(x, variables_list = "auto",
       "manage only combinations of 3 variables or less."
     ))
 
+  multinom <- inherits(dots$model, "multinom") | inherits(dots$model, "polr") |
+    inherits(dots$model, "clm") | inherits(dots$model, "clmm")
+
   list_variables <- dots$model %>% model_list_variables(add_var_type = TRUE)
   x_variable <- names(variables[1])
   x_type <- list_variables %>%
@@ -731,7 +736,7 @@ plot_marginal_predictions <- function(x, variables_list = "auto",
     variables[[1]] <- broom.helpers::seq_range
   dots$variables <- variables
   dots$by <- names(variables)
-  if (inherits(dots$model, "multinom"))
+  if (multinom)
     dots$by <- c(dots$by, "group")
 
   d <- do.call(marginaleffects::avg_predictions, dots)
@@ -775,18 +780,18 @@ plot_marginal_predictions <- function(x, variables_list = "auto",
     p <- p +
       ggplot2::labs(colour = colour_label, fill = colour_label)
 
-  if (length(variables) == 3 && !inherits(dots$model, "multinom")) {
+  if (length(variables) == 3 && !multinom) {
     facet_variable <- names(variables[3])
     p <- p +
       ggplot2::facet_wrap(facet_variable)
   }
 
-  if (inherits(dots$model, "multinom") && length(variables) <= 2) {
+  if (multinom && length(variables) <= 2) {
     p <- p +
       ggplot2::facet_wrap("group")
   }
 
-  if (inherits(dots$model, "multinom") && length(variables) == 3) {
+  if (multinom && length(variables) == 3) {
     facet_variable <- c("group", names(variables[3]))
     p <- p +
       ggplot2::facet_wrap(facet_variable)
