@@ -99,9 +99,19 @@ tidy_add_estimate_to_reference_rows <- function(
   ref_rows_sum <- which(x$reference_row & x$contrasts == "contr.sum")
   if (length(ref_rows_sum) > 0) {
     for (i in ref_rows_sum) {
-      x$estimate[i] <-
-        .get_ref_row_estimate_contr_sum(x$variable[i], model = model,
-                                        exponentiate = exponentiate, quiet = quiet)
+      est <- .get_ref_row_estimate_contr_sum(
+        x$variable[i],
+        model = model,
+        exponentiate = exponentiate,
+        quiet = quiet
+      )
+      x$estimate[i] <- est$estimate
+      x$std.error[i] <- est$std.error
+      x$p.value[i] <- est$p.value
+      if (all(c("conf.low", "conf.high") %in% names(x))) {
+        x$conf.low[i] <- est$conf.low
+        x$conf.high[i] <- est$conf.high
+      }
     }
   }
 
@@ -146,16 +156,30 @@ tidy_add_estimate_to_reference_rows <- function(
   }
 
   if (is.null(dc)) {
-    dc <- NA_real_
+    res <- data.frame(
+      estimate = NA_real_,
+      std.error = NA_real_,
+      p.value = NA_real_,
+      conf.low = NA_real_,
+      conf.high = NA_real_
+    )
   } else {
-    dc <- dc$contrasts %>%
+    res <- dc$contrasts %>%
       as.data.frame() %>%
-      purrr::pluck("estimate") %>%
+      dplyr::last() %>%
+      dplyr::select("estimate", std.error = "SE", "p.value")
+    ci <- dc %>%
+      emmeans::contrast() %>%
+      confint() %>%
       dplyr::last()
+    res$conf.low <- ci$asymp.LCL
+    res$conf.high <- ci$asymp.UCL
   }
 
   if (exponentiate) {
-    dc <- exp(dc)
+    res$estimate <- exp(res$estimate)
+    res$conf.low <- exp(res$conf.low)
+    res$conf.high <- exp(res$conf.high)
   }
-  dc
+  res
 }
