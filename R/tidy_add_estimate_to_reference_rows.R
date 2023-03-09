@@ -168,8 +168,7 @@ tidy_add_estimate_to_reference_rows <- function(
       as.data.frame(destroy.annotations = TRUE) %>%
       dplyr::last() %>%
       dplyr::select("estimate", std.error = "SE", "p.value")
-    ci <- dc %>%
-      emmeans::contrast() %>%
+    ci <- dc$contrasts %>%
       confint() %>%
       as.data.frame() %>%
       dplyr::last()
