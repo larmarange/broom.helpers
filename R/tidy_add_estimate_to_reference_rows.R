@@ -165,13 +165,13 @@ tidy_add_estimate_to_reference_rows <- function(
     )
   } else {
     res <- dc$contrasts %>%
-      dplyr::as_tibble() %>%
+      as.data.frame(destroy.annotations = TRUE) %>%
       dplyr::last() %>%
       dplyr::select("estimate", std.error = "SE", "p.value")
     ci <- dc %>%
       emmeans::contrast() %>%
       confint() %>%
-      dplyr::as_tibble() %>%
+      as.data.frame() %>%
       dplyr::last()
     res$conf.low <- ci$asymp.LCL
     res$conf.high <- ci$asymp.UCL
