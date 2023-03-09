@@ -3,7 +3,7 @@
 **New features**
 
 - `tidy_add_estimate_to_reference_rows()` now also populate p-values and
-  confidence intervals for sum contrasts
+  confidence intervals for sum contrasts (#220)
 
 **Improvements**
 
