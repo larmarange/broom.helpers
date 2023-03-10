@@ -169,7 +169,7 @@ tidy_add_estimate_to_reference_rows <- function(
       dplyr::last() %>%
       dplyr::select("estimate", std.error = "SE", "p.value")
     ci <- dc$contrasts %>%
-      confint() %>%
+      stats::confint() %>%
       as.data.frame() %>%
       dplyr::last()
     res$conf.low <- ci$asymp.LCL

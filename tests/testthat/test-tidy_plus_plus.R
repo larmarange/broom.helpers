@@ -333,6 +333,8 @@ test_that("tidy_plus_plus() works with survey::svyolr", {
 
 test_that("tidy_plus_plus() works with ordinal::clm", {
   skip_on_cran()
+  skip_if_not_installed("ordinal")
+
   mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine)
   expect_error(
     res <- mod %>% tidy_plus_plus(),
@@ -343,6 +345,8 @@ test_that("tidy_plus_plus() works with ordinal::clm", {
 
 test_that("tidy_plus_plus() works with ordinal::clmm", {
   skip_on_cran()
+  skip_if_not_installed("ordinal")
+
   mod <- ordinal::clmm(rating ~ temp * contact + (1 | judge), data = ordinal::wine)
   expect_error(
     res <- mod %>% tidy_plus_plus(),

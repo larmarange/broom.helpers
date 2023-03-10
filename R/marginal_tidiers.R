@@ -95,6 +95,10 @@ tidy_all_effects <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   if (isTRUE(dots$exponentiate))
     cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_all_effects}.") # nolint
 
+  if (inherits(x, "multinom") || inherits(x, "polr") ||
+      inherits(x, "clm") || inherits(x, "clmm"))
+    return(tidy_all_effects_effpoly(x, conf.int, conf.level, ...))
+
   .clean <- function(x) {
     # merge first columns if interaction
     x <- tidyr::unite(x, "term", 1:(ncol(x) - 4), sep = ":")
@@ -113,6 +117,44 @@ tidy_all_effects <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   attr(res, "skip_add_reference_rows") <- TRUE
   attr(res, "find_missing_interaction_terms") <- TRUE
   res
+}
+
+tidy_all_effects_effpoly <- function(x, conf.int = TRUE, conf.level = .95, ...) {
+  res <- x %>%
+    effects::allEffects(se = conf.int, level = conf.level, ...) %>%
+    purrr::map(effpoly_to_df) %>%
+    dplyr::bind_rows(.id = "variable") %>%
+    dplyr::relocate("y.level", "variable", "term")
+  attr(res, "coefficients_type") <- "marginal_predictions_at_mean"
+  attr(res, "skip_add_reference_rows") <- TRUE
+  attr(res, "find_missing_interaction_terms") <- TRUE
+  res
+}
+
+effpoly_to_df <- function(x) {
+  factors <- sapply(x$variables, function(x) x$is.factor)
+  factor.levels <- lapply(x$variables[factors], function(x) x$levels)
+  if (!length(factor.levels) == 0) {
+    factor.names <- names(factor.levels)
+    for (fac in factor.names) {
+      x$x[[fac]] <- factor(x$x[[fac]], levels = factor.levels[[fac]],
+                           exclude = NULL)
+    }
+  }
+
+  result <- rep.int(list(x$x), length(x$y.levels))
+  names(result) <- x$y.levels
+  result <- result %>% dplyr::bind_rows(.id = "y.level")
+  # merge columns if interaction
+  result <- result %>% tidyr::unite("term", 2:ncol(result), sep = ":")
+  result$estimate <- as.vector(x$prob)
+  result$std.error <- as.vector(x$se.prob)
+
+  if (!is.null(x$confidence.level)) {
+    result$conf.low <- as.vector(x$lower.prob)
+    result$conf.high <- as.vector(x$upper.prob)
+  }
+  result
 }
 
 #' Marginal Predictions with `ggeffects::ggpredict()`
@@ -160,7 +202,7 @@ tidy_ggpredict <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 
   if (isFALSE(conf.int)) conf.level <- NA
   res <- x %>%
-    ggeffects::ggpredict(ci.lvl = conf.level, ...) %>%
+    ggeffects::ggpredict(ci.lvl = conf.level) %>% # add ...
     purrr::map(
       ~ .x %>%
         dplyr::as_tibble() %>%
@@ -173,6 +215,11 @@ tidy_ggpredict <- function(x, conf.int = TRUE, conf.level = .95, ...) {
       estimate = "predicted"
     ) %>%
     dplyr::relocate("variable", "term")
+  # multinomial models
+  if ("response.level" %in% names(res))
+    res <- res %>%
+    dplyr::rename(y.level = "response.level") %>%
+    dplyr::relocate("y.level")
   attr(res, "coefficients_type") <- "marginal_predictions"
   attr(res, "skip_add_reference_rows") <- TRUE
   res
@@ -243,6 +290,12 @@ tidy_avg_slopes <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
   res <- res %>%
     dplyr::relocate("variable", "term")
 
+  # multinomial models
+  if ("group" %in% names(res))
+    res <- res %>%
+    dplyr::rename(y.level = "group") %>%
+    dplyr::relocate("y.level")
+
   attr(res, "coefficients_type") <- dplyr::case_when(
     is.null(dots$newdata) ~ "marginal_effects_average",
     isTRUE(dots$newdata == "mean") ~ "marginal_effects_at_mean",
@@ -250,7 +303,7 @@ tidy_avg_slopes <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
     TRUE ~ "marginal_effects"
   )
   attr(res, "skip_add_reference_rows") <- TRUE
-  res
+  res %>% dplyr::as_tibble()
 }
 
 #' Marginal Contrasts with `marginaleffects::avg_comparisons()`
@@ -326,6 +379,12 @@ tidy_avg_comparisons <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
   res <- res %>%
     dplyr::relocate("variable", "term")
 
+  # multinomial models
+  if ("group" %in% names(res))
+    res <- res %>%
+    dplyr::rename(y.level = "group") %>%
+    dplyr::relocate("y.level")
+
   attr(res, "coefficients_type") <- dplyr::case_when(
     is.null(dots$newdata) ~ "marginal_contrasts_average",
     isTRUE(dots$newdata == "mean") ~ "marginal_contrasts_at_mean",
@@ -333,7 +392,7 @@ tidy_avg_comparisons <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
     TRUE ~ "marginal_contrasts"
   )
   attr(res, "skip_add_reference_rows") <- TRUE
-  res
+  res %>% dplyr::as_tibble()
 }
 
 #' Marginal Means with `marginaleffects::marginal_means()`
@@ -393,15 +452,16 @@ tidy_marginal_means <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
     ) %>%
     dplyr::mutate(term = as.character(.data$term))
 
+  # multinomial models
+  if ("group" %in% names(res))
+    res <- res %>%
+    dplyr::rename(y.level = "group") %>%
+    dplyr::relocate("y.level")
 
   attr(res, "coefficients_type") <- "marginal_means"
   attr(res, "skip_add_reference_rows") <- TRUE
-  res
+  res %>% dplyr::as_tibble()
 }
-
-
-
-
 
 #' Marginal Predictions with `marginaleffects::avg_predictions()`
 #'
@@ -569,10 +629,22 @@ tidy_marginal_predictions <- function(x, variables_list = "auto",
 .tidy_one_marginal_prediction <- function(variables, dots) {
   dots$variables <- variables
   dots$by <- names(variables)
-  do.call(marginaleffects::avg_predictions, dots) %>%
+
+  if (inherits(dots$model, "multinom") || inherits(dots$model, "polr") ||
+      inherits(dots$model, "clm") || inherits(dots$model, "clmm"))
+    dots$by <- c(dots$by, "group")
+
+  res <- do.call(marginaleffects::avg_predictions, dots) %>%
     dplyr::mutate(variable = paste(names(variables), collapse = ":")) %>%
     tidyr::unite(col = "term", sep = " * ", dplyr::all_of(names(variables))) %>%
     dplyr::relocate("variable", "term")
+
+  if ("group" %in% names(res))
+    res <- res %>%
+    dplyr::rename(y.level = "group") %>%
+    dplyr::relocate("y.level")
+
+  res
 }
 
 #' @export
@@ -646,6 +718,9 @@ plot_marginal_predictions <- function(x, variables_list = "auto",
       "manage only combinations of 3 variables or less."
     ))
 
+  multinom <- inherits(dots$model, "multinom") | inherits(dots$model, "polr") |
+    inherits(dots$model, "clm") | inherits(dots$model, "clmm")
+
   list_variables <- dots$model %>% model_list_variables(add_var_type = TRUE)
   x_variable <- names(variables[1])
   x_type <- list_variables %>%
@@ -660,6 +735,9 @@ plot_marginal_predictions <- function(x, variables_list = "auto",
     variables[[1]] <- broom.helpers::seq_range
   dots$variables <- variables
   dots$by <- names(variables)
+  if (multinom)
+    dots$by <- c(dots$by, "group")
+
   d <- do.call(marginaleffects::avg_predictions, dots)
 
   mapping <- ggplot2::aes(
@@ -701,8 +779,19 @@ plot_marginal_predictions <- function(x, variables_list = "auto",
     p <- p +
       ggplot2::labs(colour = colour_label, fill = colour_label)
 
-  if (length(variables) >= 3) {
+  if (length(variables) == 3 && !multinom) {
     facet_variable <- names(variables[3])
+    p <- p +
+      ggplot2::facet_wrap(facet_variable)
+  }
+
+  if (multinom && length(variables) <= 2) {
+    p <- p +
+      ggplot2::facet_wrap("group")
+  }
+
+  if (multinom && length(variables) == 3) {
+    facet_variable <- c("group", names(variables[3]))
     p <- p +
       ggplot2::facet_wrap(facet_variable)
   }
@@ -891,6 +980,7 @@ tidy_marginal_contrasts <- function(x, variables_list = "auto",
 
   dots$variables <- variables$variables
   dots$cross <- TRUE
+
   if (!is.null(variables$by))
     dots$by <- names(variables$by)
 
@@ -931,6 +1021,13 @@ tidy_marginal_contrasts <- function(x, variables_list = "auto",
       dplyr::starts_with("contrast")
     ) %>%
     dplyr::relocate("variable", "term")
+
+  if ("group" %in% names(res))
+    res <- res %>%
+    dplyr::rename(y.level = "group") %>%
+    dplyr::relocate("y.level")
+
+  res
 }
 
 #' @export
