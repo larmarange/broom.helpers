@@ -63,6 +63,11 @@ test_that("tidy_add_estimate_to_reference_rows() works for basic models", {
     sum(res$estimate[!res$reference_row & res$variable == "trt"], na.rm = TRUE) * -1
   )
 
+  # p-values and confidence intervals should be populated
+  expect_false(any(is.na(res$p.value)))
+  expect_false(any(is.na(res$conf.low)))
+  expect_false(any(is.na(res$conf.high)))
+
   res2 <- mod %>%
     tidy_and_attach(exponentiate = TRUE) %>%
     tidy_add_estimate_to_reference_rows()
