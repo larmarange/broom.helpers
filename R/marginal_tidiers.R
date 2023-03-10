@@ -95,6 +95,9 @@ tidy_all_effects <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   if (isTRUE(dots$exponentiate))
     cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_all_effects}.") # nolint
 
+  if (inherits(x, "clm") | inherits(x, "clmm"))
+    library("MASS") # required for effects
+
   if (inherits(x, "multinom") | inherits(x, "polr") |
       inherits(x, "clm") | inherits(x, "clmm"))
     return(tidy_all_effects_effpoly(x, conf.int, conf.level, ...))
@@ -304,7 +307,7 @@ tidy_avg_slopes <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
     TRUE ~ "marginal_effects"
   )
   attr(res, "skip_add_reference_rows") <- TRUE
-  res
+  res %>% dplyr::as_tibble()
 }
 
 #' Marginal Contrasts with `marginaleffects::avg_comparisons()`
@@ -393,7 +396,7 @@ tidy_avg_comparisons <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
     TRUE ~ "marginal_contrasts"
   )
   attr(res, "skip_add_reference_rows") <- TRUE
-  res
+  res %>% dplyr::as_tibble()
 }
 
 #' Marginal Means with `marginaleffects::marginal_means()`
@@ -461,7 +464,7 @@ tidy_marginal_means <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 
   attr(res, "coefficients_type") <- "marginal_means"
   attr(res, "skip_add_reference_rows") <- TRUE
-  res
+  res %>% dplyr::as_tibble()
 }
 
 #' Marginal Predictions with `marginaleffects::avg_predictions()`
