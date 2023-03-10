@@ -429,3 +429,245 @@ test_that("tidy_avg_comparisons()", {
     "Marginal Contrasts at Marginal Means"
   )
 })
+
+test_that("Marginal tidiers works with nnet::multinom() models", {
+  skip_on_cran()
+  skip_if_not_installed("nnet")
+
+  suppressMessages(
+    mod <- nnet::multinom(
+      grade ~ stage + marker + age, data = gtsummary::trial,
+      trace = FALSE
+    )
+  )
+
+  # not supported: tidy_margins(mod)
+
+  expect_error(
+    res <- tidy_all_effects(mod),
+    NA
+  )
+  expect_true("y.level" %in% names(res))
+
+  expect_error(
+    suppressMessages(res <- tidy_ggpredict(mod)),
+    NA
+  )
+  expect_true("y.level" %in% names(res))
+
+  expect_error(
+    res <- tidy_avg_slopes(mod),
+    NA
+  )
+  expect_true("y.level" %in% names(res))
+
+  expect_error(
+    res <- tidy_avg_comparisons(mod),
+    NA
+  )
+  expect_true("y.level" %in% names(res))
+
+  expect_error(
+    res <- tidy_marginal_means(mod),
+    NA
+  )
+  expect_true("y.level" %in% names(res))
+
+  expect_error(
+    res <- tidy_marginal_predictions(mod),
+    NA
+  )
+  expect_true("y.level" %in% names(res))
+
+  expect_type(
+    p <- plot_marginal_predictions(mod),
+    "list"
+  )
+  expect_length(p, 3)
+
+  expect_error(
+    res <- tidy_marginal_contrasts(mod),
+    NA
+  )
+  expect_true("y.level" %in% names(res))
+})
+
+test_that("Marginal tidiers works with nnet::multinom() models", {
+  skip_on_cran()
+  skip_if_not_installed("nnet")
+
+  suppressMessages(
+    mod <- nnet::multinom(
+      grade ~ stage + marker + age, data = gtsummary::trial,
+      trace = FALSE
+    )
+  )
+
+  # not supported: tidy_margins(mod)
+
+  expect_error(
+    res <- tidy_all_effects(mod),
+    NA
+  )
+  expect_true("y.level" %in% names(res))
+
+  expect_error(
+    suppressMessages(res <- tidy_ggpredict(mod)),
+    NA
+  )
+  expect_true("y.level" %in% names(res))
+
+  expect_error(
+    res <- tidy_avg_slopes(mod),
+    NA
+  )
+  expect_true("y.level" %in% names(res))
+
+  expect_error(
+    res <- tidy_avg_comparisons(mod),
+    NA
+  )
+  expect_true("y.level" %in% names(res))
+
+  expect_error(
+    res <- tidy_marginal_means(mod),
+    NA
+  )
+  expect_true("y.level" %in% names(res))
+
+  expect_error(
+    res <- tidy_marginal_predictions(mod),
+    NA
+  )
+  expect_true("y.level" %in% names(res))
+
+  expect_type(
+    p <- plot_marginal_predictions(mod),
+    "list"
+  )
+  expect_length(p, 3)
+
+  expect_error(
+    res <- tidy_marginal_contrasts(mod),
+    NA
+  )
+  expect_true("y.level" %in% names(res))
+})
+
+test_that("Marginal tidiers works with MASS::polr() models", {
+  skip_on_cran()
+  skip_if_not_installed("MASS")
+
+  mod <- MASS::polr(Sat ~ Infl + Type + Cont, weights = Freq, data = MASS::housing)
+
+  expect_error(
+    suppressMessages(res <- tidy_margins(mod)),
+    NA
+  )
+  # for margins, no result per y.level
+
+  expect_error(
+    suppressMessages(res <- tidy_all_effects(mod)),
+    NA
+  )
+  expect_true("y.level" %in% names(res))
+
+  expect_error(
+    suppressMessages(res <- tidy_ggpredict(mod)),
+    NA
+  )
+  expect_true("y.level" %in% names(res))
+
+  expect_error(
+    suppressMessages(res <- tidy_avg_slopes(mod)),
+    NA
+  )
+  expect_true("y.level" %in% names(res))
+
+  expect_error(
+    suppressMessages(res <- tidy_avg_comparisons(mod)),
+    NA
+  )
+  expect_true("y.level" %in% names(res))
+
+  expect_error(
+    suppressMessages(res <- tidy_marginal_means(mod)),
+    NA
+  )
+  expect_true("y.level" %in% names(res))
+
+  expect_error(
+    suppressMessages(res <- tidy_marginal_predictions(mod)),
+    NA
+  )
+  expect_true("y.level" %in% names(res))
+
+  expect_type(
+    suppressMessages(p <- plot_marginal_predictions(mod)),
+    "list"
+  )
+  expect_length(p, 3)
+
+  expect_error(
+    suppressMessages(res <- tidy_marginal_contrasts(mod)),
+    NA
+  )
+  expect_true("y.level" %in% names(res))
+})
+
+test_that("Marginal tidiers works with orinal::clm() models", {
+  skip_on_cran()
+  skip_if_not_installed("ordinal")
+
+  mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine)
+
+  # not supported: tidy_margins(mod)
+
+  expect_error(
+    res <- tidy_all_effects(mod),
+    NA
+  )
+  expect_true("y.level" %in% names(res))
+
+  expect_error(
+    suppressMessages(res <- tidy_ggpredict(mod)),
+    NA
+  )
+  expect_true("y.level" %in% names(res))
+
+  expect_error(
+    res <- tidy_avg_slopes(mod),
+    NA
+  )
+  expect_true("y.level" %in% names(res))
+
+  expect_error(
+    res <- tidy_avg_comparisons(mod),
+    NA
+  )
+  expect_true("y.level" %in% names(res))
+
+  expect_error(
+    res <- tidy_marginal_means(mod),
+    NA
+  )
+  expect_true("y.level" %in% names(res))
+
+  expect_error(
+    res <- tidy_marginal_predictions(mod),
+    NA
+  )
+  expect_true("y.level" %in% names(res))
+
+  expect_type(
+    p <- plot_marginal_predictions(mod),
+    "list"
+  )
+  expect_length(p, 1)
+
+  expect_error(
+    res <- tidy_marginal_contrasts(mod),
+    NA
+  )
+  expect_true("y.level" %in% names(res))
+})
