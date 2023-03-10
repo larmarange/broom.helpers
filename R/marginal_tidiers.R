@@ -96,7 +96,7 @@ tidy_all_effects <- function(x, conf.int = TRUE, conf.level = .95, ...) {
     cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_all_effects}.") # nolint
 
   if (inherits(x, "clm") || inherits(x, "clmm"))
-    loadedNamespaces("MASS") # required for effects
+    loadNamespaces("MASS") # required for effects
 
   if (inherits(x, "multinom") || inherits(x, "polr") ||
       inherits(x, "clm") || inherits(x, "clmm"))
