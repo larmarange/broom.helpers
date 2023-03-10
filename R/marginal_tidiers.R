@@ -95,11 +95,11 @@ tidy_all_effects <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   if (isTRUE(dots$exponentiate))
     cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_all_effects}.") # nolint
 
-  if (inherits(x, "clm") | inherits(x, "clmm"))
-    library("MASS") # required for effects
+  if (inherits(x, "clm") || inherits(x, "clmm"))
+    loadedNamespaces("MASS") # required for effects
 
-  if (inherits(x, "multinom") | inherits(x, "polr") |
-      inherits(x, "clm") | inherits(x, "clmm"))
+  if (inherits(x, "multinom") || inherits(x, "polr") ||
+      inherits(x, "clm") || inherits(x, "clmm"))
     return(tidy_all_effects_effpoly(x, conf.int, conf.level, ...))
 
   .clean <- function(x) {
@@ -134,8 +134,7 @@ tidy_all_effects_effpoly <- function(x, conf.int = TRUE, conf.level = .95, ...) 
   res
 }
 
-effpoly_to_df <- function (x)
-{
+effpoly_to_df <- function(x) {
   factors <- sapply(x$variables, function(x) x$is.factor)
   factor.levels <- lapply(x$variables[factors], function(x) x$levels)
   if (!length(factor.levels) == 0) {
@@ -150,7 +149,7 @@ effpoly_to_df <- function (x)
   names(result) <- x$y.levels
   result <- result %>% dplyr::bind_rows(.id = "y.level")
   # merge columns if interaction
-  result <- result %>%tidyr::unite("term", 2:ncol(result), sep = ":")
+  result <- result %>% tidyr::unite("term", 2:ncol(result), sep = ":")
   result$estimate <- as.vector(x$prob)
   result$std.error <- as.vector(x$se.prob)
 
@@ -634,8 +633,8 @@ tidy_marginal_predictions <- function(x, variables_list = "auto",
   dots$variables <- variables
   dots$by <- names(variables)
 
-  if (inherits(dots$model, "multinom") | inherits(dots$model, "polr") |
-      inherits(dots$model, "clm") | inherits(dots$model, "clmm"))
+  if (inherits(dots$model, "multinom") || inherits(dots$model, "polr") ||
+      inherits(dots$model, "clm") || inherits(dots$model, "clmm"))
     dots$by <- c(dots$by, "group")
 
   res <- do.call(marginaleffects::avg_predictions, dots) %>%
