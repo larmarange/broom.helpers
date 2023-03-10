@@ -5,7 +5,9 @@
 - `tidy_add_estimate_to_reference_rows()` now also populate p-values and
   confidence intervals for sum contrasts (#220)
 - Marginal tidiers are now compatible with `nnet::multinom()`, `MASS::polr()`,
-  `ordinal::clm()` and `ordinal::clmm()` models (#215)
+  `ordinal::clm()` and `ordinal::clmm()` models, as long as the type of models
+  is supported by the corresponding package, for example, `margins` does not
+  currently support `nnet::multinom()` models (#215)
 
 **Improvements**
 
