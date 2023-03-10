@@ -38,7 +38,7 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::rcmdcheck, emmeans=?ignore-before-r=4.1.0, gam=?ignore-before-r=4.0.0, rstan=?ignore-before-r=4.0.0, glmmTMB=?ignore
+          extra-packages: any::rcmdcheck, emmeans=?ignore-before-r=4.1.0, gam=?ignore-before-r=4.0.0, rstan=?ignore-before-r=4.0.0, multgee=?ignore-before-r=4.0.0, VGAM=?ignore-before-r=4.0.0, glmmTMB=?ignore
           needs: check
 
       - uses: r-lib/actions/check-r-package@v2

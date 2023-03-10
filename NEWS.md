@@ -1,5 +1,12 @@
 # broom.helpers (development version)
 
+**New features**
+
+- `tidy_add_estimate_to_reference_rows()` now also populate p-values and
+  confidence intervals for sum contrasts (#220)
+
+**Improvements**
+
 - Marginal predictions vignette has been updated to follow changes in
   `marginaleffects` version 0.10.0 (#216)
 
