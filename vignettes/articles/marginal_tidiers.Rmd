@@ -177,6 +177,7 @@ mod %>%
     newdata = "mean",
     estimate_fun = scales::label_percent(accuracy = .1)
   ) %>%
+  modify_column_hide("p.value") %>%
   bold_labels()
 ```
 
@@ -190,6 +191,7 @@ mod %>%
     newdata = "mean",
     estimate_fun = scales::label_percent(accuracy = .1)
   ) %>%
+  modify_column_hide("p.value") %>%
   bold_labels()
 ```
 
@@ -281,6 +283,7 @@ mod %>%
     variables_list = "no_interaction",
     estimate_fun = scales::label_percent(accuracy = .1)
   ) %>%
+  modify_column_hide("p.value") %>%
   bold_labels()
 ```
 
@@ -291,6 +294,7 @@ mod %>%
     type = "response",
     estimate_fun = scales::label_percent(accuracy = .1)
   ) %>%
+  modify_column_hide("p.value") %>%
   bold_labels()
 ```
 
@@ -349,6 +353,7 @@ mod %>%
     tidy_fun = tidy_marginal_means,
     estimate_fun = scales::label_percent(accuracy = .1)
   ) %>%
+  modify_column_hide("p.value") %>%
   bold_labels()
 ```
 
@@ -362,6 +367,7 @@ mod %>%
     variables_list = "no_interaction",
     estimate_fun = scales::label_percent(accuracy = .1)
   ) %>%
+  modify_column_hide("p.value") %>%
   bold_labels()
 ```
 
@@ -379,6 +385,7 @@ mod %>%
     variables_list = "no_interaction",
     estimate_fun = scales::label_percent(accuracy = .1)
   ) %>%
+  modify_column_hide("p.value") %>%
   bold_labels()
 ```
 
