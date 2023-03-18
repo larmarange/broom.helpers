@@ -33,8 +33,8 @@ Listing of Supported Models
    \code{glmmTMB::glmmTMB()} \tab \code{broom.mixed} package required \cr
    \code{lavaan::lavaan()} \tab Limited support for categorical variables \cr
    \code{lfe::felm()} \tab  \cr
-   \code{lme4::glmer()} \tab \code{broom.mixed} package required \cr
    \code{lme4::glmer.nb()} \tab \code{broom.mixed} package required \cr
+   \code{lme4::glmer()} \tab \code{broom.mixed} package required \cr
    \code{lme4::lmer()} \tab \code{broom.mixed} package required \cr
    \code{logitr::logitr()} \tab Requires logitr >= 0.8.0 \cr
    \code{MASS::glm.nb()} \tab  \cr

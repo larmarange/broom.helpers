@@ -51,6 +51,6 @@ supported_models <-
     "`multgee::nomLORgee()`", "Experimental support. Use `tidy_multgee()` as `tidy_fun`.",
     "`multgee::ordLORgee()`", "Experimental support. Use `tidy_multgee()` as `tidy_fun`."
   ) %>%
-  dplyr::arrange(.data$model)
+  dplyr::arrange(.data$model, .locale = "en")
 
 usethis::use_data(supported_models, overwrite = TRUE)
