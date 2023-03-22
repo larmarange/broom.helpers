@@ -77,7 +77,7 @@ results tibble. Works only with models supported by <code>emmeans</code>, see
 <span>  keep_model_terms <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  pairwise_reverse <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  contrasts_adjust <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  conf.level <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  conf.level <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"conf.level"</span><span class="op">)</span>,</span>
 <span>  emmeans_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  model <span class="op">=</span> <span class="fu"><a href="tidy_attach_model.html">tidy_get_model</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  quiet <span class="op">=</span> <span class="cn">FALSE</span></span>
@@ -111,7 +111,7 @@ see <code><a href="https://rdrr.io/pkg/emmeans/man/contrast.html" class="externa
 
 
 <dt>conf.level</dt>
-<dd><p>confidence level, if <code>NULL</code> use the value indicated
+<dd><p>confidence level, by default use the value indicated
 previously in <code><a href="tidy_attach_model.html">tidy_and_attach()</a></code></p></dd>
 
 
