@@ -10,7 +10,7 @@ tidy_add_pairwise_contrasts(
   keep_model_terms = FALSE,
   pairwise_reverse = TRUE,
   contrasts_adjust = NULL,
-  conf.level = NULL,
+  conf.level = attr(x, "conf.level"),
   emmeans_args = list(),
   model = tidy_get_model(x),
   quiet = FALSE
@@ -31,7 +31,7 @@ or \code{"revpairwise"} (if \code{FALSE}), see \code{\link[emmeans:contrast]{emm
 \item{contrasts_adjust}{optional adjustment method when computing contrasts,
 see \code{\link[emmeans:contrast]{emmeans::contrast()}} (if \code{NULL}, use \code{emmeans} default)}
 
-\item{conf.level}{confidence level, if \code{NULL} use the value indicated
+\item{conf.level}{confidence level, by default use the value indicated
 previously in \code{\link[=tidy_and_attach]{tidy_and_attach()}}}
 
 \item{emmeans_args}{list of additional parameter to pass to

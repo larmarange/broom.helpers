@@ -12,6 +12,8 @@
 #' The `emmeans` package should therefore be installed.
 #' For sum contrasts, the model coefficient corresponds
 #' to the difference of each level with the grand mean.
+#' For sum contrasts, confidence intervals and p-values will also
+#' be computed and added to the reference rows.
 #'
 #' For other variables, no change will be made.
 #'
@@ -23,6 +25,8 @@
 #' @param exponentiate logical indicating whether or not to exponentiate the
 #' coefficient estimates. It should be consistent with the original call to
 #' [broom::tidy()]
+#' @param conf.level confidence level, by default use the value indicated
+#' previously in [tidy_and_attach()], used only for sum contrasts
 #' @param model the corresponding model, if not attached to `x`
 #' @inheritParams tidy_plus_plus
 #' @export
@@ -58,12 +62,16 @@
 #'   tidy_add_estimate_to_reference_rows()
 #' }
 tidy_add_estimate_to_reference_rows <- function(
-  x, exponentiate = attr(x, "exponentiate"),
+  x,
+  exponentiate = attr(x, "exponentiate"),
+  conf.level = attr(x, "conf.level"),
   model = tidy_get_model(x),
   quiet = FALSE
 ) {
   if (is.null(exponentiate) || !is.logical(exponentiate))
     cli::cli_abort("{.arg exponentiate} is not provided. You need to pass it explicitely.")
+  if (is.null(conf.level) || !is.numeric(conf.level))
+    cli::cli_abort("{.arg conf.level} is not provided. You need to pass it explicitely.")
 
   if (is.null(model)) {
     cli::cli_abort(c(
@@ -103,6 +111,7 @@ tidy_add_estimate_to_reference_rows <- function(
         x$variable[i],
         model = model,
         exponentiate = exponentiate,
+        conf.level = conf.level,
         quiet = quiet
       )
       x$estimate[i] <- est$estimate
@@ -121,7 +130,7 @@ tidy_add_estimate_to_reference_rows <- function(
 
 
 .get_ref_row_estimate_contr_sum <- function(variable, model, exponentiate = FALSE,
-                                            quiet = FALSE) {
+                                            conf.level = .95, quiet = FALSE) {
 
   if (inherits(model, "multinom")) {
     dc <- NULL
@@ -169,11 +178,23 @@ tidy_add_estimate_to_reference_rows <- function(
       dplyr::last() %>%
       dplyr::select("estimate", std.error = "SE", "p.value")
     ci <- dc$contrasts %>%
-      stats::confint() %>%
+      stats::confint(level = conf.level) %>%
       as.data.frame() %>%
       dplyr::last()
-    res$conf.low <- ci$asymp.LCL
-    res$conf.high <- ci$asymp.UCL
+    if ("asymp.LCL" %in% names(ci)) {
+      res$conf.low <- ci$asymp.LCL
+      res$conf.high <- ci$asymp.UCL
+    } else if ("lower.CL" %in% names(ci)) {
+      res$conf.low <- ci$lower.CL
+      res$conf.high <- ci$upper.CL
+    } else if ("lower.PL" %in% names(ci)) {
+      res$conf.low <- ci$lower.PL
+      res$conf.high <- ci$upper.PL
+    } else {
+      res$conf.low <- NA_real_
+      res$conf.high <- NA_real_
+    }
+
   }
 
   if (exponentiate) {

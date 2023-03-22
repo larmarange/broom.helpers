@@ -7,6 +7,7 @@
 tidy_add_estimate_to_reference_rows(
   x,
   exponentiate = attr(x, "exponentiate"),
+  conf.level = attr(x, "conf.level"),
   model = tidy_get_model(x),
   quiet = FALSE
 )
@@ -17,6 +18,9 @@ tidy_add_estimate_to_reference_rows(
 \item{exponentiate}{logical indicating whether or not to exponentiate the
 coefficient estimates. It should be consistent with the original call to
 \code{\link[broom:reexports]{broom::tidy()}}}
+
+\item{conf.level}{confidence level, by default use the value indicated
+previously in \code{\link[=tidy_and_attach]{tidy_and_attach()}}, used only for sum contrasts}
 
 \item{model}{the corresponding model, if not attached to \code{x}}
 
@@ -37,6 +41,8 @@ all other coefficients multiplied by \code{-1} (eventually exponentiated if
 The \code{emmeans} package should therefore be installed.
 For sum contrasts, the model coefficient corresponds
 to the difference of each level with the grand mean.
+For sum contrasts, confidence intervals and p-values will also
+be computed and added to the reference rows.
 
 For other variables, no change will be made.
 

@@ -18,7 +18,7 @@
 #' or `"revpairwise"` (if `FALSE`), see [emmeans::contrast()]
 #' @param contrasts_adjust optional adjustment method when computing contrasts,
 #' see [emmeans::contrast()] (if `NULL`, use `emmeans` default)
-#' @param conf.level confidence level, if `NULL` use the value indicated
+#' @param conf.level confidence level, by default use the value indicated
 #' previously in [tidy_and_attach()]
 #' @param model the corresponding model, if not attached to `x`
 #' @inheritParams tidy_plus_plus
@@ -60,7 +60,7 @@ tidy_add_pairwise_contrasts <- function(
   keep_model_terms = FALSE,
   pairwise_reverse = TRUE,
   contrasts_adjust = NULL,
-  conf.level = NULL,
+  conf.level = attr(x, "conf.level"),
   emmeans_args = list(),
   model = tidy_get_model(x),
   quiet = FALSE
@@ -72,6 +72,9 @@ tidy_add_pairwise_contrasts <- function(
     ))
   }
 
+  if (is.null(conf.level) || !is.numeric(conf.level))
+    cli::cli_abort("{.arg conf.level} is not provided. You need to pass it explicitely.")
+
   if (!"contrasts" %in% names(x)) {
     x <- x %>% tidy_add_contrasts(model = model)
   }
@@ -80,9 +83,6 @@ tidy_add_pairwise_contrasts <- function(
 
   if (isTRUE(stringr::str_starts(.attributes$coefficients_type, "marginal")))
     cli::cli_abort("Pairwise contrasts are not compatible with marginal effects / contrasts / means / predictions.") # nolint
-
-  if (is.null(conf.level))
-    conf.level <- .attributes$conf.level
 
   if (is.null(conf.level))
     cli::cli_abort("Please specify {.arg conf.level}")
