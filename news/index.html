@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">broom.helpers</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.12.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.13.0</span>
       </span>
     </div>
 
@@ -60,7 +60,16 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="1.12.0" id="broomhelpers-1120">broom.helpers 1.12.0<a class="anchor" aria-label="anchor" href="#broomhelpers-1120"></a></h2>
+<h2 class="page-header" data-toc-text="1.13.0" id="broomhelpers-1130">broom.helpers 1.13.0<a class="anchor" aria-label="anchor" href="#broomhelpers-1130"></a></h2>
+<p><strong>New features</strong></p>
+<ul><li>
+<code><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows()</a></code> now also populate p-values and confidence intervals for sum contrasts (<a href="https://github.com/larmarange/broom.helpers/issues/220" class="external-link">#220</a>)</li>
+<li>Marginal tidiers are now compatible with <code><a href="https://rdrr.io/pkg/nnet/man/multinom.html" class="external-link">nnet::multinom()</a></code>, <code><a href="https://rdrr.io/pkg/MASS/man/polr.html" class="external-link">MASS::polr()</a></code>, <code><a href="https://rdrr.io/pkg/ordinal/man/clm.html" class="external-link">ordinal::clm()</a></code> and <code><a href="https://rdrr.io/pkg/ordinal/man/clmm.html" class="external-link">ordinal::clmm()</a></code> models, as long as the type of models is supported by the corresponding package, for example, <code>margins</code> does not currently support <code><a href="https://rdrr.io/pkg/nnet/man/multinom.html" class="external-link">nnet::multinom()</a></code> models (<a href="https://github.com/larmarange/broom.helpers/issues/215" class="external-link">#215</a>)</li>
+</ul><p><strong>Improvements</strong></p>
+<ul><li>Marginal predictions vignette has been updated to follow changes in <code>marginaleffects</code> version 0.10.0 (<a href="https://github.com/larmarange/broom.helpers/issues/216" class="external-link">#216</a>)</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.12.0" id="broomhelpers-1120">broom.helpers 1.12.0<small>2023-02-09</small><a class="anchor" aria-label="anchor" href="#broomhelpers-1120"></a></h2>
 <p><strong>New features</strong></p>
 <ul><li>Set of functions to support marginal predictions, contrasts and slopes / effects (<a href="https://github.com/larmarange/broom.helpers/issues/202" class="external-link">#202</a>):
 <ul><li>A dedicated article presenting the concepts and the different functions has been added to the package documentation website</li>

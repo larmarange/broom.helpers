@@ -20,7 +20,7 @@ to the reference row."><!-- mathjax --><script src="https://cdnjs.cloudflare.com
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">broom.helpers</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.12.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.13.0</span>
       </span>
     </div>
 
@@ -74,6 +74,7 @@ to the reference row.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">tidy_add_estimate_to_reference_rows</span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
 <span>  exponentiate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"exponentiate"</span><span class="op">)</span>,</span>
+<span>  conf.level <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"conf.level"</span><span class="op">)</span>,</span>
 <span>  model <span class="op">=</span> <span class="fu"><a href="tidy_attach_model.html">tidy_get_model</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  quiet <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -89,6 +90,11 @@ to the reference row.</p>
 <dd><p>logical indicating whether or not to exponentiate the
 coefficient estimates. It should be consistent with the original call to
 <code><a href="https://broom.tidymodels.org/reference/reexports.html" class="external-link">broom::tidy()</a></code></p></dd>
+
+
+<dt>conf.level</dt>
+<dd><p>confidence level, by default use the value indicated
+previously in <code><a href="tidy_attach_model.html">tidy_and_attach()</a></code>, used only for sum contrasts</p></dd>
 
 
 <dt>model</dt>
@@ -108,7 +114,9 @@ all other coefficients multiplied by <code>-1</code> (eventually exponentiated i
 <code>exponentiate = TRUE</code>), and obtained with <code><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html" class="external-link">emmeans::emmeans()</a></code>.
 The <code>emmeans</code> package should therefore be installed.
 For sum contrasts, the model coefficient corresponds
-to the difference of each level with the grand mean.</p>
+to the difference of each level with the grand mean.
+For sum contrasts, confidence intervals and p-values will also
+be computed and added to the reference rows.</p>
 <p>For other variables, no change will be made.</p>
 <p>If the <code>reference_row</code> column is not yet available in <code>x</code>,
 <code><a href="tidy_add_reference_rows.html">tidy_add_reference_rows()</a></code> will be automatically applied.</p>
