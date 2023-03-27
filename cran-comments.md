@@ -1,6 +1,6 @@
 ## Test environments
 
-* local R installation (windows 11): R 4.2.2
+* local R installation (windows 11): R 4.2.3
 * macos-latest (on github actions): R-release
 * windows-latest (on github actions): R-release
 * ubuntu-latest  (on github actions): R-devel, R-release, R-oldrel-1, R-oldrel-2, R-oldrel-3
@@ -17,10 +17,3 @@ We checked 6 reverse dependencies, comparing R CMD check results across CRAN and
 
  * We saw 0 new problems
  * We failed to check 0 packages
-
-## resubmission
-
-We previously had a note *Overall checktime 17 min > 10 min*.
-
-Overall checktime has been reduced by reducing the number of tests to be executed on CRAN and by by converting a vignette into a pkgdown article.
-
