@@ -215,6 +215,7 @@ test_that("tidy_add_reference_rows() use var_label if available", {
 })
 
 test_that("tidy_add_reference_rows() works with nnet::multinom", {
+  skip_if_not_installed("nnet")
   skip_on_cran()
   mod <- nnet::multinom(grade ~ stage + marker + age, data = gtsummary::trial, trace = FALSE)
   res <- mod %>%
