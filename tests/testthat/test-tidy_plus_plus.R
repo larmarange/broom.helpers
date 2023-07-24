@@ -376,7 +376,7 @@ test_that("tidy_plus_plus() works with MASS::glm.nb", {
 
 test_that("tidy_plus_plus() works with geepack::geeglm", {
   skip_on_cran()
-  skip_if(packageVersion("geepack") < 1.3)
+  skip_if(packageVersion("geepack") < "1.3")
 
   df <- geepack::dietox
   df$Cu <- as.factor(df$Cu)
@@ -407,7 +407,7 @@ test_that("tidy_plus_plus() works with brms::brm", {
   skip_on_cran()
   skip_if_not_installed("broom.mixed")
   skip_if_not_installed("brms")
-  skip_if(packageVersion("brms") < 2.13)
+  skip_if(packageVersion("brms") < "2.13")
   skip_if_not_installed("rstanarm")
 
   load(system.file("extdata", "brms_example.rda", package = "broom.mixed"))

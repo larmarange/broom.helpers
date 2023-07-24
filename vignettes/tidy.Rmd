@@ -37,7 +37,7 @@ library(dplyr)
 
 # paged_table() was introduced only in rmarkdwon v1.2
 print_table <- function(tab) {
-  if (packageVersion("rmarkdown") >= 1.2) {
+  if (packageVersion("rmarkdown") >= "1.2") {
     rmarkdown::paged_table(tab)
   } else {
     knitr::kable(tab)
