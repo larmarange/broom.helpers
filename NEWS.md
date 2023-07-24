@@ -1,5 +1,9 @@
 # broom.helpers (development version)
 
+**Fix**
+
+- input of `packageVersion()` should be a character string (#225)
+
 # broom.helpers 1.13.0
 
 **New features**
