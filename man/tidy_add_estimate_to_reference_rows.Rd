@@ -52,33 +52,33 @@ If the \code{reference_row} column is not yet available in \code{x},
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 if (.assert_package("gtsummary", boolean = TRUE) && .assert_package("emmeans", boolean = TRUE)) {
-df <- Titanic \%>\%
-  dplyr::as_tibble() \%>\%
-  dplyr::mutate(dplyr::across(where(is.character), factor))
+  df <- Titanic \%>\%
+    dplyr::as_tibble() \%>\%
+    dplyr::mutate(dplyr::across(where(is.character), factor))
 
-df \%>\%
+  df \%>\%
+    glm(
+      Survived ~ Class + Age + Sex,
+      data = ., weights = .$n, family = binomial,
+      contrasts = list(Age = contr.sum, Class = "contr.SAS")
+    ) \%>\%
+    tidy_and_attach(exponentiate = TRUE) \%>\%
+    tidy_add_reference_rows() \%>\%
+    tidy_add_estimate_to_reference_rows()
+
   glm(
-    Survived ~ Class + Age + Sex,
-    data = ., weights = .$n, family = binomial,
-    contrasts = list(Age = contr.sum, Class = "contr.SAS")
+    response ~ stage + grade * trt,
+    gtsummary::trial,
+    family = binomial,
+    contrasts = list(
+      stage = contr.treatment(4, base = 3),
+      grade = contr.treatment(3, base = 2),
+      trt = contr.treatment(2, base = 2)
+    )
   ) \%>\%
-  tidy_and_attach(exponentiate = TRUE) \%>\%
-  tidy_add_reference_rows() \%>\%
-  tidy_add_estimate_to_reference_rows()
-
-glm(
-  response ~ stage + grade * trt,
-  gtsummary::trial,
-  family = binomial,
-  contrasts = list(
-    stage = contr.treatment(4, base = 3),
-    grade = contr.treatment(3, base = 2),
-    trt = contr.treatment(2, base = 2)
-  )
-) \%>\%
-  tidy_and_attach() \%>\%
-  tidy_add_reference_rows() \%>\%
-  tidy_add_estimate_to_reference_rows()
+    tidy_and_attach() \%>\%
+    tidy_add_reference_rows() \%>\%
+    tidy_add_estimate_to_reference_rows()
 }
 \dontshow{\}) # examplesIf}
 }

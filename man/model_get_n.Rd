@@ -71,7 +71,8 @@ mod \%>\% model_get_n()
 
 \dontrun{
 mod <- glm(
-  Survived ~ Class * Age + Sex, data = Titanic \%>\% as.data.frame(),
+  Survived ~ Class * Age + Sex,
+  data = Titanic \%>\% as.data.frame(),
   weights = Freq, family = binomial
 )
 mod \%>\% model_get_n()

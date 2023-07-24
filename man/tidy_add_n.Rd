@@ -102,7 +102,7 @@ df \%>\%
 
 df \%>\%
   glm(
-    Survived ~ Class * (Age : Sex),
+    Survived ~ Class * (Age:Sex),
     data = ., weights = .$n, family = binomial,
     contrasts = list(Age = contr.sum, Class = "contr.helmert")
   ) \%>\%

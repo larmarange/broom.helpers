@@ -151,18 +151,18 @@ df <- Titanic \%>\%
     Class = "Passenger's class",
     Sex = "Gender"
   )
-  ex2 <- glm(
-    Survived ~ Class + Age * Sex,
-    data = df, weights = df$n,
-    family = binomial
-  ) \%>\%
-    tidy_plus_plus(
-      exponentiate = TRUE,
-      add_reference_rows = FALSE,
-      categorical_terms_pattern = "{level} / {reference_level}",
-      add_n = TRUE
-    )
-  ex2
+ex2 <- glm(
+  Survived ~ Class + Age * Sex,
+  data = df, weights = df$n,
+  family = binomial
+) \%>\%
+  tidy_plus_plus(
+    exponentiate = TRUE,
+    add_reference_rows = FALSE,
+    categorical_terms_pattern = "{level} / {reference_level}",
+    add_n = TRUE
+  )
+ex2
 if (.assert_package("gtsummary", boolean = TRUE)) {
   ex3 <-
     glm(

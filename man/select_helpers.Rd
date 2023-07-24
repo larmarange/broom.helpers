@@ -61,10 +61,13 @@ glm(response ~ age * trt + grade, gtsummary::trial, family = binomial) \%>\%
   tidy_plus_plus(exponentiate = TRUE, include = all_categorical())
 
 glm(response ~ age + trt + grade + stage,
-    gtsummary::trial,
-    family = binomial,
-    contrasts = list(trt = contr.SAS, grade = contr.sum, stage = contr.poly)) \%>\%
-tidy_plus_plus(exponentiate = TRUE,
-               include = all_contrasts(c("treatment", "sum")))
+  gtsummary::trial,
+  family = binomial,
+  contrasts = list(trt = contr.SAS, grade = contr.sum, stage = contr.poly)
+) \%>\%
+  tidy_plus_plus(
+    exponentiate = TRUE,
+    include = all_contrasts(c("treatment", "sum"))
+  )
 \dontshow{\}) # examplesIf}
 }
