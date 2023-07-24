@@ -168,8 +168,12 @@ model_list_terms_levels.default <- function(
 .count_term <- function(observed, searched) {
   total <- 0
   for (i in searched) {
-    total <- total +
-      stringr::str_count(observed, paste0("(^|:)", .escape_regex(i), "(:|$)")) %>%
+    total <-
+      total +
+      stringr::str_count(
+        observed,
+        paste0("(^|:)", .escape_regex(i), "(:|$)")
+      ) %>%
       sum()
   }
   total

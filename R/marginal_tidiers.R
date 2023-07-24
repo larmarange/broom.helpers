@@ -37,8 +37,8 @@ tidy_margins <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 
   dots <- rlang::dots_list(...)
   if (isTRUE(dots$exponentiate)) {
-    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_margins}.")
-  } # nolint
+    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_margins}.") # nolint
+  }
 
   res <- broom::tidy(
     margins::margins(x, ...),
@@ -94,11 +94,13 @@ tidy_all_effects <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 
   dots <- rlang::dots_list(...)
   if (isTRUE(dots$exponentiate)) {
-    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_all_effects}.")
-  } # nolint
+    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_all_effects}.") # nolint
+  }
 
-  if (inherits(x, "multinom") || inherits(x, "polr") ||
-    inherits(x, "clm") || inherits(x, "clmm")) {
+  if (
+    inherits(x, "multinom") || inherits(x, "polr") ||
+      inherits(x, "clm") || inherits(x, "clmm")
+  ) {
     return(tidy_all_effects_effpoly(x, conf.int, conf.level, ...))
   }
 
@@ -203,8 +205,8 @@ tidy_ggpredict <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 
   dots <- rlang::dots_list(...)
   if (isTRUE(dots$exponentiate)) {
-    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_ggpredict}.")
-  } # nolint
+    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_ggpredict}.") # nolint
+  }
 
   if (isFALSE(conf.int)) conf.level <- NA
   res <- x %>%
@@ -282,8 +284,8 @@ tidy_avg_slopes <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 
   dots <- rlang::dots_list(...)
   if (isTRUE(dots$exponentiate)) {
-    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_avg_slopes}.")
-  } # nolint
+    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_avg_slopes}.") # nolint
+  }
   dots$exponentiate <- NULL
   dots$conf_level <- conf.level
   dots$model <- x
@@ -374,8 +376,8 @@ tidy_avg_comparisons <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 
   dots <- rlang::dots_list(...)
   if (isTRUE(dots$exponentiate)) {
-    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_avg_comparisons}.")
-  } # nolint
+    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_avg_comparisons}.") # nolint
+  }
   dots$exponentiate <- NULL
   dots$conf_level <- conf.level
   dots$model <- x
@@ -453,8 +455,8 @@ tidy_marginal_means <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 
   dots <- rlang::dots_list(...)
   if (isTRUE(dots$exponentiate)) {
-    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_marginal_means}.")
-  } # nolint
+    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_marginal_means}.") # nolint
+  }
   dots$exponentiate <- NULL
   dots$conf_level <- conf.level
   dots$model <- x
@@ -617,8 +619,8 @@ tidy_marginal_predictions <- function(x, variables_list = "auto",
 
   dots <- rlang::dots_list(...)
   if (isTRUE(dots$exponentiate)) {
-    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_marginal_predictions}.")
-  } # nolint
+    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_marginal_predictions}.")  # nolint
+  }
   dots$exponentiate <- NULL
   dots$conf_level <- conf.level
   dots$model <- x
@@ -649,8 +651,10 @@ tidy_marginal_predictions <- function(x, variables_list = "auto",
   dots$variables <- variables
   dots$by <- names(variables)
 
-  if (inherits(dots$model, "multinom") || inherits(dots$model, "polr") ||
-    inherits(dots$model, "clm") || inherits(dots$model, "clmm")) {
+  if (
+    inherits(dots$model, "multinom") || inherits(dots$model, "polr") ||
+      inherits(dots$model, "clm") || inherits(dots$model, "clmm")
+  ) {
     dots$by <- c(dots$by, "group")
   }
 
@@ -966,8 +970,8 @@ tidy_marginal_contrasts <- function(x, variables_list = "auto",
 
   dots <- rlang::dots_list(...)
   if (isTRUE(dots$exponentiate)) {
-    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_marginal_contrasts}.")
-  } # nolint
+    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_marginal_contrasts}.") # nolint
+  }
   dots$exponentiate <- NULL
   dots$conf_level <- conf.level
   dots$model <- x

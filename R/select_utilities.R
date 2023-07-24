@@ -104,8 +104,10 @@
 }
 
 .check_valid_input <- function(x, arg_name, type_check) {
-  if (!rlang::is_list(x) &&
-    !(rlang::is_vector(x) && rlang::is_named(x))) {
+  if (
+    !rlang::is_list(x) &&
+      !(rlang::is_vector(x) && rlang::is_named(x))
+  ) {
     err_msg <-
       stringr::str_glue(
         "Error processing the `{arg_name %||% ''}` argument. ",
@@ -241,13 +243,13 @@
   # determine if selecting input begins with `var()`
   select_input_starts_var <-
     !rlang::quo_is_symbol(select) && # if not a symbol (ie name)
-      tryCatch(
-        identical(
-          eval(as.list(rlang::quo_get_expr(select)) %>% purrr::pluck(1)),
-          dplyr::vars
-        ),
-        error = function(e) FALSE
-      )
+    tryCatch(
+      identical(
+        eval(as.list(rlang::quo_get_expr(select)) %>% purrr::pluck(1)),
+        dplyr::vars
+      ),
+      error = function(e) FALSE
+    )
 
   # performing selecting
   res <-

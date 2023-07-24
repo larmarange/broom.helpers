@@ -81,8 +81,7 @@ test_that("test tidy_identify_variables() checks", {
     tidy_identify_variables() %>%
     tidy_identify_variables()
   expect_true(
-    all(c("variable", "var_type", "var_class", "var_nlevels")
-    %in% names(res))
+    all(c("variable", "var_type", "var_class", "var_nlevels") %in% names(res))
   )
 
   # cannot be applied after tidy_add_header_rows
@@ -563,11 +562,10 @@ test_that("model_identify_variables() message when failure", {
       df_model = purrr::map(grade, ~ trial %>% dplyr::filter(grade == ..1)),
       mv_formula_char = "Surv(ttdeath, death) ~ trt + age + marker",
       mv_formula = purrr::map(mv_formula_char, as.formula),
-      mv_model_form =
-        purrr::map2(
-          mv_formula, df_model,
-          ~ survival::coxph(..1, data = ..2)
-        )
+      mv_model_form = purrr::map2(
+        mv_formula, df_model,
+        ~ survival::coxph(..1, data = ..2)
+      )
     )
   expect_message(
     df_models %>%

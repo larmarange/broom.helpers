@@ -219,8 +219,8 @@ test_that("tidy_add_variable_labels() works with lme4::glmer", {
   )
   expect_error(
     mod %>%
-      tidy_and_attach(tidy_fun = broom.mixed::tidy)
-      %>% tidy_add_variable_labels(),
+      tidy_and_attach(tidy_fun = broom.mixed::tidy) %>%
+      tidy_add_variable_labels(),
     NA
   )
 })

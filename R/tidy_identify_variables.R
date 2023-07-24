@@ -60,8 +60,10 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x),
 
   # specific case for marginal means / effects / predictions / contrasts
   if (
-    isTRUE(stringr::str_starts(.attributes$coefficients_type, "marginal") &&
-      "variable" %in% names(x))
+    isTRUE(
+      stringr::str_starts(.attributes$coefficients_type, "marginal") &&
+        "variable" %in% names(x)
+    )
   ) {
     x <- x %>%
       dplyr::left_join(

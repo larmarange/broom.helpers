@@ -82,8 +82,8 @@ tidy_add_pairwise_contrasts <- function(
   .attributes <- .save_attributes(x)
 
   if (isTRUE(stringr::str_starts(.attributes$coefficients_type, "marginal"))) {
-    cli::cli_abort("Pairwise contrasts are not compatible with marginal effects / contrasts / means / predictions.")
-  } # nolint
+    cli::cli_abort("Pairwise contrasts are not compatible with marginal effects / contrasts / means / predictions.")  # nolint
+  }
 
   if (is.null(conf.level)) {
     cli::cli_abort("Please specify {.arg conf.level}")
