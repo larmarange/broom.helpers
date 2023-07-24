@@ -312,7 +312,7 @@ test_that("tidy_add_term_labels() works with MASS::polr", {
 
 test_that("tidy_add_term_labels() works with geepack::geeglm", {
   skip_on_cran()
-  skip_if(packageVersion("geepack") < 1.3)
+  skip_if(packageVersion("geepack") < "1.3")
 
   df <- geepack::dietox
   df$Cu <- as.factor(df$Cu)
