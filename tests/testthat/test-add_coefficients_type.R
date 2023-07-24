@@ -179,6 +179,7 @@ test_that("model_get_coefficients_type() works with survival::clogit", {
 
 
 test_that("model_get_coefficients_type() works with nnet::multinom", {
+  skip_if_not_installed("nnet")
   mod <- nnet::multinom(grade ~ stage + marker + age, data = gtsummary::trial, trace = FALSE)
   res <- mod %>% model_get_coefficients_type()
   expect_equivalent(res, "logistic")

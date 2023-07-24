@@ -321,6 +321,7 @@ test_that("model_identify_variables() works with survival::survreg", {
 })
 
 test_that("model_identify_variables() works with nnet::multinom", {
+  skip_if_not_installed("nnet")
   mod <- nnet::multinom(grade ~ stage + marker + age, data = gtsummary::trial, trace = FALSE)
   res <- mod %>% model_identify_variables()
   expect_equivalent(

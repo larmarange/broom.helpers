@@ -140,6 +140,7 @@ test_that("test tidy_add_header_rows() checks", {
 })
 
 test_that("tidy_add_header_rows() works with nnet::multinom", {
+  skip_if_not_installed("nnet")
   skip_on_cran()
   mod <- nnet::multinom(grade ~ stage + marker + age + trt, data = gtsummary::trial, trace = FALSE)
   res <- mod %>%

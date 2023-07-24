@@ -263,6 +263,7 @@ test_that("tidy_add_variable_labels() works with survival::survreg", {
 })
 
 test_that("tidy_add_variable_labels() works with nnet::multinom", {
+  skip_if_not_installed("nnet")
   mod <- nnet::multinom(grade ~ stage + marker + age, data = gtsummary::trial, trace = FALSE)
   expect_error(mod %>% tidy_and_attach() %>% tidy_add_variable_labels(), NA)
 })
