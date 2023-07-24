@@ -10,14 +10,18 @@ test_that("tidy_add_header_rows() works as expected", {
     tidy_add_header_rows()
   expect_equivalent(
     res$label,
-    c("(Intercept)", "T Stage", "T2", "T3", "T4", "Grade", "I", "II",
+    c(
+      "(Intercept)", "T Stage", "T2", "T3", "T4", "Grade", "I", "II",
       "Chemotherapy Treatment", "Drug A", "Grade * Chemotherapy Treatment",
-      "I * Drug A", "II * Drug A")
+      "I * Drug A", "II * Drug A"
+    )
   )
   expect_equivalent(
     res$header_row,
-    c(NA, TRUE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, TRUE, FALSE,
-      TRUE, FALSE, FALSE)
+    c(
+      NA, TRUE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, TRUE, FALSE,
+      TRUE, FALSE, FALSE
+    )
   )
   expect_equivalent(
     res$var_nlevels,
@@ -31,9 +35,11 @@ test_that("tidy_add_header_rows() works as expected", {
     tidy_add_header_rows(show_single_row = everything(), quiet = TRUE)
   expect_equivalent(
     res$label,
-    c("(Intercept)", "T Stage", "T2", "T3", "T4", "Grade", "I", "II",
+    c(
+      "(Intercept)", "T Stage", "T2", "T3", "T4", "Grade", "I", "II",
       "Chemotherapy Treatment", "Grade * Chemotherapy Treatment", "I * Drug A",
-      "II * Drug A")
+      "II * Drug A"
+    )
   )
   expect_equivalent(
     res$header_row,
@@ -75,7 +81,9 @@ test_that("tidy_add_header_rows() works as expected", {
   # and if interaction with a categorical variable
   # (except if )
   mod <- lm(age ~ factor(response) * marker + trt, gtsummary::trial)
-  res <- mod %>% tidy_and_attach() %>% tidy_add_header_rows(show_single_row = "trt")
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_add_header_rows(show_single_row = "trt")
   expect_equivalent(
     res$header_row,
     c(NA, TRUE, FALSE, NA, NA, TRUE, FALSE)
@@ -100,13 +108,17 @@ test_that("tidy_add_header_rows() works as expected", {
   )
   expect_equivalent(
     res$var_label,
-    c("(Intercept)", "factor(response)", "factor(response)", "factor(response)",
-      "Marker Level (ng/mL)", "factor(response) * Marker Level (ng/mL)")
+    c(
+      "(Intercept)", "factor(response)", "factor(response)", "factor(response)",
+      "Marker Level (ng/mL)", "factor(response) * Marker Level (ng/mL)"
+    )
   )
 
   # no standard name
-  mod <- lm(hp ~ `miles per gallon`,
-     mtcars %>% dplyr::rename(`miles per gallon` = mpg))
+  mod <- lm(
+    hp ~ `miles per gallon`,
+    mtcars %>% dplyr::rename(`miles per gallon` = mpg)
+  )
   res <- mod %>%
     tidy_and_attach() %>%
     tidy_add_header_rows()
@@ -114,8 +126,10 @@ test_that("tidy_add_header_rows() works as expected", {
     res$header_row,
     c(NA, NA)
   )
-  mod <- lm(hp ~ `cyl as factor`,
-            mtcars %>% dplyr::mutate(`cyl as factor` = factor(cyl)))
+  mod <- lm(
+    hp ~ `cyl as factor`,
+    mtcars %>% dplyr::mutate(`cyl as factor` = factor(cyl))
+  )
   res <- mod %>%
     tidy_and_attach() %>%
     tidy_add_header_rows()

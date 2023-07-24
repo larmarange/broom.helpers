@@ -21,8 +21,10 @@ test_that("tidy_plus_plus() works for basic models", {
     )
   expect_equivalent(
     res$label,
-    c("T Stage:T2/T1", "T Stage:T3/T1", "T Stage:T4/T1", "custom:II/I",
-      "custom:III/I", "Chemotherapy Treatment:Drug B/Drug A")
+    c(
+      "T Stage:T2/T1", "T Stage:T3/T1", "T Stage:T4/T1", "custom:II/I",
+      "custom:III/I", "Chemotherapy Treatment:Drug B/Drug A"
+    )
   )
 
   # works with add_n
@@ -46,8 +48,10 @@ test_that("tidy_plus_plus() works with no intercept models", {
   )
   expect_equivalent(
     res$contrasts_type,
-    c("no.contrast", "no.contrast", "no.contrast", "no.contrast",
-      "treatment", "treatment", "treatment")
+    c(
+      "no.contrast", "no.contrast", "no.contrast", "no.contrast",
+      "treatment", "treatment", "treatment"
+    )
   )
 })
 
@@ -97,7 +101,6 @@ test_that("tidy_plus_plus() and functionnal programming", {
         )
     )
   )
-
 })
 
 
@@ -182,7 +185,7 @@ test_that("tidy_plus_plus() works with lme4::glmer", {
   skip_on_cran()
   skip_if_not_installed("lme4")
   mod <- lme4::glmer(cbind(incidence, size - incidence) ~ period + (1 | herd),
-                     family = binomial, data = lme4::cbpp
+    family = binomial, data = lme4::cbpp
   )
   skip_if_not_installed("broom.mixed")
   expect_error(
@@ -190,7 +193,7 @@ test_that("tidy_plus_plus() works with lme4::glmer", {
     NA
   )
   mod <- lme4::glmer(cbind(incidence, size - incidence) ~ period + (1 | herd),
-                     family = binomial("probit"), data = lme4::cbpp
+    family = binomial("probit"), data = lme4::cbpp
   )
   expect_error(
     res <- mod %>% tidy_plus_plus(),
@@ -245,8 +248,9 @@ test_that("tidy_plus_plus() works with survival::clogit", {
   n <- nrow(survival::logan)
   indx <- rep(1:n, length(resp))
   logan2 <- data.frame(survival::logan[indx, ],
-                       id = indx,
-                       tocc = factor(rep(resp, each = n)))
+    id = indx,
+    tocc = factor(rep(resp, each = n))
+  )
   logan2$case <- (logan2$occupation == logan2$tocc)
   mod <- survival::clogit(case ~ tocc + tocc:education + strata(id), logan2)
   expect_error(
@@ -260,7 +264,8 @@ test_that("tidy_plus_plus() works with nnet::multinom", {
   skip_on_cran()
   suppressMessages(
     mod <- nnet::multinom(
-      grade ~ stage + marker + age, data = gtsummary::trial,
+      grade ~ stage + marker + age,
+      data = gtsummary::trial,
       trace = FALSE
     )
   )
@@ -270,19 +275,24 @@ test_that("tidy_plus_plus() works with nnet::multinom", {
   )
   expect_equivalent(
     res$y.level,
-    c("II", "II", "II", "II", "II", "II",
-      "III", "III", "III", "III", "III", "III")
+    c(
+      "II", "II", "II", "II", "II", "II",
+      "III", "III", "III", "III", "III", "III"
+    )
   )
   expect_equivalent(
     res$term,
-    c("stageT1", "stageT2", "stageT3", "stageT4", "marker", "age",
-      "stageT1", "stageT2", "stageT3", "stageT4", "marker", "age")
+    c(
+      "stageT1", "stageT2", "stageT3", "stageT4", "marker", "age",
+      "stageT1", "stageT2", "stageT3", "stageT4", "marker", "age"
+    )
   )
 
   # multinom model with binary outcome
   suppressMessages(
     mod <- nnet::multinom(
-      response ~ stage + marker + age, data = gtsummary::trial,
+      response ~ stage + marker + age,
+      data = gtsummary::trial,
       trace = FALSE
     )
   )
@@ -290,7 +300,6 @@ test_that("tidy_plus_plus() works with nnet::multinom", {
     res <- mod %>% tidy_plus_plus(),
     NA
   )
-
 })
 
 test_that("tidy_plus_plus() works with survey::svyglm", {
@@ -307,7 +316,7 @@ test_that("tidy_plus_plus() works with survey::svyglm", {
 test_that("tidy_plus_plus() works with survey::svycoxph", {
   skip_on_cran()
   skip_if_not_installed("survey")
-  dpbc <- survey::svydesign(id = ~ 1, prob = ~ 1, strata = ~ edema, data = survival::pbc)
+  dpbc <- survey::svydesign(id = ~1, prob = ~1, strata = ~edema, data = survival::pbc)
   mod <- survey::svycoxph(
     Surv(time, status > 0) ~ log(bili) + protime + albumin,
     design = dpbc
@@ -322,7 +331,7 @@ test_that("tidy_plus_plus() works with survey::svyolr", {
   skip_on_cran()
   skip_if_not_installed("survey")
   data(api, package = "survey")
-  fpc <- survey::svydesign(id = ~ dnum, weights = ~ pw, data = apiclus1, fpc = ~ fpc)
+  fpc <- survey::svydesign(id = ~dnum, weights = ~pw, data = apiclus1, fpc = ~fpc)
   fpc <- update(fpc, mealcat = cut(meals, c(0, 25, 50, 75, 100)))
   mod <- survey::svyolr(mealcat ~ avg.ed + mobility + stype, design = fpc)
   expect_error(
@@ -486,9 +495,9 @@ test_that("tidy_plus_plus() works with lavaan::lavaan", {
                textual =~ x4 + x5 + x6 + grade
                speed   =~ x7 + x8 + x9 "
   mod <- lavaan::lavaan(HS.model,
-                        data = df,
-                        auto.var = TRUE, auto.fix.first = TRUE,
-                        auto.cov.lv.x = TRUE
+    data = df,
+    auto.var = TRUE, auto.fix.first = TRUE,
+    auto.cov.lv.x = TRUE
   )
   expect_error(
     res <- mod %>% tidy_plus_plus(),
@@ -526,9 +535,10 @@ test_that("tidy_plus_plus() works with mgcv::gam", {
   skip_if_not_installed("mgcv")
   tidy_gam <- function(x, conf.int = FALSE, exponentiate = FALSE, ...) {
     broom::tidy(x,
-                conf.int = conf.int,
-                exponentiate = exponentiate,
-                parametric = TRUE,  ...) %>%
+      conf.int = conf.int,
+      exponentiate = exponentiate,
+      parametric = TRUE, ...
+    ) %>%
       dplyr::mutate(parametric = TRUE) %>%
       dplyr::bind_rows(
         broom::tidy(x, parametric = FALSE, ...) %>%
@@ -724,15 +734,19 @@ test_that("tidy_plus_plus() works with multgee models", {
   )
   expect_equivalent(
     res$y.level,
-    c("1", "1", "1", "1", "1", "1", "1", "1",
-      "2", "2", "2", "2", "2", "2", "2", "2")
+    c(
+      "1", "1", "1", "1", "1", "1", "1", "1",
+      "2", "2", "2", "2", "2", "2", "2", "2"
+    )
   )
   expect_equivalent(
     res$term,
-    c("factor(time)0", "factor(time)6", "factor(time)12", "factor(time)24",
+    c(
+      "factor(time)0", "factor(time)6", "factor(time)12", "factor(time)24",
       "sec", "factor(time)6:sec", "factor(time)12:sec", "factor(time)24:sec",
       "factor(time)0", "factor(time)6", "factor(time)12", "factor(time)24",
-      "sec", "factor(time)6:sec", "factor(time)12:sec", "factor(time)24:sec")
+      "sec", "factor(time)6:sec", "factor(time)12:sec", "factor(time)24:sec"
+    )
   )
 
   mod2 <- ordLORgee(

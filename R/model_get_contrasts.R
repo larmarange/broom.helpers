@@ -19,10 +19,12 @@ model_get_contrasts <- function(model) {
 model_get_contrasts.default <- function(model) {
   # we try 3 different approaches in a row
   mc <- model_get_contrasts_1(model)
-  if (is.null(mc))
+  if (is.null(mc)) {
     mc <- model_get_contrasts_2(model)
-  if (is.null(mc))
+  }
+  if (is.null(mc)) {
     mc <- model_get_contrasts_3(model)
+  }
   mc
 }
 

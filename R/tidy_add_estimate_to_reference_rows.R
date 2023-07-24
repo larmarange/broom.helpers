@@ -33,45 +33,46 @@
 #' @family tidy_helpers
 #' @examplesIf interactive()
 #' if (.assert_package("gtsummary", boolean = TRUE) && .assert_package("emmeans", boolean = TRUE)) {
-#' df <- Titanic %>%
-#'   dplyr::as_tibble() %>%
-#'   dplyr::mutate(dplyr::across(where(is.character), factor))
+#'   df <- Titanic %>%
+#'     dplyr::as_tibble() %>%
+#'     dplyr::mutate(dplyr::across(where(is.character), factor))
 #'
-#' df %>%
+#'   df %>%
+#'     glm(
+#'       Survived ~ Class + Age + Sex,
+#'       data = ., weights = .$n, family = binomial,
+#'       contrasts = list(Age = contr.sum, Class = "contr.SAS")
+#'     ) %>%
+#'     tidy_and_attach(exponentiate = TRUE) %>%
+#'     tidy_add_reference_rows() %>%
+#'     tidy_add_estimate_to_reference_rows()
+#'
 #'   glm(
-#'     Survived ~ Class + Age + Sex,
-#'     data = ., weights = .$n, family = binomial,
-#'     contrasts = list(Age = contr.sum, Class = "contr.SAS")
+#'     response ~ stage + grade * trt,
+#'     gtsummary::trial,
+#'     family = binomial,
+#'     contrasts = list(
+#'       stage = contr.treatment(4, base = 3),
+#'       grade = contr.treatment(3, base = 2),
+#'       trt = contr.treatment(2, base = 2)
+#'     )
 #'   ) %>%
-#'   tidy_and_attach(exponentiate = TRUE) %>%
-#'   tidy_add_reference_rows() %>%
-#'   tidy_add_estimate_to_reference_rows()
-#'
-#' glm(
-#'   response ~ stage + grade * trt,
-#'   gtsummary::trial,
-#'   family = binomial,
-#'   contrasts = list(
-#'     stage = contr.treatment(4, base = 3),
-#'     grade = contr.treatment(3, base = 2),
-#'     trt = contr.treatment(2, base = 2)
-#'   )
-#' ) %>%
-#'   tidy_and_attach() %>%
-#'   tidy_add_reference_rows() %>%
-#'   tidy_add_estimate_to_reference_rows()
+#'     tidy_and_attach() %>%
+#'     tidy_add_reference_rows() %>%
+#'     tidy_add_estimate_to_reference_rows()
 #' }
 tidy_add_estimate_to_reference_rows <- function(
-  x,
-  exponentiate = attr(x, "exponentiate"),
-  conf.level = attr(x, "conf.level"),
-  model = tidy_get_model(x),
-  quiet = FALSE
-) {
-  if (is.null(exponentiate) || !is.logical(exponentiate))
+    x,
+    exponentiate = attr(x, "exponentiate"),
+    conf.level = attr(x, "conf.level"),
+    model = tidy_get_model(x),
+    quiet = FALSE) {
+  if (is.null(exponentiate) || !is.logical(exponentiate)) {
     cli::cli_abort("{.arg exponentiate} is not provided. You need to pass it explicitely.")
-  if (is.null(conf.level) || !is.numeric(conf.level))
+  }
+  if (is.null(conf.level) || !is.numeric(conf.level)) {
     cli::cli_abort("{.arg conf.level} is not provided. You need to pass it explicitely.")
+  }
 
   if (is.null(model)) {
     cli::cli_abort(c(
@@ -131,21 +132,22 @@ tidy_add_estimate_to_reference_rows <- function(
 
 .get_ref_row_estimate_contr_sum <- function(variable, model, exponentiate = FALSE,
                                             conf.level = .95, quiet = FALSE) {
-
   if (inherits(model, "multinom")) {
     dc <- NULL
-    if (!quiet)
+    if (!quiet) {
       cli_alert_info(paste0(
         "Sum contrasts are not supported for 'multinom' models.\n",
         "Reference row of variable '", variable, "' remained unchanged."
       ))
+    }
   } else if (inherits(model, "LORgee")) {
     dc <- NULL
-    if (!quiet)
+    if (!quiet) {
       cli_alert_info(paste0(
         "Sum contrasts are not supported for {.pkg multgee} models.\n",
         "Reference row of variable '", variable, "' remained unchanged."
       ))
+    }
   } else {
     .assert_package("emmeans", fn = "broom.helpers::tidy_add_estimate_to_reference_rows()")
 
@@ -154,11 +156,12 @@ tidy_add_estimate_to_reference_rows <- function(
         emmeans::emmeans(model, specs = variable, contr = "eff")
       ),
       error = function(e) {
-        if (!quiet)
+        if (!quiet) {
           cli_alert_info(paste0(
             "No emmeans() method for this type of model.\n",
             "Reference row of variable '", variable, "' remained unchanged."
           ))
+        }
         NULL
       }
     )
@@ -194,7 +197,6 @@ tidy_add_estimate_to_reference_rows <- function(
       res$conf.low <- NA_real_
       res$conf.high <- NA_real_
     }
-
   }
 
   if (exponentiate) {

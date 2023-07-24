@@ -61,7 +61,7 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x),
   # specific case for marginal means / effects / predictions / contrasts
   if (
     isTRUE(stringr::str_starts(.attributes$coefficients_type, "marginal") &&
-     "variable" %in% names(x))
+      "variable" %in% names(x))
   ) {
     x <- x %>%
       dplyr::left_join(
@@ -111,7 +111,7 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x),
       ) %>%
       tidy_attach_model(model = model, .attributes = .attributes)
   } else {
-    if (!quiet)
+    if (!quiet) {
       cli_alert_danger(paste0(
         "Unable to identify the list of variables.\n\n",
         "This is usually due to an error calling {.code stats::model.frame(x)}",
@@ -121,6 +121,7 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x),
         "functional programming framework (e.g. using {.code lappy()}, ",
         "{.code purrr::map()}, etc.)."
       ))
+    }
 
     x %>%
       dplyr::mutate(
@@ -131,6 +132,4 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x),
       ) %>%
       tidy_attach_model(model = model, .attributes = .attributes)
   }
-
-
 }

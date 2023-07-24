@@ -26,61 +26,72 @@
 #'   tidy_plus_plus(exponentiate = TRUE, include = all_categorical())
 #'
 #' glm(response ~ age + trt + grade + stage,
-#'     gtsummary::trial,
-#'     family = binomial,
-#'     contrasts = list(trt = contr.SAS, grade = contr.sum, stage = contr.poly)) %>%
-#' tidy_plus_plus(exponentiate = TRUE,
-#'                include = all_contrasts(c("treatment", "sum")))
+#'   gtsummary::trial,
+#'   family = binomial,
+#'   contrasts = list(trt = contr.SAS, grade = contr.sum, stage = contr.poly)
+#' ) %>%
+#'   tidy_plus_plus(
+#'     exponentiate = TRUE,
+#'     include = all_contrasts(c("treatment", "sum"))
+#'   )
 NULL
 
 #' @rdname select_helpers
 #' @export
 all_continuous <- function() {
   .generic_selector("variable", "var_type",
-                    startsWith(.data$var_type, "continuous"),
-                    fun_name = "all_continuous")
+    startsWith(.data$var_type, "continuous"),
+    fun_name = "all_continuous"
+  )
 }
 
 #' @rdname select_helpers
 #' @export
 all_dichotomous <- function() {
   .generic_selector("variable", "var_type",
-                    .data$var_type %in% "dichotomous",
-                    fun_name = "all_dichotomous")
+    .data$var_type %in% "dichotomous",
+    fun_name = "all_dichotomous"
+  )
 }
 
 #' @rdname select_helpers
 #' @export
 all_categorical <- function(dichotomous = TRUE) {
-  types <- switch(dichotomous, c("categorical", "dichotomous")) %||% "categorical"
+  types <- switch(dichotomous,
+    c("categorical", "dichotomous")
+  ) %||% "categorical"
 
   .generic_selector("variable", "var_type",
-                    .data$var_type %in% .env$types,
-                    fun_name = "all_categorical")
+    .data$var_type %in% .env$types,
+    fun_name = "all_categorical"
+  )
 }
 
 #' @rdname select_helpers
 #' @export
 all_interaction <- function() {
   .generic_selector("variable", "var_type",
-                    .data$var_type %in% "interaction",
-                    fun_name = "all_interaction")
+    .data$var_type %in% "interaction",
+    fun_name = "all_interaction"
+  )
 }
 
 #' @rdname select_helpers
 #' @export
 all_ran_pars <- function() {
   .generic_selector("variable", "var_type",
-                    .data$var_type %in% "ran_pars",
-                    fun_name = "all_ran_pars")
+    .data$var_type %in% "ran_pars",
+    fun_name = "all_ran_pars"
+  )
 }
 
 #' @rdname select_helpers
 #' @export
 all_ran_vals <- function() {
   .generic_selector("variable", "var_type",
-                    .data$var_type %in% "ran_vals",
-                    fun_name = "all_ran_vals")
+    .data$var_type %in% "ran_vals",
+    fun_name = "all_ran_vals"
+  )
 }
 
 
@@ -88,8 +99,9 @@ all_ran_vals <- function() {
 #' @export
 all_intercepts <- function() {
   .generic_selector("variable", "var_type",
-                    .data$var_type %in% "intercept",
-                    fun_name = "all_intercepts")
+    .data$var_type %in% "intercept",
+    fun_name = "all_intercepts"
+  )
 }
 
 #' @rdname select_helpers
@@ -99,19 +111,22 @@ all_contrasts <- function(contrasts_type = NULL) {
   if (is.null(contrasts_type)) {
     return(
       .generic_selector("variable", "contrasts_type",
-                        !is.na(.data$contrasts_type),
-                        fun_name = "all_contrasts")
+        !is.na(.data$contrasts_type),
+        fun_name = "all_contrasts"
+      )
     )
-  # otherwise, select those specified in `contrasts_type=`
+    # otherwise, select those specified in `contrasts_type=`
   } else {
     contrasts_type <-
       match.arg(contrasts_type,
-                c("treatment", "sum", "poly", "helmert", "other"),
-                several.ok = TRUE)
+        c("treatment", "sum", "poly", "helmert", "other"),
+        several.ok = TRUE
+      )
     return(
       .generic_selector("variable", "contrasts_type",
-                        .data$contrasts_type %in% .env$contrasts_type,
-                        fun_name = "all_contrasts")
+        .data$contrasts_type %in% .env$contrasts_type,
+        fun_name = "all_contrasts"
+      )
     )
   }
 }

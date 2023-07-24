@@ -24,7 +24,7 @@ model_get_offset.default <- function(model) {
       model_get_model_frame() %>%
       stats::model.offset(),
     error = function(e) {
-      NULL #nocov
+      NULL # nocov
     }
   )
 }

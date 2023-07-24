@@ -20,25 +20,23 @@
 #'   mod %>% model_get_pairwise_contrasts(variables = "Species", contrasts_adjust = "none")
 #' }
 model_get_pairwise_contrasts <- function(
-  model,
-  variables,
-  pairwise_reverse = TRUE,
-  contrasts_adjust = NULL,
-  conf.level = .95,
-  emmeans_args = list()
-) {
+    model,
+    variables,
+    pairwise_reverse = TRUE,
+    contrasts_adjust = NULL,
+    conf.level = .95,
+    emmeans_args = list()) {
   UseMethod("model_get_pairwise_contrasts")
 }
 
 #' @export
 model_get_pairwise_contrasts.default <- function(
-  model,
-  variables,
-  pairwise_reverse = TRUE,
-  contrasts_adjust = NULL,
-  conf.level = .95,
-  emmeans_args = list()
-) {
+    model,
+    variables,
+    pairwise_reverse = TRUE,
+    contrasts_adjust = NULL,
+    conf.level = .95,
+    emmeans_args = list()) {
   purrr::map_df(
     variables,
     .get_pairwise_contrasts_one_var,
@@ -51,13 +49,12 @@ model_get_pairwise_contrasts.default <- function(
 }
 
 .get_pairwise_contrasts_one_var <- function(
-  model,
-  variable,
-  pairwise_reverse = TRUE,
-  contrasts_adjust = NULL,
-  conf.level = .95,
-  emmeans_args = list()
-) {
+    model,
+    variable,
+    pairwise_reverse = TRUE,
+    contrasts_adjust = NULL,
+    conf.level = .95,
+    emmeans_args = list()) {
   .assert_package(
     "emmeans",
     fn = "broom.helpers::model_get_pairwise_contrasts()"
@@ -66,12 +63,13 @@ model_get_pairwise_contrasts.default <- function(
   emmeans_args$specs <- variable
   e <- do.call(emmeans::emmeans, emmeans_args)
 
-  if (is.null(contrasts_adjust))
+  if (is.null(contrasts_adjust)) {
     e <- e %>%
       graphics::pairs(reverse = pairwise_reverse)
-  else
+  } else {
     e <- e %>%
       graphics::pairs(reverse = pairwise_reverse, adjust = contrasts_adjust)
+  }
 
   r <- e %>%
     dplyr::as_tibble()

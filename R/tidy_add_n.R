@@ -92,7 +92,7 @@
 #'
 #' df %>%
 #'   glm(
-#'     Survived ~ Class * (Age : Sex),
+#'     Survived ~ Class * (Age:Sex),
 #'     data = ., weights = .$n, family = binomial,
 #'     contrasts = list(Age = contr.sum, Class = "contr.helmert")
 #'   ) %>%
@@ -135,15 +135,17 @@ tidy_add_n <- function(x, model = tidy_get_model(x)) {
       x <- x %>%
         dplyr::left_join(n, by = "term")
     }
-
   }
 
-  if (!is.null(attr(n, "N_obs")))
+  if (!is.null(attr(n, "N_obs"))) {
     .attributes$N_obs <- attr(n, "N_obs")
-  if (!is.null(attr(n, "N_event")))
+  }
+  if (!is.null(attr(n, "N_event"))) {
     .attributes$N_event <- attr(n, "N_event")
-  if (!is.null(attr(n, "Exposure")))
+  }
+  if (!is.null(attr(n, "Exposure"))) {
     .attributes$Exposure <- attr(n, "Exposure")
+  }
 
   x %>%
     tidy_attach_model(model = model, .attributes = .attributes)

@@ -9,8 +9,8 @@
 #' @param ... additional parameters passed to `parameters::model_parameters()`
 #' @examplesIf interactive()
 #' if (.assert_package("parameters", boolean = TRUE)) {
-#' lm(Sepal.Length ~ Sepal.Width + Species, data = iris) %>%
-#'   tidy_parameters()
+#'   lm(Sepal.Length ~ Sepal.Width + Species, data = iris) %>%
+#'     tidy_parameters()
 #' }
 #' @export
 #' @family custom_tieders
@@ -71,10 +71,11 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
   # class of models known for tidy() not supporting exponentiate argument
   # and for ignoring it
   if (any(c("fixest", "plm", "felm", "lavaan", "nls", "survreg") %in% class(x))) {
-    if (isFALSE(tidy_args$exponentiate))
+    if (isFALSE(tidy_args$exponentiate)) {
       tidy_args$exponentiate <- NULL
-    else
+    } else {
       cli::cli_abort("'exponentiate = TRUE' is not valid for this type of model.")
+    }
   }
 
   res <- tryCatch(
@@ -169,11 +170,12 @@ tidy_broom <- function(x, ...) {
 #'   mod2 %>% tidy_multgee()
 #' }
 tidy_multgee <- function(x, conf.int = TRUE, conf.level = .95, ...) {
-  if (!inherits(x, "LORgee"))
+  if (!inherits(x, "LORgee")) {
     cli::cli_abort(paste(
       "Only {.fn multgee::nomLORgee} and {.fn multgee::ordLORgee} models",
       "are supported."
     ))
+  }
 
   res <- tidy_parameters(x, conf.int = conf.int, conf.level = conf.level, ...)
   res$original_term <- res$term
@@ -181,8 +183,9 @@ tidy_multgee <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   # multinomial model
   if (stringr::str_detect(x$title, "NOMINAL")) {
     mf <- x %>% model_get_model_frame()
-    if (!is.factor(mf[[1]]))
+    if (!is.factor(mf[[1]])) {
       mf[[1]] <- factor(mf[[1]])
+    }
     y.levels <- levels(mf[[1]])[-1]
 
     mm <- x %>% model_get_model_matrix()

@@ -75,32 +75,38 @@ model_compute_terms_contributions.default <- function(model) {
     }
   }
 
-  tcm <- tryCatch({
-    formula <- model_get_terms(model)
-    if (is.null(formula)) return(NULL) # stop
+  tcm <- tryCatch(
+    {
+      formula <- model_get_terms(model)
+      if (is.null(formula)) {
+        return(NULL)
+      } # stop
 
-    # continuous variables converted to 1 to force positive values
-    d <- model %>% purrr::pluck("data")
-    if (is.null(d)) d <- model %>% model_get_model_frame()
+      # continuous variables converted to 1 to force positive values
+      d <- model %>% purrr::pluck("data")
+      if (is.null(d)) d <- model %>% model_get_model_frame()
 
-    if (is.null(d)) return(NULL) # stop
+      if (is.null(d)) {
+        return(NULL)
+      } # stop
 
-    d <- d %>%
-      dplyr::mutate(
-        dplyr::across(
-          where(~ is.numeric(.x) & (
-            # check is.matrix for cbind variables
-            # but include polynomial terms
-            !is.matrix(.x) | inherits(.x, "poly")
-          )),
-          ~ abs(.x) + 1 # force positive value
+      d <- d %>%
+        dplyr::mutate(
+          dplyr::across(
+            where(~ is.numeric(.x) & (
+              # check is.matrix for cbind variables
+              # but include polynomial terms
+              !is.matrix(.x) | inherits(.x, "poly")
+            )),
+            ~ abs(.x) + 1 # force positive value
+          )
         )
-      )
-    stats::model.matrix(formula, data = d, contrasts.arg = contr)
-  },
-  error = function(e) {
-    NULL # nocov
-  })
+      stats::model.matrix(formula, data = d, contrasts.arg = contr)
+    },
+    error = function(e) {
+      NULL # nocov
+    }
+  )
 
   if (is.null(tcm)) {
     return(NULL) # nocov

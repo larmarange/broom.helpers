@@ -37,10 +37,8 @@
 #' res %>% tidy_select_variables(
 #'   include = c("Age", all_categorical(dichotomous = FALSE), all_interaction())
 #' )
-
 tidy_select_variables <- function(
-  x, include = everything(), model = tidy_get_model(x)
-) {
+    x, include = everything(), model = tidy_get_model(x)) {
   if (is.null(model)) {
     cli::cli_abort(c(
       "{.arg model} is not provided.",
@@ -57,10 +55,11 @@ tidy_select_variables <- function(
   include <- .select_to_varnames({{ include }}, var_info = x, arg_name = "include")
 
   # order result, intercept first then by the order of include
-  if ("y.level" %in% names(x))
+  if ("y.level" %in% names(x)) {
     x$group_order <- factor(x$y.level) %>% forcats::fct_inorder()
-  else
+  } else {
     x$group_order <- 1
+  }
 
   x %>%
     dplyr::filter(

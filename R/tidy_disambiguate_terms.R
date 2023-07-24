@@ -17,13 +17,14 @@
 #' @examplesIf interactive()
 #' if (
 #'   .assert_package("lme4", boolean = TRUE) &&
-#'   .assert_package("broom.mixed", boolean = TRUE) &&
-#'   .assert_package("gtsummary", boolean = TRUE)
+#'     .assert_package("broom.mixed", boolean = TRUE) &&
+#'     .assert_package("gtsummary", boolean = TRUE)
 #' ) {
-#' mod <- lme4::lmer(marker ~ stage + (1|grade) + (death|response), gtsummary::trial)
-#' mod %>% tidy_and_attach() %>% tidy_disambiguate_terms()
+#'   mod <- lme4::lmer(marker ~ stage + (1 | grade) + (death | response), gtsummary::trial)
+#'   mod %>%
+#'     tidy_and_attach() %>%
+#'     tidy_disambiguate_terms()
 #' }
-
 tidy_disambiguate_terms <- function(x, sep = ".", model = tidy_get_model(x), quiet = FALSE) {
   if (is.null(model)) {
     cli::cli_abort(c(

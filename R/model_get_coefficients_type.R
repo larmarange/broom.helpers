@@ -29,18 +29,24 @@ model_get_coefficients_type.default <- function(model) {
 #' @rdname model_get_coefficients_type
 model_get_coefficients_type.glm <- function(model) {
   if (!is.null(model$family)) {
-    if (model$family$family == "binomial" && model$family$link == "logit")
+    if (model$family$family == "binomial" && model$family$link == "logit") {
       return("logistic")
-    if (model$family$family == "binomial" && model$family$link == "log")
+    }
+    if (model$family$family == "binomial" && model$family$link == "log") {
       return("relative_risk")
-    if (model$family$family == "binomial" && model$family$link == "cloglog")
+    }
+    if (model$family$family == "binomial" && model$family$link == "cloglog") {
       return("prop_hazard")
-    if (model$family$family == "poisson" && model$family$link == "log")
+    }
+    if (model$family$family == "poisson" && model$family$link == "log") {
       return("poisson")
-    if (model$family$family == "quasibinomial" && model$family$link == "logit")
+    }
+    if (model$family$family == "quasibinomial" && model$family$link == "logit") {
       return("logistic")
-    if (model$family$family == "quasipoisson" && model$family$link == "log")
+    }
+    if (model$family$family == "quasipoisson" && model$family$link == "log") {
       return("poisson")
+    }
   }
   "generic"
 }
@@ -66,14 +72,18 @@ model_get_coefficients_type.biglm <- model_get_coefficients_type.glm
 #' @export
 #' @rdname model_get_coefficients_type
 model_get_coefficients_type.glmerMod <- function(model) {
-  if (model@resp$family$family == "binomial" && model@resp$family$link == "logit")
+  if (model@resp$family$family == "binomial" && model@resp$family$link == "logit") {
     return("logistic")
-  if (model@resp$family$family == "binomial" && model@resp$family$link == "log")
+  }
+  if (model@resp$family$family == "binomial" && model@resp$family$link == "log") {
     return("relative_risk")
-  if (model@resp$family$family == "binomial" && model@resp$family$link == "cloglog")
+  }
+  if (model@resp$family$family == "binomial" && model@resp$family$link == "cloglog") {
     return("prop_hazard")
-  if (model@resp$family$family == "poisson" && model@resp$family$link == "log")
+  }
+  if (model@resp$family$family == "poisson" && model@resp$family$link == "log") {
     return("poisson")
+  }
   # "quasi" families cannot be used with in glmer
   "generic"
 }
@@ -87,8 +97,9 @@ model_get_coefficients_type.clogit <- function(model) {
 #' @export
 #' @rdname model_get_coefficients_type
 model_get_coefficients_type.polr <- function(model) {
-  if (model$method == "logistic")
+  if (model$method == "logistic") {
     return("logistic")
+  }
   "generic"
 }
 
@@ -145,15 +156,17 @@ model_get_coefficients_type.model_fit <- function(model) {
 #' @rdname model_get_coefficients_type
 model_get_coefficients_type.LORgee <- function(model) {
   if (stringr::str_detect(
-      model$link,
-      stringr::regex("logit", ignore_case = TRUE)
-    ))
+    model$link,
+    stringr::regex("logit", ignore_case = TRUE)
+  )) {
     return("logistic")
+  }
   if (stringr::str_detect(
     model$link,
     stringr::regex("cloglog", ignore_case = TRUE)
-  ))
+  )) {
     return("prop_hazard")
+  }
 
   "generic"
 }

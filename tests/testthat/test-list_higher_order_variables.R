@@ -6,7 +6,7 @@ test_that("model_list_higher_order_variables() works for basic models", {
   )
 
   mod <- glm(
-    Survived ~ Class * Age + Sex : Class,
+    Survived ~ Class * Age + Sex:Class,
     data = Titanic %>% as.data.frame(),
     weights = Freq,
     family = binomial

@@ -69,7 +69,7 @@ utils::globalVariables(c(".", "where"))
       "variable_labels", "term_labels", "N_obs", "N_event", "Exposure",
       "force_contr.treatment", "skip_add_reference_rows",
       "find_missing_interaction_terms"
-      )
+    )
   )
   .attributes[.attributes_names]
 }

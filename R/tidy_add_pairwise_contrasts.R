@@ -55,16 +55,15 @@
 #'   }
 #' }
 tidy_add_pairwise_contrasts <- function(
-  x,
-  variables = all_categorical(),
-  keep_model_terms = FALSE,
-  pairwise_reverse = TRUE,
-  contrasts_adjust = NULL,
-  conf.level = attr(x, "conf.level"),
-  emmeans_args = list(),
-  model = tidy_get_model(x),
-  quiet = FALSE
-) {
+    x,
+    variables = all_categorical(),
+    keep_model_terms = FALSE,
+    pairwise_reverse = TRUE,
+    contrasts_adjust = NULL,
+    conf.level = attr(x, "conf.level"),
+    emmeans_args = list(),
+    model = tidy_get_model(x),
+    quiet = FALSE) {
   if (is.null(model)) {
     cli::cli_abort(c(
       "{.arg model} is not provided.",
@@ -72,8 +71,9 @@ tidy_add_pairwise_contrasts <- function(
     ))
   }
 
-  if (is.null(conf.level) || !is.numeric(conf.level))
+  if (is.null(conf.level) || !is.numeric(conf.level)) {
     cli::cli_abort("{.arg conf.level} is not provided. You need to pass it explicitely.")
+  }
 
   if (!"contrasts" %in% names(x)) {
     x <- x %>% tidy_add_contrasts(model = model)
@@ -81,11 +81,13 @@ tidy_add_pairwise_contrasts <- function(
 
   .attributes <- .save_attributes(x)
 
-  if (isTRUE(stringr::str_starts(.attributes$coefficients_type, "marginal")))
-    cli::cli_abort("Pairwise contrasts are not compatible with marginal effects / contrasts / means / predictions.") # nolint
+  if (isTRUE(stringr::str_starts(.attributes$coefficients_type, "marginal"))) {
+    cli::cli_abort("Pairwise contrasts are not compatible with marginal effects / contrasts / means / predictions.")
+  } # nolint
 
-  if (is.null(conf.level))
+  if (is.null(conf.level)) {
     cli::cli_abort("Please specify {.arg conf.level}")
+  }
 
   # obtain character vector of selected variables
   variables <- .select_to_varnames(
@@ -94,8 +96,9 @@ tidy_add_pairwise_contrasts <- function(
     arg_name = "variables"
   )
 
-  if (isTRUE(.attributes$exponentiate) && is.null(emmeans_args$type))
+  if (isTRUE(.attributes$exponentiate) && is.null(emmeans_args$type)) {
     emmeans_args$type <- "response"
+  }
 
   pc <- model_get_pairwise_contrasts(
     model = model,
@@ -112,11 +115,12 @@ tidy_add_pairwise_contrasts <- function(
     tidyr::fill(all_of(c("var_class", "var_type", "var_nlevels"))) %>%
     dplyr::select(-all_of("variableF"))
 
-  if (!keep_model_terms)
+  if (!keep_model_terms) {
     x <- x %>%
       dplyr::filter(
         !(.data$variable %in% variables) | .data$contrasts_type == "pairwise"
       )
+  }
 
   x %>%
     tidy_attach_model(model = model, .attributes = .attributes)

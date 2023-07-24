@@ -441,7 +441,8 @@ test_that("Marginal tidiers works with nnet::multinom() models", {
 
   suppressMessages(
     mod <- nnet::multinom(
-      grade ~ stage + marker + age, data = gtsummary::trial,
+      grade ~ stage + marker + age,
+      data = gtsummary::trial,
       trace = FALSE
     )
   )

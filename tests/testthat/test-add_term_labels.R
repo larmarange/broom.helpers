@@ -72,8 +72,10 @@ test_that("tidy_add_term_labels() works for basic models", {
   )
 
   # model with an interaction term only
-  mod <- lm(age ~ factor(response) : marker, gtsummary::trial)
-  res <- mod %>% tidy_and_attach() %>% tidy_add_term_labels()
+  mod <- lm(age ~ factor(response):marker, gtsummary::trial)
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_add_term_labels()
   expect_equivalent(
     res$label,
     c("(Intercept)", "0 * Marker Level (ng/mL)", "1 * Marker Level (ng/mL)")
@@ -146,9 +148,11 @@ test_that("tidy_add_term_labels() correctly manages interaction terms", {
     tidy_add_term_labels()
   expect_equivalent(
     res$label,
-    c("(Intercept)", "T1", "T2", "T3", "T4", "T1 * Months to Death/Censor",
+    c(
+      "(Intercept)", "T1", "T2", "T3", "T4", "T1 * Months to Death/Censor",
       "T2 * Months to Death/Censor", "T3 * Months to Death/Censor",
-      "T4 * Months to Death/Censor")
+      "T4 * Months to Death/Censor"
+    )
   )
 
   # complex case: model with no intercept and sum contrasts
@@ -163,8 +167,10 @@ test_that("tidy_add_term_labels() correctly manages interaction terms", {
     tidy_add_term_labels()
   expect_equivalent(
     res$label,
-    c("setosa", "versicolor", "virginica", "Petal.Width",
-      "setosa * Petal.Width", "versicolor * Petal.Width")
+    c(
+      "setosa", "versicolor", "virginica", "Petal.Width",
+      "setosa * Petal.Width", "versicolor * Petal.Width"
+    )
   )
 })
 
@@ -196,14 +202,18 @@ test_that("tidy_add_term_labels() works with variables having non standard name"
     tidy_add_term_labels()
   expect_equivalent(
     res$label,
-    c("(Intercept)", "Marker Level (ng/mL)", "I", "II", "III", "0",
-      "1", "Marker Level (ng/mL) * II", "Marker Level (ng/mL) * III")
+    c(
+      "(Intercept)", "Marker Level (ng/mL)", "I", "II", "III", "0",
+      "1", "Marker Level (ng/mL) * II", "Marker Level (ng/mL) * III"
+    )
   )
   expect_equivalent(
     res$variable,
-    c("(Intercept)", "marker", "grade of kids...", "grade of kids...", "grade of kids...",
+    c(
+      "(Intercept)", "marker", "grade of kids...", "grade of kids...", "grade of kids...",
       "factor(`?? treatment ++ response ...`)", "factor(`?? treatment ++ response ...`)",
-      "marker:grade of kids...", "marker:grade of kids...")
+      "marker:grade of kids...", "marker:grade of kids..."
+    )
   )
 
   res <- gtsummary::trial %>%

@@ -79,18 +79,18 @@
 #'     Class = "Passenger's class",
 #'     Sex = "Gender"
 #'   )
-#'   ex2 <- glm(
-#'     Survived ~ Class + Age * Sex,
-#'     data = df, weights = df$n,
-#'     family = binomial
-#'   ) %>%
-#'     tidy_plus_plus(
-#'       exponentiate = TRUE,
-#'       add_reference_rows = FALSE,
-#'       categorical_terms_pattern = "{level} / {reference_level}",
-#'       add_n = TRUE
-#'     )
-#'   ex2
+#' ex2 <- glm(
+#'   Survived ~ Class + Age * Sex,
+#'   data = df, weights = df$n,
+#'   family = binomial
+#' ) %>%
+#'   tidy_plus_plus(
+#'     exponentiate = TRUE,
+#'     add_reference_rows = FALSE,
+#'     categorical_terms_pattern = "{level} / {reference_level}",
+#'     add_n = TRUE
+#'   )
+#' ex2
 #' if (.assert_package("gtsummary", boolean = TRUE)) {
 #'   ex3 <-
 #'     glm(
@@ -113,8 +113,7 @@
 #'   ex3
 #' }
 #' @export
-tidy_plus_plus <- function(
-                           model,
+tidy_plus_plus <- function(model,
                            tidy_fun = tidy_with_broom_or_parameters,
                            conf.int = TRUE,
                            conf.level = .95,
@@ -189,7 +188,7 @@ tidy_plus_plus <- function(
       labels = variable_labels,
       interaction_sep = interaction_sep,
       quiet = quiet
-      ) %>%
+    ) %>%
     tidy_add_term_labels(
       labels = term_labels,
       interaction_sep = interaction_sep,
@@ -199,8 +198,10 @@ tidy_plus_plus <- function(
 
   if (add_header_rows) {
     res <- res %>%
-      tidy_add_header_rows(show_single_row = {{ show_single_row }},
-                           strict = strict, quiet = quiet)
+      tidy_add_header_rows(
+        show_single_row = {{ show_single_row }},
+        strict = strict, quiet = quiet
+      )
   }
 
   if (add_n) {

@@ -51,25 +51,33 @@
     } else if (rlang::is_formula(x[[i]])) {
       named_list[i] <-
         .single_formula_to_list(x[[i]],
-                                data = data,
-                                var_info = var_info,
-                                arg_name = arg_name,
-                                select_single = select_single,
-                                type_check = type_check,
-                                type_check_msg = type_check_msg,
-                                null_allowed = null_allowed) %>%
+          data = data,
+          var_info = var_info,
+          arg_name = arg_name,
+          select_single = select_single,
+          type_check = type_check,
+          type_check_msg = type_check_msg,
+          null_allowed = null_allowed
+        ) %>%
         list()
     } else {
       .formula_select_error(arg_name = arg_name)
     }
 
-    .rhs_checks(x = named_list[i][[1]], arg_name = arg_name, type_check = type_check,
-                type_check_msg = type_check_msg, null_allowed = null_allowed)
+    .rhs_checks(
+      x = named_list[i][[1]], arg_name = arg_name, type_check = type_check,
+      type_check_msg = type_check_msg, null_allowed = null_allowed
+    )
   }
   named_list <- purrr::flatten(named_list)
 
   # removing duplicates (using the last one listed if variable occurs more than once)
-  tokeep <- names(named_list) %>% rev() %>% {!duplicated(.)} %>% rev() # nolint
+  tokeep <- names(named_list) %>%
+    rev() %>%
+    {
+      !duplicated(.)
+    } %>%
+    rev() # nolint
   result <- named_list[tokeep]
 
   if (isTRUE(select_single) && length(result) > 1) {
@@ -83,29 +91,34 @@
     stringr::str_glue(
       "Error in `{arg_name}=` argument--select only a single column. ",
       "The following columns were selected, ",
-      "{paste(sQuote(selected), collapse = ', ')}") %>%
+      "{paste(sQuote(selected), collapse = ', ')}"
+    ) %>%
       cli::cli_abort(call = NULL)
   }
   stringr::str_glue(
     "Error in selector--select only a single column. ",
     "The following columns were selected, ",
-    "{paste(sQuote(selected), collapse = ', ')}") %>%
+    "{paste(sQuote(selected), collapse = ', ')}"
+  ) %>%
     cli::cli_abort(call = NULL)
 }
 
 .check_valid_input <- function(x, arg_name, type_check) {
   if (!rlang::is_list(x) &&
-      !(rlang::is_vector(x) && rlang::is_named(x))) {
+    !(rlang::is_vector(x) && rlang::is_named(x))) {
     err_msg <-
       stringr::str_glue(
         "Error processing the `{arg_name %||% ''}` argument. ",
         "Expecting a list or formula.\n",
         "Review syntax details at",
-        "'https://www.danieldsjoberg.com/gtsummary/reference/syntax.html'")
+        "'https://www.danieldsjoberg.com/gtsummary/reference/syntax.html'"
+      )
     if (tryCatch(do.call(type_check, list(x)), error = function(e) FALSE)) {
       x_string <-
         suppressWarnings(tryCatch(
-          switch(rlang::is_string(x), x) %||% as.character(deparse(x)),
+          switch(rlang::is_string(x),
+            x
+          ) %||% as.character(deparse(x)),
           error = function(e) NULL
         ))
       if (!is.null(x_string) && length(x_string) == 1 && nchar(x_string) <= 50) {
@@ -161,11 +174,13 @@
   f_lhs_quo <- .f_side_as_quo(x, "lhs")
   if (rlang::quo_is_null(f_lhs_quo)) f_lhs_quo <- rlang::expr(everything())
   # extract LHS of formula
-  lhs <- .select_to_varnames(select = !!f_lhs_quo,
-                             data = data,
-                             var_info = var_info,
-                             arg_name = arg_name,
-                             select_single = select_single)
+  lhs <- .select_to_varnames(
+    select = !!f_lhs_quo,
+    data = data,
+    var_info = var_info,
+    arg_name = arg_name,
+    select_single = select_single
+  )
 
   # evaluate RHS of formula in the original formula environment
   rhs <- .f_side_as_quo(x, "rhs") %>% rlang::eval_tidy()
@@ -177,7 +192,7 @@
   purrr::map(
     lhs,
     ~ list(rhs) %>% rlang::set_names(.x)
-    ) %>%
+  ) %>%
     purrr::flatten()
 }
 
@@ -202,13 +217,16 @@
 #' @export
 .select_to_varnames <- function(select, data = NULL, var_info = NULL,
                                 arg_name = NULL, select_single = FALSE) {
-  if (is.null(data) && is.null(var_info))
+  if (is.null(data) && is.null(var_info)) {
     cli::cli_abort("At least one of {.arg data} or {.arg var_info} must be specified.")
+  }
 
   select <- rlang::enquo(select)
 
   # if NULL passed, return NULL
-  if (rlang::quo_is_null(select)) return(NULL)
+  if (rlang::quo_is_null(select)) {
+    return(NULL)
+  }
 
   # convert var_info to data frame if data not provided ------------------------
   if (is.null(data)) data <- .var_info_to_df(var_info)
@@ -223,34 +241,45 @@
   # determine if selecting input begins with `var()`
   select_input_starts_var <-
     !rlang::quo_is_symbol(select) && # if not a symbol (ie name)
-    tryCatch(identical(
-      eval(as.list(rlang::quo_get_expr(select)) %>% purrr::pluck(1)),
-      dplyr::vars),
-      error = function(e) FALSE)
+      tryCatch(
+        identical(
+          eval(as.list(rlang::quo_get_expr(select)) %>% purrr::pluck(1)),
+          dplyr::vars
+        ),
+        error = function(e) FALSE
+      )
 
   # performing selecting
   res <-
-    tryCatch({
-      if (select_input_starts_var) {
-        # `vars()` was deprecated on June 6, 2022, gtsummary will stop
-        # exporting `vars()` at some point as well.
-        paste("Use of {.code vars()} is now {.strong deprecated} and support will soon be removed.",
-              "Please replace calls to {.code vars()} with {.code c()}.") %>%
-          cli::cli_alert_warning()
+    tryCatch(
+      {
+        if (select_input_starts_var) {
+          # `vars()` was deprecated on June 6, 2022, gtsummary will stop
+          # exporting `vars()` at some point as well.
+          paste(
+            "Use of {.code vars()} is now {.strong deprecated} and support will soon be removed.",
+            "Please replace calls to {.code vars()} with {.code c()}."
+          ) %>%
+            cli::cli_alert_warning()
 
-        # `vars()` evaluates to a list of quosures; unquoting them in `select()`
-        names(dplyr::select(data, !!!rlang::eval_tidy(select)))
-      } else {
-        names(dplyr::select(data, !!select))
+          # `vars()` evaluates to a list of quosures; unquoting them in `select()`
+          names(dplyr::select(data, !!!rlang::eval_tidy(select)))
+        } else {
+          names(dplyr::select(data, !!select))
+        }
+      },
+      error = function(e) {
+        if (!is.null(arg_name)) {
+          error_msg <- stringr::str_glue(
+            "Error in `{arg_name}=` argument input. Select from ",
+            "{paste(sQuote(names(data)), collapse = ', ')}"
+          )
+        } else {
+          error_msg <- as.character(e)
+        } # nocov
+        cli::cli_abort(error_msg, call = NULL)
       }
-    },
-    error = function(e) {
-      if (!is.null(arg_name))
-        error_msg <- stringr::str_glue("Error in `{arg_name}=` argument input. Select from ",
-                                       "{paste(sQuote(names(data)), collapse = ', ')}")
-      else error_msg <- as.character(e) # nocov
-      cli::cli_abort(error_msg, call = NULL)
-    })
+    )
 
   # assuring only a single column is selected
   if (select_single == TRUE && length(res) > 1) {
@@ -258,7 +287,9 @@
   }
 
   # if nothing is selected, return a NULL
-  if (length(res) == 0) return(NULL)
+  if (length(res) == 0) {
+    return(NULL)
+  }
 
   res
 }
@@ -305,7 +336,9 @@
 .scope_var_info <- function(x) {
   # removing everything from selecting environment
   rm(list = ls(envir = env_variable_type), envir = env_variable_type)
-  if (!inherits(x, "data.frame")) return(invisible(NULL))
+  if (!inherits(x, "data.frame")) {
+    return(invisible(NULL))
+  }
 
   # saving var_info to selecting environment, where it may be utilized by selecting fns
   env_variable_type$df_var_info <- x
@@ -326,8 +359,7 @@
       purrr::map2_dfc(
         x$variable, x$var_class,
         function(var, class) {
-          switch(
-            class,
+          switch(class,
             "numeric" = data.frame(pi),
             "character" = data.frame(letters[1]),
             "factor" = data.frame(datasets::iris$Species[1]),
@@ -344,10 +376,10 @@
       )
   } else if (inherits(x, "data.frame") && "variable" %in% names(x)) {
     # if a data.frame
-    df <- purrr::map_dfc(unique(x$variable), ~data.frame(NA) %>% purrr::set_names(.x))
+    df <- purrr::map_dfc(unique(x$variable), ~ data.frame(NA) %>% purrr::set_names(.x))
   } else if (rlang::is_vector(x) && !is.list(x)) {
     # if only a vector of names were passed, converting them to a data frame
-    df <- purrr::map_dfc(unique(x), ~data.frame(NA) %>% purrr::set_names(.x))
+    df <- purrr::map_dfc(unique(x), ~ data.frame(NA) %>% purrr::set_names(.x))
   }
   # return data frame with variables as column names
   df
@@ -358,8 +390,9 @@
   side <- match.arg(side)
   f_expr <-
     switch(side,
-           "lhs" = rlang::f_lhs(x),
-           "rhs" = rlang::f_rhs(x))
+      "lhs" = rlang::f_lhs(x),
+      "rhs" = rlang::f_rhs(x)
+    )
   f_quo <- rlang::quo(!!f_expr)
   attr(f_quo, ".Environment") <- rlang::f_env(x)
   f_quo
@@ -369,16 +402,20 @@
 # this function prints an informative error msg with correct syntax example
 .formula_select_error <- function(arg_name) {
   example_text <- formula_select_examples[[arg_name %||% "not_an_arg"]] %||%
-    paste(c("label = list(age ~ \"Age, years\")",
-            "statistic = list(all_continuous() ~ \"{mean} ({sd})\")",
-            "type = list(c(response, death) ~ \"categorical\")"))
+    paste(c(
+      "label = list(age ~ \"Age, years\")",
+      "statistic = list(all_continuous() ~ \"{mean} ({sd})\")",
+      "type = list(c(response, death) ~ \"categorical\")"
+    ))
 
   # printing error for argument input
-  if (!is.null(arg_name))
+  if (!is.null(arg_name)) {
     cli_alert_danger(
-      "There was a problem with the {.code {arg_name}=} argument input.")
-  else
+      "There was a problem with the {.code {arg_name}=} argument input."
+    )
+  } else {
     cli_alert_danger("There was a problem with one of the function argument inputs.")
+  }
   cli_alert_info("Below is an example of correct syntax.")
   cli_code(example_text)
   cli::cli_abort("Invalid argument syntax", call = NULL)

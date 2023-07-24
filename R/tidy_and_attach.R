@@ -37,14 +37,16 @@ tidy_attach_model <- function(x, model, .attributes = NULL) {
 
   # if force_contr.treatment
   if (isTRUE(attr(x, "force_contr.treatment"))) {
-    for (v in names(model$contrasts))
+    for (v in names(model$contrasts)) {
       model$contrasts[[v]] <- "contr.treatment"
+    }
   }
 
   attr(x, "model") <- model
   for (a in names(.attributes)) {
-    if (!is.null(.attributes[[a]]))
+    if (!is.null(.attributes[[a]])) {
       attr(x, a) <- .attributes[[a]]
+    }
   }
   x
 }
@@ -52,13 +54,13 @@ tidy_attach_model <- function(x, model, .attributes = NULL) {
 #' @rdname tidy_attach_model
 #' @export
 tidy_and_attach <- function(
-  model, tidy_fun = tidy_with_broom_or_parameters,
-  conf.int = TRUE, conf.level = .95, exponentiate = FALSE, ...
-) {
+    model, tidy_fun = tidy_with_broom_or_parameters,
+    conf.int = TRUE, conf.level = .95, exponentiate = FALSE, ...) {
   # exponentiate cannot be used with lm models
   # but broom will not produce an error and will return unexponentiated estimates
-  if (identical(class(model), "lm") && exponentiate)
+  if (identical(class(model), "lm") && exponentiate) {
     cli::cli_abort("{.code exponentiate = TRUE} is not valid for this type of model.")
+  }
 
   tidy_args <- list(...)
   tidy_args$x <- model
@@ -84,33 +86,36 @@ tidy_and_attach <- function(
         # 2. Incorrect input or incorrect custom `tidy_fun()` passed
         #       - in this case, we print a message explaining the likely source of error
         # first attempting to run without `exponentiate=` argument
-        tryCatch({
-          tidy_args$exponentiate <- NULL
-          xx <-
-            do.call(tidy_fun, tidy_args) %>%
-            tidy_attach_model(
-              model,
-              .attributes = list(exponentiate = FALSE, conf.level = conf.level)
-            )
-          if (exponentiate)
-            cli::cli_alert_warning(
-              "`exponentiate = TRUE` is not valid for this type of model and was ignored."
-            )
-          xx
-        },
-        error = function(e) {
-          # if error persists, then there is a problem with either model input or `tidy_fun=`
-          paste0(
-            "There was an error calling {.code tidy_fun()}. ",
-            "Most likely, this is because the function supplied in {.code tidy_fun=} ",
-            "was misspelled, does not exist, is not compatible with your object, ",
-            "or was missing necessary arguments (e.g. {.code conf.level=} ",
-            "or {.code conf.int=}). See error message below."
-          ) %>%
-            stringr::str_wrap() %>%
-            cli_alert_danger()
-          cli::cli_abort(as.character(e), call = NULL)
-        })
+        tryCatch(
+          {
+            tidy_args$exponentiate <- NULL
+            xx <-
+              do.call(tidy_fun, tidy_args) %>%
+              tidy_attach_model(
+                model,
+                .attributes = list(exponentiate = FALSE, conf.level = conf.level)
+              )
+            if (exponentiate) {
+              cli::cli_alert_warning(
+                "`exponentiate = TRUE` is not valid for this type of model and was ignored."
+              )
+            }
+            xx
+          },
+          error = function(e) {
+            # if error persists, then there is a problem with either model input or `tidy_fun=`
+            paste0(
+              "There was an error calling {.code tidy_fun()}. ",
+              "Most likely, this is because the function supplied in {.code tidy_fun=} ",
+              "was misspelled, does not exist, is not compatible with your object, ",
+              "or was missing necessary arguments (e.g. {.code conf.level=} ",
+              "or {.code conf.int=}). See error message below."
+            ) %>%
+              stringr::str_wrap() %>%
+              cli_alert_danger()
+            cli::cli_abort(as.character(e), call = NULL)
+          }
+        )
       }
     )
 

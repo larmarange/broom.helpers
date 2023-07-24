@@ -185,7 +185,7 @@ model_identify_variables.model_fit <- function(model) {
 #' @export
 model_identify_variables.logitr <- function(model) {
   res <- model_identify_variables.default(model)
-  if (!is.null(model$data$scalePar))
+  if (!is.null(model$data$scalePar)) {
     res <- res %>%
       dplyr::add_row(
         term = "scalePar",
@@ -194,6 +194,7 @@ model_identify_variables.logitr <- function(model) {
         var_nlevels = NA,
         var_type = "continuous"
       )
+  }
   res
 }
 

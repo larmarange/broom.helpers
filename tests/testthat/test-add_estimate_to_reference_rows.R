@@ -86,8 +86,8 @@ test_that("tidy_add_estimate_to_reference_rows() works for basic models", {
 
   ## works also when there is an interaction term
   mod <- glm(response ~ stage * grade * trt, gtsummary::trial,
-             family = binomial,
-             contrasts = list(stage = contr.sum, grade = contr.sum, trt = contr.sum)
+    family = binomial,
+    contrasts = list(stage = contr.sum, grade = contr.sum, trt = contr.sum)
   )
   suppressWarnings(
     res <- mod %>%
@@ -163,7 +163,9 @@ test_that("test tidy_add_estimate_to_reference_rows() checks", {
     response ~ stage + grade + trt, gtsummary::trial,
     family = binomial, contrasts = list(grade = contr.sum)
   )
-  res <- mod %>% tidy_and_attach() %>% tidy_add_reference_rows()
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_add_reference_rows()
   class(mod) <- "unknown"
   expect_message(
     res %>% tidy_add_estimate_to_reference_rows(model = mod)

@@ -33,8 +33,9 @@ model_list_higher_order_variables.default <- function(model) {
 
   # exclude response variable
   response_variable <- model %>% model_get_response_variable()
-  if (!is.null(response_variable))
+  if (!is.null(response_variable)) {
     variables <- variables[!variables %in% response_variable]
+  }
   # exclude (weights)
   variables <- variables[variables != "(weights)"]
 

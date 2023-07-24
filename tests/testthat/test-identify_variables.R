@@ -14,14 +14,17 @@ test_that("model_list_variables() tests", {
   )
   expect_equivalent(
     res$var_class,
-    c(response = "integer", age = "numeric", grade = "factor", trt = "character",
-      death = "integer", NA)
+    c(
+      response = "integer", age = "numeric", grade = "factor", trt = "character",
+      death = "integer", NA
+    )
   )
 
   mod <- lm(marker ~ as.logical(response), gtsummary::trial)
   res <- mod %>%
     model_list_variables(
-      labels = list(marker = "MARKER", "as.logical(response)" = "RESPONSE"))
+      labels = list(marker = "MARKER", "as.logical(response)" = "RESPONSE")
+    )
   expect_equivalent(
     res$var_class,
     c("numeric", "logical")
@@ -73,10 +76,13 @@ test_that("test tidy_identify_variables() checks", {
     mod %>% tidy_and_attach() %>% tidy_identify_variables() %>% tidy_identify_variables(),
     NA
   )
-  res <- mod %>% tidy_and_attach() %>% tidy_identify_variables() %>% tidy_identify_variables()
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_identify_variables() %>%
+    tidy_identify_variables()
   expect_true(
     all(c("variable", "var_type", "var_class", "var_nlevels")
-        %in% names(res))
+    %in% names(res))
   )
 
   # cannot be applied after tidy_add_header_rows
@@ -181,7 +187,7 @@ test_that("tidy_identify_variables() works with variables having non standard na
   expect_error(mod %>% tidy_and_attach() %>% tidy_identify_variables(), NA)
 
   # interaction only term
-  mod <- lm(age ~ marker : `grade of kids`, df)
+  mod <- lm(age ~ marker:`grade of kids`, df)
   expect_equivalent(
     mod %>% model_list_variables(only_variable = TRUE),
     c("age", "marker", "grade of kids", "marker:grade of kids")
@@ -216,8 +222,10 @@ test_that("tidy_identify_variables() works with variables having non standard na
     tidy_remove_intercept()
   expect_equivalent(
     res$variable,
-    c("treatment +name", "disease stage",
-      "disease stage", "disease stage")
+    c(
+      "treatment +name", "disease stage",
+      "disease stage", "disease stage"
+    )
   )
   expect_equivalent(
     res$var_type,
@@ -225,7 +233,7 @@ test_that("tidy_identify_variables() works with variables having non standard na
   )
 
   mod <- lm(
-    hp ~ factor(`number + cylinders`) : `miles :: galon` + factor(`type of transmission`),
+    hp ~ factor(`number + cylinders`):`miles :: galon` + factor(`type of transmission`),
     mtcars %>% dplyr::rename(
       `miles :: galon` = mpg, `type of transmission` = am,
       `number + cylinders` = cyl
@@ -234,11 +242,13 @@ test_that("tidy_identify_variables() works with variables having non standard na
   res <- tidy_plus_plus(mod)
   expect_equivalent(
     res$variable,
-    c("factor(`type of transmission`)",
+    c(
+      "factor(`type of transmission`)",
       "factor(`type of transmission`)",
       "factor(`number + cylinders`):miles :: galon",
       "factor(`number + cylinders`):miles :: galon",
-      "factor(`number + cylinders`):miles :: galon")
+      "factor(`number + cylinders`):miles :: galon"
+    )
   )
 })
 
@@ -405,28 +415,36 @@ test_that("model_identify_variables() works with survey::svyglm", {
 
 test_that("model_identify_variables() works with ordinal::clm", {
   mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine)
-  res <- mod %>% tidy_and_attach() %>% tidy_identify_variables()
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_identify_variables()
   expect_equivalent(
     res$variable,
     c("1|2", "2|3", "3|4", "4|5", "temp", "contact", "temp:contact")
   )
 
   mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine, threshold = "symmetric")
-  res <- mod %>% tidy_and_attach() %>% tidy_identify_variables()
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_identify_variables()
   expect_equivalent(
     res$variable,
     c("central.1", "central.2", "spacing.1", "temp", "contact", "temp:contact")
   )
 
   mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine, threshold = "symmetric2")
-  res <- mod %>% tidy_and_attach() %>% tidy_identify_variables()
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_identify_variables()
   expect_equivalent(
     res$variable,
     c("spacing.1", "spacing.2", "temp", "contact", "temp:contact")
   )
 
   mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine, threshold = "equidistant")
-  res <- mod %>% tidy_and_attach() %>% tidy_identify_variables()
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_identify_variables()
   expect_equivalent(
     res$variable,
     c("threshold.1", "spacing", "temp", "contact", "temp:contact")
@@ -445,14 +463,14 @@ test_that("model_identify_variables() works with ordinal::clm", {
   #     "temp:contact")
   # )
   # nolint end
-
-
 })
 
 
 test_that("model_identify_variables() works with ordinal::clmm", {
   mod <- ordinal::clmm(rating ~ temp * contact + (1 | judge), data = ordinal::wine)
-  res <- mod %>% tidy_and_attach() %>% tidy_identify_variables()
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_identify_variables()
   expect_equivalent(
     res$variable,
     c("1|2", "2|3", "3|4", "4|5", "temp", "contact", "temp:contact")
@@ -542,7 +560,7 @@ test_that("model_identify_variables() message when failure", {
   df_models <-
     tibble::tibble(grade = c("I", "II", "III")) %>%
     dplyr::mutate(
-      df_model = purrr::map(grade, ~trial %>% dplyr::filter(grade == ..1)),
+      df_model = purrr::map(grade, ~ trial %>% dplyr::filter(grade == ..1)),
       mv_formula_char = "Surv(ttdeath, death) ~ trt + age + marker",
       mv_formula = purrr::map(mv_formula_char, as.formula),
       mv_model_form =
@@ -557,7 +575,7 @@ test_that("model_identify_variables() message when failure", {
         mv_tbl_form =
           purrr::map(
             mv_model_form,
-            ~tidy_and_attach(.x) %>% tidy_identify_variables(quiet = FALSE)
+            ~ tidy_and_attach(.x) %>% tidy_identify_variables(quiet = FALSE)
           )
       )
   )
@@ -571,18 +589,21 @@ test_that("model_identify_variables() works with glmmTMB::glmmTMB", {
 
   mod <- suppressWarnings(
     glmmTMB::glmmTMB(count ~ mined + spp,
-                     ziformula = ~ mined + site,
-                     family = poisson,
-                     data = glmmTMB::Salamanders)
+      ziformula = ~ mined + site,
+      family = poisson,
+      data = glmmTMB::Salamanders
+    )
   )
 
   res <- mod %>% model_identify_variables()
   expect_equivalent(
     res$variable,
-    c(NA, "mined", "spp", "spp", "spp", "spp", "spp", "spp", "site",
+    c(
+      NA, "mined", "spp", "spp", "spp", "spp", "spp", "spp", "site",
       "site", "site", "site", "site", "site", "site", "site", "site",
       "site", "site", "site", "site", "site", "site", "site", "site",
-      "site", "site", "site", "site", "site")
+      "site", "site", "site", "site", "site"
+    )
   )
   expect_error(
     mod %>%
@@ -618,5 +639,4 @@ test_that("model_identify_variables() works with plm::plm", {
     res$variable,
     c(NA, "value", "capital")
   )
-
 })

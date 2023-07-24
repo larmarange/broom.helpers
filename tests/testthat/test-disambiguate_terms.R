@@ -15,21 +15,29 @@ test_that("tidy_disambiguate_terms() works for mixed models", {
   skip_if_not_installed("lme4")
   mod <- lme4::lmer(Reaction ~ Days + (Days | Subject), lme4::sleepstudy)
   skip_if_not_installed("broom.mixed")
-  res <- mod %>% tidy_and_attach() %>% tidy_disambiguate_terms(sep = ".")
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_disambiguate_terms(sep = ".")
   expect_equivalent(
     res$term,
-    c("(Intercept)", "Days", "Subject.sd__(Intercept)",
+    c(
+      "(Intercept)", "Days", "Subject.sd__(Intercept)",
       "Subject.cor__(Intercept).Days",
-      "Subject.sd__Days", "Residual.sd__Observation")
+      "Subject.sd__Days", "Residual.sd__Observation"
+    )
   )
   expect_true("original_term" %in% names(res))
 
-  res <- mod %>% tidy_and_attach() %>% tidy_disambiguate_terms(sep = "_")
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_disambiguate_terms(sep = "_")
   expect_equivalent(
     res$term,
-    c("(Intercept)", "Days", "Subject_sd__(Intercept)",
+    c(
+      "(Intercept)", "Days", "Subject_sd__(Intercept)",
       "Subject_cor__(Intercept).Days",
-      "Subject_sd__Days", "Residual_sd__Observation")
+      "Subject_sd__Days", "Residual_sd__Observation"
+    )
   )
 })
 

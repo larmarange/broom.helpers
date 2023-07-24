@@ -28,11 +28,11 @@
 #' attr(ex2, "coefficients_type")
 #' attr(ex2, "coefficients_label")
 tidy_add_coefficients_type <- function(
-  x, exponentiate = attr(x, "exponentiate"),
-  model = tidy_get_model(x)
-) {
-  if (is.null(exponentiate) || !is.logical(exponentiate))
+    x, exponentiate = attr(x, "exponentiate"),
+    model = tidy_get_model(x)) {
+  if (is.null(exponentiate) || !is.logical(exponentiate)) {
     cli::cli_abort("'exponentiate' is not provided. You need to pass it explicitely.")
+  }
 
   if (is.null(model)) {
     cli::cli_abort(c(
@@ -79,7 +79,7 @@ tidy_add_coefficients_type <- function(
     )
   } else {
     coefficients_type <- model_get_coefficients_type(model)
-    if (exponentiate)
+    if (exponentiate) {
       coefficients_label <- dplyr::case_when(
         coefficients_type == "logistic" ~ "OR",
         coefficients_type == "poisson" ~ "IRR",
@@ -87,7 +87,7 @@ tidy_add_coefficients_type <- function(
         coefficients_type == "prop_hazard" ~ "HR",
         TRUE ~ "exp(Beta)"
       )
-    else
+    } else {
       coefficients_label <- dplyr::case_when(
         coefficients_type == "logistic" ~ "log(OR)",
         coefficients_type == "poisson" ~ "log(IRR)",
@@ -95,6 +95,7 @@ tidy_add_coefficients_type <- function(
         coefficients_type == "prop_hazard" ~ "log(HR)",
         TRUE ~ "Beta"
       )
+    }
   }
 
   attr(x, "coefficients_type") <- coefficients_type

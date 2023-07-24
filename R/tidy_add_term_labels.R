@@ -153,7 +153,6 @@ tidy_add_term_labels <- function(x,
     )
     term_labels <- term_labels %>%
       .update_vector(additional_term_labels)
-
   }
 
   x_var_labels <- xx %>%

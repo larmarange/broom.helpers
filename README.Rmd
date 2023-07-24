@@ -68,7 +68,7 @@ mod2 <- glm(
     grade = contr.sum
   )
 )
-ex2 <- mod2 %>% 
+ex2 <- mod2 %>%
   tidy_plus_plus(
     exponentiate = TRUE,
     variable_labels = c(age = "Age (in years)"),
@@ -90,7 +90,7 @@ ex3 <- mod1 %>%
   # add term labels
   tidy_add_term_labels() %>%
   # remove intercept
-  tidy_remove_intercept
+  tidy_remove_intercept()
 ex3
 dplyr::glimpse(ex3)
 

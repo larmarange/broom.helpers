@@ -52,7 +52,9 @@ NULL
     pkg = pkg,
     version = version,
     compare = compare,
-    reason = switch(!is.null(fn), stringr::str_glue("for `{fn}`"))
+    reason = switch(!is.null(fn),
+      stringr::str_glue("for `{fn}`")
+    )
   )
   invisible()
 }
@@ -60,9 +62,13 @@ NULL
 #' @rdname assert_package
 #' @export
 .get_package_dependencies <- function(pkg_search = "broom.helpers") {
-  if (is.null(pkg_search)) return(NULL)
+  if (is.null(pkg_search)) {
+    return(NULL)
+  }
   description <- utils::packageDescription(pkg_search)
-  if (identical(description, NA)) return(NULL)
+  if (identical(description, NA)) {
+    return(NULL)
+  }
   description %>%
     unclass() %>%
     tibble::as_tibble() %>%
@@ -85,7 +91,8 @@ NULL
     dplyr::mutate(pkg = stringr::str_squish(.data$pkg)) %>%
     dplyr::filter(!is.na(.data$pkg)) %>%
     tidyr::separate(
-      .data$pkg, into = c("pkg", "version"),
+      .data$pkg,
+      into = c("pkg", "version"),
       sep = " ", extra = "merge", fill = "right"
     ) %>%
     dplyr::mutate(
@@ -112,10 +119,12 @@ NULL
       lib_path = "LibPath"
     )
 
-  if (!is.null(pkg_search))
+  if (!is.null(pkg_search)) {
     deps <- deps %>% dplyr::filter(.data$pkg_search %in% .env$pkg_search)
-  if (remove_duplicates)
+  }
+  if (remove_duplicates) {
     deps <- deps %>% dplyr::distinct("pkg_search", .keep_all = TRUE)
+  }
 
   deps %>%
     tidyr::pivot_longer(
@@ -127,7 +136,8 @@ NULL
     dplyr::mutate(pkg = stringr::str_squish(.data$pkg)) %>%
     dplyr::filter(!is.na(.data$pkg)) %>%
     tidyr::separate(
-      .data$pkg, into = c("pkg", "version"),
+      .data$pkg,
+      into = c("pkg", "version"),
       sep = " ", extra = "merge", fill = "right"
     ) %>%
     dplyr::mutate(
@@ -139,10 +149,14 @@ NULL
 #' @rdname assert_package
 #' @export
 .get_min_version_required <- function(pkg, pkg_search = "broom.helpers") {
-  if (is.null(pkg_search)) return(NULL)
+  if (is.null(pkg_search)) {
+    return(NULL)
+  }
   res <- .get_package_dependencies(pkg_search) %>%
     dplyr::filter(.data$pkg == .env$pkg & !is.na(.data$version))
-  if (nrow(res) == 0) return(NULL)
+  if (nrow(res) == 0) {
+    return(NULL)
+  }
   version <- res %>% purrr::pluck("version")
   attr(version, "compare") <- res %>% purrr::pluck("compare")
   names(version) <- res %>% purrr::pluck("dependency_type")

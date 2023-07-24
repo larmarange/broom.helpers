@@ -54,10 +54,11 @@ model_get_response.default <- function(model) {
 #' @rdname model_get_response
 model_get_response.glm <- function(model) {
   y <- model %>% purrr::pluck("y")
-  if (is.null(y))
+  if (is.null(y)) {
     y <- model %>%
       model_get_model_frame() %>%
       stats::model.response()
+  }
 
   # model defined with cbind
   if (is.matrix(y) && ncol(y) == 2) {

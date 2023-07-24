@@ -217,7 +217,6 @@ test_that("tidy_add_n() works with nnet::multinom", {
     mod %>% tidy_and_attach() %>% tidy_add_n(),
     NA
   )
-
 })
 
 test_that("tidy_add_n() works with survey::svyglm", {

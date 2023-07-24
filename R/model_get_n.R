@@ -36,7 +36,8 @@
 #'
 #' \dontrun{
 #' mod <- glm(
-#'   Survived ~ Class * Age + Sex, data = Titanic %>% as.data.frame(),
+#'   Survived ~ Class * Age + Sex,
+#'   data = Titanic %>% as.data.frame(),
 #'   weights = Freq, family = binomial
 #' )
 #' mod %>% model_get_n()
@@ -86,7 +87,9 @@ model_get_n <- function(model) {
 #' @rdname model_get_n
 model_get_n.default <- function(model) {
   tcm <- model %>% model_compute_terms_contributions()
-  if (is.null(tcm)) return(NULL)
+  if (is.null(tcm)) {
+    return(NULL)
+  }
 
   w <- model %>% model_get_weights()
   n <- dplyr::tibble(
@@ -102,7 +105,9 @@ model_get_n.default <- function(model) {
 #' @rdname model_get_n
 model_get_n.glm <- function(model) {
   tcm <- model %>% model_compute_terms_contributions()
-  if (is.null(tcm)) return(NULL) # nocov
+  if (is.null(tcm)) {
+    return(NULL)
+  } # nocov
 
   w <- model %>% model_get_weights()
   n <- dplyr::tibble(
@@ -141,7 +146,9 @@ model_get_n.glmerMod <- model_get_n.glm
 #' @rdname model_get_n
 model_get_n.multinom <- function(model) {
   tcm <- model %>% model_compute_terms_contributions()
-  if (is.null(tcm)) return(NULL) # nocov
+  if (is.null(tcm)) {
+    return(NULL)
+  } # nocov
 
   w <- model %>% model_get_weights()
   y <- model %>% model_get_response()
@@ -175,7 +182,9 @@ model_get_n.LORgee <- function(model) {
 #' @rdname model_get_n
 model_get_n.coxph <- function(model) {
   tcm <- model %>% model_compute_terms_contributions()
-  if (is.null(tcm)) return(NULL) # nocov
+  if (is.null(tcm)) {
+    return(NULL)
+  } # nocov
 
   w <- model %>% model_get_weights()
   n <- dplyr::tibble(
@@ -214,7 +223,9 @@ model_get_n.model_fit <- function(model) {
 #' @rdname model_get_n
 model_get_n.tidycrr <- function(model) {
   tcm <- model %>% model_compute_terms_contributions()
-  if (is.null(tcm)) return(NULL) # nocov
+  if (is.null(tcm)) {
+    return(NULL)
+  } # nocov
 
   w <- model %>% model_get_weights()
   n <- dplyr::tibble(

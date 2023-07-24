@@ -27,30 +27,30 @@
 #' @family model_helpers
 #' @examplesIf interactive()
 #' if (.assert_package("gtsummary", boolean = TRUE)) {
-#' Titanic %>%
-#'   dplyr::as_tibble() %>%
-#'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes"))) %>%
+#'   Titanic %>%
+#'     dplyr::as_tibble() %>%
+#'     dplyr::mutate(Survived = factor(Survived, c("No", "Yes"))) %>%
+#'     glm(
+#'       Survived ~ Class + Age:Sex,
+#'       data = ., weights = .$n,
+#'       family = binomial
+#'     ) %>%
+#'     model_list_variables()
+#'
+#'   iris %>%
+#'     lm(
+#'       Sepal.Length ~ poly(Sepal.Width, 2) + Species,
+#'       data = .,
+#'       contrasts = list(Species = contr.sum)
+#'     ) %>%
+#'     model_list_variables()
+#'
 #'   glm(
-#'     Survived ~ Class + Age : Sex,
-#'     data = ., weights = .$n,
-#'     family = binomial
+#'     response ~ poly(age, 3) + stage + grade * trt,
+#'     na.omit(gtsummary::trial),
+#'     family = binomial,
 #'   ) %>%
-#'   model_list_variables()
-#'
-#' iris %>%
-#'   lm(
-#'     Sepal.Length ~ poly(Sepal.Width, 2) + Species,
-#'     data = .,
-#'     contrasts = list(Species = contr.sum)
-#'   ) %>%
-#'   model_list_variables()
-#'
-#' glm(
-#'   response ~ poly(age, 3) + stage + grade * trt,
-#'   na.omit(gtsummary::trial),
-#'   family = binomial,
-#' ) %>%
-#'   model_list_variables()
+#'     model_list_variables()
 #' }
 model_list_variables <- function(model, labels = NULL,
                                  only_variable = FALSE, add_var_type = FALSE) {
@@ -72,11 +72,15 @@ model_list_variables.default <- function(model, labels = NULL,
       dataClasses <- attr(model_terms, "dataClasses")
     }
   } else {
-    dataClasses <- model_frame %>% lapply(.MFclass2) %>% unlist()
+    dataClasses <- model_frame %>%
+      lapply(.MFclass2) %>%
+      unlist()
     variable_names <- names(dataClasses)
   }
 
-  if (is.null(variable_names)) return(NULL)
+  if (is.null(variable_names)) {
+    return(NULL)
+  }
 
   # update the list with all elements of dataClasses
   variable_names <- names(dataClasses) %>%
@@ -95,9 +99,13 @@ model_list_variables.default <- function(model, labels = NULL,
     ) %>%
     .compute_var_label(labels)
 
-  if (only_variable) return(res$variable)
+  if (only_variable) {
+    return(res$variable)
+  }
 
-  if (add_var_type) return(.add_var_type(res, model))
+  if (add_var_type) {
+    return(.add_var_type(res, model))
+  }
 
   res
 }
@@ -127,9 +135,13 @@ model_list_variables.lavaan <- function(model, labels = NULL,
     .add_label_attr(model) %>%
     .compute_var_label(labels)
 
-  if (only_variable) return(res$variable)
+  if (only_variable) {
+    return(res$variable)
+  }
 
-  if (add_var_type) return(.add_var_type(res, model))
+  if (add_var_type) {
+    return(.add_var_type(res, model))
+  }
 
   res
 }
@@ -160,9 +172,13 @@ model_list_variables.logitr <- function(model, labels = NULL,
   }
 
 
-  if (only_variable) return(res$variable)
+  if (only_variable) {
+    return(res$variable)
+  }
 
-  if (add_var_type) return(.add_var_type(res, model))
+  if (add_var_type) {
+    return(.add_var_type(res, model))
+  }
 
   res
 }
@@ -182,7 +198,7 @@ model_list_variables.logitr <- function(model, labels = NULL,
 
 .add_label_attr <- function(x, model) {
   labels <- unlist(labelled::var_label(model_get_model_frame(model)))
-  if (length(labels) > 0)
+  if (length(labels) > 0) {
     x %>%
       dplyr::left_join(
         dplyr::tibble(
@@ -191,27 +207,35 @@ model_list_variables.logitr <- function(model, labels = NULL,
         ),
         by = "variable"
       )
-  else
+  } else {
     x %>%
       dplyr::mutate(label_attr = NA)
+  }
 }
 
 # stats::.MFclass do not distinct integer and numeric
 .MFclass2 <- function(x) {
-  if (is.logical(x))
+  if (is.logical(x)) {
     return("logical")
-  if (is.ordered(x))
+  }
+  if (is.ordered(x)) {
     return("ordered")
-  if (is.factor(x))
+  }
+  if (is.factor(x)) {
     return("factor")
-  if (is.character(x))
+  }
+  if (is.character(x)) {
     return("character")
-  if (is.matrix(x) && is.numeric(x))
+  }
+  if (is.matrix(x) && is.numeric(x)) {
     return(paste0("nmatrix.", ncol(x)))
-  if (is.integer(x))
+  }
+  if (is.integer(x)) {
     return("integer")
-  if (is.numeric(x))
+  }
+  if (is.numeric(x)) {
     return("numeric")
+  }
   return("other")
 }
 
@@ -231,14 +255,15 @@ model_list_variables.logitr <- function(model, labels = NULL,
         by = "variable"
       )
   }
-  x %>% dplyr::mutate(
-    label_attr = as.character(.data$label_attr),
-    var_label = dplyr::case_when(
-      !is.na(.data$var_custom_label) ~ .data$var_custom_label,
-      !is.na(.data$label_attr) ~ .data$label_attr,
-      TRUE ~ .data$variable
-    )
-  ) %>%
+  x %>%
+    dplyr::mutate(
+      label_attr = as.character(.data$label_attr),
+      var_label = dplyr::case_when(
+        !is.na(.data$var_custom_label) ~ .data$var_custom_label,
+        !is.na(.data$label_attr) ~ .data$label_attr,
+        TRUE ~ .data$variable
+      )
+    ) %>%
     dplyr::select(-dplyr::all_of("var_custom_label"))
 }
 

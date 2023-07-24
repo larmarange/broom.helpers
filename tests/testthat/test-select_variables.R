@@ -77,7 +77,6 @@ test_that("tidy_select_variables() works for basic models", {
       "grade:trt", "grade:trt"
     )
   )
-
 })
 
 

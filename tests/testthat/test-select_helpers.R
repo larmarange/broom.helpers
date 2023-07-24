@@ -84,11 +84,14 @@ test_that("select_helpers: tidy_plus_plus", {
 
   mod <- glm(response ~ age * trt + grade, gtsummary::trial, family = binomial)
   mod2 <- glm(response ~ stage + grade * trt,
-              gtsummary::trial,
-              family = binomial,
-              contrasts = list(stage = contr.sum,
-                               grade = contr.poly,
-                               trt = contr.helmert))
+    gtsummary::trial,
+    family = binomial,
+    contrasts = list(
+      stage = contr.sum,
+      grade = contr.poly,
+      trt = contr.helmert
+    )
+  )
   mod3 <- glm(
     response ~ stage + grade + trt + factor(death),
     gtsummary::trial,
@@ -163,8 +166,10 @@ test_that("select_helpers: tidy_plus_plus", {
   )
 
   expect_equal(
-    tidy_plus_plus(mod, add_header_rows = TRUE,
-                   show_single_row = all_dichotomous())$variable %in% "trt" %>%
+    tidy_plus_plus(mod,
+      add_header_rows = TRUE,
+      show_single_row = all_dichotomous()
+    )$variable %in% "trt" %>%
       sum(),
     1L
   )
@@ -200,11 +205,13 @@ test_that("select_helpers: tidy_plus_plus", {
   )
   expect_equal(
     res$term,
-    c("grade.sd__(Intercept)", "grade.cor__(Intercept).stageT2",
+    c(
+      "grade.sd__(Intercept)", "grade.cor__(Intercept).stageT2",
       "grade.cor__(Intercept).stageT3", "grade.cor__(Intercept).stageT4",
       "grade.sd__stageT2", "grade.cor__stageT2.stageT3", "grade.cor__stageT2.stageT4",
       "grade.sd__stageT3", "grade.cor__stageT3.stageT4", "grade.sd__stageT4",
-      "grade.1.sd__(Intercept)", "Residual.sd__Observation")
+      "grade.1.sd__(Intercept)", "Residual.sd__Observation"
+    )
   )
   res <- mod3 %>% tidy_plus_plus(
     tidy_fun = broom.mixed::tidy,
@@ -235,11 +242,14 @@ test_that("select_helpers: tidy_add_variable_labels", {
 
   expect_equal(
     tidy_add_variable_labels(mod_tidy,
-                             labels = list(`(Intercept)` ~ "b0",
-                                           age ~ "AGE",
-                                           trt ~ "Drug",
-                                           "grade" ~ "Grade",
-                                           contains("age:") ~ "Interaction")) %>%
+      labels = list(
+        `(Intercept)` ~ "b0",
+        age ~ "AGE",
+        trt ~ "Drug",
+        "grade" ~ "Grade",
+        contains("age:") ~ "Interaction"
+      )
+    ) %>%
       dplyr::pull(var_label) %>%
       unique(),
     c("b0", "AGE", "Drug", "Grade", "Interaction")
@@ -280,17 +290,23 @@ test_that("select_helpers: .formula_list_to_named_list ", {
   )
 
   expect_error(
-    .formula_list_to_named_list(list(age ~ "Age"), var_info = tidy_mod,
-                                type_check = is.character),
+    .formula_list_to_named_list(list(age ~ "Age"),
+      var_info = tidy_mod,
+      type_check = is.character
+    ),
     NA
   )
   expect_error(
-    .formula_list_to_named_list(list(age ~ "Age"), var_info = tidy_mod,
-                                type_check = is.logical)
+    .formula_list_to_named_list(list(age ~ "Age"),
+      var_info = tidy_mod,
+      type_check = is.logical
+    )
   )
   expect_error(
-    .formula_list_to_named_list(letters, var_info = tidy_mod,
-                                type_check = is.logical)
+    .formula_list_to_named_list(letters,
+      var_info = tidy_mod,
+      type_check = is.logical
+    )
   )
 
   expect_equal(
@@ -299,51 +315,65 @@ test_that("select_helpers: .formula_list_to_named_list ", {
   )
 
   expect_equal(
-    .formula_list_to_named_list(~ "Age", var_info = tidy_mod),
+    .formula_list_to_named_list(~"Age", var_info = tidy_mod),
     list(age = "Age", trt = "Age", grade = "Age", `age:trt` = "Age")
   )
   expect_equal(
-    .formula_list_to_named_list(list(~ "Age", `age:trt` = "interact"), var_info = tidy_mod),
+    .formula_list_to_named_list(list(~"Age", `age:trt` = "interact"), var_info = tidy_mod),
     list(age = "Age", trt = "Age", grade = "Age", `age:trt` = "interact")
   )
 
   expect_error(
-    .formula_list_to_named_list(list(age ~ "Age"), var_info = tidy_mod, type_check = is.logical,
-                                arg_name = "label")
+    .formula_list_to_named_list(list(age ~ "Age"),
+      var_info = tidy_mod, type_check = is.logical,
+      arg_name = "label"
+    )
   )
   expect_error(
-    .formula_list_to_named_list(list(age ~ "Age"), var_info = tidy_mod,
-                                type_check = is.logical, arg_name = "label",
-                                type_check_msg = "Age msg error"),
+    .formula_list_to_named_list(list(age ~ "Age"),
+      var_info = tidy_mod,
+      type_check = is.logical, arg_name = "label",
+      type_check_msg = "Age msg error"
+    ),
     "Age msg error"
   )
   expect_error(
-    .formula_list_to_named_list("Age", var_info = tidy_mod,
-                                type_check = rlang::is_string,
-                                arg_name = "label"),
+    .formula_list_to_named_list("Age",
+      var_info = tidy_mod,
+      type_check = rlang::is_string,
+      arg_name = "label"
+    ),
     "Did you mean `everything"
   )
   expect_error(
-    .formula_list_to_named_list("Age", var_info = tidy_mod,
-                                type_check = rlang::is_string,
-                                arg_name = "label"),
+    .formula_list_to_named_list("Age",
+      var_info = tidy_mod,
+      type_check = rlang::is_string,
+      arg_name = "label"
+    ),
     "Age"
   )
   expect_error(
-    .formula_list_to_named_list(~ "Age", var_info = tidy_mod,
-                                type_check = rlang::is_string,
-                                arg_name = "label"),
+    .formula_list_to_named_list(~"Age",
+      var_info = tidy_mod,
+      type_check = rlang::is_string,
+      arg_name = "label"
+    ),
     NA
   )
 
   expect_error(
-    .formula_list_to_named_list(list(age ~ NULL), var_info = tidy_mod,
-                                type_check = is.logical),
+    .formula_list_to_named_list(list(age ~ NULL),
+      var_info = tidy_mod,
+      type_check = is.logical
+    ),
     NA
   )
   expect_error(
-    .formula_list_to_named_list(list(age ~ NULL), var_info = tidy_mod,
-                                type_check = is.logical, null_allowed = FALSE)
+    .formula_list_to_named_list(list(age ~ NULL),
+      var_info = tidy_mod,
+      type_check = is.logical, null_allowed = FALSE
+    )
   )
   expect_error(
     select_test <-

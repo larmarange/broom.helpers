@@ -8,7 +8,7 @@ test_that(".assert_package() works", {
 
   expect_false(.assert_package("br000000m", boolean = TRUE))
 
-  mv <- c(Suggests  = "1.1.28")
+  mv <- c(Suggests = "1.1.28")
   attr(mv, "compare") <- ">="
   expect_equal(
     .get_min_version_required("lme4"),

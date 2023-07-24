@@ -311,7 +311,7 @@ tibble::tribble(
   "n_event", "`tidy_add_n()`", "Number of events (for binomial and multinomial logistic models, Poisson and Cox models)",
   "exposure", "`tidy_add_n()`", "Exposure time (for Poisson and Cox models)"
 ) %>%
-    gt::gt() %>%
+  gt::gt() %>%
   gt::fmt_markdown(columns = everything()) %>%
   gt::tab_options(
     column_labels.font.weight = "bold"
@@ -348,7 +348,7 @@ tibble::tribble(
   "N_event", "`tidy_add_n()`", "Total number of events",
   "Exposure", "`tidy_add_n()`", "Total of exposure time"
 ) %>%
-    gt::gt() %>%
+  gt::gt() %>%
   gt::fmt_markdown(columns = everything()) %>%
   gt::tab_options(column_labels.font.weight = "bold") %>%
   gt::opt_row_striping() %>%

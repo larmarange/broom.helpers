@@ -10,8 +10,10 @@ test_that("tidy_add_pairwise_contrasts() works for glm", {
     tidy_add_pairwise_contrasts()
   expect_equivalent(
     res$term,
-    c("(Intercept)", "T2 - T1", "T3 - T1", "T3 - T2", "T4 - T1",
-      "T4 - T2", "T4 - T3", "Drug B - Drug A")
+    c(
+      "(Intercept)", "T2 - T1", "T3 - T1", "T3 - T2", "T4 - T1",
+      "T4 - T2", "T4 - T3", "Drug B - Drug A"
+    )
   )
 
   res <- mod %>%
@@ -19,8 +21,10 @@ test_that("tidy_add_pairwise_contrasts() works for glm", {
     tidy_add_pairwise_contrasts()
   expect_equivalent(
     res$term,
-    c("(Intercept)", "T2 / T1", "T3 / T1", "T3 / T2", "T4 / T1",
-      "T4 / T2", "T4 / T3", "Drug B / Drug A")
+    c(
+      "(Intercept)", "T2 / T1", "T3 / T1", "T3 / T2", "T4 / T1",
+      "T4 / T2", "T4 / T3", "Drug B / Drug A"
+    )
   )
   expect_equivalent(
     round(res$estimate, digits = 2),
@@ -40,8 +44,10 @@ test_that("tidy_add_pairwise_contrasts() works for glm", {
     )
   expect_equivalent(
     res$term,
-    c("(Intercept)", "stageT2", "stageT3", "stageT4", "T1 / T2",
-      "T1 / T3", "T1 / T4", "T2 / T3", "T2 / T4", "T3 / T4", "trtDrug B")
+    c(
+      "(Intercept)", "stageT2", "stageT3", "stageT4", "T1 / T2",
+      "T1 / T3", "T1 / T4", "T2 / T3", "T2 / T4", "T3 / T4", "trtDrug B"
+    )
   )
   expect_equivalent(
     round(res$conf.low, digits = 2),
@@ -52,8 +58,10 @@ test_that("tidy_add_pairwise_contrasts() works for glm", {
     tidy_plus_plus(exponentiate = TRUE, add_pairwise_contrasts = TRUE)
   expect_equivalent(
     res$term,
-    c("T2 / T1", "T3 / T1", "T3 / T2", "T4 / T1", "T4 / T2", "T4 / T3",
-      "Drug B / Drug A")
+    c(
+      "T2 / T1", "T3 / T1", "T3 / T2", "T4 / T1", "T4 / T2", "T4 / T3",
+      "Drug B / Drug A"
+    )
   )
 
   res1 <- mod %>%

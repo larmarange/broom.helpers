@@ -36,14 +36,18 @@ test_that("tidy_add_reference_rows() works as expected", {
   )
   expect_equivalent(
     res$var_class,
-    c(NA, "factor", "factor", "factor", "factor", "factor", "factor",
-      "factor", "character", "character", NA, NA)
+    c(
+      NA, "factor", "factor", "factor", "factor", "factor", "factor",
+      "factor", "character", "character", NA, NA
+    )
   )
   expect_equivalent(
     res$var_type,
-    c("intercept", "categorical", "categorical", "categorical", "categorical",
+    c(
+      "intercept", "categorical", "categorical", "categorical", "categorical",
       "categorical", "categorical", "categorical", "dichotomous", "dichotomous",
-      "interaction", "interaction")
+      "interaction", "interaction"
+    )
   )
   expect_equivalent(
     res$var_nlevels,
@@ -235,7 +239,7 @@ test_that("tidy_add_reference_rows() works with lme4::glmer", {
   skip_if_not_installed("lme4")
   skip_if_not_installed("broom.mixed")
   mod <- lme4::glmer(cbind(incidence, size - incidence) ~ period + (1 | herd),
-                     family = binomial, data = lme4::cbpp
+    family = binomial, data = lme4::cbpp
   )
   res <- mod %>%
     tidy_and_attach() %>%
@@ -254,15 +258,18 @@ test_that("tidy_add_reference_rows() works with glmmTMB::glmmTMB", {
   skip_if_not_installed("broom.mixed")
 
   mod <- glmmTMB::glmmTMB(count ~ mined + spp,
-                          ziformula = ~ mined,
-                          family = poisson,
-                          data = glmmTMB::Salamanders)
+    ziformula = ~mined,
+    family = poisson,
+    data = glmmTMB::Salamanders
+  )
   res <- mod %>%
     tidy_and_attach() %>%
     tidy_add_reference_rows()
   expect_equivalent(
     res$reference_row,
-    c(NA, TRUE, FALSE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
-      NA, TRUE, FALSE)
+    c(
+      NA, TRUE, FALSE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
+      NA, TRUE, FALSE
+    )
   )
 })

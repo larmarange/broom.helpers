@@ -29,39 +29,38 @@
 #' @family tidy_helpers
 #' @examplesIf interactive()
 #' if (.assert_package("gtsummary", boolean = TRUE)) {
-#' df <- Titanic %>%
-#'   dplyr::as_tibble() %>%
-#'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
+#'   df <- Titanic %>%
+#'     dplyr::as_tibble() %>%
+#'     dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
 #'
-#' res <- df %>%
+#'   res <- df %>%
+#'     glm(
+#'       Survived ~ Class + Age + Sex,
+#'       data = ., weights = .$n, family = binomial,
+#'       contrasts = list(Age = contr.sum, Class = "contr.SAS")
+#'     ) %>%
+#'     tidy_and_attach()
+#'   res %>% tidy_add_reference_rows()
+#'   res %>% tidy_add_reference_rows(no_reference_row = all_dichotomous())
+#'   res %>% tidy_add_reference_rows(no_reference_row = "Class")
+#'
 #'   glm(
-#'     Survived ~ Class + Age + Sex,
-#'     data = ., weights = .$n, family = binomial,
-#'     contrasts = list(Age = contr.sum, Class = "contr.SAS")
+#'     response ~ stage + grade * trt,
+#'     gtsummary::trial,
+#'     family = binomial,
+#'     contrasts = list(
+#'       stage = contr.treatment(4, base = 3),
+#'       grade = contr.treatment(3, base = 2),
+#'       trt = contr.treatment(2, base = 2)
+#'     )
 #'   ) %>%
-#'   tidy_and_attach()
-#' res %>% tidy_add_reference_rows()
-#' res %>% tidy_add_reference_rows(no_reference_row = all_dichotomous())
-#' res %>% tidy_add_reference_rows(no_reference_row = "Class")
-#'
-#' glm(
-#'   response ~ stage + grade * trt,
-#'   gtsummary::trial,
-#'   family = binomial,
-#'   contrasts = list(
-#'     stage = contr.treatment(4, base = 3),
-#'     grade = contr.treatment(3, base = 2),
-#'     trt = contr.treatment(2, base = 2)
-#'   )
-#' ) %>%
-#'   tidy_and_attach() %>%
-#'   tidy_add_reference_rows()
+#'     tidy_and_attach() %>%
+#'     tidy_add_reference_rows()
 #' }
 tidy_add_reference_rows <- function(
-  x, no_reference_row = NULL,
-  model = tidy_get_model(x),
-  quiet = FALSE
-) {
+    x, no_reference_row = NULL,
+    model = tidy_get_model(x),
+    quiet = FALSE) {
   if (is.null(model)) {
     cli::cli_abort(c(
       "{.arg model} is not provided.",
@@ -76,8 +75,9 @@ tidy_add_reference_rows <- function(
     return(x %>% dplyr::mutate(reference_row = NA))
   }
   # checking cases where adding reference rows is not meaningful
-  if (isTRUE(.attributes$skip_add_reference_rows))
+  if (isTRUE(.attributes$skip_add_reference_rows)) {
     return(x %>% dplyr::mutate(reference_row = NA))
+  }
 
   if ("header_row" %in% names(x)) {
     cli::cli_abort(paste(
@@ -87,28 +87,31 @@ tidy_add_reference_rows <- function(
   }
 
   if ("reference_row" %in% names(x)) {
-    if (!quiet)
+    if (!quiet) {
       cli_alert_danger(paste(
         "{.code tidy_add_reference_rows()} has already been applied.",
         "x has been returned unchanged."
       ))
+    }
     return(x)
   }
 
   if ("label" %in% names(x)) {
-    if (!quiet)
+    if (!quiet) {
       cli_alert_info(paste0(
         "tidy_add_reference_rows() has been applied after tidy_add_term_labels().\n",
         "You should consider applying tidy_add_reference_rows() first."
       ))
+    }
   }
 
   if ("n_obs" %in% names(x)) {
-    if (!quiet)
+    if (!quiet) {
       cli_alert_info(paste0(
         "{.code tidy_add_reference_rows()} has been applied after {.code tidy_add_n()}.\n",
         "You should consider applying {.code tidy_add_reference_rows()} first."
       ))
+    }
   }
 
   if (!"contrasts" %in% names(x)) {
@@ -124,7 +127,7 @@ tidy_add_reference_rows <- function(
 
   terms_levels <- model_list_terms_levels(model)
 
-  if (!is.null(terms_levels))
+  if (!is.null(terms_levels)) {
     terms_levels <- terms_levels %>%
       # keep only terms corresponding to variable in x
       # (e.g. to exclude interaction only variables)
@@ -133,13 +136,15 @@ tidy_add_reference_rows <- function(
           # and exclude variables in no_reference_row
           !.data$variable %in% no_reference_row
       )
+  }
 
-  if (is.null(terms_levels) || nrow(terms_levels) == 0)
+  if (is.null(terms_levels) || nrow(terms_levels) == 0) {
     return(
       x %>%
         dplyr::mutate(reference_row = NA) %>%
         tidy_attach_model(model)
-      )
+    )
+  }
 
   terms_levels <- terms_levels %>%
     dplyr::group_by(.data$variable) %>%
@@ -161,27 +166,34 @@ tidy_add_reference_rows <- function(
     )
 
   group <- NULL
-  if ("component" %in% names(x))
+  if ("component" %in% names(x)) {
     group <- "component"
+  }
   if ("y.level" %in% names(x) &&
-      # specific case for multinomial models
-      (inherits(model, "multinom") || inherits(model, "LORgee")))
+    # specific case for multinomial models
+    (inherits(model, "multinom") || inherits(model, "LORgee"))) {
     group <- "y.level"
-  if (!is.null(group)) x$.group_by_var <- x[[group]]
-  else x$.group_by_var <- ""
+  }
+  if (!is.null(group)) {
+    x$.group_by_var <- x[[group]]
+  } else {
+    x$.group_by_var <- ""
+  }
 
   ref_rows <- terms_levels %>%
     dplyr::filter(.data$reference) %>%
     dplyr::mutate(reference_row = TRUE) %>%
     dplyr::select(dplyr::all_of(c("term", "variable", "label", "reference_row", "rank")))
 
-  if (!"label" %in% names(x))
+  if (!"label" %in% names(x)) {
     ref_rows <- ref_rows %>% dplyr::select(-all_of("label"))
+  }
 
   # populate effect column for mixed models
   tmp <- x
-  if (!"effect" %in% names(x))
+  if (!"effect" %in% names(x)) {
     tmp$effect <- NA_character_
+  }
 
   var_summary <- tmp %>%
     dplyr::group_by(.data$.group_by_var, .data$variable) %>%
@@ -214,13 +226,15 @@ tidy_add_reference_rows <- function(
     ) %>%
     dplyr::select(-dplyr::all_of(c("var_min_rank", "var_max_rank")))
 
-  if (!"effect" %in% names(x))
+  if (!"effect" %in% names(x)) {
     ref_rows <- ref_rows %>% dplyr::select(-dplyr::all_of("effect"))
+  }
 
   x <- x %>%
     dplyr::bind_rows(ref_rows)
-  if (!is.null(group))
+  if (!is.null(group)) {
     x[[group]] <- x$.group_by_var
+  }
   x <- x %>% dplyr::select(-dplyr::all_of(".group_by_var"))
 
   if (!has_var_label) {

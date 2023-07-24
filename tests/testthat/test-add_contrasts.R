@@ -12,8 +12,10 @@ test_that("tidy_add_contrast() works for basic models", {
   )
   expect_equivalent(
     res$contrasts_type,
-    c(NA, "treatment", "treatment", "treatment", "treatment", "treatment",
-      "treatment")
+    c(
+      NA, "treatment", "treatment", "treatment", "treatment", "treatment",
+      "treatment"
+    )
   )
 
   mod <- glm(response ~ stage + grade + trt, gtsummary::trial,
@@ -68,14 +70,18 @@ test_that("tidy_add_contrast() works for basic models", {
     tidy_add_contrasts()
   expect_equivalent(
     res$contrasts,
-    c(NA, "contr.treatment(base=3)", "contr.treatment(base=3)", "contr.treatment(base=3)",
+    c(
+      NA, "contr.treatment(base=3)", "contr.treatment(base=3)", "contr.treatment(base=3)",
       "contr.treatment(base=2)", "contr.treatment(base=2)", "contr.SAS",
-      "custom")
+      "custom"
+    )
   )
   expect_equivalent(
     res$contrasts_type,
-    c(NA, "treatment", "treatment", "treatment", "treatment", "treatment",
-      "treatment", "other")
+    c(
+      NA, "treatment", "treatment", "treatment", "treatment", "treatment",
+      "treatment", "other"
+    )
   )
 
   mod <- glm(response ~ stage + grade + trt, gtsummary::trial,
@@ -114,11 +120,15 @@ test_that("test tidy_add_contrasts() checks", {
 
 test_that("tidy_add_contrasts() works with no intercept models", {
   mod <- glm(response ~ stage + grade - 1, data = gtsummary::trial, family = binomial)
-  res <- mod %>% tidy_and_attach() %>% tidy_add_contrasts()
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_add_contrasts()
   expect_equivalent(
     res$contrasts_type,
-    c("no.contrast", "no.contrast", "no.contrast", "no.contrast",
-      "treatment", "treatment")
+    c(
+      "no.contrast", "no.contrast", "no.contrast", "no.contrast",
+      "treatment", "treatment"
+    )
   )
 })
 

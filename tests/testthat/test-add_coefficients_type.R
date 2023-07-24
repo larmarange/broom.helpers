@@ -128,13 +128,13 @@ test_that("model_identify_variables() works with lme4::glmer", {
   expect_equivalent(res, "logistic")
 
   mod <- lme4::glmer(cbind(incidence, size - incidence) ~ period + (1 | herd),
-                     family = binomial("probit"), data = lme4::cbpp
+    family = binomial("probit"), data = lme4::cbpp
   )
   res <- mod %>% model_get_coefficients_type()
   expect_equivalent(res, "generic")
 
   mod <- lme4::glmer(cbind(incidence, size - incidence) ~ period + (1 | herd),
-                     family = binomial("log"), data = lme4::cbpp
+    family = binomial("log"), data = lme4::cbpp
   )
   res <- mod %>% model_get_coefficients_type()
   expect_equivalent(res, "relative_risk")
@@ -168,8 +168,9 @@ test_that("model_get_coefficients_type() works with survival::clogit", {
   n <- nrow(survival::logan)
   indx <- rep(1:n, length(resp))
   logan2 <- data.frame(survival::logan[indx, ],
-                       id = indx,
-                       tocc = factor(rep(resp, each = n)))
+    id = indx,
+    tocc = factor(rep(resp, each = n))
+  )
   logan2$case <- (logan2$occupation == logan2$tocc)
   mod <- survival::clogit(case ~ tocc + tocc:education + strata(id), logan2)
 
@@ -196,7 +197,7 @@ test_that("model_get_coefficients_type() works with survey::svyglm", {
 
 test_that("model_get_coefficients_type() works with survey::svycoxph", {
   skip_if_not_installed("survey")
-  dpbc <- survey::svydesign(id = ~ 1, prob = ~ 1, strata = ~ edema, data = survival::pbc)
+  dpbc <- survey::svydesign(id = ~1, prob = ~1, strata = ~edema, data = survival::pbc)
   mod <- survey::svycoxph(
     Surv(time, status > 0) ~ log(bili) + protime + albumin,
     design = dpbc
@@ -208,7 +209,7 @@ test_that("model_get_coefficients_type() works with survey::svycoxph", {
 test_that("tidy_plus_plus() works with survey::svyolr", {
   skip_if_not_installed("survey")
   data(api, package = "survey")
-  fpc <- survey::svydesign(id = ~ dnum, weights = ~ pw, data = apiclus1, fpc = ~ fpc)
+  fpc <- survey::svydesign(id = ~dnum, weights = ~pw, data = apiclus1, fpc = ~fpc)
   fpc <- update(fpc, mealcat = cut(meals, c(0, 25, 50, 75, 100)))
   mod <- survey::svyolr(mealcat ~ avg.ed + mobility + stype, design = fpc)
   res <- mod %>% model_get_coefficients_type()

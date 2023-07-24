@@ -13,14 +13,14 @@ knitr::opts_chunk$set(
 library(broom.helpers)
 if (
   !.assert_package("gtsummary", boolean = TRUE) ||
-  !.assert_package("ggstats", boolean = TRUE) ||
-  !.assert_package("margins", boolean = TRUE) ||
-  !.assert_package("emmeans", boolean = TRUE) ||
-  !.assert_package("effects", boolean = TRUE) ||
-  !.assert_package("marginaleffects", boolean = TRUE) ||
-  !.assert_package("ggeffects", boolean = TRUE) ||
-  !.assert_package("dplyr", boolean = TRUE) ||
-  !.assert_package("scales", boolean = TRUE)
+    !.assert_package("ggstats", boolean = TRUE) ||
+    !.assert_package("margins", boolean = TRUE) ||
+    !.assert_package("emmeans", boolean = TRUE) ||
+    !.assert_package("effects", boolean = TRUE) ||
+    !.assert_package("marginaleffects", boolean = TRUE) ||
+    !.assert_package("ggeffects", boolean = TRUE) ||
+    !.assert_package("dplyr", boolean = TRUE) ||
+    !.assert_package("scales", boolean = TRUE)
 ) {
   knitr::opts_chunk$set(eval = FALSE)
 }
@@ -270,8 +270,12 @@ avg_predictions(mod, variables = "trt", by = "trt", type = "response")
 ```{r}
 avg_predictions(mod, variables = "trt", by = "trt")
 b <- binomial()
-predict(mod, newdata = dA, type = "link") %>% mean() %>% b$linkinv()
-predict(mod, newdata = dB, type = "link") %>% mean() %>% b$linkinv()
+predict(mod, newdata = dA, type = "link") %>%
+  mean() %>%
+  b$linkinv()
+predict(mod, newdata = dB, type = "link") %>%
+  mean() %>%
+  b$linkinv()
 ```
 We can use `tidy_marginal_predictions()` to get average marginal predictions for all variables and `plot_marginal_predictions()` for a visual representation.
 

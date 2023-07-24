@@ -49,22 +49,21 @@
 #'   "{ifelse(reference, level, paste(level, '-', reference_level))}"
 #' )
 model_list_terms_levels <- function(
-  model,
-  label_pattern = "{level}",
-  variable_labels = NULL
-) {
+    model,
+    label_pattern = "{level}",
+    variable_labels = NULL) {
   UseMethod("model_list_terms_levels")
 }
 
 #' @export
 #' @rdname model_list_terms_levels
 model_list_terms_levels.default <- function(
-  model, label_pattern = "{level}",
-  variable_labels = NULL
-) {
+    model, label_pattern = "{level}",
+    variable_labels = NULL) {
   contrasts_list <- model_list_contrasts(model)
-  if (is.null(contrasts_list))
+  if (is.null(contrasts_list)) {
     return(NULL)
+  }
 
   contrasts_list <- contrasts_list %>%
     # keep only treatment, SAS and sum contrasts
@@ -74,14 +73,16 @@ model_list_terms_levels.default <- function(
     )
   xlevels <- model_get_xlevels(model)
 
-  if (nrow(contrasts_list) == 0 || length(xlevels) == 0)
+  if (nrow(contrasts_list) == 0 || length(xlevels) == 0) {
     return(NULL)
+  }
 
   model_terms <- model_identify_variables(model) %>%
     dplyr::filter(!is.na(.data$variable))
 
-  if (nrow(model_terms) == 0)
+  if (nrow(model_terms) == 0) {
     return(NULL)
+  }
 
   res <- dplyr::tibble()
 
@@ -93,7 +94,7 @@ model_list_terms_levels.default <- function(
       # plus variations with backticks
       terms_names1 <- paste0(v, terms_levels)
       terms_names2 <- paste0(v, seq(1, length(terms_levels)))
-      terms_names1b <- paste0("`", v, "`",  terms_levels)
+      terms_names1b <- paste0("`", v, "`", terms_levels)
       terms_names2b <- paste0("`", v, "`", seq(1, length(terms_levels)))
 
       observed_terms <- model_terms$term[model_terms$variable == v]
@@ -128,7 +129,7 @@ model_list_terms_levels.default <- function(
         approach == "1b" ~ terms_names1b,
         approach == "2b" ~ terms_names2b
       )
-    res <- dplyr::bind_rows(
+      res <- dplyr::bind_rows(
         res,
         dplyr::tibble(
           variable = v,

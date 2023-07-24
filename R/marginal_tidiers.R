@@ -36,8 +36,9 @@ tidy_margins <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
   .assert_package("margins")
 
   dots <- rlang::dots_list(...)
-  if (isTRUE(dots$exponentiate))
-    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_margins}.") # nolint
+  if (isTRUE(dots$exponentiate)) {
+    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_margins}.")
+  } # nolint
 
   res <- broom::tidy(
     margins::margins(x, ...),
@@ -92,12 +93,14 @@ tidy_all_effects <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   .assert_package("effects")
 
   dots <- rlang::dots_list(...)
-  if (isTRUE(dots$exponentiate))
-    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_all_effects}.") # nolint
+  if (isTRUE(dots$exponentiate)) {
+    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_all_effects}.")
+  } # nolint
 
   if (inherits(x, "multinom") || inherits(x, "polr") ||
-      inherits(x, "clm") || inherits(x, "clmm"))
+    inherits(x, "clm") || inherits(x, "clmm")) {
     return(tidy_all_effects_effpoly(x, conf.int, conf.level, ...))
+  }
 
   .clean <- function(x) {
     # merge first columns if interaction
@@ -137,8 +140,10 @@ effpoly_to_df <- function(x) {
   if (!length(factor.levels) == 0) {
     factor.names <- names(factor.levels)
     for (fac in factor.names) {
-      x$x[[fac]] <- factor(x$x[[fac]], levels = factor.levels[[fac]],
-                           exclude = NULL)
+      x$x[[fac]] <- factor(x$x[[fac]],
+        levels = factor.levels[[fac]],
+        exclude = NULL
+      )
     }
   }
 
@@ -197,8 +202,9 @@ tidy_ggpredict <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   .assert_package("ggeffects")
 
   dots <- rlang::dots_list(...)
-  if (isTRUE(dots$exponentiate))
-    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_ggpredict}.") # nolint
+  if (isTRUE(dots$exponentiate)) {
+    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_ggpredict}.")
+  } # nolint
 
   if (isFALSE(conf.int)) conf.level <- NA
   res <- x %>%
@@ -216,10 +222,11 @@ tidy_ggpredict <- function(x, conf.int = TRUE, conf.level = .95, ...) {
     ) %>%
     dplyr::relocate("variable", "term")
   # multinomial models
-  if ("response.level" %in% names(res))
+  if ("response.level" %in% names(res)) {
     res <- res %>%
-    dplyr::rename(y.level = "response.level") %>%
-    dplyr::relocate("y.level")
+      dplyr::rename(y.level = "response.level") %>%
+      dplyr::relocate("y.level")
+  }
   attr(res, "coefficients_type") <- "marginal_predictions"
   attr(res, "skip_add_reference_rows") <- TRUE
   res
@@ -274,27 +281,30 @@ tidy_avg_slopes <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
   .assert_package("marginaleffects")
 
   dots <- rlang::dots_list(...)
-  if (isTRUE(dots$exponentiate))
-    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_avg_slopes}.") # nolint
+  if (isTRUE(dots$exponentiate)) {
+    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_avg_slopes}.")
+  } # nolint
   dots$exponentiate <- NULL
   dots$conf_level <- conf.level
   dots$model <- x
 
   res <- do.call(marginaleffects::avg_slopes, dots) %>%
     dplyr::rename(variable = "term")
-  if ("contrast" %in% names(res))
+  if ("contrast" %in% names(res)) {
     res <- res %>% dplyr::rename(term = "contrast")
-  else
+  } else {
     res <- res %>% dplyr::mutate(term = .data$variable)
+  }
 
   res <- res %>%
     dplyr::relocate("variable", "term")
 
   # multinomial models
-  if ("group" %in% names(res))
+  if ("group" %in% names(res)) {
     res <- res %>%
-    dplyr::rename(y.level = "group") %>%
-    dplyr::relocate("y.level")
+      dplyr::rename(y.level = "group") %>%
+      dplyr::relocate("y.level")
+  }
 
   attr(res, "coefficients_type") <- dplyr::case_when(
     is.null(dots$newdata) ~ "marginal_effects_average",
@@ -363,27 +373,30 @@ tidy_avg_comparisons <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
   .assert_package("marginaleffects")
 
   dots <- rlang::dots_list(...)
-  if (isTRUE(dots$exponentiate))
-    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_avg_comparisons}.") # nolint
+  if (isTRUE(dots$exponentiate)) {
+    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_avg_comparisons}.")
+  } # nolint
   dots$exponentiate <- NULL
   dots$conf_level <- conf.level
   dots$model <- x
 
   res <- do.call(marginaleffects::avg_comparisons, dots) %>%
     dplyr::rename(variable = "term")
-  if ("contrast" %in% names(res))
+  if ("contrast" %in% names(res)) {
     res <- res %>% dplyr::rename(term = "contrast")
-  else
+  } else {
     res <- res %>% dplyr::mutate(term = .data$variable)
+  }
 
   res <- res %>%
     dplyr::relocate("variable", "term")
 
   # multinomial models
-  if ("group" %in% names(res))
+  if ("group" %in% names(res)) {
     res <- res %>%
-    dplyr::rename(y.level = "group") %>%
-    dplyr::relocate("y.level")
+      dplyr::rename(y.level = "group") %>%
+      dplyr::relocate("y.level")
+  }
 
   attr(res, "coefficients_type") <- dplyr::case_when(
     is.null(dots$newdata) ~ "marginal_contrasts_average",
@@ -439,8 +452,9 @@ tidy_marginal_means <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
   .assert_package("marginaleffects")
 
   dots <- rlang::dots_list(...)
-  if (isTRUE(dots$exponentiate))
-    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_marginal_means}.") # nolint
+  if (isTRUE(dots$exponentiate)) {
+    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_marginal_means}.")
+  } # nolint
   dots$exponentiate <- NULL
   dots$conf_level <- conf.level
   dots$model <- x
@@ -453,10 +467,11 @@ tidy_marginal_means <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
     dplyr::mutate(term = as.character(.data$term))
 
   # multinomial models
-  if ("group" %in% names(res))
+  if ("group" %in% names(res)) {
     res <- res %>%
-    dplyr::rename(y.level = "group") %>%
-    dplyr::relocate("y.level")
+      dplyr::rename(y.level = "group") %>%
+      dplyr::relocate("y.level")
+  }
 
   attr(res, "coefficients_type") <- "marginal_means"
   attr(res, "skip_add_reference_rows") <- TRUE
@@ -597,22 +612,26 @@ tidy_marginal_means <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 #'     patchwork::wrap_plots()
 #' }
 tidy_marginal_predictions <- function(x, variables_list = "auto",
-                                     conf.int = TRUE, conf.level = 0.95, ...) {
+                                      conf.int = TRUE, conf.level = 0.95, ...) {
   .assert_package("marginaleffects")
 
   dots <- rlang::dots_list(...)
-  if (isTRUE(dots$exponentiate))
-    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_marginal_predictions}.") # nolint
+  if (isTRUE(dots$exponentiate)) {
+    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_marginal_predictions}.")
+  } # nolint
   dots$exponentiate <- NULL
   dots$conf_level <- conf.level
   dots$model <- x
 
-  if (is.character(variables_list) && variables_list == "auto")
+  if (is.character(variables_list) && variables_list == "auto") {
     variables_list <- variables_to_predict(x, interactions = TRUE)
-  if (is.character(variables_list) && variables_list == "no_interaction")
+  }
+  if (is.character(variables_list) && variables_list == "no_interaction") {
     variables_list <- variables_to_predict(x, interactions = FALSE)
-  if (!is.list(variables_list))
+  }
+  if (!is.list(variables_list)) {
     cli::cli_abort("{.arg variables_list} should be a list or \"auto\" or \"no_interaction\".")
+  }
 
   res <- purrr::map_df(variables_list, .tidy_one_marginal_prediction, dots)
 
@@ -631,18 +650,20 @@ tidy_marginal_predictions <- function(x, variables_list = "auto",
   dots$by <- names(variables)
 
   if (inherits(dots$model, "multinom") || inherits(dots$model, "polr") ||
-      inherits(dots$model, "clm") || inherits(dots$model, "clmm"))
+    inherits(dots$model, "clm") || inherits(dots$model, "clmm")) {
     dots$by <- c(dots$by, "group")
+  }
 
   res <- do.call(marginaleffects::avg_predictions, dots) %>%
     dplyr::mutate(variable = paste(names(variables), collapse = ":")) %>%
     tidyr::unite(col = "term", sep = " * ", dplyr::all_of(names(variables))) %>%
     dplyr::relocate("variable", "term")
 
-  if ("group" %in% names(res))
+  if ("group" %in% names(res)) {
     res <- res %>%
-    dplyr::rename(y.level = "group") %>%
-    dplyr::relocate("y.level")
+      dplyr::rename(y.level = "group") %>%
+      dplyr::relocate("y.level")
+  }
 
   res
 }
@@ -667,8 +688,9 @@ variables_to_predict <- function(model, interactions = TRUE,
   }
 
   response_variable <- model %>% model_get_response_variable()
-  if (!is.null(response_variable))
+  if (!is.null(response_variable)) {
     keep <- keep[keep != response_variable]
+  }
 
   ret <- list(
     categorical = categorical,
@@ -691,7 +713,7 @@ variables_to_predict <- function(model, interactions = TRUE,
 #' @export
 #' @rdname tidy_marginal_predictions
 plot_marginal_predictions <- function(x, variables_list = "auto",
-                                     conf.level = 0.95, ...) {
+                                      conf.level = 0.95, ...) {
   .assert_package("marginaleffects")
   .assert_package("ggplot2")
 
@@ -699,24 +721,28 @@ plot_marginal_predictions <- function(x, variables_list = "auto",
   dots$conf_level <- conf.level
   dots$model <- x
 
-  if (is.character(variables_list) && variables_list == "auto")
+  if (is.character(variables_list) && variables_list == "auto") {
     variables_list <- variables_to_predict(x, interactions = TRUE) %>%
       purrr::map(rev)
-  if (is.character(variables_list) && variables_list == "no_interaction")
+  }
+  if (is.character(variables_list) && variables_list == "no_interaction") {
     variables_list <- variables_to_predict(x, interactions = FALSE) %>%
       purrr::map(rev)
-  if (!is.list(variables_list))
+  }
+  if (!is.list(variables_list)) {
     cli::cli_abort("{.arg variables_list} should be a list or \"auto\" or \"no_interaction\".")
+  }
 
   purrr::map(variables_list, .plot_one_marginal_prediction, dots)
 }
 
 .plot_one_marginal_prediction <- function(variables, dots) {
-  if (length(variables) >= 4)
+  if (length(variables) >= 4) {
     cli::cli_abort(paste(
       "Combination of 4 or more variables. {.fun plot_marginal_predictions} can",
       "manage only combinations of 3 variables or less."
     ))
+  }
 
   multinom <- inherits(dots$model, "multinom") | inherits(dots$model, "polr") |
     inherits(dots$model, "clm") | inherits(dots$model, "clmm")
@@ -731,12 +757,14 @@ plot_marginal_predictions <- function(x, variables_list = "auto",
     dplyr::filter(.data$variable == x_variable) %>%
     dplyr::pull("var_label")
 
-  if (is.character(variables[[1]]) && variables[[1]] == "fivenum")
+  if (is.character(variables[[1]]) && variables[[1]] == "fivenum") {
     variables[[1]] <- broom.helpers::seq_range
+  }
   dots$variables <- variables
   dots$by <- names(variables)
-  if (multinom)
+  if (multinom) {
     dots$by <- c(dots$by, "group")
+  }
 
   d <- do.call(marginaleffects::avg_predictions, dots)
 
@@ -746,8 +774,9 @@ plot_marginal_predictions <- function(x, variables_list = "auto",
     ymin = .data[["conf.low"]],
     ymax = .data[["conf.high"]]
   )
-  if (x_type == "continuous")
+  if (x_type == "continuous") {
     mapping$group <- ggplot2::aes(group = 1L)$group
+  }
 
   if (length(variables) >= 2) {
     colour_variable <- names(variables[2])
@@ -771,13 +800,14 @@ plot_marginal_predictions <- function(x, variables_list = "auto",
       ) +
       ggplot2::geom_line()
   } else {
-      p <- ggplot2::ggplot(d, mapping = mapping) +
-        ggplot2::geom_pointrange(position = ggplot2::position_dodge(.5))
+    p <- ggplot2::ggplot(d, mapping = mapping) +
+      ggplot2::geom_pointrange(position = ggplot2::position_dodge(.5))
   }
 
-  if (length(variables) >= 2)
+  if (length(variables) >= 2) {
     p <- p +
       ggplot2::labs(colour = colour_label, fill = colour_label)
+  }
 
   if (length(variables) == 3 && !multinom) {
     facet_variable <- names(variables[3])
@@ -931,35 +961,40 @@ plot_marginal_predictions <- function(x, variables_list = "auto",
 #' tidy_marginal_contrasts(mod, newdata = "mean")
 #' tidy_marginal_contrasts(mod3, newdata = "mean")
 tidy_marginal_contrasts <- function(x, variables_list = "auto",
-                                     conf.int = TRUE, conf.level = 0.95, ...) {
+                                    conf.int = TRUE, conf.level = 0.95, ...) {
   .assert_package("marginaleffects")
 
   dots <- rlang::dots_list(...)
-  if (isTRUE(dots$exponentiate))
-    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_marginal_contrasts}.") # nolint
+  if (isTRUE(dots$exponentiate)) {
+    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_marginal_contrasts}.")
+  } # nolint
   dots$exponentiate <- NULL
   dots$conf_level <- conf.level
   dots$model <- x
 
-  if (is.character(variables_list) && variables_list == "auto")
+  if (is.character(variables_list) && variables_list == "auto") {
     variables_list <- variables_to_contrast(
       x,
       interactions = TRUE,
       cross = FALSE
     )
-  if (is.character(variables_list) && variables_list == "no_interaction")
+  }
+  if (is.character(variables_list) && variables_list == "no_interaction") {
     variables_list <- variables_to_contrast(
       x,
       interactions = FALSE
     )
-  if (is.character(variables_list) && variables_list == "cross")
+  }
+  if (is.character(variables_list) && variables_list == "cross") {
     variables_list <- variables_to_contrast(
       x,
       interactions = TRUE,
       cross = TRUE
     )
-  if (!is.list(variables_list))
+  }
+  if (!is.list(variables_list)) {
     cli::cli_abort("{.arg variables_list} should be a list or \"auto\" or \"no_interaction\".")
+  }
 
   res <- purrr::map_df(variables_list, .tidy_one_marginal_contrast, dots)
 
@@ -975,14 +1010,16 @@ tidy_marginal_contrasts <- function(x, variables_list = "auto",
 
 .tidy_one_marginal_contrast <- function(variables, dots) {
   # allowing passing directly variables names
-  if (length(variables) > 0 && !all(names(variables) %in% c("variables", "by")))
+  if (length(variables) > 0 && !all(names(variables) %in% c("variables", "by"))) {
     variables <- list(variables = variables)
+  }
 
   dots$variables <- variables$variables
   dots$cross <- TRUE
 
-  if (!is.null(variables$by))
+  if (!is.null(variables$by)) {
     dots$by <- names(variables$by)
+  }
 
   if (!is.null(variables$by) && is.null(dots$newdata)) {
     args <- variables$by
@@ -998,12 +1035,12 @@ tidy_marginal_contrasts <- function(x, variables_list = "auto",
 
   res <- do.call(marginaleffects::avg_comparisons, dots) %>%
     dplyr::select(-dplyr::any_of("term"))
-  if (is.null(variables$by))
+  if (is.null(variables$by)) {
     res <- res %>%
       dplyr::mutate(
         variable = paste(names(variables$variables), collapse = ":")
       )
-  else
+  } else {
     res <- res %>%
       dplyr::mutate(
         variable = paste(
@@ -1012,6 +1049,7 @@ tidy_marginal_contrasts <- function(x, variables_list = "auto",
           sep = ":"
         )
       )
+  }
 
   res <- res %>%
     tidyr::unite(
@@ -1022,10 +1060,11 @@ tidy_marginal_contrasts <- function(x, variables_list = "auto",
     ) %>%
     dplyr::relocate("variable", "term")
 
-  if ("group" %in% names(res))
+  if ("group" %in% names(res)) {
     res <- res %>%
-    dplyr::rename(y.level = "group") %>%
-    dplyr::relocate("y.level")
+      dplyr::rename(y.level = "group") %>%
+      dplyr::relocate("y.level")
+  }
 
   res
 }
@@ -1059,8 +1098,9 @@ variables_to_contrast <- function(model,
   }
 
   response_variable <- model %>% model_get_response_variable()
-  if (!is.null(response_variable))
+  if (!is.null(response_variable)) {
     keep <- keep[keep != response_variable]
+  }
 
   var_ret <- list(
     categorical = var_categorical,

@@ -42,9 +42,9 @@ tidy_add_contrasts <- function(x, model = tidy_get_model(x), quiet = FALSE) {
   }
 
   if (!"variable" %in% names(x)) {
-    if (!quiet)
-
-    x <- x %>% tidy_identify_variables()
+    if (!quiet) {
+      x <- x %>% tidy_identify_variables()
+    }
   }
 
   contrasts_list <- model_list_contrasts(model)
