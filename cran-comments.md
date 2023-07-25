@@ -1,6 +1,6 @@
 ## Test environments
 
-* local R installation (windows 11): R 4.2.3
+* local R installation (windows 11): R 4-devel
 * macos-latest (on github actions): R-release
 * windows-latest (on github actions): R-release
 * ubuntu-latest  (on github actions): R-devel, R-release, R-oldrel-1, R-oldrel-2, R-oldrel-3
