@@ -81,3 +81,13 @@ model_get_xlevels.plm <- model_get_xlevels.lmerMod
 model_get_xlevels.model_fit <- function(model) {
   model_get_xlevels(model$fit)
 }
+
+#' @export
+#' @rdname model_get_xlevels
+model_get_xlevels.mmrm <- function(model) {
+  xlevels <- stats::.getXlevels(
+    model %>% model_get_terms(),
+    model %>% model_get_model_frame()
+  )
+  xlevels %>% .add_xlevels_for_logical_variables(model)
+}

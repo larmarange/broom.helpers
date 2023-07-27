@@ -60,6 +60,7 @@ Suggests:
     MASS,
     mgcv,
     mice,
+    mmrm,
     multgee,
     nnet,
     ordinal,

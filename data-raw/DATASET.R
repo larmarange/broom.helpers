@@ -49,7 +49,8 @@ supported_models <-
     "`fixest::feNmlm()`", "May fail with R <= 4.0.",
     "`logitr::logitr()`", "Requires logitr >= 0.8.0",
     "`multgee::nomLORgee()`", "Experimental support. Use `tidy_multgee()` as `tidy_fun`.",
-    "`multgee::ordLORgee()`", "Experimental support. Use `tidy_multgee()` as `tidy_fun`."
+    "`multgee::ordLORgee()`", "Experimental support. Use `tidy_multgee()` as `tidy_fun`.",
+    "`mmrm::mmrm()`", "",
   ) %>%
   dplyr::arrange(.data$model, .locale = "en")
 
