@@ -29,8 +29,7 @@ a message when requested output cannot be generated. Default is \code{FALSE}}
 }
 \description{
 For categorical variables with a treatment contrast
-(\code{\link[stats:contrast]{stats::contr.treatment()}}), a SAS contrast (\code{\link[stats:contrast]{stats::contr.SAS()}}) or a
-successive differences contrats (\code{\link[MASS:contr.sdif]{MASS::contr.sdif()}}),
+(\code{\link[stats:contrast]{stats::contr.treatment()}}) or a SAS contrast (\code{\link[stats:contrast]{stats::contr.SAS()}}),
 will add an estimate equal to \code{0} (or \code{1} if \code{exponentiate = TRUE})
 to the reference row.
 }

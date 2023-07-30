@@ -1,8 +1,7 @@
 #' Add an estimate value to references rows for categorical variables
 #'
 #' For categorical variables with a treatment contrast
-#' ([stats::contr.treatment()]), a SAS contrast ([stats::contr.SAS()]) or a
-#' successive differences contrats ([MASS::contr.sdif()]),
+#' ([stats::contr.treatment()]) or a SAS contrast ([stats::contr.SAS()]),
 #' will add an estimate equal to `0` (or `1` if `exponentiate = TRUE`)
 #' to the reference row.
 #'
@@ -99,7 +98,7 @@ tidy_add_estimate_to_reference_rows <- function(
       estimate = dplyr::if_else(
         !is.na(.data$reference_row) &
           .data$reference_row &
-          stringr::str_starts(.data$contrasts, "contr.treatment|contr.SAS|contr.sdif"),
+          stringr::str_starts(.data$contrasts, "contr.treatment|contr.SAS"),
         dplyr::if_else(exponentiate, 1, 0),
         .data$estimate
       )
