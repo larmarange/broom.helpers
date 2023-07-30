@@ -18,7 +18,7 @@ A tibble with three columns:
 \item \code{variable}: variable name
 \item \code{contrasts}: contrasts used
 \item \code{contrasts_type}: type of contrasts
-("treatment", "sum", "poly", "helmert", "other" or "no.contrast")
+("treatment", "sum", "poly", "helmert", "sdiff, "other" or "no.contrast")
 \item \code{reference}: for variables with treatment, SAS
 or sum contrasts, position of the reference level
 }

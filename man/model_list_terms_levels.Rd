@@ -8,13 +8,15 @@
 model_list_terms_levels(
   model,
   label_pattern = "{level}",
-  variable_labels = NULL
+  variable_labels = NULL,
+  sdif_term_level = c("diff", "ratio", "upper_level")
 )
 
 \method{model_list_terms_levels}{default}(
   model,
   label_pattern = "{level}",
-  variable_labels = NULL
+  variable_labels = NULL,
+  sdif_term_level = c("diff", "ratio", "upper_level")
 )
 }
 \arguments{
@@ -24,6 +26,10 @@ model_list_terms_levels(
 
 \item{variable_labels}{an optional named list or named vector of
 custom variable labels passed to \code{\link[=model_list_variables]{model_list_variables()}}}
+
+\item{sdif_term_level}{for successive differences contrasts, how should term
+levels be named? \code{"diff"} for \code{"B - A"} (default), \code{"ratio"} for \code{"B / A"},
+or \code{"upper_level"} for \code{"B"}}
 }
 \value{
 A tibble with ten columns:
@@ -44,7 +50,8 @@ The first nine columns can be used in \code{label_pattern}.
 }
 \description{
 Only for categorical variables with treatment,
-SAS or sum contrasts, and categorical variables with no contrast.
+SAS, sum or successive differences contrasts (cf. \code{\link[MASS:contr.sdif]{MASS::contr.sdif()}}), and
+categorical variables with no contrast.
 }
 \examples{
 glm(

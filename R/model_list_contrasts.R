@@ -6,7 +6,7 @@
 #' * `variable`: variable name
 #' * `contrasts`: contrasts used
 #' * `contrasts_type`: type of contrasts
-#'   ("treatment", "sum", "poly", "helmert", "other" or "no.contrast")
+#'   ("treatment", "sum", "poly", "helmert", "sdiff, "other" or "no.contrast")
 #' * `reference`: for variables with treatment, SAS
 #'   or sum contrasts, position of the reference level
 #' @details
@@ -63,6 +63,9 @@ model_list_contrasts.default <- function(model) {
       if (model_contrasts[[i]] == "contr.SAS" || model_contrasts[[i]] == "contr.sum") {
         contrasts_list$reference[[i]] <- n_levels
       }
+      if (model_contrasts[[i]] == "contr.sdif") {
+        contrasts_list$reference[[i]] <- 1
+      }
     } else if (all(model_contrasts[[i]] == stats::contr.treatment(n_levels))) {
       contrasts_list$contrasts[[i]] <- "contr.treatment"
       contrasts_list$reference[[i]] <- 1
@@ -76,6 +79,12 @@ model_list_contrasts.default <- function(model) {
     } else if (all(model_contrasts[[i]] == stats::contr.SAS(n_levels))) {
       contrasts_list$contrasts[[i]] <- "contr.SAS"
       contrasts_list$reference[[i]] <- n_levels
+    } else if (
+      .assert_package("MASS", boolean = TRUE) &&
+        all(model_contrasts[[i]] == MASS::contr.sdif(n_levels))
+    ) {
+      contrasts_list$contrasts[[i]] <- "contr.sdif"
+      contrasts_list$reference[[i]] <- 1
     } else {
       for (j in 2:n_levels) { # testing treatment coding width different value for base variable
         if (all(model_contrasts[[i]] == stats::contr.treatment(n_levels, base = j))) {
@@ -98,6 +107,7 @@ model_list_contrasts.default <- function(model) {
         .data$contrasts == "contr.sum" ~ "sum",
         .data$contrasts == "contr.helmert" ~ "helmert",
         .data$contrasts == "contr.poly" ~ "poly",
+        .data$contrasts == "contr.sdif" ~ "sdif",
         .data$contrasts == "no.contrast" ~ "no.contrast",
         TRUE ~ "other"
       )
