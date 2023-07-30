@@ -9,14 +9,14 @@ model_list_terms_levels(
   model,
   label_pattern = "{level}",
   variable_labels = NULL,
-  sdif_term_level = c("diff", "ratio", "upper_level")
+  sdif_term_level = c("diff", "ratio")
 )
 
 \method{model_list_terms_levels}{default}(
   model,
   label_pattern = "{level}",
   variable_labels = NULL,
-  sdif_term_level = c("diff", "ratio", "upper_level")
+  sdif_term_level = c("diff", "ratio")
 )
 }
 \arguments{
@@ -28,8 +28,7 @@ model_list_terms_levels(
 custom variable labels passed to \code{\link[=model_list_variables]{model_list_variables()}}}
 
 \item{sdif_term_level}{for successive differences contrasts, how should term
-levels be named? \code{"diff"} for \code{"B - A"} (default), \code{"ratio"} for \code{"B / A"},
-or \code{"upper_level"} for \code{"B"}}
+levels be named? \code{"diff"} for \code{"B - A"} (default), \code{"ratio"} for \code{"B / A"}}
 }
 \value{
 A tibble with ten columns:

@@ -64,7 +64,7 @@ model_list_contrasts.default <- function(model) {
         contrasts_list$reference[[i]] <- n_levels
       }
       if (model_contrasts[[i]] == "contr.sdif") {
-        contrasts_list$reference[[i]] <- 1
+        contrasts_list$reference[[i]] <- NA
       }
     } else if (all(model_contrasts[[i]] == stats::contr.treatment(n_levels))) {
       contrasts_list$contrasts[[i]] <- "contr.treatment"
@@ -84,7 +84,7 @@ model_list_contrasts.default <- function(model) {
         all(model_contrasts[[i]] == MASS::contr.sdif(n_levels))
     ) {
       contrasts_list$contrasts[[i]] <- "contr.sdif"
-      contrasts_list$reference[[i]] <- 1
+      contrasts_list$reference[[i]] <- NA
     } else {
       for (j in 2:n_levels) { # testing treatment coding width different value for base variable
         if (all(model_contrasts[[i]] == stats::contr.treatment(n_levels, base = j))) {

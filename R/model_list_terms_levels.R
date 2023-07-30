@@ -9,8 +9,7 @@
 #' @param variable_labels an optional named list or named vector of
 #' custom variable labels passed to [model_list_variables()]
 #' @param sdif_term_level for successive differences contrasts, how should term
-#' levels be named? `"diff"` for `"B - A"` (default), `"ratio"` for `"B / A"`,
-#' or `"upper_level"` for `"B"`
+#' levels be named? `"diff"` for `"B - A"` (default), `"ratio"` for `"B / A"`
 #' @return
 #' A tibble with ten columns:
 #' * `variable`: variable
@@ -56,7 +55,7 @@ model_list_terms_levels <- function(
     model,
     label_pattern = "{level}",
     variable_labels = NULL,
-    sdif_term_level = c("diff", "ratio", "upper_level")) {
+    sdif_term_level = c("diff", "ratio")) {
   UseMethod("model_list_terms_levels")
 }
 
@@ -65,7 +64,7 @@ model_list_terms_levels <- function(
 model_list_terms_levels.default <- function(
     model, label_pattern = "{level}",
     variable_labels = NULL,
-    sdif_term_level = c("diff", "ratio", "upper_level")) {
+    sdif_term_level = c("diff", "ratio")) {
   contrasts_list <- model_list_contrasts(model)
   if (is.null(contrasts_list)) {
     return(NULL)
@@ -104,26 +103,45 @@ model_list_terms_levels.default <- function(
 
       # terms could be named according to two approaches
       # plus variations with backticks
+      s <- seq(1, length(terms_levels))
       terms_names1 <- paste0(v, terms_levels)
-      terms_names2 <- paste0(v, seq(1, length(terms_levels)))
+      terms_names2 <- paste0(v, s)
       terms_names1b <- paste0("`", v, "`", terms_levels)
-      terms_names2b <- paste0("`", v, "`", seq(1, length(terms_levels)))
+      terms_names2b <- paste0("`", v, "`", s)
       # naming approach for contr.sdif
       terms_names3 <- paste0(v, terms_levels, "-", dplyr::lag(terms_levels))
-      terms_names3[1] <- paste0(v, terms_levels[1])
+      terms_names3 <- terms_names3[-1]
       terms_names3b <- paste0("`", v, "`", terms_levels, "-", dplyr::lag(terms_levels))
-      terms_names3b[1] <- paste0("`", v, "`", terms_levels[1])
+      terms_names3b <- terms_names3b[-1]
+      terms_names4 <- paste0(v, s, "-", dplyr::lag(s))
+      terms_names4 <- terms_names4[-1]
+      terms_names4b <- paste0("`", v, "`", s, "-", dplyr::lag(s))
+      terms_names4b <- terms_names4b[-1]
 
       # identification of the naming approach
       approach <- NA
-      if (length(observed_terms)) {
+      if (length(observed_terms) && !is.na(ref)) {
         approach <- dplyr::case_when(
           all(observed_terms %in% terms_names1[-ref]) ~ "1",
           all(observed_terms %in% terms_names2[-ref]) ~ "2",
           all(observed_terms %in% terms_names3[-ref]) ~ "3",
+          all(observed_terms %in% terms_names4[-ref]) ~ "4",
           all(observed_terms %in% terms_names1b[-ref]) ~ "1b",
           all(observed_terms %in% terms_names2b[-ref]) ~ "2b",
-          all(observed_terms %in% terms_names3b[-ref]) ~ "3b"
+          all(observed_terms %in% terms_names3b[-ref]) ~ "3b",
+          all(observed_terms %in% terms_names4b[-ref]) ~ "4b"
+        )
+      }
+      if (length(observed_terms) && is.na(ref)) {
+        approach <- dplyr::case_when(
+          all(observed_terms %in% terms_names1) ~ "1",
+          all(observed_terms %in% terms_names2) ~ "2",
+          all(observed_terms %in% terms_names3) ~ "3",
+          all(observed_terms %in% terms_names4) ~ "4",
+          all(observed_terms %in% terms_names1b) ~ "1b",
+          all(observed_terms %in% terms_names2b) ~ "2b",
+          all(observed_terms %in% terms_names3b) ~ "3b",
+          all(observed_terms %in% terms_names4b) ~ "4b"
         )
       }
       # case of an interaction term only
@@ -140,25 +158,24 @@ model_list_terms_levels.default <- function(
         )
       }
 
-      terms_names <- dplyr::case_when(
-        approach == "1" ~ terms_names1,
-        approach == "2" ~ terms_names2,
-        approach == "3" ~ terms_names3,
-        approach == "1b" ~ terms_names1b,
-        approach == "2b" ~ terms_names2b,
-        approach == "3b" ~ terms_names3b
+      terms_names <- switch (
+        approach,
+        "1" = terms_names1,
+        "2" = terms_names2,
+        "3" = terms_names3,
+        "4" = terms_names4,
+        "1b" = terms_names1b,
+        "2b" = terms_names2b,
+        "3b" = terms_names3b,
+        "4b" = terms_names4b
       )
 
-      if (approach %in% c("3", "3b") && sdif_term_level == "diff") {
+      if (approach %in% c("3", "3b", "4", "4b")) {
+        sep <- "-"
+        if (sdif_term_level == "ratio") sep <- "/"
         tl <- terms_levels
-        terms_levels <- paste(tl, "-", dplyr::lag(tl))
-        terms_levels[1] <- tl[1]
-      }
-
-      if (approach %in% c("3", "3b") && sdif_term_level == "ratio") {
-        tl <- terms_levels
-        terms_levels <- paste(tl, "/", dplyr::lag(tl))
-        terms_levels[1] <- tl[1]
+        terms_levels <- paste(tl, sep, dplyr::lag(tl))
+        terms_levels <- terms_levels[-1]
       }
 
       res <- dplyr::bind_rows(

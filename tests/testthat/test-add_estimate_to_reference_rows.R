@@ -40,29 +40,6 @@ test_that("tidy_add_estimate_to_reference_rows() works for basic models", {
     c(1, 1, 1)
   )
 
-  skip_if_not_installed("MASS")
-  mod <- glm(
-    response ~ stage + grade,
-    gtsummary::trial,
-    family = binomial,
-    contrasts = list(stage = MASS::contr.sdif, grade = MASS::contr.sdif)
-  )
-
-  res <- mod %>%
-    tidy_and_attach(exponentiate = FALSE) %>%
-    tidy_add_estimate_to_reference_rows()
-  expect_equivalent(
-    res$estimate[res$reference_row & !is.na(res$reference_row)],
-    c(0, 0)
-  )
-  res <- mod %>%
-    tidy_and_attach(exponentiate = TRUE) %>%
-    tidy_add_estimate_to_reference_rows()
-  expect_equivalent(
-    res$estimate[res$reference_row & !is.na(res$reference_row)],
-    c(1, 1)
-  )
-
   skip_if_not_installed("emmeans")
 
   mod <- glm(response ~ stage + grade + trt, gtsummary::trial,
