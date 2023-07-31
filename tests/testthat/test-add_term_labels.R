@@ -188,6 +188,44 @@ test_that("tidy_add_term_labels() works with poly or helmert contrasts", {
   )
 })
 
+test_that("tidy_add_term_labels() works with sdif contrasts", {
+  skip_if_not_installed("MASS")
+  mod <- glm(
+    response ~ stage + grade,
+    gtsummary::trial,
+    family = binomial,
+    contrasts = list(stage = MASS::contr.sdif, grade = MASS::contr.sdif)
+  )
+  # should not produce an error
+  expect_error(
+    res <- mod %>% tidy_and_attach() %>% tidy_add_term_labels(),
+    NA
+  )
+  expect_equivalent(
+    res$label,
+    c(
+      `(Intercept)` = "(Intercept)", `stageT2-T1` = "T2 - T1",
+      `stageT3-T2` = "T3 - T2", `stageT4-T3` = "T4 - T3",
+      `gradeII-I` = "II - I", `gradeIII-II` = "III - II"
+    )
+  )
+  # should not produce an error
+  expect_error(
+    res <- mod %>%
+      tidy_and_attach(exponentiate = TRUE) %>%
+      tidy_add_term_labels(),
+    NA
+  )
+  expect_equivalent(
+    res$label,
+    c(
+      `(Intercept)` = "(Intercept)", `stageT2-T1` = "T2 / T1",
+      `stageT3-T2` = "T3 / T2", `stageT4-T3` = "T4 / T3",
+      `gradeII-I` = "II / I", `gradeIII-II` = "III / II"
+    )
+  )
+})
+
 
 test_that("tidy_add_term_labels() works with variables having non standard name", {
   skip_on_cran()

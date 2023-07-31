@@ -1,5 +1,9 @@
 # broom.helpers (development version)
 
+**New features**
+
+- support for `MASS::contr.sdif()` contrasts (#230)
+
 **Fix**
 
 - input of `packageVersion()` should be a character string (#225)

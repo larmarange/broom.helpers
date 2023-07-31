@@ -2,7 +2,8 @@
 #'
 #' For categorical variables with a treatment contrast
 #' ([stats::contr.treatment()]), a SAS contrast ([stats::contr.SAS()])
-#' or a sum contrast ([stats::contr.sum()]), add a reference row.
+#' a sum contrast ([stats::contr.sum()]), or successive differences contrast
+#' ([MASS::contr.sdif()]) add a reference row.
 #'
 #' The added `reference_row` column will be equal to:
 #'
