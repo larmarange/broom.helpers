@@ -761,3 +761,47 @@ test_that("tidy_plus_plus() works with multgee models", {
     NA
   )
 })
+
+test_that("tidy_plus_plus() works with pscl::zeroinfl() &  hurdle() models", {
+  skip_on_cran()
+  skip_if_not_installed("pscl")
+  skip_if_not_installed("parameters")
+
+  library(pscl)
+  data("bioChemists", package = "pscl")
+  m1 <- zeroinfl(art ~ fem + mar + phd | fem + mar + phd, data = bioChemists)
+  m2 <- zeroinfl(art ~ fem + mar + phd | 1, data = bioChemists, dist = "negbin")
+  m3 <- zeroinfl(art ~ fem + mar + phd | fem, data = bioChemists)
+  m4 <- hurdle(art ~ fem + mar + phd | fem, data = bioChemists)
+
+  expect_error(
+    res <- m1 %>% tidy_plus_plus(exponentiate = TRUE, tidy_fun = tidy_zeroinfl),
+    NA
+  )
+  expect_equal(nrow(res), 10)
+
+  expect_error(
+    res <- m1 %>% tidy_plus_plus(intercept = TRUE, tidy_fun = tidy_zeroinfl),
+    NA
+  )
+  expect_equal(nrow(res), 12)
+
+  expect_error(
+    res <- m2 %>% tidy_plus_plus(intercept = TRUE, tidy_fun = tidy_zeroinfl),
+    NA
+  )
+  expect_equal(nrow(res), 7)
+
+  expect_error(
+    res <- m3 %>% tidy_plus_plus(intercept = TRUE, tidy_fun = tidy_zeroinfl),
+    NA
+  )
+  expect_equal(nrow(res), 9)
+
+  expect_error(
+    res <- m4 %>% tidy_plus_plus(intercept = TRUE, tidy_fun = tidy_zeroinfl),
+    NA
+  )
+  expect_equal(nrow(res), 9)
+
+})
