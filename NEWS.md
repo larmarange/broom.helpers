@@ -1,4 +1,8 @@
-# broom.helpers 1.13.1
+# broom.helpers (development version)
+
+**New features**
+
+- support for `MASS::contr.sdif()` contrasts (#230)
 
 **Fix**
 

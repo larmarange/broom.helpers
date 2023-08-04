@@ -27,7 +27,8 @@ a message when requested output cannot be generated. Default is \code{FALSE}}
 \description{
 For categorical variables with a treatment contrast
 (\code{\link[stats:contrast]{stats::contr.treatment()}}), a SAS contrast (\code{\link[stats:contrast]{stats::contr.SAS()}})
-or a sum contrast (\code{\link[stats:contrast]{stats::contr.sum()}}), add a reference row.
+a sum contrast (\code{\link[stats:contrast]{stats::contr.sum()}}), or successive differences contrast
+(\code{\link[MASS:contr.sdif]{MASS::contr.sdif()}}) add a reference row.
 }
 \details{
 The added \code{reference_row} column will be equal to:

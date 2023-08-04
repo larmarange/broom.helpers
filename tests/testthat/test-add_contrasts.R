@@ -102,6 +102,32 @@ test_that("tidy_add_contrast() works for basic models", {
     res$contrasts_type,
     c(NA, "sum", "sum", "sum", "helmert", "helmert", "treatment")
   )
+
+
+  skip_if_not_installed("MASS")
+  library(MASS)
+  mod <- glm(
+    response ~ stage + grade + trt,
+    gtsummary::trial,
+    family = binomial,
+    contrasts = list(
+      stage = contr.sdif,
+      grade = contr.sdif(3),
+      trt = "contr.sdif"
+    )
+  )
+  res <- mod %>%
+    tidy_and_attach() %>%
+    tidy_add_contrasts()
+  expect_equivalent(
+    res$contrasts,
+    c(NA, "contr.sdif", "contr.sdif", "contr.sdif", "contr.sdif",
+      "contr.sdif", "contr.sdif")
+  )
+  expect_equivalent(
+    res$contrasts_type,
+    c(NA, "sdif", "sdif", "sdif", "sdif", "sdif", "sdif")
+  )
 })
 
 test_that("test tidy_add_contrasts() checks", {

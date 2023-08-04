@@ -1,7 +1,7 @@
 #' Add an estimate value to references rows for categorical variables
 #'
 #' For categorical variables with a treatment contrast
-#' ([stats::contr.treatment()]) or a SAS contrast ([stats::contr.SAS()])
+#' ([stats::contr.treatment()]) or a SAS contrast ([stats::contr.SAS()]),
 #' will add an estimate equal to `0` (or `1` if `exponentiate = TRUE`)
 #' to the reference row.
 #'
