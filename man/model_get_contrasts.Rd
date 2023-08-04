@@ -3,11 +3,17 @@
 \name{model_get_contrasts}
 \alias{model_get_contrasts}
 \alias{model_get_contrasts.model_fit}
+\alias{model_get_contrasts.zeroinfl}
+\alias{model_get_contrasts.hurdle}
 \title{Get contrasts used in the model}
 \usage{
 model_get_contrasts(model)
 
 \method{model_get_contrasts}{model_fit}(model)
+
+\method{model_get_contrasts}{zeroinfl}(model)
+
+\method{model_get_contrasts}{hurdle}(model)
 }
 \arguments{
 \item{model}{a model object}

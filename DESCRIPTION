@@ -67,6 +67,7 @@ Suggests:
     parsnip,
     patchwork,
     plm,
+    pscl,
     rmarkdown,
     rstanarm,
     scales,

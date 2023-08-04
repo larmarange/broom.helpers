@@ -49,7 +49,9 @@ supported_models <-
     "`fixest::feNmlm()`", "May fail with R <= 4.0.",
     "`logitr::logitr()`", "Requires logitr >= 0.8.0",
     "`multgee::nomLORgee()`", "Experimental support. Use `tidy_multgee()` as `tidy_fun`.",
-    "`multgee::ordLORgee()`", "Experimental support. Use `tidy_multgee()` as `tidy_fun`."
+    "`multgee::ordLORgee()`", "Experimental support. Use `tidy_multgee()` as `tidy_fun`.",
+    "`pscl::zeroinfl()`", "Experimental support. Use `tidy_zeroinfl()` as `tidy_fun`.",
+    "`pscl::hurdle()`", "Experimental support. Use `tidy_zeroinfl()` as `tidy_fun`."
   ) %>%
   dplyr::arrange(.data$model, .locale = "en")
 

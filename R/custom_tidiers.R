@@ -56,11 +56,29 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
 
   if (inherits(x, "LORgee")) {
     cli::cli_alert_info("{.pkg multgee} model detected.")
-    cli::cli_alert_success("{.code tidy_multgee()} used instead.")
+    cli::cli_alert_success("{.fn tidy_multgee} used instead.")
     cli::cli_alert_info(
       "Add {.code tidy_fun = broom.helpers::tidy_multgee} to quiet these messages."
     )
     return(tidy_multgee(x, conf.int = conf.int, conf.level = conf.level, ...))
+  }
+
+  if (inherits(x, "zeroinfl")) {
+    cli::cli_alert_info("{.cls zeroinfl} model detected.")
+    cli::cli_alert_success("{.fn tidy_zeroinfl} used instead.")
+    cli::cli_alert_info(
+      "Add {.code tidy_fun = broom.helpers::tidy_zeroinfl} to quiet these messages."
+    )
+    return(tidy_zeroinfl(x, conf.int = conf.int, conf.level = conf.level, ...))
+  }
+
+  if (inherits(x, "hurdle")) {
+    cli::cli_alert_info("{.cls hurdle} model detected.")
+    cli::cli_alert_success("{.fn tidy_zeroinfl} used instead.")
+    cli::cli_alert_info(
+      "Add {.code tidy_fun = broom.helpers::tidy_zeroinfl} to quiet these messages."
+    )
+    return(tidy_zeroinfl(x, conf.int = conf.int, conf.level = conf.level, ...))
   }
 
   tidy_args <- list(...)
@@ -203,4 +221,54 @@ tidy_multgee <- function(x, conf.int = TRUE, conf.level = .95, ...) {
     res$term <- c(b, t)
     return(res)
   }
+}
+
+#' Tidy a `zeroinfl` or a `hurdle` model
+#'
+#' `r lifecycle::badge("experimental")`
+#' A tidier for models generated with `pscl::zeroinfl()` or `pscl::hurdle()`.
+#' Term names will be updated to be consistent with generic models. The original
+#' term names are preserved in an `"original_term"` column.
+#' @param x a `pscl::zeroinfl()` or a `pscl::hurdle()` model
+#' @param conf.int logical indicating whether or not to include a confidence
+#' interval in the tidied output
+#' @param conf.level the confidence level to use for the confidence interval
+#' @param component `NULL` or one of `"all"`, `"conditional"`, `"zi"`, or
+#' `"zero_inflated"`
+#' @param ... additional parameters passed to `parameters::model_parameters()`
+#' @export
+#' @family custom_tieders
+#' @examplesIf interactive()
+#' if (.assert_package("pscl", boolean = TRUE)) {
+#'   library(pscl)
+#'   mod <- zeroinfl(
+#'     art ~ fem + mar + phd,
+#'     data = pscl::bioChemists
+#'   )
+#'
+#'   mod %>% tidy_zeroinfl(exponentiate = TRUE)
+#' }
+tidy_zeroinfl <- function(
+    x,
+    conf.int = TRUE,
+    conf.level = .95,
+    component = NULL,
+    ...) {
+  if (!inherits(x, "zeroinfl") && !inherits(x, "hurdle"))
+    cli::cli_abort("{.arg x} should be of class {.cls zeroinfl} or {.cls hurdle}") # nolint
+
+  res <- tidy_parameters(
+    x,
+    conf.int = conf.int,
+    conf.level = conf.level,
+    component = component,
+    ...
+  )
+  res$original_term <- res$term
+  starts_zero <- stringr::str_starts(res$term, "zero_")
+  res$term[starts_zero] <- stringr::str_sub(res$term[starts_zero], 6)
+  starts_count <- stringr::str_starts(res$term, "count_")
+  res$term[starts_count] <- stringr::str_sub(res$term[starts_count], 7)
+  attr(res, "component") <- component
+  res
 }

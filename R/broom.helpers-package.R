@@ -68,7 +68,7 @@ utils::globalVariables(c(".", "where"))
       "exponentiate", "conf.level", "coefficients_type", "coefficients_label",
       "variable_labels", "term_labels", "N_obs", "N_event", "Exposure",
       "force_contr.treatment", "skip_add_reference_rows",
-      "find_missing_interaction_terms"
+      "find_missing_interaction_terms", "component"
     )
   )
   .attributes[.attributes_names]
