@@ -67,12 +67,10 @@ model_get_contrasts.zeroinfl <- function(model) {
   mc <- model_get_contrasts_1(model)
   res <- mc$count
   # merging/combining the two lists
-  for (v in names(mc$zero))
-    res[[v]] <- mc$zero[[v]]
+  for (v in names(mc$zero)) res[[v]] <- mc$zero[[v]]
   res
 }
 
 #' @export
 #' @rdname model_get_contrasts
 model_get_contrasts.hurdle <- model_get_contrasts.zeroinfl
-
