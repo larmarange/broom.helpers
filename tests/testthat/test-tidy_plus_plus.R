@@ -774,6 +774,13 @@ test_that("tidy_plus_plus() works with pscl::zeroinfl() &  hurdle() models", {
   m3 <- zeroinfl(art ~ fem + mar + phd | fem, data = bioChemists)
   m4 <- hurdle(art ~ fem + mar + phd | fem, data = bioChemists)
 
+  expect_message(
+    res <- m1 %>% tidy_plus_plus()
+  )
+  expect_message(
+    res <- m4 %>% tidy_plus_plus()
+  )
+
   expect_error(
     res <- m1 %>% tidy_plus_plus(exponentiate = TRUE, tidy_fun = tidy_zeroinfl),
     NA
