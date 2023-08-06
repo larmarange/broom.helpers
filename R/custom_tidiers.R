@@ -269,6 +269,12 @@ tidy_zeroinfl <- function(
   res$term[starts_zero] <- stringr::str_sub(res$term[starts_zero], 6)
   starts_count <- stringr::str_starts(res$term, "count_")
   res$term[starts_count] <- stringr::str_sub(res$term[starts_count], 7)
+
+  if (!is.null(component) && component %in% c("conditional", "zero_inflated"))
+    res$component <- component
+  if (!is.null(component) && component == "zi")
+    res$component <- "zero_inflated"
+
   attr(res, "component") <- component
   res
 }
