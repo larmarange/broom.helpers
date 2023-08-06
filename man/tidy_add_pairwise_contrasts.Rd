@@ -51,6 +51,10 @@ results tibble. Works only with models supported by \code{emmeans}, see
 \note{
 If the \code{contrasts} column is not yet available in \code{x},
 \code{\link[=tidy_add_contrasts]{tidy_add_contrasts()}} will be automatically applied.
+
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+For multi-components models, such as zero-inflated Poisson or beta
+regression, support of pairwise contrasts is still experimental.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

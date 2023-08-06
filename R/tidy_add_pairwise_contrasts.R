@@ -9,6 +9,10 @@
 #' If the `contrasts` column is not yet available in `x`,
 #' [tidy_add_contrasts()] will be automatically applied.
 #'
+#' `r lifecycle::badge("experimental")`
+#' For multi-components models, such as zero-inflated Poisson or beta
+#' regression, support of pairwise contrasts is still experimental.
+#'
 #' @param x a tidy tibble
 #' @param variables a vector indicating the name of variables
 #' for those pairwise contrasts should be added.
@@ -82,7 +86,7 @@ tidy_add_pairwise_contrasts <- function(
   .attributes <- .save_attributes(x)
 
   if (isTRUE(stringr::str_starts(.attributes$coefficients_type, "marginal"))) {
-    cli::cli_abort("Pairwise contrasts are not compatible with marginal effects / contrasts / means / predictions.")  # nolint
+    cli::cli_abort("Pairwise contrasts are not compatible with marginal effects / contrasts / means / predictions.") # nolint
   }
 
   if (is.null(conf.level)) {
@@ -109,11 +113,34 @@ tidy_add_pairwise_contrasts <- function(
     emmeans_args = emmeans_args
   )
 
-  x <- dplyr::bind_rows(x, pc) %>%
-    dplyr::mutate(variableF = forcats::fct_inorder(.data$variable)) %>%
-    dplyr::arrange(.data$variableF) %>%
-    tidyr::fill(all_of(c("var_class", "var_type", "var_nlevels"))) %>%
-    dplyr::select(-all_of("variableF"))
+  if (
+    isTRUE(.attributes$exponentiate) &&
+      (inherits(model, "zeroinfl") || inherits(model, "hurdle"))
+  ) {
+    pc <- pc %>%
+      dplyr::mutate(
+        estimate = exp(estimate),
+        conf.low = exp(conf.low),
+        conf.high = exp(conf.high)
+      )
+  }
+
+  if ("component" %in% colnames(x) && "component" %in% colnames(pc)) {
+    x <- dplyr::bind_rows(x, pc) %>%
+      dplyr::mutate(
+        componentF = forcats::fct_inorder(.data$component),
+        variableF = forcats::fct_inorder(.data$variable)
+      ) %>%
+      dplyr::arrange(.data$componentF, .data$variableF) %>%
+      tidyr::fill(all_of(c("var_class", "var_type", "var_nlevels"))) %>%
+      dplyr::select(-all_of(c("componentF", "variableF")))
+  } else {
+    x <- dplyr::bind_rows(x, pc) %>%
+      dplyr::mutate(variableF = forcats::fct_inorder(.data$variable)) %>%
+      dplyr::arrange(.data$variableF) %>%
+      tidyr::fill(all_of(c("var_class", "var_type", "var_nlevels"))) %>%
+      dplyr::select(-all_of("variableF"))
+  }
 
   if (!keep_model_terms) {
     x <- x %>%

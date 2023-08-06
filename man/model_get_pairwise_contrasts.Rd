@@ -2,9 +2,29 @@
 % Please edit documentation in R/model_get_pairwise_contrasts.R
 \name{model_get_pairwise_contrasts}
 \alias{model_get_pairwise_contrasts}
+\alias{model_get_pairwise_contrasts.zeroinfl}
+\alias{model_get_pairwise_contrasts.hurdle}
 \title{Get pairwise comparison of the levels of a categorical variable}
 \usage{
 model_get_pairwise_contrasts(
+  model,
+  variables,
+  pairwise_reverse = TRUE,
+  contrasts_adjust = NULL,
+  conf.level = 0.95,
+  emmeans_args = list()
+)
+
+\method{model_get_pairwise_contrasts}{zeroinfl}(
+  model,
+  variables,
+  pairwise_reverse = TRUE,
+  contrasts_adjust = NULL,
+  conf.level = 0.95,
+  emmeans_args = list()
+)
+
+\method{model_get_pairwise_contrasts}{hurdle}(
   model,
   variables,
   pairwise_reverse = TRUE,
@@ -32,12 +52,23 @@ see \code{\link[emmeans:contrast]{emmeans::contrast()}} (if \code{NULL}, use \co
 \description{
 It is computed with \code{\link[emmeans:emmeans]{emmeans::emmeans()}}.
 }
+\details{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+For \code{pscl::zeroinfl()} and \code{pscl::hurdle()} models, pairwise contrasts are
+computed separately for each component, using \code{mode = "count"} and
+\code{mode = "zero"} (see documentation of \code{emmeans}) and a component column
+is added to the results. This support is still experimental.
+}
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 if (.assert_package("emmeans", boolean = TRUE)) {
   mod <- lm(Sepal.Length ~ Species, data = iris)
   mod \%>\% model_get_pairwise_contrasts(variables = "Species")
-  mod \%>\% model_get_pairwise_contrasts(variables = "Species", contrasts_adjust = "none")
+  mod \%>\%
+    model_get_pairwise_contrasts(
+      variables = "Species",
+      contrasts_adjust = "none"
+    )
 }
 \dontshow{\}) # examplesIf}
 }
