@@ -1,12 +1,15 @@
 #' Tidy a model with parameters package
 #'
-#' Use `parameters::model_parameters()` to tidy a model and apply
+#' Use [parameters::model_parameters()] to tidy a model and apply
 #' `parameters::standardize_names(style = "broom")` to the output
 #' @param x a model
 #' @param conf.int logical indicating whether or not to include a confidence
 #' interval in the tidied output
 #' @param conf.level the confidence level to use for the confidence interval
-#' @param ... additional parameters passed to `parameters::model_parameters()`
+#' @param ... additional parameters passed to [parameters::model_parameters()]
+#' @note
+#' For [betareg::betareg()], the component column in the results is standardized
+#' with [broom::tidy()], using `"mean"` and `"precision"` values.
 #' @examplesIf interactive()
 #' if (.assert_package("parameters", boolean = TRUE)) {
 #'   lm(Sepal.Length ~ Sepal.Width + Species, data = iris) %>%
@@ -16,11 +19,21 @@
 #' @family custom_tieders
 tidy_parameters <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   .assert_package("parameters", fn = "broom.helpers::tidy_parameters()")
-
+  args <- list(...)
   if (!conf.int) conf.level <- NULL
+  args$ci <- conf.level
+  args$model <- x
 
-  res <- x %>%
-    parameters::model_parameters(ci = conf.level, ...) %>%
+  if (
+    inherits(x, "betareg") &&
+      !is.null(args$component) &&
+      args$component == "mean"
+  ) {
+    args$component <- "conditional"
+  }
+
+  res <-
+    do.call(parameters::model_parameters, args) %>%
     parameters::standardize_names(style = "broom")
 
   if (inherits(x, "multinom")) {
@@ -30,6 +43,23 @@ tidy_parameters <- function(x, conf.int = TRUE, conf.level = .95, ...) {
     } else {
       # binary
       res$y.level <- x$lev %>% utils::tail(n = 1)
+    }
+  }
+
+  if (!is.null(args$component)) {
+    attr(res, "component") <- args$component
+  }
+
+  # for betareg, need to standardize component with tidy::broom()
+  if (inherits(x, "betareg")) {
+    if (is.null(args$component) || args$component == "conditional") {
+      res$component <- "mean"
+    }
+    if (!is.null(args$component) && args$component == "precision") {
+      res$component <- "precision"
+    }
+    if (!is.null(args$component) && args$component == "all") {
+      res$component[res$component == "conditional"] <- "mean"
     }
   }
 
@@ -254,8 +284,9 @@ tidy_zeroinfl <- function(
     conf.level = .95,
     component = NULL,
     ...) {
-  if (!inherits(x, "zeroinfl") && !inherits(x, "hurdle"))
-    cli::cli_abort("{.arg x} should be of class {.cls zeroinfl} or {.cls hurdle}") # nolint
+  if (!inherits(x, "zeroinfl") && !inherits(x, "hurdle")) {
+    cli::cli_abort("{.arg x} should be of class {.cls zeroinfl} or {.cls hurdle}")
+  } # nolint
 
   res <- tidy_parameters(
     x,
@@ -270,10 +301,12 @@ tidy_zeroinfl <- function(
   starts_count <- stringr::str_starts(res$term, "count_")
   res$term[starts_count] <- stringr::str_sub(res$term[starts_count], 7)
 
-  if (!is.null(component) && component %in% c("conditional", "zero_inflated"))
+  if (!is.null(component) && component %in% c("conditional", "zero_inflated")) {
     res$component <- component
-  if (!is.null(component) && component == "zi")
+  }
+  if (!is.null(component) && component == "zi") {
     res$component <- "zero_inflated"
+  }
 
   attr(res, "component") <- component
   res

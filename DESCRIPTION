@@ -29,6 +29,7 @@ Imports:
     tibble,
     tidyr
 Suggests: 
+    betareg,
     biglm,
     biglmm,
     brms (>= 2.13.0),

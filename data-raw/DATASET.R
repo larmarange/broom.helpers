@@ -50,8 +50,9 @@ supported_models <-
     "`logitr::logitr()`", "Requires logitr >= 0.8.0",
     "`multgee::nomLORgee()`", "Experimental support. Use `tidy_multgee()` as `tidy_fun`.",
     "`multgee::ordLORgee()`", "Experimental support. Use `tidy_multgee()` as `tidy_fun`.",
-    "`pscl::zeroinfl()`", "Experimental support. Use `tidy_zeroinfl()` as `tidy_fun`.",
-    "`pscl::hurdle()`", "Experimental support. Use `tidy_zeroinfl()` as `tidy_fun`."
+    "`pscl::zeroinfl()`", "Use `tidy_zeroinfl()` as `tidy_fun`.",
+    "`pscl::hurdle()`", "Use `tidy_zeroinfl()` as `tidy_fun`.",
+    "`betareg::betareg()`", "Use `tidy_parameters()` as `tidy_fun` with `component` argument to control with coefficients to return."
   ) %>%
   dplyr::arrange(.data$model, .locale = "en")
 
