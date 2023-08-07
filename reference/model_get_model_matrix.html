@@ -20,7 +20,7 @@ with the same structure as stats::model.matrix.default()."><!-- mathjax --><scri
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">broom.helpers</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.13.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.14.0</span>
       </span>
     </div>
 
@@ -101,6 +101,9 @@ with the same structure as <code><a href="https://rdrr.io/r/stats/model.matrix.h
 <span><span class="fu">model_get_model_matrix</span><span class="op">(</span><span class="va">model</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for LORgee</span></span>
+<span><span class="fu">model_get_model_matrix</span><span class="op">(</span><span class="va">model</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for betareg</span></span>
 <span><span class="fu">model_get_model_matrix</span><span class="op">(</span><span class="va">model</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -116,9 +119,9 @@ with the same structure as <code><a href="https://rdrr.io/r/stats/model.matrix.h
 </dl></div>
     <div id="details">
     <h2>Details</h2>
-    <p>For models fitted with <code><a href="https://rdrr.io/pkg/glmmTMB/man/glmmTMB.html" class="external-link">glmmTMB::glmmTMB()</a></code>, it will return a model matrix
+    <p>For models fitted with <code>glmmTMB::glmmTMB()</code>, it will return a model matrix
 taking into account all components ("cond", "zi" and "disp"). For a more
-restricted model matrix, please refer to <code><a href="https://rdrr.io/pkg/glmmTMB/man/glmmTMB_methods.html" class="external-link">glmmTMB::model.matrix.glmmTMB()</a></code>.</p>
+restricted model matrix, please refer to <code>glmmTMB::model.matrix.glmmTMB()</code>.</p>
 <p>For <code><a href="https://rdrr.io/pkg/plm/man/plm.html" class="external-link">plm::plm()</a></code> models, constant columns are not removed.</p>
     </div>
     <div id="see-also">

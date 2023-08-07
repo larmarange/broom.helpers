@@ -21,7 +21,7 @@ See marginaleffects::avg_predictions() for a list of supported models."><!-- mat
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">broom.helpers</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.13.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.14.0</span>
       </span>
     </div>
 
@@ -66,10 +66,10 @@ See marginaleffects::avg_predictions() for a list of supported models."><!-- mat
 
     <div class="ref-description">
     <p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a>
-Use <code><a href="https://vincentarelbundock.github.io/marginaleffects/reference/predictions.html" class="external-link">marginaleffects::avg_predictions()</a></code> to estimate marginal predictions for
+Use <code><a href="https://rdrr.io/pkg/marginaleffects/man/predictions.html" class="external-link">marginaleffects::avg_predictions()</a></code> to estimate marginal predictions for
 each variable of a model and return a tibble tidied in a way that it could
 be used by <code>broom.helpers</code> functions.
-See <code><a href="https://vincentarelbundock.github.io/marginaleffects/reference/predictions.html" class="external-link">marginaleffects::avg_predictions()</a></code> for a list of supported models.</p>
+See <code><a href="https://rdrr.io/pkg/marginaleffects/man/predictions.html" class="external-link">marginaleffects::avg_predictions()</a></code> for a list of supported models.</p>
     </div>
 
     <div id="ref-usage">
@@ -99,7 +99,7 @@ See <code><a href="https://vincentarelbundock.github.io/marginaleffects/referenc
 
 <dt>variables_list</dt>
 <dd><p>a list whose elements will be sequentially passed to
-<code>variables</code> in <code><a href="https://vincentarelbundock.github.io/marginaleffects/reference/predictions.html" class="external-link">marginaleffects::avg_predictions()</a></code> (see details below);
+<code>variables</code> in <code><a href="https://rdrr.io/pkg/marginaleffects/man/predictions.html" class="external-link">marginaleffects::avg_predictions()</a></code> (see details below);
 alternatively, it could also be the string <code>"auto"</code> (default) or
 <code>"no_interaction"</code></p></dd>
 
@@ -115,7 +115,7 @@ interval in the tidied output</p></dd>
 
 <dt>...</dt>
 <dd><p>additional parameters passed to
-<code><a href="https://vincentarelbundock.github.io/marginaleffects/reference/predictions.html" class="external-link">marginaleffects::avg_predictions()</a></code></p></dd>
+<code><a href="https://rdrr.io/pkg/marginaleffects/man/predictions.html" class="external-link">marginaleffects::avg_predictions()</a></code></p></dd>
 
 
 <dt>model</dt>
@@ -138,7 +138,7 @@ interactions be returned?</p></dd>
     <div id="details">
     <h2>Details</h2>
     <p>Marginal predictions are obtained by calling, for each variable,
-<code><a href="https://vincentarelbundock.github.io/marginaleffects/reference/predictions.html" class="external-link">marginaleffects::avg_predictions()</a></code> with the same variable being used for
+<code><a href="https://rdrr.io/pkg/marginaleffects/man/predictions.html" class="external-link">marginaleffects::avg_predictions()</a></code> with the same variable being used for
 the <code>variables</code> and the <code>by</code> argument.</p>
 <p>Considering a categorical variable named <code>cat</code>, <code>tidy_marginal_predictions()</code>
 will call <code>avg_predictions(model, variables = list(cat = unique), by = "cat")</code>
@@ -152,12 +152,12 @@ values of <code>cont</code>.</p>
 using a counterfactual grid for each value of the variable of interest,
 before averaging the results. <em>Marginal predictions at the mean</em> could be
 obtained by indicating <code>newdata = "mean"</code>. Other assumptions are possible,
-see the help file of <code><a href="https://vincentarelbundock.github.io/marginaleffects/reference/predictions.html" class="external-link">marginaleffects::avg_predictions()</a></code>.</p>
+see the help file of <code><a href="https://rdrr.io/pkg/marginaleffects/man/predictions.html" class="external-link">marginaleffects::avg_predictions()</a></code>.</p>
 <p><code>tidy_marginal_predictions()</code> will compute marginal predictions for each
 variable or combination of variables, before stacking the results in a unique
 tibble. This is why <code>tidy_marginal_predictions()</code> has a <code>variables_list</code>
 argument consisting of a list of specifications that will be passed
-sequentially to the <code>variables</code> argument of <code><a href="https://vincentarelbundock.github.io/marginaleffects/reference/predictions.html" class="external-link">marginaleffects::avg_predictions()</a></code>.</p>
+sequentially to the <code>variables</code> argument of <code><a href="https://rdrr.io/pkg/marginaleffects/man/predictions.html" class="external-link">marginaleffects::avg_predictions()</a></code>.</p>
 <p>The helper function <code>variables_to_predict()</code> could be used to automatically
 generate a suitable list to be used with <code>variables_list</code>. By default, all
 unique values are retained for categorical variables and <code>fivenum</code> (i.e.
@@ -176,7 +176,7 @@ plots that could be combined with <code><a href="https://patchwork.data-imaginis
     </div>
     <div id="see-also">
     <h2>See also</h2>
-    <div class="dont-index"><p><code><a href="https://vincentarelbundock.github.io/marginaleffects/reference/predictions.html" class="external-link">marginaleffects::avg_predictions()</a></code></p>
+    <div class="dont-index"><p><code><a href="https://rdrr.io/pkg/marginaleffects/man/predictions.html" class="external-link">marginaleffects::avg_predictions()</a></code></p>
 <p>Other marginal_tieders: 
 <code><a href="tidy_all_effects.html">tidy_all_effects</a>()</code>,
 <code><a href="tidy_avg_comparisons.html">tidy_avg_comparisons</a>()</code>,

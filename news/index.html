@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">broom.helpers</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.13.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.14.0</span>
       </span>
     </div>
 
@@ -60,7 +60,16 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="1.13.0" id="broomhelpers-1130">broom.helpers 1.13.0<a class="anchor" aria-label="anchor" href="#broomhelpers-1130"></a></h2>
+<h2 class="page-header" data-toc-text="1.14.0" id="broomhelpers-1140">broom.helpers 1.14.0<a class="anchor" aria-label="anchor" href="#broomhelpers-1140"></a></h2>
+<p><strong>New features</strong></p>
+<ul><li>support for <code><a href="https://rdrr.io/pkg/MASS/man/contr.sdif.html" class="external-link">MASS::contr.sdif()</a></code> contrasts (<a href="https://github.com/larmarange/broom.helpers/issues/230" class="external-link">#230</a>)</li>
+<li>support for <code><a href="https://rdrr.io/pkg/pscl/man/zeroinfl.html" class="external-link">pscl::zeroinfl()</a></code> and <code><a href="https://rdrr.io/pkg/pscl/man/hurdle.html" class="external-link">pscl::hurdle()</a></code> models (<a href="https://github.com/larmarange/broom.helpers/issues/232" class="external-link">#232</a>)</li>
+<li>support for <code><a href="https://rdrr.io/pkg/betareg/man/betareg.html" class="external-link">betareg::betareg()</a></code> models (<a href="https://github.com/larmarange/broom.helpers/issues/234" class="external-link">#234</a>)</li>
+</ul><p><strong>Fix</strong></p>
+<ul><li>input of <code><a href="https://rdrr.io/r/utils/packageDescription.html" class="external-link">packageVersion()</a></code> should be a character string (<a href="https://github.com/larmarange/broom.helpers/issues/225" class="external-link">#225</a>)</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.13.0" id="broomhelpers-1130">broom.helpers 1.13.0<small>2023-03-28</small><a class="anchor" aria-label="anchor" href="#broomhelpers-1130"></a></h2>
 <p><strong>New features</strong></p>
 <ul><li>
 <code><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows()</a></code> now also populate p-values and confidence intervals for sum contrasts (<a href="https://github.com/larmarange/broom.helpers/issues/220" class="external-link">#220</a>)</li>
@@ -173,7 +182,7 @@
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.4.0" id="broomhelpers-140">broom.helpers 1.4.0<small>2021-09-30</small><a class="anchor" aria-label="anchor" href="#broomhelpers-140"></a></h2>
 <p><strong>New supported models</strong></p>
-<ul><li>Support for <code><a href="https://rdrr.io/pkg/glmmTMB/man/glmmTMB.html" class="external-link">glmmTMB::glmmTMB()</a></code> models (<a href="https://github.com/larmarange/broom.helpers/issues/119" class="external-link">#119</a>)</li>
+<ul><li>Support for <code>glmmTMB::glmmTMB()</code> models (<a href="https://github.com/larmarange/broom.helpers/issues/119" class="external-link">#119</a>)</li>
 </ul><p><strong>New features</strong></p>
 <ul><li>Function arguments that accept formula-list values now have more flexible inputs. (<a href="https://github.com/larmarange/broom.helpers/issues/121" class="external-link">#121</a>)
 <ul><li>The passed list may now be a combination of named lists and lists of formulas, e.g. <code>list(trt ~ 1, all_continuous() ~ 2)</code>.</li>
