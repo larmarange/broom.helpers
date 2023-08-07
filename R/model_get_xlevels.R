@@ -22,7 +22,7 @@ model_get_xlevels.default <- function(model) {
   if (is.null(xlevels)) {
     xlevels <- tryCatch(
       stats::.getXlevels(
-        stats::terms(model),
+        model %>% model_get_terms(),
         model %>% model_get_model_frame()
       ),
       error = function(e) {

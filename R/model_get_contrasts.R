@@ -74,3 +74,13 @@ model_get_contrasts.zeroinfl <- function(model) {
 #' @export
 #' @rdname model_get_contrasts
 model_get_contrasts.hurdle <- model_get_contrasts.zeroinfl
+
+#' @export
+#' @rdname model_get_contrasts
+model_get_contrasts.betareg <- function(model) {
+  mc <- model_get_contrasts_1(model)
+  res <- mc$mean
+  # merging/combining the two lists
+  for (v in names(mc$precision)) res[[v]] <- mc$precision[[v]]
+  res
+}

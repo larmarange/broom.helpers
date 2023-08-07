@@ -49,3 +49,9 @@ model_get_terms.glmmTMB <- function(model) {
 model_get_terms.model_fit <- function(model) {
   model_get_terms(model$fit)
 }
+
+#' @export
+#' @rdname model_get_terms
+model_get_terms.betareg <- function(model) {
+  model_get_terms(model$terms$full)
+}

@@ -126,6 +126,47 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
     }
   }
 
+  # for betareg, if exponentiate = TRUE, forcing tidy_parameters,
+  # by adding `component = "all" to the arguments`
+  if (inherits(x, "betareg")) {
+    if (isFALSE(tidy_args$exponentiate)) {
+      tidy_args$exponentiate <- NULL
+    } else if (isTRUE(tidy_args$exponentiate)) {
+      component <- tidy_args$component
+      cli::cli_alert_info(
+        "{.code exponentiate = TRUE} not valid for {.cl betareg} with {.fn broom::tidy()}."
+      )
+      if (is.null(component)) {
+        cli::cli_alert_success("{.code tidy_parameters(component = \"all\")} used instead.")
+        cli::cli_alert_info(
+          "Add {.code tidy_fun = broom.helpers::tidy_parameters} to quiet these messages."
+        )
+        return(
+          tidy_parameters(
+            x,
+            conf.int = conf.int,
+            conf.level = conf.level,
+            component = "all",
+            ...
+          )
+        )
+      } else {
+        cli::cli_alert_success("{.code tidy_parameters()} used instead.")
+        cli::cli_alert_info(
+          "Add {.code tidy_fun = broom.helpers::tidy_parameters} to quiet these messages."
+        )
+        return(
+          tidy_parameters(
+            x,
+            conf.int = conf.int,
+            conf.level = conf.level,
+            ...
+          )
+        )
+      }
+    }
+  }
+
   res <- tryCatch(
     do.call(tidy_broom, tidy_args),
     error = function(e) {
