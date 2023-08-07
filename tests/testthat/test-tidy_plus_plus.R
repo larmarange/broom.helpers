@@ -830,6 +830,7 @@ test_that("tidy_plus_plus() works with betareg::betareg() models", {
   m1 <- betareg(yield ~ batch + temp, data = GasolineYield)
   m2 <- betareg(yield ~ batch + temp | temp + pressure, data = GasolineYield)
   m3 <- betareg(yield ~ temp | temp + batch, data = GasolineYield)
+  m4 <- betareg(yield ~ temp + batch | temp + batch, data = GasolineYield)
 
   expect_error(
     res <- m1 %>% tidy_plus_plus(intercept = TRUE),
@@ -862,6 +863,11 @@ test_that("tidy_plus_plus() works with betareg::betareg() models", {
     NA
   )
   expect_equal(nrow(res), 11)
+  expect_error(
+    res <- m2 %>% tidy_plus_plus(add_header_rows = TRUE),
+    NA
+  )
+  expect_equal(nrow(res), 14)
 
   expect_error(
     res <- m3 %>% tidy_plus_plus(intercept = TRUE),
@@ -882,4 +888,10 @@ test_that("tidy_plus_plus() works with betareg::betareg() models", {
   expect_error(
     m3 %>% tidy_plus_plus(add_pairwise_contrasts = TRUE)
   )
+
+  expect_error(
+    res <- m4 %>% tidy_plus_plus(add_header_rows = TRUE),
+    NA
+  )
+  expect_equal(nrow(res), 24)
 })
