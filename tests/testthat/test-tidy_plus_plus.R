@@ -761,3 +761,137 @@ test_that("tidy_plus_plus() works with multgee models", {
     NA
   )
 })
+
+test_that("tidy_plus_plus() works with pscl::zeroinfl() &  hurdle() models", {
+  skip_on_cran()
+  skip_if_not_installed("pscl")
+  skip_if_not_installed("parameters")
+
+  library(pscl)
+  data("bioChemists", package = "pscl")
+  m1 <- zeroinfl(art ~ fem + mar + phd | fem + mar + phd, data = bioChemists)
+  m2 <- zeroinfl(art ~ fem + mar + phd | 1, data = bioChemists, dist = "negbin")
+  m3 <- zeroinfl(art ~ fem + mar + phd | fem, data = bioChemists)
+  m4 <- hurdle(art ~ fem + mar + phd | fem, data = bioChemists)
+
+  expect_message(
+    res <- m1 %>% tidy_plus_plus()
+  )
+  expect_message(
+    res <- m4 %>% tidy_plus_plus()
+  )
+
+  expect_error(
+    res <- m1 %>% tidy_plus_plus(exponentiate = TRUE, tidy_fun = tidy_zeroinfl),
+    NA
+  )
+  expect_equal(nrow(res), 10)
+
+  expect_error(
+    res <- m1 %>% tidy_plus_plus(intercept = TRUE, tidy_fun = tidy_zeroinfl),
+    NA
+  )
+  expect_equal(nrow(res), 12)
+
+  expect_error(
+    res <- m2 %>% tidy_plus_plus(intercept = TRUE, tidy_fun = tidy_zeroinfl),
+    NA
+  )
+  expect_equal(nrow(res), 7)
+
+  expect_error(
+    res <- m3 %>% tidy_plus_plus(intercept = TRUE, tidy_fun = tidy_zeroinfl),
+    NA
+  )
+  expect_equal(nrow(res), 9)
+
+  expect_error(
+    res <- m4 %>% tidy_plus_plus(intercept = TRUE, tidy_fun = tidy_zeroinfl),
+    NA
+  )
+  expect_equal(nrow(res), 9)
+
+  expect_error(
+    m3 %>% tidy_plus_plus(add_pairwise_contrasts = TRUE)
+  )
+
+  expect_error(
+    m4 %>% tidy_plus_plus(add_pairwise_contrasts = TRUE)
+  )
+})
+
+test_that("tidy_plus_plus() works with betareg::betareg() models", {
+  skip_on_cran()
+  skip_if_not_installed("betareg")
+  skip_if_not_installed("parameters")
+
+  library(betareg)
+  data("GasolineYield", package = "betareg")
+  m1 <- betareg(yield ~ batch + temp, data = GasolineYield)
+  m2 <- betareg(yield ~ batch + temp | temp + pressure, data = GasolineYield)
+  m3 <- betareg(yield ~ temp | temp + batch, data = GasolineYield)
+  m4 <- betareg(yield ~ temp + batch | temp + batch, data = GasolineYield)
+
+  expect_error(
+    res <- m1 %>% tidy_plus_plus(intercept = TRUE),
+    NA
+  )
+  expect_equal(nrow(res), 13)
+  expect_error(
+    res <- m1 %>% tidy_plus_plus(exponentiate = TRUE),
+    NA
+  )
+  expect_equal(nrow(res), 11)
+  expect_error(
+    res <- m1 %>% tidy_plus_plus(add_header_rows = TRUE),
+    NA
+  )
+  expect_equal(nrow(res), 12)
+
+  expect_error(
+    res <- m2 %>% tidy_plus_plus(intercept = TRUE),
+    NA
+  )
+  expect_equal(nrow(res), 15)
+  expect_error(
+    res <- m2 %>% tidy_plus_plus(exponentiate = TRUE),
+    NA
+  )
+  expect_equal(nrow(res), 13)
+  expect_error(
+    res <- m2 %>% tidy_plus_plus(component = "conditional"),
+    NA
+  )
+  expect_equal(nrow(res), 11)
+  expect_error(
+    res <- m2 %>% tidy_plus_plus(add_header_rows = TRUE),
+    NA
+  )
+  expect_equal(nrow(res), 14)
+
+  expect_error(
+    res <- m3 %>% tidy_plus_plus(intercept = TRUE),
+    NA
+  )
+  expect_equal(nrow(res), 14)
+  expect_error(
+    res <- m3 %>% tidy_plus_plus(exponentiate = TRUE),
+    NA
+  )
+  expect_equal(nrow(res), 12)
+  expect_error(
+    res <- m3 %>% tidy_plus_plus(component = "mean"),
+    NA
+  )
+  expect_equal(nrow(res), 1)
+
+  expect_error(
+    m3 %>% tidy_plus_plus(add_pairwise_contrasts = TRUE)
+  )
+
+  expect_error(
+    res <- m4 %>% tidy_plus_plus(add_header_rows = TRUE),
+    NA
+  )
+  expect_equal(nrow(res), 24)
+})

@@ -113,16 +113,29 @@ tidy_add_header_rows <- function(x,
   }
 
   # checking if variables incorrectly requested for single row summary
-  bad_single_row <- xx %>%
-    dplyr::filter(
-      !is.na(.data$variable),
-      is.na(.data$reference_row) | !.data$reference_row,
-      .data$variable %in% show_single_row
-    ) %>%
-    dplyr::group_by(.data$variable) %>%
-    dplyr::count() %>%
-    dplyr::filter(.data$n > 1) %>%
-    dplyr::pull(.data$variable)
+  if ("component" %in% colnames(xx)) {
+    bad_single_row <- xx %>%
+      dplyr::filter(
+        !is.na(.data$variable),
+        is.na(.data$reference_row) | !.data$reference_row,
+        .data$variable %in% show_single_row
+      ) %>%
+      dplyr::group_by(.data$component, .data$variable) %>%
+      dplyr::count() %>%
+      dplyr::filter(.data$n > 1) %>%
+      dplyr::pull(.data$variable)
+  } else {
+    bad_single_row <- xx %>%
+      dplyr::filter(
+        !is.na(.data$variable),
+        is.na(.data$reference_row) | !.data$reference_row,
+        .data$variable %in% show_single_row
+      ) %>%
+      dplyr::group_by(.data$variable) %>%
+      dplyr::count() %>%
+      dplyr::filter(.data$n > 1) %>%
+      dplyr::pull(.data$variable)
+  }
   if (length(bad_single_row) > 0) {
     if (!quiet) {
       paste(
@@ -144,13 +157,24 @@ tidy_add_header_rows <- function(x,
     length(show_single_row) > 0 &&
       any(x$variable %in% show_single_row)
   ) {
-    variables_to_simplify <- xx %>%
-      dplyr::filter(
-        .data$variable %in% show_single_row & !.data$reference_row
-      ) %>%
-      dplyr::count(.data$variable) %>%
-      dplyr::filter(.data$n == 1) %>%
-      purrr::pluck("variable")
+    if ("component" %in% colnames(xx)) {
+      variables_to_simplify <- xx %>%
+        dplyr::filter(
+          .data$variable %in% show_single_row & !.data$reference_row
+        ) %>%
+        dplyr::count(.data$component, .data$variable) %>%
+        dplyr::filter(.data$n == 1) %>%
+        purrr::pluck("variable") %>%
+        unique()
+    } else {
+      variables_to_simplify <- xx %>%
+        dplyr::filter(
+          .data$variable %in% show_single_row & !.data$reference_row
+        ) %>%
+        dplyr::count(.data$variable) %>%
+        dplyr::filter(.data$n == 1) %>%
+        purrr::pluck("variable")
+    }
 
     # removing reference rows of those variables
     if (length(variables_to_simplify) > 0) {
@@ -197,6 +221,33 @@ tidy_add_header_rows <- function(x,
       header_rows <- header_rows %>%
         dplyr::mutate(term_cleaned = .clean_backticks(.data$term, .data$variable)) %>%
         dplyr::group_by(.data$variable, .data$y.level) %>%
+        dplyr::summarise(
+          var_class = dplyr::first(.data$var_class),
+          var_type = dplyr::first(.data$var_type),
+          var_label = dplyr::first(.data$var_label),
+          var_nlevels = dplyr::first(.data$var_nlevels),
+          contrasts = dplyr::first(.data$contrasts),
+          contrasts_type = dplyr::first(.data$contrasts_type),
+          var_nrow = dplyr::n(),
+          var_test = sum(.data$term_cleaned != .data$variable),
+          rank = min(.data$rank) - .25,
+          .groups = "drop_last"
+        ) %>%
+        dplyr::filter(.data$var_nrow >= 2 | .data$var_test > 0) %>%
+        dplyr::select(-dplyr::all_of(c("var_nrow", "var_test"))) %>%
+        dplyr::mutate(
+          header_row = TRUE,
+          label = .data$var_label
+        )
+    }
+  } else if ("component" %in% names(x)) {
+    header_rows <- x %>%
+      dplyr::filter(!is.na(.data$variable) & !.data$variable %in% show_single_row)
+
+    if (nrow(header_rows) > 0) {
+      header_rows <- header_rows %>%
+        dplyr::mutate(term_cleaned = .clean_backticks(.data$term, .data$variable)) %>%
+        dplyr::group_by(.data$variable, .data$component) %>%
         dplyr::summarise(
           var_class = dplyr::first(.data$var_class),
           var_type = dplyr::first(.data$var_type),

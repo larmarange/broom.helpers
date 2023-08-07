@@ -3,6 +3,8 @@
 **New features**
 
 - support for `MASS::contr.sdif()` contrasts (#230)
+- support for `pscl::zeroinfl()` and `pscl::hurdle()` models (#232)
+- support for `betareg::betareg()` models (#234)
 
 **Fix**
 

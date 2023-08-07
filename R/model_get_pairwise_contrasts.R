@@ -11,13 +11,23 @@
 #' @param conf.level level of confidence for confidence intervals
 #' @param emmeans_args list of additional parameter to pass to
 #' [emmeans::emmeans()] when computing pairwise contrasts
+#' @details
+#' `r lifecycle::badge("experimental")`
+#' For `pscl::zeroinfl()` and `pscl::hurdle()` models, pairwise contrasts are
+#' computed separately for each component, using `mode = "count"` and
+#' `mode = "zero"` (see documentation of `emmeans`) and a component column
+#' is added to the results. This support is still experimental.
 #' @family model_helpers
 #' @export
 #' @examplesIf interactive()
 #' if (.assert_package("emmeans", boolean = TRUE)) {
 #'   mod <- lm(Sepal.Length ~ Species, data = iris)
 #'   mod %>% model_get_pairwise_contrasts(variables = "Species")
-#'   mod %>% model_get_pairwise_contrasts(variables = "Species", contrasts_adjust = "none")
+#'   mod %>%
+#'     model_get_pairwise_contrasts(
+#'       variables = "Species",
+#'       contrasts_adjust = "none"
+#'     )
 #' }
 model_get_pairwise_contrasts <- function(
     model,
@@ -97,3 +107,17 @@ model_get_pairwise_contrasts.default <- function(
   r$contrasts_type <- "pairwise"
   r %>% dplyr::relocate(dplyr::all_of("variable"))
 }
+
+#' @export
+model_get_pairwise_contrasts.zeroinfl <- function(model, ...) {
+  cli::cli_abort(c(
+    "Pairwise contrasts are not supported for multi-components model.",
+    "Use directly {.fn emmeans::emmeans}."
+  ))
+}
+
+#' @export
+model_get_pairwise_contrasts.hurdle <- model_get_pairwise_contrasts.zeroinfl
+
+#' @export
+model_get_pairwise_contrasts.betareg <- model_get_pairwise_contrasts.zeroinfl

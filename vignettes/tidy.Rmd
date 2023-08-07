@@ -296,7 +296,7 @@ td {vertical-align: top;}
 # nolint start
 tibble::tribble(
   ~Column, ~Function, ~Description,
-  "original_term", "`tidy_disambiguate_terms()`", "Original term before disambiguation. This columns is added only when disambiguation is needed (i.e. for mixed models). Also used for \"multgee\" models.",
+  "original_term", "`tidy_disambiguate_terms()`, `tidy_multgee()` or `tidy_zeroinfl()`", "Original term before disambiguation. This columns is added only when disambiguation is needed (i.e. for mixed models). Also used for \"multgee\", \"zeroinfl\" and \"hurdle\" models.",
   "variable", "`tidy_identify_variables()`", "String of variable names from the model. For categorical variables and polynomial terms defined with `stats::poly()`, terms belonging to the variable are identified.",
   "var_class", "`tidy_identify_variables()`", "Class of the variable.",
   "var_type", "`tidy_identify_variables()`", "One of \"intercept\", \"continuous\", \"dichotomous\", \"categorical\", \"interaction\", \"ran_pars\" or \"ran_vals\"",
@@ -346,7 +346,8 @@ tibble::tribble(
   "Custom term labels passed to `tidy_add_term_labels()`",
   "N_obs", "`tidy_add_n()`", "Total number of observations",
   "N_event", "`tidy_add_n()`", "Total number of events",
-  "Exposure", "`tidy_add_n()`", "Total of exposure time"
+  "Exposure", "`tidy_add_n()`", "Total of exposure time",
+  "component", "`tidy_zeroinfl()`", "`component` argument passed to `tidy_zeroinfl()`"
 ) %>%
   gt::gt() %>%
   gt::fmt_markdown(columns = everything()) %>%

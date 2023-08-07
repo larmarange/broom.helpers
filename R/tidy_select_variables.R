@@ -57,6 +57,8 @@ tidy_select_variables <- function(
   # order result, intercept first then by the order of include
   if ("y.level" %in% names(x)) {
     x$group_order <- factor(x$y.level) %>% forcats::fct_inorder()
+  } else if ("component" %in% names(x)) {
+    x$group_order <- factor(x$component) %>% forcats::fct_inorder()
   } else {
     x$group_order <- 1
   }

@@ -1,12 +1,15 @@
 #' Tidy a model with parameters package
 #'
-#' Use `parameters::model_parameters()` to tidy a model and apply
+#' Use [parameters::model_parameters()] to tidy a model and apply
 #' `parameters::standardize_names(style = "broom")` to the output
 #' @param x a model
 #' @param conf.int logical indicating whether or not to include a confidence
 #' interval in the tidied output
 #' @param conf.level the confidence level to use for the confidence interval
-#' @param ... additional parameters passed to `parameters::model_parameters()`
+#' @param ... additional parameters passed to [parameters::model_parameters()]
+#' @note
+#' For [betareg::betareg()], the component column in the results is standardized
+#' with [broom::tidy()], using `"mean"` and `"precision"` values.
 #' @examplesIf interactive()
 #' if (.assert_package("parameters", boolean = TRUE)) {
 #'   lm(Sepal.Length ~ Sepal.Width + Species, data = iris) %>%
@@ -16,11 +19,21 @@
 #' @family custom_tieders
 tidy_parameters <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   .assert_package("parameters", fn = "broom.helpers::tidy_parameters()")
-
+  args <- list(...)
   if (!conf.int) conf.level <- NULL
+  args$ci <- conf.level
+  args$model <- x
 
-  res <- x %>%
-    parameters::model_parameters(ci = conf.level, ...) %>%
+  if (
+    inherits(x, "betareg") &&
+      !is.null(args$component) &&
+      args$component == "mean"
+  ) {
+    args$component <- "conditional"
+  }
+
+  res <-
+    do.call(parameters::model_parameters, args) %>%
     parameters::standardize_names(style = "broom")
 
   if (inherits(x, "multinom")) {
@@ -30,6 +43,23 @@ tidy_parameters <- function(x, conf.int = TRUE, conf.level = .95, ...) {
     } else {
       # binary
       res$y.level <- x$lev %>% utils::tail(n = 1)
+    }
+  }
+
+  if (!is.null(args$component)) {
+    attr(res, "component") <- args$component
+  }
+
+  # for betareg, need to standardize component with tidy::broom()
+  if (inherits(x, "betareg")) {
+    if (is.null(args$component) || args$component == "conditional") {
+      res$component <- "mean"
+    }
+    if (!is.null(args$component) && args$component == "precision") {
+      res$component <- "precision"
+    }
+    if (!is.null(args$component) && args$component == "all") {
+      res$component[res$component == "conditional"] <- "mean"
     }
   }
 
@@ -56,11 +86,29 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
 
   if (inherits(x, "LORgee")) {
     cli::cli_alert_info("{.pkg multgee} model detected.")
-    cli::cli_alert_success("{.code tidy_multgee()} used instead.")
+    cli::cli_alert_success("{.fn tidy_multgee} used instead.")
     cli::cli_alert_info(
       "Add {.code tidy_fun = broom.helpers::tidy_multgee} to quiet these messages."
     )
     return(tidy_multgee(x, conf.int = conf.int, conf.level = conf.level, ...))
+  }
+
+  if (inherits(x, "zeroinfl")) {
+    cli::cli_alert_info("{.cls zeroinfl} model detected.")
+    cli::cli_alert_success("{.fn tidy_zeroinfl} used instead.")
+    cli::cli_alert_info(
+      "Add {.code tidy_fun = broom.helpers::tidy_zeroinfl} to quiet these messages."
+    )
+    return(tidy_zeroinfl(x, conf.int = conf.int, conf.level = conf.level, ...))
+  }
+
+  if (inherits(x, "hurdle")) {
+    cli::cli_alert_info("{.cls hurdle} model detected.")
+    cli::cli_alert_success("{.fn tidy_zeroinfl} used instead.")
+    cli::cli_alert_info(
+      "Add {.code tidy_fun = broom.helpers::tidy_zeroinfl} to quiet these messages."
+    )
+    return(tidy_zeroinfl(x, conf.int = conf.int, conf.level = conf.level, ...))
   }
 
   tidy_args <- list(...)
@@ -75,6 +123,47 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
       tidy_args$exponentiate <- NULL
     } else {
       cli::cli_abort("'exponentiate = TRUE' is not valid for this type of model.")
+    }
+  }
+
+  # for betareg, if exponentiate = TRUE, forcing tidy_parameters,
+  # by adding `component = "all" to the arguments`
+  if (inherits(x, "betareg")) {
+    if (isFALSE(tidy_args$exponentiate)) {
+      tidy_args$exponentiate <- NULL
+    } else if (isTRUE(tidy_args$exponentiate)) {
+      component <- tidy_args$component
+      cli::cli_alert_info(
+        "{.code exponentiate = TRUE} not valid for {.cl betareg} with {.fn broom::tidy()}."
+      )
+      if (is.null(component)) {
+        cli::cli_alert_success("{.code tidy_parameters(component = \"all\")} used instead.")
+        cli::cli_alert_info(
+          "Add {.code tidy_fun = broom.helpers::tidy_parameters} to quiet these messages."
+        )
+        return(
+          tidy_parameters(
+            x,
+            conf.int = conf.int,
+            conf.level = conf.level,
+            component = "all",
+            ...
+          )
+        )
+      } else {
+        cli::cli_alert_success("{.code tidy_parameters()} used instead.")
+        cli::cli_alert_info(
+          "Add {.code tidy_fun = broom.helpers::tidy_parameters} to quiet these messages."
+        )
+        return(
+          tidy_parameters(
+            x,
+            conf.int = conf.int,
+            conf.level = conf.level,
+            ...
+          )
+        )
+      }
     }
   }
 
@@ -203,4 +292,63 @@ tidy_multgee <- function(x, conf.int = TRUE, conf.level = .95, ...) {
     res$term <- c(b, t)
     return(res)
   }
+}
+
+#' Tidy a `zeroinfl` or a `hurdle` model
+#'
+#' `r lifecycle::badge("experimental")`
+#' A tidier for models generated with `pscl::zeroinfl()` or `pscl::hurdle()`.
+#' Term names will be updated to be consistent with generic models. The original
+#' term names are preserved in an `"original_term"` column.
+#' @param x a `pscl::zeroinfl()` or a `pscl::hurdle()` model
+#' @param conf.int logical indicating whether or not to include a confidence
+#' interval in the tidied output
+#' @param conf.level the confidence level to use for the confidence interval
+#' @param component `NULL` or one of `"all"`, `"conditional"`, `"zi"`, or
+#' `"zero_inflated"`
+#' @param ... additional parameters passed to `parameters::model_parameters()`
+#' @export
+#' @family custom_tieders
+#' @examplesIf interactive()
+#' if (.assert_package("pscl", boolean = TRUE)) {
+#'   library(pscl)
+#'   mod <- zeroinfl(
+#'     art ~ fem + mar + phd,
+#'     data = pscl::bioChemists
+#'   )
+#'
+#'   mod %>% tidy_zeroinfl(exponentiate = TRUE)
+#' }
+tidy_zeroinfl <- function(
+    x,
+    conf.int = TRUE,
+    conf.level = .95,
+    component = NULL,
+    ...) {
+  if (!inherits(x, "zeroinfl") && !inherits(x, "hurdle")) {
+    cli::cli_abort("{.arg x} should be of class {.cls zeroinfl} or {.cls hurdle}")
+  } # nolint
+
+  res <- tidy_parameters(
+    x,
+    conf.int = conf.int,
+    conf.level = conf.level,
+    component = component,
+    ...
+  )
+  res$original_term <- res$term
+  starts_zero <- stringr::str_starts(res$term, "zero_")
+  res$term[starts_zero] <- stringr::str_sub(res$term[starts_zero], 6)
+  starts_count <- stringr::str_starts(res$term, "count_")
+  res$term[starts_count] <- stringr::str_sub(res$term[starts_count], 7)
+
+  if (!is.null(component) && component %in% c("conditional", "zero_inflated")) {
+    res$component <- component
+  }
+  if (!is.null(component) && component == "zi") {
+    res$component <- "zero_inflated"
+  }
+
+  attr(res, "component") <- component
+  res
 }
