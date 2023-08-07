@@ -811,4 +811,11 @@ test_that("tidy_plus_plus() works with pscl::zeroinfl() &  hurdle() models", {
   )
   expect_equal(nrow(res), 9)
 
+  expect_error(
+    m3 %>% tidy_plus_plus(add_pairwise_contrasts = TRUE)
+  )
+
+  expect_error(
+    m4 %>% tidy_plus_plus(add_pairwise_contrasts = TRUE)
+  )
 })

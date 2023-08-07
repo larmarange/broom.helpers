@@ -2,29 +2,9 @@
 % Please edit documentation in R/model_get_pairwise_contrasts.R
 \name{model_get_pairwise_contrasts}
 \alias{model_get_pairwise_contrasts}
-\alias{model_get_pairwise_contrasts.zeroinfl}
-\alias{model_get_pairwise_contrasts.hurdle}
 \title{Get pairwise comparison of the levels of a categorical variable}
 \usage{
 model_get_pairwise_contrasts(
-  model,
-  variables,
-  pairwise_reverse = TRUE,
-  contrasts_adjust = NULL,
-  conf.level = 0.95,
-  emmeans_args = list()
-)
-
-\method{model_get_pairwise_contrasts}{zeroinfl}(
-  model,
-  variables,
-  pairwise_reverse = TRUE,
-  contrasts_adjust = NULL,
-  conf.level = 0.95,
-  emmeans_args = list()
-)
-
-\method{model_get_pairwise_contrasts}{hurdle}(
   model,
   variables,
   pairwise_reverse = TRUE,

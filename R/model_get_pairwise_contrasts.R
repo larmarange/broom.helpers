@@ -109,45 +109,15 @@ model_get_pairwise_contrasts.default <- function(
 }
 
 #' @export
-#' @rdname model_get_pairwise_contrasts
-model_get_pairwise_contrasts.zeroinfl <- function(
-    model,
-    variables,
-    pairwise_reverse = TRUE,
-    contrasts_adjust = NULL,
-    conf.level = .95,
-    emmeans_args = list()) {
-  count_args <- emmeans_args
-  count_args$mode <- "count"
-  count_variables <- variables[variables %in% names(model$contrasts$count)]
-  count_contrasts <- purrr::map_df(
-    count_variables,
-    .get_pairwise_contrasts_one_var,
-    model = model,
-    pairwise_reverse = pairwise_reverse,
-    contrasts_adjust = contrasts_adjust,
-    conf.level = conf.level,
-    emmeans_args = count_args
-  )
-  count_contrasts$component <- "conditional"
-
-  zero_args <- emmeans_args
-  zero_args$mode <- "zero"
-  zero_variables <- variables[variables %in% names(model$contrasts$zero)]
-  zero_contrasts <- purrr::map_df(
-    zero_variables,
-    .get_pairwise_contrasts_one_var,
-    model = model,
-    pairwise_reverse = pairwise_reverse,
-    contrasts_adjust = contrasts_adjust,
-    conf.level = conf.level,
-    emmeans_args = zero_args
-  )
-  zero_contrasts$component <- "zero_inflated"
-
-  dplyr::bind_rows(count_contrasts, zero_contrasts)
+model_get_pairwise_contrasts.zeroinfl <- function(model, ...) {
+  cli::cli_abort(c(
+    "Pairwise contrasts are not supported for multi-components model.",
+    "Use directly {.fn emmeans::emmeans}."
+  ))
 }
 
 #' @export
-#' @rdname model_get_pairwise_contrasts
 model_get_pairwise_contrasts.hurdle <- model_get_pairwise_contrasts.zeroinfl
+
+#' @export
+model_get_pairwise_contrasts.betareg <- model_get_pairwise_contrasts.zeroinfl
