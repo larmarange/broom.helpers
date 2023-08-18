@@ -59,6 +59,8 @@
 #' @inheritParams tidy_select_variables
 #' @param keep_model should the model be kept as an attribute of the final
 #' result?
+#' @param post_fun custom function applied to the results at the end of
+#' `tidy_plus_plus()`
 #' @param quiet logical argument whether broom.helpers should not return
 #' a message when requested output cannot be generated. Default is `FALSE`
 #' @param strict logical argument whether broom.helpers should return an error
@@ -139,6 +141,7 @@ tidy_plus_plus <- function(model,
                            intercept = FALSE,
                            include = everything(),
                            keep_model = FALSE,
+                           post_fun = NULL,
                            quiet = FALSE,
                            strict = FALSE,
                            ...) {
@@ -217,6 +220,9 @@ tidy_plus_plus <- function(model,
       include = {{ include }},
     ) %>%
     tidy_add_coefficients_type()
+
+  if (!is.null(post_fun))
+    res <- res %>% post_fun()
 
   if (!keep_model) {
     res <- res %>% tidy_detach_model()

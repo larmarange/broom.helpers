@@ -31,6 +31,7 @@ tidy_plus_plus(
   intercept = FALSE,
   include = everything(),
   keep_model = FALSE,
+  post_fun = NULL,
   quiet = FALSE,
   strict = FALSE,
   ...
@@ -107,6 +108,9 @@ and \code{\link[=all_interaction]{all_interaction()}}}
 
 \item{keep_model}{should the model be kept as an attribute of the final
 result?}
+
+\item{post_fun}{custom function applied to the results at the end of
+\code{tidy_plus_plus()}}
 
 \item{quiet}{logical argument whether broom.helpers should not return
 a message when requested output cannot be generated. Default is \code{FALSE}}
