@@ -2,7 +2,7 @@
 
 **New features**
 
-- new `post_fun` argument in `tidy_plus_plus()` (#235)
+- new `tidy_post_fun` argument in `tidy_plus_plus()` (#235)
 
 **Fix**
 

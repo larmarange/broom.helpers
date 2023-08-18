@@ -896,7 +896,7 @@ test_that("tidy_plus_plus() works with betareg::betareg() models", {
   expect_equal(nrow(res), 24)
 })
 
-test_that("post_fun argument of `tidy_plus_plus()`", {
+test_that("tidy_post_fun argument of `tidy_plus_plus()`", {
   mod <- lm(Petal.Length ~ Petal.Width + Species, iris)
 
   add_titi <- function(x) {
@@ -904,7 +904,7 @@ test_that("post_fun argument of `tidy_plus_plus()`", {
     x
   }
   expect_error(
-    res <- tidy_plus_plus(mod, post_fun = add_titi),
+    res <- tidy_plus_plus(mod, tidy_post_fun = add_titi),
     NA
   )
   expect_true("titi" %in% names(res))
@@ -912,7 +912,7 @@ test_that("post_fun argument of `tidy_plus_plus()`", {
 
   keep_2_rows <- function(res) {head(res, n = 2)}
   expect_error(
-    res <- tidy_plus_plus(mod, post_fun = keep_2_rows),
+    res <- tidy_plus_plus(mod, tidy_post_fun = keep_2_rows),
     NA
   )
   expect_equal(nrow(res), 2L)
