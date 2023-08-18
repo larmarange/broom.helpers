@@ -31,7 +31,7 @@ tidy_plus_plus(
   intercept = FALSE,
   include = everything(),
   keep_model = FALSE,
-  post_fun = NULL,
+  tidy_post_fun = NULL,
   quiet = FALSE,
   strict = FALSE,
   ...
@@ -109,6 +109,9 @@ and \code{\link[=all_interaction]{all_interaction()}}}
 \item{keep_model}{should the model be kept as an attribute of the final
 result?}
 
+\item{tidy_post_fun}{custom function applied to the results at the end of
+\code{tidy_plus_plus()} (see note)}
+
 \item{quiet}{logical argument whether broom.helpers should not return
 a message when requested output cannot be generated. Default is \code{FALSE}}
 
@@ -116,9 +119,6 @@ a message when requested output cannot be generated. Default is \code{FALSE}}
 when requested output cannot be generated. Default is \code{FALSE}}
 
 \item{...}{other arguments passed to \code{tidy_fun()}}
-
-\item{tidy_post_fun}{custom function applied to the results at the end of
-\code{tidy_plus_plus()} (see note)}
 }
 \description{
 This function will apply sequentially:

@@ -147,7 +147,7 @@ tidy_plus_plus <- function(model,
                            intercept = FALSE,
                            include = everything(),
                            keep_model = FALSE,
-                           post_fun = NULL,
+                           tidy_post_fun = NULL,
                            quiet = FALSE,
                            strict = FALSE,
                            ...) {
