@@ -28,7 +28,7 @@ supported_models <-
     "`MASS::glm.nb()`", "",
     "`mice::mira`", paste(
       "Limited support. If `mod` is a `mira` object, use",
-      "`tidy_plus_plus(mod, tidy_fun = function(x, ...) mice::pool(x) %>% mice::tidy(...))`"
+      "`tidy_fun = function(x, ...) {mice::pool(x) %>% mice::tidy(...)}`"
     ),
     "`lavaan::lavaan()`", "Limited support for categorical variables",
     "`stats::nls()`", "Limited support",
