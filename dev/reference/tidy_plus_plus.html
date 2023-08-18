@@ -123,6 +123,7 @@ tidy_detach_model()
 <span>  intercept <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  include <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  keep_model <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  tidy_post_fun <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  quiet <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  strict <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="va">...</span></span>
@@ -254,6 +255,11 @@ and <code><a href="select_helpers.html">all_interaction()</a></code></p></dd>
 result?</p></dd>
 
 
+<dt>tidy_post_fun</dt>
+<dd><p>custom function applied to the results at the end of
+<code>tidy_plus_plus()</code> (see note)</p></dd>
+
+
 <dt>quiet</dt>
 <dd><p>logical argument whether broom.helpers should not return
 a message when requested output cannot be generated. Default is <code>FALSE</code></p></dd>
@@ -268,6 +274,14 @@ when requested output cannot be generated. Default is <code>FALSE</code></p></dd
 <dd><p>other arguments passed to <code>tidy_fun()</code></p></dd>
 
 </dl></div>
+    <div id="note">
+    <h2>Note</h2>
+    <p><code>tidy_post_fun</code> is applied to the result at the end of <code>tidy_plus_plus()</code>
+and receive only one argument (the result of <code>tidy_plus_plus()</code>). However,
+if needed, the model is still attached to the tibble as an attribute, even
+if <code>keep_model = FALSE</code>. Therefore, it is possible to use <code><a href="tidy_attach_model.html">tidy_get_model()</a></code>
+within <code>tidy_fun</code> if, for any reason, you need to access the source model.</p>
+    </div>
     <div id="see-also">
     <h2>See also</h2>
     <div class="dont-index"><p>Other tidy_helpers: 
