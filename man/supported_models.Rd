@@ -20,7 +20,7 @@ Listing of Supported Models
 \section{Supported models}{
 \tabular{ll}{
    model \tab notes \cr
-   \code{betareg::betareg()} \tab Use \code{tidy_parameters()} as \code{tidy_fun} with \code{component} argument to control with coefficients to return. \verb{broom::tidy() does not support the }exponentiate\verb{argument for betareg models, use}tidy_parameters() instead.` \cr
+   \code{betareg::betareg()} \tab Use \code{tidy_parameters()} as \code{tidy_fun} with \code{component} argument to control with coefficients to return. \code{broom::tidy()} does not support the \code{exponentiate} argument for betareg models, use \code{tidy_parameters()} instead. \cr
    \code{biglm::bigglm()} \tab  \cr
    \code{biglmm::bigglm()} \tab  \cr
    \code{brms::brm()} \tab \code{broom.mixed} package required \cr

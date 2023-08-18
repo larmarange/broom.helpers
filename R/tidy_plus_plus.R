@@ -59,11 +59,19 @@
 #' @inheritParams tidy_select_variables
 #' @param keep_model should the model be kept as an attribute of the final
 #' result?
+#' @param tidy_post_fun custom function applied to the results at the end of
+#' `tidy_plus_plus()` (see note)
 #' @param quiet logical argument whether broom.helpers should not return
 #' a message when requested output cannot be generated. Default is `FALSE`
 #' @param strict logical argument whether broom.helpers should return an error
 #' when requested output cannot be generated. Default is `FALSE`
 #' @param ... other arguments passed to `tidy_fun()`
+#' @note
+#' `tidy_post_fun` is applied to the result at the end of `tidy_plus_plus()`
+#' and receive only one argument (the result of `tidy_plus_plus()`). However,
+#' if needed, the model is still attached to the tibble as an attribute, even
+#' if `keep_model = FALSE`. Therefore, it is possible to use [tidy_get_model()]
+#' within `tidy_fun` if, for any reason, you need to access the source model.
 #' @family tidy_helpers
 #' @examplesIf interactive()
 #' ex1 <- lm(Sepal.Length ~ Sepal.Width + Species, data = iris) %>%
@@ -139,6 +147,7 @@ tidy_plus_plus <- function(model,
                            intercept = FALSE,
                            include = everything(),
                            keep_model = FALSE,
+                           tidy_post_fun = NULL,
                            quiet = FALSE,
                            strict = FALSE,
                            ...) {
@@ -217,6 +226,9 @@ tidy_plus_plus <- function(model,
       include = {{ include }},
     ) %>%
     tidy_add_coefficients_type()
+
+  if (!is.null(tidy_post_fun))
+    res <- res %>% tidy_post_fun()
 
   if (!keep_model) {
     res <- res %>% tidy_detach_model()

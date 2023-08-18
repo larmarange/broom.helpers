@@ -1,8 +1,12 @@
 # broom.helpers (development version)
 
+**New features**
+
+- new `tidy_post_fun` argument in `tidy_plus_plus()` (#235)
+
 **Fix**
 
-- Fix in `supported_models`
+- fix in `supported_models`
 
 # broom.helpers 1.14.0
 
