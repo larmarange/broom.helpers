@@ -91,7 +91,7 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x),
       x <- x %>%
         dplyr::mutate(
           var_type = dplyr::if_else(
-            .data$effect %in% c("ran_pars", "ran_vals"),
+            .data$effect %in% c("ran_pars", "ran_vals", "random"),
             .data$effect,
             .data$var_type
           )
