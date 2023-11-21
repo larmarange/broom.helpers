@@ -18,6 +18,7 @@ Tidy with \code{broom::tidy()} and checks that all arguments are used
 Other custom_tieders: 
 \code{\link{tidy_multgee}()},
 \code{\link{tidy_parameters}()},
-\code{\link{tidy_with_broom_or_parameters}()}
+\code{\link{tidy_with_broom_or_parameters}()},
+\code{\link{tidy_zeroinfl}()}
 }
 \concept{custom_tieders}

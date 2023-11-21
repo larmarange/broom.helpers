@@ -32,10 +32,13 @@ tidy_disambiguate_terms <- function(x, sep = ".", model = tidy_get_model(x), qui
       "You need to pass it or to use {.fn tidy_and_attach}."
     ))
   }
-
   if ("original_term" %in% names(x)) {
-    if (!quiet && !inherits(model, "LORgee")) {
-      # no alert for multgee models
+    if (
+      !quiet &&
+        !inherits(model, "LORgee") && # no alert for multgee models
+        !inherits(model, "zeroinfl") && # or zeroninfl/hurdle
+        !inherits(model, "hurdle")
+    ) {
       cli_alert_danger(paste(
         "{.code tidy_disambiguate_terms()} has already been applied.",
         "x has been returned unchanged."

@@ -31,6 +31,7 @@ tidy_plus_plus(
   intercept = FALSE,
   include = everything(),
   keep_model = FALSE,
+  tidy_post_fun = NULL,
   quiet = FALSE,
   strict = FALSE,
   ...
@@ -108,6 +109,9 @@ and \code{\link[=all_interaction]{all_interaction()}}}
 \item{keep_model}{should the model be kept as an attribute of the final
 result?}
 
+\item{tidy_post_fun}{custom function applied to the results at the end of
+\code{tidy_plus_plus()} (see note)}
+
 \item{quiet}{logical argument whether broom.helpers should not return
 a message when requested output cannot be generated. Default is \code{FALSE}}
 
@@ -135,6 +139,13 @@ This function will apply sequentially:
 \item \code{\link[=tidy_add_coefficients_type]{tidy_add_coefficients_type()}}
 \item \code{\link[=tidy_detach_model]{tidy_detach_model()}}
 }
+}
+\note{
+\code{tidy_post_fun} is applied to the result at the end of \code{tidy_plus_plus()}
+and receive only one argument (the result of \code{tidy_plus_plus()}). However,
+if needed, the model is still attached to the tibble as an attribute, even
+if \code{keep_model = FALSE}. Therefore, it is possible to use \code{\link[=tidy_get_model]{tidy_get_model()}}
+within \code{tidy_fun} if, for any reason, you need to access the source model.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

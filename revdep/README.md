@@ -1,18 +1,18 @@
 # Platform
 
-|field    |value                                                                                |
-|:--------|:------------------------------------------------------------------------------------|
-|version  |R version 4.3.0 (2023-04-21 ucrt)                                                    |
-|os       |Windows 11 x64 (build 22621)                                                         |
-|system   |x86_64, mingw32                                                                      |
-|ui       |RStudio                                                                              |
-|language |(EN)                                                                                 |
-|collate  |French_France.utf8                                                                   |
-|ctype    |French_France.utf8                                                                   |
-|tz       |Europe/Paris                                                                         |
-|date     |2023-07-24                                                                           |
-|rstudio  |2023.06.0+421 Mountain Hydrangea (desktop)                                           |
-|pandoc   |3.1.1 @ C:/Program Files/RStudio/resources/app/bin/quarto/bin/tools/ (via rmarkdown) |
+|field    |value                                           |
+|:--------|:-----------------------------------------------|
+|version  |R version 4.3.1 (2023-06-16 ucrt)               |
+|os       |Windows 11 x64 (build 22621)                    |
+|system   |x86_64, mingw32                                 |
+|ui       |RStudio                                         |
+|language |(EN)                                            |
+|collate  |French_France.utf8                              |
+|ctype    |French_France.utf8                              |
+|tz       |Europe/Paris                                    |
+|date     |2023-08-07                                      |
+|rstudio  |2023.06.0+421 Mountain Hydrangea (desktop)      |
+|pandoc   |3.1.1 @ C:\PROGRA~1\Quarto\bin\tools\pandoc.exe |
 
 # Dependencies
 

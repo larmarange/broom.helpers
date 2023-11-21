@@ -2,7 +2,19 @@
 
 **New features**
 
+- new `tidy_post_fun` argument in `tidy_plus_plus()` (#235)
+
+**Fix**
+
+- fix in `supported_models`
+
+# broom.helpers 1.14.0
+
+**New features**
+
 - support for `MASS::contr.sdif()` contrasts (#230)
+- support for `pscl::zeroinfl()` and `pscl::hurdle()` models (#232)
+- support for `betareg::betareg()` models (#234)
 
 **Fix**
 

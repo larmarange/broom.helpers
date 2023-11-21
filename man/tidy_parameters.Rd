@@ -14,11 +14,15 @@ interval in the tidied output}
 
 \item{conf.level}{the confidence level to use for the confidence interval}
 
-\item{...}{additional parameters passed to \code{parameters::model_parameters()}}
+\item{...}{additional parameters passed to \code{\link[parameters:model_parameters]{parameters::model_parameters()}}}
 }
 \description{
-Use \code{parameters::model_parameters()} to tidy a model and apply
+Use \code{\link[parameters:model_parameters]{parameters::model_parameters()}} to tidy a model and apply
 \code{parameters::standardize_names(style = "broom")} to the output
+}
+\note{
+For \code{\link[betareg:betareg]{betareg::betareg()}}, the component column in the results is standardized
+with \code{\link[broom:reexports]{broom::tidy()}}, using \code{"mean"} and \code{"precision"} values.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
@@ -32,6 +36,7 @@ if (.assert_package("parameters", boolean = TRUE)) {
 Other custom_tieders: 
 \code{\link{tidy_broom}()},
 \code{\link{tidy_multgee}()},
-\code{\link{tidy_with_broom_or_parameters}()}
+\code{\link{tidy_with_broom_or_parameters}()},
+\code{\link{tidy_zeroinfl}()}
 }
 \concept{custom_tieders}

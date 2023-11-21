@@ -53,6 +53,7 @@ reference:
       - tidy_parameters
       - tidy_with_broom_or_parameters
       - tidy_multgee
+      - tidy_zeroinfl
 
   - title: Tidiers for marginal predictions, contrasts, and effects
   - contents:

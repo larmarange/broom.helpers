@@ -9,6 +9,10 @@
 #' If the `contrasts` column is not yet available in `x`,
 #' [tidy_add_contrasts()] will be automatically applied.
 #'
+#' `r lifecycle::badge("experimental")`
+#' For multi-components models, such as zero-inflated Poisson or beta
+#' regression, support of pairwise contrasts is still experimental.
+#'
 #' @param x a tidy tibble
 #' @param variables a vector indicating the name of variables
 #' for those pairwise contrasts should be added.
@@ -82,7 +86,7 @@ tidy_add_pairwise_contrasts <- function(
   .attributes <- .save_attributes(x)
 
   if (isTRUE(stringr::str_starts(.attributes$coefficients_type, "marginal"))) {
-    cli::cli_abort("Pairwise contrasts are not compatible with marginal effects / contrasts / means / predictions.")  # nolint
+    cli::cli_abort("Pairwise contrasts are not compatible with marginal effects / contrasts / means / predictions.") # nolint
   }
 
   if (is.null(conf.level)) {

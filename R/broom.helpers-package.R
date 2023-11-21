@@ -50,7 +50,8 @@ utils::globalVariables(c(".", "where"))
     dplyr::select(
       dplyr::any_of(
         c(
-          "y.level", "term", "original_term", "variable", "var_label", "var_class", "var_type",
+          "y.level", "component", "term", "original_term", "variable",
+          "var_label", "var_class", "var_type",
           "var_nlevels", "header_row", "contrasts", "contrasts_type",
           "reference_row", "label", "n_obs", "n_event", "exposure"
         )
@@ -68,7 +69,7 @@ utils::globalVariables(c(".", "where"))
       "exponentiate", "conf.level", "coefficients_type", "coefficients_label",
       "variable_labels", "term_labels", "N_obs", "N_event", "Exposure",
       "force_contr.treatment", "skip_add_reference_rows",
-      "find_missing_interaction_terms"
+      "find_missing_interaction_terms", "component"
     )
   )
   .attributes[.attributes_names]

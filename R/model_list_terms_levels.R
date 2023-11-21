@@ -158,7 +158,7 @@ model_list_terms_levels.default <- function(
         )
       }
 
-      terms_names <- switch (
+      terms_names <- switch(
         approach,
         "1" = terms_names1,
         "2" = terms_names2,

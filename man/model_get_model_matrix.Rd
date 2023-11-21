@@ -13,6 +13,7 @@
 \alias{model_get_model_matrix.fixest}
 \alias{model_get_model_matrix.LORgee}
 \alias{model_get_model_matrix.mmrm}
+\alias{model_get_model_matrix.betareg}
 \title{Get the model matrix of a model}
 \usage{
 model_get_model_matrix(model, ...)
@@ -38,6 +39,8 @@ model_get_model_matrix(model, ...)
 \method{model_get_model_matrix}{LORgee}(model, ...)
 
 \method{model_get_model_matrix}{mmrm}(model, ...)
+
+\method{model_get_model_matrix}{betareg}(model, ...)
 }
 \arguments{
 \item{model}{a model object}
