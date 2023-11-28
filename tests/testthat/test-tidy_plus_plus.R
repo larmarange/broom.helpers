@@ -896,6 +896,38 @@ test_that("tidy_plus_plus() works with betareg::betareg() models", {
   expect_equal(nrow(res), 24)
 })
 
+test_that("tidy_plus_plus() works with mmrm::mmrm() models", {
+  skip_on_cran()
+  skip_if_not_installed("mmrm")
+
+  m1 <- mmrm::mmrm(FEV1 ~ SEX + ARMCD + AVISIT + us(AVISIT | USUBJID), data = mmrm::fev_data)
+  m2 <- mmrm::mmrm(FEV1 ~ SEX + ARMCD * AVISIT + us(AVISIT | USUBJID), data = mmrm::fev_data)
+
+  expect_error(
+    res <- m1 %>% tidy_plus_plus(intercept = TRUE),
+    NA
+  )
+  expect_equal(nrow(res), 9)
+
+  expect_error(
+    res <- m1 %>% tidy_plus_plus(add_header_rows = TRUE),
+    NA
+  )
+  expect_equal(nrow(res), 11)
+
+  expect_error(
+    res <- m2 %>% tidy_plus_plus(intercept = TRUE),
+    NA
+  )
+  expect_equal(nrow(res), 12)
+
+  expect_error(
+    res <- m2 %>% tidy_plus_plus(add_header_rows = TRUE),
+    NA
+  )
+  expect_equal(nrow(res), 15)
+})
+
 test_that("tidy_post_fun argument of `tidy_plus_plus()`", {
   mod <- lm(Petal.Length ~ Petal.Width + Species, iris)
 

@@ -74,11 +74,3 @@ model_get_weights.svyglm <- function(model) {
 model_get_weights.model_fit <- function(model) {
   model_get_weights(model$fit)
 }
-
-#' @export
-#' @rdname model_get_weights
-model_get_weights.mmrm <- function(model) {
-  w <- stats::weights(model)
-  mf <- model %>% model_get_model_frame()
-  w[as.integer(row.names(mf))]
-}

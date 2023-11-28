@@ -52,12 +52,6 @@ model_get_terms.model_fit <- function(model) {
 
 #' @export
 #' @rdname model_get_terms
-model_get_terms.mmrm <- function(model) {
-  model$formula_parts$model_formula %>% stats::terms()
-}
-
-#' @export
-#' @rdname model_get_terms
 model_get_terms.betareg <- function(model) {
   model_get_terms(model$terms$full)
 }

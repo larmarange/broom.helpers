@@ -6,7 +6,6 @@
 \alias{model_get_terms.brmsfit}
 \alias{model_get_terms.glmmTMB}
 \alias{model_get_terms.model_fit}
-\alias{model_get_terms.mmrm}
 \alias{model_get_terms.betareg}
 \title{Get the terms of a model}
 \usage{
@@ -19,8 +18,6 @@ model_get_terms(model)
 \method{model_get_terms}{glmmTMB}(model)
 
 \method{model_get_terms}{model_fit}(model)
-
-\method{model_get_terms}{mmrm}(model)
 
 \method{model_get_terms}{betareg}(model)
 }

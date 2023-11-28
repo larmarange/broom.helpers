@@ -10,7 +10,6 @@
 \alias{model_get_xlevels.glmmTMB}
 \alias{model_get_xlevels.plm}
 \alias{model_get_xlevels.model_fit}
-\alias{model_get_xlevels.mmrm}
 \title{Get xlevels used in the model}
 \usage{
 model_get_xlevels(model)
@@ -30,8 +29,6 @@ model_get_xlevels(model)
 \method{model_get_xlevels}{plm}(model)
 
 \method{model_get_xlevels}{model_fit}(model)
-
-\method{model_get_xlevels}{mmrm}(model)
 }
 \arguments{
 \item{model}{a model object}

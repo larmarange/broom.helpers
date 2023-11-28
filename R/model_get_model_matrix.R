@@ -124,15 +124,6 @@ model_get_model_matrix.LORgee <- function(model, ...) {
 
 #' @export
 #' @rdname model_get_model_matrix
-model_get_model_matrix.mmrm <- function(model, ...) {
-  stats::model.matrix.default(
-    model %>% model_get_terms(),
-    data = stats::model.frame(model)
-  )
-}
-
-#' @export
-#' @rdname model_get_model_matrix
 model_get_model_matrix.betareg <- function(model, ...) {
   stats::model.matrix.default(
     model %>% model_get_terms(),
