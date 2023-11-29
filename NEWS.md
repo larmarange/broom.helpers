@@ -7,6 +7,7 @@
 **Fix**
 
 - fix in `supported_models`
+- bug fix when using `tidy_parameters()` for mixed models (#238)
 
 # broom.helpers 1.14.0
 
