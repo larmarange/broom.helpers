@@ -178,6 +178,10 @@ test_that("tidy_plus_plus() works with lme4::lmer", {
     res <- mod %>% tidy_plus_plus(),
     NA
   )
+  expect_error(
+    res <- mod %>% tidy_plus_plus(tidy_fun = tidy_parameters),
+    NA
+  )
 })
 
 
