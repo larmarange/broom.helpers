@@ -910,7 +910,9 @@ test_that("tidy_post_fun argument of `tidy_plus_plus()`", {
   expect_true("titi" %in% names(res))
   expect_true(res$titi[1] == "titi")
 
-  keep_2_rows <- function(res) {head(res, n = 2)}
+  keep_2_rows <- function(res) {
+    head(res, n = 2)
+  }
   expect_error(
     res <- tidy_plus_plus(mod, tidy_post_fun = keep_2_rows),
     NA
