@@ -315,6 +315,17 @@ test_that("tidy_plus_plus() works with survey::svyglm", {
     res <- mod %>% tidy_plus_plus(),
     NA
   )
+
+  df_rep <- survey::as.svrepdesign(df)
+  mod_rep <- survey::svyglm(
+    response ~ age + grade * trt,
+    df_rep,
+    family = quasibinomial
+  )
+  expect_error(
+    res <- mod_rep %>% tidy_plus_plus(),
+    NA
+  )
 })
 
 test_that("tidy_plus_plus() works with survey::svycoxph", {

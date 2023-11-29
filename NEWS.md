@@ -8,6 +8,7 @@
 
 - fix in `supported_models`
 - bug fix when using `tidy_parameters()` for mixed models (#238)
+- bug fix for `survey::svyglm()` models with replicate weights (#240)
 
 # broom.helpers 1.14.0
 
