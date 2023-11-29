@@ -1,5 +1,9 @@
 # broom.helpers (development version)
 
+**New supported models**
+
+- Support for `mmrm::mmrm()` models (#228)
+
 **New features**
 
 - new `tidy_post_fun` argument in `tidy_plus_plus()` (#235)
