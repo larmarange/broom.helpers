@@ -4,6 +4,7 @@
 \alias{model_get_weights}
 \alias{model_get_weights.default}
 \alias{model_get_weights.svyglm}
+\alias{model_get_weights.svrepglm}
 \alias{model_get_weights.model_fit}
 \title{Get sampling weights used by a model}
 \usage{
@@ -13,6 +14,8 @@ model_get_weights(model)
 
 \method{model_get_weights}{svyglm}(model)
 
+\method{model_get_weights}{svrepglm}(model)
+
 \method{model_get_weights}{model_fit}(model)
 }
 \arguments{
@@ -20,6 +23,11 @@ model_get_weights(model)
 }
 \description{
 This function does not cover \code{lavaan} models (\code{NULL} is returned).
+}
+\note{
+For class \code{svrepglm} objects (glm on a survey object with replicate weights),
+it will return the original sampling weights of the data, not the replicate
+weights.
 }
 \examples{
 mod <- lm(Sepal.Length ~ Sepal.Width, iris)

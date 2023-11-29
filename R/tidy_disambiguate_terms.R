@@ -52,12 +52,12 @@ tidy_disambiguate_terms <- function(x, sep = ".", model = tidy_get_model(x), qui
   if ("group" %in% names(x)) {
     x <- x %>%
       dplyr::mutate(
+        original_term = .data$term,
         term = dplyr::if_else(
-          is.na(.data$group),
+          is.na(.data$group) | .data$group == "",
           .data$term,
           paste(.data$group, .data$term, sep = sep)
-        ),
-        original_term = .data$term
+        )
       )
   }
 

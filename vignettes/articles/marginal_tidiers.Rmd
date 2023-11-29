@@ -110,7 +110,7 @@ It is also possible to generate similar plots with `ggeffects::ggeffect()`. Plea
 ```{r}
 mod %>%
   ggeffects::ggeffect() %>%
-  plot() %>%
+  lapply(plot) %>%
   patchwork::wrap_plots()
 ```
 

@@ -3,6 +3,10 @@
 #' This function does not cover `lavaan` models (`NULL` is returned).
 #'
 #' @param model a model object
+#' @note
+#' For class `svrepglm` objects (glm on a survey object with replicate weights),
+#' it will return the original sampling weights of the data, not the replicate
+#' weights.
 #' @export
 #' @family model_helpers
 #' @examples
@@ -67,6 +71,12 @@ model_get_weights.default <- function(model) {
 #' @rdname model_get_weights
 model_get_weights.svyglm <- function(model) {
   stats::weights(model$survey.design)
+}
+
+#' @export
+#' @rdname model_get_weights
+model_get_weights.svrepglm <- function(model) {
+  model$survey.design$pweights
 }
 
 #' @export

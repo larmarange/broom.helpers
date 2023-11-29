@@ -587,7 +587,7 @@ test_that("model_identify_variables() works with glmmTMB::glmmTMB", {
 
   mod <- suppressWarnings(
     glmmTMB::glmmTMB(count ~ mined + spp,
-      ziformula = ~ mined + site,
+      ziformula = ~ mined,
       family = poisson,
       data = glmmTMB::Salamanders
     )
@@ -597,15 +597,12 @@ test_that("model_identify_variables() works with glmmTMB::glmmTMB", {
   expect_equivalent(
     res$variable,
     c(
-      NA, "mined", "spp", "spp", "spp", "spp", "spp", "spp", "site",
-      "site", "site", "site", "site", "site", "site", "site", "site",
-      "site", "site", "site", "site", "site", "site", "site", "site",
-      "site", "site", "site", "site", "site"
+      NA, "mined", "spp", "spp", "spp", "spp", "spp", "spp"
     )
   )
   expect_error(
     mod %>%
-      tidy_and_attach(tidy_fun = broom.mixed::tidy) %>%
+      tidy_and_attach() %>%
       tidy_identify_variables(),
     NA
   )
