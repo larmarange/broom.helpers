@@ -4,7 +4,7 @@
 #'
 #' @param model a model object
 #' @note
-#' For class `svrepglm` objects (glm on a survey object with replicate weights),
+#' For class `svrepglm` objects (GLM on a survey object with replicate weights),
 #' it will return the original sampling weights of the data, not the replicate
 #' weights.
 #' @export

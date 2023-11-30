@@ -25,7 +25,7 @@ model_get_weights(model)
 This function does not cover \code{lavaan} models (\code{NULL} is returned).
 }
 \note{
-For class \code{svrepglm} objects (glm on a survey object with replicate weights),
+For class \code{svrepglm} objects (GLM on a survey object with replicate weights),
 it will return the original sampling weights of the data, not the replicate
 weights.
 }
