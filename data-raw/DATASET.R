@@ -53,7 +53,8 @@ supported_models <-
     "`mmrm::mmrm()`", "",
     "`pscl::zeroinfl()`", "Use `tidy_zeroinfl()` as `tidy_fun`.",
     "`pscl::hurdle()`", "Use `tidy_zeroinfl()` as `tidy_fun`.",
-    "`betareg::betareg()`", "Use `tidy_parameters()` as `tidy_fun` with `component` argument to control with coefficients to return. `broom::tidy()` does not support the `exponentiate` argument for betareg models, use `tidy_parameters()` instead." # nolint
+    "`betareg::betareg()`", "Use `tidy_parameters()` as `tidy_fun` with `component` argument to control with coefficients to return. `broom::tidy()` does not support the `exponentiate` argument for betareg models, use `tidy_parameters()` instead.", # nolint
+    "`survival::cch()`", "`exponentiate = TRUE` is mandatory."
   ) %>%
   dplyr::arrange(.data$model, .locale = "en")
 
