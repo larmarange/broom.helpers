@@ -53,3 +53,19 @@
   names(x) <- saved_names
   x
 }
+
+# copied from broom
+.exponentiate <- function (data, col = "estimate")
+{
+  data <- data %>%
+    dplyr::mutate(
+      dplyr::across(dplyr::all_of(col), exp)
+    )
+  if ("conf.low" %in% colnames(data)) {
+    data <- data %>%
+      dplyr::mutate(
+        dplyr::across(dplyr::any_of(c("conf.low", "conf.high")), exp)
+      )
+  }
+  data
+}

@@ -130,3 +130,12 @@ model_get_model_matrix.betareg <- function(model, ...) {
     data = model %>% model_get_model_frame()
   )
 }
+
+#' @export
+#' @rdname model_get_model_matrix
+model_get_model_matrix.cch <- function(model, ...) {
+  stats::model.matrix.default(
+    model$call$formula %>% stats::formula(),
+    data = model %>% model_get_model_frame()
+  )
+}

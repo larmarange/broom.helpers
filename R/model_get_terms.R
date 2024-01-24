@@ -55,3 +55,18 @@ model_get_terms.model_fit <- function(model) {
 model_get_terms.betareg <- function(model) {
   model_get_terms(model$terms$full)
 }
+
+#' @export
+#' @rdname model_get_terms
+model_get_terms.betareg <- function(model) {
+  model_get_terms(model$terms$full)
+}
+
+#' @export
+#' @rdname model_get_model_matrix
+model_get_terms.cch <- function(model, ...) {
+  stats::terms.formula(
+    model$call$formula %>% stats::formula(),
+    data = model %>% model_get_model_frame()
+  )
+}

@@ -20,6 +20,8 @@ model_get_terms(model)
 \method{model_get_terms}{model_fit}(model)
 
 \method{model_get_terms}{betareg}(model)
+
+\method{model_get_terms}{betareg}(model)
 }
 \arguments{
 \item{model}{a model object}

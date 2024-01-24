@@ -966,3 +966,6 @@ test_that("tidy_post_fun argument of `tidy_plus_plus()`", {
   )
   expect_equal(nrow(res), 2L)
 })
+
+# test for survival::cch() not working, model.frame() not working
+# in the test_that environment for this type of model
