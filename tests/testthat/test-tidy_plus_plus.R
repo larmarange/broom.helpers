@@ -982,7 +982,7 @@ test_that("tidy_plus_plus() works with survival::cch() models", {
   )
   ccoh.data$age <- ccoh.data$age / 12
 
-  mod <- cch(
+  mod <- survival::cch(
     Surv(edrel, rel) ~ stage + histol + age, data = ccoh.data,
     subcoh = ~subcohort,
     id = ~seqno,
