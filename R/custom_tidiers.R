@@ -130,9 +130,9 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
   # results are already exponentiated but the argument should not be passes
   if (inherits(x, "cch")) {
     if (!isTRUE(tidy_args$exponentiate)) {
-      cli::cli_warn(c(
+      cli::cli_abort(c(
         "Coefficients are always exponentiated for this type of model.",
-        "Use 'exponentiate = TRUE' to remove this warning."
+        "Use 'exponentiate = TRUE' to solve this error."
       ))
     }
     tidy_args$exponentiate <- NULL
