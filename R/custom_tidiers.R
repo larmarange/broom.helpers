@@ -118,12 +118,24 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
 
   # class of models known for tidy() not supporting exponentiate argument
   # and for ignoring it
-  if (any(c("fixest", "plm", "felm", "lavaan", "nls", "survreg", "cch") %in% class(x))) {
+  if (any(c("fixest", "plm", "felm", "lavaan", "nls", "survreg") %in% class(x))) {
     if (isFALSE(tidy_args$exponentiate)) {
       tidy_args$exponentiate <- NULL
-    } else if (isTRUE(tidy_args$exponentiate)) {
+    } else {
       cli::cli_abort("'exponentiate = TRUE' is not valid for this type of model.")
     }
+  }
+
+  # specific case for cch models
+  # results are already exponentiated but the argument should not be passes
+  if (inherits(x, "cch")) {
+    if (!isTRUE(tidy_args$exponentiate)) {
+      cli::cli_warn(c(
+        "Coefficients are always exponentiated for this type of model.",
+        "Use 'exponentiate = TRUE' to remove this warning."
+      ))
+    }
+    tidy_args$exponentiate <- NULL
   }
 
   # class of models known for tidy() not supporting conf.int argument
