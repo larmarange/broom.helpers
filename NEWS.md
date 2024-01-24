@@ -3,6 +3,7 @@
 **New supported models**
 
 - Support for `mmrm::mmrm()` models (#228)
+- Support for `survival::cch()` models (#242)
 
 **New features**
 
