@@ -118,12 +118,18 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
 
   # class of models known for tidy() not supporting exponentiate argument
   # and for ignoring it
-  if (any(c("fixest", "plm", "felm", "lavaan", "nls", "survreg") %in% class(x))) {
+  if (any(c("fixest", "plm", "felm", "lavaan", "nls", "survreg", "cch") %in% class(x))) {
     if (isFALSE(tidy_args$exponentiate)) {
       tidy_args$exponentiate <- NULL
-    } else {
+    } else if (isTRUE(tidy_args$exponentiate)) {
       cli::cli_abort("'exponentiate = TRUE' is not valid for this type of model.")
     }
+  }
+
+  # class of models known for tidy() not supporting conf.int argument
+  # and for ignoring it in tidy_args
+  if (any(c("cch") %in% class(x))) {
+    tidy_args$conf.int <- NULL
   }
 
   # for betareg, if exponentiate = TRUE, forcing tidy_parameters,
@@ -210,6 +216,13 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
       )
     }
   }
+
+  # cleaning in conf.int = FALSE
+  if (isFALSE(conf.int)) {
+    res <- res %>%
+      dplyr::select(-dplyr::any_of(c("conf.low", "conf.high")))
+  }
+
   res
 }
 
