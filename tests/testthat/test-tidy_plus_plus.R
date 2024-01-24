@@ -972,15 +972,15 @@ test_that("tidy_plus_plus() works with survival::cch() models", {
   skip_if_not_installed("survival")
 
   subcoh <- survival::nwtco$in.subcohort
-  selccoh <- with(survival::nwtco, rel==1 | subcoh==1)
-  ccoh.data <- survival::nwtco[selccoh,]
+  selccoh <- with(survival::nwtco, rel == 1 | subcoh == 1)
+  ccoh.data <- survival::nwtco[selccoh, ]
   ccoh.data$subcohort <- subcoh[selccoh]
   ccoh.data$histol <- factor(ccoh.data$histol, labels = c("FH", "UH"))
   ccoh.data$stage <- factor(
     ccoh.data$stage,
-    labels = c( "I", "II", "III", "IV")
+    labels = c("I", "II", "III", "IV")
   )
-  ccoh.data$age <- ccoh.data$age/12
+  ccoh.data$age <- ccoh.data$age / 12
 
   mod <- cch(
     Surv(edrel, rel) ~ stage + histol + age, data = ccoh.data,
