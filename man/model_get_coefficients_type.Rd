@@ -18,6 +18,7 @@
 \alias{model_get_coefficients_type.coxph}
 \alias{model_get_coefficients_type.crr}
 \alias{model_get_coefficients_type.tidycrr}
+\alias{model_get_coefficients_type.cch}
 \alias{model_get_coefficients_type.model_fit}
 \alias{model_get_coefficients_type.LORgee}
 \title{Get coefficient type}
@@ -55,6 +56,8 @@ model_get_coefficients_type(model)
 \method{model_get_coefficients_type}{crr}(model)
 
 \method{model_get_coefficients_type}{tidycrr}(model)
+
+\method{model_get_coefficients_type}{cch}(model)
 
 \method{model_get_coefficients_type}{model_fit}(model)
 
