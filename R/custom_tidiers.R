@@ -79,6 +79,8 @@ tidy_parameters <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 #' @export
 #' @family custom_tieders
 tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, ...) {
+  exponentiate_later <- FALSE
+
   # load broom.mixed if available
   if (any(c("glmerMod", "lmerMod", "glmmTMB", "glmmadmb", "stanreg", "brmsfit") %in% class(x))) {
     .assert_package("broom.mixed", fn = "broom.helpers::tidy_with_broom_or_parameters()")
@@ -127,20 +129,12 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
   }
 
   # specific case for cch models
-  # results are already exponentiated but the argument should not be passes
+  # exponentiate and conf.int not supported by broom::tidy()
   if (inherits(x, "cch")) {
-    if (!isTRUE(tidy_args$exponentiate)) {
-      cli::cli_abort(c(
-        "Coefficients are always exponentiated for this type of model.",
-        "Use 'exponentiate = TRUE' to solve this error."
-      ))
+    if (isTRUE(tidy_args$exponentiate)) {
+      exponentiate_later <- TRUE
     }
     tidy_args$exponentiate <- NULL
-  }
-
-  # class of models known for tidy() not supporting conf.int argument
-  # and for ignoring it in tidy_args
-  if (any(c("cch") %in% class(x))) {
     tidy_args$conf.int <- NULL
   }
 
@@ -233,6 +227,10 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
   if (isFALSE(conf.int)) {
     res <- res %>%
       dplyr::select(-dplyr::any_of(c("conf.low", "conf.high")))
+  }
+
+  if (exponentiate_later) {
+    res <- .exponentiate(res)
   }
 
   res
