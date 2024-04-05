@@ -40,7 +40,7 @@ contrast will be selected. Default is \code{NULL}.  Select among contrast types
 A character vector of column names selected
 }
 \description{
-Set of functions to supplement the {tidyselect} set of
+Set of functions to supplement the \emph{tidyselect} set of
 functions for selecting columns of data frames (and other items as well).
 \itemize{
 \item \code{all_continuous()} selects continuous variables
