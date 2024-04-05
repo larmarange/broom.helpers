@@ -62,12 +62,13 @@
     <div class="section level2">
 <h2 class="page-header" data-toc-text="development version" id="broomhelpers-development-version">broom.helpers (development version)<a class="anchor" aria-label="anchor" href="#broomhelpers-development-version"></a></h2>
 <p><strong>New supported models</strong></p>
-<ul><li>Support for <code><a href="https://rdrr.io/pkg/mmrm/man/mmrm.html" class="external-link">mmrm::mmrm()</a></code> models (<a href="https://github.com/larmarange/broom.helpers/issues/228" class="external-link">#228</a>)</li>
-<li>Support for <code><a href="https://rdrr.io/pkg/survival/man/cch.html" class="external-link">survival::cch()</a></code> models (<a href="https://github.com/larmarange/broom.helpers/issues/242" class="external-link">#242</a>)</li>
+<ul><li>support for <code><a href="https://openpharma.github.io/mmrm/latest-tag/reference/mmrm.html" class="external-link">mmrm::mmrm()</a></code> models (<a href="https://github.com/larmarange/broom.helpers/issues/228" class="external-link">#228</a>)</li>
+<li>support for <code><a href="https://rdrr.io/pkg/survival/man/cch.html" class="external-link">survival::cch()</a></code> models (<a href="https://github.com/larmarange/broom.helpers/issues/242" class="external-link">#242</a>)</li>
 </ul><p><strong>New features</strong></p>
 <ul><li>new <code>tidy_post_fun</code> argument in <code><a href="../reference/tidy_plus_plus.html">tidy_plus_plus()</a></code> (<a href="https://github.com/larmarange/broom.helpers/issues/235" class="external-link">#235</a>)</li>
 </ul><p><strong>Fix</strong></p>
-<ul><li>fix in <code>supported_models</code>
+<ul><li>fix the order of the levels of categorical variables in the results of <code><a href="../reference/tidy_marginal_predictions.html">tidy_marginal_predictions()</a></code> (<a href="https://github.com/larmarange/broom.helpers/issues/245" class="external-link">#245</a>)</li>
+<li>fix in <code>supported_models</code>
 </li>
 <li>bug fix when using <code><a href="../reference/tidy_parameters.html">tidy_parameters()</a></code> for mixed models (<a href="https://github.com/larmarange/broom.helpers/issues/238" class="external-link">#238</a>)</li>
 <li>bug fix for <code><a href="https://rdrr.io/pkg/survey/man/svyglm.html" class="external-link">survey::svyglm()</a></code> models with replicate weights (<a href="https://github.com/larmarange/broom.helpers/issues/240" class="external-link">#240</a>)</li>
@@ -195,7 +196,7 @@
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.4.0" id="broomhelpers-140">broom.helpers 1.4.0<small>2021-09-30</small><a class="anchor" aria-label="anchor" href="#broomhelpers-140"></a></h2>
 <p><strong>New supported models</strong></p>
-<ul><li>Support for <code>glmmTMB::glmmTMB()</code> models (<a href="https://github.com/larmarange/broom.helpers/issues/119" class="external-link">#119</a>)</li>
+<ul><li>Support for <code><a href="https://rdrr.io/pkg/glmmTMB/man/glmmTMB.html" class="external-link">glmmTMB::glmmTMB()</a></code> models (<a href="https://github.com/larmarange/broom.helpers/issues/119" class="external-link">#119</a>)</li>
 </ul><p><strong>New features</strong></p>
 <ul><li>Function arguments that accept formula-list values now have more flexible inputs. (<a href="https://github.com/larmarange/broom.helpers/issues/121" class="external-link">#121</a>)
 <ul><li>The passed list may now be a combination of named lists and lists of formulas, e.g. <code>list(trt ~ 1, all_continuous() ~ 2)</code>.</li>
