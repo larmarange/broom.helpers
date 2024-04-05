@@ -55,8 +55,7 @@
 }
 
 # copied from broom
-.exponentiate <- function (data, col = "estimate")
-{
+.exponentiate <- function(data, col = "estimate") {
   data <- data %>%
     dplyr::mutate(
       dplyr::across(dplyr::all_of(col), exp)

@@ -659,6 +659,7 @@ tidy_marginal_predictions <- function(x, variables_list = "auto",
   }
 
   res <- do.call(marginaleffects::avg_predictions, dots) %>%
+    dplyr::arrange(dplyr::pick(dplyr::any_of(c(names(variables)))), "group") %>%
     dplyr::mutate(variable = paste(names(variables), collapse = ":")) %>%
     tidyr::unite(col = "term", sep = " * ", dplyr::all_of(names(variables))) %>%
     dplyr::relocate("variable", "term")

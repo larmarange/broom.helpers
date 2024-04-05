@@ -2,8 +2,8 @@
 
 **New supported models**
 
-- Support for `mmrm::mmrm()` models (#228)
-- Support for `survival::cch()` models (#242)
+- support for `mmrm::mmrm()` models (#228)
+- support for `survival::cch()` models (#242)
 
 **New features**
 
@@ -11,6 +11,8 @@
 
 **Fix**
 
+- fix the order of the levels of categorical variables in the results of
+  `tidy_marginal_predictions()` (#245)
 - fix in `supported_models`
 - bug fix when using `tidy_parameters()` for mixed models (#238)
 - bug fix for `survey::svyglm()` models with replicate weights (#240)

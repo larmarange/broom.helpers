@@ -101,6 +101,14 @@ test_that("tidy_marginal_predictions()", {
   skip_on_cran()
   skip_if_not_installed("marginaleffects")
 
+  iris <- iris %>% dplyr::arrange(dplyr::desc(Species))
+  mod <- lm(Petal.Length ~ Petal.Width + Species + Sepal.Length, data = iris)
+  expect_error(
+    t <- tidy_marginal_predictions(mod),
+    NA
+  )
+  expect_equal(t[t$variable == "Species", "term"], levels(iris$Species))
+
   mod <- lm(Petal.Length ~ Petal.Width * Species + Sepal.Length, data = iris)
   expect_error(
     t <- tidy_marginal_predictions(mod),
