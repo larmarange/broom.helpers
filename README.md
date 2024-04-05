@@ -58,16 +58,15 @@ library(broom.helpers)
 ex1 <- mod1 %>% tidy_plus_plus()
 ex1
 #> # A tibble: 4 × 17
-#>   term     varia…¹ var_l…² var_c…³ var_t…⁴ var_n…⁵ contr…⁶ contr…⁷ refer…⁸ label
-#>   <chr>    <chr>   <chr>   <chr>   <chr>     <int> <chr>   <chr>   <lgl>   <chr>
-#> 1 Sepal.W… Sepal.… Sepal.… numeric contin…      NA <NA>    <NA>    NA      Sepa…
-#> 2 Species… Species Species factor  catego…       3 contr.… treatm… TRUE    seto…
-#> 3 Species… Species Species factor  catego…       3 contr.… treatm… FALSE   vers…
-#> 4 Species… Species Species factor  catego…       3 contr.… treatm… FALSE   virg…
-#> # … with 7 more variables: n_obs <dbl>, estimate <dbl>, std.error <dbl>,
-#> #   statistic <dbl>, p.value <dbl>, conf.low <dbl>, conf.high <dbl>, and
-#> #   abbreviated variable names ¹​variable, ²​var_label, ³​var_class, ⁴​var_type,
-#> #   ⁵​var_nlevels, ⁶​contrasts, ⁷​contrasts_type, ⁸​reference_row
+#>   term              variable  var_label var_class var_type var_nlevels contrasts
+#>   <chr>             <chr>     <chr>     <chr>     <chr>          <int> <chr>    
+#> 1 Sepal.Width       Sepal.Wi… Sepal.Wi… numeric   continu…          NA <NA>     
+#> 2 Speciessetosa     Species   Species   factor    categor…           3 contr.tr…
+#> 3 Speciesversicolor Species   Species   factor    categor…           3 contr.tr…
+#> 4 Speciesvirginica  Species   Species   factor    categor…           3 contr.tr…
+#> # ℹ 10 more variables: contrasts_type <chr>, reference_row <lgl>, label <chr>,
+#> #   n_obs <dbl>, estimate <dbl>, std.error <dbl>, statistic <dbl>,
+#> #   p.value <dbl>, conf.low <dbl>, conf.high <dbl>
 dplyr::glimpse(ex1)
 #> Rows: 4
 #> Columns: 17
@@ -98,7 +97,7 @@ mod2 <- glm(
     grade = contr.sum
   )
 )
-ex2 <- mod2 %>% 
+ex2 <- mod2 %>%
   tidy_plus_plus(
     exponentiate = TRUE,
     variable_labels = c(age = "Age (in years)"),
@@ -107,30 +106,28 @@ ex2 <- mod2 %>%
   )
 ex2
 #> # A tibble: 17 × 19
-#>    term  varia…¹ var_l…² var_c…³ var_t…⁴ var_n…⁵ heade…⁶ contr…⁷ contr…⁸ refer…⁹
-#>    <chr> <chr>   <chr>   <chr>   <chr>     <int> <lgl>   <chr>   <chr>   <lgl>  
-#>  1 <NA>  age     Age (i… nmatri… contin…      NA TRUE    <NA>    <NA>    NA     
-#>  2 poly… age     Age (i… nmatri… contin…      NA FALSE   <NA>    <NA>    NA     
-#>  3 poly… age     Age (i… nmatri… contin…      NA FALSE   <NA>    <NA>    NA     
-#>  4 poly… age     Age (i… nmatri… contin…      NA FALSE   <NA>    <NA>    NA     
-#>  5 <NA>  stage   T Stage factor  catego…       4 TRUE    contr.… treatm… NA     
-#>  6 stag… stage   T Stage factor  catego…       4 FALSE   contr.… treatm… FALSE  
-#>  7 stag… stage   T Stage factor  catego…       4 FALSE   contr.… treatm… FALSE  
-#>  8 stag… stage   T Stage factor  catego…       4 FALSE   contr.… treatm… TRUE   
-#>  9 stag… stage   T Stage factor  catego…       4 FALSE   contr.… treatm… FALSE  
-#> 10 <NA>  grade   Grade   factor  catego…       3 TRUE    contr.… sum     NA     
-#> 11 grad… grade   Grade   factor  catego…       3 FALSE   contr.… sum     FALSE  
-#> 12 grad… grade   Grade   factor  catego…       3 FALSE   contr.… sum     FALSE  
-#> 13 grad… grade   Grade   factor  catego…       3 FALSE   contr.… sum     TRUE   
-#> 14 trtD… trt     Chemot… charac… dichot…       2 NA      contr.… treatm… FALSE  
-#> 15 <NA>  grade:… Grade … <NA>    intera…      NA TRUE    <NA>    <NA>    NA     
-#> 16 grad… grade:… Grade … <NA>    intera…      NA FALSE   <NA>    <NA>    NA     
-#> 17 grad… grade:… Grade … <NA>    intera…      NA FALSE   <NA>    <NA>    NA     
-#> # … with 9 more variables: label <chr>, n_obs <dbl>, n_event <dbl>,
-#> #   estimate <dbl>, std.error <dbl>, statistic <dbl>, p.value <dbl>,
-#> #   conf.low <dbl>, conf.high <dbl>, and abbreviated variable names ¹​variable,
-#> #   ²​var_label, ³​var_class, ⁴​var_type, ⁵​var_nlevels, ⁶​header_row, ⁷​contrasts,
-#> #   ⁸​contrasts_type, ⁹​reference_row
+#>    term   variable var_label var_class var_type var_nlevels header_row contrasts
+#>    <chr>  <chr>    <chr>     <chr>     <chr>          <int> <lgl>      <chr>    
+#>  1 <NA>   age      Age (in … nmatrix.3 continu…          NA TRUE       <NA>     
+#>  2 poly(… age      Age (in … nmatrix.3 continu…          NA FALSE      <NA>     
+#>  3 poly(… age      Age (in … nmatrix.3 continu…          NA FALSE      <NA>     
+#>  4 poly(… age      Age (in … nmatrix.3 continu…          NA FALSE      <NA>     
+#>  5 <NA>   stage    T Stage   factor    categor…           4 TRUE       contr.tr…
+#>  6 stage1 stage    T Stage   factor    categor…           4 FALSE      contr.tr…
+#>  7 stage2 stage    T Stage   factor    categor…           4 FALSE      contr.tr…
+#>  8 stage3 stage    T Stage   factor    categor…           4 FALSE      contr.tr…
+#>  9 stage4 stage    T Stage   factor    categor…           4 FALSE      contr.tr…
+#> 10 <NA>   grade    Grade     factor    categor…           3 TRUE       contr.sum
+#> 11 grade1 grade    Grade     factor    categor…           3 FALSE      contr.sum
+#> 12 grade2 grade    Grade     factor    categor…           3 FALSE      contr.sum
+#> 13 grade3 grade    Grade     factor    categor…           3 FALSE      contr.sum
+#> 14 trtDr… trt      Chemothe… character dichoto…           2 NA         contr.tr…
+#> 15 <NA>   grade:t… Grade * … <NA>      interac…          NA TRUE       <NA>     
+#> 16 grade… grade:t… Grade * … <NA>      interac…          NA FALSE      <NA>     
+#> 17 grade… grade:t… Grade * … <NA>      interac…          NA FALSE      <NA>     
+#> # ℹ 11 more variables: contrasts_type <chr>, reference_row <lgl>, label <chr>,
+#> #   n_obs <dbl>, n_event <dbl>, estimate <dbl>, std.error <dbl>,
+#> #   statistic <dbl>, p.value <dbl>, conf.low <dbl>, conf.high <dbl>
 dplyr::glimpse(ex2)
 #> Rows: 17
 #> Columns: 19
@@ -166,19 +163,18 @@ ex3 <- mod1 %>%
   # add term labels
   tidy_add_term_labels() %>%
   # remove intercept
-  tidy_remove_intercept
+  tidy_remove_intercept()
 ex3
 #> # A tibble: 4 × 16
-#>   term     varia…¹ var_l…² var_c…³ var_t…⁴ var_n…⁵ contr…⁶ contr…⁷ refer…⁸ label
-#>   <chr>    <chr>   <chr>   <chr>   <chr>     <int> <chr>   <chr>   <lgl>   <chr>
-#> 1 Sepal.W… Sepal.… Sepal.… numeric contin…      NA <NA>    <NA>    NA      Sepa…
-#> 2 Species… Species Species factor  catego…       3 contr.… treatm… TRUE    seto…
-#> 3 Species… Species Species factor  catego…       3 contr.… treatm… FALSE   vers…
-#> 4 Species… Species Species factor  catego…       3 contr.… treatm… FALSE   virg…
-#> # … with 6 more variables: estimate <dbl>, std.error <dbl>, statistic <dbl>,
-#> #   p.value <dbl>, conf.low <dbl>, conf.high <dbl>, and abbreviated variable
-#> #   names ¹​variable, ²​var_label, ³​var_class, ⁴​var_type, ⁵​var_nlevels,
-#> #   ⁶​contrasts, ⁷​contrasts_type, ⁸​reference_row
+#>   term              variable  var_label var_class var_type var_nlevels contrasts
+#>   <chr>             <chr>     <chr>     <chr>     <chr>          <int> <chr>    
+#> 1 Sepal.Width       Sepal.Wi… Sepal.Wi… numeric   continu…          NA <NA>     
+#> 2 Speciessetosa     Species   Species   factor    categor…           3 contr.tr…
+#> 3 Speciesversicolor Species   Species   factor    categor…           3 contr.tr…
+#> 4 Speciesvirginica  Species   Species   factor    categor…           3 contr.tr…
+#> # ℹ 9 more variables: contrasts_type <chr>, reference_row <lgl>, label <chr>,
+#> #   estimate <dbl>, std.error <dbl>, statistic <dbl>, p.value <dbl>,
+#> #   conf.low <dbl>, conf.high <dbl>
 dplyr::glimpse(ex3)
 #> Rows: 4
 #> Columns: 16
@@ -212,32 +208,31 @@ ex4 <- mod2 %>%
   tidy_add_header_rows()
 ex4
 #> # A tibble: 20 × 17
-#>    term  varia…¹ var_l…² var_c…³ var_t…⁴ var_n…⁵ heade…⁶ contr…⁷ contr…⁸ refer…⁹
-#>    <chr> <chr>   <chr>   <chr>   <chr>     <int> <lgl>   <chr>   <chr>   <lgl>  
-#>  1 (Int… (Inter… (Inter… <NA>    interc…      NA NA      <NA>    <NA>    NA     
-#>  2 <NA>  age     Age in… nmatri… contin…      NA TRUE    <NA>    <NA>    NA     
-#>  3 poly… age     Age in… nmatri… contin…      NA FALSE   <NA>    <NA>    NA     
-#>  4 poly… age     Age in… nmatri… contin…      NA FALSE   <NA>    <NA>    NA     
-#>  5 poly… age     Age in… nmatri… contin…      NA FALSE   <NA>    <NA>    NA     
-#>  6 <NA>  stage   T Stage factor  catego…       4 TRUE    contr.… treatm… NA     
-#>  7 stag… stage   T Stage factor  catego…       4 FALSE   contr.… treatm… FALSE  
-#>  8 stag… stage   T Stage factor  catego…       4 FALSE   contr.… treatm… FALSE  
-#>  9 stag… stage   T Stage factor  catego…       4 FALSE   contr.… treatm… TRUE   
-#> 10 stag… stage   T Stage factor  catego…       4 FALSE   contr.… treatm… FALSE  
-#> 11 <NA>  grade   Grade   factor  catego…       3 TRUE    contr.… sum     NA     
-#> 12 grad… grade   Grade   factor  catego…       3 FALSE   contr.… sum     FALSE  
-#> 13 grad… grade   Grade   factor  catego…       3 FALSE   contr.… sum     FALSE  
-#> 14 grad… grade   Grade   factor  catego…       3 FALSE   contr.… sum     TRUE   
-#> 15 <NA>  trt     Chemot… charac… dichot…       2 TRUE    contr.… treatm… NA     
-#> 16 trtD… trt     Chemot… charac… dichot…       2 FALSE   contr.… treatm… TRUE   
-#> 17 trtD… trt     Chemot… charac… dichot…       2 FALSE   contr.… treatm… FALSE  
-#> 18 <NA>  grade:… Grade … <NA>    intera…      NA TRUE    <NA>    <NA>    NA     
-#> 19 grad… grade:… Grade … <NA>    intera…      NA FALSE   <NA>    <NA>    NA     
-#> 20 grad… grade:… Grade … <NA>    intera…      NA FALSE   <NA>    <NA>    NA     
-#> # … with 7 more variables: label <chr>, estimate <dbl>, std.error <dbl>,
-#> #   statistic <dbl>, p.value <dbl>, conf.low <dbl>, conf.high <dbl>, and
-#> #   abbreviated variable names ¹​variable, ²​var_label, ³​var_class, ⁴​var_type,
-#> #   ⁵​var_nlevels, ⁶​header_row, ⁷​contrasts, ⁸​contrasts_type, ⁹​reference_row
+#>    term   variable var_label var_class var_type var_nlevels header_row contrasts
+#>    <chr>  <chr>    <chr>     <chr>     <chr>          <int> <lgl>      <chr>    
+#>  1 (Inte… (Interc… (Interce… <NA>      interce…          NA NA         <NA>     
+#>  2 <NA>   age      Age in y… nmatrix.3 continu…          NA TRUE       <NA>     
+#>  3 poly(… age      Age in y… nmatrix.3 continu…          NA FALSE      <NA>     
+#>  4 poly(… age      Age in y… nmatrix.3 continu…          NA FALSE      <NA>     
+#>  5 poly(… age      Age in y… nmatrix.3 continu…          NA FALSE      <NA>     
+#>  6 <NA>   stage    T Stage   factor    categor…           4 TRUE       contr.tr…
+#>  7 stage1 stage    T Stage   factor    categor…           4 FALSE      contr.tr…
+#>  8 stage2 stage    T Stage   factor    categor…           4 FALSE      contr.tr…
+#>  9 stage3 stage    T Stage   factor    categor…           4 FALSE      contr.tr…
+#> 10 stage4 stage    T Stage   factor    categor…           4 FALSE      contr.tr…
+#> 11 <NA>   grade    Grade     factor    categor…           3 TRUE       contr.sum
+#> 12 grade1 grade    Grade     factor    categor…           3 FALSE      contr.sum
+#> 13 grade2 grade    Grade     factor    categor…           3 FALSE      contr.sum
+#> 14 grade3 grade    Grade     factor    categor…           3 FALSE      contr.sum
+#> 15 <NA>   trt      Chemothe… character dichoto…           2 TRUE       contr.tr…
+#> 16 trtDr… trt      Chemothe… character dichoto…           2 FALSE      contr.tr…
+#> 17 trtDr… trt      Chemothe… character dichoto…           2 FALSE      contr.tr…
+#> 18 <NA>   grade:t… Grade * … <NA>      interac…          NA TRUE       <NA>     
+#> 19 grade… grade:t… Grade * … <NA>      interac…          NA FALSE      <NA>     
+#> 20 grade… grade:t… Grade * … <NA>      interac…          NA FALSE      <NA>     
+#> # ℹ 9 more variables: contrasts_type <chr>, reference_row <lgl>, label <chr>,
+#> #   estimate <dbl>, std.error <dbl>, statistic <dbl>, p.value <dbl>,
+#> #   conf.low <dbl>, conf.high <dbl>
 dplyr::glimpse(ex4)
 #> Rows: 20
 #> Columns: 17
