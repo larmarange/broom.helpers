@@ -20,7 +20,7 @@ with the same structure as stats::model.matrix.default()."><!-- mathjax --><scri
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">broom.helpers</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.14.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.15.0</span>
       </span>
     </div>
 
@@ -59,7 +59,7 @@ with the same structure as stats::model.matrix.default()."><!-- mathjax --><scri
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Get the model matrix of a model</h1>
-    <small class="dont-index">Source: <a href="https://github.com/larmarange/broom.helpers/blob/HEAD/R/model_get_model_matrix.R" class="external-link"><code>R/model_get_model_matrix.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/larmarange/broom.helpers/blob/HEAD/R/model_get_model_matrix.R" class="external-link"><code>R/model_get_model_matrix.R</code></a>, <a href="https://github.com/larmarange/broom.helpers/blob/HEAD/R/model_get_terms.R" class="external-link"><code>R/model_get_terms.R</code></a></small>
     <div class="hidden name"><code>model_get_model_matrix.Rd</code></div>
     </div>
 
@@ -104,7 +104,13 @@ with the same structure as <code><a href="https://rdrr.io/r/stats/model.matrix.h
 <span><span class="fu">model_get_model_matrix</span><span class="op">(</span><span class="va">model</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for betareg</span></span>
-<span><span class="fu">model_get_model_matrix</span><span class="op">(</span><span class="va">model</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">model_get_model_matrix</span><span class="op">(</span><span class="va">model</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for cch</span></span>
+<span><span class="fu">model_get_model_matrix</span><span class="op">(</span><span class="va">model</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for cch</span></span>
+<span><span class="fu"><a href="model_get_terms.html">model_get_terms</a></span><span class="op">(</span><span class="va">model</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -119,9 +125,9 @@ with the same structure as <code><a href="https://rdrr.io/r/stats/model.matrix.h
 </dl></div>
     <div id="details">
     <h2>Details</h2>
-    <p>For models fitted with <code>glmmTMB::glmmTMB()</code>, it will return a model matrix
+    <p>For models fitted with <code><a href="https://rdrr.io/pkg/glmmTMB/man/glmmTMB.html" class="external-link">glmmTMB::glmmTMB()</a></code>, it will return a model matrix
 taking into account all components ("cond", "zi" and "disp"). For a more
-restricted model matrix, please refer to <code>glmmTMB::model.matrix.glmmTMB()</code>.</p>
+restricted model matrix, please refer to <code><a href="https://rdrr.io/pkg/glmmTMB/man/glmmTMB_methods.html" class="external-link">glmmTMB::model.matrix.glmmTMB()</a></code>.</p>
 <p>For <code><a href="https://rdrr.io/pkg/plm/man/plm.html" class="external-link">plm::plm()</a></code> models, constant columns are not removed.</p>
     </div>
     <div id="see-also">
@@ -132,14 +138,14 @@ restricted model matrix, please refer to <code>glmmTMB::model.matrix.glmmTMB()</
 <code><a href="model_get_assign.html">model_get_assign</a>()</code>,
 <code><a href="model_get_coefficients_type.html">model_get_coefficients_type</a>()</code>,
 <code><a href="model_get_contrasts.html">model_get_contrasts</a>()</code>,
-<code><a href="model_get_model_frame.html">model_get_model_frame</a>()</code>,
 <code><a href="model_get_model.html">model_get_model</a>()</code>,
-<code><a href="model_get_nlevels.html">model_get_nlevels</a>()</code>,
+<code><a href="model_get_model_frame.html">model_get_model_frame</a>()</code>,
 <code><a href="model_get_n.html">model_get_n</a>()</code>,
+<code><a href="model_get_nlevels.html">model_get_nlevels</a>()</code>,
 <code><a href="model_get_offset.html">model_get_offset</a>()</code>,
 <code><a href="model_get_pairwise_contrasts.html">model_get_pairwise_contrasts</a>()</code>,
-<code><a href="model_get_response_variable.html">model_get_response_variable</a>()</code>,
 <code><a href="model_get_response.html">model_get_response</a>()</code>,
+<code><a href="model_get_response_variable.html">model_get_response_variable</a>()</code>,
 <code><a href="model_get_terms.html">model_get_terms</a>()</code>,
 <code><a href="model_get_weights.html">model_get_weights</a>()</code>,
 <code><a href="model_get_xlevels.html">model_get_xlevels</a>()</code>,
