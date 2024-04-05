@@ -60,6 +60,7 @@ Listing of Supported Models
    \code{survey::svycoxph()} \tab  \cr
    \code{survey::svyglm()} \tab  \cr
    \code{survey::svyolr()} \tab  \cr
+   \code{survival::cch()} \tab `Experimental support. \cr
    \code{survival::clogit()} \tab  \cr
    \code{survival::coxph()} \tab  \cr
    \code{survival::survreg()} \tab  \cr
