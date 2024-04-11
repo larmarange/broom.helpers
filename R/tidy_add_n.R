@@ -40,10 +40,11 @@
 #' obtained with `n_event / exposure`.
 #'
 #' For Cox models ([survival::coxph()]), an individual could be coded
-#' with several observations (several rows). `n_obs` will correspond to the weighted
-#' number of observations which could be different from the number of
-#' individuals. `tidy_add_n()` will also compute a (weighted) number of events
-#' (`n_event`) according to the definition of the [survival::Surv()] object.
+#' with several observations (several rows). `n_obs` will correspond to the
+#' weighted number of observations which could be different from the number of
+#' individuals `n_ind`. `tidy_add_n()` will also compute a (weighted) number of
+#' events (`n_event`) according to the definition of the [survival::Surv()]
+#' object.
 #' Exposure time is also returned in `exposure` column. It is equal to the
 #' (weighted) sum of the time variable if only one variable time is passed to
 #' [survival::Surv()], and to the (weighted) sum of `time2 - time` if two time

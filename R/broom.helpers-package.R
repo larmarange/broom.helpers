@@ -53,7 +53,7 @@ utils::globalVariables(c(".", "where"))
           "y.level", "component", "term", "original_term", "variable",
           "var_label", "var_class", "var_type",
           "var_nlevels", "header_row", "contrasts", "contrasts_type",
-          "reference_row", "label", "n_obs", "n_event", "exposure"
+          "reference_row", "label", "n_obs", "n_ind", "n_event", "exposure"
         )
       ),
       dplyr::everything()
@@ -67,7 +67,7 @@ utils::globalVariables(c(".", "where"))
     names(.attributes),
     c(
       "exponentiate", "conf.level", "coefficients_type", "coefficients_label",
-      "variable_labels", "term_labels", "N_obs", "N_event", "Exposure",
+      "variable_labels", "term_labels", "N_obs", "N_ind", "N_event", "Exposure",
       "force_contr.treatment", "skip_add_reference_rows",
       "find_missing_interaction_terms", "component"
     )
