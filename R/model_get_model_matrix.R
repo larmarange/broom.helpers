@@ -15,6 +15,8 @@
 #'   model_get_model_matrix() %>%
 #'   head()
 model_get_model_matrix <- function(model, ...) {
+  if (!is.null(attr(model, "model_matrix")))
+    return(attr(model, "model_matrix"))
   UseMethod("model_get_model_matrix")
 }
 

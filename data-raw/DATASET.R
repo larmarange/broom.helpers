@@ -41,7 +41,6 @@ supported_models <-
     "`tidycmprsk::crr()`", "",
     "`plm::plm()`", "",
     "`biglm::bigglm()`", "",
-    "`biglmm::bigglm()`", "",
     "`parsnip::model_fit`", "Supported as long as the type of model and the engine is supported.",
     "`fixest::feglm()`", "May fail with R <= 4.0.",
     "`fixest::femlm()`", "May fail with R <= 4.0.",
