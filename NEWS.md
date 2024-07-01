@@ -5,6 +5,11 @@
 - new argument `model_matrix_attr` in `tidy_and_attach()` and `tidy_plus_plus()`
   to attach model frame and model matrix to the model as attributes for saving
   some execution time (#254)
+  
+**Deprecated support**
+
+- `biglmm::bigglm()` not supported anymore as `bigglmm` has been removed from
+  CRAN
 
 # broom.helpers 1.15.0
 

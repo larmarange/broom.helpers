@@ -22,7 +22,6 @@ Listing of Supported Models
    model \tab notes \cr
    \code{betareg::betareg()} \tab Use \code{tidy_parameters()} as \code{tidy_fun} with \code{component} argument to control with coefficients to return. \code{broom::tidy()} does not support the \code{exponentiate} argument for betareg models, use \code{tidy_parameters()} instead. \cr
    \code{biglm::bigglm()} \tab  \cr
-   \code{biglmm::bigglm()} \tab  \cr
    \code{brms::brm()} \tab \code{broom.mixed} package required \cr
    \code{cmprsk::crr()} \tab Limited support. It is recommended to use \code{tidycmprsk::crr()} instead. \cr
    \code{fixest::feglm()} \tab May fail with R <= 4.0. \cr
