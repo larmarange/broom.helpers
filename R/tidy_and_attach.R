@@ -18,6 +18,9 @@
 #' @param exponentiate logical indicating whether or not to exponentiate the
 #' coefficient estimates. This is typical for logistic, Poisson and Cox models,
 #' but a bad idea if there is no log or logit link; defaults to `FALSE`
+#' @param model_matrix_attr logical indicating whether model frame and model
+#' matrix should be added as attributes of `model` (respectively named
+#' `"model_frame"` and `"model_matrix"`) and passed through
 #' @param .attributes named list of additional attributes to be attached to `x`
 #' @param ... other arguments passed to `tidy_fun()`
 #' @family tidy_helpers
@@ -55,7 +58,8 @@ tidy_attach_model <- function(x, model, .attributes = NULL) {
 #' @export
 tidy_and_attach <- function(
     model, tidy_fun = tidy_with_broom_or_parameters,
-    conf.int = TRUE, conf.level = .95, exponentiate = FALSE, ...) {
+    conf.int = TRUE, conf.level = .95, exponentiate = FALSE,
+    model_matrix_attr = TRUE, ...) {
   # exponentiate cannot be used with lm models
   # but broom will not produce an error and will return unexponentiated estimates
   if (identical(class(model), "lm") && exponentiate) {
@@ -64,6 +68,12 @@ tidy_and_attach <- function(
 
   tidy_args <- list(...)
   tidy_args$x <- model
+
+  if (model_matrix_attr) {
+    attr(model, "model_frame") <- model %>% model_get_model_frame()
+    attr(model, "model_matrix") <- model %>% model_get_model_matrix()
+  }
+
   tidy_args$conf.int <- conf.int
   if (conf.int) tidy_args$conf.level <- conf.level
   tidy_args$exponentiate <- exponentiate
