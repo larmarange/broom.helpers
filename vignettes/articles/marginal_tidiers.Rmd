@@ -277,6 +277,7 @@ predict(mod, newdata = dB, type = "link") %>%
   mean() %>%
   b$linkinv()
 ```
+
 We can use `tidy_marginal_predictions()` to get average marginal predictions for all variables and `plot_marginal_predictions()` for a visual representation.
 
 ```{r}
@@ -327,7 +328,7 @@ pred <- predictions(mod, newdata = "marginalmeans")
 pred
 ```
 
-As we can see, `pred` contains 8 rows, one for each combination of `trt` (2 modalities) and `stage` (4 modalities). `age` is fixed at his mean (`mean(d$age)`) as well as `marker`.
+As we can see, `pred` contains 8 rows, one for each combination of `trt` (2 modalities) and `stage` (4 modalities). `age` is fixed at its mean (`mean(d$age)`) as well as `marker`.
 
 Let's compute the average predictions for each value of `stage`.
 
@@ -343,22 +344,19 @@ We can check that we obtain the same estimates as with `emmeans::emmeans()`.
 emmeans::emmeans(mod, "stage", type = "response")
 ```
 
-The function `marginaleffects::marginal_means()` allows to compute directly marginal means of all categorical variables.
+These estimates could be computed, for each categorical variable, with `marginaleffects::prediction()` using `datagrid(grid_type = "balanced")`[^1].
+
+[^1]: The function `marginaleffects::marginalmeans()` is now deprecated.
 
 ```{r}
-marginal_means(mod)
-```
-
-`{broom.helpers}` provides a `tidy_marginal_means()` tidier.
-
-```{r}
-mod %>%
-  tbl_regression(
-    tidy_fun = tidy_marginal_means,
-    estimate_fun = scales::label_percent(accuracy = .1)
-  ) %>%
-  modify_column_hide("p.value") %>%
-  bold_labels()
+predictions(mod,
+  by = "trt",
+  newdata = datagrid(grid_type = "balanced")
+)
+predictions(mod,
+  by = "stage",
+  newdata = datagrid(grid_type = "balanced")
+)
 ```
 
 Marginal means are defined only for categorical variables. However, we can define **marginal predictions at marginal means** for both continuous and categorical variables, calling `tidy_marginal_predictions()` with the option `newdata = "marginalmeans"`. For categorical variables, marginal predictions at marginal means will be equal to marginal means.
@@ -578,8 +576,11 @@ In our model, we defined an interaction between `trt` and `marker`. Therefore, w
 avg_comparisons(
   mod,
   variables = list(marker = 1),
-  newdata = datagridcf(trt = unique),
-  by = "trt",
+  newdata = datagrid(
+    trt = unique,
+    grid_type = "counterfactual"
+  ),
+  by = "trt"
 )
 ```
 
@@ -709,9 +710,9 @@ mod_alt %>%
 
 ### Marginal Effects at the Mean (MEM)
 
-For marginal effects at the mean[^1], simple use `newdata = "mean"`.
+For marginal effects at the mean[^2], simple use `newdata = "mean"`.
 
-[^1]: More precisely, `marginaleffects::marginaleffects()` use the mean of continuous variables and the mode of categorical variables.
+[^2]: More precisely, `marginaleffects::marginaleffects()` use the mean of continuous variables and the mode of categorical variables.
 
 ```{r}
 mod %>%

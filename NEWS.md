@@ -10,6 +10,17 @@
 
 - `biglmm::bigglm()` not supported anymore as `bigglmm` has been removed from
   CRAN
+  
+**Deprecated functions**
+
+- `tidy_marginal_means()` is now deprecated, following deprecation of
+  `marginaleffects::marginal_means()`. Use instead `tidy_marginal_predictions()`
+  with the option `newdata = "marginalmeans"`.
+  
+**Fixes**
+
+- `tidy_marginal_predictions()` has been updated to avoid the use of the
+  deprecated function `marginaleffects::datagridcf()` (#256)
 
 # broom.helpers 1.15.0
 

@@ -33,4 +33,3 @@ test_that("tidy_and_attach() handles models without exponentiate arguments", {
   expect_error(mod %>% tidy_and_attach(exponentiate = TRUE))
   expect_error(mod %>% tidy_and_attach(), NA)
 })
-
