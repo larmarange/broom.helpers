@@ -31,7 +31,6 @@ Imports:
 Suggests: 
     betareg,
     biglm,
-    biglmm,
     brms (>= 2.13.0),
     broom.mixed,
     cmprsk,

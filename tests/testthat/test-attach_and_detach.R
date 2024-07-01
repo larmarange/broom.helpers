@@ -2,7 +2,7 @@ test_that("Attach and Detach models works", {
   mod <- lm(Sepal.Length ~ Sepal.Width + Species, data = iris)
   expect_identical(
     mod,
-    mod %>% tidy_and_attach() %>% tidy_get_model()
+    mod %>% tidy_and_attach(model_matrix_attr = FALSE) %>% tidy_get_model()
   )
 
   tb <- broom::tidy(mod)
@@ -33,3 +33,4 @@ test_that("tidy_and_attach() handles models without exponentiate arguments", {
   expect_error(mod %>% tidy_and_attach(exponentiate = TRUE))
   expect_error(mod %>% tidy_and_attach(), NA)
 })
+

@@ -650,28 +650,6 @@ test_that("tidy_plus_plus() works with biglm::bigglm", {
   )
 })
 
-test_that("tidy_plus_plus() works with biglmm::bigglm", {
-  skip_on_cran()
-  skip_if_not_installed("biglmm")
-  skip_if(compareVersion(as.character(getRversion()), "3.6") < 0)
-
-  mod <- biglmm::bigglm(
-    response ~ age + trt,
-    data = as.data.frame(gtsummary::trial),
-    family = binomial()
-  )
-
-  expect_error(
-    res <- mod %>% tidy_plus_plus(),
-    NA
-  )
-
-  # check that reference rows are properly added
-  expect_equal(
-    res %>% dplyr::filter(variable == "trt") %>% purrr::pluck("reference_row"),
-    c(TRUE, FALSE)
-  )
-})
 
 test_that("tidy_plus_plus() works with parsnip::model_fit object", {
   skip_on_cran()

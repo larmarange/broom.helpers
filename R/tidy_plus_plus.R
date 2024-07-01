@@ -24,6 +24,9 @@
 #' @param exponentiate logical indicating whether or not to exponentiate the
 #' coefficient estimates. This is typical for logistic, Poisson and Cox models,
 #' but a bad idea if there is no log or logit link; defaults to `FALSE`.
+#' @param model_matrix_attr logical indicating whether model frame and model
+#' matrix should be added as attributes of `model` (respectively named
+#' `"model_frame"` and `"model_matrix"`) and passed through
 #' @param variable_labels a named list or a named vector of custom variable labels
 #' @param term_labels a named list or a named vector of custom term labels
 #' @param interaction_sep separator for interaction terms
@@ -126,6 +129,7 @@ tidy_plus_plus <- function(model,
                            conf.int = TRUE,
                            conf.level = .95,
                            exponentiate = FALSE,
+                           model_matrix_attr = TRUE,
                            variable_labels = NULL,
                            term_labels = NULL,
                            interaction_sep = " * ",
@@ -157,6 +161,7 @@ tidy_plus_plus <- function(model,
       conf.int = conf.int,
       conf.level = conf.level,
       exponentiate = exponentiate,
+      model_matrix_attr = model_matrix_attr,
       ...
     )
 
