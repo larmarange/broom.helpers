@@ -347,7 +347,7 @@ test_that("tidy_marginal_means()", {
   skip_if_not_installed("marginaleffects")
 
   mod <- lm(Petal.Length ~ Petal.Width * Species + Sepal.Length, data = iris)
-  expect_deprecated(
+  lifecycle::expect_deprecated(
     tidy_marginal_means(mod)
   )
 })
