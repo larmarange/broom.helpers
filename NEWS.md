@@ -1,5 +1,11 @@
 # broom.helpers (development version)
 
+**New features**
+
+- new argument `model_matrix_attr` in `tidy_and_attach()` and `tidy_plus_plus()`
+  to attach model frame and model matrix to the model as attributes for saving
+  some execution time (#254)
+
 # broom.helpers 1.15.0
 
 **New supported models**

@@ -15,6 +15,7 @@ tidy_and_attach(
   conf.int = TRUE,
   conf.level = 0.95,
   exponentiate = FALSE,
+  model_matrix_attr = TRUE,
   ...
 )
 
@@ -39,6 +40,10 @@ interval in the tidied output}
 \item{exponentiate}{logical indicating whether or not to exponentiate the
 coefficient estimates. This is typical for logistic, Poisson and Cox models,
 but a bad idea if there is no log or logit link; defaults to \code{FALSE}}
+
+\item{model_matrix_attr}{logical indicating whether model frame and model
+matrix should be added as attributes of \code{model} (respectively named
+\code{"model_frame"} and \code{"model_matrix"}) and passed through}
 
 \item{...}{other arguments passed to \code{tidy_fun()}}
 }
