@@ -1029,7 +1029,8 @@ tidy_marginal_contrasts <- function(x, variables_list = "auto",
   if (!is.null(variables$by) && is.null(dots$newdata)) {
     args <- variables$by
     args$model <- dots$model
-    dots$newdata <- do.call(marginaleffects::datagridcf, args)
+    args$grid_type <- "counterfactual"
+    dots$newdata <- do.call(marginaleffects::datagrid, args)
   }
 
   if (!is.null(variables$by) && identical(dots$newdata, "mean")) {

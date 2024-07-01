@@ -6,16 +6,17 @@
 #' For Poisson models, will return the number of events and exposure time
 #' (defined with [stats::offset()]).
 #'
-#' For Cox models ([survival::coxph()]), will return the number of events and
-#' exposure time.
+#' For Cox models ([survival::coxph()]), will return the number of events,
+#' exposure time and the number of individuals.
 #'
 #' For competing risk regression models ([tidycmprsk::crr()]), `n_event` takes
 #' into account only the event of interest defined by `failcode.`
 #'
 #' See [tidy_add_n()] for more details.
 #'
-#' The total number of observations (`N_obs`), of events (`N_event`) and of
-#' exposure time (`Exposure`) are stored as attributes of the returned tibble.
+#' The total number of observations (`N_obs`), of individuals (`N_ind`), of
+#' events (`N_event`) and of exposure time (`Exposure`) are stored as attributes
+#' of the returned tibble.
 #'
 #' This function does not cover `lavaan` models (`NULL` is returned).
 #'
@@ -192,6 +193,15 @@ model_get_n.coxph <- function(model) {
     n_obs = colSums(tcm * w)
   )
   attr(n, "N_obs") <- sum(w)
+
+  mf <- stats::model.frame(model) # using stats::model.frame() to get (id)
+  if (!"(id)" %in% names(mf))
+    mf[["(id)"]] <- seq_len(nrow(mf))
+  n_obs_per_ind <- mf %>%
+    dplyr::add_count(dplyr::pick("(id)")) |>
+    dplyr::pull("n")
+  n$n_ind <- colSums(tcm * w / n_obs_per_ind)
+  attr(n, "N_ind") <- sum(w / n_obs_per_ind)
 
   y <- model %>% model_get_response()
   status <- y[, ncol(y)]
