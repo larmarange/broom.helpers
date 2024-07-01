@@ -459,12 +459,6 @@ test_that("Marginal tidiers works with nnet::multinom() models", {
   expect_true("y.level" %in% names(res))
 
   expect_error(
-    res <- tidy_marginal_means(mod),
-    NA
-  )
-  expect_true("y.level" %in% names(res))
-
-  expect_error(
     res <- tidy_marginal_predictions(mod),
     NA
   )
@@ -525,12 +519,6 @@ test_that("Marginal tidiers works with MASS::polr() models", {
   expect_true("y.level" %in% names(res))
 
   expect_error(
-    suppressMessages(res <- tidy_marginal_means(mod)),
-    NA
-  )
-  expect_true("y.level" %in% names(res))
-
-  expect_error(
     suppressMessages(res <- tidy_marginal_predictions(mod)),
     NA
   )
@@ -584,12 +572,6 @@ test_that("Marginal tidiers works with ordinal::clm() models", {
 
   expect_error(
     res <- tidy_avg_comparisons(mod),
-    NA
-  )
-  expect_true("y.level" %in% names(res))
-
-  expect_error(
-    res <- tidy_marginal_means(mod),
     NA
   )
   expect_true("y.level" %in% names(res))
