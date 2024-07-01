@@ -4,14 +4,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="broom.helpers">
 <title>Getting Started with broom.helpers • broom.helpers</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Getting Started with broom.helpers">
+<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Getting Started with broom.helpers">
 <meta property="og:description" content="broom.helpers">
 <meta name="robots" content="noindex">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -19,73 +19,70 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body data-spy="scroll" data-target="#toc">
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <div class="container template-article">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">broom.helpers</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.15.0.9000</span>
-      </span>
-    </div>
+    <nav class="navbar fixed-top navbar-default navbar-expand-lg bg-light" data-bs-theme="default"><div class="container">
+    
+    <a class="navbar-brand me-2" href="../index.html">broom.helpers</a>
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.15.0.9000</small>
+
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item">
+  <a class="nav-link" href="../index.html">
     <span class="fa fa-home"></span>
      
   </a>
 </li>
-<li>
-  <a href="../reference/index.html">Reference</a>
+<li class="nav-item">
+  <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
-<li>
-  <a href="../articles/tidy.html">Getting Started</a>
+<li class="active nav-item">
+  <a class="nav-link" href="../articles/tidy.html">Getting Started</a>
 </li>
-<li>
-  <a href="../articles/marginal_tidiers.html">Marginal estimates</a>
+<li class="nav-item">
+  <a class="nav-link" href="../articles/marginal_tidiers.html">Marginal estimates</a>
 </li>
-<li>
-  <a href="../news/index.html">News</a>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">News</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/larmarange/broom.helpers" class="external-link">
+<form class="form-inline my-2 my-lg-0" role="search">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/larmarange/broom.helpers">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
       </ul>
 </div>
-<!--/.nav-collapse -->
+
+    
   </div>
-<!--/.container -->
-</div>
-<!--/.navbar -->
+</nav><div class="container template-article">
 
-      
 
-      </header><link href="tidy_files/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+
+<link href="tidy_files/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
 <script src="tidy_files/pagedtable-1.1/js/pagedtable.js"></script><div class="row">
-  <div class="col-md-9 contents">
-    <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Getting Started with broom.helpers</h1>
+  <main id="main" class="col-md-9"><div class="page-header">
+      <img src="" class="logo" alt=""><h1>Getting Started with broom.helpers</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/larmarange/broom.helpers/blob/HEAD/vignettes/tidy.Rmd" class="external-link"><code>vignettes/tidy.Rmd</code></a></small>
-      <div class="hidden name"><code>tidy.Rmd</code></div>
-
+      <div class="d-none name"><code>tidy.Rmd</code></div>
     </div>
 
     
@@ -356,7 +353,7 @@ defined alternative reference rows. It will be properly managed by
 In that case, each model coefficient corresponds to the difference of
 that modality with the grand mean. A variable with 4 modalities will be
 coded with 3 terms. However, a value could be computed (using
-<code><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html" class="external-link">emmeans::emmeans()</a></code>) for the last modality, corresponding to
+<code><a href="https://rvlenth.github.io/emmeans/reference/emmeans.html" class="external-link">emmeans::emmeans()</a></code>) for the last modality, corresponding to
 the difference of that modality with the grand mean and equal to sum of
 all other coefficients multiplied by -1. <code>broom.helpers</code> will
 identify categorical variables coded with sum contrasts and could
@@ -477,23 +474,23 @@ information in the column.</p>
 <style>
 td {vertical-align: top;}
 </style>
-<div id="vizqoglgli" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#vizqoglgli table {
+<div id="wlefoodfie" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wlefoodfie table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#vizqoglgli thead, #vizqoglgli tbody, #vizqoglgli tfoot, #vizqoglgli tr, #vizqoglgli td, #vizqoglgli th {
+#wlefoodfie thead, #wlefoodfie tbody, #wlefoodfie tfoot, #wlefoodfie tr, #wlefoodfie td, #wlefoodfie th {
   border-style: none;
 }
 
-#vizqoglgli p {
+#wlefoodfie p {
   margin: 0;
   padding: 0;
 }
 
-#vizqoglgli .gt_table {
+#wlefoodfie .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -519,12 +516,12 @@ td {vertical-align: top;}
   border-left-color: #D3D3D3;
 }
 
-#vizqoglgli .gt_caption {
+#wlefoodfie .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#vizqoglgli .gt_title {
+#wlefoodfie .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -536,7 +533,7 @@ td {vertical-align: top;}
   border-bottom-width: 0;
 }
 
-#vizqoglgli .gt_subtitle {
+#wlefoodfie .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -548,7 +545,7 @@ td {vertical-align: top;}
   border-top-width: 0;
 }
 
-#vizqoglgli .gt_heading {
+#wlefoodfie .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -560,13 +557,13 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#vizqoglgli .gt_bottom_border {
+#wlefoodfie .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#vizqoglgli .gt_col_headings {
+#wlefoodfie .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -581,7 +578,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#vizqoglgli .gt_col_heading {
+#wlefoodfie .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -601,7 +598,7 @@ td {vertical-align: top;}
   overflow-x: hidden;
 }
 
-#vizqoglgli .gt_column_spanner_outer {
+#wlefoodfie .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -613,15 +610,15 @@ td {vertical-align: top;}
   padding-right: 4px;
 }
 
-#vizqoglgli .gt_column_spanner_outer:first-child {
+#wlefoodfie .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vizqoglgli .gt_column_spanner_outer:last-child {
+#wlefoodfie .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vizqoglgli .gt_column_spanner {
+#wlefoodfie .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -633,11 +630,11 @@ td {vertical-align: top;}
   width: 100%;
 }
 
-#vizqoglgli .gt_spanner_row {
+#wlefoodfie .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#vizqoglgli .gt_group_heading {
+#wlefoodfie .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -663,7 +660,7 @@ td {vertical-align: top;}
   text-align: left;
 }
 
-#vizqoglgli .gt_empty_group_heading {
+#wlefoodfie .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -678,15 +675,15 @@ td {vertical-align: top;}
   vertical-align: middle;
 }
 
-#vizqoglgli .gt_from_md > :first-child {
+#wlefoodfie .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vizqoglgli .gt_from_md > :last-child {
+#wlefoodfie .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vizqoglgli .gt_row {
+#wlefoodfie .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -705,7 +702,7 @@ td {vertical-align: top;}
   overflow-x: hidden;
 }
 
-#vizqoglgli .gt_stub {
+#wlefoodfie .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -718,7 +715,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#vizqoglgli .gt_stub_row_group {
+#wlefoodfie .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -732,15 +729,15 @@ td {vertical-align: top;}
   vertical-align: top;
 }
 
-#vizqoglgli .gt_row_group_first td {
+#wlefoodfie .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#vizqoglgli .gt_row_group_first th {
+#wlefoodfie .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#vizqoglgli .gt_summary_row {
+#wlefoodfie .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -750,16 +747,16 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#vizqoglgli .gt_first_summary_row {
+#wlefoodfie .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#vizqoglgli .gt_first_summary_row.thick {
+#wlefoodfie .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#vizqoglgli .gt_last_summary_row {
+#wlefoodfie .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -769,7 +766,7 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#vizqoglgli .gt_grand_summary_row {
+#wlefoodfie .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -779,7 +776,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#vizqoglgli .gt_first_grand_summary_row {
+#wlefoodfie .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -789,7 +786,7 @@ td {vertical-align: top;}
   border-top-color: #D3D3D3;
 }
 
-#vizqoglgli .gt_last_grand_summary_row_top {
+#wlefoodfie .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -799,11 +796,11 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#vizqoglgli .gt_striped {
+#wlefoodfie .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vizqoglgli .gt_table_body {
+#wlefoodfie .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -812,7 +809,7 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#vizqoglgli .gt_footnotes {
+#wlefoodfie .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -826,7 +823,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#vizqoglgli .gt_footnote {
+#wlefoodfie .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -835,7 +832,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#vizqoglgli .gt_sourcenotes {
+#wlefoodfie .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -849,7 +846,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#vizqoglgli .gt_sourcenote {
+#wlefoodfie .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -857,63 +854,63 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#vizqoglgli .gt_left {
+#wlefoodfie .gt_left {
   text-align: left;
 }
 
-#vizqoglgli .gt_center {
+#wlefoodfie .gt_center {
   text-align: center;
 }
 
-#vizqoglgli .gt_right {
+#wlefoodfie .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vizqoglgli .gt_font_normal {
+#wlefoodfie .gt_font_normal {
   font-weight: normal;
 }
 
-#vizqoglgli .gt_font_bold {
+#wlefoodfie .gt_font_bold {
   font-weight: bold;
 }
 
-#vizqoglgli .gt_font_italic {
+#wlefoodfie .gt_font_italic {
   font-style: italic;
 }
 
-#vizqoglgli .gt_super {
+#wlefoodfie .gt_super {
   font-size: 65%;
 }
 
-#vizqoglgli .gt_footnote_marks {
+#wlefoodfie .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#vizqoglgli .gt_asterisk {
+#wlefoodfie .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#vizqoglgli .gt_indent_1 {
+#wlefoodfie .gt_indent_1 {
   text-indent: 5px;
 }
 
-#vizqoglgli .gt_indent_2 {
+#wlefoodfie .gt_indent_2 {
   text-indent: 10px;
 }
 
-#vizqoglgli .gt_indent_3 {
+#wlefoodfie .gt_indent_3 {
   text-indent: 15px;
 }
 
-#vizqoglgli .gt_indent_4 {
+#wlefoodfie .gt_indent_4 {
   text-indent: 20px;
 }
 
-#vizqoglgli .gt_indent_5 {
+#wlefoodfie .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1095,23 +1092,23 @@ short description.</p>
 <style>
 td {vertical-align: top;}
 </style>
-<div id="ilwggrmvwl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ilwggrmvwl table {
+<div id="dbirslsqjl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#dbirslsqjl table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ilwggrmvwl thead, #ilwggrmvwl tbody, #ilwggrmvwl tfoot, #ilwggrmvwl tr, #ilwggrmvwl td, #ilwggrmvwl th {
+#dbirslsqjl thead, #dbirslsqjl tbody, #dbirslsqjl tfoot, #dbirslsqjl tr, #dbirslsqjl td, #dbirslsqjl th {
   border-style: none;
 }
 
-#ilwggrmvwl p {
+#dbirslsqjl p {
   margin: 0;
   padding: 0;
 }
 
-#ilwggrmvwl .gt_table {
+#dbirslsqjl .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1137,12 +1134,12 @@ td {vertical-align: top;}
   border-left-color: #D3D3D3;
 }
 
-#ilwggrmvwl .gt_caption {
+#dbirslsqjl .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ilwggrmvwl .gt_title {
+#dbirslsqjl .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1154,7 +1151,7 @@ td {vertical-align: top;}
   border-bottom-width: 0;
 }
 
-#ilwggrmvwl .gt_subtitle {
+#dbirslsqjl .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1166,7 +1163,7 @@ td {vertical-align: top;}
   border-top-width: 0;
 }
 
-#ilwggrmvwl .gt_heading {
+#dbirslsqjl .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1178,13 +1175,13 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#ilwggrmvwl .gt_bottom_border {
+#dbirslsqjl .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ilwggrmvwl .gt_col_headings {
+#dbirslsqjl .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1199,7 +1196,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#ilwggrmvwl .gt_col_heading {
+#dbirslsqjl .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1219,7 +1216,7 @@ td {vertical-align: top;}
   overflow-x: hidden;
 }
 
-#ilwggrmvwl .gt_column_spanner_outer {
+#dbirslsqjl .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1231,15 +1228,15 @@ td {vertical-align: top;}
   padding-right: 4px;
 }
 
-#ilwggrmvwl .gt_column_spanner_outer:first-child {
+#dbirslsqjl .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ilwggrmvwl .gt_column_spanner_outer:last-child {
+#dbirslsqjl .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ilwggrmvwl .gt_column_spanner {
+#dbirslsqjl .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1251,11 +1248,11 @@ td {vertical-align: top;}
   width: 100%;
 }
 
-#ilwggrmvwl .gt_spanner_row {
+#dbirslsqjl .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ilwggrmvwl .gt_group_heading {
+#dbirslsqjl .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1281,7 +1278,7 @@ td {vertical-align: top;}
   text-align: left;
 }
 
-#ilwggrmvwl .gt_empty_group_heading {
+#dbirslsqjl .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1296,15 +1293,15 @@ td {vertical-align: top;}
   vertical-align: middle;
 }
 
-#ilwggrmvwl .gt_from_md > :first-child {
+#dbirslsqjl .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ilwggrmvwl .gt_from_md > :last-child {
+#dbirslsqjl .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ilwggrmvwl .gt_row {
+#dbirslsqjl .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1323,7 +1320,7 @@ td {vertical-align: top;}
   overflow-x: hidden;
 }
 
-#ilwggrmvwl .gt_stub {
+#dbirslsqjl .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1336,7 +1333,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#ilwggrmvwl .gt_stub_row_group {
+#dbirslsqjl .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1350,15 +1347,15 @@ td {vertical-align: top;}
   vertical-align: top;
 }
 
-#ilwggrmvwl .gt_row_group_first td {
+#dbirslsqjl .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ilwggrmvwl .gt_row_group_first th {
+#dbirslsqjl .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ilwggrmvwl .gt_summary_row {
+#dbirslsqjl .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1368,16 +1365,16 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#ilwggrmvwl .gt_first_summary_row {
+#dbirslsqjl .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ilwggrmvwl .gt_first_summary_row.thick {
+#dbirslsqjl .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ilwggrmvwl .gt_last_summary_row {
+#dbirslsqjl .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1387,7 +1384,7 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#ilwggrmvwl .gt_grand_summary_row {
+#dbirslsqjl .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1397,7 +1394,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#ilwggrmvwl .gt_first_grand_summary_row {
+#dbirslsqjl .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1407,7 +1404,7 @@ td {vertical-align: top;}
   border-top-color: #D3D3D3;
 }
 
-#ilwggrmvwl .gt_last_grand_summary_row_top {
+#dbirslsqjl .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1417,11 +1414,11 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#ilwggrmvwl .gt_striped {
+#dbirslsqjl .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ilwggrmvwl .gt_table_body {
+#dbirslsqjl .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1430,7 +1427,7 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#ilwggrmvwl .gt_footnotes {
+#dbirslsqjl .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1444,7 +1441,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#ilwggrmvwl .gt_footnote {
+#dbirslsqjl .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1453,7 +1450,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#ilwggrmvwl .gt_sourcenotes {
+#dbirslsqjl .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1467,7 +1464,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#ilwggrmvwl .gt_sourcenote {
+#dbirslsqjl .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1475,63 +1472,63 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#ilwggrmvwl .gt_left {
+#dbirslsqjl .gt_left {
   text-align: left;
 }
 
-#ilwggrmvwl .gt_center {
+#dbirslsqjl .gt_center {
   text-align: center;
 }
 
-#ilwggrmvwl .gt_right {
+#dbirslsqjl .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ilwggrmvwl .gt_font_normal {
+#dbirslsqjl .gt_font_normal {
   font-weight: normal;
 }
 
-#ilwggrmvwl .gt_font_bold {
+#dbirslsqjl .gt_font_bold {
   font-weight: bold;
 }
 
-#ilwggrmvwl .gt_font_italic {
+#dbirslsqjl .gt_font_italic {
   font-style: italic;
 }
 
-#ilwggrmvwl .gt_super {
+#dbirslsqjl .gt_super {
   font-size: 65%;
 }
 
-#ilwggrmvwl .gt_footnote_marks {
+#dbirslsqjl .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ilwggrmvwl .gt_asterisk {
+#dbirslsqjl .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ilwggrmvwl .gt_indent_1 {
+#dbirslsqjl .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ilwggrmvwl .gt_indent_2 {
+#dbirslsqjl .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ilwggrmvwl .gt_indent_3 {
+#dbirslsqjl .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ilwggrmvwl .gt_indent_4 {
+#dbirslsqjl .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ilwggrmvwl .gt_indent_5 {
+#dbirslsqjl .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1659,23 +1656,23 @@ td {vertical-align: top;}
 <div class="section level2">
 <h2 id="supported-models">Supported models<a class="anchor" aria-label="anchor" href="#supported-models"></a>
 </h2>
-<div id="tkwvdspetk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#tkwvdspetk table {
+<div id="tayyjktvor" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tayyjktvor table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tkwvdspetk thead, #tkwvdspetk tbody, #tkwvdspetk tfoot, #tkwvdspetk tr, #tkwvdspetk td, #tkwvdspetk th {
+#tayyjktvor thead, #tayyjktvor tbody, #tayyjktvor tfoot, #tayyjktvor tr, #tayyjktvor td, #tayyjktvor th {
   border-style: none;
 }
 
-#tkwvdspetk p {
+#tayyjktvor p {
   margin: 0;
   padding: 0;
 }
 
-#tkwvdspetk .gt_table {
+#tayyjktvor .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1701,12 +1698,12 @@ td {vertical-align: top;}
   border-left-color: #D3D3D3;
 }
 
-#tkwvdspetk .gt_caption {
+#tayyjktvor .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tkwvdspetk .gt_title {
+#tayyjktvor .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1718,7 +1715,7 @@ td {vertical-align: top;}
   border-bottom-width: 0;
 }
 
-#tkwvdspetk .gt_subtitle {
+#tayyjktvor .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1730,7 +1727,7 @@ td {vertical-align: top;}
   border-top-width: 0;
 }
 
-#tkwvdspetk .gt_heading {
+#tayyjktvor .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1742,13 +1739,13 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#tkwvdspetk .gt_bottom_border {
+#tayyjktvor .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tkwvdspetk .gt_col_headings {
+#tayyjktvor .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1763,7 +1760,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#tkwvdspetk .gt_col_heading {
+#tayyjktvor .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1783,7 +1780,7 @@ td {vertical-align: top;}
   overflow-x: hidden;
 }
 
-#tkwvdspetk .gt_column_spanner_outer {
+#tayyjktvor .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1795,15 +1792,15 @@ td {vertical-align: top;}
   padding-right: 4px;
 }
 
-#tkwvdspetk .gt_column_spanner_outer:first-child {
+#tayyjktvor .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tkwvdspetk .gt_column_spanner_outer:last-child {
+#tayyjktvor .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tkwvdspetk .gt_column_spanner {
+#tayyjktvor .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1815,11 +1812,11 @@ td {vertical-align: top;}
   width: 100%;
 }
 
-#tkwvdspetk .gt_spanner_row {
+#tayyjktvor .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tkwvdspetk .gt_group_heading {
+#tayyjktvor .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1845,7 +1842,7 @@ td {vertical-align: top;}
   text-align: left;
 }
 
-#tkwvdspetk .gt_empty_group_heading {
+#tayyjktvor .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1860,15 +1857,15 @@ td {vertical-align: top;}
   vertical-align: middle;
 }
 
-#tkwvdspetk .gt_from_md > :first-child {
+#tayyjktvor .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tkwvdspetk .gt_from_md > :last-child {
+#tayyjktvor .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tkwvdspetk .gt_row {
+#tayyjktvor .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1887,7 +1884,7 @@ td {vertical-align: top;}
   overflow-x: hidden;
 }
 
-#tkwvdspetk .gt_stub {
+#tayyjktvor .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1900,7 +1897,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#tkwvdspetk .gt_stub_row_group {
+#tayyjktvor .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1914,15 +1911,15 @@ td {vertical-align: top;}
   vertical-align: top;
 }
 
-#tkwvdspetk .gt_row_group_first td {
+#tayyjktvor .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tkwvdspetk .gt_row_group_first th {
+#tayyjktvor .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tkwvdspetk .gt_summary_row {
+#tayyjktvor .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1932,16 +1929,16 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#tkwvdspetk .gt_first_summary_row {
+#tayyjktvor .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tkwvdspetk .gt_first_summary_row.thick {
+#tayyjktvor .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tkwvdspetk .gt_last_summary_row {
+#tayyjktvor .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1951,7 +1948,7 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#tkwvdspetk .gt_grand_summary_row {
+#tayyjktvor .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1961,7 +1958,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#tkwvdspetk .gt_first_grand_summary_row {
+#tayyjktvor .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1971,7 +1968,7 @@ td {vertical-align: top;}
   border-top-color: #D3D3D3;
 }
 
-#tkwvdspetk .gt_last_grand_summary_row_top {
+#tayyjktvor .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1981,11 +1978,11 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#tkwvdspetk .gt_striped {
+#tayyjktvor .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tkwvdspetk .gt_table_body {
+#tayyjktvor .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1994,7 +1991,7 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#tkwvdspetk .gt_footnotes {
+#tayyjktvor .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2008,7 +2005,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#tkwvdspetk .gt_footnote {
+#tayyjktvor .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2017,7 +2014,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#tkwvdspetk .gt_sourcenotes {
+#tayyjktvor .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2031,7 +2028,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#tkwvdspetk .gt_sourcenote {
+#tayyjktvor .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2039,63 +2036,63 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#tkwvdspetk .gt_left {
+#tayyjktvor .gt_left {
   text-align: left;
 }
 
-#tkwvdspetk .gt_center {
+#tayyjktvor .gt_center {
   text-align: center;
 }
 
-#tkwvdspetk .gt_right {
+#tayyjktvor .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tkwvdspetk .gt_font_normal {
+#tayyjktvor .gt_font_normal {
   font-weight: normal;
 }
 
-#tkwvdspetk .gt_font_bold {
+#tayyjktvor .gt_font_bold {
   font-weight: bold;
 }
 
-#tkwvdspetk .gt_font_italic {
+#tayyjktvor .gt_font_italic {
   font-style: italic;
 }
 
-#tkwvdspetk .gt_super {
+#tayyjktvor .gt_super {
   font-size: 65%;
 }
 
-#tkwvdspetk .gt_footnote_marks {
+#tayyjktvor .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tkwvdspetk .gt_asterisk {
+#tayyjktvor .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tkwvdspetk .gt_indent_1 {
+#tayyjktvor .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tkwvdspetk .gt_indent_2 {
+#tayyjktvor .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tkwvdspetk .gt_indent_3 {
+#tayyjktvor .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tkwvdspetk .gt_indent_4 {
+#tayyjktvor .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tkwvdspetk .gt_indent_5 {
+#tayyjktvor .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2121,45 +2118,47 @@ td {vertical-align: top;}
 </tr>
 <tr>
 <td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/biglmm/man/bigglm.html" class="external-link">biglmm::bigglm()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
-</tr>
-<tr>
-<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p><code><a href="https://paul-buerkner.github.io/brms/reference/brm.html" class="external-link">brms::brm()</a></code></p>
 </div></td>
-<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p><code>broom.mixed</code> package required</p>
 </div></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p><code><a href="https://rdrr.io/pkg/cmprsk/man/crr.html" class="external-link">cmprsk::crr()</a></code></p>
 </div></td>
-<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p>Limited support. It is recommended to use <code><a href="https://mskcc-epi-bio.github.io/tidycmprsk/reference/crr.html" class="external-link">tidycmprsk::crr()</a></code> instead.</p>
 </div></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p><code><a href="https://lrberge.github.io/fixest/reference/feglm.html" class="external-link">fixest::feglm()</a></code></p>
 </div></td>
-<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p>May fail with R &lt;= 4.0.</p>
 </div></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p><code><a href="https://lrberge.github.io/fixest/reference/femlm.html" class="external-link">fixest::femlm()</a></code></p>
 </div></td>
+<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<p>May fail with R &lt;= 4.0.</p>
+</div></td>
+</tr>
+<tr>
+<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<p><code><a href="https://lrberge.github.io/fixest/reference/feNmlm.html" class="external-link">fixest::feNmlm()</a></code></p>
+</div></td>
 <td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p>May fail with R &lt;= 4.0.</p>
 </div></td>
 </tr>
 <tr>
 <td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://lrberge.github.io/fixest/reference/feNmlm.html" class="external-link">fixest::feNmlm()</a></code></p>
+<p><code><a href="https://lrberge.github.io/fixest/reference/feols.html" class="external-link">fixest::feols()</a></code></p>
 </div></td>
 <td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p>May fail with R &lt;= 4.0.</p>
@@ -2167,57 +2166,57 @@ td {vertical-align: top;}
 </tr>
 <tr>
 <td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://lrberge.github.io/fixest/reference/feols.html" class="external-link">fixest::feols()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>May fail with R &lt;= 4.0.</p>
-</div></td>
-</tr>
-<tr>
-<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p><code><a href="https://rdrr.io/pkg/gam/man/gam.html" class="external-link">gam::gam()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
-</tr>
-<tr>
-<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/geepack/man/geeglm.html" class="external-link">geepack::geeglm()</a></code></p>
 </div></td>
 <td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
 </tr>
 <tr>
 <td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<p><code><a href="https://rdrr.io/pkg/geepack/man/geeglm.html" class="external-link">geepack::geeglm()</a></code></p>
+</div></td>
+<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
+</tr>
+<tr>
+<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p><code><a href="https://rdrr.io/pkg/glmmTMB/man/glmmTMB.html" class="external-link">glmmTMB::glmmTMB()</a></code></p>
 </div></td>
-<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p><code>broom.mixed</code> package required</p>
 </div></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p><code><a href="https://rdrr.io/pkg/lavaan/man/lavaan.html" class="external-link">lavaan::lavaan()</a></code></p>
 </div></td>
-<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p>Limited support for categorical variables</p>
 </div></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p><code><a href="https://rdrr.io/pkg/lfe/man/felm.html" class="external-link">lfe::felm()</a></code></p>
 </div></td>
-<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
+<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p><code><a href="https://rdrr.io/pkg/lme4/man/glmer.nb.html" class="external-link">lme4::glmer.nb()</a></code></p>
 </div></td>
+<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<p><code>broom.mixed</code> package required</p>
+</div></td>
+</tr>
+<tr>
+<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<p><code><a href="https://rdrr.io/pkg/lme4/man/glmer.html" class="external-link">lme4::glmer()</a></code></p>
+</div></td>
 <td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p><code>broom.mixed</code> package required</p>
 </div></td>
 </tr>
 <tr>
 <td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/lme4/man/glmer.html" class="external-link">lme4::glmer()</a></code></p>
+<p><code><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lme4::lmer()</a></code></p>
 </div></td>
 <td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p><code>broom.mixed</code> package required</p>
@@ -2225,87 +2224,71 @@ td {vertical-align: top;}
 </tr>
 <tr>
 <td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lme4::lmer()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code>broom.mixed</code> package required</p>
-</div></td>
-</tr>
-<tr>
-<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p><code><a href="https://rdrr.io/pkg/logitr/man/logitr.html" class="external-link">logitr::logitr()</a></code></p>
 </div></td>
-<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p>Requires logitr &gt;= 0.8.0</p>
 </div></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/MASS/man/glm.nb.html" class="external-link">MASS::glm.nb()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
-</tr>
-<tr>
 <td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/MASS/man/polr.html" class="external-link">MASS::polr()</a></code></p>
+<p><code><a href="https://rdrr.io/pkg/MASS/man/glm.nb.html" class="external-link">MASS::glm.nb()</a></code></p>
 </div></td>
 <td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
 </tr>
 <tr>
 <td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<p><code><a href="https://rdrr.io/pkg/MASS/man/polr.html" class="external-link">MASS::polr()</a></code></p>
+</div></td>
+<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
+</tr>
+<tr>
+<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p><code><a href="https://rdrr.io/pkg/mgcv/man/gam.html" class="external-link">mgcv::gam()</a></code></p>
 </div></td>
-<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p>Use default tidier <code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">broom::tidy()</a></code> for smooth terms only, or <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/custom_tidiers.html" class="external-link">gtsummary::tidy_gam()</a></code> to include parametric terms</p>
 </div></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p><code><a href="https://amices.org/mice/reference/mira-class.html" class="external-link">mice::mira</a></code></p>
 </div></td>
-<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p>Limited support. If <code>mod</code> is a <code>mira</code> object, use <code>tidy_fun = function(x, ...) {mice::pool(x) %&gt;% mice::tidy(...)}</code></p>
 </div></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p><code><a href="https://openpharma.github.io/mmrm/latest-tag/reference/mmrm.html" class="external-link">mmrm::mmrm()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
-</tr>
-<tr>
-<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/multgee/man/nomLORgee.html" class="external-link">multgee::nomLORgee()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Experimental support. Use <code><a href="../reference/tidy_multgee.html">tidy_multgee()</a></code> as <code>tidy_fun</code>.</p>
-</div></td>
-</tr>
-<tr>
-<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/multgee/man/ordLORgee.html" class="external-link">multgee::ordLORgee()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Experimental support. Use <code><a href="../reference/tidy_multgee.html">tidy_multgee()</a></code> as <code>tidy_fun</code>.</p>
-</div></td>
-</tr>
-<tr>
-<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/nnet/man/multinom.html" class="external-link">nnet::multinom()</a></code></p>
 </div></td>
 <td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
 </tr>
 <tr>
 <td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/ordinal/man/clm.html" class="external-link">ordinal::clm()</a></code></p>
+<p><code><a href="https://rdrr.io/pkg/multgee/man/nomLORgee.html" class="external-link">multgee::nomLORgee()</a></code></p>
 </div></td>
 <td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Limited support for models with nominal predictors.</p>
+<p>Experimental support. Use <code><a href="../reference/tidy_multgee.html">tidy_multgee()</a></code> as <code>tidy_fun</code>.</p>
 </div></td>
 </tr>
 <tr>
 <td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/ordinal/man/clmm.html" class="external-link">ordinal::clmm()</a></code></p>
+<p><code><a href="https://rdrr.io/pkg/multgee/man/ordLORgee.html" class="external-link">multgee::ordLORgee()</a></code></p>
+</div></td>
+<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<p>Experimental support. Use <code><a href="../reference/tidy_multgee.html">tidy_multgee()</a></code> as <code>tidy_fun</code>.</p>
+</div></td>
+</tr>
+<tr>
+<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<p><code><a href="https://rdrr.io/pkg/nnet/man/multinom.html" class="external-link">nnet::multinom()</a></code></p>
+</div></td>
+<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
+</tr>
+<tr>
+<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<p><code><a href="https://rdrr.io/pkg/ordinal/man/clm.html" class="external-link">ordinal::clm()</a></code></p>
 </div></td>
 <td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p>Limited support for models with nominal predictors.</p>
@@ -2313,29 +2296,29 @@ td {vertical-align: top;}
 </tr>
 <tr>
 <td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://parsnip.tidymodels.org/reference/model_fit.html" class="external-link">parsnip::model_fit</a></code></p>
+<p><code><a href="https://rdrr.io/pkg/ordinal/man/clmm.html" class="external-link">ordinal::clmm()</a></code></p>
 </div></td>
 <td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<p>Limited support for models with nominal predictors.</p>
+</div></td>
+</tr>
+<tr>
+<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<p><code><a href="https://parsnip.tidymodels.org/reference/model_fit.html" class="external-link">parsnip::model_fit</a></code></p>
+</div></td>
+<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p>Supported as long as the type of model and the engine is supported.</p>
 </div></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p><code><a href="https://rdrr.io/pkg/plm/man/plm.html" class="external-link">plm::plm()</a></code></p>
 </div></td>
-<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
-</tr>
-<tr>
-<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/pscl/man/hurdle.html" class="external-link">pscl::hurdle()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Use <code><a href="../reference/tidy_zeroinfl.html">tidy_zeroinfl()</a></code> as <code>tidy_fun</code>.</p>
-</div></td>
+<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
 </tr>
 <tr>
 <td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/pscl/man/zeroinfl.html" class="external-link">pscl::zeroinfl()</a></code></p>
+<p><code><a href="https://rdrr.io/pkg/pscl/man/hurdle.html" class="external-link">pscl::hurdle()</a></code></p>
 </div></td>
 <td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p>Use <code><a href="../reference/tidy_zeroinfl.html">tidy_zeroinfl()</a></code> as <code>tidy_fun</code>.</p>
@@ -2343,95 +2326,103 @@ td {vertical-align: top;}
 </tr>
 <tr>
 <td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://mc-stan.org/rstanarm/reference/stan_glm.html" class="external-link">rstanarm::stan_glm()</a></code></p>
+<p><code><a href="https://rdrr.io/pkg/pscl/man/zeroinfl.html" class="external-link">pscl::zeroinfl()</a></code></p>
 </div></td>
 <td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<p>Use <code><a href="../reference/tidy_zeroinfl.html">tidy_zeroinfl()</a></code> as <code>tidy_fun</code>.</p>
+</div></td>
+</tr>
+<tr>
+<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<p><code><a href="https://mc-stan.org/rstanarm/reference/stan_glm.html" class="external-link">rstanarm::stan_glm()</a></code></p>
+</div></td>
+<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p><code>broom.mixed</code> package required</p>
 </div></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p><code><a href="https://rdrr.io/r/stats/aov.html" class="external-link">stats::aov()</a></code></p>
 </div></td>
-<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p>Reference rows are not relevant for such models.</p>
 </div></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">stats::glm()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
-</tr>
-<tr>
 <td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">stats::lm()</a></code></p>
+<p><code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">stats::glm()</a></code></p>
 </div></td>
 <td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
 </tr>
 <tr>
 <td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<p><code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">stats::lm()</a></code></p>
+</div></td>
+<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
+</tr>
+<tr>
+<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p><code><a href="https://rdrr.io/r/stats/nls.html" class="external-link">stats::nls()</a></code></p>
 </div></td>
-<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p>Limited support</p>
 </div></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/survey/man/svycoxph.html" class="external-link">survey::svycoxph()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
-</tr>
-<tr>
 <td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/survey/man/svyglm.html" class="external-link">survey::svyglm()</a></code></p>
+<p><code><a href="https://rdrr.io/pkg/survey/man/svycoxph.html" class="external-link">survey::svycoxph()</a></code></p>
 </div></td>
 <td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
 </tr>
 <tr>
 <td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/survey/man/svyolr.html" class="external-link">survey::svyolr()</a></code></p>
+<p><code><a href="https://rdrr.io/pkg/survey/man/svyglm.html" class="external-link">survey::svyglm()</a></code></p>
 </div></td>
 <td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
 </tr>
 <tr>
 <td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<p><code><a href="https://rdrr.io/pkg/survey/man/svyolr.html" class="external-link">survey::svyolr()</a></code></p>
+</div></td>
+<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
+</tr>
+<tr>
+<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p><code><a href="https://rdrr.io/pkg/survival/man/cch.html" class="external-link">survival::cch()</a></code></p>
 </div></td>
-<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p>`Experimental support.</p>
 </div></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p><code><a href="https://rdrr.io/pkg/survival/man/clogit.html" class="external-link">survival::clogit()</a></code></p>
 </div></td>
-<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
+<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p><code><a href="https://rdrr.io/pkg/survival/man/coxph.html" class="external-link">survival::coxph()</a></code></p>
 </div></td>
+<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
+</tr>
+<tr>
+<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<p><code><a href="https://rdrr.io/pkg/survival/man/survreg.html" class="external-link">survival::survreg()</a></code></p>
+</div></td>
 <td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
 </tr>
 <tr>
 <td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/survival/man/survreg.html" class="external-link">survival::survreg()</a></code></p>
+<p><code><a href="https://mskcc-epi-bio.github.io/tidycmprsk/reference/crr.html" class="external-link">tidycmprsk::crr()</a></code></p>
 </div></td>
 <td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
 </tr>
 <tr>
 <td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://mskcc-epi-bio.github.io/tidycmprsk/reference/crr.html" class="external-link">tidycmprsk::crr()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
-</tr>
-<tr>
-<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p><code><a href="https://rdrr.io/pkg/VGAM/man/vglm.html" class="external-link">VGAM::vglm()</a></code></p>
 </div></td>
-<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
+<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
 <p>Limited support. It is recommended to use <code><a href="../reference/tidy_parameters.html">tidy_parameters()</a></code> as <code>tidy_fun</code>.</p>
 </div></td>
 </tr>
@@ -2442,33 +2433,24 @@ td {vertical-align: top;}
 may or may not work properly or partially with other types of models. Do
 not hesitate to provide feedback on <a href="https://github.com/larmarange/broom.helpers/issues" class="external-link">GitHub</a>.</p>
 </div>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
-
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
 
-      <footer><div class="copyright">
-  <p></p>
-<p>Developed by <a href="http://joseph.larmarange.net/" class="external-link">Joseph Larmarange</a>, <a href="http://www.danieldsjoberg.com/" class="external-link">Daniel D. Sjoberg</a>.</p>
+    <footer><div class="pkgdown-footer-left">
+  <p>Developed by <a href="http://joseph.larmarange.net/" class="external-link">Joseph Larmarange</a>, <a href="http://www.danieldsjoberg.com/" class="external-link">Daniel D. Sjoberg</a>.</p>
 </div>
 
-<div class="pkgdown">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+<div class="pkgdown-footer-right">
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
 
   
-
 
   
 
