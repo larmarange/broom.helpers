@@ -347,31 +347,8 @@ test_that("tidy_marginal_means()", {
   skip_if_not_installed("marginaleffects")
 
   mod <- lm(Petal.Length ~ Petal.Width * Species + Sepal.Length, data = iris)
-  expect_error(
-    t <- tidy_marginal_means(mod),
-    NA
-  )
-  expect_error(
-    tidy_marginal_means(mod, exponentiate = TRUE)
-  )
-  expect_error(
-    res <- tidy_plus_plus(mod, tidy_fun = tidy_marginal_means),
-    NA
-  )
-  expect_equal(
-    nrow(res),
-    nrow(t)
-  )
-  expect_equal(
-    attr(res, "coefficients_label"),
-    "Marginal Means"
-  )
-  expect_error(
-    tidy_plus_plus(
-      mod,
-      tidy_fun = tidy_marginal_means,
-      add_pairwise_contrasts = TRUE
-    )
+  expect_deprecated(
+    tidy_marginal_means(mod)
   )
 })
 

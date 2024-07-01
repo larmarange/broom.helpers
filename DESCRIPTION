@@ -56,7 +56,7 @@ Suggests:
     lfe,
     lme4 (>= 1.1.28),
     logitr (>= 0.8.0),
-    marginaleffects (>= 0.10.0),
+    marginaleffects (>= 0.18.0),
     margins,
     MASS,
     mgcv,
