@@ -298,7 +298,7 @@ tidy_multgee <- function(x, conf.int = TRUE, conf.level = .95, ...) {
     if (!is.factor(mf[[1]])) {
       mf[[1]] <- factor(mf[[1]])
     }
-    y.levels <- levels(mf[[1]])[-1]
+    y.levels <- levels(mf[[1]])[-length(levels(mf[[1]]))]
 
     mm <- x %>% model_get_model_matrix()
     t <- colnames(mm)

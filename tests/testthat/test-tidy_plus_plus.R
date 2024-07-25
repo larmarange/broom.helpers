@@ -728,8 +728,8 @@ test_that("tidy_plus_plus() works with multgee models", {
   expect_equivalent(
     res$y.level,
     c(
-      "1", "1", "1", "1", "1", "1", "1", "1",
-      "2", "2", "2", "2", "2", "2", "2", "2"
+      "0", "0", "0", "0", "0", "0", "0", "0",
+      "1", "1", "1", "1", "1", "1", "1", "1"
     )
   )
   expect_equivalent(
