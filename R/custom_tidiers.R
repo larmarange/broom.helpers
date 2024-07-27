@@ -258,15 +258,25 @@ tidy_broom <- function(x, ...) {
 #' interval in the tidied output
 #' @param conf.level the confidence level to use for the confidence interval
 #' @param ... additional parameters passed to `parameters::model_parameters()`
+#' @details
+#' To be noted, for `multgee::nomLORgee()`, the baseline `y` category is the
+#' latest modality of `y`.
+#'
 #' @export
 #' @family custom_tieders
 #' @examplesIf interactive()
 #' if (.assert_package("multgee", boolean = TRUE)) {
 #'   library(multgee)
 #'
+#'   h <- housing
+#'   h$status <- factor(
+#'     h$y,
+#'     labels = c("street", "community", "independant")
+#'   )
+#'
 #'   mod <- multgee::nomLORgee(
-#'     y ~ factor(time) * sec,
-#'     data = multgee::housing,
+#'     status ~ factor(time) * sec,
+#'     data = h,
 #'     id = id,
 #'     repeated = time,
 #'   )

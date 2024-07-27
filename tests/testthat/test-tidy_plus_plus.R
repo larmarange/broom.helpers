@@ -715,9 +715,14 @@ test_that("tidy_plus_plus() works with multgee models", {
   skip_if_not_installed("parameters")
 
   library(multgee)
+  h <- housing
+  h$status <- factor(
+    h$y,
+    labels = c("street", "community", "independant")
+  )
   mod <- multgee::nomLORgee(
-    y ~ factor(time) * sec,
-    data = multgee::housing,
+    status ~ factor(time) * sec,
+    data = h,
     id = id,
     repeated = time,
   )
@@ -728,8 +733,9 @@ test_that("tidy_plus_plus() works with multgee models", {
   expect_equivalent(
     res$y.level,
     c(
-      "0", "0", "0", "0", "0", "0", "0", "0",
-      "1", "1", "1", "1", "1", "1", "1", "1"
+      "street", "street", "street", "street", "street", "street",
+      "street", "street", "community", "community", "community", "community",
+      "community", "community", "community", "community"
     )
   )
   expect_equivalent(

@@ -19,6 +19,8 @@
   
 **Fixes**
 
+- `tidy_multgee()` has been fixed to properly identify the different `y.levels`
+  (#260 @jackmwolf)
 - `tidy_marginal_predictions()` has been updated to avoid the use of the
   deprecated function `marginaleffects::datagridcf()` (#256)
 
