@@ -240,7 +240,10 @@ test_that("model_get_n() works with survival::coxph", {
   df <- survival::lung %>% dplyr::mutate(sex = factor(sex))
   mod <- survival::coxph(survival::Surv(time, status) ~ ph.ecog + age + sex, data = df)
   expect_error(res <- mod %>% model_get_n(), NA)
-  expect_equivalent(names(res), c("term", "n_obs", "n_event", "exposure"))
+  expect_equivalent(
+    names(res),
+    c("term", "n_obs", "n_ind", "n_event", "exposure")
+  )
 
   test <- list(
     start = c(1, 2, 5, 2, 1, 7, 3, 4, 8, 8),
@@ -250,8 +253,12 @@ test_that("model_get_n() works with survival::coxph", {
   )
   mod <- survival::coxph(survival::Surv(start, stop, event) ~ x, test)
   expect_error(res <- mod %>% model_get_n(), NA)
-  expect_equivalent(names(res), c("term", "n_obs", "n_event", "exposure"))
+  expect_equivalent(
+    names(res),
+    c("term", "n_obs", "n_ind", "n_event", "exposure")
+  )
   expect_equivalent(res$n_obs, c(10, 10))
+  expect_equivalent(res$n_ind, c(10, 10))
   expect_equivalent(res$n_event, c(7, 7))
   expect_equivalent(res$exposure, c(43, 43))
 })
@@ -264,7 +271,10 @@ test_that("model_get_n() works with survival::survreg", {
     dist = "exponential"
   )
   expect_error(res <- mod %>% model_get_n(), NA)
-  expect_equivalent(names(res), c("term", "n_obs", "n_event", "exposure"))
+  expect_equivalent(
+    names(res),
+    c("term", "n_obs", "n_ind", "n_event", "exposure")
+  )
 })
 
 test_that("model_get_n() works with nnet::multinom", {
@@ -401,7 +411,10 @@ test_that("model_get_n() works with tidycmprsk::crr", {
   skip_on_cran()
   skip_if_not_installed("tidycmprsk")
 
-  mod <- tidycmprsk::crr(Surv(ttdeath, death_cr) ~ age + grade, tidycmprsk::trial)
+  mod <- tidycmprsk::crr(
+    survival::Surv(ttdeath, death_cr) ~ age + grade,
+    tidycmprsk::trial
+  )
   res <- mod %>% tidy_plus_plus()
   expect_equivalent(
     res$n_event,
