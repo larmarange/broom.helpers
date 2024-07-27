@@ -23,6 +23,7 @@ tidy_parameters <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   if (!conf.int) conf.level <- NULL
   args$ci <- conf.level
   args$model <- x
+  if (is.null(args$pretty_names)) args$pretty_names <- FALSE
 
   if (
     inherits(x, "betareg") &&
