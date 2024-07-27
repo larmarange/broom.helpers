@@ -18,13 +18,16 @@ interval in the tidied output}
 \code{marginaleffects::marginal_means()}}
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+This function is deprecated. Use instead \code{tidy_marginal_predictions()} with
+the option \code{newdata = "marginalmeans"}.
+}
+\details{
 Use \code{marginaleffects::marginal_means()} to estimate marginal means and
 return a tibble tidied in a way that it could be used by \code{broom.helpers}
 functions. See \code{marginaleffects::marginal_means()()} for a list of supported
 models.
-}
-\details{
+
 \code{marginaleffects::marginal_means()} estimate marginal means:
 adjusted predictions, averaged across a grid of categorical predictors,
 holding other numeric predictors at their means. Please refer to the
