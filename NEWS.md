@@ -5,6 +5,8 @@
 - new argument `model_matrix_attr` in `tidy_and_attach()` and `tidy_plus_plus()`
   to attach model frame and model matrix to the model as attributes for saving
   some execution time (#254)
+- `tidy_add_n()` now returns `n_ind` the number of individuals, in addition to
+  the number of observations (#251)
   
 **Deprecated support**
 
