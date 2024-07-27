@@ -66,9 +66,9 @@ variables are defined in \code{\link[survival:Surv]{survival::Surv()}}.
 For competing risk regression models (\code{\link[tidycmprsk:crr]{tidycmprsk::crr()}}), \code{n_event} takes
 into account only the event of interest defined by \code{failcode.}
 
-The (weighted) total number of observations (\code{N_obs}), of events (\code{N_event}) and
-of exposure time (\code{Exposure}) are stored as attributes of the returned
-tibble.
+The (weighted) total number of observations (\code{N_obs}), of individuals
+(\code{N_ind}), of events (\code{N_event}) and of exposure time (\code{Exposure}) are
+stored as attributes of the returned tibble.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
