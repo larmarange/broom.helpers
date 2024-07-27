@@ -44,16 +44,17 @@ the number of events.
 For Poisson models, will return the number of events and exposure time
 (defined with \code{\link[stats:offset]{stats::offset()}}).
 
-For Cox models (\code{\link[survival:coxph]{survival::coxph()}}), will return the number of events and
-exposure time.
+For Cox models (\code{\link[survival:coxph]{survival::coxph()}}), will return the number of events,
+exposure time and the number of individuals.
 
 For competing risk regression models (\code{\link[tidycmprsk:crr]{tidycmprsk::crr()}}), \code{n_event} takes
 into account only the event of interest defined by \code{failcode.}
 
 See \code{\link[=tidy_add_n]{tidy_add_n()}} for more details.
 
-The total number of observations (\code{N_obs}), of events (\code{N_event}) and of
-exposure time (\code{Exposure}) are stored as attributes of the returned tibble.
+The total number of observations (\code{N_obs}), of individuals (\code{N_ind}), of
+events (\code{N_event}) and of exposure time (\code{Exposure}) are stored as attributes
+of the returned tibble.
 
 This function does not cover \code{lavaan} models (\code{NULL} is returned).
 }

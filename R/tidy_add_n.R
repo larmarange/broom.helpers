@@ -40,10 +40,11 @@
 #' obtained with `n_event / exposure`.
 #'
 #' For Cox models ([survival::coxph()]), an individual could be coded
-#' with several observations (several rows). `n_obs` will correspond to the weighted
-#' number of observations which could be different from the number of
-#' individuals. `tidy_add_n()` will also compute a (weighted) number of events
-#' (`n_event`) according to the definition of the [survival::Surv()] object.
+#' with several observations (several rows). `n_obs` will correspond to the
+#' weighted number of observations which could be different from the number of
+#' individuals `n_ind`. `tidy_add_n()` will also compute a (weighted) number of
+#' events (`n_event`) according to the definition of the [survival::Surv()]
+#' object.
 #' Exposure time is also returned in `exposure` column. It is equal to the
 #' (weighted) sum of the time variable if only one variable time is passed to
 #' [survival::Surv()], and to the (weighted) sum of `time2 - time` if two time
@@ -52,9 +53,9 @@
 #' For competing risk regression models ([tidycmprsk::crr()]), `n_event` takes
 #' into account only the event of interest defined by `failcode.`
 #'
-#' The (weighted) total number of observations (`N_obs`), of events (`N_event`) and
-#' of exposure time (`Exposure`) are stored as attributes of the returned
-#' tibble.
+#' The (weighted) total number of observations (`N_obs`), of individuals
+#' (`N_ind`), of events (`N_event`) and of exposure time (`Exposure`) are
+#' stored as attributes of the returned tibble.
 #'
 #' @param x a tidy tibble
 #' @param model the corresponding model, if not attached to `x`
@@ -139,6 +140,9 @@ tidy_add_n <- function(x, model = tidy_get_model(x)) {
 
   if (!is.null(attr(n, "N_obs"))) {
     .attributes$N_obs <- attr(n, "N_obs")
+  }
+  if (!is.null(attr(n, "N_ind"))) {
+    .attributes$N_ind <- attr(n, "N_ind")
   }
   if (!is.null(attr(n, "N_event"))) {
     .attributes$N_event <- attr(n, "N_event")

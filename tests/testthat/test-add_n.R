@@ -174,7 +174,9 @@ test_that("tidy_add_n() works with survival::coxph", {
   skip_on_cran()
   df <- survival::lung %>% dplyr::mutate(sex = factor(sex))
   mod <- survival::coxph(survival::Surv(time, status) ~ ph.ecog + age + sex, data = df)
-  expect_error(mod %>% tidy_and_attach() %>% tidy_add_n(), NA)
+  expect_error(res <- mod %>% tidy_and_attach() %>% tidy_add_n(), NA)
+  expect_equivalent(res$n_ind, c(227, 227, 90))
+  expect_equivalent(attr(res, "N_ind"), 227)
 })
 
 test_that("tidy_add_n() works with survival::survreg", {
