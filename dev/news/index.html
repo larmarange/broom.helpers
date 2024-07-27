@@ -37,6 +37,8 @@
 <h2 class="pkg-version" data-toc-text="development version" id="broomhelpers-development-version">broom.helpers (development version)<a class="anchor" aria-label="anchor" href="#broomhelpers-development-version"></a></h2>
 <p><strong>New features</strong></p>
 <ul><li>new argument <code>model_matrix_attr</code> in <code><a href="../reference/tidy_attach_model.html">tidy_and_attach()</a></code> and <code><a href="../reference/tidy_plus_plus.html">tidy_plus_plus()</a></code> to attach model frame and model matrix to the model as attributes for saving some execution time (<a href="https://github.com/larmarange/broom.helpers/issues/254" class="external-link">#254</a>)</li>
+<li>
+<code><a href="../reference/tidy_add_n.html">tidy_add_n()</a></code> now returns <code>n_ind</code> the number of individuals, in addition to the number of observations (<a href="https://github.com/larmarange/broom.helpers/issues/251" class="external-link">#251</a>)</li>
 <li>by default, <code><a href="../reference/tidy_parameters.html">tidy_parameters()</a></code> calls now <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">parameters::model_parameters()</a></code> with <code>pretty_names = FALSE</code> for saving execution time (<a href="https://github.com/larmarange/broom.helpers/issues/259" class="external-link">#259</a>)</li>
 </ul><p><strong>Deprecated support</strong></p>
 <ul><li>

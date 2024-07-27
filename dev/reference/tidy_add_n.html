@@ -91,19 +91,20 @@ model the effect of <code>x</code> on the ratio <code>y / z</code>, a Poisson mo
 as <code>glm(y ~ x + offset(log(z)), family = poisson)</code>). Observed rates could be
 obtained with <code>n_event / exposure</code>.</p>
 <p>For Cox models (<code><a href="https://rdrr.io/pkg/survival/man/coxph.html" class="external-link">survival::coxph()</a></code>), an individual could be coded
-with several observations (several rows). <code>n_obs</code> will correspond to the weighted
-number of observations which could be different from the number of
-individuals. <code>tidy_add_n()</code> will also compute a (weighted) number of events
-(<code>n_event</code>) according to the definition of the <code><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">survival::Surv()</a></code> object.
+with several observations (several rows). <code>n_obs</code> will correspond to the
+weighted number of observations which could be different from the number of
+individuals <code>n_ind</code>. <code>tidy_add_n()</code> will also compute a (weighted) number of
+events (<code>n_event</code>) according to the definition of the <code><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">survival::Surv()</a></code>
+object.
 Exposure time is also returned in <code>exposure</code> column. It is equal to the
 (weighted) sum of the time variable if only one variable time is passed to
 <code><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">survival::Surv()</a></code>, and to the (weighted) sum of <code>time2 - time</code> if two time
 variables are defined in <code><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">survival::Surv()</a></code>.</p>
 <p>For competing risk regression models (<code><a href="https://mskcc-epi-bio.github.io/tidycmprsk/reference/crr.html" class="external-link">tidycmprsk::crr()</a></code>), <code>n_event</code> takes
 into account only the event of interest defined by <code>failcode.</code></p>
-<p>The (weighted) total number of observations (<code>N_obs</code>), of events (<code>N_event</code>) and
-of exposure time (<code>Exposure</code>) are stored as attributes of the returned
-tibble.</p>
+<p>The (weighted) total number of observations (<code>N_obs</code>), of individuals
+(<code>N_ind</code>), of events (<code>N_event</code>) and of exposure time (<code>Exposure</code>) are
+stored as attributes of the returned tibble.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
