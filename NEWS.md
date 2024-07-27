@@ -5,6 +5,8 @@
 - new argument `model_matrix_attr` in `tidy_and_attach()` and `tidy_plus_plus()`
   to attach model frame and model matrix to the model as attributes for saving
   some execution time (#254)
+- by default, `tidy_parameters()` calls now `parameters::model_parameters()`
+  with `pretty_names = FALSE` for saving execution time (#259)
   
 **Deprecated support**
 
