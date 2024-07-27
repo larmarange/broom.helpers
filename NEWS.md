@@ -7,6 +7,8 @@
   some execution time (#254)
 - `tidy_add_n()` now returns `n_ind` the number of individuals, in addition to
   the number of observations (#251)
+- by default, `tidy_parameters()` calls now `parameters::model_parameters()`
+  with `pretty_names = FALSE` for saving execution time (#259)
   
 **Deprecated support**
 
