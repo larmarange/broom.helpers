@@ -22,14 +22,24 @@ A tidier for models generated with \code{multgee::nomLORgee()} or \code{multgee:
 Term names will be updated to be consistent with generic models. The original
 term names are preserved in an \code{"original_term"} column.
 }
+\details{
+To be noted, for \code{multgee::nomLORgee()}, the baseline \code{y} category is the
+latest modality of \code{y}.
+}
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 if (.assert_package("multgee", boolean = TRUE)) {
   library(multgee)
 
+  h <- housing
+  h$status <- factor(
+    h$y,
+    labels = c("street", "community", "independant")
+  )
+
   mod <- multgee::nomLORgee(
-    y ~ factor(time) * sec,
-    data = multgee::housing,
+    status ~ factor(time) * sec,
+    data = h,
     id = id,
     repeated = time,
   )
