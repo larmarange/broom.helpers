@@ -412,7 +412,10 @@ tidy_avg_comparisons <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 
 #' Marginal Means with `marginaleffects::marginal_means()`
 #'
-#' `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("deprecated")`
+#' This function is deprecated. Use instead `tidy_marginal_predictions()` with
+#' the option `newdata = "marginalmeans"`.
+#'
 #' Use `marginaleffects::marginal_means()` to estimate marginal means and
 #' return a tibble tidied in a way that it could be used by `broom.helpers`
 #' functions. See `marginaleffects::marginal_means()()` for a list of supported
@@ -451,6 +454,13 @@ tidy_avg_comparisons <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 #' mod2 <- lm(Petal.Length ~ poly(Petal.Width, 2) + Species, data = iris)
 #' tidy_marginal_means(mod2)
 tidy_marginal_means <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
+  lifecycle::deprecate_warn(
+    when = "1.16.0",
+    what = "tidy_marginal_means()",
+    with = "tidy_marginal_predictions()",
+    details = "Specify `newdata = \"marginalmeans\"`."
+  )
+
   .assert_package("marginaleffects")
 
   dots <- rlang::dots_list(...)
@@ -1029,7 +1039,8 @@ tidy_marginal_contrasts <- function(x, variables_list = "auto",
   if (!is.null(variables$by) && is.null(dots$newdata)) {
     args <- variables$by
     args$model <- dots$model
-    dots$newdata <- do.call(marginaleffects::datagridcf, args)
+    args$grid_type <- "counterfactual"
+    dots$newdata <- do.call(marginaleffects::datagrid, args)
   }
 
   if (!is.null(variables$by) && identical(dots$newdata, "mean")) {
