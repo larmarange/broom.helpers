@@ -45,6 +45,8 @@
 <code><a href="../reference/tidy_marginal_means.html">tidy_marginal_means()</a></code> is now deprecated, following deprecation of <code><a href="https://marginaleffects.com/man/marginal_means.html" class="external-link">marginaleffects::marginal_means()</a></code>. Use instead <code><a href="../reference/tidy_marginal_predictions.html">tidy_marginal_predictions()</a></code> with the option <code>newdata = "marginalmeans"</code>.</li>
 </ul><p><strong>Fixes</strong></p>
 <ul><li>
+<code><a href="../reference/tidy_multgee.html">tidy_multgee()</a></code> has been fixed to properly identify the different <code>y.levels</code> (<a href="https://github.com/larmarange/broom.helpers/issues/260" class="external-link">#260</a> <a href="https://github.com/jackmwolf" class="external-link">@jackmwolf</a>)</li>
+<li>
 <code><a href="../reference/tidy_marginal_predictions.html">tidy_marginal_predictions()</a></code> has been updated to avoid the use of the deprecated function <code><a href="https://marginaleffects.com/man/datagridcf.html" class="external-link">marginaleffects::datagridcf()</a></code> (<a href="https://github.com/larmarange/broom.helpers/issues/256" class="external-link">#256</a>)</li>
 </ul></div>
     <div class="section level2">
