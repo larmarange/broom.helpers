@@ -60,7 +60,8 @@ mod <- glm(
 )
 mod |>
   tbl_regression(
-    exponentiate = TRUE
+    exponentiate = TRUE,
+    label = list(age = "Age in years")
   ) |>
   bold_labels()
 ```
@@ -175,7 +176,8 @@ mod |>
   tbl_regression(
     tidy_fun = tidy_marginal_predictions,
     newdata = "mean",
-    estimate_fun = scales::label_percent(accuracy = .1)
+    estimate_fun = scales::label_percent(accuracy = .1),
+    label = list(age = "Age in years")
   ) |>
   modify_column_hide("p.value") |>
   bold_labels()
@@ -189,7 +191,8 @@ mod |>
     tidy_fun = tidy_marginal_predictions,
     variables_list = "no_interaction",
     newdata = "mean",
-    estimate_fun = scales::label_percent(accuracy = .1)
+    estimate_fun = scales::label_percent(accuracy = .1),
+    label = list(age = "Age in years")
   ) |>
   modify_column_hide("p.value") |>
   bold_labels()
@@ -198,12 +201,14 @@ mod |>
 `{broom.helpers}` also include `plot_marginal_predictions()` to generate a list of plots to visualize all marginal predictions. Use `patchwork::wrap_plots()` to combine all plots together.
 
 ```{r}
-p <- plot_marginal_predictions(mod, newdata = "mean") |>
+p <- mod |> 
+  plot_marginal_predictions(newdata = "mean") |>
   patchwork::wrap_plots() &
   ggplot2::scale_y_continuous(
     labels = scales::label_percent(),
     limits = c(-0.2, 1)
   )
+p[[2]] <- p[[2]] + xlab("Age in years")
 p + patchwork::plot_annotation(
   title = "Marginal Predictions at the Mean"
 )
@@ -220,6 +225,7 @@ p <- mod |>
     labels = scales::label_percent(),
     limits = c(-0.2, 1)
   )
+p[[4]] <- p[[4]] + xlab("Age in years")
 p + patchwork::plot_annotation(
   title = "Marginal Predictions at the Mean"
 )
@@ -235,7 +241,8 @@ ggstats::ggcoef_model(
   vline = FALSE,
   show_p_values = FALSE,
   signif_stars = FALSE,
-  significance = NULL
+  significance = NULL,
+  variable_labels = c(age = "Age in years")
 )
 ```
 
@@ -286,7 +293,8 @@ mod |>
     tidy_fun = tidy_marginal_predictions,
     type = "response",
     variables_list = "no_interaction",
-    estimate_fun = scales::label_percent(accuracy = .1)
+    estimate_fun = scales::label_percent(accuracy = .1),
+    label = list(age = "Age in years")
   ) |>
   modify_column_hide("p.value") |>
   bold_labels()
@@ -297,7 +305,8 @@ mod |>
   tbl_regression(
     tidy_fun = tidy_marginal_predictions,
     type = "response",
-    estimate_fun = scales::label_percent(accuracy = .1)
+    estimate_fun = scales::label_percent(accuracy = .1),
+    label = list(age = "Age in years")
   ) |>
   modify_column_hide("p.value") |>
   bold_labels()
@@ -310,6 +319,7 @@ p <- plot_marginal_predictions(mod, type = "response") |>
     labels = scales::label_percent(),
     limits = c(-0.2, 1)
   )
+p[[2]] <- p[[2]] + xlab("Age in years")
 p + patchwork::plot_annotation(
   title = "Average Marginal Predictions"
 )
@@ -367,7 +377,8 @@ mod |>
     tidy_fun = tidy_marginal_predictions,
     newdata = "marginalmeans",
     variables_list = "no_interaction",
-    estimate_fun = scales::label_percent(accuracy = .1)
+    estimate_fun = scales::label_percent(accuracy = .1),
+    label = list(age = "Age in years")
   ) |>
   modify_column_hide("p.value") |>
   bold_labels()
@@ -385,7 +396,8 @@ mod |>
     tidy_fun = tidy_marginal_predictions,
     newdata = "median",
     variables_list = "no_interaction",
-    estimate_fun = scales::label_percent(accuracy = .1)
+    estimate_fun = scales::label_percent(accuracy = .1),
+    label = list(age = "Age in years")
   ) |>
   modify_column_hide("p.value") |>
   bold_labels()
@@ -399,7 +411,8 @@ The `{ggeffects}` package offers a `ggeffects::ggpredict()` function which gener
 mod |>
   tbl_regression(
     tidy_fun = tidy_ggpredict,
-    estimate_fun = scales::label_percent(accuracy = .1)
+    estimate_fun = scales::label_percent(accuracy = .1),
+    label = list(age = "Age in years")
   ) |>
   bold_labels()
 ```
@@ -491,7 +504,8 @@ A nicely formatted table can therefore be generated with `gtsummary::tbl_regress
 mod |>
   tbl_regression(
     tidy_fun = tidy_avg_comparisons,
-    estimate_fun = scales::label_percent(style_positive = "plus")
+    estimate_fun = scales::label_percent(style_positive = "plus"),
+    label = list(age = "Age in years")
   ) |>
   bold_labels()
 ```
@@ -499,7 +513,11 @@ mod |>
 Similarly, a forest plot could be produced with `ggstats::ggcoef_model()`.
 
 ```{r}
-ggstats::ggcoef_model(mod, tidy_fun = tidy_avg_comparisons) +
+ggstats::ggcoef_model(
+  mod,
+  tidy_fun = tidy_avg_comparisons,
+  variable_labels = c(age = "Age in years")
+) +
   ggplot2::scale_x_continuous(
     labels = scales::label_percent(style_positive = "plus")
   )
@@ -525,7 +543,8 @@ mod |>
   tbl_regression(
     tidy_fun = tidy_avg_comparisons,
     newdata = "mean",
-    estimate_fun = scales::label_percent(style_positive = "plus")
+    estimate_fun = scales::label_percent(style_positive = "plus"),
+    label = list(age = "Age in years")
   ) |>
   bold_labels()
 ```
@@ -536,7 +555,8 @@ For `ggstats::ggcoef_model()`, use `tidy_args` to pass `newdata = "mean"`.
 mod |>
   ggstats::ggcoef_model(
     tidy_fun = tidy_avg_comparisons,
-    tidy_args = list(newdata = "mean")
+    tidy_args = list(newdata = "mean"),
+    variable_labels = c(age = "Age in years")
   ) +
   ggplot2::scale_x_continuous(
     labels = scales::label_percent(style_positive = "plus")
@@ -552,7 +572,8 @@ mod |>
   tbl_regression(
     tidy_fun = tidy_avg_comparisons,
     newdata = "marginalmeans",
-    estimate_fun = scales::label_percent(style_positive = "plus")
+    estimate_fun = scales::label_percent(style_positive = "plus"),
+    label = list(age = "Age in years")
   ) |>
   bold_labels()
 ```
@@ -561,7 +582,8 @@ mod |>
 mod |>
   ggstats::ggcoef_model(
     tidy_fun = tidy_avg_comparisons,
-    tidy_args = list(newdata = "marginalmeans")
+    tidy_args = list(newdata = "marginalmeans"),
+    variable_labels = c(age = "Age in years")
   ) +
   ggplot2::scale_x_continuous(
     labels = scales::label_percent(style_positive = "plus")
@@ -600,13 +622,18 @@ The tidier `tidy_marginal_contrasts()` allows to compute directly several combin
 mod |>
   tbl_regression(
     tidy_fun = tidy_marginal_contrasts,
-    estimate_fun = scales::label_percent(style_positive = "plus")
+    estimate_fun = scales::label_percent(style_positive = "plus"),
+    label = list(age = "Age in years")
   ) |>
   bold_labels()
 ```
 
 ```{r}
-ggstats::ggcoef_model(mod, tidy_fun = tidy_marginal_contrasts)
+ggstats::ggcoef_model(
+  mod,
+  tidy_fun = tidy_marginal_contrasts,
+  variable_labels = c(age = "Age in years")
+)
 ```
 
 By default, when there is an interaction, contrasts are computed for the last variable of the interaction according to the different values of the first variables (if one of this variable is continuous, using Tukey's five numbers).
@@ -618,7 +645,8 @@ mod |>
   tbl_regression(
     tidy_fun = tidy_marginal_contrasts,
     variables_list = "cross",
-    estimate_fun = scales::label_percent(style_positive = "plus")
+    estimate_fun = scales::label_percent(style_positive = "plus"),
+    label = list(age = "Age in years")
   ) |>
   bold_labels()
 ```
@@ -630,7 +658,8 @@ mod |>
   tbl_regression(
     tidy_fun = tidy_marginal_contrasts,
     variables_list = "no_interaction",
-    estimate_fun = scales::label_percent(style_positive = "plus")
+    estimate_fun = scales::label_percent(style_positive = "plus"),
+    label = list(age = "Age in years")
   ) |>
   bold_labels()
 ```
@@ -639,7 +668,8 @@ mod |>
 ggstats::ggcoef_model(
   mod,
   tidy_fun = tidy_marginal_contrasts,
-  tidy_args = list(variables_list = "no_interaction")
+  tidy_args = list(variables_list = "no_interaction"),
+  variable_labels = c(age = "Age in years")
 )
 ```
 
@@ -669,7 +699,8 @@ Column names are not consistent with other tidiers used by `{broom.helpers}`. Us
 mod |>
   tbl_regression(
     tidy_fun = tidy_avg_slopes,
-    estimate_fun = scales::label_percent(style_positive = "plus")
+    estimate_fun = scales::label_percent(style_positive = "plus"),
+    label = list(age = "Age in years")
   ) |>
   bold_labels()
 ```
@@ -677,7 +708,8 @@ mod |>
 ```{r}
 mod |>
   ggstats::ggcoef_model(
-    tidy_fun = tidy_avg_slopes
+    tidy_fun = tidy_avg_slopes,
+    variable_labels = c(age = "Age in years")
   ) +
   ggplot2::scale_x_continuous(
     labels = scales::label_percent(style_positive = "plus")
@@ -719,7 +751,8 @@ mod |>
   tbl_regression(
     tidy_fun = tidy_avg_slopes,
     newdata = "mean",
-    estimate_fun = scales::label_percent(style_positive = "plus")
+    estimate_fun = scales::label_percent(style_positive = "plus"),
+    label = list(age = "Age in years")
   ) |>
   bold_labels()
 ```
@@ -728,7 +761,8 @@ mod |>
 mod |>
   ggstats::ggcoef_model(
     tidy_fun = tidy_avg_slopes,
-    tidy_args = list(newdata = "mean")
+    tidy_args = list(newdata = "mean"),
+    variable_labels = c(age = "Age in years")
   ) +
   ggplot2::scale_x_continuous(
     labels = scales::label_percent(style_positive = "plus")
@@ -744,7 +778,8 @@ mod |>
   tbl_regression(
     tidy_fun = tidy_avg_slopes,
     newdata = "marginalmeans",
-    estimate_fun = scales::label_percent(style_positive = "plus")
+    estimate_fun = scales::label_percent(style_positive = "plus"),
+    label = list(age = "Age in years")
   ) |>
   bold_labels()
 ```
@@ -753,7 +788,8 @@ mod |>
 mod |>
   ggstats::ggcoef_model(
     tidy_fun = tidy_avg_slopes,
-    tidy_args = list(newdata = "marginalmeans")
+    tidy_args = list(newdata = "marginalmeans"),
+    variable_labels = c(age = "Age in years")
   ) +
   ggplot2::scale_x_continuous(
     labels = scales::label_percent(style_positive = "plus")
