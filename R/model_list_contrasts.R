@@ -21,7 +21,7 @@
 #'   data = mtcars,
 #'   family = binomial,
 #'   contrasts = list(`factor(cyl)` = contr.sum)
-#' ) %>%
+#' ) |>
 #'   model_list_contrasts()
 model_list_contrasts <- function(model) {
   UseMethod("model_list_contrasts")
@@ -46,8 +46,8 @@ model_list_contrasts.default <- function(model) {
 
   for (i in seq_len(nrow(contrasts_list))) {
     n_levels <- length(xlevels[[contrasts_list$variable[i]]])
-    n_terms <- model_variables %>%
-      dplyr::filter(.data$variable == contrasts_list$variable[i]) %>%
+    n_terms <- model_variables |>
+      dplyr::filter(.data$variable == contrasts_list$variable[i]) |>
       nrow()
 
     if (n_levels == n_terms) {
@@ -99,10 +99,10 @@ model_list_contrasts.default <- function(model) {
       contrasts_list$contrasts[[i]] <- "custom"
     }
   }
-  contrasts_list %>%
+  contrasts_list |>
     dplyr::mutate(
       contrasts_type = dplyr::case_when(
-        .data$contrasts %>% stringr::str_starts("contr.treatment") ~ "treatment",
+        .data$contrasts |> stringr::str_starts("contr.treatment") ~ "treatment",
         .data$contrasts == "contr.SAS" ~ "treatment",
         .data$contrasts == "contr.sum" ~ "sum",
         .data$contrasts == "contr.helmert" ~ "helmert",

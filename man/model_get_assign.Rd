@@ -23,7 +23,7 @@ Return the assign attribute attached to the object returned by
 \code{\link[stats:model.matrix]{stats::model.matrix()}}.
 }
 \examples{
-lm(hp ~ mpg + factor(cyl), mtcars) \%>\%
+lm(hp ~ mpg + factor(cyl), mtcars) |>
   model_get_assign()
 }
 \seealso{

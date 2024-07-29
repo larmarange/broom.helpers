@@ -34,7 +34,7 @@ if (.assert_package("pscl", boolean = TRUE)) {
     data = pscl::bioChemists
   )
 
-  mod \%>\% tidy_zeroinfl(exponentiate = TRUE)
+  mod |> tidy_zeroinfl(exponentiate = TRUE)
 }
 \dontshow{\}) # examplesIf}
 }

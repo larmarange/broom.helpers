@@ -27,29 +27,29 @@
 #' @family model_helpers
 #' @examplesIf interactive()
 #' if (.assert_package("gtsummary", boolean = TRUE)) {
-#'   Titanic %>%
-#'     dplyr::as_tibble() %>%
-#'     dplyr::mutate(Survived = factor(Survived, c("No", "Yes"))) %>%
+#'   Titanic |>
+#'     dplyr::as_tibble() |>
+#'     dplyr::mutate(Survived = factor(Survived, c("No", "Yes"))) |>
 #'     glm(
 #'       Survived ~ Class + Age:Sex,
 #'       data = ., weights = .$n,
 #'       family = binomial
-#'     ) %>%
+#'     ) |>
 #'     model_list_variables()
 #'
-#'   iris %>%
+#'   iris |>
 #'     lm(
 #'       Sepal.Length ~ poly(Sepal.Width, 2) + Species,
 #'       data = .,
 #'       contrasts = list(Species = contr.sum)
-#'     ) %>%
+#'     ) |>
 #'     model_list_variables()
 #'
 #'   glm(
 #'     response ~ poly(age, 3) + stage + grade * trt,
 #'     na.omit(gtsummary::trial),
 #'     family = binomial,
-#'   ) %>%
+#'   ) |>
 #'     model_list_variables()
 #' }
 model_list_variables <- function(model, labels = NULL,
@@ -66,14 +66,14 @@ model_list_variables.default <- function(model, labels = NULL,
 
   if (!is.null(model_terms) && inherits(model_terms, "terms")) {
     variable_names <- attr(model_terms, "term.labels")
-    dataClasses <- purrr::map(model_frame, .MFclass2) %>% unlist()
+    dataClasses <- purrr::map(model_frame, .MFclass2) |> unlist()
 
     if (is.null(dataClasses)) {
       dataClasses <- attr(model_terms, "dataClasses")
     }
   } else {
-    dataClasses <- model_frame %>%
-      lapply(.MFclass2) %>%
+    dataClasses <- model_frame |>
+      lapply(.MFclass2) |>
       unlist()
     variable_names <- names(dataClasses)
   }
@@ -83,20 +83,20 @@ model_list_variables.default <- function(model, labels = NULL,
   }
 
   # update the list with all elements of dataClasses
-  variable_names <- names(dataClasses) %>%
-    c(variable_names) %>%
-    .clean_backticks() %>%
+  variable_names <- names(dataClasses) |>
+    c(variable_names) |>
+    .clean_backticks() |>
     unique()
 
   res <- tibble::tibble(
     variable = variable_names
-  ) %>%
-    .add_var_class(dataClasses) %>%
-    .add_label_attr(model) %>%
+  ) |>
+    .add_var_class(dataClasses) |>
+    .add_label_attr(model) |>
     # specific case of polynomial terms defined with poly()
     dplyr::mutate(
       variable = stringr::str_replace(.data$variable, "^poly\\((.*),(.*)\\)$", "\\1")
-    ) %>%
+    ) |>
     .compute_var_label(labels)
 
   if (only_variable) {
@@ -117,22 +117,22 @@ model_list_variables.lavaan <- function(model, labels = NULL,
                                         only_variable = FALSE, add_var_type = FALSE) {
   res <- tibble::tibble(
     variable = .clean_backticks(unique(model@ParTable$lhs))
-  ) %>%
+  ) |>
     dplyr::left_join(
       tibble::tibble(
         variable = .clean_backticks(model@Data@ov$name),
         var_class = model@Data@ov$type
       ),
       by = "variable"
-    ) %>%
+    ) |>
     dplyr::mutate(
       var_class = dplyr::if_else(
         .data$var_class == "ordered",
         "factor",
         .data$var_class
       )
-    ) %>%
-    .add_label_attr(model) %>%
+    ) |>
+    .add_label_attr(model) |>
     .compute_var_label(labels)
 
   if (only_variable) {
@@ -153,8 +153,8 @@ model_list_variables.logitr <- function(model, labels = NULL,
   res <- model_list_variables.default(model, labels, FALSE)
 
   if (!is.null(model$data$scalePar)) {
-    label_scalePar <- labels %>% purrr::pluck("scalePar")
-    res <- res %>%
+    label_scalePar <- labels |> purrr::pluck("scalePar")
+    res <- res |>
       dplyr::add_row(
         variable = "scalePar",
         var_class = "numeric",
@@ -186,7 +186,7 @@ model_list_variables.logitr <- function(model, labels = NULL,
 ## model_list_variables() helpers --------------------------
 
 .add_var_class <- function(x, dataClasses) {
-  x %>%
+  x |>
     dplyr::left_join(
       tibble::tibble(
         variable = names(dataClasses),
@@ -199,7 +199,7 @@ model_list_variables.logitr <- function(model, labels = NULL,
 .add_label_attr <- function(x, model) {
   labels <- unlist(labelled::var_label(model_get_model_frame(model)))
   if (length(labels) > 0) {
-    x %>%
+    x |>
       dplyr::left_join(
         dplyr::tibble(
           variable = names(labels),
@@ -208,7 +208,7 @@ model_list_variables.logitr <- function(model, labels = NULL,
         by = "variable"
       )
   } else {
-    x %>%
+    x |>
       dplyr::mutate(label_attr = NA)
   }
 }
@@ -246,7 +246,7 @@ model_list_variables.logitr <- function(model, labels = NULL,
   if (is.null(labels)) {
     x$var_custom_label <- NA_character_
   } else {
-    x <- x %>%
+    x <- x |>
       dplyr::left_join(
         dplyr::tibble(
           variable = names(labels),
@@ -255,7 +255,7 @@ model_list_variables.logitr <- function(model, labels = NULL,
         by = "variable"
       )
   }
-  x %>%
+  x |>
     dplyr::mutate(
       label_attr = as.character(.data$label_attr),
       var_label = dplyr::case_when(
@@ -263,15 +263,15 @@ model_list_variables.logitr <- function(model, labels = NULL,
         !is.na(.data$label_attr) ~ .data$label_attr,
         TRUE ~ .data$variable
       )
-    ) %>%
+    ) |>
     dplyr::select(-dplyr::all_of("var_custom_label"))
 }
 
 .add_var_type <- function(x, model) {
-  x <- x %>%
+  x <- x |>
     dplyr::left_join(
       model_get_nlevels(model),
       by = "variable"
     )
-  x %>% .compute_var_type()
+  x |> .compute_var_type()
 }

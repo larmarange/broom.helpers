@@ -11,8 +11,8 @@
 #' @family model_helpers
 #' @seealso [stats::model.frame()]
 #' @examples
-#' lm(hp ~ mpg + factor(cyl), mtcars) %>%
-#'   model_get_model_frame() %>%
+#' lm(hp ~ mpg + factor(cyl), mtcars) |>
+#'   model_get_model_frame() |>
 #'   head()
 model_get_model_frame <- function(model) {
   if (!is.null(attr(model, "model_frame")))

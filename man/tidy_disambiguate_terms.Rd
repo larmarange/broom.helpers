@@ -32,8 +32,8 @@ if (
     .assert_package("gtsummary", boolean = TRUE)
 ) {
   mod <- lme4::lmer(marker ~ stage + (1 | grade) + (death | response), gtsummary::trial)
-  mod \%>\%
-    tidy_and_attach() \%>\%
+  mod |>
+    tidy_and_attach() |>
     tidy_disambiguate_terms()
 }
 \dontshow{\}) # examplesIf}

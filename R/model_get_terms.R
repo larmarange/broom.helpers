@@ -8,7 +8,7 @@
 #' @family model_helpers
 #' @seealso [stats::terms()]
 #' @examples
-#' lm(hp ~ mpg + factor(cyl), mtcars) %>%
+#' lm(hp ~ mpg + factor(cyl), mtcars) |>
 #'   model_get_terms()
 model_get_terms <- function(model) {
   UseMethod("model_get_terms")
@@ -28,9 +28,9 @@ model_get_terms.default <- function(model) {
 #' @export
 #' @rdname model_get_terms
 model_get_terms.brmsfit <- function(model) {
-  model$formula %>%
-    brms::brmsterms(resp_rhs_all = FALSE) %>%
-    purrr::pluck("allvars") %>%
+  model$formula |>
+    brms::brmsterms(resp_rhs_all = FALSE) |>
+    purrr::pluck("allvars") |>
     stats::terms()
 }
 
@@ -41,7 +41,7 @@ model_get_terms.brmsfit <- function(model) {
 #' taking into account all components ("cond" and "zi"). For a more
 #' restricted terms object, please refer to `glmmTMB::terms.glmmTMB()`.
 model_get_terms.glmmTMB <- function(model) {
-  model$modelInfo$allForm$combForm %>% stats::terms()
+  model$modelInfo$allForm$combForm |> stats::terms()
 }
 
 #' @export
@@ -66,7 +66,7 @@ model_get_terms.betareg <- function(model) {
 #' @rdname model_get_model_matrix
 model_get_terms.cch <- function(model, ...) {
   stats::terms.formula(
-    model$call$formula %>% stats::formula(),
-    data = model %>% model_get_model_frame()
+    model$call$formula |> stats::formula(),
+    data = model |> model_get_model_frame()
   )
 }

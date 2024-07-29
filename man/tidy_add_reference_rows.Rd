@@ -50,20 +50,20 @@ rather than before. Similarly, it is better to apply
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 if (.assert_package("gtsummary", boolean = TRUE)) {
-  df <- Titanic \%>\%
-    dplyr::as_tibble() \%>\%
+  df <- Titanic |>
+    dplyr::as_tibble() |>
     dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
 
-  res <- df \%>\%
+  res <- df |>
     glm(
       Survived ~ Class + Age + Sex,
       data = ., weights = .$n, family = binomial,
       contrasts = list(Age = contr.sum, Class = "contr.SAS")
-    ) \%>\%
+    ) |>
     tidy_and_attach()
-  res \%>\% tidy_add_reference_rows()
-  res \%>\% tidy_add_reference_rows(no_reference_row = all_dichotomous())
-  res \%>\% tidy_add_reference_rows(no_reference_row = "Class")
+  res |> tidy_add_reference_rows()
+  res |> tidy_add_reference_rows(no_reference_row = all_dichotomous())
+  res |> tidy_add_reference_rows(no_reference_row = "Class")
 
   glm(
     response ~ stage + grade * trt,
@@ -74,8 +74,8 @@ if (.assert_package("gtsummary", boolean = TRUE)) {
       grade = contr.treatment(3, base = 2),
       trt = contr.treatment(2, base = 2)
     )
-  ) \%>\%
-    tidy_and_attach() \%>\%
+  ) |>
+    tidy_and_attach() |>
     tidy_add_reference_rows()
 }
 \dontshow{\}) # examplesIf}

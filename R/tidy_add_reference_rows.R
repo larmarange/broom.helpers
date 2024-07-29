@@ -30,20 +30,20 @@
 #' @family tidy_helpers
 #' @examplesIf interactive()
 #' if (.assert_package("gtsummary", boolean = TRUE)) {
-#'   df <- Titanic %>%
-#'     dplyr::as_tibble() %>%
+#'   df <- Titanic |>
+#'     dplyr::as_tibble() |>
 #'     dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
 #'
-#'   res <- df %>%
+#'   res <- df |>
 #'     glm(
 #'       Survived ~ Class + Age + Sex,
 #'       data = ., weights = .$n, family = binomial,
 #'       contrasts = list(Age = contr.sum, Class = "contr.SAS")
-#'     ) %>%
+#'     ) |>
 #'     tidy_and_attach()
-#'   res %>% tidy_add_reference_rows()
-#'   res %>% tidy_add_reference_rows(no_reference_row = all_dichotomous())
-#'   res %>% tidy_add_reference_rows(no_reference_row = "Class")
+#'   res |> tidy_add_reference_rows()
+#'   res |> tidy_add_reference_rows(no_reference_row = all_dichotomous())
+#'   res |> tidy_add_reference_rows(no_reference_row = "Class")
 #'
 #'   glm(
 #'     response ~ stage + grade * trt,
@@ -54,8 +54,8 @@
 #'       grade = contr.treatment(3, base = 2),
 #'       trt = contr.treatment(2, base = 2)
 #'     )
-#'   ) %>%
-#'     tidy_and_attach() %>%
+#'   ) |>
+#'     tidy_and_attach() |>
 #'     tidy_add_reference_rows()
 #' }
 tidy_add_reference_rows <- function(
@@ -73,11 +73,11 @@ tidy_add_reference_rows <- function(
 
   # adding reference rows is not meaningful for stats::aov
   if (inherits(model, "aov")) {
-    return(x %>% dplyr::mutate(reference_row = NA))
+    return(x |> dplyr::mutate(reference_row = NA))
   }
   # checking cases where adding reference rows is not meaningful
   if (isTRUE(.attributes$skip_add_reference_rows)) {
-    return(x %>% dplyr::mutate(reference_row = NA))
+    return(x |> dplyr::mutate(reference_row = NA))
   }
 
   if ("header_row" %in% names(x)) {
@@ -116,7 +116,7 @@ tidy_add_reference_rows <- function(
   }
 
   if (!"contrasts" %in% names(x)) {
-    x <- x %>% tidy_add_contrasts(model = model)
+    x <- x |> tidy_add_contrasts(model = model)
   }
 
   # obtain character vector of selected variables
@@ -129,7 +129,7 @@ tidy_add_reference_rows <- function(
   terms_levels <- model_list_terms_levels(model)
 
   if (!is.null(terms_levels)) {
-    terms_levels <- terms_levels %>%
+    terms_levels <- terms_levels |>
       # keep only terms corresponding to variable in x
       # (e.g. to exclude interaction only variables)
       dplyr::filter(
@@ -141,14 +141,14 @@ tidy_add_reference_rows <- function(
 
   if (is.null(terms_levels) || nrow(terms_levels) == 0) {
     return(
-      x %>%
-        dplyr::mutate(reference_row = NA) %>%
+      x |>
+        dplyr::mutate(reference_row = NA) |>
         tidy_attach_model(model)
     )
   }
 
-  terms_levels <- terms_levels %>%
-    dplyr::group_by(.data$variable) %>%
+  terms_levels <- terms_levels |>
+    dplyr::group_by(.data$variable) |>
     dplyr::mutate(rank = seq_len(dplyr::n()))
 
   has_var_label <- "var_label" %in% names(x)
@@ -156,7 +156,7 @@ tidy_add_reference_rows <- function(
     x$var_label <- NA_character_
   } # temporary populate it
 
-  x <- x %>%
+  x <- x |>
     dplyr::mutate(
       reference_row = dplyr::if_else(
         .data$variable %in% unique(terms_levels$variable),
@@ -183,13 +183,13 @@ tidy_add_reference_rows <- function(
     x$.group_by_var <- ""
   }
 
-  ref_rows <- terms_levels %>%
-    dplyr::filter(.data$reference) %>%
-    dplyr::mutate(reference_row = TRUE) %>%
+  ref_rows <- terms_levels |>
+    dplyr::filter(.data$reference) |>
+    dplyr::mutate(reference_row = TRUE) |>
     dplyr::select(dplyr::all_of(c("term", "variable", "label", "reference_row", "rank")))
 
   if (!"label" %in% names(x)) {
-    ref_rows <- ref_rows %>% dplyr::select(-all_of("label"))
+    ref_rows <- ref_rows |> dplyr::select(-all_of("label"))
   }
 
   # populate effect column for mixed models
@@ -198,8 +198,8 @@ tidy_add_reference_rows <- function(
     tmp$effect <- NA_character_
   }
 
-  var_summary <- tmp %>%
-    dplyr::group_by(.data$.group_by_var, .data$variable) %>%
+  var_summary <- tmp |>
+    dplyr::group_by(.data$.group_by_var, .data$variable) |>
     dplyr::summarise(
       var_class = dplyr::first(.data$var_class),
       var_type = dplyr::first(.data$var_type),
@@ -213,11 +213,11 @@ tidy_add_reference_rows <- function(
       .groups = "drop_last"
     )
 
-  ref_rows <- ref_rows %>%
+  ref_rows <- ref_rows |>
     dplyr::left_join(
       var_summary,
       by = "variable"
-    ) %>%
+    ) |>
     dplyr::mutate(
       rank = .data$var_min_rank - 1.25 + .data$rank,
       # if last, reduce by .5 to avoid overlap with next variable
@@ -226,26 +226,26 @@ tidy_add_reference_rows <- function(
         .data$rank - .5,
         .data$rank
       )
-    ) %>%
+    ) |>
     dplyr::select(-dplyr::all_of(c("var_min_rank", "var_max_rank")))
 
   if (!"effect" %in% names(x)) {
-    ref_rows <- ref_rows %>% dplyr::select(-dplyr::all_of("effect"))
+    ref_rows <- ref_rows |> dplyr::select(-dplyr::all_of("effect"))
   }
 
-  x <- x %>%
+  x <- x |>
     dplyr::bind_rows(ref_rows)
   if (!is.null(group)) {
     x[[group]] <- x$.group_by_var
   }
-  x <- x %>% dplyr::select(-dplyr::all_of(".group_by_var"))
+  x <- x |> dplyr::select(-dplyr::all_of(".group_by_var"))
 
   if (!has_var_label) {
-    x <- x %>% dplyr::select(-dplyr::all_of("var_label"))
+    x <- x |> dplyr::select(-dplyr::all_of("var_label"))
   }
 
-  x %>%
-    dplyr::arrange(.data$rank) %>%
-    dplyr::select(-dplyr::all_of("rank")) %>%
+  x |>
+    dplyr::arrange(.data$rank) |>
+    dplyr::select(-dplyr::all_of("rank")) |>
     tidy_attach_model(model = model, .attributes = .attributes)
 }

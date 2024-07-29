@@ -21,7 +21,7 @@ model objects that store the proper object internally (e.g. mice models).
 This function extracts that model object in those cases.
 }
 \examples{
-lm(hp ~ mpg + factor(cyl), mtcars) \%>\%
+lm(hp ~ mpg + factor(cyl), mtcars) |>
   model_get_model()
 }
 \seealso{

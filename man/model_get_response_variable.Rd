@@ -16,7 +16,7 @@ model_get_response_variable(model)
 Get the name of the response variable
 }
 \examples{
-lm(hp ~ mpg + factor(cyl) + disp:hp, mtcars) \%>\%
+lm(hp ~ mpg + factor(cyl) + disp:hp, mtcars) |>
   model_get_response_variable()
 
 mod <- glm(
@@ -24,15 +24,15 @@ mod <- glm(
   gtsummary::trial,
   family = binomial
 )
-mod \%>\% model_get_response_variable()
+mod |> model_get_response_variable()
 
 mod <- glm(
   Survived ~ Class * Age + Sex,
-  data = Titanic \%>\% as.data.frame(),
+  data = Titanic |> as.data.frame(),
   weights = Freq,
   family = binomial
 )
-mod \%>\% model_get_response_variable()
+mod |> model_get_response_variable()
 }
 \seealso{
 Other model_helpers: 

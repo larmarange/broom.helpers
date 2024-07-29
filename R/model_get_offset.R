@@ -11,7 +11,7 @@
 #'   gtsummary::trial,
 #'   family = poisson
 #' )
-#' mod %>% model_get_offset()
+#' mod |> model_get_offset()
 model_get_offset <- function(model) {
   UseMethod("model_get_offset")
 }
@@ -20,8 +20,8 @@ model_get_offset <- function(model) {
 #' @rdname model_get_offset
 model_get_offset.default <- function(model) {
   tryCatch(
-    model %>%
-      model_get_model_frame() %>%
+    model |>
+      model_get_model_frame() |>
       stats::model.offset(),
     error = function(e) {
       NULL # nocov

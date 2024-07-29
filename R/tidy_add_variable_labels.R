@@ -21,17 +21,17 @@
 #' @export
 #' @family tidy_helpers
 #' @examples
-#' df <- Titanic %>%
-#'   dplyr::as_tibble() %>%
-#'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes"))) %>%
+#' df <- Titanic |>
+#'   dplyr::as_tibble() |>
+#'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes"))) |>
 #'   labelled::set_variable_labels(
 #'     Class = "Passenger's class",
 #'     Sex = "Sex"
 #'   )
 #'
-#' df %>%
-#'   glm(Survived ~ Class * Age * Sex, data = ., weights = .$n, family = binomial) %>%
-#'   tidy_and_attach() %>%
+#' df |>
+#'   glm(Survived ~ Class * Age * Sex, data = ., weights = .$n, family = binomial) |>
+#'   tidy_and_attach() |>
 #'   tidy_add_variable_labels(
 #'     labels = list(
 #'       "(Intercept)" = "Custom intercept",
@@ -62,11 +62,11 @@ tidy_add_variable_labels <- function(x,
   .attributes <- .save_attributes(x)
 
   if ("var_label" %in% names(x)) {
-    x <- x %>% dplyr::select(-dplyr::all_of("var_label"))
+    x <- x |> dplyr::select(-dplyr::all_of("var_label"))
   }
 
   if (!"variable" %in% names(x) || !"var_type" %in% names(x)) {
-    x <- x %>% tidy_identify_variables(model = model)
+    x <- x |> tidy_identify_variables(model = model)
   }
 
   labels <- .formula_list_to_named_list(labels, var_info = x, arg_name = "labels")
@@ -79,16 +79,16 @@ tidy_add_variable_labels <- function(x,
   names(var_labels) <- var_labels
 
   # add the list of variables from x
-  additional_labels <- x$variable[!is.na(x$variable)] %>% unique()
+  additional_labels <- x$variable[!is.na(x$variable)] |> unique()
   names(additional_labels) <- additional_labels
-  var_labels <- var_labels %>%
+  var_labels <- var_labels |>
     .update_vector(additional_labels)
 
   # add the list of variables from model_list_variables
   variable_list <- model_list_variables(model, labels = labels)
   additional_labels <- variable_list$var_label
   names(additional_labels) <- variable_list$variable
-  var_labels <- var_labels %>%
+  var_labels <- var_labels |>
     .update_vector(additional_labels)
 
   # check if all elements of labels are in x
@@ -101,7 +101,7 @@ tidy_add_variable_labels <- function(x,
     cli::cli_abort("Incorrect call with `labels=`. Quitting execution.", call = NULL)
   }
 
-  var_labels <- var_labels %>%
+  var_labels <- var_labels |>
     .update_vector(labels)
 
   # save custom labels
@@ -113,21 +113,21 @@ tidy_add_variable_labels <- function(x,
   interaction_terms <- setdiff(interaction_terms, names(labels))
   names(interaction_terms) <- interaction_terms
   # compute labels for interaction terms
-  interaction_terms <- interaction_terms %>%
-    strsplit(":") %>%
+  interaction_terms <- interaction_terms |>
+    strsplit(":") |>
     lapply(function(x) {
       paste(var_labels[x], collapse = interaction_sep)
-    }) %>%
+    }) |>
     unlist()
-  var_labels <- var_labels %>% .update_vector(interaction_terms)
+  var_labels <- var_labels |> .update_vector(interaction_terms)
 
-  x %>%
+  x |>
     dplyr::left_join(
       tibble::tibble(
         variable = names(var_labels),
         var_label = var_labels
       ),
       by = "variable"
-    ) %>%
+    ) |>
     tidy_attach_model(model = model, .attributes = .attributes)
 }

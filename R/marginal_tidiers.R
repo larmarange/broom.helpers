@@ -22,9 +22,9 @@
 #' @seealso `margins::margins()`
 #' @export
 #' @examplesIf interactive()
-#' df <- Titanic %>%
-#'   dplyr::as_tibble() %>%
-#'   tidyr::uncount(n) %>%
+#' df <- Titanic |>
+#'   dplyr::as_tibble() |>
+#'   tidyr::uncount(n) |>
 #'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
 #' mod <- glm(
 #'   Survived ~ Class + Age + Sex,
@@ -79,9 +79,9 @@ tidy_margins <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 #' @seealso `effects::allEffects()`
 #' @export
 #' @examplesIf interactive()
-#' df <- Titanic %>%
-#'   dplyr::as_tibble() %>%
-#'   tidyr::uncount(n) %>%
+#' df <- Titanic |>
+#'   dplyr::as_tibble() |>
+#'   tidyr::uncount(n) |>
 #'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
 #' mod <- glm(
 #'   Survived ~ Class + Age + Sex,
@@ -112,11 +112,11 @@ tidy_all_effects <- function(x, conf.int = TRUE, conf.level = .95, ...) {
     rownames(x) <- NULL
     x
   }
-  res <- x %>%
-    effects::allEffects(se = conf.int, level = conf.level, ...) %>%
-    as.data.frame() %>%
-    purrr::map(.clean) %>%
-    dplyr::bind_rows(.id = "variable") %>%
+  res <- x |>
+    effects::allEffects(se = conf.int, level = conf.level, ...) |>
+    as.data.frame() |>
+    purrr::map(.clean) |>
+    dplyr::bind_rows(.id = "variable") |>
     dplyr::relocate("variable", "term")
   attr(res, "coefficients_type") <- "marginal_predictions_at_mean"
   attr(res, "skip_add_reference_rows") <- TRUE
@@ -125,10 +125,10 @@ tidy_all_effects <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 }
 
 tidy_all_effects_effpoly <- function(x, conf.int = TRUE, conf.level = .95, ...) {
-  res <- x %>%
-    effects::allEffects(se = conf.int, level = conf.level, ...) %>%
-    purrr::map(effpoly_to_df) %>%
-    dplyr::bind_rows(.id = "variable") %>%
+  res <- x |>
+    effects::allEffects(se = conf.int, level = conf.level, ...) |>
+    purrr::map(effpoly_to_df) |>
+    dplyr::bind_rows(.id = "variable") |>
     dplyr::relocate("y.level", "variable", "term")
   attr(res, "coefficients_type") <- "marginal_predictions_at_mean"
   attr(res, "skip_add_reference_rows") <- TRUE
@@ -151,9 +151,9 @@ effpoly_to_df <- function(x) {
 
   result <- rep.int(list(x$x), length(x$y.levels))
   names(result) <- x$y.levels
-  result <- result %>% dplyr::bind_rows(.id = "y.level")
+  result <- result |> dplyr::bind_rows(.id = "y.level")
   # merge columns if interaction
-  result <- result %>% tidyr::unite("term", 2:ncol(result), sep = ":")
+  result <- result |> tidyr::unite("term", 2:ncol(result), sep = ":")
   result$estimate <- as.vector(x$prob)
   result$std.error <- as.vector(x$se.prob)
 
@@ -190,9 +190,9 @@ effpoly_to_df <- function(x) {
 #' @seealso `ggeffects::ggpredict()`
 #' @export
 #' @examplesIf interactive()
-#' df <- Titanic %>%
-#'   dplyr::as_tibble() %>%
-#'   tidyr::uncount(n) %>%
+#' df <- Titanic |>
+#'   dplyr::as_tibble() |>
+#'   tidyr::uncount(n) |>
 #'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
 #' mod <- glm(
 #'   Survived ~ Class + Age + Sex,
@@ -209,24 +209,24 @@ tidy_ggpredict <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   }
 
   if (isFALSE(conf.int)) conf.level <- NA
-  res <- x %>%
-    ggeffects::ggpredict(ci.lvl = conf.level) %>% # add ...
+  res <- x |>
+    ggeffects::ggpredict(ci_level = conf.level) |> # add ...
     purrr::map(
-      ~ .x %>%
-        dplyr::as_tibble() %>%
+      ~ .x |>
+        dplyr::as_tibble() |>
         dplyr::mutate(x = as.character(.data$x))
-    ) %>%
-    dplyr::bind_rows() %>%
+    ) |>
+    dplyr::bind_rows() |>
     dplyr::rename(
       variable = "group",
       term = "x",
       estimate = "predicted"
-    ) %>%
+    ) |>
     dplyr::relocate("variable", "term")
   # multinomial models
   if ("response.level" %in% names(res)) {
-    res <- res %>%
-      dplyr::rename(y.level = "response.level") %>%
+    res <- res |>
+      dplyr::rename(y.level = "response.level") |>
       dplyr::relocate("y.level")
   }
   attr(res, "coefficients_type") <- "marginal_predictions"
@@ -262,9 +262,9 @@ tidy_ggpredict <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 #' @examplesIf interactive()
 #' # Average Marginal Effects (AME)
 #'
-#' df <- Titanic %>%
-#'   dplyr::as_tibble() %>%
-#'   tidyr::uncount(n) %>%
+#' df <- Titanic |>
+#'   dplyr::as_tibble() |>
+#'   tidyr::uncount(n) |>
 #'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
 #' mod <- glm(
 #'   Survived ~ Class + Age + Sex,
@@ -290,21 +290,21 @@ tidy_avg_slopes <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
   dots$conf_level <- conf.level
   dots$model <- x
 
-  res <- do.call(marginaleffects::avg_slopes, dots) %>%
+  res <- do.call(marginaleffects::avg_slopes, dots) |>
     dplyr::rename(variable = "term")
   if ("contrast" %in% names(res)) {
-    res <- res %>% dplyr::rename(term = "contrast")
+    res <- res |> dplyr::rename(term = "contrast")
   } else {
-    res <- res %>% dplyr::mutate(term = .data$variable)
+    res <- res |> dplyr::mutate(term = .data$variable)
   }
 
-  res <- res %>%
+  res <- res |>
     dplyr::relocate("variable", "term")
 
   # multinomial models
   if ("group" %in% names(res)) {
-    res <- res %>%
-      dplyr::rename(y.level = "group") %>%
+    res <- res |>
+      dplyr::rename(y.level = "group") |>
       dplyr::relocate("y.level")
   }
 
@@ -315,7 +315,7 @@ tidy_avg_slopes <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
     TRUE ~ "marginal_effects"
   )
   attr(res, "skip_add_reference_rows") <- TRUE
-  res %>% dplyr::as_tibble()
+  res |> dplyr::as_tibble()
 }
 
 #' Marginal Contrasts with `marginaleffects::avg_comparisons()`
@@ -348,9 +348,9 @@ tidy_avg_slopes <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 #' @examplesIf interactive()
 #' # Average Marginal Contrasts
 #'
-#' df <- Titanic %>%
-#'   dplyr::as_tibble() %>%
-#'   tidyr::uncount(n) %>%
+#' df <- Titanic |>
+#'   dplyr::as_tibble() |>
+#'   tidyr::uncount(n) |>
 #'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
 #' mod <- glm(
 #'   Survived ~ Class + Age + Sex,
@@ -382,21 +382,21 @@ tidy_avg_comparisons <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
   dots$conf_level <- conf.level
   dots$model <- x
 
-  res <- do.call(marginaleffects::avg_comparisons, dots) %>%
+  res <- do.call(marginaleffects::avg_comparisons, dots) |>
     dplyr::rename(variable = "term")
   if ("contrast" %in% names(res)) {
-    res <- res %>% dplyr::rename(term = "contrast")
+    res <- res |> dplyr::rename(term = "contrast")
   } else {
-    res <- res %>% dplyr::mutate(term = .data$variable)
+    res <- res |> dplyr::mutate(term = .data$variable)
   }
 
-  res <- res %>%
+  res <- res |>
     dplyr::relocate("variable", "term")
 
   # multinomial models
   if ("group" %in% names(res)) {
-    res <- res %>%
-      dplyr::rename(y.level = "group") %>%
+    res <- res |>
+      dplyr::rename(y.level = "group") |>
       dplyr::relocate("y.level")
   }
 
@@ -407,7 +407,7 @@ tidy_avg_comparisons <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
     TRUE ~ "marginal_contrasts"
   )
   attr(res, "skip_add_reference_rows") <- TRUE
-  res %>% dplyr::as_tibble()
+  res |> dplyr::as_tibble()
 }
 
 #' Marginal Means with `marginaleffects::marginal_means()`
@@ -440,9 +440,9 @@ tidy_avg_comparisons <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 #' @examplesIf interactive()
 #' # Average Marginal Means
 #'
-#' df <- Titanic %>%
-#'   dplyr::as_tibble() %>%
-#'   tidyr::uncount(n) %>%
+#' df <- Titanic |>
+#'   dplyr::as_tibble() |>
+#'   tidyr::uncount(n) |>
 #'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
 #' mod <- glm(
 #'   Survived ~ Class + Age + Sex,
@@ -471,23 +471,23 @@ tidy_marginal_means <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
   dots$conf_level <- conf.level
   dots$model <- x
 
-  res <- do.call(marginaleffects::marginal_means, dots) %>%
+  res <- do.call(marginaleffects::marginal_means, dots) |>
     dplyr::rename(
       variable = "term",
       term = "value"
-    ) %>%
+    ) |>
     dplyr::mutate(term = as.character(.data$term))
 
   # multinomial models
   if ("group" %in% names(res)) {
-    res <- res %>%
-      dplyr::rename(y.level = "group") %>%
+    res <- res |>
+      dplyr::rename(y.level = "group") |>
       dplyr::relocate("y.level")
   }
 
   attr(res, "coefficients_type") <- "marginal_means"
   attr(res, "skip_add_reference_rows") <- TRUE
-  res %>% dplyr::as_tibble()
+  res |> dplyr::as_tibble()
 }
 
 #' Marginal Predictions with `marginaleffects::avg_predictions()`
@@ -558,9 +558,9 @@ tidy_marginal_means <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 #' @export
 #' @examplesIf interactive()
 #' # Average Marginal Predictions
-#' df <- Titanic %>%
-#'   dplyr::as_tibble() %>%
-#'   tidyr::uncount(n) %>%
+#' df <- Titanic |>
+#'   dplyr::as_tibble() |>
+#'   tidyr::uncount(n) |>
 #'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
 #' mod <- glm(
 #'   Survived ~ Class + Age + Sex,
@@ -569,8 +569,8 @@ tidy_marginal_means <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 #' tidy_marginal_predictions(mod)
 #' tidy_plus_plus(mod, tidy_fun = tidy_marginal_predictions)
 #' if (require("patchwork")) {
-#'   plot_marginal_predictions(mod) %>% patchwork::wrap_plots()
-#'   plot_marginal_predictions(mod) %>%
+#'   plot_marginal_predictions(mod) |> patchwork::wrap_plots()
+#'   plot_marginal_predictions(mod) |>
 #'     patchwork::wrap_plots() &
 #'     ggplot2::scale_y_continuous(limits = c(0, 1), label = scales::percent)
 #' }
@@ -578,7 +578,7 @@ tidy_marginal_means <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 #' mod2 <- lm(Petal.Length ~ poly(Petal.Width, 2) + Species, data = iris)
 #' tidy_marginal_predictions(mod2)
 #' if (require("patchwork")) {
-#'   plot_marginal_predictions(mod2) %>% patchwork::wrap_plots()
+#'   plot_marginal_predictions(mod2) |> patchwork::wrap_plots()
 #' }
 #' tidy_marginal_predictions(
 #'   mod2,
@@ -604,9 +604,9 @@ tidy_marginal_means <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 #' tidy_marginal_predictions(mod3)
 #' tidy_marginal_predictions(mod3, "no_interaction")
 #' if (require("patchwork")) {
-#'   plot_marginal_predictions(mod3) %>%
+#'   plot_marginal_predictions(mod3) |>
 #'     patchwork::wrap_plots()
-#'   plot_marginal_predictions(mod3, "no_interaction") %>%
+#'   plot_marginal_predictions(mod3, "no_interaction") |>
 #'     patchwork::wrap_plots()
 #' }
 #' tidy_marginal_predictions(
@@ -620,7 +620,7 @@ tidy_marginal_means <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 #' # Marginal Predictions at the Mean
 #' tidy_marginal_predictions(mod, newdata = "mean")
 #' if (require("patchwork")) {
-#'   plot_marginal_predictions(mod, newdata = "mean") %>%
+#'   plot_marginal_predictions(mod, newdata = "mean") |>
 #'     patchwork::wrap_plots()
 #' }
 tidy_marginal_predictions <- function(x, variables_list = "auto",
@@ -668,15 +668,15 @@ tidy_marginal_predictions <- function(x, variables_list = "auto",
     dots$by <- c(dots$by, "group")
   }
 
-  res <- do.call(marginaleffects::avg_predictions, dots) %>%
-    dplyr::arrange(dplyr::pick(dplyr::any_of(c(names(variables)))), "group") %>%
-    dplyr::mutate(variable = paste(names(variables), collapse = ":")) %>%
-    tidyr::unite(col = "term", sep = " * ", dplyr::all_of(names(variables))) %>%
+  res <- do.call(marginaleffects::avg_predictions, dots) |>
+    dplyr::arrange(dplyr::pick(dplyr::any_of(c(names(variables)))), "group") |>
+    dplyr::mutate(variable = paste(names(variables), collapse = ":")) |>
+    tidyr::unite(col = "term", sep = " * ", dplyr::all_of(names(variables))) |>
     dplyr::relocate("variable", "term")
 
   if ("group" %in% names(res)) {
-    res <- res %>%
-      dplyr::rename(y.level = "group") %>%
+    res <- res |>
+      dplyr::rename(y.level = "group") |>
       dplyr::relocate("y.level")
   }
 
@@ -693,7 +693,7 @@ tidy_marginal_predictions <- function(x, variables_list = "auto",
 variables_to_predict <- function(model, interactions = TRUE,
                                  categorical = unique,
                                  continuous = stats::fivenum) {
-  variables <- model %>%
+  variables <- model |>
     model_list_variables(add_var_type = TRUE)
 
   if (interactions) {
@@ -702,7 +702,7 @@ variables_to_predict <- function(model, interactions = TRUE,
     keep <- variables[variables$var_type != "interaction", ]$variable
   }
 
-  response_variable <- model %>% model_get_response_variable()
+  response_variable <- model |> model_get_response_variable()
   if (!is.null(response_variable)) {
     keep <- keep[keep != response_variable]
   }
@@ -712,11 +712,11 @@ variables_to_predict <- function(model, interactions = TRUE,
     dichotomous = categorical,
     continuous = continuous
   )
-  variables <- variables %>%
+  variables <- variables |>
     tibble::column_to_rownames("variable")
 
   one_element <- function(v) {
-    v <- strsplit(v, ":") %>% unlist()
+    v <- strsplit(v, ":") |> unlist()
     one <- variables[v, "var_type"]
     one <- ret[one]
     names(one) <- v
@@ -737,11 +737,11 @@ plot_marginal_predictions <- function(x, variables_list = "auto",
   dots$model <- x
 
   if (is.character(variables_list) && variables_list == "auto") {
-    variables_list <- variables_to_predict(x, interactions = TRUE) %>%
+    variables_list <- variables_to_predict(x, interactions = TRUE) |>
       purrr::map(rev)
   }
   if (is.character(variables_list) && variables_list == "no_interaction") {
-    variables_list <- variables_to_predict(x, interactions = FALSE) %>%
+    variables_list <- variables_to_predict(x, interactions = FALSE) |>
       purrr::map(rev)
   }
   if (!is.list(variables_list)) {
@@ -762,14 +762,14 @@ plot_marginal_predictions <- function(x, variables_list = "auto",
   multinom <- inherits(dots$model, "multinom") | inherits(dots$model, "polr") |
     inherits(dots$model, "clm") | inherits(dots$model, "clmm")
 
-  list_variables <- dots$model %>% model_list_variables(add_var_type = TRUE)
+  list_variables <- dots$model |> model_list_variables(add_var_type = TRUE)
   x_variable <- names(variables[1])
-  x_type <- list_variables %>%
-    dplyr::filter(.data$variable == x_variable) %>%
+  x_type <- list_variables |>
+    dplyr::filter(.data$variable == x_variable) |>
     dplyr::pull("var_type")
   if (x_type == "dichotomous") x_type <- "categorical"
-  x_label <- list_variables %>%
-    dplyr::filter(.data$variable == x_variable) %>%
+  x_label <- list_variables |>
+    dplyr::filter(.data$variable == x_variable) |>
     dplyr::pull("var_label")
 
   if (is.character(variables[[1]]) && variables[[1]] == "fivenum") {
@@ -796,8 +796,8 @@ plot_marginal_predictions <- function(x, variables_list = "auto",
   if (length(variables) >= 2) {
     colour_variable <- names(variables[2])
     d[[colour_variable]] <- factor(d[[colour_variable]])
-    colour_label <- list_variables %>%
-      dplyr::filter(.data$variable == colour_variable) %>%
+    colour_label <- list_variables |>
+      dplyr::filter(.data$variable == colour_variable) |>
       dplyr::pull("var_label")
     mapping$colour <- ggplot2::aes(colour = .data[[colour_variable]])$colour
     if (x_type == "continuous") {
@@ -917,9 +917,9 @@ plot_marginal_predictions <- function(x, variables_list = "auto",
 #' @export
 #' @examplesIf interactive()
 #' # Average Marginal Contrasts
-#' df <- Titanic %>%
-#'   dplyr::as_tibble() %>%
-#'   tidyr::uncount(n) %>%
+#' df <- Titanic |>
+#'   dplyr::as_tibble() |>
+#'   tidyr::uncount(n) |>
 #'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
 #' mod <- glm(
 #'   Survived ~ Class + Age + Sex,
@@ -1049,15 +1049,15 @@ tidy_marginal_contrasts <- function(x, variables_list = "auto",
     dots$newdata <- do.call(marginaleffects::datagrid, args)
   }
 
-  res <- do.call(marginaleffects::avg_comparisons, dots) %>%
+  res <- do.call(marginaleffects::avg_comparisons, dots) |>
     dplyr::select(-dplyr::any_of("term"))
   if (is.null(variables$by)) {
-    res <- res %>%
+    res <- res |>
       dplyr::mutate(
         variable = paste(names(variables$variables), collapse = ":")
       )
   } else {
-    res <- res %>%
+    res <- res |>
       dplyr::mutate(
         variable = paste(
           paste(names(variables$by), collapse = ":"),
@@ -1067,18 +1067,18 @@ tidy_marginal_contrasts <- function(x, variables_list = "auto",
       )
   }
 
-  res <- res %>%
+  res <- res |>
     tidyr::unite(
       col = "term",
       sep = " * ",
       dplyr::all_of(names(variables$by)),
       dplyr::starts_with("contrast")
-    ) %>%
+    ) |>
     dplyr::relocate("variable", "term")
 
   if ("group" %in% names(res)) {
-    res <- res %>%
-      dplyr::rename(y.level = "group") %>%
+    res <- res |>
+      dplyr::rename(y.level = "group") |>
       dplyr::relocate("y.level")
   }
 
@@ -1104,7 +1104,7 @@ variables_to_contrast <- function(model,
                                   var_continuous = 1,
                                   by_categorical = unique,
                                   by_continuous = stats::fivenum) {
-  variables <- model %>%
+  variables <- model |>
     model_list_variables(add_var_type = TRUE)
 
   if (interactions) {
@@ -1113,7 +1113,7 @@ variables_to_contrast <- function(model,
     keep <- variables[variables$var_type != "interaction", ]$variable
   }
 
-  response_variable <- model %>% model_get_response_variable()
+  response_variable <- model |> model_get_response_variable()
   if (!is.null(response_variable)) {
     keep <- keep[keep != response_variable]
   }
@@ -1128,11 +1128,11 @@ variables_to_contrast <- function(model,
     dichotomous = by_categorical,
     continuous = by_continuous
   )
-  variables <- variables %>%
+  variables <- variables |>
     tibble::column_to_rownames("variable")
 
   one_element <- function(v) {
-    v <- strsplit(v, ":") %>% unlist()
+    v <- strsplit(v, ":") |> unlist()
     if (length(v) == 1 || isTRUE(cross)) {
       one_variables <- variables[v, "var_type"]
       one_variables <- var_ret[one_variables]

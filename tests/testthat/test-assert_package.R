@@ -27,7 +27,7 @@ test_that(".assert_package() works", {
   )
 
   expect_true(
-    df_deps %>% inherits("data.frame")
+    df_deps |> inherits("data.frame")
   )
 
   expect_equal(

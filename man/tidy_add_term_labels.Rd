@@ -56,21 +56,21 @@ including interaction terms.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-df <- Titanic \%>\%
-  dplyr::as_tibble() \%>\%
-  dplyr::mutate(Survived = factor(Survived, c("No", "Yes"))) \%>\%
+df <- Titanic |>
+  dplyr::as_tibble() |>
+  dplyr::mutate(Survived = factor(Survived, c("No", "Yes"))) |>
   labelled::set_variable_labels(
     Class = "Passenger's class",
     Sex = "Sex"
   )
 
-mod <- df \%>\%
+mod <- df |>
   glm(Survived ~ Class * Age * Sex, data = ., weights = .$n, family = binomial)
-mod \%>\%
-  tidy_and_attach() \%>\%
+mod |>
+  tidy_and_attach() |>
   tidy_add_term_labels()
-mod \%>\%
-  tidy_and_attach() \%>\%
+mod |>
+  tidy_and_attach() |>
   tidy_add_term_labels(
     interaction_sep = " x ",
     categorical_terms_pattern = "{level} / {reference_level}"

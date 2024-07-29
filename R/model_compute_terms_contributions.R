@@ -14,10 +14,10 @@
 #' @family model_helpers
 #' @examplesIf interactive()
 #' mod <- lm(Sepal.Length ~ Sepal.Width, iris)
-#' mod %>% model_compute_terms_contributions()
+#' mod |> model_compute_terms_contributions()
 #'
 #' mod <- lm(hp ~ mpg + factor(cyl) + disp:hp, mtcars)
-#' mod %>% model_compute_terms_contributions()
+#' mod |> model_compute_terms_contributions()
 #'
 #' mod <- glm(
 #'   response ~ stage * grade + trt,
@@ -29,7 +29,7 @@
 #'     trt = "contr.SAS"
 #'   )
 #' )
-#' mod %>% model_compute_terms_contributions()
+#' mod |> model_compute_terms_contributions()
 #'
 #' mod <- glm(
 #'   response ~ stage * trt,
@@ -37,23 +37,23 @@
 #'   family = binomial,
 #'   contrasts = list(stage = contr.poly)
 #' )
-#' mod %>% model_compute_terms_contributions()
+#' mod |> model_compute_terms_contributions()
 #'
 #' mod <- glm(
 #'   Survived ~ Class * Age + Sex,
-#'   data = Titanic %>% as.data.frame(),
+#'   data = Titanic |> as.data.frame(),
 #'   weights = Freq, family = binomial
 #' )
-#' mod %>% model_compute_terms_contributions()
+#' mod |> model_compute_terms_contributions()
 #'
-#' d <- dplyr::as_tibble(Titanic) %>%
-#'   dplyr::group_by(Class, Sex, Age) %>%
+#' d <- dplyr::as_tibble(Titanic) |>
+#'   dplyr::group_by(Class, Sex, Age) |>
 #'   dplyr::summarise(
 #'     n_survived = sum(n * (Survived == "Yes")),
 #'     n_dead = sum(n * (Survived == "No"))
 #'   )
 #' mod <- glm(cbind(n_survived, n_dead) ~ Class * Age + Sex, data = d, family = binomial)
-#' mod %>% model_compute_terms_contributions()
+#' mod |> model_compute_terms_contributions()
 model_compute_terms_contributions <- function(model) {
   UseMethod("model_compute_terms_contributions")
 }
@@ -61,14 +61,14 @@ model_compute_terms_contributions <- function(model) {
 #' @export
 #' @rdname model_compute_terms_contributions
 model_compute_terms_contributions.default <- function(model) {
-  contr <- model %>% model_get_contrasts()
+  contr <- model |> model_get_contrasts()
 
   # check poly contrasts
   # we change the contrasts arguments to force positive values
   if (!is.null(contr)) {
-    list.contr.poly <- model %>%
-      model_list_contrasts() %>%
-      dplyr::filter(.data$contrasts == "contr.poly") %>%
+    list.contr.poly <- model |>
+      model_list_contrasts() |>
+      dplyr::filter(.data$contrasts == "contr.poly") |>
       purrr::pluck("variable")
     for (v in list.contr.poly) {
       contr[[v]] <- contr.poly.abs
@@ -83,14 +83,14 @@ model_compute_terms_contributions.default <- function(model) {
       } # stop
 
       # continuous variables converted to 1 to force positive values
-      d <- model %>% purrr::pluck("data")
-      if (is.null(d)) d <- model %>% model_get_model_frame()
+      d <- model |> purrr::pluck("data")
+      if (is.null(d)) d <- model |> model_get_model_frame()
 
       if (is.null(d)) {
         return(NULL)
       } # stop
 
-      d <- d %>%
+      d <- d |>
         dplyr::mutate(
           dplyr::across(
             where(~ is.numeric(.x) & (
@@ -121,24 +121,24 @@ model_compute_terms_contributions.default <- function(model) {
 }
 
 contr.poly.abs <- function(...) {
-  stats::contr.poly(...) %>% abs()
+  stats::contr.poly(...) |> abs()
 }
 
 .add_ref_terms_to_tcm <- function(model, tcm) {
   # adding reference terms
   # for treatment and sum contrasts
-  tl <- model %>%
+  tl <- model |>
     model_list_terms_levels()
   for (v in unique(tl$variable)) {
-    ct <- tl %>%
-      dplyr::filter(.data$variable == v) %>%
-      purrr::chuck("contrasts_type") %>%
+    ct <- tl |>
+      dplyr::filter(.data$variable == v) |>
+      purrr::chuck("contrasts_type") |>
       dplyr::first()
-    ref_term <- tl %>%
-      dplyr::filter(.data$variable == v & .data$reference) %>%
+    ref_term <- tl |>
+      dplyr::filter(.data$variable == v & .data$reference) |>
       purrr::chuck("term")
-    nonref_terms <- tl %>%
-      dplyr::filter(.data$variable == v & !.data$reference) %>%
+    nonref_terms <- tl |>
+      dplyr::filter(.data$variable == v & !.data$reference) |>
       purrr::chuck("term")
 
     if (ct == "treatment" && all(nonref_terms %in% colnames(tcm))) {

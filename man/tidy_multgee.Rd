@@ -43,7 +43,7 @@ if (.assert_package("multgee", boolean = TRUE)) {
     id = id,
     repeated = time,
   )
-  mod \%>\% tidy_multgee()
+  mod |> tidy_multgee()
 
   mod2 <- ordLORgee(
     formula = y ~ factor(time) + factor(trt) + factor(baseline),
@@ -52,7 +52,7 @@ if (.assert_package("multgee", boolean = TRUE)) {
     repeated = time,
     LORstr = "uniform"
   )
-  mod2 \%>\% tidy_multgee()
+  mod2 |> tidy_multgee()
 }
 \dontshow{\}) # examplesIf}
 }

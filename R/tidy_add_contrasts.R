@@ -15,17 +15,17 @@
 #' @export
 #' @family tidy_helpers
 #' @examples
-#' df <- Titanic %>%
-#'   dplyr::as_tibble() %>%
+#' df <- Titanic |>
+#'   dplyr::as_tibble() |>
 #'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
 #'
-#' df %>%
+#' df |>
 #'   glm(
 #'     Survived ~ Class + Age + Sex,
 #'     data = ., weights = .$n, family = binomial,
 #'     contrasts = list(Age = contr.sum, Class = "contr.helmert")
-#'   ) %>%
-#'   tidy_and_attach() %>%
+#'   ) |>
+#'   tidy_and_attach() |>
 #'   tidy_add_contrasts()
 tidy_add_contrasts <- function(x, model = tidy_get_model(x), quiet = FALSE) {
   if (is.null(model)) {
@@ -38,12 +38,12 @@ tidy_add_contrasts <- function(x, model = tidy_get_model(x), quiet = FALSE) {
   .attributes <- .save_attributes(x)
 
   if ("contrasts" %in% names(x)) {
-    x <- x %>% dplyr::select(-dplyr::all_of("contrasts"))
+    x <- x |> dplyr::select(-dplyr::all_of("contrasts"))
   }
 
   if (!"variable" %in% names(x)) {
     if (!quiet) {
-      x <- x %>% tidy_identify_variables()
+      x <- x |> tidy_identify_variables()
     }
   }
 
@@ -52,13 +52,13 @@ tidy_add_contrasts <- function(x, model = tidy_get_model(x), quiet = FALSE) {
     x$contrasts <- NA_character_
     x$contrasts_type <- NA_character_
   } else {
-    x <- x %>%
+    x <- x |>
       dplyr::left_join(
-        contrasts_list %>%
+        contrasts_list |>
           dplyr::select(dplyr::all_of(c("variable", "contrasts", "contrasts_type"))),
         by = "variable"
       )
   }
-  x %>%
+  x |>
     tidy_attach_model(model = model, .attributes = .attributes)
 }

@@ -37,7 +37,7 @@ glm(
   data = mtcars,
   family = binomial,
   contrasts = list(`factor(cyl)` = contr.sum)
-) \%>\%
+) |>
   model_list_contrasts()
 }
 \seealso{

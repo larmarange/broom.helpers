@@ -38,9 +38,9 @@ For more information, see \code{vignette("marginal_tidiers", "broom.helpers")}.
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Average Marginal Effects (AME)
 
-df <- Titanic \%>\%
-  dplyr::as_tibble() \%>\%
-  tidyr::uncount(n) \%>\%
+df <- Titanic |>
+  dplyr::as_tibble() |>
+  tidyr::uncount(n) |>
   dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
 mod <- glm(
   Survived ~ Class + Age + Sex,

@@ -61,31 +61,31 @@ Parsing this information can be difficult, but the `broom.helper` package has ma
 
 ```{r}
 tidy_forest <-
-  model_logit %>%
+  model_logit |>
   # perform initial tidying of the model
-  tidy_and_attach(exponentiate = TRUE, conf.int = TRUE) %>%
+  tidy_and_attach(exponentiate = TRUE, conf.int = TRUE) |>
   # adding in the reference row for categorical variables
-  tidy_add_reference_rows() %>%
+  tidy_add_reference_rows() |>
   # adding a reference value to appear in plot
-  tidy_add_estimate_to_reference_rows() %>%
+  tidy_add_estimate_to_reference_rows() |>
   # adding the variable labels
-  tidy_add_term_labels() %>%
+  tidy_add_term_labels() |>
   # removing intercept estimate from model
   tidy_remove_intercept()
 tidy_forest
 ```
 
-**Note:** we used `tidy_and_attach()` instead of `broom::tidy()`. `broom.helpers` functions needs a copy of the original model. To avoid passing the model at each step, the easier way is to attach the model as an attribute of the tibble with `tidy_attach_model()`. `tidy_and_attach()` is simply a shortcut of `model %>% broom::tidy() %>% tidy_and_attach(model)`.
+**Note:** we used `tidy_and_attach()` instead of `broom::tidy()`. `broom.helpers` functions needs a copy of the original model. To avoid passing the model at each step, the easier way is to attach the model as an attribute of the tibble with `tidy_attach_model()`. `tidy_and_attach()` is simply a shortcut of `model |> broom::tidy() |> tidy_and_attach(model)`.
 
 We now have a tibble with every piece of information we need to create our forest plot using `ggplot2`.
 
 ```{r, warning=FALSE}
-tidy_forest %>%
+tidy_forest |>
   mutate(
-    plot_label = paste(var_label, label, sep = ":") %>%
-      forcats::fct_inorder() %>%
+    plot_label = paste(var_label, label, sep = ":") |>
+      forcats::fct_inorder() |>
       forcats::fct_rev()
-  ) %>%
+  ) |>
   ggplot(aes(x = plot_label, y = estimate, ymin = conf.low, ymax = conf.high, color = variable)) +
   geom_hline(yintercept = 1, linetype = 2) +
   geom_pointrange() +
@@ -108,25 +108,25 @@ Let's change the labels shown in our summary table as well.
 
 ```{r}
 tidy_table <-
-  model_logit %>%
+  model_logit |>
   # perform initial tidying of the model
-  tidy_and_attach(exponentiate = TRUE, conf.int = TRUE) %>%
+  tidy_and_attach(exponentiate = TRUE, conf.int = TRUE) |>
   # adding in the reference row for categorical variables
-  tidy_add_reference_rows() %>%
+  tidy_add_reference_rows() |>
   # adding the variable labels
-  tidy_add_term_labels() %>%
+  tidy_add_term_labels() |>
   # add header row
-  tidy_add_header_rows() %>%
+  tidy_add_header_rows() |>
   # removing intercept estimate from model
   tidy_remove_intercept()
 
 # print summary table
 options(knitr.kable.NA = "")
-tidy_table %>%
+tidy_table |>
   # format model estimates
-  select(label, estimate, conf.low, conf.high, p.value) %>%
-  mutate(across(all_of(c("estimate", "conf.low", "conf.high")), style_ratio)) %>%
-  mutate(across(p.value, style_pvalue)) %>%
+  select(label, estimate, conf.low, conf.high, p.value) |>
+  mutate(across(all_of(c("estimate", "conf.low", "conf.high")), style_ratio)) |>
+  mutate(across(p.value, style_pvalue)) |>
   print_table()
 ```
 
@@ -137,13 +137,13 @@ tidy_table %>%
 There is also a handy wrapper, called `tidy_plus_plus()`, for the most commonly used `tidy_*()` functions, and they can be executed with a single line of code:
 
 ```{r}
-model_logit %>%
+model_logit |>
   tidy_plus_plus(exponentiate = TRUE)
 ```
 
 ```{r}
-model_logit %>%
-  tidy_plus_plus(exponentiate = TRUE) %>%
+model_logit |>
+  tidy_plus_plus(exponentiate = TRUE) |>
   print_table()
 ```
 
@@ -160,12 +160,12 @@ When polynomial terms of a continuous variable are defined with `stats::poly()`,
 ```{r}
 model_poly <- glm(response ~ poly(age, 3) + ttdeath, na.omit(trial), family = binomial)
 
-model_poly %>%
+model_poly |>
   tidy_plus_plus(
     exponentiate = TRUE,
     add_header_rows = TRUE,
     variable_labels = c(age = "Age in years")
-  ) %>%
+  ) |>
   print_table()
 ```
 
@@ -180,11 +180,11 @@ model_1 <- glm(
   family = binomial
 )
 
-model_1 %>%
-  tidy_and_attach(exponentiate = TRUE) %>%
-  tidy_add_reference_rows() %>%
-  tidy_add_estimate_to_reference_rows(exponentiate = TRUE) %>%
-  tidy_add_term_labels() %>%
+model_1 |>
+  tidy_and_attach(exponentiate = TRUE) |>
+  tidy_add_reference_rows() |>
+  tidy_add_estimate_to_reference_rows(exponentiate = TRUE) |>
+  tidy_add_term_labels() |>
   print_table()
 ```
 
@@ -202,11 +202,11 @@ model_2 <- glm(
   )
 )
 
-model_2 %>%
-  tidy_and_attach(exponentiate = TRUE) %>%
-  tidy_add_reference_rows() %>%
-  tidy_add_estimate_to_reference_rows(exponentiate = TRUE) %>%
-  tidy_add_term_labels() %>%
+model_2 |>
+  tidy_and_attach(exponentiate = TRUE) |>
+  tidy_add_reference_rows() |>
+  tidy_add_estimate_to_reference_rows(exponentiate = TRUE) |>
+  tidy_add_term_labels() |>
   print_table()
 ```
 
@@ -224,11 +224,11 @@ model_3 <- glm(
   )
 )
 
-model_3 %>%
-  tidy_and_attach(exponentiate = TRUE) %>%
-  tidy_add_reference_rows() %>%
-  tidy_add_estimate_to_reference_rows(exponentiate = TRUE) %>%
-  tidy_add_term_labels() %>%
+model_3 |>
+  tidy_and_attach(exponentiate = TRUE) |>
+  tidy_add_reference_rows() |>
+  tidy_add_estimate_to_reference_rows(exponentiate = TRUE) |>
+  tidy_add_term_labels() |>
   print_table()
 ```
 
@@ -246,11 +246,11 @@ model_4 <- glm(
   )
 )
 
-model_4 %>%
-  tidy_and_attach(exponentiate = TRUE) %>%
-  tidy_add_reference_rows() %>%
-  tidy_add_estimate_to_reference_rows(exponentiate = TRUE) %>%
-  tidy_add_term_labels() %>%
+model_4 |>
+  tidy_and_attach(exponentiate = TRUE) |>
+  tidy_add_reference_rows() |>
+  tidy_add_estimate_to_reference_rows(exponentiate = TRUE) |>
+  tidy_add_term_labels() |>
   print_table()
 ```
 
@@ -261,24 +261,24 @@ Pairwise contrasts of categorical variables could be computed with `tidy_add_pai
 ```{r}
 model_logit <- glm(response ~ age + trt + grade, trial, family = binomial)
 
-model_logit %>%
-  tidy_and_attach() %>%
-  tidy_add_pairwise_contrasts() %>%
+model_logit |>
+  tidy_and_attach() |>
+  tidy_add_pairwise_contrasts() |>
   print_table()
 
-model_logit %>%
-  tidy_and_attach(exponentiate = TRUE) %>%
-  tidy_add_pairwise_contrasts() %>%
+model_logit |>
+  tidy_and_attach(exponentiate = TRUE) |>
+  tidy_add_pairwise_contrasts() |>
   print_table()
 
-model_logit %>%
-  tidy_and_attach(exponentiate = TRUE) %>%
-  tidy_add_pairwise_contrasts(pairwise_reverse = FALSE) %>%
+model_logit |>
+  tidy_and_attach(exponentiate = TRUE) |>
+  tidy_add_pairwise_contrasts(pairwise_reverse = FALSE) |>
   print_table()
 
-model_logit %>%
-  tidy_and_attach(exponentiate = TRUE) %>%
-  tidy_add_pairwise_contrasts(keep_model_terms = TRUE) %>%
+model_logit |>
+  tidy_and_attach(exponentiate = TRUE) |>
+  tidy_add_pairwise_contrasts(keep_model_terms = TRUE) |>
   print_table()
 ```
 
@@ -311,13 +311,13 @@ tibble::tribble(
   "n_ind", "`tidy_add_n()`", "Number of individuals (for Cox models)",
   "n_event", "`tidy_add_n()`", "Number of events (for binomial and multinomial logistic models, Poisson and Cox models)",
   "exposure", "`tidy_add_n()`", "Exposure time (for Poisson and Cox models)"
-) %>%
-  gt::gt() %>%
-  gt::fmt_markdown(columns = everything()) %>%
+) |>
+  gt::gt() |>
+  gt::fmt_markdown(columns = everything()) |>
   gt::tab_options(
     column_labels.font.weight = "bold"
-  ) %>%
-  gt::opt_row_striping() %>%
+  ) |>
+  gt::opt_row_striping() |>
   gt::tab_style("vertical-align:top; font-size: 12px;", gt::cells_body())
 # nolint end
 ```
@@ -350,23 +350,23 @@ tibble::tribble(
   "N_ind", "`tidy_add_n()`", "Total number of individuals (for Cox models)",
   "Exposure", "`tidy_add_n()`", "Total of exposure time",
   "component", "`tidy_zeroinfl()`", "`component` argument passed to `tidy_zeroinfl()`"
-) %>%
-  gt::gt() %>%
-  gt::fmt_markdown(columns = everything()) %>%
-  gt::tab_options(column_labels.font.weight = "bold") %>%
-  gt::opt_row_striping() %>%
+) |>
+  gt::gt() |>
+  gt::fmt_markdown(columns = everything()) |>
+  gt::tab_options(column_labels.font.weight = "bold") |>
+  gt::opt_row_striping() |>
   gt::tab_style("vertical-align:top; font-size: 12px;", gt::cells_body())
 ```
 
 ## Supported models
 
 ```{r, echo=FALSE}
-supported_models %>%
-  dplyr::rename_with(stringr::str_to_title) %>%
-  gt::gt() %>%
-  gt::fmt_markdown(columns = everything()) %>%
-  gt::tab_options(column_labels.font.weight = "bold") %>%
-  gt::opt_row_striping() %>%
+supported_models |>
+  dplyr::rename_with(stringr::str_to_title) |>
+  gt::gt() |>
+  gt::fmt_markdown(columns = everything()) |>
+  gt::tab_options(column_labels.font.weight = "bold") |>
+  gt::opt_row_striping() |>
   gt::tab_style("vertical-align:top; font-size: 12px;", gt::cells_body())
 ```
 

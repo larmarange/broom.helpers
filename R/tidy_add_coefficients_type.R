@@ -13,17 +13,17 @@
 #' @export
 #' @family tidy_helpers
 #' @examples
-#' ex1 <- lm(hp ~ mpg + factor(cyl), mtcars) %>%
-#'   tidy_and_attach() %>%
+#' ex1 <- lm(hp ~ mpg + factor(cyl), mtcars) |>
+#'   tidy_and_attach() |>
 #'   tidy_add_coefficients_type()
 #' attr(ex1, "coefficients_type")
 #' attr(ex1, "coefficients_label")
 #'
-#' ex2 <- Titanic %>%
-#'   dplyr::as_tibble() %>%
-#'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes"))) %>%
-#'   glm(Survived ~ Class + Age * Sex, data = ., weights = .$n, family = binomial) %>%
-#'   tidy_and_attach(exponentiate = TRUE) %>%
+#' ex2 <- Titanic |>
+#'   dplyr::as_tibble() |>
+#'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes"))) |>
+#'   glm(Survived ~ Class + Age * Sex, data = ., weights = .$n, family = binomial) |>
+#'   tidy_and_attach(exponentiate = TRUE) |>
 #'   tidy_add_coefficients_type()
 #' attr(ex2, "coefficients_type")
 #' attr(ex2, "coefficients_label")
@@ -101,6 +101,6 @@ tidy_add_coefficients_type <- function(
   attr(x, "coefficients_type") <- coefficients_type
   attr(x, "coefficients_label") <- coefficients_label
 
-  x %>%
+  x |>
     tidy_attach_model(model = model, .attributes = .attributes)
 }

@@ -21,8 +21,8 @@
 #'     .assert_package("gtsummary", boolean = TRUE)
 #' ) {
 #'   mod <- lme4::lmer(marker ~ stage + (1 | grade) + (death | response), gtsummary::trial)
-#'   mod %>%
-#'     tidy_and_attach() %>%
+#'   mod |>
+#'     tidy_and_attach() |>
 #'     tidy_disambiguate_terms()
 #' }
 tidy_disambiguate_terms <- function(x, sep = ".", model = tidy_get_model(x), quiet = FALSE) {
@@ -50,7 +50,7 @@ tidy_disambiguate_terms <- function(x, sep = ".", model = tidy_get_model(x), qui
   .attributes <- .save_attributes(x)
 
   if ("group" %in% names(x)) {
-    x <- x %>%
+    x <- x |>
       dplyr::mutate(
         original_term = .data$term,
         term = dplyr::if_else(
@@ -61,6 +61,6 @@ tidy_disambiguate_terms <- function(x, sep = ".", model = tidy_get_model(x), qui
       )
   }
 
-  x %>%
+  x |>
     tidy_attach_model(model = model, .attributes = .attributes)
 }

@@ -69,35 +69,35 @@ NULL
   if (identical(description, NA)) {
     return(NULL)
   }
-  description %>%
-    unclass() %>%
-    tibble::as_tibble() %>%
+  description |>
+    unclass() |>
+    tibble::as_tibble() |>
     dplyr::select(dplyr::any_of(
       c(
         "Package", "Version", "Imports", "Depends",
         "Suggests", "Enhances", "LinkingTo"
       )
-    )) %>%
+    )) |>
     dplyr::rename(
       pkg_search = "Package",
       pkg_search_version = "Version"
-    ) %>%
+    ) |>
     tidyr::pivot_longer(
       -dplyr::all_of(c("pkg_search", "pkg_search_version")),
       values_to = "pkg",
       names_to = "dependency_type",
-    ) %>%
-    tidyr::separate_rows("pkg", sep = ",") %>%
-    dplyr::mutate(pkg = stringr::str_squish(.data$pkg)) %>%
-    dplyr::filter(!is.na(.data$pkg)) %>%
+    ) |>
+    tidyr::separate_rows("pkg", sep = ",") |>
+    dplyr::mutate(pkg = stringr::str_squish(.data$pkg)) |>
+    dplyr::filter(!is.na(.data$pkg)) |>
     tidyr::separate(
       .data$pkg,
       into = c("pkg", "version"),
       sep = " ", extra = "merge", fill = "right"
-    ) %>%
+    ) |>
     dplyr::mutate(
-      compare = .data$version %>% stringr::str_extract(pattern = "[>=<]+"),
-      version = .data$version %>% stringr::str_remove_all(pattern = "[\\(\\) >=<]")
+      compare = .data$version |> stringr::str_extract(pattern = "[>=<]+"),
+      version = .data$version |> stringr::str_remove_all(pattern = "[\\(\\) >=<]")
     )
 }
 
@@ -108,11 +108,11 @@ NULL
     remove_duplicates = FALSE,
     lib.loc = NULL) {
   deps <-
-    utils::installed.packages(lib.loc = lib.loc) %>%
-    tibble::as_tibble() %>%
+    utils::installed.packages(lib.loc = lib.loc) |>
+    tibble::as_tibble() |>
     dplyr::select(dplyr::all_of(
       c("Package", "Version", "LibPath", "Imports", "Depends", "Suggests", "Enhances", "LinkingTo")
-    )) %>%
+    )) |>
     dplyr::rename(
       pkg_search = "Package",
       pkg_search_version = "Version",
@@ -120,29 +120,29 @@ NULL
     )
 
   if (!is.null(pkg_search)) {
-    deps <- deps %>% dplyr::filter(.data$pkg_search %in% .env$pkg_search)
+    deps <- deps |> dplyr::filter(.data$pkg_search %in% .env$pkg_search)
   }
   if (remove_duplicates) {
-    deps <- deps %>% dplyr::distinct("pkg_search", .keep_all = TRUE)
+    deps <- deps |> dplyr::distinct("pkg_search", .keep_all = TRUE)
   }
 
-  deps %>%
+  deps |>
     tidyr::pivot_longer(
       -dplyr::all_of(c("pkg_search", "pkg_search_version", "lib_path")),
       values_to = "pkg",
       names_to = "dependency_type",
-    ) %>%
-    tidyr::separate_rows("pkg", sep = ",") %>%
-    dplyr::mutate(pkg = stringr::str_squish(.data$pkg)) %>%
-    dplyr::filter(!is.na(.data$pkg)) %>%
+    ) |>
+    tidyr::separate_rows("pkg", sep = ",") |>
+    dplyr::mutate(pkg = stringr::str_squish(.data$pkg)) |>
+    dplyr::filter(!is.na(.data$pkg)) |>
     tidyr::separate(
       .data$pkg,
       into = c("pkg", "version"),
       sep = " ", extra = "merge", fill = "right"
-    ) %>%
+    ) |>
     dplyr::mutate(
-      compare = .data$version %>% stringr::str_extract(pattern = "[>=<]+"),
-      version = .data$version %>% stringr::str_remove_all(pattern = "[\\(\\) >=<]")
+      compare = .data$version |> stringr::str_extract(pattern = "[>=<]+"),
+      version = .data$version |> stringr::str_remove_all(pattern = "[\\(\\) >=<]")
     )
 }
 
@@ -152,13 +152,13 @@ NULL
   if (is.null(pkg_search)) {
     return(NULL)
   }
-  res <- .get_package_dependencies(pkg_search) %>%
+  res <- .get_package_dependencies(pkg_search) |>
     dplyr::filter(.data$pkg == .env$pkg & !is.na(.data$version))
   if (nrow(res) == 0) {
     return(NULL)
   }
-  version <- res %>% purrr::pluck("version")
-  attr(version, "compare") <- res %>% purrr::pluck("compare")
-  names(version) <- res %>% purrr::pluck("dependency_type")
+  version <- res |> purrr::pluck("version")
+  attr(version, "compare") <- res |> purrr::pluck("compare")
+  names(version) <- res |> purrr::pluck("dependency_type")
   version
 }

@@ -25,7 +25,7 @@ model_get_response(model)
 This function does not cover \code{lavaan} models (\code{NULL} is returned).
 }
 \examples{
-lm(hp ~ mpg + factor(cyl) + disp:hp, mtcars) \%>\%
+lm(hp ~ mpg + factor(cyl) + disp:hp, mtcars) |>
   model_get_response()
 
 mod <- glm(
@@ -34,24 +34,24 @@ mod <- glm(
   family = binomial,
   contrasts = list(stage = contr.sum, grade = contr.treatment(3, 2), trt = "contr.SAS")
 )
-mod \%>\% model_get_response()
+mod |> model_get_response()
 
 mod <- glm(
   Survived ~ Class * Age + Sex,
-  data = Titanic \%>\% as.data.frame(),
+  data = Titanic |> as.data.frame(),
   weights = Freq,
   family = binomial
 )
-mod \%>\% model_get_response()
+mod |> model_get_response()
 
-d <- dplyr::as_tibble(Titanic) \%>\%
-  dplyr::group_by(Class, Sex, Age) \%>\%
+d <- dplyr::as_tibble(Titanic) |>
+  dplyr::group_by(Class, Sex, Age) |>
   dplyr::summarise(
     n_survived = sum(n * (Survived == "Yes")),
     n_dead = sum(n * (Survived == "No"))
   )
 mod <- glm(cbind(n_survived, n_dead) ~ Class * Age + Sex, data = d, family = binomial, y = FALSE)
-mod \%>\% model_get_response()
+mod |> model_get_response()
 }
 \seealso{
 Other model_helpers: 

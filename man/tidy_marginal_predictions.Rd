@@ -105,9 +105,9 @@ For more information, see \code{vignette("marginal_tidiers", "broom.helpers")}.
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Average Marginal Predictions
-df <- Titanic \%>\%
-  dplyr::as_tibble() \%>\%
-  tidyr::uncount(n) \%>\%
+df <- Titanic |>
+  dplyr::as_tibble() |>
+  tidyr::uncount(n) |>
   dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
 mod <- glm(
   Survived ~ Class + Age + Sex,
@@ -116,8 +116,8 @@ mod <- glm(
 tidy_marginal_predictions(mod)
 tidy_plus_plus(mod, tidy_fun = tidy_marginal_predictions)
 if (require("patchwork")) {
-  plot_marginal_predictions(mod) \%>\% patchwork::wrap_plots()
-  plot_marginal_predictions(mod) \%>\%
+  plot_marginal_predictions(mod) |> patchwork::wrap_plots()
+  plot_marginal_predictions(mod) |>
     patchwork::wrap_plots() &
     ggplot2::scale_y_continuous(limits = c(0, 1), label = scales::percent)
 }
@@ -125,7 +125,7 @@ if (require("patchwork")) {
 mod2 <- lm(Petal.Length ~ poly(Petal.Width, 2) + Species, data = iris)
 tidy_marginal_predictions(mod2)
 if (require("patchwork")) {
-  plot_marginal_predictions(mod2) \%>\% patchwork::wrap_plots()
+  plot_marginal_predictions(mod2) |> patchwork::wrap_plots()
 }
 tidy_marginal_predictions(
   mod2,
@@ -151,9 +151,9 @@ mod3 <- glm(
 tidy_marginal_predictions(mod3)
 tidy_marginal_predictions(mod3, "no_interaction")
 if (require("patchwork")) {
-  plot_marginal_predictions(mod3) \%>\%
+  plot_marginal_predictions(mod3) |>
     patchwork::wrap_plots()
-  plot_marginal_predictions(mod3, "no_interaction") \%>\%
+  plot_marginal_predictions(mod3, "no_interaction") |>
     patchwork::wrap_plots()
 }
 tidy_marginal_predictions(
@@ -167,7 +167,7 @@ tidy_marginal_predictions(
 # Marginal Predictions at the Mean
 tidy_marginal_predictions(mod, newdata = "mean")
 if (require("patchwork")) {
-  plot_marginal_predictions(mod, newdata = "mean") \%>\%
+  plot_marginal_predictions(mod, newdata = "mean") |>
     patchwork::wrap_plots()
 }
 \dontshow{\}) # examplesIf}

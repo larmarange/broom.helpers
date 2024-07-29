@@ -19,7 +19,7 @@ a tibble with two columns: \code{"variable"} and \code{"var_nlevels"}
 Get the number of levels for each factor used in \code{xlevels}
 }
 \examples{
-lm(hp ~ mpg + factor(cyl), mtcars) \%>\%
+lm(hp ~ mpg + factor(cyl), mtcars) |>
   model_get_nlevels()
 }
 \seealso{

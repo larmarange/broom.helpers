@@ -29,21 +29,21 @@
 #' @family tidy_helpers
 #' @examplesIf interactive()
 #' if (.assert_package("gtsummary", boolean = TRUE)) {
-#'   df <- Titanic %>%
-#'     dplyr::as_tibble() %>%
+#'   df <- Titanic |>
+#'     dplyr::as_tibble() |>
 #'     dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
 #'
-#'   res <- df %>%
+#'   res <- df |>
 #'     glm(
 #'       Survived ~ Class + Age + Sex,
 #'       data = ., weights = .$n, family = binomial,
 #'       contrasts = list(Age = contr.sum, Class = "contr.SAS")
-#'     ) %>%
-#'     tidy_and_attach() %>%
-#'     tidy_add_variable_labels(labels = list(Class = "Custom label for Class")) %>%
+#'     ) |>
+#'     tidy_and_attach() |>
+#'     tidy_add_variable_labels(labels = list(Class = "Custom label for Class")) |>
 #'     tidy_add_reference_rows()
-#'   res %>% tidy_add_header_rows()
-#'   res %>% tidy_add_header_rows(show_single_row = all_dichotomous())
+#'   res |> tidy_add_header_rows()
+#'   res |> tidy_add_header_rows(show_single_row = all_dichotomous())
 #'
 #'   glm(
 #'     response ~ stage + grade * trt,
@@ -54,9 +54,9 @@
 #'       grade = contr.treatment(3, base = 2),
 #'       trt = contr.treatment(2, base = 2)
 #'     )
-#'   ) %>%
-#'     tidy_and_attach() %>%
-#'     tidy_add_reference_rows() %>%
+#'   ) |>
+#'     tidy_and_attach() |>
+#'     tidy_add_reference_rows() |>
 #'     tidy_add_header_rows()
 #' }
 tidy_add_header_rows <- function(x,
@@ -84,7 +84,7 @@ tidy_add_header_rows <- function(x,
   .attributes <- .save_attributes(x)
 
   if (!"label" %in% names(x)) {
-    x <- x %>% tidy_add_term_labels(model = model)
+    x <- x |> tidy_add_term_labels(model = model)
   }
 
   # management of show_single_row --------------
@@ -108,32 +108,32 @@ tidy_add_header_rows <- function(x,
       # specific case for multinomial models
       (inherits(model, "multinom") || inherits(model, "LORgee"))
   ) {
-    xx <- xx %>%
+    xx <- xx |>
       dplyr::filter(.data$y.level == x$y.level[1])
   }
 
   # checking if variables incorrectly requested for single row summary
   if ("component" %in% colnames(xx)) {
-    bad_single_row <- xx %>%
+    bad_single_row <- xx |>
       dplyr::filter(
         !is.na(.data$variable),
         is.na(.data$reference_row) | !.data$reference_row,
         .data$variable %in% show_single_row
-      ) %>%
-      dplyr::group_by(.data$component, .data$variable) %>%
-      dplyr::count() %>%
-      dplyr::filter(.data$n > 1) %>%
+      ) |>
+      dplyr::group_by(.data$component, .data$variable) |>
+      dplyr::count() |>
+      dplyr::filter(.data$n > 1) |>
       dplyr::pull(.data$variable)
   } else {
-    bad_single_row <- xx %>%
+    bad_single_row <- xx |>
       dplyr::filter(
         !is.na(.data$variable),
         is.na(.data$reference_row) | !.data$reference_row,
         .data$variable %in% show_single_row
-      ) %>%
-      dplyr::group_by(.data$variable) %>%
-      dplyr::count() %>%
-      dplyr::filter(.data$n > 1) %>%
+      ) |>
+      dplyr::group_by(.data$variable) |>
+      dplyr::count() |>
+      dplyr::filter(.data$n > 1) |>
       dplyr::pull(.data$variable)
   }
   if (length(bad_single_row) > 0) {
@@ -141,7 +141,7 @@ tidy_add_header_rows <- function(x,
       paste(
         "Variable(s) {paste(shQuote(bad_single_row), collapse = \", \")} were",
         "incorrectly requested to be printed on a single row."
-      ) %>%
+      ) |>
         cli_alert_danger()
     }
     if (strict) {
@@ -158,27 +158,27 @@ tidy_add_header_rows <- function(x,
       any(x$variable %in% show_single_row)
   ) {
     if ("component" %in% colnames(xx)) {
-      variables_to_simplify <- xx %>%
+      variables_to_simplify <- xx |>
         dplyr::filter(
           .data$variable %in% show_single_row & !.data$reference_row
-        ) %>%
-        dplyr::count(.data$component, .data$variable) %>%
-        dplyr::filter(.data$n == 1) %>%
-        purrr::pluck("variable") %>%
+        ) |>
+        dplyr::count(.data$component, .data$variable) |>
+        dplyr::filter(.data$n == 1) |>
+        purrr::pluck("variable") |>
         unique()
     } else {
-      variables_to_simplify <- xx %>%
+      variables_to_simplify <- xx |>
         dplyr::filter(
           .data$variable %in% show_single_row & !.data$reference_row
-        ) %>%
-        dplyr::count(.data$variable) %>%
-        dplyr::filter(.data$n == 1) %>%
+        ) |>
+        dplyr::count(.data$variable) |>
+        dplyr::filter(.data$n == 1) |>
         purrr::pluck("variable")
     }
 
     # removing reference rows of those variables
     if (length(variables_to_simplify) > 0) {
-      x <- x %>%
+      x <- x |>
         dplyr::filter(
           is.na(.data$variable) |
             !.data$variable %in% variables_to_simplify |
@@ -188,7 +188,7 @@ tidy_add_header_rows <- function(x,
 
     # for variables in show_single_row
     # label should be equal to var_label
-    x <- x %>%
+    x <- x |>
       dplyr::mutate(
         label = dplyr::if_else(
           .data$variable %in% show_single_row,
@@ -199,12 +199,12 @@ tidy_add_header_rows <- function(x,
   }
 
   if (!has_reference_row) {
-    x <- x %>% dplyr::select(-dplyr::all_of("reference_row"))
+    x <- x |> dplyr::select(-dplyr::all_of("reference_row"))
   }
 
   # computing header rows ---------------
 
-  x <- x %>%
+  x <- x |>
     dplyr::mutate(
       rank = seq_len(dplyr::n()) # for sorting table at the end
     )
@@ -214,13 +214,13 @@ tidy_add_header_rows <- function(x,
       # specific case for multinomial models
       (inherits(model, "multinom") || inherits(model, "LORgee"))
   ) {
-    header_rows <- x %>%
+    header_rows <- x |>
       dplyr::filter(!is.na(.data$variable) & !.data$variable %in% show_single_row)
 
     if (nrow(header_rows) > 0) {
-      header_rows <- header_rows %>%
-        dplyr::mutate(term_cleaned = .clean_backticks(.data$term, .data$variable)) %>%
-        dplyr::group_by(.data$variable, .data$y.level) %>%
+      header_rows <- header_rows |>
+        dplyr::mutate(term_cleaned = .clean_backticks(.data$term, .data$variable)) |>
+        dplyr::group_by(.data$variable, .data$y.level) |>
         dplyr::summarise(
           var_class = dplyr::first(.data$var_class),
           var_type = dplyr::first(.data$var_type),
@@ -232,22 +232,22 @@ tidy_add_header_rows <- function(x,
           var_test = sum(.data$term_cleaned != .data$variable),
           rank = min(.data$rank) - .25,
           .groups = "drop_last"
-        ) %>%
-        dplyr::filter(.data$var_nrow >= 2 | .data$var_test > 0) %>%
-        dplyr::select(-dplyr::all_of(c("var_nrow", "var_test"))) %>%
+        ) |>
+        dplyr::filter(.data$var_nrow >= 2 | .data$var_test > 0) |>
+        dplyr::select(-dplyr::all_of(c("var_nrow", "var_test"))) |>
         dplyr::mutate(
           header_row = TRUE,
           label = .data$var_label
         )
     }
   } else if ("component" %in% names(x)) {
-    header_rows <- x %>%
+    header_rows <- x |>
       dplyr::filter(!is.na(.data$variable) & !.data$variable %in% show_single_row)
 
     if (nrow(header_rows) > 0) {
-      header_rows <- header_rows %>%
-        dplyr::mutate(term_cleaned = .clean_backticks(.data$term, .data$variable)) %>%
-        dplyr::group_by(.data$variable, .data$component) %>%
+      header_rows <- header_rows |>
+        dplyr::mutate(term_cleaned = .clean_backticks(.data$term, .data$variable)) |>
+        dplyr::group_by(.data$variable, .data$component) |>
         dplyr::summarise(
           var_class = dplyr::first(.data$var_class),
           var_type = dplyr::first(.data$var_type),
@@ -259,16 +259,16 @@ tidy_add_header_rows <- function(x,
           var_test = sum(.data$term_cleaned != .data$variable),
           rank = min(.data$rank) - .25,
           .groups = "drop_last"
-        ) %>%
-        dplyr::filter(.data$var_nrow >= 2 | .data$var_test > 0) %>%
-        dplyr::select(-dplyr::all_of(c("var_nrow", "var_test"))) %>%
+        ) |>
+        dplyr::filter(.data$var_nrow >= 2 | .data$var_test > 0) |>
+        dplyr::select(-dplyr::all_of(c("var_nrow", "var_test"))) |>
         dplyr::mutate(
           header_row = TRUE,
           label = .data$var_label
         )
     }
   } else {
-    header_rows <- x %>%
+    header_rows <- x |>
       dplyr::filter(
         !is.na(.data$variable) &
           !.data$variable %in% show_single_row &
@@ -276,9 +276,9 @@ tidy_add_header_rows <- function(x,
       )
 
     if (nrow(header_rows) > 0) {
-      header_rows <- header_rows %>%
-        dplyr::mutate(term_cleaned = .clean_backticks(.data$term, .data$variable)) %>%
-        dplyr::group_by(.data$variable) %>%
+      header_rows <- header_rows |>
+        dplyr::mutate(term_cleaned = .clean_backticks(.data$term, .data$variable)) |>
+        dplyr::group_by(.data$variable) |>
         dplyr::summarise(
           var_class = dplyr::first(.data$var_class),
           var_type = dplyr::first(.data$var_type),
@@ -291,9 +291,9 @@ tidy_add_header_rows <- function(x,
           var_test = sum(.data$term_cleaned != .data$variable),
           rank = min(.data$rank) - .25,
           .groups = "drop_last"
-        ) %>%
-        dplyr::filter(.data$var_nrow >= 2 | .data$var_test > 0) %>%
-        dplyr::select(-dplyr::all_of(c("var_nrow", "var_test"))) %>%
+        ) |>
+        dplyr::filter(.data$var_nrow >= 2 | .data$var_test > 0) |>
+        dplyr::select(-dplyr::all_of(c("var_nrow", "var_test"))) |>
         dplyr::mutate(
           header_row = TRUE,
           label = .data$var_label
@@ -301,14 +301,14 @@ tidy_add_header_rows <- function(x,
     }
   }
 
-  x <- x %>%
+  x <- x |>
     dplyr::mutate(
       header_row = dplyr::if_else(.data$variable %in% header_rows$variable, FALSE, NA)
-    ) %>%
-    dplyr::bind_rows(header_rows) %>%
-    dplyr::arrange(.data$rank) %>%
+    ) |>
+    dplyr::bind_rows(header_rows) |>
+    dplyr::arrange(.data$rank) |>
     dplyr::select(-dplyr::all_of("rank"))
 
-  x %>%
+  x |>
     tidy_attach_model(model = model, .attributes = .attributes)
 }

@@ -10,11 +10,11 @@
 #' @export
 #' @family tidy_helpers
 #' @examples
-#' Titanic %>%
-#'   dplyr::as_tibble() %>%
-#'   dplyr::mutate(Survived = factor(Survived)) %>%
-#'   glm(Survived ~ Class + Age + Sex, data = ., weights = .$n, family = binomial) %>%
-#'   tidy_and_attach() %>%
+#' Titanic |>
+#'   dplyr::as_tibble() |>
+#'   dplyr::mutate(Survived = factor(Survived)) |>
+#'   glm(Survived ~ Class + Age + Sex, data = ., weights = .$n, family = binomial) |>
+#'   tidy_and_attach() |>
 #'   tidy_remove_intercept()
 tidy_remove_intercept <- function(x, model = tidy_get_model(x)) {
   if (is.null(model)) {
@@ -27,10 +27,10 @@ tidy_remove_intercept <- function(x, model = tidy_get_model(x)) {
   .attributes <- .save_attributes(x)
 
   if (!"var_type" %in% names(x)) {
-    x <- x %>% tidy_identify_variables(model = model)
+    x <- x |> tidy_identify_variables(model = model)
   }
 
-  x %>%
-    dplyr::filter(.data$var_type != "intercept") %>%
+  x |>
+    dplyr::filter(.data$var_type != "intercept") |>
     tidy_attach_model(model = model, .attributes = .attributes)
 }

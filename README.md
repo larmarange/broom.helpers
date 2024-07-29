@@ -55,7 +55,7 @@ Documentation of development version:
 ``` r
 mod1 <- lm(Sepal.Length ~ Sepal.Width + Species, data = iris)
 library(broom.helpers)
-ex1 <- mod1 %>% tidy_plus_plus()
+ex1 <- mod1 |> tidy_plus_plus()
 ex1
 #> # A tibble: 4 × 17
 #>   term              variable  var_label var_class var_type var_nlevels contrasts
@@ -97,7 +97,7 @@ mod2 <- glm(
     grade = contr.sum
   )
 )
-ex2 <- mod2 %>%
+ex2 <- mod2 |>
   tidy_plus_plus(
     exponentiate = TRUE,
     variable_labels = c(age = "Age (in years)"),
@@ -155,13 +155,13 @@ dplyr::glimpse(ex2)
 ### fine control
 
 ``` r
-ex3 <- mod1 %>%
+ex3 <- mod1 |>
   # perform initial tidying of model
-  tidy_and_attach() %>%
+  tidy_and_attach() |>
   # add reference row
-  tidy_add_reference_rows() %>%
+  tidy_add_reference_rows() |>
   # add term labels
-  tidy_add_term_labels() %>%
+  tidy_add_term_labels() |>
   # remove intercept
   tidy_remove_intercept()
 ex3
@@ -195,15 +195,15 @@ dplyr::glimpse(ex3)
 #> $ conf.low       <dbl> 0.5933983, NA, 1.2371791, 1.7491525
 #> $ conf.high      <dbl> 1.013723, NA, 1.680307, 2.144481
 
-ex4 <- mod2 %>%
+ex4 <- mod2 |>
   # perform initial tidying of model
-  tidy_and_attach(exponentiate = TRUE) %>%
+  tidy_and_attach(exponentiate = TRUE) |>
   # add variable labels, including a custom value for age
-  tidy_add_variable_labels(labels = c(age = "Age in years")) %>%
+  tidy_add_variable_labels(labels = c(age = "Age in years")) |>
   # add reference rows for categorical variables
-  tidy_add_reference_rows() %>%
+  tidy_add_reference_rows() |>
   # add a, estimate value of reference terms
-  tidy_add_estimate_to_reference_rows(exponentiate = TRUE) %>%
+  tidy_add_estimate_to_reference_rows(exponentiate = TRUE) |>
   # add header rows for categorical variables
   tidy_add_header_rows()
 ex4

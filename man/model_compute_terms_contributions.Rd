@@ -23,10 +23,10 @@ This function does not cover \code{lavaan} models (\code{NULL} is returned).
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 mod <- lm(Sepal.Length ~ Sepal.Width, iris)
-mod \%>\% model_compute_terms_contributions()
+mod |> model_compute_terms_contributions()
 
 mod <- lm(hp ~ mpg + factor(cyl) + disp:hp, mtcars)
-mod \%>\% model_compute_terms_contributions()
+mod |> model_compute_terms_contributions()
 
 mod <- glm(
   response ~ stage * grade + trt,
@@ -38,7 +38,7 @@ mod <- glm(
     trt = "contr.SAS"
   )
 )
-mod \%>\% model_compute_terms_contributions()
+mod |> model_compute_terms_contributions()
 
 mod <- glm(
   response ~ stage * trt,
@@ -46,23 +46,23 @@ mod <- glm(
   family = binomial,
   contrasts = list(stage = contr.poly)
 )
-mod \%>\% model_compute_terms_contributions()
+mod |> model_compute_terms_contributions()
 
 mod <- glm(
   Survived ~ Class * Age + Sex,
-  data = Titanic \%>\% as.data.frame(),
+  data = Titanic |> as.data.frame(),
   weights = Freq, family = binomial
 )
-mod \%>\% model_compute_terms_contributions()
+mod |> model_compute_terms_contributions()
 
-d <- dplyr::as_tibble(Titanic) \%>\%
-  dplyr::group_by(Class, Sex, Age) \%>\%
+d <- dplyr::as_tibble(Titanic) |>
+  dplyr::group_by(Class, Sex, Age) |>
   dplyr::summarise(
     n_survived = sum(n * (Survived == "Yes")),
     n_dead = sum(n * (Survived == "No"))
   )
 mod <- glm(cbind(n_survived, n_dead) ~ Class * Age + Sex, data = d, family = binomial)
-mod \%>\% model_compute_terms_contributions()
+mod |> model_compute_terms_contributions()
 \dontshow{\}) # examplesIf}
 }
 \seealso{

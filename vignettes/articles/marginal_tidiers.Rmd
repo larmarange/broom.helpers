@@ -50,7 +50,7 @@ Let's consider the `trial` dataset from the `{gtsummary}` package and build a lo
 library(broom.helpers)
 library(gtsummary)
 library(dplyr)
-d <- trial %>%
+d <- trial |>
   filter(complete.cases(response, trt, marker, grade, age))
 
 mod <- glm(
@@ -58,10 +58,10 @@ mod <- glm(
   data = d,
   family = binomial
 )
-mod %>%
+mod |>
   tbl_regression(
     exponentiate = TRUE
-  ) %>%
+  ) |>
   bold_labels()
 ```
 
@@ -108,9 +108,9 @@ plot(allEffects(mod))
 It is also possible to generate similar plots with `ggeffects::ggeffect()`. Please note that `ggeffects::ggeffect()` will consider, by default, only individual variables from the model and not existing interactions.
 
 ```{r}
-mod %>%
-  ggeffects::ggeffect() %>%
-  lapply(plot) %>%
+mod |>
+  ggeffects::ggeffect() |>
+  lapply(plot) |>
   patchwork::wrap_plots()
 ```
 
@@ -123,11 +123,11 @@ tidy_all_effects(mod)
 It is therefore very easy to produce a nicely formatted table with `gtsummary::tbl_regression()` or a forest plot with `ggstats::ggcoef_model()`.
 
 ```{r}
-mod %>%
+mod |>
   tbl_regression(
     tidy_fun = tidy_all_effects,
     estimate_fun = scales::label_percent(accuracy = .1)
-  ) %>%
+  ) |>
   bold_labels()
 ```
 
@@ -169,36 +169,36 @@ predictions(
 `{broom.helpers}` provides a global tidier `tidy_marginal_predictions()` to compute the marginal predictions for each variable or combination of variables before stacking them in a unique tibble. You should specify `newdata = "mean"` to get marginal predictions at the mean. By default, as `effects::allEffects()`, it will consider all higher order combinations of variables (as identified with `model_list_higher_order_variables()`).
 
 ```{r}
-mod %>%
+mod |>
   model_list_higher_order_variables()
-mod %>%
+mod |>
   tbl_regression(
     tidy_fun = tidy_marginal_predictions,
     newdata = "mean",
     estimate_fun = scales::label_percent(accuracy = .1)
-  ) %>%
-  modify_column_hide("p.value") %>%
+  ) |>
+  modify_column_hide("p.value") |>
   bold_labels()
 ```
 
 Simply specify `variables_list = "no_interaction"` to compute marginal predictions for each individual variable without considering existing interactions.
 
 ```{r}
-mod %>%
+mod |>
   tbl_regression(
     tidy_fun = tidy_marginal_predictions,
     variables_list = "no_interaction",
     newdata = "mean",
     estimate_fun = scales::label_percent(accuracy = .1)
-  ) %>%
-  modify_column_hide("p.value") %>%
+  ) |>
+  modify_column_hide("p.value") |>
   bold_labels()
 ```
 
 `{broom.helpers}` also include `plot_marginal_predictions()` to generate a list of plots to visualize all marginal predictions. Use `patchwork::wrap_plots()` to combine all plots together.
 
 ```{r}
-p <- plot_marginal_predictions(mod, newdata = "mean") %>%
+p <- plot_marginal_predictions(mod, newdata = "mean") |>
   patchwork::wrap_plots() &
   ggplot2::scale_y_continuous(
     labels = scales::label_percent(),
@@ -210,11 +210,11 @@ p + patchwork::plot_annotation(
 ```
 
 ```{r}
-p <- mod %>%
+p <- mod |>
   plot_marginal_predictions(
     "no_interaction",
     newdata = "mean"
-  ) %>%
+  ) |>
   patchwork::wrap_plots() &
   ggplot2::scale_y_continuous(
     labels = scales::label_percent(),
@@ -246,17 +246,17 @@ Instead of averaging observed values to generate "typical observations" before p
 More precisely, the purpose is to adopt a counterfactual approach. Let's take an example. Let's consider `d` our observed data used to estimate the model. We can make a copy of this dataset, where all variables would be identical, but considering that all individuals have received Drug A. Similarly, we could generate a dataset where all individuals would have received Drug B.
 
 ```{r}
-dA <- d %>%
+dA <- d |>
   mutate(trt = "Drug A")
-dB <- d %>%
+dB <- d |>
   mutate(trt = "Drug B")
 ```
 
 We can now predict the outcome for all observations in `dA` and then compute the average, and similarly with `dB`.
 
 ```{r}
-predict(mod, newdata = dA, type = "response") %>% mean()
-predict(mod, newdata = dB, type = "response") %>% mean()
+predict(mod, newdata = dA, type = "response") |> mean()
+predict(mod, newdata = dB, type = "response") |> mean()
 ```
 
 We, then, obtain **Average Marginal Predictions** for `trt`. The same results could be computed with `marginaleffects::avg_predictions()`. Note that the counterfactual approach corresponds to the default behavior when no value is provided to `newdata`.
@@ -270,41 +270,41 @@ avg_predictions(mod, variables = "trt", by = "trt", type = "response")
 ```{r}
 avg_predictions(mod, variables = "trt", by = "trt")
 b <- binomial()
-predict(mod, newdata = dA, type = "link") %>%
-  mean() %>%
+predict(mod, newdata = dA, type = "link") |>
+  mean() |>
   b$linkinv()
-predict(mod, newdata = dB, type = "link") %>%
-  mean() %>%
+predict(mod, newdata = dB, type = "link") |>
+  mean() |>
   b$linkinv()
 ```
 
 We can use `tidy_marginal_predictions()` to get average marginal predictions for all variables and `plot_marginal_predictions()` for a visual representation.
 
 ```{r}
-mod %>%
+mod |>
   tbl_regression(
     tidy_fun = tidy_marginal_predictions,
     type = "response",
     variables_list = "no_interaction",
     estimate_fun = scales::label_percent(accuracy = .1)
-  ) %>%
-  modify_column_hide("p.value") %>%
+  ) |>
+  modify_column_hide("p.value") |>
   bold_labels()
 ```
 
 ```{r}
-mod %>%
+mod |>
   tbl_regression(
     tidy_fun = tidy_marginal_predictions,
     type = "response",
     estimate_fun = scales::label_percent(accuracy = .1)
-  ) %>%
-  modify_column_hide("p.value") %>%
+  ) |>
+  modify_column_hide("p.value") |>
   bold_labels()
 ```
 
 ```{r}
-p <- plot_marginal_predictions(mod, type = "response") %>%
+p <- plot_marginal_predictions(mod, type = "response") |>
   patchwork::wrap_plots(ncol = 2) &
   ggplot2::scale_y_continuous(
     labels = scales::label_percent(),
@@ -333,8 +333,8 @@ As we can see, `pred` contains 8 rows, one for each combination of `trt` (2 moda
 Let's compute the average predictions for each value of `stage`.
 
 ```{r}
-pred %>%
-  group_by(stage) %>%
+pred |>
+  group_by(stage) |>
   summarise(mean(estimate))
 ```
 
@@ -362,14 +362,14 @@ predictions(mod,
 Marginal means are defined only for categorical variables. However, we can define **marginal predictions at marginal means** for both continuous and categorical variables, calling `tidy_marginal_predictions()` with the option `newdata = "marginalmeans"`. For categorical variables, marginal predictions at marginal means will be equal to marginal means.
 
 ```{r}
-mod %>%
+mod |>
   tbl_regression(
     tidy_fun = tidy_marginal_predictions,
     newdata = "marginalmeans",
     variables_list = "no_interaction",
     estimate_fun = scales::label_percent(accuracy = .1)
-  ) %>%
-  modify_column_hide("p.value") %>%
+  ) |>
+  modify_column_hide("p.value") |>
   bold_labels()
 ```
 
@@ -380,14 +380,14 @@ mod %>%
 They are similar to marginal predictions at the mean, except that continuous variables are fixed at the median of observed values (and categorical variables at their mode). Simply use `newdata = "median"`.
 
 ```{r}
-mod %>%
+mod |>
   tbl_regression(
     tidy_fun = tidy_marginal_predictions,
     newdata = "median",
     variables_list = "no_interaction",
     estimate_fun = scales::label_percent(accuracy = .1)
-  ) %>%
-  modify_column_hide("p.value") %>%
+  ) |>
+  modify_column_hide("p.value") |>
   bold_labels()
 ```
 
@@ -396,18 +396,18 @@ mod %>%
 The `{ggeffects}` package offers a `ggeffects::ggpredict()` function which generates marginal predictions at the mean of continuous variables and at the first modality (used as reference) of categorical variables. `{broom.helpers}` provides a `tidy_ggpredict()` tidier.
 
 ```{r}
-mod %>%
+mod |>
   tbl_regression(
     tidy_fun = tidy_ggpredict,
     estimate_fun = scales::label_percent(accuracy = .1)
-  ) %>%
+  ) |>
   bold_labels()
 ```
 
 ```{r}
-mod %>%
-  ggeffects::ggpredict() %>%
-  plot() %>%
+mod |>
+  ggeffects::ggpredict() |>
+  plot() |>
   patchwork::wrap_plots()
 ```
 
@@ -481,18 +481,18 @@ tidy_avg_comparisons(mod)
 This custom tidier is compatible with `tidy_plus_plus()` and the suit of other functions provided by `{broom.helpers}`.
 
 ```{r}
-mod %>%
+mod |>
   tidy_plus_plus(tidy_fun = tidy_avg_comparisons)
 ```
 
 A nicely formatted table can therefore be generated with `gtsummary::tbl_regression()`.
 
 ```{r}
-mod %>%
+mod |>
   tbl_regression(
     tidy_fun = tidy_avg_comparisons,
     estimate_fun = scales::label_percent(style_positive = "plus")
-  ) %>%
+  ) |>
   bold_labels()
 ```
 
@@ -521,19 +521,19 @@ comparisons(mod, variables = "trt", newdata = "mean")
 The `newdata` argument can be passed to `tidy_avg_comparisons()`, `tidy_plus_plus` or `gtsummary::tbl_regression()`.
 
 ```{r}
-mod %>%
+mod |>
   tbl_regression(
     tidy_fun = tidy_avg_comparisons,
     newdata = "mean",
     estimate_fun = scales::label_percent(style_positive = "plus")
-  ) %>%
+  ) |>
   bold_labels()
 ```
 
 For `ggstats::ggcoef_model()`, use `tidy_args` to pass `newdata = "mean"`.
 
 ```{r}
-mod %>%
+mod |>
   ggstats::ggcoef_model(
     tidy_fun = tidy_avg_comparisons,
     tidy_args = list(newdata = "mean")
@@ -548,17 +548,17 @@ mod %>%
 Other assumptions, such as `"marginalmeans"` or `"median"`, could be defined using `newdata`. See the documentation of `marginaleffects::comparisons()`.
 
 ```{r}
-mod %>%
+mod |>
   tbl_regression(
     tidy_fun = tidy_avg_comparisons,
     newdata = "marginalmeans",
     estimate_fun = scales::label_percent(style_positive = "plus")
-  ) %>%
+  ) |>
   bold_labels()
 ```
 
 ```{r}
-mod %>%
+mod |>
   ggstats::ggcoef_model(
     tidy_fun = tidy_avg_comparisons,
     tidy_args = list(newdata = "marginalmeans")
@@ -597,11 +597,11 @@ avg_comparisons(
 The tidier `tidy_marginal_contrasts()` allows to compute directly several combinations of variables and to stack all the results in a unique tibble.
 
 ```{r}
-mod %>%
+mod |>
   tbl_regression(
     tidy_fun = tidy_marginal_contrasts,
     estimate_fun = scales::label_percent(style_positive = "plus")
-  ) %>%
+  ) |>
   bold_labels()
 ```
 
@@ -614,24 +614,24 @@ By default, when there is an interaction, contrasts are computed for the last va
 The option `variables_list = "cross"` could be used to get "cross-contrasts" for interactions.
 
 ```{r}
-mod %>%
+mod |>
   tbl_regression(
     tidy_fun = tidy_marginal_contrasts,
     variables_list = "cross",
     estimate_fun = scales::label_percent(style_positive = "plus")
-  ) %>%
+  ) |>
   bold_labels()
 ```
 
 The option `variables_list = "no_interaction"` could be used to get the average marginal contrasts for each variable without considering interactions.
 
 ```{r}
-mod %>%
+mod |>
   tbl_regression(
     tidy_fun = tidy_marginal_contrasts,
     variables_list = "no_interaction",
     estimate_fun = scales::label_percent(style_positive = "plus")
-  ) %>%
+  ) |>
   bold_labels()
 ```
 
@@ -666,16 +666,16 @@ avg_slopes(mod)
 Column names are not consistent with other tidiers used by `{broom.helpers}`. Use `tidy_avg_slopes()` instead.
 
 ```{r}
-mod %>%
+mod |>
   tbl_regression(
     tidy_fun = tidy_avg_slopes,
     estimate_fun = scales::label_percent(style_positive = "plus")
-  ) %>%
+  ) |>
   bold_labels()
 ```
 
 ```{r}
-mod %>%
+mod |>
   ggstats::ggcoef_model(
     tidy_fun = tidy_avg_slopes
   ) +
@@ -694,17 +694,17 @@ mod_alt <- glm(
   data = d,
   family = binomial
 )
-margins::margins(mod_alt) %>% tidy()
+margins::margins(mod_alt) |> tidy()
 ```
 
 For `{broom.helpers}`, `{gtsummary}` or `{ggstats}`, use `tidy_margins()`.
 
 ```{r}
-mod_alt %>%
+mod_alt |>
   tbl_regression(
     tidy_fun = tidy_margins,
     estimate_fun = scales::label_percent(style_positive = "plus")
-  ) %>%
+  ) |>
   bold_labels()
 ```
 
@@ -715,17 +715,17 @@ For marginal effects at the mean[^2], simple use `newdata = "mean"`.
 [^2]: More precisely, `marginaleffects::marginaleffects()` use the mean of continuous variables and the mode of categorical variables.
 
 ```{r}
-mod %>%
+mod |>
   tbl_regression(
     tidy_fun = tidy_avg_slopes,
     newdata = "mean",
     estimate_fun = scales::label_percent(style_positive = "plus")
-  ) %>%
+  ) |>
   bold_labels()
 ```
 
 ```{r}
-mod %>%
+mod |>
   ggstats::ggcoef_model(
     tidy_fun = tidy_avg_slopes,
     tidy_args = list(newdata = "mean")
@@ -740,17 +740,17 @@ mod %>%
 Simply use `newdata = "marginalmeans"`.
 
 ```{r}
-mod %>%
+mod |>
   tbl_regression(
     tidy_fun = tidy_avg_slopes,
     newdata = "marginalmeans",
     estimate_fun = scales::label_percent(style_positive = "plus")
-  ) %>%
+  ) |>
   bold_labels()
 ```
 
 ```{r}
-mod %>%
+mod |>
   ggstats::ggcoef_model(
     tidy_fun = tidy_avg_slopes,
     tidy_args = list(newdata = "marginalmeans")

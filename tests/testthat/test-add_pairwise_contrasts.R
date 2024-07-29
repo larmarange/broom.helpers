@@ -5,8 +5,8 @@ test_that("tidy_add_pairwise_contrasts() works for glm", {
 
   mod <- glm(response ~ stage + trt, gtsummary::trial, family = binomial)
 
-  res <- mod %>%
-    tidy_and_attach() %>%
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_pairwise_contrasts()
   expect_equivalent(
     res$term,
@@ -16,8 +16,8 @@ test_that("tidy_add_pairwise_contrasts() works for glm", {
     )
   )
 
-  res <- mod %>%
-    tidy_and_attach(exponentiate = TRUE) %>%
+  res <- mod |>
+    tidy_and_attach(exponentiate = TRUE) |>
     tidy_add_pairwise_contrasts()
   expect_equivalent(
     res$term,
@@ -35,8 +35,8 @@ test_that("tidy_add_pairwise_contrasts() works for glm", {
     c(0.25, 0.2, 0.36, 0.56, 0.27, 0.42, 0.23, 0.67)
   )
 
-  res <- mod %>%
-    tidy_and_attach(exponentiate = TRUE, conf.level = .9) %>%
+  res <- mod |>
+    tidy_and_attach(exponentiate = TRUE, conf.level = .9) |>
     tidy_add_pairwise_contrasts(
       variables = stage,
       keep_model_terms = TRUE,
@@ -54,7 +54,7 @@ test_that("tidy_add_pairwise_contrasts() works for glm", {
     c(0.27, 0.3, 0.54, 0.4, 0.6, 0.33, 0.46, 0.19, 0.27, 0.49, 0.74)
   )
 
-  res <- mod %>%
+  res <- mod |>
     tidy_plus_plus(exponentiate = TRUE, add_pairwise_contrasts = TRUE)
   expect_equivalent(
     res$term,
@@ -64,9 +64,9 @@ test_that("tidy_add_pairwise_contrasts() works for glm", {
     )
   )
 
-  res1 <- mod %>%
+  res1 <- mod |>
     tidy_plus_plus(add_pairwise_contrasts = TRUE)
-  res2 <- mod %>%
+  res2 <- mod |>
     tidy_plus_plus(add_pairwise_contrasts = TRUE, contrasts_adjust = "none")
   expect_false(identical(res1, res2))
 })

@@ -46,17 +46,17 @@ It is possible to pass a custom label for an interaction
 term in \code{labels} (see examples).
 }
 \examples{
-df <- Titanic \%>\%
-  dplyr::as_tibble() \%>\%
-  dplyr::mutate(Survived = factor(Survived, c("No", "Yes"))) \%>\%
+df <- Titanic |>
+  dplyr::as_tibble() |>
+  dplyr::mutate(Survived = factor(Survived, c("No", "Yes"))) |>
   labelled::set_variable_labels(
     Class = "Passenger's class",
     Sex = "Sex"
   )
 
-df \%>\%
-  glm(Survived ~ Class * Age * Sex, data = ., weights = .$n, family = binomial) \%>\%
-  tidy_and_attach() \%>\%
+df |>
+  glm(Survived ~ Class * Age * Sex, data = ., weights = .$n, family = binomial) |>
+  tidy_and_attach() |>
   tidy_add_variable_labels(
     labels = list(
       "(Intercept)" = "Custom intercept",

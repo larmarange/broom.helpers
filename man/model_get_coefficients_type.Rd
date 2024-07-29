@@ -71,13 +71,13 @@ Indicate the type of coefficient among "generic", "logistic",
 "poisson", "relative_risk" or "prop_hazard".
 }
 \examples{
-lm(hp ~ mpg + factor(cyl), mtcars) \%>\%
+lm(hp ~ mpg + factor(cyl), mtcars) |>
   model_get_coefficients_type()
 
-Titanic \%>\%
-  dplyr::as_tibble() \%>\%
-  dplyr::mutate(Survived = factor(Survived, c("No", "Yes"))) \%>\%
-  glm(Survived ~ Class + Age * Sex, data = ., weights = .$n, family = binomial) \%>\%
+Titanic |>
+  dplyr::as_tibble() |>
+  dplyr::mutate(Survived = factor(Survived, c("No", "Yes"))) |>
+  glm(Survived ~ Class + Age * Sex, data = ., weights = .$n, family = binomial) |>
   model_get_coefficients_type()
 }
 \seealso{

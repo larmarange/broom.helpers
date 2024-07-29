@@ -33,18 +33,18 @@
 #' @family tidy_helpers
 #' @examplesIf interactive()
 #' if (.assert_package("gtsummary", boolean = TRUE) && .assert_package("emmeans", boolean = TRUE)) {
-#'   df <- Titanic %>%
-#'     dplyr::as_tibble() %>%
+#'   df <- Titanic |>
+#'     dplyr::as_tibble() |>
 #'     dplyr::mutate(dplyr::across(where(is.character), factor))
 #'
-#'   df %>%
+#'   df |>
 #'     glm(
 #'       Survived ~ Class + Age + Sex,
 #'       data = ., weights = .$n, family = binomial,
 #'       contrasts = list(Age = contr.sum, Class = "contr.SAS")
-#'     ) %>%
-#'     tidy_and_attach(exponentiate = TRUE) %>%
-#'     tidy_add_reference_rows() %>%
+#'     ) |>
+#'     tidy_and_attach(exponentiate = TRUE) |>
+#'     tidy_add_reference_rows() |>
 #'     tidy_add_estimate_to_reference_rows()
 #'
 #'   glm(
@@ -56,9 +56,9 @@
 #'       grade = contr.treatment(3, base = 2),
 #'       trt = contr.treatment(2, base = 2)
 #'     )
-#'   ) %>%
-#'     tidy_and_attach() %>%
-#'     tidy_add_reference_rows() %>%
+#'   ) |>
+#'     tidy_and_attach() |>
+#'     tidy_add_reference_rows() |>
 #'     tidy_add_estimate_to_reference_rows()
 #' }
 tidy_add_estimate_to_reference_rows <- function(
@@ -85,15 +85,15 @@ tidy_add_estimate_to_reference_rows <- function(
   .attributes$exponentiate <- exponentiate
 
   if (!"reference_row" %in% names(x)) {
-    x <- x %>% tidy_add_reference_rows(model = model)
+    x <- x |> tidy_add_reference_rows(model = model)
   }
 
   if (!"estimate" %in% names(x)) { # to avoid a problem with certain types of model (e.g. gam)
-    return(x %>% tidy_attach_model(model))
+    return(x |> tidy_attach_model(model))
   }
 
   # treatment contrasts
-  x <- x %>%
+  x <- x |>
     dplyr::mutate(
       estimate = dplyr::if_else(
         !is.na(.data$reference_row) &
@@ -125,7 +125,7 @@ tidy_add_estimate_to_reference_rows <- function(
     }
   }
 
-  x %>%
+  x |>
     tidy_attach_model(model = model, .attributes = .attributes)
 }
 
@@ -176,13 +176,13 @@ tidy_add_estimate_to_reference_rows <- function(
       conf.high = NA_real_
     )
   } else {
-    res <- dc$contrasts %>%
-      as.data.frame(destroy.annotations = TRUE) %>%
-      dplyr::last() %>%
+    res <- dc$contrasts |>
+      as.data.frame(destroy.annotations = TRUE) |>
+      dplyr::last() |>
       dplyr::select("estimate", std.error = "SE", "p.value")
-    ci <- dc$contrasts %>%
-      stats::confint(level = conf.level) %>%
-      as.data.frame() %>%
+    ci <- dc$contrasts |>
+      stats::confint(level = conf.level) |>
+      as.data.frame() |>
       dplyr::last()
     if ("asymp.LCL" %in% names(ci)) {
       res$conf.low <- ci$asymp.LCL

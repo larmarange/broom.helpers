@@ -32,23 +32,23 @@
 #'   data = mtcars,
 #'   family = binomial,
 #'   contrasts = list(`factor(cyl)` = contr.sum)
-#' ) %>%
+#' ) |>
 #'   model_list_terms_levels()
 #'
-#' df <- Titanic %>%
-#'   dplyr::as_tibble() %>%
+#' df <- Titanic |>
+#'   dplyr::as_tibble() |>
 #'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
 #'
-#' mod <- df %>%
+#' mod <- df |>
 #'   glm(
 #'     Survived ~ Class + Age + Sex,
 #'     data = ., weights = .$n, family = binomial,
 #'     contrasts = list(Age = contr.sum, Class = "contr.helmert")
 #'   )
-#' mod %>% model_list_terms_levels()
-#' mod %>% model_list_terms_levels("{level} vs {reference_level}")
-#' mod %>% model_list_terms_levels("{variable} [{level} - {reference_level}]")
-#' mod %>% model_list_terms_levels(
+#' mod |> model_list_terms_levels()
+#' mod |> model_list_terms_levels("{level} vs {reference_level}")
+#' mod |> model_list_terms_levels("{variable} [{level} - {reference_level}]")
+#' mod |> model_list_terms_levels(
 #'   "{ifelse(reference, level, paste(level, '-', reference_level))}"
 #' )
 model_list_terms_levels <- function(
@@ -72,10 +72,10 @@ model_list_terms_levels.default <- function(
 
   sdif_term_level <- match.arg(sdif_term_level)
 
-  contrasts_list <- contrasts_list %>%
+  contrasts_list <- contrasts_list |>
     # keep only treatment, SAS and sum contrasts
     dplyr::filter(
-      .data$contrasts %>%
+      .data$contrasts |>
         stringr::str_starts("contr.treatment|contr.SAS|contr.sum|no.contrast|contr.sdif")
     )
   xlevels <- model_get_xlevels(model)
@@ -84,7 +84,7 @@ model_list_terms_levels.default <- function(
     return(NULL)
   }
 
-  model_terms <- model_identify_variables(model) %>%
+  model_terms <- model_identify_variables(model) |>
     dplyr::filter(!is.na(.data$variable))
 
   if (nrow(model_terms) == 0) {
@@ -193,19 +193,19 @@ model_list_terms_levels.default <- function(
     }
   }
 
-  res %>%
+  res |>
     dplyr::left_join(
-      model %>%
-        model_list_variables(labels = variable_labels) %>%
+      model |>
+        model_list_variables(labels = variable_labels) |>
         dplyr::select(all_of(c("variable", "var_label"))),
       by = "variable"
-    ) %>%
+    ) |>
     dplyr::left_join(
-      model %>%
-        model_get_nlevels() %>%
+      model |>
+        model_get_nlevels() |>
         dplyr::select(all_of(c("variable", "var_nlevels"))),
       by = "variable"
-    ) %>%
+    ) |>
     dplyr::mutate(
       dichotomous = .data$var_nlevels == 2,
       label = stringr::str_glue_data(res, label_pattern)
@@ -222,7 +222,7 @@ model_list_terms_levels.default <- function(
       stringr::str_count(
         observed,
         paste0("(^|:)", .escape_regex(i), "(:|$)")
-      ) %>%
+      ) |>
       sum()
   }
   total

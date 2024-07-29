@@ -58,23 +58,23 @@ glm(
   data = mtcars,
   family = binomial,
   contrasts = list(`factor(cyl)` = contr.sum)
-) \%>\%
+) |>
   model_list_terms_levels()
 
-df <- Titanic \%>\%
-  dplyr::as_tibble() \%>\%
+df <- Titanic |>
+  dplyr::as_tibble() |>
   dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
 
-mod <- df \%>\%
+mod <- df |>
   glm(
     Survived ~ Class + Age + Sex,
     data = ., weights = .$n, family = binomial,
     contrasts = list(Age = contr.sum, Class = "contr.helmert")
   )
-mod \%>\% model_list_terms_levels()
-mod \%>\% model_list_terms_levels("{level} vs {reference_level}")
-mod \%>\% model_list_terms_levels("{variable} [{level} - {reference_level}]")
-mod \%>\% model_list_terms_levels(
+mod |> model_list_terms_levels()
+mod |> model_list_terms_levels("{level} vs {reference_level}")
+mod |> model_list_terms_levels("{variable} [{level} - {reference_level}]")
+mod |> model_list_terms_levels(
   "{ifelse(reference, level, paste(level, '-', reference_level))}"
 )
 }

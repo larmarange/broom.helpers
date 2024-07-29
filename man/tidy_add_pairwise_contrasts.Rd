@@ -60,20 +60,20 @@ regression, support of pairwise contrasts is still experimental.
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 if (.assert_package("emmeans", boolean = TRUE)) {
   mod1 <- lm(Sepal.Length ~ Species, data = iris)
-  mod1 \%>\%
-    tidy_and_attach() \%>\%
+  mod1 |>
+    tidy_and_attach() |>
     tidy_add_pairwise_contrasts()
 
-  mod1 \%>\%
-    tidy_and_attach() \%>\%
+  mod1 |>
+    tidy_and_attach() |>
     tidy_add_pairwise_contrasts(pairwise_reverse = FALSE)
 
-  mod1 \%>\%
-    tidy_and_attach() \%>\%
+  mod1 |>
+    tidy_and_attach() |>
     tidy_add_pairwise_contrasts(keep_model_terms = TRUE)
 
-  mod1 \%>\%
-    tidy_and_attach() \%>\%
+  mod1 |>
+    tidy_and_attach() |>
     tidy_add_pairwise_contrasts(contrasts_adjust = "none")
 
   if (.assert_package("gtsummary", boolean = TRUE)) {
@@ -82,8 +82,8 @@ if (.assert_package("emmeans", boolean = TRUE)) {
       data = gtsummary::trial,
       family = binomial
     )
-    mod2 \%>\%
-      tidy_and_attach(exponentiate = TRUE) \%>\%
+    mod2 |>
+      tidy_and_attach(exponentiate = TRUE) |>
       tidy_add_pairwise_contrasts()
   }
 }

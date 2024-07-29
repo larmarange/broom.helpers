@@ -11,34 +11,34 @@
 #' @family model_helpers
 #' @examples
 #' mod <- lm(Sepal.Length ~ Sepal.Width, iris)
-#' mod %>% model_get_weights()
+#' mod |> model_get_weights()
 #'
 #' mod <- lm(hp ~ mpg + factor(cyl) + disp:hp, mtcars, weights = mtcars$gear)
-#' mod %>% model_get_weights()
+#' mod |> model_get_weights()
 #'
 #' mod <- glm(
 #'   response ~ stage * grade + trt,
 #'   gtsummary::trial,
 #'   family = binomial
 #' )
-#' mod %>% model_get_weights()
+#' mod |> model_get_weights()
 #'
 #' mod <- glm(
 #'   Survived ~ Class * Age + Sex,
-#'   data = Titanic %>% as.data.frame(),
+#'   data = Titanic |> as.data.frame(),
 #'   weights = Freq,
 #'   family = binomial
 #' )
-#' mod %>% model_get_weights()
+#' mod |> model_get_weights()
 #'
-#' d <- dplyr::as_tibble(Titanic) %>%
-#'   dplyr::group_by(Class, Sex, Age) %>%
+#' d <- dplyr::as_tibble(Titanic) |>
+#'   dplyr::group_by(Class, Sex, Age) |>
 #'   dplyr::summarise(
 #'     n_survived = sum(n * (Survived == "Yes")),
 #'     n_dead = sum(n * (Survived == "No"))
 #'   )
 #' mod <- glm(cbind(n_survived, n_dead) ~ Class * Age + Sex, data = d, family = binomial)
-#' mod %>% model_get_weights()
+#' mod |> model_get_weights()
 model_get_weights <- function(model) {
   UseMethod("model_get_weights")
 }
@@ -53,12 +53,12 @@ model_get_weights.default <- function(model) {
     }
   )
   if (is.null(w) || length(w) == 0) {
-    mf <- model %>% model_get_model_frame()
+    mf <- model |> model_get_model_frame()
     if (!is.null(mf)) {
       if ("(weights)" %in% names(mf)) {
-        w <- mf %>% purrr::pluck("(weights)")
+        w <- mf |> purrr::pluck("(weights)")
       } else {
-        w <- rep_len(1L, mf %>% nrow())
+        w <- rep_len(1L, mf |> nrow())
       }
     }
   }

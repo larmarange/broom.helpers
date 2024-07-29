@@ -12,7 +12,7 @@
 #' with [broom::tidy()], using `"mean"` and `"precision"` values.
 #' @examplesIf interactive()
 #' if (.assert_package("parameters", boolean = TRUE)) {
-#'   lm(Sepal.Length ~ Sepal.Width + Species, data = iris) %>%
+#'   lm(Sepal.Length ~ Sepal.Width + Species, data = iris) |>
 #'     tidy_parameters()
 #' }
 #' @export
@@ -34,16 +34,16 @@ tidy_parameters <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   }
 
   res <-
-    do.call(parameters::model_parameters, args) %>%
+    do.call(parameters::model_parameters, args) |>
     parameters::standardize_names(style = "broom")
 
   if (inherits(x, "multinom")) {
     if ("response" %in% colnames(res)) {
-      res <- res %>%
+      res <- res |>
         dplyr::rename(y.level = "response")
     } else {
       # binary
-      res$y.level <- x$lev %>% utils::tail(n = 1)
+      res$y.level <- x$lev |> utils::tail(n = 1)
     }
   }
 
@@ -226,7 +226,7 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
 
   # cleaning in conf.int = FALSE
   if (isFALSE(conf.int)) {
-    res <- res %>%
+    res <- res |>
       dplyr::select(-dplyr::any_of(c("conf.low", "conf.high")))
   }
 
@@ -281,7 +281,7 @@ tidy_broom <- function(x, ...) {
 #'     id = id,
 #'     repeated = time,
 #'   )
-#'   mod %>% tidy_multgee()
+#'   mod |> tidy_multgee()
 #'
 #'   mod2 <- ordLORgee(
 #'     formula = y ~ factor(time) + factor(trt) + factor(baseline),
@@ -290,7 +290,7 @@ tidy_broom <- function(x, ...) {
 #'     repeated = time,
 #'     LORstr = "uniform"
 #'   )
-#'   mod2 %>% tidy_multgee()
+#'   mod2 |> tidy_multgee()
 #' }
 tidy_multgee <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   if (!inherits(x, "LORgee")) {
@@ -305,13 +305,13 @@ tidy_multgee <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 
   # multinomial model
   if (stringr::str_detect(x$title, "NOMINAL")) {
-    mf <- x %>% model_get_model_frame()
+    mf <- x |> model_get_model_frame()
     if (!is.factor(mf[[1]])) {
       mf[[1]] <- factor(mf[[1]])
     }
     y.levels <- levels(mf[[1]])[-length(levels(mf[[1]]))]
 
-    mm <- x %>% model_get_model_matrix()
+    mm <- x |> model_get_model_matrix()
     t <- colnames(mm)
 
     res$term <- rep.int(t, times = length(y.levels))
@@ -319,7 +319,7 @@ tidy_multgee <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 
     return(res)
   } else {
-    mm <- x %>% model_get_model_matrix()
+    mm <- x |> model_get_model_matrix()
     t <- colnames(mm)
     t <- t[t != "(Intercept)"]
     b <- res$term[stringr::str_starts(res$term, "beta")]
@@ -351,7 +351,7 @@ tidy_multgee <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 #'     data = pscl::bioChemists
 #'   )
 #'
-#'   mod %>% tidy_zeroinfl(exponentiate = TRUE)
+#'   mod |> tidy_zeroinfl(exponentiate = TRUE)
 #' }
 tidy_zeroinfl <- function(
     x,
