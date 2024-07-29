@@ -208,7 +208,7 @@ p <- mod |>
     labels = scales::label_percent(),
     limits = c(-0.2, 1)
   )
-p[[2]] <- p[[2]] + xlab("Age in years")
+p[[2]] <- p[[2]] + ggplot2::xlab("Age in years")
 p + patchwork::plot_annotation(
   title = "Marginal Predictions at the Mean"
 )
@@ -225,7 +225,7 @@ p <- mod |>
     labels = scales::label_percent(),
     limits = c(-0.2, 1)
   )
-p[[4]] <- p[[4]] + xlab("Age in years")
+p[[4]] <- p[[4]] + ggplot2::xlab("Age in years")
 p + patchwork::plot_annotation(
   title = "Marginal Predictions at the Mean"
 )
@@ -319,7 +319,7 @@ p <- plot_marginal_predictions(mod, type = "response") |>
     labels = scales::label_percent(),
     limits = c(-0.2, 1)
   )
-p[[2]] <- p[[2]] + xlab("Age in years")
+p[[2]] <- p[[2]] + ggplot2::xlab("Age in years")
 p + patchwork::plot_annotation(
   title = "Average Marginal Predictions"
 )
