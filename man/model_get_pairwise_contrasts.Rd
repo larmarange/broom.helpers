@@ -43,8 +43,8 @@ is added to the results. This support is still experimental.
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 if (.assert_package("emmeans", boolean = TRUE)) {
   mod <- lm(Sepal.Length ~ Species, data = iris)
-  mod \%>\% model_get_pairwise_contrasts(variables = "Species")
-  mod \%>\%
+  mod |> model_get_pairwise_contrasts(variables = "Species")
+  mod |>
     model_get_pairwise_contrasts(
       variables = "Species",
       contrasts_adjust = "none"

@@ -31,20 +31,20 @@
 #' @examplesIf interactive()
 #' if (.assert_package("emmeans", boolean = TRUE)) {
 #'   mod1 <- lm(Sepal.Length ~ Species, data = iris)
-#'   mod1 %>%
-#'     tidy_and_attach() %>%
+#'   mod1 |>
+#'     tidy_and_attach() |>
 #'     tidy_add_pairwise_contrasts()
 #'
-#'   mod1 %>%
-#'     tidy_and_attach() %>%
+#'   mod1 |>
+#'     tidy_and_attach() |>
 #'     tidy_add_pairwise_contrasts(pairwise_reverse = FALSE)
 #'
-#'   mod1 %>%
-#'     tidy_and_attach() %>%
+#'   mod1 |>
+#'     tidy_and_attach() |>
 #'     tidy_add_pairwise_contrasts(keep_model_terms = TRUE)
 #'
-#'   mod1 %>%
-#'     tidy_and_attach() %>%
+#'   mod1 |>
+#'     tidy_and_attach() |>
 #'     tidy_add_pairwise_contrasts(contrasts_adjust = "none")
 #'
 #'   if (.assert_package("gtsummary", boolean = TRUE)) {
@@ -53,8 +53,8 @@
 #'       data = gtsummary::trial,
 #'       family = binomial
 #'     )
-#'     mod2 %>%
-#'       tidy_and_attach(exponentiate = TRUE) %>%
+#'     mod2 |>
+#'       tidy_and_attach(exponentiate = TRUE) |>
 #'       tidy_add_pairwise_contrasts()
 #'   }
 #' }
@@ -80,7 +80,7 @@ tidy_add_pairwise_contrasts <- function(
   }
 
   if (!"contrasts" %in% names(x)) {
-    x <- x %>% tidy_add_contrasts(model = model)
+    x <- x |> tidy_add_contrasts(model = model)
   }
 
   .attributes <- .save_attributes(x)
@@ -113,19 +113,19 @@ tidy_add_pairwise_contrasts <- function(
     emmeans_args = emmeans_args
   )
 
-  x <- dplyr::bind_rows(x, pc) %>%
-    dplyr::mutate(variableF = forcats::fct_inorder(.data$variable)) %>%
-    dplyr::arrange(.data$variableF) %>%
-    tidyr::fill(all_of(c("var_class", "var_type", "var_nlevels"))) %>%
+  x <- dplyr::bind_rows(x, pc) |>
+    dplyr::mutate(variableF = forcats::fct_inorder(.data$variable)) |>
+    dplyr::arrange(.data$variableF) |>
+    tidyr::fill(all_of(c("var_class", "var_type", "var_nlevels"))) |>
     dplyr::select(-all_of("variableF"))
 
   if (!keep_model_terms) {
-    x <- x %>%
+    x <- x |>
       dplyr::filter(
         !(.data$variable %in% variables) | .data$contrasts_type == "pairwise"
       )
   }
 
-  x %>%
+  x |>
     tidy_attach_model(model = model, .attributes = .attributes)
 }

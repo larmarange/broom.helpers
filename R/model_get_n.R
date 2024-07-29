@@ -24,7 +24,7 @@
 #' @export
 #' @family model_helpers
 #' @examples
-#' lm(hp ~ mpg + factor(cyl) + disp:hp, mtcars) %>%
+#' lm(hp ~ mpg + factor(cyl) + disp:hp, mtcars) |>
 #'   model_get_n()
 #'
 #' mod <- glm(
@@ -33,52 +33,52 @@
 #'   family = binomial,
 #'   contrasts = list(stage = contr.sum, grade = contr.treatment(3, 2), trt = "contr.SAS")
 #' )
-#' mod %>% model_get_n()
+#' mod |> model_get_n()
 #'
 #' \dontrun{
 #' mod <- glm(
 #'   Survived ~ Class * Age + Sex,
-#'   data = Titanic %>% as.data.frame(),
+#'   data = Titanic |> as.data.frame(),
 #'   weights = Freq, family = binomial
 #' )
-#' mod %>% model_get_n()
+#' mod |> model_get_n()
 #'
-#' d <- dplyr::as_tibble(Titanic) %>%
-#'   dplyr::group_by(Class, Sex, Age) %>%
+#' d <- dplyr::as_tibble(Titanic) |>
+#'   dplyr::group_by(Class, Sex, Age) |>
 #'   dplyr::summarise(
 #'     n_survived = sum(n * (Survived == "Yes")),
 #'     n_dead = sum(n * (Survived == "No"))
 #'   )
 #' mod <- glm(cbind(n_survived, n_dead) ~ Class * Age + Sex, data = d, family = binomial)
-#' mod %>% model_get_n()
+#' mod |> model_get_n()
 #'
 #' mod <- glm(response ~ age + grade * trt, gtsummary::trial, family = poisson)
-#' mod %>% model_get_n()
+#' mod |> model_get_n()
 #'
 #' mod <- glm(
 #'   response ~ trt * grade + offset(ttdeath),
 #'   gtsummary::trial,
 #'   family = poisson
 #' )
-#' mod %>% model_get_n()
+#' mod |> model_get_n()
 #'
 #' dont
-#' df <- survival::lung %>% dplyr::mutate(sex = factor(sex))
+#' df <- survival::lung |> dplyr::mutate(sex = factor(sex))
 #' mod <- survival::coxph(survival::Surv(time, status) ~ ph.ecog + age + sex, data = df)
-#' mod %>% model_get_n()
+#' mod |> model_get_n()
 #'
 #' mod <- lme4::lmer(Reaction ~ Days + (Days | Subject), lme4::sleepstudy)
-#' mod %>% model_get_n()
+#' mod |> model_get_n()
 #'
 #' mod <- lme4::glmer(response ~ trt * grade + (1 | stage),
 #'   family = binomial, data = gtsummary::trial
 #' )
-#' mod %>% model_get_n()
+#' mod |> model_get_n()
 #'
 #' mod <- lme4::glmer(cbind(incidence, size - incidence) ~ period + (1 | herd),
 #'   family = binomial, data = lme4::cbpp
 #' )
-#' mod %>% model_get_n()
+#' mod |> model_get_n()
 #' }
 model_get_n <- function(model) {
   UseMethod("model_get_n")
@@ -87,12 +87,12 @@ model_get_n <- function(model) {
 #' @export
 #' @rdname model_get_n
 model_get_n.default <- function(model) {
-  tcm <- model %>% model_compute_terms_contributions()
+  tcm <- model |> model_compute_terms_contributions()
   if (is.null(tcm)) {
     return(NULL)
   }
 
-  w <- model %>% model_get_weights()
+  w <- model |> model_get_weights()
   n <- dplyr::tibble(
     term = colnames(tcm),
     n_obs = colSums(tcm * w)
@@ -105,22 +105,22 @@ model_get_n.default <- function(model) {
 #' @export
 #' @rdname model_get_n
 model_get_n.glm <- function(model) {
-  tcm <- model %>% model_compute_terms_contributions()
+  tcm <- model |> model_compute_terms_contributions()
   if (is.null(tcm)) {
     return(NULL)
   } # nocov
 
-  w <- model %>% model_get_weights()
+  w <- model |> model_get_weights()
   n <- dplyr::tibble(
     term = colnames(tcm),
     n_obs = colSums(tcm * w)
   )
   attr(n, "N_obs") <- sum(w)
 
-  ct <- model %>% model_get_coefficients_type()
+  ct <- model |> model_get_coefficients_type()
 
   if (ct %in% c("logistic", "poisson")) {
-    y <- model %>% model_get_response()
+    y <- model |> model_get_response()
     if (is.factor(y)) {
       # the first level denotes failure and all others success
       y <- as.integer(y != levels(y)[1])
@@ -130,7 +130,7 @@ model_get_n.glm <- function(model) {
   }
 
   if (ct == "poisson") {
-    off <- model %>% model_get_offset()
+    off <- model |> model_get_offset()
     if (is.null(off)) off <- 0L
     n$exposure <- colSums(tcm * exp(off) * w)
     attr(n, "Exposure") <- sum(exp(off) * w)
@@ -146,13 +146,13 @@ model_get_n.glmerMod <- model_get_n.glm
 #' @export
 #' @rdname model_get_n
 model_get_n.multinom <- function(model) {
-  tcm <- model %>% model_compute_terms_contributions()
+  tcm <- model |> model_compute_terms_contributions()
   if (is.null(tcm)) {
     return(NULL)
   } # nocov
 
-  w <- model %>% model_get_weights()
-  y <- model %>% model_get_response()
+  w <- model |> model_get_weights()
+  y <- model |> model_get_response()
   if (!is.factor(y)) y <- factor(y)
 
   n <- purrr::map_df(
@@ -182,12 +182,12 @@ model_get_n.LORgee <- function(model) {
 #' @export
 #' @rdname model_get_n
 model_get_n.coxph <- function(model) {
-  tcm <- model %>% model_compute_terms_contributions()
+  tcm <- model |> model_compute_terms_contributions()
   if (is.null(tcm)) {
     return(NULL)
   } # nocov
 
-  w <- model %>% model_get_weights()
+  w <- model |> model_get_weights()
   n <- dplyr::tibble(
     term = colnames(tcm),
     n_obs = colSums(tcm * w)
@@ -197,13 +197,13 @@ model_get_n.coxph <- function(model) {
   mf <- stats::model.frame(model) # using stats::model.frame() to get (id)
   if (!"(id)" %in% names(mf))
     mf[["(id)"]] <- seq_len(nrow(mf))
-  n_obs_per_ind <- mf %>%
+  n_obs_per_ind <- mf |>
     dplyr::add_count(dplyr::pick("(id)")) |>
     dplyr::pull("n")
   n$n_ind <- colSums(tcm * w / n_obs_per_ind)
   attr(n, "N_ind") <- sum(w / n_obs_per_ind)
 
-  y <- model %>% model_get_response()
+  y <- model |> model_get_response()
   status <- y[, ncol(y)]
   if (ncol(y) == 3) {
     time <- y[, 2] - y[, 1]
@@ -232,19 +232,19 @@ model_get_n.model_fit <- function(model) {
 #' @export
 #' @rdname model_get_n
 model_get_n.tidycrr <- function(model) {
-  tcm <- model %>% model_compute_terms_contributions()
+  tcm <- model |> model_compute_terms_contributions()
   if (is.null(tcm)) {
     return(NULL)
   } # nocov
 
-  w <- model %>% model_get_weights()
+  w <- model |> model_get_weights()
   n <- dplyr::tibble(
     term = colnames(tcm),
     n_obs = colSums(tcm * w)
   )
   attr(n, "N_obs") <- sum(w)
 
-  y <- model %>% model_get_response()
+  y <- model |> model_get_response()
   time <- y[, 1]
   status <- as.integer(y[, 2] == model$failcode)
 

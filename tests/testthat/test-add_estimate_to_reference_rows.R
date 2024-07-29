@@ -1,15 +1,15 @@
 test_that("tidy_add_estimate_to_reference_rows() works for basic models", {
   mod <- glm(response ~ stage + grade + trt, gtsummary::trial, family = binomial)
-  res <- mod %>%
-    tidy_and_attach() %>%
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_estimate_to_reference_rows()
   expect_equivalent(
     res$estimate[res$reference_row & !is.na(res$reference_row)],
     c(0, 0, 0)
   )
 
-  res <- mod %>%
-    tidy_and_attach(exponentiate = TRUE) %>%
+  res <- mod |>
+    tidy_and_attach(exponentiate = TRUE) |>
     tidy_add_estimate_to_reference_rows()
   expect_equivalent(
     res$estimate[res$reference_row & !is.na(res$reference_row)],
@@ -24,16 +24,16 @@ test_that("tidy_add_estimate_to_reference_rows() works for basic models", {
       trt = contr.SAS
     )
   )
-  res <- mod %>%
-    tidy_and_attach() %>%
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_estimate_to_reference_rows()
   expect_equivalent(
     res$estimate[res$reference_row & !is.na(res$reference_row)],
     c(0, 0, 0)
   )
 
-  res <- mod %>%
-    tidy_and_attach(exponentiate = TRUE) %>%
+  res <- mod |>
+    tidy_and_attach(exponentiate = TRUE) |>
     tidy_add_estimate_to_reference_rows()
   expect_equivalent(
     res$estimate[res$reference_row & !is.na(res$reference_row)],
@@ -46,8 +46,8 @@ test_that("tidy_add_estimate_to_reference_rows() works for basic models", {
     family = binomial,
     contrasts = list(stage = contr.sum, grade = contr.sum, trt = contr.sum)
   )
-  res <- mod %>%
-    tidy_and_attach() %>%
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_estimate_to_reference_rows()
   # should be -1 * sum of other coefficients when sum contrasts
   expect_equivalent(
@@ -68,8 +68,8 @@ test_that("tidy_add_estimate_to_reference_rows() works for basic models", {
   expect_false(any(is.na(res$conf.low)))
   expect_false(any(is.na(res$conf.high)))
 
-  res2 <- mod %>%
-    tidy_and_attach(exponentiate = TRUE) %>%
+  res2 <- mod |>
+    tidy_and_attach(exponentiate = TRUE) |>
     tidy_add_estimate_to_reference_rows()
   expect_equivalent(
     res2$estimate[res2$reference_row & res2$variable == "stage" & !is.na(res2$reference_row)],
@@ -90,8 +90,8 @@ test_that("tidy_add_estimate_to_reference_rows() works for basic models", {
     contrasts = list(stage = contr.sum, grade = contr.sum, trt = contr.sum)
   )
   suppressWarnings(
-    res <- mod %>%
-      tidy_and_attach() %>%
+    res <- mod |>
+      tidy_and_attach() |>
       tidy_add_estimate_to_reference_rows()
   )
   # should be -1 * sum of other coefficients when sum contrasts
@@ -116,20 +116,20 @@ test_that("tidy_add_estimate_to_reference_rows() works for basic models", {
   )
 
   expect_error(
-    res <- mod %>%
-      tidy_and_attach() %>%
+    res <- mod |>
+      tidy_and_attach() |>
       tidy_add_estimate_to_reference_rows(),
     NA
   )
   expect_error(
-    res2 <- mod %>%
-      tidy_and_attach(conf.level = .8) %>%
+    res2 <- mod |>
+      tidy_and_attach(conf.level = .8) |>
       tidy_add_estimate_to_reference_rows(),
     NA
   )
   expect_error(
-    res3 <- mod %>%
-      tidy_and_attach() %>%
+    res3 <- mod |>
+      tidy_and_attach() |>
       tidy_add_estimate_to_reference_rows(conf.level = .8),
     NA
   )
@@ -141,18 +141,18 @@ test_that("tidy_add_estimate_to_reference_rows() works for basic models", {
 test_that("test tidy_add_estimate_to_reference_rows() checks", {
   mod <- glm(response ~ stage + grade + trt, gtsummary::trial, family = binomial)
   # expect an error if no model attached
-  expect_error(mod %>% broom::tidy() %>% tidy_add_estimate_to_reference_rows(exponentiate = TRUE))
+  expect_error(mod |> broom::tidy() |> tidy_add_estimate_to_reference_rows(exponentiate = TRUE))
 
   # expect an error if no value for exponentiate
   expect_error(
-    mod %>%
-      tidy_and_attach() %>%
+    mod |>
+      tidy_and_attach() |>
       tidy_add_estimate_to_reference_rows(exponentiate = NULL)
   )
   expect_error(
-    mod %>%
-      broom::tidy() %>%
-      tidy_attach_model(mod) %>%
+    mod |>
+      broom::tidy() |>
+      tidy_attach_model(mod) |>
       tidy_add_estimate_to_reference_rows()
   )
 
@@ -163,21 +163,21 @@ test_that("test tidy_add_estimate_to_reference_rows() checks", {
     response ~ stage + grade + trt, gtsummary::trial,
     family = binomial, contrasts = list(grade = contr.sum)
   )
-  res <- mod %>%
-    tidy_and_attach() %>%
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_reference_rows()
   class(mod) <- "unknown"
   expect_message(
-    res %>% tidy_add_estimate_to_reference_rows(model = mod)
+    res |> tidy_add_estimate_to_reference_rows(model = mod)
   )
 })
 
 test_that("tidy_add_estimate_to_reference_rows() works with character variables", {
-  df <- gtsummary::trial %>%
+  df <- gtsummary::trial |>
     dplyr::mutate(dplyr::across(where(is.factor), as.character))
   mod <- glm(response ~ stage + grade + trt, df, family = binomial)
-  res <- mod %>%
-    tidy_and_attach() %>%
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_estimate_to_reference_rows()
   expect_equivalent(
     res$estimate[res$reference_row & !is.na(res$reference_row)],
@@ -192,8 +192,8 @@ test_that("tidy_add_estimate_to_reference_rows() works with character variables"
       trt = contr.SAS
     )
   )
-  res <- mod %>%
-    tidy_and_attach() %>%
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_estimate_to_reference_rows()
   expect_equivalent(
     res$estimate[res$reference_row & !is.na(res$reference_row)],
@@ -206,8 +206,8 @@ test_that("tidy_add_estimate_to_reference_rows() works with character variables"
     family = binomial,
     contrasts = list(stage = contr.sum, grade = contr.sum, trt = contr.sum)
   )
-  res <- mod %>%
-    tidy_and_attach() %>%
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_estimate_to_reference_rows()
   # should be -1 * sum of other coefficients when sum contrasts
   expect_equivalent(
@@ -228,29 +228,29 @@ test_that("tidy_add_estimate_to_reference_rows() works with character variables"
 test_that("tidy_add_estimate_to_reference_rows() handles variables having non standard name", {
   skip_if_not_installed("emmeans")
 
-  df <- gtsummary::trial %>% dplyr::mutate(`grade of kids` = grade)
+  df <- gtsummary::trial |> dplyr::mutate(`grade of kids` = grade)
   mod <- glm(response ~ stage + `grade of kids` + trt, df,
     family = binomial,
     contrasts = list(`grade of kids` = contr.sum)
   )
   expect_message(
-    res <- mod %>%
-      tidy_and_attach(tidy_fun = broom::tidy) %>%
+    res <- mod |>
+      tidy_and_attach(tidy_fun = broom::tidy) |>
       tidy_add_estimate_to_reference_rows(),
     NA
   )
   expect_equivalent(
-    res$estimate[res$variable == "grade of kids" & !is.na(res$variable)] %>% sum(),
+    res$estimate[res$variable == "grade of kids" & !is.na(res$variable)] |> sum(),
     0
   )
 })
 
 test_that("tidy_add_estimate_to_reference_rows() preserve estimates of continuous variables", {
   mod <- glm(response ~ poly(age, 3) + ttdeath, na.omit(gtsummary::trial), family = binomial)
-  res1 <- mod %>%
-    tidy_and_attach() %>%
+  res1 <- mod |>
+    tidy_and_attach() |>
     tidy_add_reference_rows()
-  res2 <- res1 %>% tidy_add_estimate_to_reference_rows()
+  res2 <- res1 |> tidy_add_estimate_to_reference_rows()
   expect_equivalent(res1$estimate, res2$estimate)
 })
 
@@ -264,8 +264,8 @@ test_that("tidy_add_estimate_to_reference_rows() works with lme4::lmer", {
   df$group <- rep.int(1:2, 100)
   mod <- lme4::lmer(marker ~ stage + grade + (1 | group), df)
   expect_error(
-    mod %>%
-      tidy_and_attach(tidy_fun = broom.mixed::tidy) %>%
+    mod |>
+      tidy_and_attach(tidy_fun = broom.mixed::tidy) |>
       tidy_add_estimate_to_reference_rows(),
     NA
   )
@@ -282,8 +282,8 @@ test_that("tidy_add_estimate_to_reference_rows() works with lme4::glmer", {
     mod <- lme4::glmer(response ~ stage + grade + (1 | group), df, family = binomial)
   )
   expect_error(
-    mod %>%
-      tidy_and_attach(tidy_fun = broom.mixed::tidy) %>%
+    mod |>
+      tidy_and_attach(tidy_fun = broom.mixed::tidy) |>
       tidy_add_estimate_to_reference_rows(),
     NA
   )
@@ -291,9 +291,9 @@ test_that("tidy_add_estimate_to_reference_rows() works with lme4::glmer", {
 
 
 test_that("tidy_add_estimate_to_reference_rows() works with survival::coxph", {
-  df <- survival::lung %>% dplyr::mutate(sex = factor(sex))
+  df <- survival::lung |> dplyr::mutate(sex = factor(sex))
   mod <- survival::coxph(survival::Surv(time, status) ~ ph.ecog + age + sex, data = df)
-  expect_error(mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows(), NA)
+  expect_error(mod |> tidy_and_attach() |> tidy_add_estimate_to_reference_rows(), NA)
 })
 
 test_that("tidy_add_estimate_to_reference_rows() works with survival::survreg", {
@@ -302,12 +302,12 @@ test_that("tidy_add_estimate_to_reference_rows() works with survival::survreg", 
     survival::ovarian,
     dist = "exponential"
   )
-  expect_error(mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows(), NA)
+  expect_error(mod |> tidy_and_attach() |> tidy_add_estimate_to_reference_rows(), NA)
 })
 
 test_that("tidy_add_estimate_to_reference_rows() works with nnet::multinom", {
   mod <- nnet::multinom(grade ~ stage + marker + age, data = gtsummary::trial, trace = FALSE)
-  expect_error(mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows(), NA)
+  expect_error(mod |> tidy_and_attach() |> tidy_add_estimate_to_reference_rows(), NA)
 
   # no emmeans for multinom
   # should return a warning but not an error
@@ -316,31 +316,31 @@ test_that("tidy_add_estimate_to_reference_rows() works with nnet::multinom", {
     data = gtsummary::trial, trace = FALSE,
     contrasts = list(stage = contr.sum)
   )
-  expect_message(mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows())
+  expect_message(mod |> tidy_and_attach() |> tidy_add_estimate_to_reference_rows())
 })
 
 test_that("tidy_add_estimate_to_reference_rows() works with survey::svyglm", {
   skip_if_not_installed("survey")
   df <- survey::svydesign(~1, weights = ~1, data = gtsummary::trial)
   mod <- survey::svyglm(response ~ age + grade * trt, df, family = quasibinomial)
-  expect_error(mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows(), NA)
+  expect_error(mod |> tidy_and_attach() |> tidy_add_estimate_to_reference_rows(), NA)
 })
 
 test_that("tidy_add_estimate_to_reference_rows() works with ordinal::clm", {
   mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine)
-  expect_error(mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows(), NA)
+  expect_error(mod |> tidy_and_attach() |> tidy_add_estimate_to_reference_rows(), NA)
 })
 
 
 test_that("tidy_add_estimate_to_reference_rows() works with ordinal::clmm", {
   mod <- ordinal::clmm(rating ~ temp * contact + (1 | judge), data = ordinal::wine)
-  expect_error(mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows(), NA)
+  expect_error(mod |> tidy_and_attach() |> tidy_add_estimate_to_reference_rows(), NA)
 })
 
 
 test_that("tidy_add_estimate_to_reference_rows() works with MASS::polr", {
   mod <- MASS::polr(Sat ~ Infl + Type + Cont, weights = Freq, data = MASS::housing)
-  expect_error(mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows(), NA)
+  expect_error(mod |> tidy_and_attach() |> tidy_add_estimate_to_reference_rows(), NA)
 })
 
 
@@ -353,7 +353,7 @@ test_that("tidy_add_estimate_to_reference_rows() works with geepack::geeglm", {
   suppressWarnings(
     mod <- geepack::geeglm(mf, data = df, id = Pig, family = poisson("identity"), corstr = "ar1")
   )
-  expect_error(mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows(), NA)
+  expect_error(mod |> tidy_and_attach() |> tidy_add_estimate_to_reference_rows(), NA)
 })
 
 
@@ -361,7 +361,7 @@ test_that("tidy_add_estimate_to_reference_rows() works with gam::gam", {
   skip_if_not_installed("gam")
   data(kyphosis, package = "gam")
   mod <- gam::gam(Kyphosis ~ gam::s(Age, 4) + Number, family = binomial, data = kyphosis)
-  expect_error(mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows(), NA)
+  expect_error(mod |> tidy_and_attach() |> tidy_add_estimate_to_reference_rows(), NA)
 })
 
 
@@ -377,5 +377,5 @@ test_that("tidy_add_estimate_to_reference_rows() works with lavaan::lavaan", {
     auto.var = TRUE, auto.fix.first = TRUE,
     auto.cov.lv.x = TRUE
   )
-  expect_error(mod %>% tidy_and_attach() %>% tidy_add_estimate_to_reference_rows(), NA)
+  expect_error(mod |> tidy_and_attach() |> tidy_add_estimate_to_reference_rows(), NA)
 })

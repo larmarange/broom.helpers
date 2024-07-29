@@ -16,7 +16,7 @@ model_list_higher_order_variables(model)
 List higher order variables of a model
 }
 \examples{
-lm(hp ~ mpg + factor(cyl) + disp:hp, mtcars) \%>\%
+lm(hp ~ mpg + factor(cyl) + disp:hp, mtcars) |>
   model_list_higher_order_variables()
 
 mod <- glm(
@@ -24,15 +24,15 @@ mod <- glm(
   gtsummary::trial,
   family = binomial
 )
-mod \%>\% model_list_higher_order_variables()
+mod |> model_list_higher_order_variables()
 
 mod <- glm(
   Survived ~ Class * Age + Sex,
-  data = Titanic \%>\% as.data.frame(),
+  data = Titanic |> as.data.frame(),
   weights = Freq,
   family = binomial
 )
-mod \%>\% model_list_higher_order_variables()
+mod |> model_list_higher_order_variables()
 }
 \seealso{
 Other model_helpers: 

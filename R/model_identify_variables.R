@@ -15,22 +15,22 @@
 #' @family model_helpers
 #' @seealso [tidy_identify_variables()]
 #' @examples
-#' Titanic %>%
-#'   dplyr::as_tibble() %>%
-#'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes"))) %>%
-#'   glm(
-#'     Survived ~ Class + Age * Sex,
-#'     data = ., weights = .$n,
-#'     family = binomial
-#'   ) %>%
+#' df <- Titanic |>
+#'   dplyr::as_tibble() |>
+#'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
+#' glm(
+#'   Survived ~ Class + Age * Sex,
+#'   data = df, weights = df$n,
+#'   family = binomial
+#' ) |>
 #'   model_identify_variables()
 #'
-#' iris %>%
+#' iris |>
 #'   lm(
 #'     Sepal.Length ~ poly(Sepal.Width, 2) + Species,
-#'     data = .,
+#'     data = _,
 #'     contrasts = list(Species = contr.sum)
-#'   ) %>%
+#'   ) |>
 #'   model_identify_variables()
 model_identify_variables <- function(model) {
   UseMethod("model_identify_variables")
@@ -39,7 +39,7 @@ model_identify_variables <- function(model) {
 #' @rdname model_identify_variables
 #' @export
 model_identify_variables.default <- function(model) {
-  assign <- model %>% model_get_assign()
+  assign <- model |> model_get_assign()
   model_matrix <- attr(assign, "model_matrix")
 
   if (is.null(model_matrix) || is.null(assign)) {
@@ -50,34 +50,34 @@ model_identify_variables.default <- function(model) {
         var_class = NA_character_,
         var_type = NA_character_,
         var_nlevels = NA_integer_
-      ) %>%
+      ) |>
         dplyr::filter(FALSE)
     )
   }
 
   assign[assign == 0] <- NA
   model_terms <- model_get_terms(model)
-  variable_names <- model %>% model_list_variables(only_variable = TRUE)
-  variables <- attr(model_terms, "term.labels") %>%
+  variable_names <- model |> model_list_variables(only_variable = TRUE)
+  variables <- attr(model_terms, "term.labels") |>
     .clean_backticks(variable_names = variable_names)
 
   tibble::tibble(
     term = colnames(model_matrix),
     variable = variables[assign]
-  ) %>%
+  ) |>
     # specific case of polynomial terms defined with poly()
     dplyr::mutate(
       variable = stringr::str_replace(.data$variable, "^poly\\((.*),(.*)\\)$", "\\1")
-    ) %>%
+    ) |>
     dplyr::left_join(
-      model_list_variables(model) %>%
+      model_list_variables(model) |>
         dplyr::select("variable", "var_class"),
       by = "variable"
-    ) %>%
+    ) |>
     dplyr::left_join(
       model_get_nlevels(model),
       by = "variable"
-    ) %>%
+    ) |>
     .compute_var_type()
 }
 
@@ -88,7 +88,7 @@ model_identify_variables.lavaan <- function(model) {
   tibble::tibble(
     term = paste(model@ParTable$lhs, model@ParTable$op, model@ParTable$rhs),
     variable = .clean_backticks(model@ParTable$lhs)
-  ) %>%
+  ) |>
     dplyr::left_join(
       tibble::tibble(
         variable = .clean_backticks(model@Data@ov$name),
@@ -96,7 +96,7 @@ model_identify_variables.lavaan <- function(model) {
         var_nlevels = model@Data@ov$nlev
       ),
       by = "variable"
-    ) %>%
+    ) |>
     dplyr::mutate(
       var_nlevels = dplyr::if_else(
         .data$var_nlevels == 0,
@@ -108,7 +108,7 @@ model_identify_variables.lavaan <- function(model) {
         "factor",
         .data$var_class
       )
-    ) %>%
+    ) |>
     .compute_var_type()
 }
 
@@ -116,14 +116,14 @@ model_identify_variables.lavaan <- function(model) {
 #' @rdname model_identify_variables
 #' @export
 model_identify_variables.aov <- function(model) {
-  model %>%
-    model_list_variables() %>%
-    dplyr::mutate(term = .data$variable) %>%
-    dplyr::select(dplyr::all_of(c("term", "variable", "var_class"))) %>%
+  model |>
+    model_list_variables() |>
+    dplyr::mutate(term = .data$variable) |>
+    dplyr::select(dplyr::all_of(c("term", "variable", "var_class"))) |>
     dplyr::left_join(
-      model %>% model_get_nlevels(),
+      model |> model_get_nlevels(),
       by = "variable"
-    ) %>%
+    ) |>
     .compute_var_type()
 }
 
@@ -134,7 +134,7 @@ model_identify_variables.clm <- function(model) {
   res <- model_identify_variables.default(model)
   if (is.null(model$alpha.mat)) {
     res <- dplyr::bind_rows(
-      res %>%
+      res |>
         dplyr::filter(.data$term != "(Intercept)"),
       dplyr::tibble(
         term = names(model$alpha),
@@ -145,11 +145,11 @@ model_identify_variables.clm <- function(model) {
     y.levels <- colnames(model$alpha.mat)
     nominal_terms <- rownames(model$alpha.mat)
     res <- dplyr::bind_rows(
-      res %>%
+      res |>
         dplyr::filter(!.data$term %in% nominal_terms),
-      res %>%
-        dplyr::filter(.data$term %in% nominal_terms) %>%
-        tidyr::crossing(y.level = y.levels) %>%
+      res |>
+        dplyr::filter(.data$term %in% nominal_terms) |>
+        tidyr::crossing(y.level = y.levels) |>
         dplyr::mutate(term = paste(.data$y.level, .data$term, sep = "."))
     )
   }
@@ -164,12 +164,12 @@ model_identify_variables.clmm <- model_identify_variables.clm
 #' @rdname model_identify_variables
 #' @export
 model_identify_variables.gam <- function(model) {
-  model_identify_variables.default(model) %>%
+  model_identify_variables.default(model) |>
     dplyr::bind_rows(
       # suppressWarnings to avoid a warning when the result is an empty tibble
-      suppressWarnings(broom::tidy(model, parametric = FALSE)) %>%
-        dplyr::bind_rows(tibble::tibble(term = character(0))) %>%
-        dplyr::select(dplyr::all_of("term")) %>%
+      suppressWarnings(broom::tidy(model, parametric = FALSE)) |>
+        dplyr::bind_rows(tibble::tibble(term = character(0))) |>
+        dplyr::select(dplyr::all_of("term")) |>
         dplyr::mutate(variable = .data$term, var_type = "continuous")
     )
 }
@@ -186,7 +186,7 @@ model_identify_variables.model_fit <- function(model) {
 model_identify_variables.logitr <- function(model) {
   res <- model_identify_variables.default(model)
   if (!is.null(model$data$scalePar)) {
-    res <- res %>%
+    res <- res |>
       dplyr::add_row(
         term = "scalePar",
         variable = "scalePar",
@@ -203,7 +203,7 @@ model_identify_variables.logitr <- function(model) {
 
 .compute_var_type <- function(x) {
   cat_classes <- c("factor", "character", "logical")
-  x %>%
+  x |>
     dplyr::mutate(
       var_type = dplyr::case_when(
         is.na(.data$variable) ~ "intercept",

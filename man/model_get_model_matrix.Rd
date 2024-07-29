@@ -64,8 +64,8 @@ restricted model matrix, please refer to \code{glmmTMB::model.matrix.glmmTMB()}.
 For \code{\link[plm:plm]{plm::plm()}} models, constant columns are not removed.
 }
 \examples{
-lm(hp ~ mpg + factor(cyl), mtcars) \%>\%
-  model_get_model_matrix() \%>\%
+lm(hp ~ mpg + factor(cyl), mtcars) |>
+  model_get_model_matrix() |>
   head()
 }
 \seealso{

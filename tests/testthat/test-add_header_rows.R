@@ -5,8 +5,8 @@ test_that("tidy_add_header_rows() works as expected", {
     family = binomial,
     contrasts = list(stage = contr.treatment, grade = contr.SAS, trt = contr.sum)
   )
-  res <- mod %>%
-    tidy_and_attach() %>%
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_header_rows()
   expect_equivalent(
     res$label,
@@ -29,9 +29,9 @@ test_that("tidy_add_header_rows() works as expected", {
   )
 
   # show_single_row has an effect only on variables with one term (2 if a ref term)
-  res <- mod %>%
-    tidy_and_attach() %>%
-    tidy_identify_variables() %>%
+  res <- mod |>
+    tidy_and_attach() |>
+    tidy_identify_variables() |>
     tidy_add_header_rows(show_single_row = everything(), quiet = TRUE)
   expect_equivalent(
     res$label,
@@ -50,9 +50,9 @@ test_that("tidy_add_header_rows() works as expected", {
   )
 
   # with reference rows
-  res <- mod %>%
-    tidy_and_attach() %>%
-    tidy_add_reference_rows() %>%
+  res <- mod |>
+    tidy_and_attach() |>
+    tidy_add_reference_rows() |>
     tidy_add_header_rows()
   expect_equivalent(
     res$label,
@@ -73,7 +73,7 @@ test_that("tidy_add_header_rows() works as expected", {
   # no warning with an intercept only model
   mod <- lm(mpg ~ 1, mtcars)
   expect_warning(
-    mod %>% tidy_and_attach() %>% tidy_add_header_rows(),
+    mod |> tidy_and_attach() |> tidy_add_header_rows(),
     NA
   )
 
@@ -81,8 +81,8 @@ test_that("tidy_add_header_rows() works as expected", {
   # and if interaction with a categorical variable
   # (except if )
   mod <- lm(age ~ factor(response) * marker + trt, gtsummary::trial)
-  res <- mod %>%
-    tidy_and_attach() %>%
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_header_rows(show_single_row = "trt")
   expect_equivalent(
     res$header_row,
@@ -91,16 +91,16 @@ test_that("tidy_add_header_rows() works as expected", {
 
   # show_single_row could be apply to an interaction variable
   mod <- lm(age ~ factor(response) * marker, gtsummary::trial)
-  res <- mod %>%
-    tidy_and_attach() %>%
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_header_rows(show_single_row = "factor(response):marker")
   expect_equivalent(
     res$header_row,
     c(NA, TRUE, FALSE, NA, NA)
   )
-  res <- mod %>%
-    tidy_and_attach() %>%
-    tidy_add_reference_rows() %>%
+  res <- mod |>
+    tidy_and_attach() |>
+    tidy_add_reference_rows() |>
     tidy_add_header_rows(show_single_row = "factor(response):marker")
   expect_equivalent(
     res$header_row,
@@ -117,10 +117,10 @@ test_that("tidy_add_header_rows() works as expected", {
   # no standard name
   mod <- lm(
     hp ~ `miles per gallon`,
-    mtcars %>% dplyr::rename(`miles per gallon` = mpg)
+    mtcars |> dplyr::rename(`miles per gallon` = mpg)
   )
-  res <- mod %>%
-    tidy_and_attach() %>%
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_header_rows()
   expect_equivalent(
     res$header_row,
@@ -128,10 +128,10 @@ test_that("tidy_add_header_rows() works as expected", {
   )
   mod <- lm(
     hp ~ `cyl as factor`,
-    mtcars %>% dplyr::mutate(`cyl as factor` = factor(cyl))
+    mtcars |> dplyr::mutate(`cyl as factor` = factor(cyl))
   )
-  res <- mod %>%
-    tidy_and_attach() %>%
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_header_rows()
   expect_equivalent(
     res$header_row,
@@ -142,13 +142,13 @@ test_that("tidy_add_header_rows() works as expected", {
 test_that("test tidy_add_header_rows() checks", {
   mod <- glm(response ~ stage + grade + trt, gtsummary::trial, family = binomial)
   # expect an error if no model attached
-  expect_error(mod %>% broom::tidy() %>% tidy_add_header_rows())
+  expect_error(mod |> broom::tidy() |> tidy_add_header_rows())
 
   # warning if applied twice
   expect_message(
-    mod %>%
-      tidy_and_attach() %>%
-      tidy_add_header_rows() %>%
+    mod |>
+      tidy_and_attach() |>
+      tidy_add_header_rows() |>
       tidy_add_header_rows()
   )
 })
@@ -157,9 +157,9 @@ test_that("tidy_add_header_rows() works with nnet::multinom", {
   skip_if_not_installed("nnet")
   skip_on_cran()
   mod <- nnet::multinom(grade ~ stage + marker + age + trt, data = gtsummary::trial, trace = FALSE)
-  res <- mod %>%
-    tidy_and_attach() %>%
-    tidy_add_reference_rows() %>%
+  res <- mod |>
+    tidy_and_attach() |>
+    tidy_add_reference_rows() |>
     tidy_add_header_rows()
   expect_equivalent(
     res$header_row,
@@ -179,9 +179,9 @@ test_that("tidy_add_header_rows() works with nnet::multinom", {
       "Chemotherapy Treatment", "Drug A", "Drug B"
     )
   )
-  res <- mod %>%
-    tidy_and_attach() %>%
-    tidy_add_reference_rows() %>%
+  res <- mod |>
+    tidy_and_attach() |>
+    tidy_add_reference_rows() |>
     tidy_add_header_rows(show_single_row = everything(), quiet = TRUE)
   expect_equivalent(
     res$header_row,
@@ -203,8 +203,8 @@ test_that("tidy_add_header_rows() works with nnet::multinom", {
 
 
 test_that("test tidy_add_header_rows() bad single row request", {
-  mod <- lm(mpg ~ hp + factor(cyl) + factor(am), mtcars) %>%
-    tidy_and_attach() %>%
+  mod <- lm(mpg ~ hp + factor(cyl) + factor(am), mtcars) |>
+    tidy_and_attach() |>
     tidy_identify_variables()
 
   expect_message(
@@ -223,12 +223,12 @@ test_that("tidy_add_header_rows() and mixed model", {
     age ~ stage + (stage | grade) + (1 | grade),
     gtsummary::trial
   )
-  res <- mod %>%
-    tidy_and_attach(tidy_fun = broom.mixed::tidy) %>%
+  res <- mod |>
+    tidy_and_attach(tidy_fun = broom.mixed::tidy) |>
     tidy_add_header_rows()
   expect_equal(
-    res %>%
-      dplyr::filter(.data$header_row & .data$var_type == "ran_pars") %>%
+    res |>
+      dplyr::filter(.data$header_row & .data$var_type == "ran_pars") |>
       nrow(),
     0L
   )

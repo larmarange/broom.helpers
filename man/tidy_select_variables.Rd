@@ -29,22 +29,23 @@ If the \code{variable} column is not yet available in \code{x},
 \code{\link[=tidy_identify_variables]{tidy_identify_variables()}} will be automatically applied.
 }
 \examples{
-res <- Titanic \%>\%
-  dplyr::as_tibble() \%>\%
-  dplyr::mutate(Survived = factor(Survived)) \%>\%
-  glm(Survived ~ Class + Age * Sex, data = ., weights = .$n, family = binomial) \%>\%
-  tidy_and_attach() \%>\%
+df <- Titanic |>
+  dplyr::as_tibble() |>
+  dplyr::mutate(Survived = factor(Survived))
+res <-
+  glm(Survived ~ Class + Age * Sex, data = df, weights = df$n, family = binomial) |>
+  tidy_and_attach() |>
   tidy_identify_variables()
 
 res
-res \%>\% tidy_select_variables()
-res \%>\% tidy_select_variables(include = "Class")
-res \%>\% tidy_select_variables(include = -c("Age", "Sex"))
-res \%>\% tidy_select_variables(include = starts_with("A"))
-res \%>\% tidy_select_variables(include = all_categorical())
-res \%>\% tidy_select_variables(include = all_dichotomous())
-res \%>\% tidy_select_variables(include = all_interaction())
-res \%>\% tidy_select_variables(
+res |> tidy_select_variables()
+res |> tidy_select_variables(include = "Class")
+res |> tidy_select_variables(include = -c("Age", "Sex"))
+res |> tidy_select_variables(include = starts_with("A"))
+res |> tidy_select_variables(include = all_categorical())
+res |> tidy_select_variables(include = all_dichotomous())
+res |> tidy_select_variables(include = all_interaction())
+res |> tidy_select_variables(
   include = c("Age", all_categorical(dichotomous = FALSE), all_interaction())
 )
 }

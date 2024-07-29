@@ -22,8 +22,8 @@
 #' @examplesIf interactive()
 #' if (.assert_package("emmeans", boolean = TRUE)) {
 #'   mod <- lm(Sepal.Length ~ Species, data = iris)
-#'   mod %>% model_get_pairwise_contrasts(variables = "Species")
-#'   mod %>%
+#'   mod |> model_get_pairwise_contrasts(variables = "Species")
+#'   mod |>
 #'     model_get_pairwise_contrasts(
 #'       variables = "Species",
 #'       contrasts_adjust = "none"
@@ -74,17 +74,17 @@ model_get_pairwise_contrasts.default <- function(
   e <- do.call(emmeans::emmeans, emmeans_args)
 
   if (is.null(contrasts_adjust)) {
-    e <- e %>%
+    e <- e |>
       graphics::pairs(reverse = pairwise_reverse)
   } else {
-    e <- e %>%
+    e <- e |>
       graphics::pairs(reverse = pairwise_reverse, adjust = contrasts_adjust)
   }
 
-  r <- e %>%
+  r <- e |>
     dplyr::as_tibble()
   if (!is.numeric(r[[2]])) { # if by
-    r <- r %>%
+    r <- r |>
       tidyr::unite("term", 1:2, sep = " | ")
   }
   r <- r[, c(1:3, ncol(r) - 1, ncol(r))]
@@ -93,10 +93,10 @@ model_get_pairwise_contrasts.default <- function(
     "statistic", "p.value"
   )
 
-  ci <- stats::confint(e, level = conf.level) %>%
+  ci <- stats::confint(e, level = conf.level) |>
     dplyr::as_tibble()
   if (!is.numeric(ci[[2]])) { # if by
-    ci <- ci %>%
+    ci <- ci |>
       tidyr::unite("term", 1:2, sep = " | ")
   }
   ci <- ci[, c(1, ncol(ci) - 1, ncol(ci))]
@@ -105,7 +105,7 @@ model_get_pairwise_contrasts.default <- function(
   r$variable <- variable
   r$contrasts <- ifelse(pairwise_reverse, "pairwise", "revpairwise")
   r$contrasts_type <- "pairwise"
-  r %>% dplyr::relocate(dplyr::all_of("variable"))
+  r |> dplyr::relocate(dplyr::all_of("variable"))
 }
 
 #' @export

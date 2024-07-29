@@ -27,9 +27,9 @@
 .clean_backticks <- function(x, variable_names = x) {
   saved_names <- names(x)
 
-  variable_names <- variable_names %>%
-    stats::na.omit() %>%
-    unique() %>%
+  variable_names <- variable_names |>
+    stats::na.omit() |>
+    unique() |>
     .escape_regex()
 
   # cleaning existing backticks in variable_names
@@ -56,12 +56,12 @@
 
 # copied from broom
 .exponentiate <- function(data, col = "estimate") {
-  data <- data %>%
+  data <- data |>
     dplyr::mutate(
       dplyr::across(dplyr::all_of(col), exp)
     )
   if ("conf.low" %in% colnames(data)) {
-    data <- data %>%
+    data <- data |>
       dplyr::mutate(
         dplyr::across(dplyr::any_of(c("conf.low", "conf.high")), exp)
       )

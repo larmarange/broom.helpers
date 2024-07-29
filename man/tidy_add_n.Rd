@@ -72,54 +72,52 @@ stored as attributes of the returned tibble.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-lm(Petal.Length ~ ., data = iris) \%>\%
-  tidy_and_attach() \%>\%
+lm(Petal.Length ~ ., data = iris) |>
+  tidy_and_attach() |>
   tidy_add_n()
 
-lm(Petal.Length ~ ., data = iris, contrasts = list(Species = contr.sum)) \%>\%
-  tidy_and_attach() \%>\%
+lm(Petal.Length ~ ., data = iris, contrasts = list(Species = contr.sum)) |>
+  tidy_and_attach() |>
   tidy_add_n()
 
-lm(Petal.Length ~ ., data = iris, contrasts = list(Species = contr.poly)) \%>\%
-  tidy_and_attach() \%>\%
+lm(Petal.Length ~ ., data = iris, contrasts = list(Species = contr.poly)) |>
+  tidy_and_attach() |>
   tidy_add_n()
 
-lm(Petal.Length ~ poly(Sepal.Length, 2), data = iris) \%>\%
-  tidy_and_attach() \%>\%
+lm(Petal.Length ~ poly(Sepal.Length, 2), data = iris) |>
+  tidy_and_attach() |>
   tidy_add_n()
 
-df <- Titanic \%>\%
-  dplyr::as_tibble() \%>\%
+df <- Titanic |>
+  dplyr::as_tibble() |>
   dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
 
-df \%>\%
-  glm(
-    Survived ~ Class + Age + Sex,
-    data = ., weights = .$n, family = binomial,
-    contrasts = list(Age = contr.sum, Class = "contr.helmert")
-  ) \%>\%
-  tidy_and_attach() \%>\%
+glm(
+  Survived ~ Class + Age + Sex,
+  data = df, weights = df$n, family = binomial,
+  contrasts = list(Age = contr.sum, Class = "contr.helmert")
+) |>
+  tidy_and_attach() |>
   tidy_add_n()
 
-df \%>\%
-  glm(
-    Survived ~ Class * (Age:Sex),
-    data = ., weights = .$n, family = binomial,
-    contrasts = list(Age = contr.sum, Class = "contr.helmert")
-  ) \%>\%
-  tidy_and_attach() \%>\%
+glm(
+  Survived ~ Class * (Age:Sex),
+  data = df, weights = df$n, family = binomial,
+  contrasts = list(Age = contr.sum, Class = "contr.helmert")
+) |>
+  tidy_and_attach() |>
   tidy_add_n()
 
-glm(response ~ age + grade * trt, gtsummary::trial, family = poisson) \%>\%
-  tidy_and_attach() \%>\%
+glm(response ~ age + grade * trt, gtsummary::trial, family = poisson) |>
+  tidy_and_attach() |>
   tidy_add_n()
 
 glm(
   response ~ trt * grade + offset(log(ttdeath)),
   gtsummary::trial,
   family = poisson
-) \%>\%
-  tidy_and_attach() \%>\%
+) |>
+  tidy_and_attach() |>
   tidy_add_n()
 \dontshow{\}) # examplesIf}
 }

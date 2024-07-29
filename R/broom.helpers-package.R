@@ -40,13 +40,13 @@ utils::globalVariables(c(".", "where"))
     "6" = "\u2076", "7" = "\u2077", "8" = "\u2078",
     "9" = "\u2079"
   )
-  x %>% stringr::str_replace_all(pattern)
+  x |> stringr::str_replace_all(pattern)
 }
 
 
 # for consistent column order
 .order_tidy_columns <- function(x) {
-  x %>%
+  x |>
     dplyr::select(
       dplyr::any_of(
         c(

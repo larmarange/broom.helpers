@@ -58,7 +58,7 @@
           type_check = type_check,
           type_check_msg = type_check_msg,
           null_allowed = null_allowed
-        ) %>%
+        ) |>
         list()
     } else {
       .formula_select_error(arg_name = arg_name)
@@ -72,12 +72,12 @@
   named_list <- purrr::flatten(named_list)
 
   # removing duplicates (using the last one listed if variable occurs more than once)
-  tokeep <- names(named_list) %>%
-    rev() %>%
-    {
-      !duplicated(.)
-    } %>%
-    rev() # nolint
+  rd <- function(x) {
+    x <- rev(x)
+    x <- !duplicated(x)
+    rev(x)
+  }
+  tokeep <- names(named_list) |> rd()
   result <- named_list[tokeep]
 
   if (isTRUE(select_single) && length(result) > 1) {
@@ -92,14 +92,14 @@
       "Error in `{arg_name}=` argument--select only a single column. ",
       "The following columns were selected, ",
       "{paste(sQuote(selected), collapse = ', ')}"
-    ) %>%
+    ) |>
       cli::cli_abort(call = NULL)
   }
   stringr::str_glue(
     "Error in selector--select only a single column. ",
     "The following columns were selected, ",
     "{paste(sQuote(selected), collapse = ', ')}"
-  ) %>%
+  ) |>
     cli::cli_abort(call = NULL)
 }
 
@@ -150,7 +150,7 @@
         stringr::str_glue(
           "Error processing `{arg_name %||% ''}` argument for element '{lhs[[1]]}'. ",
           "A NULL value is not allowed."
-        ) %>%
+        ) |>
           cli::cli_abort(call = NULL)
       }
 
@@ -159,7 +159,7 @@
         stringr::str_glue(
           "Error processing `{arg_name %||% ''}` argument for element '{lhs[[1]]}'. ",
           type_check_msg %||% "The value passed is not the expected type/class."
-        ) %>%
+        ) |>
           cli::cli_abort(call = NULL)
       }
     }
@@ -185,7 +185,7 @@
   )
 
   # evaluate RHS of formula in the original formula environment
-  rhs <- .f_side_as_quo(x, "rhs") %>% rlang::eval_tidy()
+  rhs <- .f_side_as_quo(x, "rhs") |> rlang::eval_tidy()
 
   # checking if RHS is NULL ----------------------------------------------------
 
@@ -193,8 +193,8 @@
   # converting rhs and lhs into a named list
   purrr::map(
     lhs,
-    ~ list(rhs) %>% rlang::set_names(.x)
-  ) %>%
+    ~ list(rhs) |> rlang::set_names(.x)
+  ) |>
     purrr::flatten()
 }
 
@@ -245,7 +245,7 @@
     !rlang::quo_is_symbol(select) && # if not a symbol (ie name)
     tryCatch(
       identical(
-        eval(as.list(rlang::quo_get_expr(select)) %>% purrr::pluck(1)),
+        eval(as.list(rlang::quo_get_expr(select)) |> purrr::pluck(1)),
         dplyr::vars
       ),
       error = function(e) FALSE
@@ -261,7 +261,7 @@
           paste(
             "Use of {.code vars()} is now {.strong deprecated} and support will soon be removed.",
             "Please replace calls to {.code vars()} with {.code c()}."
-          ) %>%
+          ) |>
             cli::cli_alert_warning()
 
           # `vars()` evaluates to a list of quosures; unquoting them in `select()`
@@ -319,11 +319,14 @@
   }
 
   # selecting the variable from the variable information data frame
-  env_variable_type$df_var_info %>%
-    dplyr::select(all_of(c(variable_column, select_column))) %>%
-    dplyr::filter(stats::complete.cases(.)) %>%
-    dplyr::filter({{ select_expr }}) %>%
-    dplyr::pull(dplyr::all_of(variable_column)) %>%
+  filter_complete_cases <- function(x) {
+    dplyr::filter(x, stats::complete.cases(x))
+  }
+  env_variable_type$df_var_info |>
+    dplyr::select(all_of(c(variable_column, select_column))) |>
+    filter_complete_cases() |>
+    dplyr::filter({{ select_expr }}) |>
+    dplyr::pull(dplyr::all_of(variable_column)) |>
     unique()
 }
 
@@ -354,8 +357,8 @@
   if (inherits(x, "data.frame") && all(c("variable", "var_class") %in% names(x))) {
     # keep unique var names
     x <-
-      dplyr::select(x, all_of(c("variable", "var_class"))) %>%
-      dplyr::distinct() %>%
+      dplyr::select(x, all_of(c("variable", "var_class"))) |>
+      dplyr::distinct() |>
       dplyr::filter(!is.na(.data$variable))
     df <-
       purrr::map2_dfc(
@@ -372,16 +375,16 @@
             "POSIXct" = data.frame(as.POSIXct(Sys.Date())),
             "difftime" = data.frame(Sys.Date() - Sys.Date())
           ) %||%
-            data.frame(NA) %>%
+            data.frame(NA) |>
             purrr::set_names(var)
         }
       )
   } else if (inherits(x, "data.frame") && "variable" %in% names(x)) {
     # if a data.frame
-    df <- purrr::map_dfc(unique(x$variable), ~ data.frame(NA) %>% purrr::set_names(.x))
+    df <- purrr::map_dfc(unique(x$variable), ~ data.frame(NA) |> purrr::set_names(.x))
   } else if (rlang::is_vector(x) && !is.list(x)) {
     # if only a vector of names were passed, converting them to a data frame
-    df <- purrr::map_dfc(unique(x), ~ data.frame(NA) %>% purrr::set_names(.x))
+    df <- purrr::map_dfc(unique(x), ~ data.frame(NA) |> purrr::set_names(.x))
   }
   # return data frame with variables as column names
   df

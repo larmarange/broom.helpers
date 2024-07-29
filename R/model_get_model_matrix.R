@@ -11,8 +11,8 @@
 #' @family model_helpers
 #' @seealso [stats::model.matrix()]
 #' @examples
-#' lm(hp ~ mpg + factor(cyl), mtcars) %>%
-#'   model_get_model_matrix() %>%
+#' lm(hp ~ mpg + factor(cyl), mtcars) |>
+#'   model_get_model_matrix() |>
 #'   head()
 model_get_model_matrix <- function(model, ...) {
   if (!is.null(attr(model, "model_matrix")))
@@ -62,8 +62,8 @@ model_get_model_matrix.clm <- function(model, ...) {
 #' @export
 #' @rdname model_get_model_matrix
 model_get_model_matrix.brmsfit <- function(model, ...) {
-  model %>%
-    brms::standata() %>%
+  model |>
+    brms::standata() |>
     purrr::pluck("X")
 }
 
@@ -128,8 +128,8 @@ model_get_model_matrix.LORgee <- function(model, ...) {
 #' @rdname model_get_model_matrix
 model_get_model_matrix.betareg <- function(model, ...) {
   stats::model.matrix.default(
-    model %>% model_get_terms(),
-    data = model %>% model_get_model_frame()
+    model |> model_get_terms(),
+    data = model |> model_get_model_frame()
   )
 }
 
@@ -137,7 +137,7 @@ model_get_model_matrix.betareg <- function(model, ...) {
 #' @rdname model_get_model_matrix
 model_get_model_matrix.cch <- function(model, ...) {
   stats::model.matrix.default(
-    model$call$formula %>% stats::formula(),
-    data = model %>% model_get_model_frame()
+    model$call$formula |> stats::formula(),
+    data = model |> model_get_model_frame()
   )
 }

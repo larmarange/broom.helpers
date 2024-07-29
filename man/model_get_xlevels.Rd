@@ -37,7 +37,7 @@ model_get_xlevels(model)
 Get xlevels used in the model
 }
 \examples{
-lm(hp ~ mpg + factor(cyl), mtcars) \%>\%
+lm(hp ~ mpg + factor(cyl), mtcars) |>
   model_get_xlevels()
 }
 \seealso{

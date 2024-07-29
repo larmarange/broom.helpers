@@ -28,7 +28,7 @@ supported_models <-
     "`MASS::glm.nb()`", "",
     "`mice::mira`", paste(
       "Limited support. If `mod` is a `mira` object, use",
-      "`tidy_fun = function(x, ...) {mice::pool(x) %>% mice::tidy(...)}`"
+      "`tidy_fun = function(x, ...) {mice::pool(x) |> mice::tidy(...)}`"
     ),
     "`lavaan::lavaan()`", "Limited support for categorical variables",
     "`stats::nls()`", "Limited support",
@@ -54,7 +54,7 @@ supported_models <-
     "`pscl::hurdle()`", "Use `tidy_zeroinfl()` as `tidy_fun`.",
     "`betareg::betareg()`", "Use `tidy_parameters()` as `tidy_fun` with `component` argument to control with coefficients to return. `broom::tidy()` does not support the `exponentiate` argument for betareg models, use `tidy_parameters()` instead.", # nolint
     "`survival::cch()`", "`Experimental support."
-  ) %>%
+  ) |>
   dplyr::arrange(.data$model, .locale = "en")
 
 usethis::use_data(supported_models, overwrite = TRUE)

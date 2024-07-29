@@ -19,22 +19,23 @@
 #' @export
 #' @family tidy_helpers
 #' @examples
-#' res <- Titanic %>%
-#'   dplyr::as_tibble() %>%
-#'   dplyr::mutate(Survived = factor(Survived)) %>%
-#'   glm(Survived ~ Class + Age * Sex, data = ., weights = .$n, family = binomial) %>%
-#'   tidy_and_attach() %>%
+#' df <- Titanic |>
+#'   dplyr::as_tibble() |>
+#'   dplyr::mutate(Survived = factor(Survived))
+#' res <-
+#'   glm(Survived ~ Class + Age * Sex, data = df, weights = df$n, family = binomial) |>
+#'   tidy_and_attach() |>
 #'   tidy_identify_variables()
 #'
 #' res
-#' res %>% tidy_select_variables()
-#' res %>% tidy_select_variables(include = "Class")
-#' res %>% tidy_select_variables(include = -c("Age", "Sex"))
-#' res %>% tidy_select_variables(include = starts_with("A"))
-#' res %>% tidy_select_variables(include = all_categorical())
-#' res %>% tidy_select_variables(include = all_dichotomous())
-#' res %>% tidy_select_variables(include = all_interaction())
-#' res %>% tidy_select_variables(
+#' res |> tidy_select_variables()
+#' res |> tidy_select_variables(include = "Class")
+#' res |> tidy_select_variables(include = -c("Age", "Sex"))
+#' res |> tidy_select_variables(include = starts_with("A"))
+#' res |> tidy_select_variables(include = all_categorical())
+#' res |> tidy_select_variables(include = all_dichotomous())
+#' res |> tidy_select_variables(include = all_interaction())
+#' res |> tidy_select_variables(
 #'   include = c("Age", all_categorical(dichotomous = FALSE), all_interaction())
 #' )
 tidy_select_variables <- function(
@@ -47,7 +48,7 @@ tidy_select_variables <- function(
   }
 
   if (!"variable" %in% names(x)) {
-    x <- x %>% tidy_identify_variables(model = model)
+    x <- x |> tidy_identify_variables(model = model)
   }
   .attributes <- .save_attributes(x)
 
@@ -56,29 +57,29 @@ tidy_select_variables <- function(
 
   # order result, intercept first then by the order of include
   if ("y.level" %in% names(x)) {
-    x$group_order <- factor(x$y.level) %>% forcats::fct_inorder()
+    x$group_order <- factor(x$y.level) |> forcats::fct_inorder()
   } else if ("component" %in% names(x)) {
-    x$group_order <- factor(x$component) %>% forcats::fct_inorder()
+    x$group_order <- factor(x$component) |> forcats::fct_inorder()
   } else {
     x$group_order <- 1
   }
 
-  x %>%
+  x |>
     dplyr::filter(
       .data$var_type == "intercept" |
         .data$variable %in% include
-    ) %>%
+    ) |>
     dplyr::mutate(
       log_intercept = .data$var_type == "intercept",
       fct_variable = factor(.data$variable, levels = include)
-    ) %>%
+    ) |>
     dplyr::arrange(
       .data$group_order,
       dplyr::desc(.data$log_intercept),
       .data$fct_variable
-    ) %>%
+    ) |>
     dplyr::select(
       -dplyr::any_of(c("group_order", "log_intercept", "fct_variable"))
-    ) %>%
+    ) |>
     tidy_attach_model(model = model, .attributes = .attributes)
 }

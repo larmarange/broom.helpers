@@ -4,7 +4,7 @@
 #' @export
 #' @family model_helpers
 #' @examples
-#' lm(hp ~ mpg + factor(cyl), mtcars) %>%
+#' lm(hp ~ mpg + factor(cyl), mtcars) |>
 #'   model_get_xlevels()
 model_get_xlevels <- function(model) {
   UseMethod("model_get_xlevels")
@@ -14,7 +14,7 @@ model_get_xlevels <- function(model) {
 #' @rdname model_get_xlevels
 model_get_xlevels.default <- function(model) {
   xlevels <- tryCatch(
-    model %>% purrr::chuck("xlevels"),
+    model |> purrr::chuck("xlevels"),
     error = function(e) {
       NULL # nocov
     }
@@ -22,21 +22,21 @@ model_get_xlevels.default <- function(model) {
   if (is.null(xlevels)) {
     xlevels <- tryCatch(
       stats::.getXlevels(
-        model %>% model_get_terms(),
-        model %>% model_get_model_frame()
+        model |> model_get_terms(),
+        model |> model_get_model_frame()
       ),
       error = function(e) {
         NULL # nocov
       }
     )
   }
-  xlevels %>% .add_xlevels_for_logical_variables(model)
+  xlevels |> .add_xlevels_for_logical_variables(model)
 }
 
 .add_xlevels_for_logical_variables <- function(xlevels, model) {
-  log_vars <- model %>%
-    model_list_variables() %>%
-    dplyr::filter(.data$var_class == "logical") %>%
+  log_vars <- model |>
+    model_list_variables() |>
+    dplyr::filter(.data$var_class == "logical") |>
     purrr::pluck("variable")
 
   for (v in setdiff(log_vars, names(xlevels))) {
@@ -49,9 +49,9 @@ model_get_xlevels.default <- function(model) {
 #' @export
 #' @rdname model_get_xlevels
 model_get_xlevels.lmerMod <- function(model) {
-  stats::model.frame(model) %>%
-    lapply(levels) %>%
-    purrr::compact() %>% # keep only not null
+  stats::model.frame(model) |>
+    lapply(levels) |>
+    purrr::compact() |> # keep only not null
     .add_xlevels_for_logical_variables(model)
 }
 

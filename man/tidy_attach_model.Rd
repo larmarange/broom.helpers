@@ -61,7 +61,7 @@ Use \code{tidy_get_model()} to get the model attached to the tibble and
 }
 \examples{
 mod <- lm(Sepal.Length ~ Sepal.Width + Species, data = iris)
-tt <- mod \%>\%
+tt <- mod |>
   tidy_and_attach(conf.int = TRUE)
 tt
 tidy_get_model(tt)

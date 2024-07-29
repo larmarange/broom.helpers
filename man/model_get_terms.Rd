@@ -36,7 +36,7 @@ taking into account all components ("cond" and "zi"). For a more
 restricted terms object, please refer to \code{glmmTMB::terms.glmmTMB()}.
 }
 \examples{
-lm(hp ~ mpg + factor(cyl), mtcars) \%>\%
+lm(hp ~ mpg + factor(cyl), mtcars) |>
   model_get_terms()
 }
 \seealso{

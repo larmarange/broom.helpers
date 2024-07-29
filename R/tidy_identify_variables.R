@@ -26,19 +26,24 @@
 #' @seealso [model_identify_variables()]
 #' @family tidy_helpers
 #' @examples
-#' Titanic %>%
-#'   dplyr::as_tibble() %>%
-#'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes"))) %>%
-#'   glm(Survived ~ Class + Age * Sex, data = ., weights = .$n, family = binomial) %>%
-#'   tidy_and_attach() %>%
+#' df <- Titanic |>
+#'   dplyr::as_tibble() |>
+#'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
+#' glm(
+#'   Survived ~ Class + Age * Sex,
+#'   data = df,
+#'   weights = df$n,
+#'   family = binomial
+#' ) |>
+#'   tidy_and_attach() |>
 #'   tidy_identify_variables()
 #'
 #' lm(
 #'   Sepal.Length ~ poly(Sepal.Width, 2) + Species,
 #'   data = iris,
 #'   contrasts = list(Species = contr.sum)
-#' ) %>%
-#'   tidy_and_attach(conf.int = TRUE) %>%
+#' ) |>
+#'   tidy_and_attach(conf.int = TRUE) |>
 #'   tidy_identify_variables()
 tidy_identify_variables <- function(x, model = tidy_get_model(x),
                                     quiet = FALSE) {
@@ -65,17 +70,17 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x),
         "variable" %in% names(x)
     )
   ) {
-    x <- x %>%
+    x <- x |>
       dplyr::left_join(
         model_list_variables(model, add_var_type = TRUE),
         by = "variable"
-      ) %>%
+      ) |>
       tidy_attach_model(model = model, .attributes = .attributes)
     return(x)
   }
 
   if ("variable" %in% names(x)) {
-    x <- x %>% dplyr::select(
+    x <- x |> dplyr::select(
       -any_of(c("variable", "var_class", "var_type", "var_nlevels"))
     )
   }
@@ -83,12 +88,12 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x),
   variables_list <- model_identify_variables(model)
 
   if (nrow(variables_list) > 0) {
-    x <- x %>%
+    x <- x |>
       dplyr::left_join(variables_list, by = "term")
 
     # management of random parameters (mixed models)
     if ("effect" %in% names(x)) {
-      x <- x %>%
+      x <- x |>
         dplyr::mutate(
           var_type = dplyr::if_else(
             .data$effect %in% c("ran_pars", "ran_vals", "random"),
@@ -98,7 +103,7 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x),
         )
     }
 
-    x %>%
+    x |>
       dplyr::mutate(
         var_type = dplyr::if_else(
           is.na(.data$var_type),
@@ -110,7 +115,7 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x),
           .data$term,
           .data$variable
         )
-      ) %>%
+      ) |>
       tidy_attach_model(model = model, .attributes = .attributes)
   } else {
     if (!quiet) {
@@ -125,13 +130,13 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x),
       ))
     }
 
-    x %>%
+    x |>
       dplyr::mutate(
         variable = .data$term,
         var_class = NA_integer_,
         var_type = "unknown",
         var_nlevels = NA_integer_
-      ) %>%
+      ) |>
       tidy_attach_model(model = model, .attributes = .attributes)
   }
 }

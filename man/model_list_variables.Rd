@@ -71,29 +71,29 @@ Including variables used only in an interaction.
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 if (.assert_package("gtsummary", boolean = TRUE)) {
-  Titanic \%>\%
-    dplyr::as_tibble() \%>\%
-    dplyr::mutate(Survived = factor(Survived, c("No", "Yes"))) \%>\%
-    glm(
-      Survived ~ Class + Age:Sex,
-      data = ., weights = .$n,
-      family = binomial
-    ) \%>\%
-    model_list_variables()
+  df <- Titanic |>
+    dplyr::as_tibble() |>
+    dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
+  glm(
+    Survived ~ Class + Age:Sex,
+    data = df, weights = df$n,
+    family = binomial
+  ) |>
+  model_list_variables()
 
-  iris \%>\%
+  iris |>
     lm(
       Sepal.Length ~ poly(Sepal.Width, 2) + Species,
-      data = .,
+      data = _,
       contrasts = list(Species = contr.sum)
-    ) \%>\%
+    ) |>
     model_list_variables()
 
   glm(
     response ~ poly(age, 3) + stage + grade * trt,
     na.omit(gtsummary::trial),
     family = binomial,
-  ) \%>\%
+  ) |>
     model_list_variables()
 }
 \dontshow{\}) # examplesIf}

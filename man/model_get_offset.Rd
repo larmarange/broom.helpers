@@ -21,7 +21,7 @@ mod <- glm(
   gtsummary::trial,
   family = poisson
 )
-mod \%>\% model_get_offset()
+mod |> model_get_offset()
 }
 \seealso{
 Other model_helpers: 

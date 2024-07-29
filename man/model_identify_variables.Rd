@@ -49,22 +49,22 @@ or \code{"interaction"}
 It will also identify interaction terms and intercept(s).
 }
 \examples{
-Titanic \%>\%
-  dplyr::as_tibble() \%>\%
-  dplyr::mutate(Survived = factor(Survived, c("No", "Yes"))) \%>\%
-  glm(
-    Survived ~ Class + Age * Sex,
-    data = ., weights = .$n,
-    family = binomial
-  ) \%>\%
+df <- Titanic |>
+  dplyr::as_tibble() |>
+  dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
+glm(
+  Survived ~ Class + Age * Sex,
+  data = df, weights = df$n,
+  family = binomial
+) |>
   model_identify_variables()
 
-iris \%>\%
+iris |>
   lm(
     Sepal.Length ~ poly(Sepal.Width, 2) + Species,
-    data = .,
+    data = _,
     contrasts = list(Species = contr.sum)
-  ) \%>\%
+  ) |>
   model_identify_variables()
 }
 \seealso{

@@ -4,7 +4,7 @@
 #' @export
 #' @family model_helpers
 #' @examples
-#' lm(hp ~ mpg + factor(cyl) + disp:hp, mtcars) %>%
+#' lm(hp ~ mpg + factor(cyl) + disp:hp, mtcars) |>
 #'   model_list_higher_order_variables()
 #'
 #' mod <- glm(
@@ -12,15 +12,15 @@
 #'   gtsummary::trial,
 #'   family = binomial
 #' )
-#' mod %>% model_list_higher_order_variables()
+#' mod |> model_list_higher_order_variables()
 #'
 #' mod <- glm(
 #'   Survived ~ Class * Age + Sex,
-#'   data = Titanic %>% as.data.frame(),
+#'   data = Titanic |> as.data.frame(),
 #'   weights = Freq,
 #'   family = binomial
 #' )
-#' mod %>% model_list_higher_order_variables()
+#' mod |> model_list_higher_order_variables()
 model_list_higher_order_variables <- function(model) {
   UseMethod("model_list_higher_order_variables")
 }
@@ -28,11 +28,11 @@ model_list_higher_order_variables <- function(model) {
 #' @export
 #' @rdname model_list_higher_order_variables
 model_list_higher_order_variables.default <- function(model) {
-  variables <- model %>%
+  variables <- model |>
     model_list_variables(only_variable = TRUE)
 
   # exclude response variable
-  response_variable <- model %>% model_get_response_variable()
+  response_variable <- model |> model_get_response_variable()
   if (!is.null(response_variable)) {
     variables <- variables[!variables %in% response_variable]
   }
@@ -47,11 +47,11 @@ model_list_higher_order_variables.default <- function(model) {
       function(x) {
         all(i %in% x)
       }
-    ) %>%
-      unlist() %>%
+    ) |>
+      unlist() |>
       sum()
   }
-  count <- lapply(terms, .count_combination) %>% unlist()
+  count <- lapply(terms, .count_combination) |> unlist()
 
   # keep combinations appearing only once
   variables[count == 1]

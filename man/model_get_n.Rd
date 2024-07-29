@@ -59,7 +59,7 @@ of the returned tibble.
 This function does not cover \code{lavaan} models (\code{NULL} is returned).
 }
 \examples{
-lm(hp ~ mpg + factor(cyl) + disp:hp, mtcars) \%>\%
+lm(hp ~ mpg + factor(cyl) + disp:hp, mtcars) |>
   model_get_n()
 
 mod <- glm(
@@ -68,52 +68,52 @@ mod <- glm(
   family = binomial,
   contrasts = list(stage = contr.sum, grade = contr.treatment(3, 2), trt = "contr.SAS")
 )
-mod \%>\% model_get_n()
+mod |> model_get_n()
 
 \dontrun{
 mod <- glm(
   Survived ~ Class * Age + Sex,
-  data = Titanic \%>\% as.data.frame(),
+  data = Titanic |> as.data.frame(),
   weights = Freq, family = binomial
 )
-mod \%>\% model_get_n()
+mod |> model_get_n()
 
-d <- dplyr::as_tibble(Titanic) \%>\%
-  dplyr::group_by(Class, Sex, Age) \%>\%
+d <- dplyr::as_tibble(Titanic) |>
+  dplyr::group_by(Class, Sex, Age) |>
   dplyr::summarise(
     n_survived = sum(n * (Survived == "Yes")),
     n_dead = sum(n * (Survived == "No"))
   )
 mod <- glm(cbind(n_survived, n_dead) ~ Class * Age + Sex, data = d, family = binomial)
-mod \%>\% model_get_n()
+mod |> model_get_n()
 
 mod <- glm(response ~ age + grade * trt, gtsummary::trial, family = poisson)
-mod \%>\% model_get_n()
+mod |> model_get_n()
 
 mod <- glm(
   response ~ trt * grade + offset(ttdeath),
   gtsummary::trial,
   family = poisson
 )
-mod \%>\% model_get_n()
+mod |> model_get_n()
 
 dont
-df <- survival::lung \%>\% dplyr::mutate(sex = factor(sex))
+df <- survival::lung |> dplyr::mutate(sex = factor(sex))
 mod <- survival::coxph(survival::Surv(time, status) ~ ph.ecog + age + sex, data = df)
-mod \%>\% model_get_n()
+mod |> model_get_n()
 
 mod <- lme4::lmer(Reaction ~ Days + (Days | Subject), lme4::sleepstudy)
-mod \%>\% model_get_n()
+mod |> model_get_n()
 
 mod <- lme4::glmer(response ~ trt * grade + (1 | stage),
   family = binomial, data = gtsummary::trial
 )
-mod \%>\% model_get_n()
+mod |> model_get_n()
 
 mod <- lme4::glmer(cbind(incidence, size - incidence) ~ period + (1 | herd),
   family = binomial, data = lme4::cbpp
 )
-mod \%>\% model_get_n()
+mod |> model_get_n()
 }
 }
 \seealso{

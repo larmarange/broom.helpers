@@ -31,34 +31,34 @@ weights.
 }
 \examples{
 mod <- lm(Sepal.Length ~ Sepal.Width, iris)
-mod \%>\% model_get_weights()
+mod |> model_get_weights()
 
 mod <- lm(hp ~ mpg + factor(cyl) + disp:hp, mtcars, weights = mtcars$gear)
-mod \%>\% model_get_weights()
+mod |> model_get_weights()
 
 mod <- glm(
   response ~ stage * grade + trt,
   gtsummary::trial,
   family = binomial
 )
-mod \%>\% model_get_weights()
+mod |> model_get_weights()
 
 mod <- glm(
   Survived ~ Class * Age + Sex,
-  data = Titanic \%>\% as.data.frame(),
+  data = Titanic |> as.data.frame(),
   weights = Freq,
   family = binomial
 )
-mod \%>\% model_get_weights()
+mod |> model_get_weights()
 
-d <- dplyr::as_tibble(Titanic) \%>\%
-  dplyr::group_by(Class, Sex, Age) \%>\%
+d <- dplyr::as_tibble(Titanic) |>
+  dplyr::group_by(Class, Sex, Age) |>
   dplyr::summarise(
     n_survived = sum(n * (Survived == "Yes")),
     n_dead = sum(n * (Survived == "No"))
   )
 mod <- glm(cbind(n_survived, n_dead) ~ Class * Age + Sex, data = d, family = binomial)
-mod \%>\% model_get_weights()
+mod |> model_get_weights()
 }
 \seealso{
 Other model_helpers: 

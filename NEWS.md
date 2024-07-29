@@ -9,6 +9,8 @@
   the number of observations (#251)
 - by default, `tidy_parameters()` calls now `parameters::model_parameters()`
   with `pretty_names = FALSE` for saving execution time (#259)
+- internal code now uses the native R pipe (`|>`), requiring therefore R >= 4.2
+  (#262)
   
 **Deprecated support**
 
@@ -20,6 +22,9 @@
 - `tidy_marginal_means()` is now deprecated, following deprecation of
   `marginaleffects::marginal_means()`. Use instead `tidy_marginal_predictions()`
   with the option `newdata = "marginalmeans"`.
+- `tidy_margins()` is now indicated as superseded and may be deprecated if
+  `margins` is removed from CRAN. `tidy_avg_slopes()` could be used as an
+  alternative. (#252)
   
 **Fixes**
 

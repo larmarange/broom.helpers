@@ -17,12 +17,20 @@ interval in the tidied output}
 \item{...}{additional parameters passed to \code{margins::margins()}}
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
+}
+\details{
+The \code{margins} package is no longer under active development and may be
+removed from CRAN sooner or later. It is advised to use the \code{marginaleffects}
+package instead, offering more functionalities. You could have a look at the
+\href{https://larmarange.github.io/broom.helpers/articles/marginal_tidiers.html}{article}
+dedicated to marginal estimates with \code{broom.helpers}. \code{tidy_avg_slopes()}
+could be used as an alternative.
+
 Use \code{margins::margins()} to estimate average marginal effects (AME) and
 return a tibble tidied in a way that it could be used by \code{broom.helpers}
 functions. See \code{margins::margins()} for a list of supported models.
-}
-\details{
+
 By default, \code{margins::margins()} estimate average marginal effects (AME): an
 effect is computed for each observed value in the original dataset before
 being averaged.
@@ -36,9 +44,9 @@ categorical variables. Interactions are also ignored.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-df <- Titanic \%>\%
-  dplyr::as_tibble() \%>\%
-  tidyr::uncount(n) \%>\%
+df <- Titanic |>
+  dplyr::as_tibble() |>
+  tidyr::uncount(n) |>
   dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
 mod <- glm(
   Survived ~ Class + Age + Sex,

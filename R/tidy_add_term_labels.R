@@ -28,21 +28,21 @@
 #' @export
 #' @family tidy_helpers
 #' @examplesIf interactive()
-#' df <- Titanic %>%
-#'   dplyr::as_tibble() %>%
-#'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes"))) %>%
+#' df <- Titanic |>
+#'   dplyr::as_tibble() |>
+#'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes"))) |>
 #'   labelled::set_variable_labels(
 #'     Class = "Passenger's class",
 #'     Sex = "Sex"
 #'   )
 #'
-#' mod <- df %>%
-#'   glm(Survived ~ Class * Age * Sex, data = ., weights = .$n, family = binomial)
-#' mod %>%
-#'   tidy_and_attach() %>%
+#' mod <-
+#'   glm(Survived ~ Class * Age * Sex, data = df, weights = df$n, family = binomial)
+#' mod |>
+#'   tidy_and_attach() |>
 #'   tidy_add_term_labels()
-#' mod %>%
-#'   tidy_and_attach() %>%
+#' mod |>
+#'   tidy_and_attach() |>
 #'   tidy_add_term_labels(
 #'     interaction_sep = " x ",
 #'     categorical_terms_pattern = "{level} / {reference_level}"
@@ -68,7 +68,7 @@ tidy_add_term_labels <- function(x,
   .attributes <- .save_attributes(x)
 
   if ("label" %in% names(x)) {
-    x <- x %>% dplyr::select(-dplyr::all_of("label"))
+    x <- x |> dplyr::select(-dplyr::all_of("label"))
   }
 
   if (is.list(labels)) {
@@ -76,16 +76,16 @@ tidy_add_term_labels <- function(x,
   }
 
   if (!"var_label" %in% names(x)) {
-    x <- x %>% tidy_add_variable_labels(model = model, quiet = quiet)
+    x <- x |> tidy_add_variable_labels(model = model, quiet = quiet)
   }
   if (!"contrasts" %in% names(x)) {
-    x <- x %>% tidy_add_contrasts(model = model)
+    x <- x |> tidy_add_contrasts(model = model)
   }
 
   # specific case for nnet::multinom
   # keeping only one level for computing term_labels
   if ("y.level" %in% names(x) && inherits(model, "multinom")) {
-    xx <- x %>%
+    xx <- x |>
       dplyr::filter(.data$y.level == x$y.level[1])
   } else {
     xx <- x
@@ -99,7 +99,7 @@ tidy_add_term_labels <- function(x,
   sdif_term_level <- "diff"
   if (.attributes$exponentiate) sdif_term_level <- "ratio"
 
-  terms_levels <- model %>% model_list_terms_levels(
+  terms_levels <- model |> model_list_terms_levels(
     label_pattern = categorical_terms_pattern,
     variable_labels = .attributes$variable_labels,
     sdif_term_level = sdif_term_level
@@ -107,29 +107,29 @@ tidy_add_term_labels <- function(x,
   if (!is.null(terms_levels)) {
     additional_term_labels <- terms_levels$label
     names(additional_term_labels) <- terms_levels$term
-    term_labels <- term_labels %>%
+    term_labels <- term_labels |>
       .update_vector(additional_term_labels)
 
     # also consider "variablelevel" notation
     # when not already used (e.g. for sum contrasts)
-    terms_levels2 <- terms_levels %>%
-      dplyr::mutate(term2 = paste0(.data$variable, .data$level)) %>%
+    terms_levels2 <- terms_levels |>
+      dplyr::mutate(term2 = paste0(.data$variable, .data$level)) |>
       dplyr::filter(.data$term2 != .data$term)
     if (nrow(terms_levels2) > 0) {
       additional_term_labels <- terms_levels2$label
       names(additional_term_labels) <- terms_levels2$term2
-      term_labels <- term_labels %>%
+      term_labels <- term_labels |>
         .update_vector(additional_term_labels)
     }
     # also consider "variablelevel_rank" notation
     # for no intercept model (because type of interaction unknown)
-    terms_levels3 <- terms_levels %>%
-      dplyr::mutate(term3 = paste0(.data$variable, .data$level_rank)) %>%
+    terms_levels3 <- terms_levels |>
+      dplyr::mutate(term3 = paste0(.data$variable, .data$level_rank)) |>
       dplyr::filter(.data$term3 != .data$term & .data$contrasts_type == "no.contrast")
     if (nrow(terms_levels3) > 0) {
       additional_term_labels <- terms_levels3$label
       names(additional_term_labels) <- terms_levels3$term3
-      term_labels <- term_labels %>%
+      term_labels <- term_labels |>
         .update_vector(additional_term_labels)
     }
   }
@@ -139,7 +139,7 @@ tidy_add_term_labels <- function(x,
   # then current variable labels in x
   variables_list <- model_list_variables(model)
   if (!is.null(variables_list)) {
-    variables_list <- variables_list %>%
+    variables_list <- variables_list |>
       dplyr::mutate(
         label = dplyr::if_else(
           is.na(.data$label_attr),
@@ -149,38 +149,38 @@ tidy_add_term_labels <- function(x,
       )
     additional_term_labels <- variables_list$label
     names(additional_term_labels) <- variables_list$variable
-    term_labels <- term_labels %>%
+    term_labels <- term_labels |>
       .update_vector(additional_term_labels)
     # add version with backtips for variables with non standard names
     names(additional_term_labels) <- paste0(
       "`", names(additional_term_labels), "`"
     )
-    term_labels <- term_labels %>%
+    term_labels <- term_labels |>
       .update_vector(additional_term_labels)
   }
 
-  x_var_labels <- xx %>%
+  x_var_labels <- xx |>
     dplyr::mutate(
       variable = dplyr::if_else(
         is.na(.data$variable), # for intercept
         .data$term,
         .data$variable
       )
-    ) %>%
-    dplyr::group_by(.data$variable) %>%
+    ) |>
+    dplyr::group_by(.data$variable) |>
     dplyr::summarise(
       var_label = dplyr::first(.data$var_label),
       .groups = "drop_last"
     )
   additional_term_labels <- x_var_labels$var_label
   names(additional_term_labels) <- x_var_labels$variable
-  term_labels <- term_labels %>%
+  term_labels <- term_labels |>
     .update_vector(additional_term_labels)
   # add version with backtips for variables with non standard names
   names(additional_term_labels) <- paste0(
     "`", names(additional_term_labels), "`"
   )
-  term_labels <- term_labels %>%
+  term_labels <- term_labels |>
     .update_vector(additional_term_labels)
 
 
@@ -195,21 +195,21 @@ tidy_add_term_labels <- function(x,
   }
 
   # labels for polynomial terms
-  poly_terms <- xx %>%
+  poly_terms <- xx |>
     dplyr::filter(
-      .data$term %>% stringr::str_starts("poly\\(")
-    ) %>%
+      .data$term |> stringr::str_starts("poly\\(")
+    ) |>
     dplyr::mutate(
-      degree = .data$term %>% stringr::str_replace("poly\\(.+\\)([0-9]+)", "\\1"),
+      degree = .data$term |> stringr::str_replace("poly\\(.+\\)([0-9]+)", "\\1"),
       label = paste0(.data$var_label, .superscript_numbers(.data$degree))
     )
   poly_labels <- poly_terms$label
   names(poly_labels) <- poly_terms$term
-  term_labels <- term_labels %>%
+  term_labels <- term_labels |>
     .update_vector(poly_labels)
 
   # labels argument
-  term_labels <- term_labels %>%
+  term_labels <- term_labels |>
     .update_vector(labels)
   # save custom labels
   .attributes$term_labels <- labels
@@ -220,7 +220,7 @@ tidy_add_term_labels <- function(x,
   interaction_terms <- setdiff(interaction_terms, names(labels))
   names(interaction_terms) <- interaction_terms
   interaction_terms <-
-    interaction_terms %>%
+    interaction_terms |>
     strsplit(":")
 
   # in some cases (e.g. marginal predictions)
@@ -231,26 +231,26 @@ tidy_add_term_labels <- function(x,
     missing_terms <- setdiff(it[it != ""], names(term_labels))
     if (length(missing_terms) > 0) {
       names(missing_terms) <- missing_terms
-      term_labels <- term_labels %>%
+      term_labels <- term_labels |>
         .update_vector(missing_terms)
     }
   }
 
-  interaction_terms <- interaction_terms %>%
+  interaction_terms <- interaction_terms |>
     lapply(function(x) {
       paste(term_labels[x], collapse = interaction_sep)
-    }) %>%
+    }) |>
     unlist()
-  term_labels <- term_labels %>%
+  term_labels <- term_labels |>
     .update_vector(interaction_terms)
 
-  x %>%
+  x |>
     dplyr::left_join(
       tibble::tibble(
         term = names(term_labels),
         label = term_labels
       ),
       by = "term"
-    ) %>%
+    ) |>
     tidy_attach_model(model = model, .attributes = .attributes)
 }

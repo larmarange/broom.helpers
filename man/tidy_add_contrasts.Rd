@@ -24,17 +24,16 @@ If the \code{variable} column is not yet available in \code{x},
 \code{\link[=tidy_identify_variables]{tidy_identify_variables()}} will be automatically applied.
 }
 \examples{
-df <- Titanic \%>\%
-  dplyr::as_tibble() \%>\%
+df <- Titanic |>
+  dplyr::as_tibble() |>
   dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
 
-df \%>\%
-  glm(
-    Survived ~ Class + Age + Sex,
-    data = ., weights = .$n, family = binomial,
-    contrasts = list(Age = contr.sum, Class = "contr.helmert")
-  ) \%>\%
-  tidy_and_attach() \%>\%
+glm(
+  Survived ~ Class + Age + Sex,
+  data = df, weights = df$n, family = binomial,
+  contrasts = list(Age = contr.sum, Class = "contr.helmert")
+) |>
+  tidy_and_attach() |>
   tidy_add_contrasts()
 }
 \seealso{

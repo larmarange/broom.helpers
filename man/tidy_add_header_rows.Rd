@@ -53,21 +53,21 @@ If the \code{label} column is not yet available in \code{x},
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 if (.assert_package("gtsummary", boolean = TRUE)) {
-  df <- Titanic \%>\%
-    dplyr::as_tibble() \%>\%
+  df <- Titanic |>
+    dplyr::as_tibble() |>
     dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
 
-  res <- df \%>\%
+  res <-
     glm(
       Survived ~ Class + Age + Sex,
-      data = ., weights = .$n, family = binomial,
+      data = df, weights = df$n, family = binomial,
       contrasts = list(Age = contr.sum, Class = "contr.SAS")
-    ) \%>\%
-    tidy_and_attach() \%>\%
-    tidy_add_variable_labels(labels = list(Class = "Custom label for Class")) \%>\%
+    ) |>
+    tidy_and_attach() |>
+    tidy_add_variable_labels(labels = list(Class = "Custom label for Class")) |>
     tidy_add_reference_rows()
-  res \%>\% tidy_add_header_rows()
-  res \%>\% tidy_add_header_rows(show_single_row = all_dichotomous())
+  res |> tidy_add_header_rows()
+  res |> tidy_add_header_rows(show_single_row = all_dichotomous())
 
   glm(
     response ~ stage + grade * trt,
@@ -78,9 +78,9 @@ if (.assert_package("gtsummary", boolean = TRUE)) {
       grade = contr.treatment(3, base = 2),
       trt = contr.treatment(2, base = 2)
     )
-  ) \%>\%
-    tidy_and_attach() \%>\%
-    tidy_add_reference_rows() \%>\%
+  ) |>
+    tidy_and_attach() |>
+    tidy_add_reference_rows() |>
     tidy_add_header_rows()
 }
 \dontshow{\}) # examplesIf}

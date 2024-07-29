@@ -5,8 +5,8 @@ test_that("tidy_add_reference_rows() works as expected", {
     family = binomial,
     contrasts = list(stage = contr.treatment, grade = contr.SAS, trt = contr.sum)
   )
-  res <- mod %>%
-    tidy_and_attach() %>%
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_reference_rows()
   if ("stage2" %in% names(coef(mod))) {
     expect_equivalent(
@@ -61,15 +61,15 @@ test_that("tidy_add_reference_rows() works as expected", {
     family = binomial,
     contrasts = list(stage = contr.poly, grade = contr.helmert, trt = matrix(c(2, 3)))
   )
-  res <- mod %>%
-    tidy_and_attach() %>%
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_reference_rows()
   expect_true(all(is.na(res$reference_row)))
 
   # no reference row for an interaction only variable
   mod <- lm(age ~ factor(response):marker, gtsummary::trial)
-  res <- mod %>%
-    tidy_and_attach() %>%
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_reference_rows()
   expect_equivalent(
     res$reference_row,
@@ -83,8 +83,8 @@ test_that("tidy_add_reference_rows() works as expected", {
     family = binomial,
     contrasts = list(stage = contr.treatment, grade = contr.SAS, trt = contr.sum)
   )
-  res <- mod %>%
-    tidy_and_attach() %>%
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_reference_rows(no_reference_row = c("stage", "grade"))
   if ("stage2" %in% names(coef(mod))) {
     expect_equivalent(
@@ -115,43 +115,43 @@ test_that("tidy_add_reference_rows() works as expected", {
 test_that("test tidy_add_reference_rows() checks", {
   mod <- glm(response ~ stage + grade + trt, gtsummary::trial, family = binomial)
   # expect an error if no model attached
-  expect_error(mod %>% broom::tidy() %>% tidy_add_reference_rows())
+  expect_error(mod |> broom::tidy() |> tidy_add_reference_rows())
 
   # warning if applied twice
   expect_message(
-    mod %>%
-      tidy_and_attach() %>%
-      tidy_add_reference_rows() %>%
+    mod |>
+      tidy_and_attach() |>
+      tidy_add_reference_rows() |>
       tidy_add_reference_rows()
   )
 
   # message if applied after tidy_add_term_labels()
   expect_message(
-    mod %>%
-      tidy_and_attach() %>%
-      tidy_add_term_labels() %>%
+    mod |>
+      tidy_and_attach() |>
+      tidy_add_term_labels() |>
       tidy_add_reference_rows()
   )
 
   # message if applied after tidy_add_n()
   expect_message(
-    mod %>%
-      tidy_and_attach() %>%
-      tidy_add_n() %>%
+    mod |>
+      tidy_and_attach() |>
+      tidy_add_n() |>
       tidy_add_reference_rows()
   )
 
   # error if applied after tidy_add_header_rows()
   expect_error(
-    mod %>%
-      tidy_and_attach() %>%
-      tidy_add_header_rows() %>%
+    mod |>
+      tidy_and_attach() |>
+      tidy_add_header_rows() |>
       tidy_add_reference_rows()
   )
 
   # message or error if non existing variable in no_reference_row
   expect_error(
-    mod %>% tidy_and_attach() %>% tidy_add_reference_rows(no_reference_row = "g")
+    mod |> tidy_and_attach() |> tidy_add_reference_rows(no_reference_row = "g")
   )
 })
 
@@ -166,8 +166,8 @@ test_that("tidy_add_reference_rows() works with different values of base in cont
       trt = contr.treatment(2, base = 2)
     )
   )
-  res <- mod %>%
-    tidy_and_attach() %>%
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_reference_rows()
   if ("stage2" %in% names(coef(mod))) {
     expect_equivalent(
@@ -203,9 +203,9 @@ test_that("tidy_add_reference_rows() use var_label if available", {
     gtsummary::trial,
     family = binomial
   )
-  res <- mod %>%
-    tidy_and_attach() %>%
-    tidy_add_variable_labels() %>%
+  res <- mod |>
+    tidy_and_attach() |>
+    tidy_add_variable_labels() |>
     tidy_add_reference_rows()
 
   expect_equivalent(
@@ -222,8 +222,8 @@ test_that("tidy_add_reference_rows() works with nnet::multinom", {
   skip_if_not_installed("nnet")
   skip_on_cran()
   mod <- nnet::multinom(grade ~ stage + marker + age, data = gtsummary::trial, trace = FALSE)
-  res <- mod %>%
-    tidy_and_attach() %>%
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_reference_rows()
   expect_equivalent(
     res$reference_row,
@@ -241,8 +241,8 @@ test_that("tidy_add_reference_rows() works with lme4::glmer", {
   mod <- lme4::glmer(cbind(incidence, size - incidence) ~ period + (1 | herd),
     family = binomial, data = lme4::cbpp
   )
-  res <- mod %>%
-    tidy_and_attach() %>%
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_reference_rows()
 
   expect_equal(
@@ -257,13 +257,16 @@ test_that("tidy_add_reference_rows() works with glmmTMB::glmmTMB", {
   skip_if_not_installed("glmmTMB")
   skip_if_not_installed("broom.mixed")
 
-  mod <- glmmTMB::glmmTMB(count ~ mined + spp,
-    ziformula = ~mined,
-    family = poisson,
-    data = glmmTMB::Salamanders
+  suppressWarnings(
+    mod <- glmmTMB::glmmTMB(
+      count ~ mined + spp,
+      ziformula = ~mined,
+      family = poisson,
+      data = glmmTMB::Salamanders
+    )
   )
-  res <- mod %>%
-    tidy_and_attach() %>%
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_reference_rows()
   expect_equivalent(
     res$reference_row,

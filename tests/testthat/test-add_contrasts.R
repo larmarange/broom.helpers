@@ -1,7 +1,7 @@
 test_that("tidy_add_contrast() works for basic models", {
   mod <- glm(response ~ stage + grade + trt, gtsummary::trial, family = binomial)
-  res <- mod %>%
-    tidy_and_attach() %>%
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_contrasts()
   expect_equivalent(
     res$contrasts,
@@ -22,8 +22,8 @@ test_that("tidy_add_contrast() works for basic models", {
     family = binomial,
     contrasts = list(stage = contr.sum, grade = contr.helmert, trt = contr.SAS)
   )
-  res <- mod %>%
-    tidy_and_attach() %>%
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_contrasts()
   expect_equivalent(
     res$contrasts,
@@ -41,8 +41,8 @@ test_that("tidy_add_contrast() works for basic models", {
     family = binomial,
     contrasts = list(stage = contr.poly, grade = contr.treatment, trt = matrix(c(-3, 2)))
   )
-  res <- mod %>%
-    tidy_and_attach() %>%
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_contrasts()
   expect_equivalent(
     res$contrasts,
@@ -65,8 +65,8 @@ test_that("tidy_add_contrast() works for basic models", {
       trt = contr.treatment(2, 2), "factor(death)" = matrix(c(-3, 2))
     )
   )
-  res <- mod %>%
-    tidy_and_attach() %>%
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_contrasts()
   expect_equivalent(
     res$contrasts,
@@ -88,8 +88,8 @@ test_that("tidy_add_contrast() works for basic models", {
     family = binomial,
     contrasts = list(stage = "contr.sum", grade = "contr.helmert", trt = "contr.SAS")
   )
-  res <- mod %>%
-    tidy_and_attach() %>%
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_contrasts()
   expect_equivalent(
     res$contrasts,
@@ -116,8 +116,8 @@ test_that("tidy_add_contrast() works for basic models", {
       trt = "contr.sdif"
     )
   )
-  res <- mod %>%
-    tidy_and_attach() %>%
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_contrasts()
   expect_equivalent(
     res$contrasts,
@@ -133,11 +133,11 @@ test_that("tidy_add_contrast() works for basic models", {
 test_that("test tidy_add_contrasts() checks", {
   mod <- glm(response ~ stage + grade + trt, gtsummary::trial, family = binomial)
   # expect an error if no model attached
-  expect_error(mod %>% broom::tidy() %>% tidy_add_contrasts())
+  expect_error(mod |> broom::tidy() |> tidy_add_contrasts())
 
   # could be apply twice (no error)
   expect_error(
-    mod %>% tidy_and_attach() %>% tidy_add_contrasts() %>% tidy_add_contrasts(),
+    mod |> tidy_and_attach() |> tidy_add_contrasts() |> tidy_add_contrasts(),
     NA
   )
 })
@@ -146,8 +146,8 @@ test_that("test tidy_add_contrasts() checks", {
 
 test_that("tidy_add_contrasts() works with no intercept models", {
   mod <- glm(response ~ stage + grade - 1, data = gtsummary::trial, family = binomial)
-  res <- mod %>%
-    tidy_and_attach() %>%
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_contrasts()
   expect_equivalent(
     res$contrasts_type,
@@ -159,10 +159,10 @@ test_that("tidy_add_contrasts() works with no intercept models", {
 })
 
 test_that("tidy_add_contrasts() works with variables having non standard name", {
-  df <- gtsummary::trial %>% dplyr::mutate(`grade of kids` = grade)
+  df <- gtsummary::trial |> dplyr::mutate(`grade of kids` = grade)
   mod <- glm(response ~ stage + `grade of kids` + trt, df, family = binomial)
-  res <- mod %>%
-    tidy_and_attach() %>%
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_contrasts()
   expect_equivalent(
     res$contrasts,
@@ -176,8 +176,8 @@ test_that("tidy_add_contrasts() works with variables having non standard name", 
     family = binomial,
     contrasts = list(`grade of kids` = contr.helmert)
   )
-  res <- mod %>%
-    tidy_and_attach() %>%
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_contrasts()
   expect_equivalent(
     res$contrasts,
@@ -196,7 +196,7 @@ test_that("tidy_add_contrasts() works with lme4::lmer", {
   df$stage <- as.character(df$stage)
   df$group <- rep.int(1:2, 100)
   mod <- lme4::lmer(marker ~ stage + grade + (1 | group), df)
-  expect_error(mod %>% tidy_and_attach(tidy_fun = broom.mixed::tidy) %>% tidy_add_contrasts(), NA)
+  expect_error(mod |> tidy_and_attach(tidy_fun = broom.mixed::tidy) |> tidy_add_contrasts(), NA)
 })
 
 
@@ -209,14 +209,14 @@ test_that("tidy_add_contrasts() works with lme4::glmer", {
   suppressMessages(
     mod <- lme4::glmer(response ~ stage + grade + (1 | group), df, family = binomial)
   )
-  expect_error(mod %>% tidy_and_attach(tidy_fun = broom.mixed::tidy) %>% tidy_add_contrasts(), NA)
+  expect_error(mod |> tidy_and_attach(tidy_fun = broom.mixed::tidy) |> tidy_add_contrasts(), NA)
 })
 
 
 test_that("tidy_add_contrasts() works with survival::coxph", {
-  df <- survival::lung %>% dplyr::mutate(sex = factor(sex))
+  df <- survival::lung |> dplyr::mutate(sex = factor(sex))
   mod <- survival::coxph(survival::Surv(time, status) ~ ph.ecog + age + sex, data = df)
-  expect_error(mod %>% tidy_and_attach() %>% tidy_add_contrasts(), NA)
+  expect_error(mod |> tidy_and_attach() |> tidy_add_contrasts(), NA)
 })
 
 test_that("tidy_add_contrasts() works with survival::survreg", {
@@ -225,22 +225,22 @@ test_that("tidy_add_contrasts() works with survival::survreg", {
     survival::ovarian,
     dist = "exponential"
   )
-  expect_error(mod %>% tidy_and_attach() %>% tidy_add_contrasts(), NA)
+  expect_error(mod |> tidy_and_attach() |> tidy_add_contrasts(), NA)
 })
 
 test_that("tidy_add_contrasts() works with nnet::multinom", {
   skip_if_not_installed("nnet")
   mod <- nnet::multinom(grade ~ stage + marker + age, data = gtsummary::trial, trace = FALSE)
-  expect_error(mod %>% tidy_and_attach() %>% tidy_add_contrasts(), NA)
+  expect_error(mod |> tidy_and_attach() |> tidy_add_contrasts(), NA)
 
   mod <- nnet::multinom(
     grade ~ stage + marker + age,
     data = gtsummary::trial, trace = FALSE,
     contrasts = list(stage = contr.sum)
   )
-  expect_error(mod %>% tidy_and_attach() %>% tidy_add_contrasts(), NA)
-  res <- mod %>%
-    tidy_and_attach() %>%
+  expect_error(mod |> tidy_and_attach() |> tidy_add_contrasts(), NA)
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_contrasts()
   expect_equivalent(
     res$contrasts,
@@ -255,24 +255,24 @@ test_that("tidy_add_contrasts() works with survey::svyglm", {
   skip_if_not_installed("survey")
   df <- survey::svydesign(~1, weights = ~1, data = gtsummary::trial)
   mod <- survey::svyglm(response ~ age + grade * trt, df, family = quasibinomial)
-  expect_error(mod %>% tidy_and_attach() %>% tidy_add_contrasts(), NA)
+  expect_error(mod |> tidy_and_attach() |> tidy_add_contrasts(), NA)
 })
 
 test_that("tidy_add_contrasts() works with ordinal::clm", {
   mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine)
-  expect_error(mod %>% tidy_and_attach() %>% tidy_add_contrasts(), NA)
+  expect_error(mod |> tidy_and_attach() |> tidy_add_contrasts(), NA)
 })
 
 
 test_that("tidy_add_contrasts() works with ordinal::clmm", {
   mod <- ordinal::clmm(rating ~ temp * contact + (1 | judge), data = ordinal::wine)
-  expect_error(mod %>% tidy_and_attach() %>% tidy_add_contrasts(), NA)
+  expect_error(mod |> tidy_and_attach() |> tidy_add_contrasts(), NA)
 })
 
 
 test_that("tidy_add_contrasts() works with MASS::polr", {
   mod <- MASS::polr(Sat ~ Infl + Type + Cont, weights = Freq, data = MASS::housing)
-  expect_error(mod %>% tidy_and_attach() %>% tidy_add_contrasts(), NA)
+  expect_error(mod |> tidy_and_attach() |> tidy_add_contrasts(), NA)
 })
 
 
@@ -285,7 +285,7 @@ test_that("tidy_add_contrasts() works with geepack::geeglm", {
   suppressWarnings(
     mod <- geepack::geeglm(mf, data = df, id = Pig, family = poisson("identity"), corstr = "ar1")
   )
-  expect_error(mod %>% tidy_and_attach() %>% tidy_add_contrasts(), NA)
+  expect_error(mod |> tidy_and_attach() |> tidy_add_contrasts(), NA)
 })
 
 
@@ -293,7 +293,7 @@ test_that("tidy_add_contrasts() works with gam::gam", {
   skip_if_not_installed("gam")
   data(kyphosis, package = "gam")
   mod <- gam::gam(Kyphosis ~ gam::s(Age, 4) + Number, family = binomial, data = kyphosis)
-  expect_error(mod %>% tidy_and_attach() %>% tidy_add_contrasts(), NA)
+  expect_error(mod |> tidy_and_attach() |> tidy_add_contrasts(), NA)
 })
 
 
@@ -309,7 +309,7 @@ test_that("tidy_add_contrasts() works with lavaan::lavaan", {
     auto.var = TRUE, auto.fix.first = TRUE,
     auto.cov.lv.x = TRUE
   )
-  expect_error(mod %>% tidy_and_attach() %>% tidy_add_contrasts(), NA)
+  expect_error(mod |> tidy_and_attach() |> tidy_add_contrasts(), NA)
 })
 
 
@@ -325,6 +325,6 @@ test_that("model_get_contrasts() works with rstanarm::stan_glm", {
     family = binomial
   )
   expect_false(
-    is.null(mod %>% model_get_contrasts())
+    is.null(mod |> model_get_contrasts())
   )
 })

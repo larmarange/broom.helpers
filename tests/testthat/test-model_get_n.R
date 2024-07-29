@@ -1,6 +1,6 @@
 test_that("model_get_n() works for basic models", {
   mod <- lm(Sepal.Length ~ ., iris)
-  res <- mod %>% model_get_n()
+  res <- mod |> model_get_n()
   expect_equivalent(
     res$n_obs,
     c(150, 150, 150, 150, 50, 50, 50)
@@ -10,7 +10,7 @@ test_that("model_get_n() works for basic models", {
     Sepal.Length ~ log(Sepal.Width) + Petal.Length^2,
     iris
   )
-  res <- mod %>% model_get_n()
+  res <- mod |> model_get_n()
   expect_equivalent(
     res$n_obs,
     c(150, 150, 150)
@@ -18,7 +18,7 @@ test_that("model_get_n() works for basic models", {
 
   # logistic model
   mod <- glm(response ~ stage + grade + trt, gtsummary::trial, family = binomial)
-  res <- mod %>% model_get_n()
+  res <- mod |> model_get_n()
   expect_equivalent(
     res$n_obs,
     c(193, 52, 40, 49, 63, 63, 98, 52, 67, 95)
@@ -30,10 +30,10 @@ test_that("model_get_n() works for basic models", {
 
   mod <- glm(
     Survived ~ Class * Age + Sex,
-    data = Titanic %>% as.data.frame(),
+    data = Titanic |> as.data.frame(),
     weights = Freq, family = binomial
   )
-  res <- mod %>% model_get_n()
+  res <- mod |> model_get_n()
   expect_equivalent(
     res$n_obs,
     c(2201, 285, 706, 885, 2092, 470, 261, 627, 885, 325, 109, 1731)
@@ -44,8 +44,8 @@ test_that("model_get_n() works for basic models", {
   )
 
   # cbind() syntax
-  d <- dplyr::as_tibble(Titanic) %>%
-    dplyr::group_by(Class, Sex, Age) %>%
+  d <- dplyr::as_tibble(Titanic) |>
+    dplyr::group_by(Class, Sex, Age) |>
     dplyr::summarise(
       n_survived = sum(n * (Survived == "Yes")),
       n_dead = sum(n * (Survived == "No"))
@@ -56,7 +56,7 @@ test_that("model_get_n() works for basic models", {
     family = binomial,
     y = FALSE # should work even if y is not returned
   )
-  expect_error(res <- mod %>% model_get_n(), NA)
+  expect_error(res <- mod |> model_get_n(), NA)
   expect_equivalent(
     res$n_obs,
     c(2201, 285, 706, 885, 109, 1731, 24, 79, 0, 325, 2092, 470)
@@ -68,7 +68,7 @@ test_that("model_get_n() works for basic models", {
 
   # Poisson without offset
   mod <- glm(response ~ age + grade * trt, gtsummary::trial, family = poisson)
-  res <- mod %>% model_get_n()
+  res <- mod |> model_get_n()
   expect_equivalent(
     res$n_obs,
     c(183, 183, 58, 60, 94, 29, 33, 65, 89)
@@ -89,7 +89,7 @@ test_that("model_get_n() works for basic models", {
     family = poisson,
     weights = rep_len(1:2, 200)
   )
-  res <- mod %>% model_get_n()
+  res <- mod |> model_get_n()
   expect_equivalent(
     res$n_obs,
     c(292, 151, 94, 92, 49, 49, 141, 106)
@@ -99,17 +99,17 @@ test_that("model_get_n() works for basic models", {
     c(96, 53, 28, 31, 19, 12, 43, 37)
   )
   expect_equivalent(
-    res$exposure %>% round(),
+    res$exposure |> round(),
     c(5819, 2914, 1826, 1766, 887, 916, 2905, 2227)
   )
 
   # interaction only terms
   mod <- glm(
     Survived ~ Class:Age,
-    data = Titanic %>% as.data.frame(),
+    data = Titanic |> as.data.frame(),
     weights = Freq, family = binomial
   )
-  res <- mod %>% model_get_n()
+  res <- mod |> model_get_n()
   expect_equivalent(
     res$n_obs,
     c(2201, 6, 24, 79, 0, 319, 261, 627, 885)
@@ -122,13 +122,13 @@ test_that("model_get_n() works for basic models", {
 
 
 test_that("model_get_n() handles variables having non standard name", {
-  df <- gtsummary::trial %>% dplyr::mutate(`grade of kids` = grade)
+  df <- gtsummary::trial |> dplyr::mutate(`grade of kids` = grade)
   mod <- glm(response ~ stage + `grade of kids` + trt, df,
     family = binomial,
     contrasts = list(`grade of kids` = contr.sum)
   )
   expect_error(
-    res <- mod %>% model_get_n(),
+    res <- mod |> model_get_n(),
     NA
   )
 })
@@ -141,7 +141,7 @@ test_that("model_get_n() works with different contrasts", {
     family = binomial,
     contrasts = list(stage = contr.treatment, grade = contr.SAS, trt = contr.SAS)
   )
-  expect_error(res <- mod %>% model_get_n(), NA)
+  expect_error(res <- mod |> model_get_n(), NA)
   expect_equivalent(names(res), c("term", "n_obs", "n_event"))
   if ("stage2" %in% names(coef(mod))) {
     expect_equivalent(
@@ -172,7 +172,7 @@ test_that("model_get_n() works with different contrasts", {
     family = binomial,
     contrasts = list(stage = contr.poly, grade = contr.helmert, trt = contr.sum)
   )
-  expect_error(res <- mod %>% model_get_n(), NA)
+  expect_error(res <- mod |> model_get_n(), NA)
   expect_equivalent(names(res), c("term", "n_obs", "n_event"))
   expect_equivalent(
     res$term,
@@ -191,7 +191,7 @@ test_that("model_get_n() works with different contrasts", {
 test_that("model_get_n() works with stats::poly()", {
   skip_on_cran()
   mod <- lm(Sepal.Length ~ poly(Sepal.Width, 3) + poly(Petal.Length, 2), iris)
-  expect_error(res <- mod %>% model_get_n(), NA)
+  expect_error(res <- mod |> model_get_n(), NA)
   expect_equivalent(names(res), c("term", "n_obs"))
   expect_equivalent(
     res$term,
@@ -215,7 +215,7 @@ test_that("model_get_n() works with lme4::lmer", {
   df$stage <- as.character(df$stage)
   df$group <- rep.int(1:2, 100)
   mod <- lme4::lmer(marker ~ stage + grade + (1 | group), df)
-  expect_error(res <- mod %>% model_get_n(), NA)
+  expect_error(res <- mod |> model_get_n(), NA)
   expect_equivalent(names(res), c("term", "n_obs"))
 })
 
@@ -230,16 +230,16 @@ test_that("model_get_n() works with lme4::glmer", {
   suppressMessages(
     mod <- lme4::glmer(response ~ stage + grade + (1 | group), df, family = binomial)
   )
-  expect_error(res <- mod %>% model_get_n(), NA)
+  expect_error(res <- mod |> model_get_n(), NA)
   expect_equivalent(names(res), c("term", "n_obs", "n_event"))
 })
 
 
 test_that("model_get_n() works with survival::coxph", {
   skip_on_cran()
-  df <- survival::lung %>% dplyr::mutate(sex = factor(sex))
+  df <- survival::lung |> dplyr::mutate(sex = factor(sex))
   mod <- survival::coxph(survival::Surv(time, status) ~ ph.ecog + age + sex, data = df)
-  expect_error(res <- mod %>% model_get_n(), NA)
+  expect_error(res <- mod |> model_get_n(), NA)
   expect_equivalent(
     names(res),
     c("term", "n_obs", "n_ind", "n_event", "exposure")
@@ -252,7 +252,7 @@ test_that("model_get_n() works with survival::coxph", {
     x = c(1, 0, 0, 1, 0, 1, 1, 1, 0, 0)
   )
   mod <- survival::coxph(survival::Surv(start, stop, event) ~ x, test)
-  expect_error(res <- mod %>% model_get_n(), NA)
+  expect_error(res <- mod |> model_get_n(), NA)
   expect_equivalent(
     names(res),
     c("term", "n_obs", "n_ind", "n_event", "exposure")
@@ -270,7 +270,7 @@ test_that("model_get_n() works with survival::survreg", {
     survival::ovarian,
     dist = "exponential"
   )
-  expect_error(res <- mod %>% model_get_n(), NA)
+  expect_error(res <- mod |> model_get_n(), NA)
   expect_equivalent(
     names(res),
     c("term", "n_obs", "n_ind", "n_event", "exposure")
@@ -281,7 +281,7 @@ test_that("model_get_n() works with nnet::multinom", {
   skip_if_not_installed("nnet")
   skip_on_cran()
   mod <- nnet::multinom(grade ~ stage + marker + age, data = gtsummary::trial, trace = FALSE)
-  expect_error(res <- mod %>% model_get_n(), NA)
+  expect_error(res <- mod |> model_get_n(), NA)
   expect_equivalent(names(res), c("y.level", "term", "n_obs", "n_event"))
   expect_equivalent(
     res$y.level,
@@ -301,7 +301,7 @@ test_that("model_get_n() works with nnet::multinom", {
 
   # when y is not coded as a factor
   mod <- nnet::multinom(race ~ age + lwt + bwt, data = MASS::birthwt, trace = FALSE)
-  expect_true(mod %>% model_get_n() %>% nrow() > 0)
+  expect_true(mod |> model_get_n() |> nrow() > 0)
 })
 
 test_that("model_get_n() works with survey::svyglm", {
@@ -309,20 +309,20 @@ test_that("model_get_n() works with survey::svyglm", {
   skip_if_not_installed("survey")
   df <- survey::svydesign(~1, weights = ~1, data = gtsummary::trial)
   mod <- survey::svyglm(response ~ age + grade * trt, df, family = quasibinomial)
-  expect_error(res <- mod %>% model_get_n(), NA)
+  expect_error(res <- mod |> model_get_n(), NA)
   expect_equivalent(names(res), c("term", "n_obs", "n_event"))
 
   mod <- survey::svyglm(response ~ age + grade + offset(log(ttdeath)), df, family = quasipoisson)
-  expect_error(res <- mod %>% model_get_n(), NA)
+  expect_error(res <- mod |> model_get_n(), NA)
   expect_equivalent(names(res), c("term", "n_obs", "n_event", "exposure"))
 
   df <- survey::svydesign(
     ~1,
     weights = ~Freq,
-    data = as.data.frame(Titanic) %>% dplyr::filter(Freq > 0)
+    data = as.data.frame(Titanic) |> dplyr::filter(Freq > 0)
   )
   mod <- survey::svyglm(Survived ~ Class + Age * Sex, df, family = quasibinomial)
-  expect_error(res <- mod %>% model_get_n(), NA)
+  expect_error(res <- mod |> model_get_n(), NA)
   expect_equivalent(names(res), c("term", "n_obs", "n_event"))
   expect_equivalent(
     res$n_obs,
@@ -333,7 +333,7 @@ test_that("model_get_n() works with survey::svyglm", {
 test_that("model_get_n() works with ordinal::clm", {
   skip_on_cran()
   mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine)
-  expect_error(res <- mod %>% model_get_n(), NA)
+  expect_error(res <- mod |> model_get_n(), NA)
   expect_equivalent(names(res), c("term", "n_obs"))
   # note: no nevent computed for ordinal models
 })
@@ -342,7 +342,7 @@ test_that("model_get_n() works with ordinal::clm", {
 test_that("model_get_n() works with ordinal::clmm", {
   skip_on_cran()
   mod <- ordinal::clmm(rating ~ temp * contact + (1 | judge), data = ordinal::wine)
-  expect_error(res <- mod %>% model_get_n(), NA)
+  expect_error(res <- mod |> model_get_n(), NA)
   expect_equivalent(names(res), c("term", "n_obs"))
 })
 
@@ -350,7 +350,7 @@ test_that("model_get_n() works with ordinal::clmm", {
 test_that("model_get_n() works with MASS::polr", {
   skip_on_cran()
   mod <- MASS::polr(Sat ~ Infl + Type + Cont, weights = Freq, data = MASS::housing)
-  expect_error(res <- mod %>% model_get_n(), NA)
+  expect_error(res <- mod |> model_get_n(), NA)
   expect_equivalent(names(res), c("term", "n_obs"))
 })
 
@@ -365,13 +365,13 @@ test_that("model_get_n() works with geepack::geeglm", {
   suppressWarnings(
     mod <- geepack::geeglm(mf, data = df, id = Pig, family = poisson("identity"), corstr = "ar1")
   )
-  expect_error(res <- mod %>% model_get_n(), NA)
+  expect_error(res <- mod |> model_get_n(), NA)
   expect_equivalent(names(res), c("term", "n_obs"))
 
   suppressWarnings(
     mod <- geepack::geeglm(mf, data = df, id = Pig, family = poisson(), corstr = "ar1")
   )
-  expect_error(res <- mod %>% model_get_n(), NA)
+  expect_error(res <- mod |> model_get_n(), NA)
   expect_equivalent(names(res), c("term", "n_obs", "n_event", "exposure"))
 })
 
@@ -381,7 +381,7 @@ test_that("model_get_n() works with gam::gam", {
   skip_if_not_installed("gam")
   data(kyphosis, package = "gam")
   mod <- gam::gam(Kyphosis ~ gam::s(Age, 4) + Number, family = binomial, data = kyphosis)
-  expect_error(res <- mod %>% model_get_n(), NA)
+  expect_error(res <- mod |> model_get_n(), NA)
   expect_equivalent(names(res), c("term", "n_obs", "n_event"))
 })
 
@@ -399,12 +399,12 @@ test_that("model_get_n() works with lavaan::lavaan", {
     auto.var = TRUE, auto.fix.first = TRUE,
     auto.cov.lv.x = TRUE
   )
-  expect_error(res <- mod %>% model_get_n(), NA)
+  expect_error(res <- mod |> model_get_n(), NA)
   expect_null(res)
-  expect_null(mod %>% model_get_response())
-  expect_null(mod %>% model_get_weights())
-  expect_null(mod %>% model_get_offset())
-  expect_null(mod %>% model_compute_terms_contributions())
+  expect_null(mod |> model_get_response())
+  expect_null(mod |> model_get_weights())
+  expect_null(mod |> model_get_offset())
+  expect_null(mod |> model_compute_terms_contributions())
 })
 
 test_that("model_get_n() works with tidycmprsk::crr", {
@@ -415,7 +415,7 @@ test_that("model_get_n() works with tidycmprsk::crr", {
     survival::Surv(ttdeath, death_cr) ~ age + grade,
     tidycmprsk::trial
   )
-  res <- mod %>% tidy_plus_plus()
+  res <- mod |> tidy_plus_plus()
   expect_equivalent(
     res$n_event,
     c(52, 16, 15, 21)
@@ -434,8 +434,8 @@ test_that("tidy_add_n() does not duplicates rows with gam model", {
     family = gaussian
   )
 
-  res <- mod %>%
-    tidy_and_attach(tidy_fun = gtsummary::tidy_gam) %>%
+  res <- mod |>
+    tidy_and_attach(tidy_fun = gtsummary::tidy_gam) |>
     tidy_add_n()
   expect_equal(nrow(res), 7L)
 })

@@ -1,7 +1,7 @@
 test_that("tidy_add_n() works for basic models", {
   mod <- glm(response ~ stage + grade + trt, gtsummary::trial, family = binomial)
-  res <- mod %>%
-    tidy_and_attach() %>%
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_n()
   expect_equivalent(
     res$n_obs,
@@ -18,8 +18,8 @@ test_that("tidy_add_n() works for basic models", {
     family = binomial,
     contrasts = list(stage = contr.sum, grade = contr.helmert, trt = contr.SAS)
   )
-  res <- mod %>%
-    tidy_and_attach() %>%
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_n()
   expect_equivalent(
     res$n_obs,
@@ -32,8 +32,8 @@ test_that("tidy_add_n() works for basic models", {
     family = binomial,
     contrasts = list(stage = contr.poly, grade = contr.treatment, trt = matrix(c(-3, 2)))
   )
-  res <- mod %>%
-    tidy_and_attach() %>%
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_n()
   expect_equivalent(
     res$n_obs,
@@ -51,8 +51,8 @@ test_that("tidy_add_n() works for basic models", {
       trt = contr.treatment(2, 2), "factor(death)" = matrix(c(-3, 2))
     )
   )
-  res <- mod %>%
-    tidy_and_attach() %>%
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_n()
   expect_equivalent(
     res$n_obs,
@@ -65,8 +65,8 @@ test_that("tidy_add_n() works for basic models", {
     family = binomial,
     contrasts = list(stage = "contr.sum", grade = "contr.helmert", trt = "contr.SAS")
   )
-  res <- mod %>%
-    tidy_and_attach() %>%
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_n()
   expect_equivalent(
     res$n_obs,
@@ -75,8 +75,8 @@ test_that("tidy_add_n() works for basic models", {
 
 
   mod <- glm(response ~ age + grade * trt, gtsummary::trial, family = poisson)
-  res <- mod %>%
-    tidy_and_attach() %>%
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_n()
   expect_equivalent(
     res$n_obs,
@@ -100,8 +100,8 @@ test_that("tidy_add_n() works for basic models", {
     family = poisson,
     weights = rep_len(1:2, 200)
   )
-  res <- mod %>%
-    tidy_and_attach() %>%
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_n()
   expect_equivalent(
     res$n_obs,
@@ -123,21 +123,21 @@ test_that("tidy_add_n() works for basic models", {
 test_that("test tidy_add_n() checks", {
   mod <- glm(response ~ stage + grade + trt, gtsummary::trial, family = binomial)
   # expect an error if no model attached
-  expect_error(mod %>% broom::tidy() %>% tidy_add_n())
+  expect_error(mod |> broom::tidy() |> tidy_add_n())
 
   # could be apply twice (no error)
   expect_error(
-    mod %>% tidy_and_attach() %>% tidy_add_n() %>% tidy_add_n(),
+    mod |> tidy_and_attach() |> tidy_add_n() |> tidy_add_n(),
     NA
   )
 })
 
 
 test_that("tidy_add_n() works with variables having non standard name", {
-  df <- gtsummary::trial %>% dplyr::mutate(`grade of kids` = grade)
+  df <- gtsummary::trial |> dplyr::mutate(`grade of kids` = grade)
   mod <- glm(response ~ stage + `grade of kids` + trt, df, family = binomial)
-  res <- mod %>%
-    tidy_and_attach() %>%
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_n()
   expect_equivalent(
     res$n_obs,
@@ -153,7 +153,7 @@ test_that("tidy_add_n() works with lme4::lmer", {
   df$stage <- as.character(df$stage)
   df$group <- rep.int(1:2, 100)
   mod <- lme4::lmer(marker ~ stage + grade + (1 | group), df)
-  expect_error(mod %>% tidy_and_attach(tidy_fun = broom.mixed::tidy) %>% tidy_add_n(), NA)
+  expect_error(mod |> tidy_and_attach(tidy_fun = broom.mixed::tidy) |> tidy_add_n(), NA)
 })
 
 
@@ -166,15 +166,15 @@ test_that("tidy_add_n() works with lme4::glmer", {
   suppressMessages(
     mod <- lme4::glmer(response ~ stage + grade + (1 | group), df, family = binomial)
   )
-  expect_error(mod %>% tidy_and_attach(tidy_fun = broom.mixed::tidy) %>% tidy_add_n(), NA)
+  expect_error(mod |> tidy_and_attach(tidy_fun = broom.mixed::tidy) |> tidy_add_n(), NA)
 })
 
 
 test_that("tidy_add_n() works with survival::coxph", {
   skip_on_cran()
-  df <- survival::lung %>% dplyr::mutate(sex = factor(sex))
+  df <- survival::lung |> dplyr::mutate(sex = factor(sex))
   mod <- survival::coxph(survival::Surv(time, status) ~ ph.ecog + age + sex, data = df)
-  expect_error(res <- mod %>% tidy_and_attach() %>% tidy_add_n(), NA)
+  expect_error(res <- mod |> tidy_and_attach() |> tidy_add_n(), NA)
   expect_equivalent(res$n_ind, c(227, 227, 90))
   expect_equivalent(attr(res, "N_ind"), 227)
 })
@@ -186,23 +186,23 @@ test_that("tidy_add_n() works with survival::survreg", {
     survival::ovarian,
     dist = "exponential"
   )
-  expect_error(mod %>% tidy_and_attach() %>% tidy_add_n(), NA)
+  expect_error(mod |> tidy_and_attach() |> tidy_add_n(), NA)
 })
 
 test_that("tidy_add_n() works with nnet::multinom", {
   skip_if_not_installed("nnet")
   skip_on_cran()
   mod <- nnet::multinom(grade ~ stage + marker + age, data = gtsummary::trial, trace = FALSE)
-  expect_error(mod %>% tidy_and_attach() %>% tidy_add_n(), NA)
+  expect_error(mod |> tidy_and_attach() |> tidy_add_n(), NA)
 
   mod <- nnet::multinom(
     grade ~ stage + marker + age,
     data = gtsummary::trial, trace = FALSE,
     contrasts = list(stage = contr.sum)
   )
-  expect_error(mod %>% tidy_and_attach() %>% tidy_add_n(), NA)
-  res <- mod %>%
-    tidy_and_attach() %>%
+  expect_error(mod |> tidy_and_attach() |> tidy_add_n(), NA)
+  res <- mod |>
+    tidy_and_attach() |>
     tidy_add_n()
   expect_equivalent(
     res$n_obs,
@@ -216,7 +216,7 @@ test_that("tidy_add_n() works with nnet::multinom", {
   # when y is not coded as a factor
   mod <- nnet::multinom(race ~ age + lwt + bwt, data = MASS::birthwt, trace = FALSE)
   expect_error(
-    mod %>% tidy_and_attach() %>% tidy_add_n(),
+    mod |> tidy_and_attach() |> tidy_add_n(),
     NA
   )
 })
@@ -225,24 +225,24 @@ test_that("tidy_add_n() works with survey::svyglm", {
   skip_if_not_installed("survey")
   df <- survey::svydesign(~1, weights = ~1, data = gtsummary::trial)
   mod <- survey::svyglm(response ~ age + grade * trt, df, family = quasibinomial)
-  expect_error(mod %>% tidy_and_attach() %>% tidy_add_n(), NA)
+  expect_error(mod |> tidy_and_attach() |> tidy_add_n(), NA)
 })
 
 test_that("tidy_add_n() works with ordinal::clm", {
   mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine)
-  expect_error(mod %>% tidy_and_attach() %>% tidy_add_n(), NA)
+  expect_error(mod |> tidy_and_attach() |> tidy_add_n(), NA)
 })
 
 
 test_that("tidy_add_n() works with ordinal::clmm", {
   mod <- ordinal::clmm(rating ~ temp * contact + (1 | judge), data = ordinal::wine)
-  expect_error(mod %>% tidy_and_attach() %>% tidy_add_n(), NA)
+  expect_error(mod |> tidy_and_attach() |> tidy_add_n(), NA)
 })
 
 
 test_that("tidy_add_n() works with MASS::polr", {
   mod <- MASS::polr(Sat ~ Infl + Type + Cont, weights = Freq, data = MASS::housing)
-  expect_error(mod %>% tidy_and_attach() %>% tidy_add_n(), NA)
+  expect_error(mod |> tidy_and_attach() |> tidy_add_n(), NA)
 })
 
 
@@ -255,7 +255,7 @@ test_that("tidy_add_n() works with geepack::geeglm", {
   suppressWarnings(
     mod <- geepack::geeglm(mf, data = df, id = Pig, family = poisson("identity"), corstr = "ar1")
   )
-  expect_error(mod %>% tidy_and_attach() %>% tidy_add_n(), NA)
+  expect_error(mod |> tidy_and_attach() |> tidy_add_n(), NA)
 })
 
 
@@ -263,7 +263,7 @@ test_that("tidy_add_n() works with gam::gam", {
   skip_if_not_installed("gam")
   data(kyphosis, package = "gam")
   mod <- gam::gam(Kyphosis ~ gam::s(Age, 4) + Number, family = binomial, data = kyphosis)
-  expect_error(mod %>% tidy_and_attach() %>% tidy_add_n(), NA)
+  expect_error(mod |> tidy_and_attach() |> tidy_add_n(), NA)
 })
 
 
@@ -279,6 +279,6 @@ test_that("tidy_add_n() works with lavaan::lavaan", {
     auto.var = TRUE, auto.fix.first = TRUE,
     auto.cov.lv.x = TRUE
   )
-  expect_error(res <- mod %>% tidy_and_attach() %>% tidy_add_n(), NA)
+  expect_error(res <- mod |> tidy_and_attach() |> tidy_add_n(), NA)
   expect_true(all(is.na(res$n)))
 })

@@ -8,7 +8,7 @@
 #' @export
 #' @family model_helpers
 #' @examples
-#' lm(hp ~ mpg + factor(cyl), mtcars) %>%
+#' lm(hp ~ mpg + factor(cyl), mtcars) |>
 #'   model_get_model()
 model_get_model <- function(model) {
   UseMethod("model_get_model")

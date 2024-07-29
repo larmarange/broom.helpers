@@ -154,15 +154,15 @@ within \code{tidy_fun} if, for any reason, you need to access the source model.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-ex1 <- lm(Sepal.Length ~ Sepal.Width + Species, data = iris) \%>\%
+ex1 <- lm(Sepal.Length ~ Sepal.Width + Species, data = iris) |>
   tidy_plus_plus()
 ex1
 
-df <- Titanic \%>\%
-  dplyr::as_tibble() \%>\%
+df <- Titanic |>
+  dplyr::as_tibble() |>
   dplyr::mutate(
     Survived = factor(Survived, c("No", "Yes"))
-  ) \%>\%
+  ) |>
   labelled::set_variable_labels(
     Class = "Passenger's class",
     Sex = "Gender"
@@ -171,7 +171,7 @@ ex2 <- glm(
   Survived ~ Class + Age * Sex,
   data = df, weights = df$n,
   family = binomial
-) \%>\%
+) |>
   tidy_plus_plus(
     exponentiate = TRUE,
     add_reference_rows = FALSE,
@@ -189,7 +189,7 @@ if (.assert_package("gtsummary", boolean = TRUE)) {
         stage = contr.treatment(4, base = 3),
         grade = contr.sum
       )
-    ) \%>\%
+    ) |>
     tidy_plus_plus(
       exponentiate = TRUE,
       variable_labels = c(age = "Age (in years)"),
