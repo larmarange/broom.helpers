@@ -36,8 +36,8 @@
 #'     Sex = "Sex"
 #'   )
 #'
-#' mod <- df |>
-#'   glm(Survived ~ Class * Age * Sex, data = ., weights = .$n, family = binomial)
+#' mod <-
+#'   glm(Survived ~ Class * Age * Sex, data = df, weights = df$n, family = binomial)
 #' mod |>
 #'   tidy_and_attach() |>
 #'   tidy_add_term_labels()

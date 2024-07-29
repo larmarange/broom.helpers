@@ -19,10 +19,10 @@ If the \code{variable} column is not yet available in \code{x},
 \code{\link[=tidy_identify_variables]{tidy_identify_variables()}} will be automatically applied.
 }
 \examples{
-Titanic |>
+df <- Titanic |>
   dplyr::as_tibble() |>
-  dplyr::mutate(Survived = factor(Survived)) |>
-  glm(Survived ~ Class + Age + Sex, data = ., weights = .$n, family = binomial) |>
+  dplyr::mutate(Survived = factor(Survived))
+glm(Survived ~ Class + Age + Sex, data = df, weights = df$n, family = binomial) |>
   tidy_and_attach() |>
   tidy_remove_intercept()
 }

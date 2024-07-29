@@ -57,10 +57,10 @@ if (.assert_package("gtsummary", boolean = TRUE)) {
     dplyr::as_tibble() |>
     dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
 
-  res <- df |>
+  res <-
     glm(
       Survived ~ Class + Age + Sex,
-      data = ., weights = .$n, family = binomial,
+      data = df, weights = df$n, family = binomial,
       contrasts = list(Age = contr.sum, Class = "contr.SAS")
     ) |>
     tidy_and_attach() |>

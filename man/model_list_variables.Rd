@@ -84,7 +84,7 @@ if (.assert_package("gtsummary", boolean = TRUE)) {
   iris |>
     lm(
       Sepal.Length ~ poly(Sepal.Width, 2) + Species,
-      data = .,
+      data = _,
       contrasts = list(Species = contr.sum)
     ) |>
     model_list_variables()

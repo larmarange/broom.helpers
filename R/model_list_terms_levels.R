@@ -39,12 +39,11 @@
 #'   dplyr::as_tibble() |>
 #'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
 #'
-#' mod <- df |>
-#'   glm(
-#'     Survived ~ Class + Age + Sex,
-#'     data = ., weights = .$n, family = binomial,
-#'     contrasts = list(Age = contr.sum, Class = "contr.helmert")
-#'   )
+#' mod <- glm(
+#'   Survived ~ Class + Age + Sex,
+#'   data = df, weights = df$n, family = binomial,
+#'   contrasts = list(Age = contr.sum, Class = "contr.helmert")
+#' )
 #' mod |> model_list_terms_levels()
 #' mod |> model_list_terms_levels("{level} vs {reference_level}")
 #' mod |> model_list_terms_levels("{variable} [{level} - {reference_level}]")

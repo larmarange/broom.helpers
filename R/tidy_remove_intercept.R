@@ -10,10 +10,10 @@
 #' @export
 #' @family tidy_helpers
 #' @examples
-#' Titanic |>
+#' df <- Titanic |>
 #'   dplyr::as_tibble() |>
-#'   dplyr::mutate(Survived = factor(Survived)) |>
-#'   glm(Survived ~ Class + Age + Sex, data = ., weights = .$n, family = binomial) |>
+#'   dplyr::mutate(Survived = factor(Survived))
+#' glm(Survived ~ Class + Age + Sex, data = df, weights = df$n, family = binomial) |>
 #'   tidy_and_attach() |>
 #'   tidy_remove_intercept()
 tidy_remove_intercept <- function(x, model = tidy_get_model(x)) {

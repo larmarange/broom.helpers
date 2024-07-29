@@ -29,8 +29,7 @@
 #'     Sex = "Sex"
 #'   )
 #'
-#' df |>
-#'   glm(Survived ~ Class * Age * Sex, data = ., weights = .$n, family = binomial) |>
+#' glm(Survived ~ Class * Age * Sex, data = df, weights = df$n, family = binomial) |>
 #'   tidy_and_attach() |>
 #'   tidy_add_variable_labels(
 #'     labels = list(

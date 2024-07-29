@@ -62,7 +62,7 @@ glm(
 iris |>
   lm(
     Sepal.Length ~ poly(Sepal.Width, 2) + Species,
-    data = .,
+    data = _,
     contrasts = list(Species = contr.sum)
   ) |>
   model_identify_variables()

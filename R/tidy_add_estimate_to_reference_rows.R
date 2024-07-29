@@ -37,12 +37,11 @@
 #'     dplyr::as_tibble() |>
 #'     dplyr::mutate(dplyr::across(where(is.character), factor))
 #'
-#'   df |>
-#'     glm(
-#'       Survived ~ Class + Age + Sex,
-#'       data = ., weights = .$n, family = binomial,
-#'       contrasts = list(Age = contr.sum, Class = "contr.SAS")
-#'     ) |>
+#'   glm(
+#'     Survived ~ Class + Age + Sex,
+#'     data = df, weights = df$n, family = binomial,
+#'     contrasts = list(Age = contr.sum, Class = "contr.SAS")
+#'   ) |>
 #'     tidy_and_attach(exponentiate = TRUE) |>
 #'     tidy_add_reference_rows() |>
 #'     tidy_add_estimate_to_reference_rows()
