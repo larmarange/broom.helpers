@@ -14,7 +14,7 @@
   
 **Deprecated support**
 
-- `biglmm::bigglm()` not supported anymore as `bigglmm` has been removed from
+- `biglmm::bigglm()` not supported anymore as `biglmm` has been removed from
   CRAN
   
 **Deprecated functions**
