@@ -1,6 +1,14 @@
 #' Average Marginal Effects with `margins::margins()`
 #'
-#' `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("superseded")`
+#'
+#' The `margins` package is no longer under active development and may be
+#' removed from CRAN sooner or later. It is advised to use the `marginaleffects`
+#' package instead, offering more functionalities. You could have a look at the
+#' [article](https://larmarange.github.io/broom.helpers/articles/marginal_tidiers.html)
+#' dedicated to marginal estimates with `broom.helpers`. `tidy_avg_slopes()`
+#' could be used as an alternative.
+#'
 #' Use `margins::margins()` to estimate average marginal effects (AME) and
 #' return a tibble tidied in a way that it could be used by `broom.helpers`
 #' functions. See `margins::margins()` for a list of supported models.

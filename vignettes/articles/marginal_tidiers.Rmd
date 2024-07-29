@@ -201,7 +201,7 @@ mod |>
 `{broom.helpers}` also include `plot_marginal_predictions()` to generate a list of plots to visualize all marginal predictions. Use `patchwork::wrap_plots()` to combine all plots together.
 
 ```{r}
-p <- mod |> 
+p <- mod |>
   plot_marginal_predictions(newdata = "mean") |>
   patchwork::wrap_plots() &
   ggplot2::scale_y_continuous(

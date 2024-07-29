@@ -20,7 +20,12 @@ interval in the tidied output}
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
 }
 \details{
-The ``
+The \code{margins} package is no longer under active development and may be
+removed from CRAN sooner or later. It is advised to use the \code{marginaleffects}
+package instead, offering more functionalities. You could have a look at the
+\href{https://larmarange.github.io/broom.helpers/articles/marginal_tidiers.html}{article}
+dedicated to marginal estimates with \code{broom.helpers}. \code{tidy_avg_slopes()}
+could be used as an alternative.
 
 Use \code{margins::margins()} to estimate average marginal effects (AME) and
 return a tibble tidied in a way that it could be used by \code{broom.helpers}
