@@ -26,10 +26,15 @@
 #' @seealso [model_identify_variables()]
 #' @family tidy_helpers
 #' @examples
-#' Titanic |>
+#' df <- Titanic |>
 #'   dplyr::as_tibble() |>
-#'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes"))) |>
-#'   glm(Survived ~ Class + Age * Sex, data = ., weights = .$n, family = binomial) |>
+#'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
+#' glm(
+#'   Survived ~ Class + Age * Sex,
+#'   data = df,
+#'   weights = df$n,
+#'   family = binomial
+#' ) |>
 #'   tidy_and_attach() |>
 #'   tidy_identify_variables()
 #'

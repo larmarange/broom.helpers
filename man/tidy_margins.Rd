@@ -17,12 +17,15 @@ interval in the tidied output}
 \item{...}{additional parameters passed to \code{margins::margins()}}
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
+}
+\details{
+The ``
+
 Use \code{margins::margins()} to estimate average marginal effects (AME) and
 return a tibble tidied in a way that it could be used by \code{broom.helpers}
 functions. See \code{margins::margins()} for a list of supported models.
-}
-\details{
+
 By default, \code{margins::margins()} estimate average marginal effects (AME): an
 effect is computed for each observed value in the original dataset before
 being averaged.

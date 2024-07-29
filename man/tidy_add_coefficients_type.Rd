@@ -32,10 +32,15 @@ ex1 <- lm(hp ~ mpg + factor(cyl), mtcars) |>
 attr(ex1, "coefficients_type")
 attr(ex1, "coefficients_label")
 
-ex2 <- Titanic |>
+df <- Titanic |>
   dplyr::as_tibble() |>
-  dplyr::mutate(Survived = factor(Survived, c("No", "Yes"))) |>
-  glm(Survived ~ Class + Age * Sex, data = ., weights = .$n, family = binomial) |>
+  dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
+ex2 <- glm(
+  Survived ~ Class + Age * Sex,
+  data = df,
+  weights = df$n,
+  family = binomial
+) |>
   tidy_and_attach(exponentiate = TRUE) |>
   tidy_add_coefficients_type()
 attr(ex2, "coefficients_type")

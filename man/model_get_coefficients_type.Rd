@@ -74,10 +74,10 @@ Indicate the type of coefficient among "generic", "logistic",
 lm(hp ~ mpg + factor(cyl), mtcars) |>
   model_get_coefficients_type()
 
-d <- Titanic |>
+df <- Titanic |>
   dplyr::as_tibble() |>
   dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
-glm(Survived ~ Class + Age * Sex, data = d, weights = d$n, family = binomial) |>
+glm(Survived ~ Class + Age * Sex, data = df, weights = df$n, family = binomial) |>
   model_get_coefficients_type()
 }
 \seealso{
