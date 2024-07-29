@@ -40,12 +40,15 @@
 <li>
 <code><a href="../reference/tidy_add_n.html">tidy_add_n()</a></code> now returns <code>n_ind</code> the number of individuals, in addition to the number of observations (<a href="https://github.com/larmarange/broom.helpers/issues/251" class="external-link">#251</a>)</li>
 <li>by default, <code><a href="../reference/tidy_parameters.html">tidy_parameters()</a></code> calls now <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">parameters::model_parameters()</a></code> with <code>pretty_names = FALSE</code> for saving execution time (<a href="https://github.com/larmarange/broom.helpers/issues/259" class="external-link">#259</a>)</li>
+<li>internal code now uses the native R pipe (<code>|&gt;</code>), requiring therefore R &gt;= 4.2 (<a href="https://github.com/larmarange/broom.helpers/issues/262" class="external-link">#262</a>)</li>
 </ul><p><strong>Deprecated support</strong></p>
 <ul><li>
 <code>biglmm::bigglm()</code> not supported anymore as <code>bigglmm</code> has been removed from CRAN</li>
 </ul><p><strong>Deprecated functions</strong></p>
 <ul><li>
 <code><a href="../reference/tidy_marginal_means.html">tidy_marginal_means()</a></code> is now deprecated, following deprecation of <code><a href="https://marginaleffects.com/man/marginal_means.html" class="external-link">marginaleffects::marginal_means()</a></code>. Use instead <code><a href="../reference/tidy_marginal_predictions.html">tidy_marginal_predictions()</a></code> with the option <code>newdata = "marginalmeans"</code>.</li>
+<li>
+<code><a href="../reference/tidy_margins.html">tidy_margins()</a></code> is now indicated as superseded and may be deprecated if <code>margins</code> is removed from CRAN. <code><a href="../reference/tidy_avg_slopes.html">tidy_avg_slopes()</a></code> could be used as an alternative. (<a href="https://github.com/larmarange/broom.helpers/issues/252" class="external-link">#252</a>)</li>
 </ul><p><strong>Fixes</strong></p>
 <ul><li>
 <code><a href="../reference/tidy_multgee.html">tidy_multgee()</a></code> has been fixed to properly identify the different <code>y.levels</code> (<a href="https://github.com/larmarange/broom.helpers/issues/260" class="external-link">#260</a> <a href="https://github.com/jackmwolf" class="external-link">@jackmwolf</a>)</li>

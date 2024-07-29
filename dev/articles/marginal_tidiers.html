@@ -120,7 +120,7 @@ and <code>age</code>). We will include an interaction between
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://larmarange.github.io/broom.helpers/">broom.helpers</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ddsjoberg/gtsummary" class="external-link">gtsummary</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
-<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="va">trial</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="va">trial</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/complete.cases.html" class="external-link">complete.cases</a></span><span class="op">(</span><span class="va">response</span>, <span class="va">trt</span>, <span class="va">marker</span>, <span class="va">grade</span>, <span class="va">age</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span></span>
@@ -128,10 +128,11 @@ and <code>age</code>). We will include an interaction between
 <span>  data <span class="op">=</span> <span class="va">d</span>,</span>
 <span>  family <span class="op">=</span> <span class="va">binomial</span></span>
 <span><span class="op">)</span></span>
-<span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="va">mod</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html" class="external-link">tbl_regression</a></span><span class="op">(</span></span>
-<span>    exponentiate <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    exponentiate <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>age <span class="op">=</span> <span class="st">"Age in years"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/bold_italicize_labels_levels.html" class="external-link">bold_labels</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div id="mwlefoodfi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#mwlefoodfi table {
@@ -649,19 +650,19 @@ and <code>age</code>). We will include an interaction between
 <td headers="p.value" class="gt_row gt_center">0.4</td>
 </tr>
 <tr>
-<td headers="label" class="gt_row gt_left" style="font-weight: bold;">age</td>
+<td headers="label" class="gt_row gt_left" style="font-weight: bold;">Age in years</td>
 <td headers="estimate" class="gt_row gt_center"><br></td>
 <td headers="conf.low" class="gt_row gt_center"><br></td>
 <td headers="p.value" class="gt_row gt_center"><br></td>
 </tr>
 <tr>
-<td headers="label" class="gt_row gt_left">    age</td>
+<td headers="label" class="gt_row gt_left">    Age in years</td>
 <td headers="estimate" class="gt_row gt_center">41.7</td>
 <td headers="conf.low" class="gt_row gt_center">0.50, 4,791</td>
 <td headers="p.value" class="gt_row gt_center">0.11</td>
 </tr>
 <tr>
-<td headers="label" class="gt_row gt_left">    age²</td>
+<td headers="label" class="gt_row gt_left">    Age in years²</td>
 <td headers="estimate" class="gt_row gt_center">1.04</td>
 <td headers="conf.low" class="gt_row gt_center">0.01, 94.1</td>
 <td headers="p.value" class="gt_row gt_center">&gt;0.9</td>
@@ -795,9 +796,9 @@ within the model.</p>
 <code><a href="https://strengejacke.github.io/ggeffects/reference/ggpredict.html" class="external-link">ggeffects::ggeffect()</a></code> will consider, by default, only
 individual variables from the model and not existing interactions.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu">ggeffects</span><span class="fu">::</span><span class="fu"><a href="https://strengejacke.github.io/ggeffects/reference/ggpredict.html" class="external-link">ggeffect</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">plot</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">ggeffects</span><span class="fu">::</span><span class="fu"><a href="https://strengejacke.github.io/ggeffects/reference/ggpredict.html" class="external-link">ggeffect</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">plot</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">patchwork</span><span class="fu">::</span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/wrap_plots.html" class="external-link">wrap_plots</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="marginal_tidiers_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 <p>To generate a tibble of these results formatted in a way that it
@@ -831,11 +832,11 @@ tieder.</p>
 <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html" class="external-link">gtsummary::tbl_regression()</a></code> or a forest plot with
 <code><a href="https://larmarange.github.io/ggstats/reference/ggcoef_model.html" class="external-link">ggstats::ggcoef_model()</a></code>.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html" class="external-link">tbl_regression</a></span><span class="op">(</span></span>
 <span>    tidy_fun <span class="op">=</span> <span class="va">tidy_all_effects</span>,</span>
 <span>    estimate_fun <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>accuracy <span class="op">=</span> <span class="fl">.1</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/bold_italicize_labels_levels.html" class="external-link">bold_labels</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div id="bjgwtlmpwz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#bjgwtlmpwz table {
@@ -1449,16 +1450,17 @@ By default, as <code><a href="https://rdrr.io/pkg/effects/man/effect.html" class
 higher order combinations of variables (as identified with
 <code><a href="../reference/model_list_higher_order_variables.html">model_list_higher_order_variables()</a></code>).</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/model_list_higher_order_variables.html">model_list_higher_order_variables</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "stage"      "age"        "trt:marker"</span></span>
-<span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="va">mod</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html" class="external-link">tbl_regression</a></span><span class="op">(</span></span>
 <span>    tidy_fun <span class="op">=</span> <span class="va">tidy_marginal_predictions</span>,</span>
 <span>    newdata <span class="op">=</span> <span class="st">"mean"</span>,</span>
-<span>    estimate_fun <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>accuracy <span class="op">=</span> <span class="fl">.1</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/modify_column_hide.html" class="external-link">modify_column_hide</a></span><span class="op">(</span><span class="st">"p.value"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    estimate_fun <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>accuracy <span class="op">=</span> <span class="fl">.1</span><span class="op">)</span>,</span>
+<span>    label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>age <span class="op">=</span> <span class="st">"Age in years"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/modify_column_hide.html" class="external-link">modify_column_hide</a></span><span class="op">(</span><span class="st">"p.value"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/bold_italicize_labels_levels.html" class="external-link">bold_labels</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div id="frloeemaui" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#frloeemaui table {
@@ -1944,7 +1946,7 @@ higher order combinations of variables (as identified with
 <td headers="conf.low" class="gt_row gt_center">17.6%, 51.4%</td>
 </tr>
 <tr>
-<td headers="label" class="gt_row gt_left" style="font-weight: bold;">age</td>
+<td headers="label" class="gt_row gt_left" style="font-weight: bold;">Age in years</td>
 <td headers="estimate" class="gt_row gt_center"><br></td>
 <td headers="conf.low" class="gt_row gt_center"><br></td>
 </tr>
@@ -2040,14 +2042,15 @@ higher order combinations of variables (as identified with
 compute marginal predictions for each individual variable without
 considering existing interactions.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html" class="external-link">tbl_regression</a></span><span class="op">(</span></span>
 <span>    tidy_fun <span class="op">=</span> <span class="va">tidy_marginal_predictions</span>,</span>
 <span>    variables_list <span class="op">=</span> <span class="st">"no_interaction"</span>,</span>
 <span>    newdata <span class="op">=</span> <span class="st">"mean"</span>,</span>
-<span>    estimate_fun <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>accuracy <span class="op">=</span> <span class="fl">.1</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/modify_column_hide.html" class="external-link">modify_column_hide</a></span><span class="op">(</span><span class="st">"p.value"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    estimate_fun <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>accuracy <span class="op">=</span> <span class="fl">.1</span><span class="op">)</span>,</span>
+<span>    label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>age <span class="op">=</span> <span class="st">"Age in years"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/modify_column_hide.html" class="external-link">modify_column_hide</a></span><span class="op">(</span><span class="st">"p.value"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/bold_italicize_labels_levels.html" class="external-link">bold_labels</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div id="xkhthyrdeh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#xkhthyrdeh table {
@@ -2578,7 +2581,7 @@ considering existing interactions.</p>
 <td headers="conf.low" class="gt_row gt_center">17.6%, 51.4%</td>
 </tr>
 <tr>
-<td headers="label" class="gt_row gt_left" style="font-weight: bold;">age</td>
+<td headers="label" class="gt_row gt_left" style="font-weight: bold;">Age in years</td>
 <td headers="estimate" class="gt_row gt_center"><br></td>
 <td headers="conf.low" class="gt_row gt_center"><br></td>
 </tr>
@@ -2620,27 +2623,30 @@ considering existing interactions.</p>
 visualize all marginal predictions. Use
 <code><a href="https://patchwork.data-imaginist.com/reference/wrap_plots.html" class="external-link">patchwork::wrap_plots()</a></code> to combine all plots together.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tidy_marginal_predictions.html">plot_marginal_predictions</a></span><span class="op">(</span><span class="va">mod</span>, newdata <span class="op">=</span> <span class="st">"mean"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="va">mod</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/tidy_marginal_predictions.html">plot_marginal_predictions</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="st">"mean"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">patchwork</span><span class="fu">::</span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/wrap_plots.html" class="external-link">wrap_plots</a></span><span class="op">(</span><span class="op">)</span> <span class="op">&amp;</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span></span>
 <span>    labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>    limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.2</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
+<span><span class="va">p</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">p</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">+</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Age in years"</span><span class="op">)</span></span>
 <span><span class="va">p</span> <span class="op">+</span> <span class="fu">patchwork</span><span class="fu">::</span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html" class="external-link">plot_annotation</a></span><span class="op">(</span></span>
 <span>  title <span class="op">=</span> <span class="st">"Marginal Predictions at the Mean"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p><img src="marginal_tidiers_files/figure-html/unnamed-chunk-15-1.png" width="700"></p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="va">mod</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/tidy_marginal_predictions.html">plot_marginal_predictions</a></span><span class="op">(</span></span>
 <span>    <span class="st">"no_interaction"</span>,</span>
 <span>    newdata <span class="op">=</span> <span class="st">"mean"</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">patchwork</span><span class="fu">::</span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/wrap_plots.html" class="external-link">wrap_plots</a></span><span class="op">(</span><span class="op">)</span> <span class="op">&amp;</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span></span>
 <span>    labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>    limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.2</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
+<span><span class="va">p</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">p</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span> <span class="op">+</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Age in years"</span><span class="op">)</span></span>
 <span><span class="va">p</span> <span class="op">+</span> <span class="fu">patchwork</span><span class="fu">::</span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html" class="external-link">plot_annotation</a></span><span class="op">(</span></span>
 <span>  title <span class="op">=</span> <span class="st">"Marginal Predictions at the Mean"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -2656,7 +2662,8 @@ using <code>tidy_args</code> to pass arguments to
 <span>  vline <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  show_p_values <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  signif_stars <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  significance <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  significance <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  variable_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>age <span class="op">=</span> <span class="st">"Age in years"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p><img src="marginal_tidiers_files/figure-html/unnamed-chunk-17-1.png" width="700"></p>
 </div>
@@ -2675,17 +2682,17 @@ all variables would be identical, but considering that all individuals
 have received Drug A. Similarly, we could generate a dataset where all
 individuals would have received Drug B.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">dA</span> <span class="op">&lt;-</span> <span class="va">d</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">dA</span> <span class="op">&lt;-</span> <span class="va">d</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>trt <span class="op">=</span> <span class="st">"Drug A"</span><span class="op">)</span></span>
-<span><span class="va">dB</span> <span class="op">&lt;-</span> <span class="va">d</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="va">dB</span> <span class="op">&lt;-</span> <span class="va">d</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>trt <span class="op">=</span> <span class="st">"Drug B"</span><span class="op">)</span></span></code></pre></div>
 <p>We can now predict the outcome for all observations in
 <code>dA</code> and then compute the average, and similarly with
 <code>dB</code>.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">mod</span>, newdata <span class="op">=</span> <span class="va">dA</span>, type <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">mod</span>, newdata <span class="op">=</span> <span class="va">dA</span>, type <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.2830866</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">mod</span>, newdata <span class="op">=</span> <span class="va">dB</span>, type <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">mod</span>, newdata <span class="op">=</span> <span class="va">dB</span>, type <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.3431492</span></span></code></pre></div>
 <p>We, then, obtain <strong>Average Marginal Predictions</strong> for
 <code>trt</code>. The same results could be computed with
@@ -2719,12 +2726,12 @@ identical to the average of predictions.</p>
 <span><span class="co">#&gt; Columns: trt, estimate, p.value, s.value, conf.low, conf.high </span></span>
 <span><span class="co">#&gt; Type:  invlink(link)</span></span>
 <span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html" class="external-link">binomial</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">mod</span>, newdata <span class="op">=</span> <span class="va">dA</span>, type <span class="op">=</span> <span class="st">"link"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">mod</span>, newdata <span class="op">=</span> <span class="va">dA</span>, type <span class="op">=</span> <span class="st">"link"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="va">b</span><span class="op">$</span><span class="fu">linkinv</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.2743123</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">mod</span>, newdata <span class="op">=</span> <span class="va">dB</span>, type <span class="op">=</span> <span class="st">"link"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">mod</span>, newdata <span class="op">=</span> <span class="va">dB</span>, type <span class="op">=</span> <span class="st">"link"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="va">b</span><span class="op">$</span><span class="fu">linkinv</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.3331447</span></span></code></pre></div>
 <p>We can use <code><a href="../reference/tidy_marginal_predictions.html">tidy_marginal_predictions()</a></code> to get average
@@ -2732,14 +2739,15 @@ marginal predictions for all variables and
 <code><a href="../reference/tidy_marginal_predictions.html">plot_marginal_predictions()</a></code> for a visual
 representation.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html" class="external-link">tbl_regression</a></span><span class="op">(</span></span>
 <span>    tidy_fun <span class="op">=</span> <span class="va">tidy_marginal_predictions</span>,</span>
 <span>    type <span class="op">=</span> <span class="st">"response"</span>,</span>
 <span>    variables_list <span class="op">=</span> <span class="st">"no_interaction"</span>,</span>
-<span>    estimate_fun <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>accuracy <span class="op">=</span> <span class="fl">.1</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/modify_column_hide.html" class="external-link">modify_column_hide</a></span><span class="op">(</span><span class="st">"p.value"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    estimate_fun <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>accuracy <span class="op">=</span> <span class="fl">.1</span><span class="op">)</span>,</span>
+<span>    label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>age <span class="op">=</span> <span class="st">"Age in years"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/modify_column_hide.html" class="external-link">modify_column_hide</a></span><span class="op">(</span><span class="st">"p.value"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/bold_italicize_labels_levels.html" class="external-link">bold_labels</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div id="nzbagtwlcq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#nzbagtwlcq table {
@@ -3270,7 +3278,7 @@ representation.</p>
 <td headers="conf.low" class="gt_row gt_center">16.1%, 43.8%</td>
 </tr>
 <tr>
-<td headers="label" class="gt_row gt_left" style="font-weight: bold;">age</td>
+<td headers="label" class="gt_row gt_left" style="font-weight: bold;">Age in years</td>
 <td headers="estimate" class="gt_row gt_center"><br></td>
 <td headers="conf.low" class="gt_row gt_center"><br></td>
 </tr>
@@ -3308,13 +3316,14 @@ representation.</p>
 </table>
 </div>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html" class="external-link">tbl_regression</a></span><span class="op">(</span></span>
 <span>    tidy_fun <span class="op">=</span> <span class="va">tidy_marginal_predictions</span>,</span>
 <span>    type <span class="op">=</span> <span class="st">"response"</span>,</span>
-<span>    estimate_fun <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>accuracy <span class="op">=</span> <span class="fl">.1</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/modify_column_hide.html" class="external-link">modify_column_hide</a></span><span class="op">(</span><span class="st">"p.value"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    estimate_fun <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>accuracy <span class="op">=</span> <span class="fl">.1</span><span class="op">)</span>,</span>
+<span>    label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>age <span class="op">=</span> <span class="st">"Age in years"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/modify_column_hide.html" class="external-link">modify_column_hide</a></span><span class="op">(</span><span class="st">"p.value"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/bold_italicize_labels_levels.html" class="external-link">bold_labels</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div id="vaghsmzzjk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#vaghsmzzjk table {
@@ -3800,7 +3809,7 @@ representation.</p>
 <td headers="conf.low" class="gt_row gt_center">16.1%, 43.8%</td>
 </tr>
 <tr>
-<td headers="label" class="gt_row gt_left" style="font-weight: bold;">age</td>
+<td headers="label" class="gt_row gt_left" style="font-weight: bold;">Age in years</td>
 <td headers="estimate" class="gt_row gt_center"><br></td>
 <td headers="conf.low" class="gt_row gt_center"><br></td>
 </tr>
@@ -3893,12 +3902,13 @@ representation.</p>
 </table>
 </div>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tidy_marginal_predictions.html">plot_marginal_predictions</a></span><span class="op">(</span><span class="va">mod</span>, type <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tidy_marginal_predictions.html">plot_marginal_predictions</a></span><span class="op">(</span><span class="va">mod</span>, type <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">patchwork</span><span class="fu">::</span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/wrap_plots.html" class="external-link">wrap_plots</a></span><span class="op">(</span>ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">&amp;</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span></span>
 <span>    labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>    limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.2</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
+<span><span class="va">p</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">p</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">+</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Age in years"</span><span class="op">)</span></span>
 <span><span class="va">p</span> <span class="op">+</span> <span class="fu">patchwork</span><span class="fu">::</span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html" class="external-link">plot_annotation</a></span><span class="op">(</span></span>
 <span>  title <span class="op">=</span> <span class="st">"Average Marginal Predictions"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -3938,8 +3948,8 @@ modalities). <code>age</code> is fixed at its mean
 <p>Let’s compute the average predictions for each value of
 <code>stage</code>.</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">pred</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">stage</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">pred</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">stage</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">estimate</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 2</span></span></span>
 <span><span class="co">#&gt;   stage `mean(estimate)`</span></span>
@@ -3998,14 +4008,15 @@ for both continuous and categorical variables, calling
 marginal predictions at marginal means will be equal to marginal
 means.</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html" class="external-link">tbl_regression</a></span><span class="op">(</span></span>
 <span>    tidy_fun <span class="op">=</span> <span class="va">tidy_marginal_predictions</span>,</span>
 <span>    newdata <span class="op">=</span> <span class="st">"marginalmeans"</span>,</span>
 <span>    variables_list <span class="op">=</span> <span class="st">"no_interaction"</span>,</span>
-<span>    estimate_fun <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>accuracy <span class="op">=</span> <span class="fl">.1</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/modify_column_hide.html" class="external-link">modify_column_hide</a></span><span class="op">(</span><span class="st">"p.value"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    estimate_fun <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>accuracy <span class="op">=</span> <span class="fl">.1</span><span class="op">)</span>,</span>
+<span>    label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>age <span class="op">=</span> <span class="st">"Age in years"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/modify_column_hide.html" class="external-link">modify_column_hide</a></span><span class="op">(</span><span class="st">"p.value"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/bold_italicize_labels_levels.html" class="external-link">bold_labels</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div id="qcbzolnajc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#qcbzolnajc table {
@@ -4536,7 +4547,7 @@ means.</p>
 <td headers="conf.low" class="gt_row gt_center">16.4%, 46.6%</td>
 </tr>
 <tr>
-<td headers="label" class="gt_row gt_left" style="font-weight: bold;">age</td>
+<td headers="label" class="gt_row gt_left" style="font-weight: bold;">Age in years</td>
 <td headers="estimate" class="gt_row gt_center"><br></td>
 <td headers="conf.low" class="gt_row gt_center"><br></td>
 </tr>
@@ -4585,14 +4596,15 @@ continuous variables are fixed at the median of observed values (and
 categorical variables at their mode). Simply use
 <code>newdata = "median"</code>.</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html" class="external-link">tbl_regression</a></span><span class="op">(</span></span>
 <span>    tidy_fun <span class="op">=</span> <span class="va">tidy_marginal_predictions</span>,</span>
 <span>    newdata <span class="op">=</span> <span class="st">"median"</span>,</span>
 <span>    variables_list <span class="op">=</span> <span class="st">"no_interaction"</span>,</span>
-<span>    estimate_fun <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>accuracy <span class="op">=</span> <span class="fl">.1</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/modify_column_hide.html" class="external-link">modify_column_hide</a></span><span class="op">(</span><span class="st">"p.value"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    estimate_fun <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>accuracy <span class="op">=</span> <span class="fl">.1</span><span class="op">)</span>,</span>
+<span>    label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>age <span class="op">=</span> <span class="st">"Age in years"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/modify_column_hide.html" class="external-link">modify_column_hide</a></span><span class="op">(</span><span class="st">"p.value"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/bold_italicize_labels_levels.html" class="external-link">bold_labels</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div id="zkxluoqobq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#zkxluoqobq table {
@@ -5123,7 +5135,7 @@ categorical variables at their mode). Simply use
 <td headers="conf.low" class="gt_row gt_center">16.0%, 48.7%</td>
 </tr>
 <tr>
-<td headers="label" class="gt_row gt_left" style="font-weight: bold;">age</td>
+<td headers="label" class="gt_row gt_left" style="font-weight: bold;">Age in years</td>
 <td headers="estimate" class="gt_row gt_center"><br></td>
 <td headers="conf.low" class="gt_row gt_center"><br></td>
 </tr>
@@ -5171,14 +5183,13 @@ modality (used as reference) of categorical variables.
 <a href="https://larmarange.github.io/broom.helpers/">broom.helpers</a> provides a <code><a href="../reference/tidy_ggpredict.html">tidy_ggpredict()</a></code>
 tidier.</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html" class="external-link">tbl_regression</a></span><span class="op">(</span></span>
 <span>    tidy_fun <span class="op">=</span> <span class="va">tidy_ggpredict</span>,</span>
-<span>    estimate_fun <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>accuracy <span class="op">=</span> <span class="fl">.1</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    estimate_fun <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>accuracy <span class="op">=</span> <span class="fl">.1</span><span class="op">)</span>,</span>
+<span>    label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>age <span class="op">=</span> <span class="st">"Age in years"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/bold_italicize_labels_levels.html" class="external-link">bold_labels</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Argument `ci.lvl` is deprecated and will be removed in the future.</span></span>
-<span><span class="co">#&gt;   Please use `ci_level` instead.</span></span>
 <span><span class="co">#&gt; Warning: Some of the focal terms are of type `character`. This may lead to</span></span>
 <span><span class="co">#&gt;   unexpected results. It is recommended to convert these variables to</span></span>
 <span><span class="co">#&gt;   factors before fitting the model.</span></span>
@@ -6507,7 +6518,7 @@ tidier.</p>
 <td headers="conf.low" class="gt_row gt_center">17.6%, 51.4%</td>
 </tr>
 <tr>
-<td headers="label" class="gt_row gt_left" style="font-weight: bold;">age</td>
+<td headers="label" class="gt_row gt_left" style="font-weight: bold;">Age in years</td>
 <td headers="estimate" class="gt_row gt_center"><br></td>
 <td headers="conf.low" class="gt_row gt_center"><br></td>
 </tr>
@@ -6810,9 +6821,9 @@ tidier.</p>
 </table>
 </div>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu">ggeffects</span><span class="fu">::</span><span class="fu"><a href="https://strengejacke.github.io/ggeffects/reference/ggpredict.html" class="external-link">ggpredict</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">ggeffects</span><span class="fu">::</span><span class="fu"><a href="https://strengejacke.github.io/ggeffects/reference/ggpredict.html" class="external-link">ggpredict</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">patchwork</span><span class="fu">::</span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/wrap_plots.html" class="external-link">wrap_plots</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: Some of the focal terms are of type `character`. This may lead to</span></span>
 <span><span class="co">#&gt;   unexpected results. It is recommended to convert these variables to</span></span>
@@ -6990,7 +7001,7 @@ tidiers used by <code>broom.helpers</code>. Therefore, a
 and the suit of other functions provided by
 <a href="https://larmarange.github.io/broom.helpers/">broom.helpers</a>.</p>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/tidy_plus_plus.html">tidy_plus_plus</a></span><span class="op">(</span>tidy_fun <span class="op">=</span> <span class="va">tidy_avg_comparisons</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 23</span></span></span>
 <span><span class="co">#&gt;   term               variable var_label var_class var_type var_nlevels contrasts</span></span>
@@ -7009,11 +7020,12 @@ and the suit of other functions provided by
 <p>A nicely formatted table can therefore be generated with
 <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html" class="external-link">gtsummary::tbl_regression()</a></code>.</p>
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html" class="external-link">tbl_regression</a></span><span class="op">(</span></span>
 <span>    tidy_fun <span class="op">=</span> <span class="va">tidy_avg_comparisons</span>,</span>
-<span>    estimate_fun <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>style_positive <span class="op">=</span> <span class="st">"plus"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    estimate_fun <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>style_positive <span class="op">=</span> <span class="st">"plus"</span><span class="op">)</span>,</span>
+<span>    label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>age <span class="op">=</span> <span class="st">"Age in years"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/bold_italicize_labels_levels.html" class="external-link">bold_labels</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div id="uygiofoxrw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#uygiofoxrw table {
@@ -7475,7 +7487,7 @@ and the suit of other functions provided by
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
-<td headers="label" class="gt_row gt_left" style="font-weight: bold;">age</td>
+<td headers="label" class="gt_row gt_left" style="font-weight: bold;">Age in years</td>
 <td headers="estimate" class="gt_row gt_center"><br></td>
 <td headers="conf.low" class="gt_row gt_center"><br></td>
 <td headers="p.value" class="gt_row gt_center"><br></td>
@@ -7545,7 +7557,11 @@ and the suit of other functions provided by
 <p>Similarly, a forest plot could be produced with
 <code><a href="https://larmarange.github.io/ggstats/reference/ggcoef_model.html" class="external-link">ggstats::ggcoef_model()</a></code>.</p>
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">ggstats</span><span class="fu">::</span><span class="fu"><a href="https://larmarange.github.io/ggstats/reference/ggcoef_model.html" class="external-link">ggcoef_model</a></span><span class="op">(</span><span class="va">mod</span>, tidy_fun <span class="op">=</span> <span class="va">tidy_avg_comparisons</span><span class="op">)</span> <span class="op">+</span></span>
+<code class="sourceCode R"><span><span class="fu">ggstats</span><span class="fu">::</span><span class="fu"><a href="https://larmarange.github.io/ggstats/reference/ggcoef_model.html" class="external-link">ggcoef_model</a></span><span class="op">(</span></span>
+<span>  <span class="va">mod</span>,</span>
+<span>  tidy_fun <span class="op">=</span> <span class="va">tidy_avg_comparisons</span>,</span>
+<span>  variable_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>age <span class="op">=</span> <span class="st">"Age in years"</span><span class="op">)</span></span>
+<span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span></span>
 <span>    labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>style_positive <span class="op">=</span> <span class="st">"plus"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
@@ -7588,12 +7604,13 @@ values and where categorical predictors will be set to the mode
 <code><a href="../reference/tidy_avg_comparisons.html">tidy_avg_comparisons()</a></code>, <code>tidy_plus_plus</code> or
 <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html" class="external-link">gtsummary::tbl_regression()</a></code>.</p>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html" class="external-link">tbl_regression</a></span><span class="op">(</span></span>
 <span>    tidy_fun <span class="op">=</span> <span class="va">tidy_avg_comparisons</span>,</span>
 <span>    newdata <span class="op">=</span> <span class="st">"mean"</span>,</span>
-<span>    estimate_fun <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>style_positive <span class="op">=</span> <span class="st">"plus"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    estimate_fun <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>style_positive <span class="op">=</span> <span class="st">"plus"</span><span class="op">)</span>,</span>
+<span>    label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>age <span class="op">=</span> <span class="st">"Age in years"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/bold_italicize_labels_levels.html" class="external-link">bold_labels</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div id="nimgmagujn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#nimgmagujn table {
@@ -8055,7 +8072,7 @@ values and where categorical predictors will be set to the mode
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
-<td headers="label" class="gt_row gt_left" style="font-weight: bold;">age</td>
+<td headers="label" class="gt_row gt_left" style="font-weight: bold;">Age in years</td>
 <td headers="estimate" class="gt_row gt_center"><br></td>
 <td headers="conf.low" class="gt_row gt_center"><br></td>
 <td headers="p.value" class="gt_row gt_center"><br></td>
@@ -8125,10 +8142,11 @@ values and where categorical predictors will be set to the mode
 <p>For <code><a href="https://larmarange.github.io/ggstats/reference/ggcoef_model.html" class="external-link">ggstats::ggcoef_model()</a></code>, use <code>tidy_args</code>
 to pass <code>newdata = "mean"</code>.</p>
 <div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">ggstats</span><span class="fu">::</span><span class="fu"><a href="https://larmarange.github.io/ggstats/reference/ggcoef_model.html" class="external-link">ggcoef_model</a></span><span class="op">(</span></span>
 <span>    tidy_fun <span class="op">=</span> <span class="va">tidy_avg_comparisons</span>,</span>
-<span>    tidy_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="st">"mean"</span><span class="op">)</span></span>
+<span>    tidy_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="st">"mean"</span><span class="op">)</span>,</span>
+<span>    variable_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>age <span class="op">=</span> <span class="st">"Age in years"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span></span>
 <span>    labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>style_positive <span class="op">=</span> <span class="st">"plus"</span><span class="op">)</span></span>
@@ -8142,12 +8160,13 @@ to pass <code>newdata = "mean"</code>.</p>
 <code>"median"</code>, could be defined using <code>newdata</code>. See
 the documentation of <code><a href="https://marginaleffects.com/man/comparisons.html" class="external-link">marginaleffects::comparisons()</a></code>.</p>
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html" class="external-link">tbl_regression</a></span><span class="op">(</span></span>
 <span>    tidy_fun <span class="op">=</span> <span class="va">tidy_avg_comparisons</span>,</span>
 <span>    newdata <span class="op">=</span> <span class="st">"marginalmeans"</span>,</span>
-<span>    estimate_fun <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>style_positive <span class="op">=</span> <span class="st">"plus"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    estimate_fun <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>style_positive <span class="op">=</span> <span class="st">"plus"</span><span class="op">)</span>,</span>
+<span>    label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>age <span class="op">=</span> <span class="st">"Age in years"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/bold_italicize_labels_levels.html" class="external-link">bold_labels</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div id="jwxtvtxgtl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#jwxtvtxgtl table {
@@ -8609,7 +8628,7 @@ the documentation of <code><a href="https://marginaleffects.com/man/comparisons.
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
-<td headers="label" class="gt_row gt_left" style="font-weight: bold;">age</td>
+<td headers="label" class="gt_row gt_left" style="font-weight: bold;">Age in years</td>
 <td headers="estimate" class="gt_row gt_center"><br></td>
 <td headers="conf.low" class="gt_row gt_center"><br></td>
 <td headers="p.value" class="gt_row gt_center"><br></td>
@@ -8677,10 +8696,11 @@ the documentation of <code><a href="https://marginaleffects.com/man/comparisons.
 </table>
 </div>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">ggstats</span><span class="fu">::</span><span class="fu"><a href="https://larmarange.github.io/ggstats/reference/ggcoef_model.html" class="external-link">ggcoef_model</a></span><span class="op">(</span></span>
 <span>    tidy_fun <span class="op">=</span> <span class="va">tidy_avg_comparisons</span>,</span>
-<span>    tidy_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="st">"marginalmeans"</span><span class="op">)</span></span>
+<span>    tidy_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="st">"marginalmeans"</span><span class="op">)</span>,</span>
+<span>    variable_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>age <span class="op">=</span> <span class="st">"Age in years"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span></span>
 <span>    labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>style_positive <span class="op">=</span> <span class="st">"plus"</span><span class="op">)</span></span>
@@ -8731,11 +8751,12 @@ changing.</p>
 directly several combinations of variables and to stack all the results
 in a unique tibble.</p>
 <div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html" class="external-link">tbl_regression</a></span><span class="op">(</span></span>
 <span>    tidy_fun <span class="op">=</span> <span class="va">tidy_marginal_contrasts</span>,</span>
-<span>    estimate_fun <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>style_positive <span class="op">=</span> <span class="st">"plus"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    estimate_fun <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>style_positive <span class="op">=</span> <span class="st">"plus"</span><span class="op">)</span>,</span>
+<span>    label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>age <span class="op">=</span> <span class="st">"Age in years"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/bold_italicize_labels_levels.html" class="external-link">bold_labels</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div id="awxnjtisyj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#awxnjtisyj table {
@@ -9221,7 +9242,7 @@ in a unique tibble.</p>
 <td headers="p.value" class="gt_row gt_center">0.4</td>
 </tr>
 <tr>
-<td headers="label" class="gt_row gt_left" style="font-weight: bold;">age</td>
+<td headers="label" class="gt_row gt_left" style="font-weight: bold;">Age in years</td>
 <td headers="estimate" class="gt_row gt_center"><br></td>
 <td headers="conf.low" class="gt_row gt_center"><br></td>
 <td headers="p.value" class="gt_row gt_center"><br></td>
@@ -9259,7 +9280,11 @@ in a unique tibble.</p>
 </table>
 </div>
 <div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">ggstats</span><span class="fu">::</span><span class="fu"><a href="https://larmarange.github.io/ggstats/reference/ggcoef_model.html" class="external-link">ggcoef_model</a></span><span class="op">(</span><span class="va">mod</span>, tidy_fun <span class="op">=</span> <span class="va">tidy_marginal_contrasts</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">ggstats</span><span class="fu">::</span><span class="fu"><a href="https://larmarange.github.io/ggstats/reference/ggcoef_model.html" class="external-link">ggcoef_model</a></span><span class="op">(</span></span>
+<span>  <span class="va">mod</span>,</span>
+<span>  tidy_fun <span class="op">=</span> <span class="va">tidy_marginal_contrasts</span>,</span>
+<span>  variable_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>age <span class="op">=</span> <span class="st">"Age in years"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="marginal_tidiers_files/figure-html/unnamed-chunk-53-1.png" width="700"></p>
 <p>By default, when there is an interaction, contrasts are computed for
 the last variable of the interaction according to the different values
@@ -9268,12 +9293,13 @@ Tukey’s five numbers).</p>
 <p>The option <code>variables_list = "cross"</code> could be used to get
 “cross-contrasts” for interactions.</p>
 <div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html" class="external-link">tbl_regression</a></span><span class="op">(</span></span>
 <span>    tidy_fun <span class="op">=</span> <span class="va">tidy_marginal_contrasts</span>,</span>
 <span>    variables_list <span class="op">=</span> <span class="st">"cross"</span>,</span>
-<span>    estimate_fun <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>style_positive <span class="op">=</span> <span class="st">"plus"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    estimate_fun <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>style_positive <span class="op">=</span> <span class="st">"plus"</span><span class="op">)</span>,</span>
+<span>    label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>age <span class="op">=</span> <span class="st">"Age in years"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/bold_italicize_labels_levels.html" class="external-link">bold_labels</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div id="szvxpjewra" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#szvxpjewra table {
@@ -9759,7 +9785,7 @@ Tukey’s five numbers).</p>
 <td headers="p.value" class="gt_row gt_center">0.4</td>
 </tr>
 <tr>
-<td headers="label" class="gt_row gt_left" style="font-weight: bold;">age</td>
+<td headers="label" class="gt_row gt_left" style="font-weight: bold;">Age in years</td>
 <td headers="estimate" class="gt_row gt_center"><br></td>
 <td headers="conf.low" class="gt_row gt_center"><br></td>
 <td headers="p.value" class="gt_row gt_center"><br></td>
@@ -9794,12 +9820,13 @@ Tukey’s five numbers).</p>
 used to get the average marginal contrasts for each variable without
 considering interactions.</p>
 <div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html" class="external-link">tbl_regression</a></span><span class="op">(</span></span>
 <span>    tidy_fun <span class="op">=</span> <span class="va">tidy_marginal_contrasts</span>,</span>
 <span>    variables_list <span class="op">=</span> <span class="st">"no_interaction"</span>,</span>
-<span>    estimate_fun <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>style_positive <span class="op">=</span> <span class="st">"plus"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    estimate_fun <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>style_positive <span class="op">=</span> <span class="st">"plus"</span><span class="op">)</span>,</span>
+<span>    label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>age <span class="op">=</span> <span class="st">"Age in years"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/bold_italicize_labels_levels.html" class="external-link">bold_labels</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div id="kaewbdxtyg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#kaewbdxtyg table {
@@ -10309,7 +10336,7 @@ considering interactions.</p>
 <td headers="p.value" class="gt_row gt_center">0.4</td>
 </tr>
 <tr>
-<td headers="label" class="gt_row gt_left" style="font-weight: bold;">age</td>
+<td headers="label" class="gt_row gt_left" style="font-weight: bold;">Age in years</td>
 <td headers="estimate" class="gt_row gt_center"><br></td>
 <td headers="conf.low" class="gt_row gt_center"><br></td>
 <td headers="p.value" class="gt_row gt_center"><br></td>
@@ -10332,7 +10359,8 @@ considering interactions.</p>
 <code class="sourceCode R"><span><span class="fu">ggstats</span><span class="fu">::</span><span class="fu"><a href="https://larmarange.github.io/ggstats/reference/ggcoef_model.html" class="external-link">ggcoef_model</a></span><span class="op">(</span></span>
 <span>  <span class="va">mod</span>,</span>
 <span>  tidy_fun <span class="op">=</span> <span class="va">tidy_marginal_contrasts</span>,</span>
-<span>  tidy_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>variables_list <span class="op">=</span> <span class="st">"no_interaction"</span><span class="op">)</span></span>
+<span>  tidy_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>variables_list <span class="op">=</span> <span class="st">"no_interaction"</span><span class="op">)</span>,</span>
+<span>  variable_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>age <span class="op">=</span> <span class="st">"Age in years"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p><img src="marginal_tidiers_files/figure-html/unnamed-chunk-56-1.png" width="700"></p>
 <p>As before, to display marginal contrasts at the mean, indicate
@@ -10391,11 +10419,12 @@ being averaged with <code><a href="https://marginaleffects.com/man/slopes.html" 
 <a href="https://larmarange.github.io/broom.helpers/">broom.helpers</a>. Use <code><a href="../reference/tidy_avg_slopes.html">tidy_avg_slopes()</a></code>
 instead.</p>
 <div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html" class="external-link">tbl_regression</a></span><span class="op">(</span></span>
 <span>    tidy_fun <span class="op">=</span> <span class="va">tidy_avg_slopes</span>,</span>
-<span>    estimate_fun <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>style_positive <span class="op">=</span> <span class="st">"plus"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    estimate_fun <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>style_positive <span class="op">=</span> <span class="st">"plus"</span><span class="op">)</span>,</span>
+<span>    label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>age <span class="op">=</span> <span class="st">"Age in years"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/bold_italicize_labels_levels.html" class="external-link">bold_labels</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div id="pzqwvmyieg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#pzqwvmyieg table {
@@ -10857,7 +10886,7 @@ instead.</p>
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
-<td headers="label" class="gt_row gt_left" style="font-weight: bold;">age</td>
+<td headers="label" class="gt_row gt_left" style="font-weight: bold;">Age in years</td>
 <td headers="estimate" class="gt_row gt_center"><br></td>
 <td headers="conf.low" class="gt_row gt_center"><br></td>
 <td headers="p.value" class="gt_row gt_center"><br></td>
@@ -10925,9 +10954,10 @@ instead.</p>
 </table>
 </div>
 <div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">ggstats</span><span class="fu">::</span><span class="fu"><a href="https://larmarange.github.io/ggstats/reference/ggcoef_model.html" class="external-link">ggcoef_model</a></span><span class="op">(</span></span>
-<span>    tidy_fun <span class="op">=</span> <span class="va">tidy_avg_slopes</span></span>
+<span>    tidy_fun <span class="op">=</span> <span class="va">tidy_avg_slopes</span>,</span>
+<span>    variable_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>age <span class="op">=</span> <span class="st">"Age in years"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span></span>
 <span>    labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>style_positive <span class="op">=</span> <span class="st">"plus"</span><span class="op">)</span></span>
@@ -10946,7 +10976,7 @@ command. As <code><a href="https://rdrr.io/pkg/margins/man/margins.html" class="
 <span>  data <span class="op">=</span> <span class="va">d</span>,</span>
 <span>  family <span class="op">=</span> <span class="va">binomial</span></span>
 <span><span class="op">)</span></span>
-<span><span class="fu">margins</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/margins/man/margins.html" class="external-link">margins</a></span><span class="op">(</span><span class="va">mod_alt</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu">margins</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/margins/man/margins.html" class="external-link">margins</a></span><span class="op">(</span><span class="va">mod_alt</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: tidying a `margins` object was deprecated in broom 1.0.6.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> margins was removed from CRAN in April 2024 and its tidiers are thus</span></span>
 <span><span class="co">#&gt;   untested.</span></span>
@@ -10966,11 +10996,11 @@ command. As <code><a href="https://rdrr.io/pkg/margins/man/margins.html" class="
 <p>For <a href="https://larmarange.github.io/broom.helpers/">broom.helpers</a>, <a href="https://github.com/ddsjoberg/gtsummary" class="external-link">gtsummary</a> or
 <a href="https://larmarange.github.io/ggstats/" class="external-link">ggstats</a>, use <code><a href="../reference/tidy_margins.html">tidy_margins()</a></code>.</p>
 <div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mod_alt</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">mod_alt</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html" class="external-link">tbl_regression</a></span><span class="op">(</span></span>
 <span>    tidy_fun <span class="op">=</span> <span class="va">tidy_margins</span>,</span>
 <span>    estimate_fun <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>style_positive <span class="op">=</span> <span class="st">"plus"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/bold_italicize_labels_levels.html" class="external-link">bold_labels</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div id="rvpncytoso" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#rvpncytoso table {
@@ -11508,12 +11538,13 @@ command. As <code><a href="https://rdrr.io/pkg/margins/man/margins.html" class="
 continuous variables and the mode of categorical variables.&lt;/p&gt;'><sup>2</sup></a>, simple use
 <code>newdata = "mean"</code>.</p>
 <div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html" class="external-link">tbl_regression</a></span><span class="op">(</span></span>
 <span>    tidy_fun <span class="op">=</span> <span class="va">tidy_avg_slopes</span>,</span>
 <span>    newdata <span class="op">=</span> <span class="st">"mean"</span>,</span>
-<span>    estimate_fun <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>style_positive <span class="op">=</span> <span class="st">"plus"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    estimate_fun <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>style_positive <span class="op">=</span> <span class="st">"plus"</span><span class="op">)</span>,</span>
+<span>    label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>age <span class="op">=</span> <span class="st">"Age in years"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/bold_italicize_labels_levels.html" class="external-link">bold_labels</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div id="bsmhowzcoh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#bsmhowzcoh table {
@@ -11975,7 +12006,7 @@ continuous variables and the mode of categorical variables.&lt;/p&gt;'><sup>2</s
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
-<td headers="label" class="gt_row gt_left" style="font-weight: bold;">age</td>
+<td headers="label" class="gt_row gt_left" style="font-weight: bold;">Age in years</td>
 <td headers="estimate" class="gt_row gt_center"><br></td>
 <td headers="conf.low" class="gt_row gt_center"><br></td>
 <td headers="p.value" class="gt_row gt_center"><br></td>
@@ -12043,10 +12074,11 @@ continuous variables and the mode of categorical variables.&lt;/p&gt;'><sup>2</s
 </table>
 </div>
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">ggstats</span><span class="fu">::</span><span class="fu"><a href="https://larmarange.github.io/ggstats/reference/ggcoef_model.html" class="external-link">ggcoef_model</a></span><span class="op">(</span></span>
 <span>    tidy_fun <span class="op">=</span> <span class="va">tidy_avg_slopes</span>,</span>
-<span>    tidy_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="st">"mean"</span><span class="op">)</span></span>
+<span>    tidy_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="st">"mean"</span><span class="op">)</span>,</span>
+<span>    variable_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>age <span class="op">=</span> <span class="st">"Age in years"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span></span>
 <span>    labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>style_positive <span class="op">=</span> <span class="st">"plus"</span><span class="op">)</span></span>
@@ -12058,12 +12090,13 @@ continuous variables and the mode of categorical variables.&lt;/p&gt;'><sup>2</s
 </h3>
 <p>Simply use <code>newdata = "marginalmeans"</code>.</p>
 <div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html" class="external-link">tbl_regression</a></span><span class="op">(</span></span>
 <span>    tidy_fun <span class="op">=</span> <span class="va">tidy_avg_slopes</span>,</span>
 <span>    newdata <span class="op">=</span> <span class="st">"marginalmeans"</span>,</span>
-<span>    estimate_fun <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>style_positive <span class="op">=</span> <span class="st">"plus"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    estimate_fun <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>style_positive <span class="op">=</span> <span class="st">"plus"</span><span class="op">)</span>,</span>
+<span>    label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>age <span class="op">=</span> <span class="st">"Age in years"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/bold_italicize_labels_levels.html" class="external-link">bold_labels</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div id="cziddeigzx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#cziddeigzx table {
@@ -12525,7 +12558,7 @@ continuous variables and the mode of categorical variables.&lt;/p&gt;'><sup>2</s
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
-<td headers="label" class="gt_row gt_left" style="font-weight: bold;">age</td>
+<td headers="label" class="gt_row gt_left" style="font-weight: bold;">Age in years</td>
 <td headers="estimate" class="gt_row gt_center"><br></td>
 <td headers="conf.low" class="gt_row gt_center"><br></td>
 <td headers="p.value" class="gt_row gt_center"><br></td>
@@ -12593,10 +12626,11 @@ continuous variables and the mode of categorical variables.&lt;/p&gt;'><sup>2</s
 </table>
 </div>
 <div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mod</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">ggstats</span><span class="fu">::</span><span class="fu"><a href="https://larmarange.github.io/ggstats/reference/ggcoef_model.html" class="external-link">ggcoef_model</a></span><span class="op">(</span></span>
 <span>    tidy_fun <span class="op">=</span> <span class="va">tidy_avg_slopes</span>,</span>
-<span>    tidy_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="st">"marginalmeans"</span><span class="op">)</span></span>
+<span>    tidy_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="st">"marginalmeans"</span><span class="op">)</span>,</span>
+<span>    variable_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>age <span class="op">=</span> <span class="st">"Age in years"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span></span>
 <span>    labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>style_positive <span class="op">=</span> <span class="st">"plus"</span><span class="op">)</span></span>
