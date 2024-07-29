@@ -9,7 +9,7 @@
   the number of observations (#251)
 - by default, `tidy_parameters()` calls now `parameters::model_parameters()`
   with `pretty_names = FALSE` for saving execution time (#259)
-- internal code now use the native R pipe (`|>`), requiring therefore R >= 4.2
+- internal code now uses the native R pipe (`|>`), requiring therefore R >= 4.2
   (#262)
   
 **Deprecated support**
