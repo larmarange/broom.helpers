@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   articles/marginal_tidiers: marginal_tidiers.html
   tidy: tidy.html
-last_built: 2024-08-14T10:45Z
+last_built: 2024-08-14T11:00Z
 urls:
   reference: https://larmarange.github.io/broom.helpers/reference
   article: https://larmarange.github.io/broom.helpers/articles
