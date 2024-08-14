@@ -1,10 +1,10 @@
 on:
   workflow_dispatch:
-  inputs:
-    which:
-      type: choice
-      description: Which dependents to check
-      options:
+    inputs:
+      which:
+        type: choice
+        description: Which dependents to check
+        options:
         - strong
         - most
 
