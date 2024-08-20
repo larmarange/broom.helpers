@@ -26,6 +26,7 @@ Issues with CRAN packages are summarised below.
 
 ## recheck GitHub action
 
+------- Check results summary ------
 Check status summary:
                   OK
   Source packages  1
@@ -44,5 +45,8 @@ rdepends_logitr ... OK
 rdepends_regport ... OK
 rdepends_simstudy ... OK
 rdepends_smdi ... OK
+
+------- Check for regressions ------
+No changes between old and new version
 
 cf. https://github.com/larmarange/broom.helpers/actions/workflows/recheck.yml
