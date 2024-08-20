@@ -4,87 +4,57 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Getting Started with broom.helpers • broom.helpers</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Getting Started with broom.helpers">
-<meta property="og:description" content="broom.helpers">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Getting Started with broom.helpers">
 </head>
-<body data-spy="scroll" data-target="#toc">
-    
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
-    <div class="container template-article">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">broom.helpers</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.15.0</span>
-      </span>
-    </div>
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fa fa-home"></span>
-     
-  </a>
-</li>
-<li>
-  <a href="../reference/index.html">Reference</a>
-</li>
-<li>
-  <a href="../articles/tidy.html">Getting Started</a>
-</li>
-<li>
-  <a href="../articles/marginal_tidiers.html">Marginal estimates</a>
-</li>
-<li>
-  <a href="../news/index.html">News</a>
-</li>
+    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="default" aria-label="Site navigation"><div class="container">
+
+    <a class="navbar-brand me-2" href="../index.html">broom.helpers</a>
+
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.16.0</small>
+
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item"><a class="nav-link" href="../index.html"><span class="fa fa-home"></span></a></li>
+<li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="active nav-item"><a class="nav-link" href="../articles/tidy.html">Getting Started</a></li>
+<li class="nav-item"><a class="nav-link" href="../articles/marginal_tidiers.html">Marginal estimates</a></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">News</a></li>
       </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/larmarange/broom.helpers" class="external-link">
-    <span class="fa fa-github fa-lg"></span>
-     
-  </a>
-</li>
+<ul class="navbar-nav">
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/larmarange/broom.helpers"><span class="fa fa-github fa-lg"></span></a></li>
       </ul>
 </div>
-<!--/.nav-collapse -->
+
+
   </div>
-<!--/.container -->
-</div>
-<!--/.navbar -->
+</nav><div class="container template-article">
 
-      
 
-      </header><link href="tidy_files/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+
+<link href="tidy_files/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
 <script src="tidy_files/pagedtable-1.1/js/pagedtable.js"></script><div class="row">
-  <div class="col-md-9 contents">
-    <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Getting Started with broom.helpers</h1>
+  <main id="main" class="col-md-9"><div class="page-header">
+
+      <h1>Getting Started with broom.helpers</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/larmarange/broom.helpers/blob/HEAD/vignettes/tidy.Rmd" class="external-link"><code>vignettes/tidy.Rmd</code></a></small>
-      <div class="hidden name"><code>tidy.Rmd</code></div>
-
+      <small class="dont-index">Source: <a href="https://github.com/larmarange/broom.helpers/blob/main/vignettes/tidy.Rmd" class="external-link"><code>vignettes/tidy.Rmd</code></a></small>
+      <div class="d-none name"><code>tidy.Rmd</code></div>
     </div>
 
     
@@ -136,15 +106,15 @@ difficult, but the <code>broom.helper</code> package has made it
 simple.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tidy_forest</span> <span class="op">&lt;-</span></span>
-<span>  <span class="va">model_logit</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="va">model_logit</span> <span class="op">|&gt;</span></span>
 <span>  <span class="co"># perform initial tidying of the model</span></span>
-<span>  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="co"># adding in the reference row for categorical variables</span></span>
-<span>  <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="co"># adding a reference value to appear in plot</span></span>
-<span>  <span class="fu"><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="co"># adding the variable labels</span></span>
-<span>  <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="co"># removing intercept estimate from model</span></span>
 <span>  <span class="fu"><a href="../reference/tidy_remove_intercept.html">tidy_remove_intercept</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">tidy_forest</span></span>
@@ -165,16 +135,16 @@ needs a copy of the original model. To avoid passing the model at each
 step, the easier way is to attach the model as an attribute of the
 tibble with <code><a href="../reference/tidy_attach_model.html">tidy_attach_model()</a></code>.
 <code><a href="../reference/tidy_attach_model.html">tidy_and_attach()</a></code> is simply a shortcut of
-<code>model %&gt;% broom::tidy() %&gt;% tidy_and_attach(model)</code>.</p>
+<code>model |&gt; broom::tidy() |&gt; tidy_and_attach(model)</code>.</p>
 <p>We now have a tibble with every piece of information we need to
 create our forest plot using <code>ggplot2</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">tidy_forest</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">tidy_forest</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
-<span>    plot_label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">var_label</span>, <span class="va">label</span>, sep <span class="op">=</span> <span class="st">":"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>      <span class="fu">forcats</span><span class="fu">::</span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_inorder.html" class="external-link">fct_inorder</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    plot_label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">var_label</span>, <span class="va">label</span>, sep <span class="op">=</span> <span class="st">":"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>      <span class="fu">forcats</span><span class="fu">::</span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_inorder.html" class="external-link">fct_inorder</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>      <span class="fu">forcats</span><span class="fu">::</span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_rev.html" class="external-link">fct_rev</a></span><span class="op">(</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">plot_label</span>, y <span class="op">=</span> <span class="va">estimate</span>, ymin <span class="op">=</span> <span class="va">conf.low</span>, ymax <span class="op">=</span> <span class="va">conf.high</span>, color <span class="op">=</span> <span class="va">variable</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">1</span>, linetype <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html" class="external-link">geom_pointrange</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
@@ -201,25 +171,25 @@ header and reference rows, and utilize existing variable labels. Let’s
 change the labels shown in our summary table as well.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tidy_table</span> <span class="op">&lt;-</span></span>
-<span>  <span class="va">model_logit</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="va">model_logit</span> <span class="op">|&gt;</span></span>
 <span>  <span class="co"># perform initial tidying of the model</span></span>
-<span>  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="co"># adding in the reference row for categorical variables</span></span>
-<span>  <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="co"># adding the variable labels</span></span>
-<span>  <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="co"># add header row</span></span>
-<span>  <span class="fu"><a href="../reference/tidy_add_header_rows.html">tidy_add_header_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_header_rows.html">tidy_add_header_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="co"># removing intercept estimate from model</span></span>
 <span>  <span class="fu"><a href="../reference/tidy_remove_intercept.html">tidy_remove_intercept</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># print summary table</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>knitr.kable.NA <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span>
-<span><span class="va">tidy_table</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="va">tidy_table</span> <span class="op">|&gt;</span></span>
 <span>  <span class="co"># format model estimates</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">label</span>, <span class="va">estimate</span>, <span class="va">conf.low</span>, <span class="va">conf.high</span>, <span class="va">p.value</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html" class="external-link">all_of</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"estimate"</span>, <span class="st">"conf.low"</span>, <span class="st">"conf.high"</span><span class="op">)</span><span class="op">)</span>, <span class="va">style_ratio</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="va">p.value</span>, <span class="va">style_pvalue</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">label</span>, <span class="va">estimate</span>, <span class="va">conf.low</span>, <span class="va">conf.high</span>, <span class="va">p.value</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html" class="external-link">all_of</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"estimate"</span>, <span class="st">"conf.low"</span>, <span class="st">"conf.high"</span><span class="op">)</span><span class="op">)</span>, <span class="va">style_ratio</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="va">p.value</span>, <span class="va">style_pvalue</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">print_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -239,7 +209,7 @@ vignette</a>. <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/
 for the most commonly used <code>tidy_*()</code> functions, and they can
 be executed with a single line of code:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">model_logit</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">model_logit</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/tidy_plus_plus.html">tidy_plus_plus</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 18</span></span></span>
 <span><span class="co">#&gt;   term      variable var_label          var_class var_type var_nlevels contrasts</span></span>
@@ -253,8 +223,8 @@ be executed with a single line of code:</p>
 <span><span class="co">#&gt; <span style="color: #949494;">#   n_obs &lt;dbl&gt;, n_event &lt;dbl&gt;, estimate &lt;dbl&gt;, std.error &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   statistic &lt;dbl&gt;, p.value &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;</span></span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">model_logit</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/tidy_plus_plus.html">tidy_plus_plus</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">model_logit</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/tidy_plus_plus.html">tidy_plus_plus</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">print_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -280,12 +250,12 @@ header rows.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model_poly</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">response</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html" class="external-link">poly</a></span><span class="op">(</span><span class="va">age</span>, <span class="fl">3</span><span class="op">)</span> <span class="op">+</span> <span class="va">ttdeath</span>, <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html" class="external-link">na.omit</a></span><span class="op">(</span><span class="va">trial</span><span class="op">)</span>, family <span class="op">=</span> <span class="va">binomial</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">model_poly</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="va">model_poly</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/tidy_plus_plus.html">tidy_plus_plus</a></span><span class="op">(</span></span>
 <span>    exponentiate <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>    add_header_rows <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>    variable_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>age <span class="op">=</span> <span class="st">"Age in years"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">print_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -314,11 +284,11 @@ specific model term.</p>
 <span>  family <span class="op">=</span> <span class="va">binomial</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">model_1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="va">model_1</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">print_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -340,11 +310,11 @@ defined alternative reference rows. It will be properly managed by
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">model_2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="va">model_2</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">print_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -355,7 +325,7 @@ defined alternative reference rows. It will be properly managed by
 In that case, each model coefficient corresponds to the difference of
 that modality with the grand mean. A variable with 4 modalities will be
 coded with 3 terms. However, a value could be computed (using
-<code><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html" class="external-link">emmeans::emmeans()</a></code>) for the last modality, corresponding to
+<code><a href="https://rvlenth.github.io/emmeans/reference/emmeans.html" class="external-link">emmeans::emmeans()</a></code>) for the last modality, corresponding to
 the difference of that modality with the grand mean and equal to sum of
 all other coefficients multiplied by -1. <code>broom.helpers</code> will
 identify categorical variables coded with sum contrasts and could
@@ -372,11 +342,11 @@ retrieve an estimate value for the reference term.</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">model_3</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="va">model_3</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">print_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -402,11 +372,11 @@ term in such case.</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">model_4</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="va">model_4</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_estimate_to_reference_rows.html">tidy_add_estimate_to_reference_rows</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">print_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -422,9 +392,9 @@ term in such case.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model_logit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">response</span> <span class="op">~</span> <span class="va">age</span> <span class="op">+</span> <span class="va">trt</span> <span class="op">+</span> <span class="va">grade</span>, <span class="va">trial</span>, family <span class="op">=</span> <span class="va">binomial</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">model_logit</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/tidy_add_pairwise_contrasts.html">tidy_add_pairwise_contrasts</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="va">model_logit</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_pairwise_contrasts.html">tidy_add_pairwise_contrasts</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">print_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -433,9 +403,9 @@ term in such case.</p>
 </div>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="va">model_logit</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/tidy_add_pairwise_contrasts.html">tidy_add_pairwise_contrasts</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="va">model_logit</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_pairwise_contrasts.html">tidy_add_pairwise_contrasts</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">print_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -444,9 +414,9 @@ term in such case.</p>
 </div>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="va">model_logit</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/tidy_add_pairwise_contrasts.html">tidy_add_pairwise_contrasts</a></span><span class="op">(</span>pairwise_reverse <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="va">model_logit</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_pairwise_contrasts.html">tidy_add_pairwise_contrasts</a></span><span class="op">(</span>pairwise_reverse <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">print_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -455,9 +425,9 @@ term in such case.</p>
 </div>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="va">model_logit</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/tidy_add_pairwise_contrasts.html">tidy_add_pairwise_contrasts</a></span><span class="op">(</span>keep_model_terms <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="va">model_logit</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span>exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/tidy_add_pairwise_contrasts.html">tidy_add_pairwise_contrasts</a></span><span class="op">(</span>keep_model_terms <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">print_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -476,23 +446,23 @@ information in the column.</p>
 <style>
 td {vertical-align: top;}
 </style>
-<div id="zmjiiosmpj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#zmjiiosmpj table {
+<div id="mwlefoodfi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#mwlefoodfi table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#zmjiiosmpj thead, #zmjiiosmpj tbody, #zmjiiosmpj tfoot, #zmjiiosmpj tr, #zmjiiosmpj td, #zmjiiosmpj th {
+#mwlefoodfi thead, #mwlefoodfi tbody, #mwlefoodfi tfoot, #mwlefoodfi tr, #mwlefoodfi td, #mwlefoodfi th {
   border-style: none;
 }
 
-#zmjiiosmpj p {
+#mwlefoodfi p {
   margin: 0;
   padding: 0;
 }
 
-#zmjiiosmpj .gt_table {
+#mwlefoodfi .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -518,12 +488,12 @@ td {vertical-align: top;}
   border-left-color: #D3D3D3;
 }
 
-#zmjiiosmpj .gt_caption {
+#mwlefoodfi .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#zmjiiosmpj .gt_title {
+#mwlefoodfi .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -535,7 +505,7 @@ td {vertical-align: top;}
   border-bottom-width: 0;
 }
 
-#zmjiiosmpj .gt_subtitle {
+#mwlefoodfi .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -547,7 +517,7 @@ td {vertical-align: top;}
   border-top-width: 0;
 }
 
-#zmjiiosmpj .gt_heading {
+#mwlefoodfi .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -559,13 +529,13 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#zmjiiosmpj .gt_bottom_border {
+#mwlefoodfi .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zmjiiosmpj .gt_col_headings {
+#mwlefoodfi .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -580,7 +550,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#zmjiiosmpj .gt_col_heading {
+#mwlefoodfi .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -600,7 +570,7 @@ td {vertical-align: top;}
   overflow-x: hidden;
 }
 
-#zmjiiosmpj .gt_column_spanner_outer {
+#mwlefoodfi .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -612,15 +582,15 @@ td {vertical-align: top;}
   padding-right: 4px;
 }
 
-#zmjiiosmpj .gt_column_spanner_outer:first-child {
+#mwlefoodfi .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zmjiiosmpj .gt_column_spanner_outer:last-child {
+#mwlefoodfi .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zmjiiosmpj .gt_column_spanner {
+#mwlefoodfi .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -632,11 +602,11 @@ td {vertical-align: top;}
   width: 100%;
 }
 
-#zmjiiosmpj .gt_spanner_row {
+#mwlefoodfi .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#zmjiiosmpj .gt_group_heading {
+#mwlefoodfi .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -662,7 +632,7 @@ td {vertical-align: top;}
   text-align: left;
 }
 
-#zmjiiosmpj .gt_empty_group_heading {
+#mwlefoodfi .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -677,15 +647,15 @@ td {vertical-align: top;}
   vertical-align: middle;
 }
 
-#zmjiiosmpj .gt_from_md > :first-child {
+#mwlefoodfi .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zmjiiosmpj .gt_from_md > :last-child {
+#mwlefoodfi .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zmjiiosmpj .gt_row {
+#mwlefoodfi .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -704,7 +674,7 @@ td {vertical-align: top;}
   overflow-x: hidden;
 }
 
-#zmjiiosmpj .gt_stub {
+#mwlefoodfi .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -717,7 +687,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#zmjiiosmpj .gt_stub_row_group {
+#mwlefoodfi .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -731,15 +701,15 @@ td {vertical-align: top;}
   vertical-align: top;
 }
 
-#zmjiiosmpj .gt_row_group_first td {
+#mwlefoodfi .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#zmjiiosmpj .gt_row_group_first th {
+#mwlefoodfi .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#zmjiiosmpj .gt_summary_row {
+#mwlefoodfi .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -749,16 +719,16 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#zmjiiosmpj .gt_first_summary_row {
+#mwlefoodfi .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#zmjiiosmpj .gt_first_summary_row.thick {
+#mwlefoodfi .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#zmjiiosmpj .gt_last_summary_row {
+#mwlefoodfi .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -768,7 +738,7 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#zmjiiosmpj .gt_grand_summary_row {
+#mwlefoodfi .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -778,7 +748,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#zmjiiosmpj .gt_first_grand_summary_row {
+#mwlefoodfi .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -788,7 +758,7 @@ td {vertical-align: top;}
   border-top-color: #D3D3D3;
 }
 
-#zmjiiosmpj .gt_last_grand_summary_row_top {
+#mwlefoodfi .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -798,11 +768,11 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#zmjiiosmpj .gt_striped {
+#mwlefoodfi .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zmjiiosmpj .gt_table_body {
+#mwlefoodfi .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -811,7 +781,7 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#zmjiiosmpj .gt_footnotes {
+#mwlefoodfi .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -825,7 +795,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#zmjiiosmpj .gt_footnote {
+#mwlefoodfi .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -834,7 +804,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#zmjiiosmpj .gt_sourcenotes {
+#mwlefoodfi .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -848,7 +818,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#zmjiiosmpj .gt_sourcenote {
+#mwlefoodfi .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -856,64 +826,73 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#zmjiiosmpj .gt_left {
+#mwlefoodfi .gt_left {
   text-align: left;
 }
 
-#zmjiiosmpj .gt_center {
+#mwlefoodfi .gt_center {
   text-align: center;
 }
 
-#zmjiiosmpj .gt_right {
+#mwlefoodfi .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zmjiiosmpj .gt_font_normal {
+#mwlefoodfi .gt_font_normal {
   font-weight: normal;
 }
 
-#zmjiiosmpj .gt_font_bold {
+#mwlefoodfi .gt_font_bold {
   font-weight: bold;
 }
 
-#zmjiiosmpj .gt_font_italic {
+#mwlefoodfi .gt_font_italic {
   font-style: italic;
 }
 
-#zmjiiosmpj .gt_super {
+#mwlefoodfi .gt_super {
   font-size: 65%;
 }
 
-#zmjiiosmpj .gt_footnote_marks {
+#mwlefoodfi .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#zmjiiosmpj .gt_asterisk {
+#mwlefoodfi .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#zmjiiosmpj .gt_indent_1 {
+#mwlefoodfi .gt_indent_1 {
   text-indent: 5px;
 }
 
-#zmjiiosmpj .gt_indent_2 {
+#mwlefoodfi .gt_indent_2 {
   text-indent: 10px;
 }
 
-#zmjiiosmpj .gt_indent_3 {
+#mwlefoodfi .gt_indent_3 {
   text-indent: 15px;
 }
 
-#zmjiiosmpj .gt_indent_4 {
+#mwlefoodfi .gt_indent_4 {
   text-indent: 20px;
 }
 
-#zmjiiosmpj .gt_indent_5 {
+#mwlefoodfi .gt_indent_5 {
   text-indent: 25px;
+}
+
+#mwlefoodfi .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#mwlefoodfi div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
 }
 </style>
 <table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
@@ -924,158 +903,79 @@ td {vertical-align: top;}
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
-<td headers="Column" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>original_term</p>
-</div></td>
-<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="../reference/tidy_disambiguate_terms.html">tidy_disambiguate_terms()</a></code>, <code><a href="../reference/tidy_multgee.html">tidy_multgee()</a></code> or <code><a href="../reference/tidy_zeroinfl.html">tidy_zeroinfl()</a></code></p>
-</div></td>
-<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Original term before disambiguation. This columns is added only when disambiguation is needed (i.e. for mixed models). Also used for “multgee”, “zeroinfl” and “hurdle” models.</p>
-</div></td>
+<td headers="Column" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">original_term</span></td>
+<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_disambiguate_terms.html">tidy_disambiguate_terms()</a></code>, <code><a href="../reference/tidy_multgee.html">tidy_multgee()</a></code> or <code><a href="../reference/tidy_zeroinfl.html">tidy_zeroinfl()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Original term before disambiguation. This columns is added only when disambiguation is needed (i.e. for mixed models). Also used for “multgee”, “zeroinfl” and “hurdle” models.</span></td>
 </tr>
 <tr>
-<td headers="Column" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>variable</p>
-</div></td>
-<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code></p>
-</div></td>
-<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>String of variable names from the model. For categorical variables and polynomial terms defined with <code><a href="https://rdrr.io/r/stats/poly.html" class="external-link">stats::poly()</a></code>, terms belonging to the variable are identified.</p>
-</div></td>
+<td headers="Column" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">variable</span></td>
+<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">String of variable names from the model. For categorical variables and polynomial terms defined with <code><a href="https://rdrr.io/r/stats/poly.html" class="external-link">stats::poly()</a></code>, terms belonging to the variable are identified.</span></td>
 </tr>
 <tr>
-<td headers="Column" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>var_class</p>
-</div></td>
-<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code></p>
-</div></td>
-<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Class of the variable.</p>
-</div></td>
+<td headers="Column" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">var_class</span></td>
+<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Class of the variable.</span></td>
 </tr>
 <tr>
-<td headers="Column" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>var_type</p>
-</div></td>
-<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code></p>
-</div></td>
-<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>One of “intercept”, “continuous”, “dichotomous”, “categorical”, “interaction”, “ran_pars” or “ran_vals”</p>
-</div></td>
+<td headers="Column" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">var_type</span></td>
+<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">One of “intercept”, “continuous”, “dichotomous”, “categorical”, “interaction”, “ran_pars” or “ran_vals”</span></td>
 </tr>
 <tr>
-<td headers="Column" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>var_nlevels</p>
-</div></td>
-<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code></p>
-</div></td>
-<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Number of original levels for categorical variables</p>
-</div></td>
+<td headers="Column" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">var_nlevels</span></td>
+<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Number of original levels for categorical variables</span></td>
 </tr>
 <tr>
-<td headers="Column" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>contrasts</p>
-</div></td>
-<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="../reference/tidy_add_contrasts.html">tidy_add_contrasts()</a></code></p>
-</div></td>
-<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Contrasts used for categorical variables.<br><em>Require “variable” column. If needed, will automatically apply <code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code>.</em></p>
-</div></td>
+<td headers="Column" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">contrasts</span></td>
+<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_contrasts.html">tidy_add_contrasts()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Contrasts used for categorical variables.<br><em>Require “variable” column. If needed, will automatically apply <code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code>.</em></span></td>
 </tr>
 <tr>
-<td headers="Column" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>contrasts_type</p>
-</div></td>
-<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="../reference/tidy_add_contrasts.html">tidy_add_contrasts()</a></code></p>
-</div></td>
-<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Type of contrasts (“treatment”, “sum”, “poly”, “helmert”, “sdif”, “other” or “no.contrast”). “pairwise is used for pairwise contrasts computed with <code><a href="../reference/tidy_add_pairwise_contrasts.html">tidy_add_pairwise_contrasts()</a></code>.</p>
-</div></td>
+<td headers="Column" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">contrasts_type</span></td>
+<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_contrasts.html">tidy_add_contrasts()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Type of contrasts (“treatment”, “sum”, “poly”, “helmert”, “sdif”, “other” or “no.contrast”). “pairwise is used for pairwise contrasts computed with <code><a href="../reference/tidy_add_pairwise_contrasts.html">tidy_add_pairwise_contrasts()</a></code>.</span></td>
 </tr>
 <tr>
-<td headers="Column" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>reference_row</p>
-</div></td>
-<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows()</a></code></p>
-</div></td>
-<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Logical indicating if a row is a reference row for categorical variables using a treatment or a sum contrast. Is equal to <code>NA</code> for variables who do not have a reference row.<br><em>Require “contrasts” column. If needed, will automatically apply <code><a href="../reference/tidy_add_contrasts.html">tidy_add_contrasts()</a></code>.<br><code><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows()</a></code> will not populate the label of the reference term. It is therefore better to apply <code><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels()</a></code> after <code><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows()</a></code> rather than before.</em></p>
-</div></td>
+<td headers="Column" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">reference_row</span></td>
+<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Logical indicating if a row is a reference row for categorical variables using a treatment or a sum contrast. Is equal to <code>NA</code> for variables who do not have a reference row.<br><em>Require “contrasts” column. If needed, will automatically apply <code><a href="../reference/tidy_add_contrasts.html">tidy_add_contrasts()</a></code>.<br><code><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows()</a></code> will not populate the label of the reference term. It is therefore better to apply <code><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels()</a></code> after <code><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows()</a></code> rather than before.</em></span></td>
 </tr>
 <tr>
-<td headers="Column" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>var_label</p>
-</div></td>
-<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="../reference/tidy_add_variable_labels.html">tidy_add_variable_labels()</a></code></p>
-</div></td>
-<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>String of variable labels from the model. Columns labelled with the <code>labelled</code> package are retained. It is possible to pass a custom label for an interaction term with the <code>labels</code> argument. <br><em>Require “variable” column. If needed, will automatically apply <code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code>.</em></p>
-</div></td>
+<td headers="Column" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">var_label</span></td>
+<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_variable_labels.html">tidy_add_variable_labels()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">String of variable labels from the model. Columns labelled with the <code>labelled</code> package are retained. It is possible to pass a custom label for an interaction term with the <code>labels</code> argument. <br><em>Require “variable” column. If needed, will automatically apply <code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code>.</em></span></td>
 </tr>
 <tr>
-<td headers="Column" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>label</p>
-</div></td>
-<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels()</a></code></p>
-</div></td>
-<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>String of term labels based on (1) labels provided in <code>labels</code> argument if provided; (2) factor levels for categorical variables coded with treatment, SAS or sum contrasts; (3) variable labels when there is only one term per variable; and (4) term name otherwise.<br><em>Require “variable_label” column. If needed, will automatically apply <code><a href="../reference/tidy_add_variable_labels.html">tidy_add_variable_labels()</a></code>.<br>Require “contrasts” column. If needed, will automatically apply <code><a href="../reference/tidy_add_contrasts.html">tidy_add_contrasts()</a></code>.</em></p>
-</div></td>
+<td headers="Column" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">label</span></td>
+<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">String of term labels based on (1) labels provided in <code>labels</code> argument if provided; (2) factor levels for categorical variables coded with treatment, SAS or sum contrasts; (3) variable labels when there is only one term per variable; and (4) term name otherwise.<br><em>Require “variable_label” column. If needed, will automatically apply <code><a href="../reference/tidy_add_variable_labels.html">tidy_add_variable_labels()</a></code>.<br>Require “contrasts” column. If needed, will automatically apply <code><a href="../reference/tidy_add_contrasts.html">tidy_add_contrasts()</a></code>.</em></span></td>
 </tr>
 <tr>
-<td headers="Column" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>header_row</p>
-</div></td>
-<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="../reference/tidy_add_header_rows.html">tidy_add_header_rows()</a></code></p>
-</div></td>
-<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Logical indicating if a row is a header row for variables with several terms. Is equal to <code>NA</code> for variables who do not have an header row.<em>Require “label” column. If needed, will automatically apply <code><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels()</a></code>.<br>It is better to apply <code><a href="../reference/tidy_add_header_rows.html">tidy_add_header_rows()</a></code> after other <code>tidy_*</code> functions</em></p>
-</div></td>
+<td headers="Column" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">header_row</span></td>
+<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_header_rows.html">tidy_add_header_rows()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Logical indicating if a row is a header row for variables with several terms. Is equal to <code>NA</code> for variables who do not have an header row.<em>Require “label” column. If needed, will automatically apply <code><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels()</a></code>.<br>It is better to apply <code><a href="../reference/tidy_add_header_rows.html">tidy_add_header_rows()</a></code> after other <code>tidy_*</code> functions</em></span></td>
 </tr>
 <tr>
-<td headers="Column" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>n_obs</p>
-</div></td>
-<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="../reference/tidy_add_n.html">tidy_add_n()</a></code></p>
-</div></td>
-<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Number of observations</p>
-</div></td>
+<td headers="Column" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">n_obs</span></td>
+<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_n.html">tidy_add_n()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Number of observations</span></td>
 </tr>
 <tr>
-<td headers="Column" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>n_event</p>
-</div></td>
-<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="../reference/tidy_add_n.html">tidy_add_n()</a></code></p>
-</div></td>
-<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Number of events (for binomial and multinomial logistic models, Poisson and Cox models)</p>
-</div></td>
+<td headers="Column" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">n_ind</span></td>
+<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_n.html">tidy_add_n()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Number of individuals (for Cox models)</span></td>
 </tr>
 <tr>
-<td headers="Column" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>exposure</p>
-</div></td>
-<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="../reference/tidy_add_n.html">tidy_add_n()</a></code></p>
-</div></td>
-<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Exposure time (for Poisson and Cox models)</p>
-</div></td>
+<td headers="Column" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">n_event</span></td>
+<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_n.html">tidy_add_n()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Number of events (for binomial and multinomial logistic models, Poisson and Cox models)</span></td>
+</tr>
+<tr>
+<td headers="Column" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">exposure</span></td>
+<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_n.html">tidy_add_n()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Exposure time (for Poisson and Cox models)</span></td>
 </tr>
 </tbody>
 </table>
@@ -1094,23 +994,23 @@ short description.</p>
 <style>
 td {vertical-align: top;}
 </style>
-<div id="uxjrnlmrvj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#uxjrnlmrvj table {
+<div id="pgudacgqfl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pgudacgqfl table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#uxjrnlmrvj thead, #uxjrnlmrvj tbody, #uxjrnlmrvj tfoot, #uxjrnlmrvj tr, #uxjrnlmrvj td, #uxjrnlmrvj th {
+#pgudacgqfl thead, #pgudacgqfl tbody, #pgudacgqfl tfoot, #pgudacgqfl tr, #pgudacgqfl td, #pgudacgqfl th {
   border-style: none;
 }
 
-#uxjrnlmrvj p {
+#pgudacgqfl p {
   margin: 0;
   padding: 0;
 }
 
-#uxjrnlmrvj .gt_table {
+#pgudacgqfl .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1136,12 +1036,12 @@ td {vertical-align: top;}
   border-left-color: #D3D3D3;
 }
 
-#uxjrnlmrvj .gt_caption {
+#pgudacgqfl .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#uxjrnlmrvj .gt_title {
+#pgudacgqfl .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1153,7 +1053,7 @@ td {vertical-align: top;}
   border-bottom-width: 0;
 }
 
-#uxjrnlmrvj .gt_subtitle {
+#pgudacgqfl .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1165,7 +1065,7 @@ td {vertical-align: top;}
   border-top-width: 0;
 }
 
-#uxjrnlmrvj .gt_heading {
+#pgudacgqfl .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1177,13 +1077,13 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#uxjrnlmrvj .gt_bottom_border {
+#pgudacgqfl .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#uxjrnlmrvj .gt_col_headings {
+#pgudacgqfl .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1198,7 +1098,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#uxjrnlmrvj .gt_col_heading {
+#pgudacgqfl .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1218,7 +1118,7 @@ td {vertical-align: top;}
   overflow-x: hidden;
 }
 
-#uxjrnlmrvj .gt_column_spanner_outer {
+#pgudacgqfl .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1230,15 +1130,15 @@ td {vertical-align: top;}
   padding-right: 4px;
 }
 
-#uxjrnlmrvj .gt_column_spanner_outer:first-child {
+#pgudacgqfl .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#uxjrnlmrvj .gt_column_spanner_outer:last-child {
+#pgudacgqfl .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#uxjrnlmrvj .gt_column_spanner {
+#pgudacgqfl .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1250,11 +1150,11 @@ td {vertical-align: top;}
   width: 100%;
 }
 
-#uxjrnlmrvj .gt_spanner_row {
+#pgudacgqfl .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#uxjrnlmrvj .gt_group_heading {
+#pgudacgqfl .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1280,7 +1180,7 @@ td {vertical-align: top;}
   text-align: left;
 }
 
-#uxjrnlmrvj .gt_empty_group_heading {
+#pgudacgqfl .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1295,15 +1195,15 @@ td {vertical-align: top;}
   vertical-align: middle;
 }
 
-#uxjrnlmrvj .gt_from_md > :first-child {
+#pgudacgqfl .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#uxjrnlmrvj .gt_from_md > :last-child {
+#pgudacgqfl .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#uxjrnlmrvj .gt_row {
+#pgudacgqfl .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1322,7 +1222,7 @@ td {vertical-align: top;}
   overflow-x: hidden;
 }
 
-#uxjrnlmrvj .gt_stub {
+#pgudacgqfl .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1335,7 +1235,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#uxjrnlmrvj .gt_stub_row_group {
+#pgudacgqfl .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1349,15 +1249,15 @@ td {vertical-align: top;}
   vertical-align: top;
 }
 
-#uxjrnlmrvj .gt_row_group_first td {
+#pgudacgqfl .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#uxjrnlmrvj .gt_row_group_first th {
+#pgudacgqfl .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#uxjrnlmrvj .gt_summary_row {
+#pgudacgqfl .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1367,16 +1267,16 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#uxjrnlmrvj .gt_first_summary_row {
+#pgudacgqfl .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#uxjrnlmrvj .gt_first_summary_row.thick {
+#pgudacgqfl .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#uxjrnlmrvj .gt_last_summary_row {
+#pgudacgqfl .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1386,7 +1286,7 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#uxjrnlmrvj .gt_grand_summary_row {
+#pgudacgqfl .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1396,7 +1296,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#uxjrnlmrvj .gt_first_grand_summary_row {
+#pgudacgqfl .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1406,7 +1306,7 @@ td {vertical-align: top;}
   border-top-color: #D3D3D3;
 }
 
-#uxjrnlmrvj .gt_last_grand_summary_row_top {
+#pgudacgqfl .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1416,11 +1316,11 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#uxjrnlmrvj .gt_striped {
+#pgudacgqfl .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#uxjrnlmrvj .gt_table_body {
+#pgudacgqfl .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1429,7 +1329,7 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#uxjrnlmrvj .gt_footnotes {
+#pgudacgqfl .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1443,7 +1343,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#uxjrnlmrvj .gt_footnote {
+#pgudacgqfl .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1452,7 +1352,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#uxjrnlmrvj .gt_sourcenotes {
+#pgudacgqfl .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1466,7 +1366,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#uxjrnlmrvj .gt_sourcenote {
+#pgudacgqfl .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1474,64 +1374,73 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#uxjrnlmrvj .gt_left {
+#pgudacgqfl .gt_left {
   text-align: left;
 }
 
-#uxjrnlmrvj .gt_center {
+#pgudacgqfl .gt_center {
   text-align: center;
 }
 
-#uxjrnlmrvj .gt_right {
+#pgudacgqfl .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#uxjrnlmrvj .gt_font_normal {
+#pgudacgqfl .gt_font_normal {
   font-weight: normal;
 }
 
-#uxjrnlmrvj .gt_font_bold {
+#pgudacgqfl .gt_font_bold {
   font-weight: bold;
 }
 
-#uxjrnlmrvj .gt_font_italic {
+#pgudacgqfl .gt_font_italic {
   font-style: italic;
 }
 
-#uxjrnlmrvj .gt_super {
+#pgudacgqfl .gt_super {
   font-size: 65%;
 }
 
-#uxjrnlmrvj .gt_footnote_marks {
+#pgudacgqfl .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#uxjrnlmrvj .gt_asterisk {
+#pgudacgqfl .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#uxjrnlmrvj .gt_indent_1 {
+#pgudacgqfl .gt_indent_1 {
   text-indent: 5px;
 }
 
-#uxjrnlmrvj .gt_indent_2 {
+#pgudacgqfl .gt_indent_2 {
   text-indent: 10px;
 }
 
-#uxjrnlmrvj .gt_indent_3 {
+#pgudacgqfl .gt_indent_3 {
   text-indent: 15px;
 }
 
-#uxjrnlmrvj .gt_indent_4 {
+#pgudacgqfl .gt_indent_4 {
   text-indent: 20px;
 }
 
-#uxjrnlmrvj .gt_indent_5 {
+#pgudacgqfl .gt_indent_5 {
   text-indent: 25px;
+}
+
+#pgudacgqfl .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#pgudacgqfl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
 }
 </style>
 <table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
@@ -1542,114 +1451,59 @@ td {vertical-align: top;}
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
-<td headers="Attribute" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>exponentiate</p>
-</div></td>
-<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="../reference/tidy_attach_model.html">tidy_and_attach()</a></code></p>
-</div></td>
-<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Indicates if estimates were exponentiated</p>
-</div></td>
+<td headers="Attribute" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">exponentiate</span></td>
+<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_attach_model.html">tidy_and_attach()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Indicates if estimates were exponentiated</span></td>
 </tr>
 <tr>
-<td headers="Attribute" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>conf.level</p>
-</div></td>
-<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="../reference/tidy_attach_model.html">tidy_and_attach()</a></code></p>
-</div></td>
-<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Level of confidence used for confidence intervals</p>
-</div></td>
+<td headers="Attribute" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">conf.level</span></td>
+<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_attach_model.html">tidy_and_attach()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Level of confidence used for confidence intervals</span></td>
 </tr>
 <tr>
-<td headers="Attribute" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>coefficients_type</p>
-</div></td>
-<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="../reference/tidy_add_coefficients_type.html">tidy_add_coefficients_type()</a></code></p>
-</div></td>
-<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Type of coefficients</p>
-</div></td>
+<td headers="Attribute" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">coefficients_type</span></td>
+<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_coefficients_type.html">tidy_add_coefficients_type()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Type of coefficients</span></td>
 </tr>
 <tr>
-<td headers="Attribute" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>coefficients_label</p>
-</div></td>
-<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="../reference/tidy_add_coefficients_type.html">tidy_add_coefficients_type()</a></code></p>
-</div></td>
-<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Coefficients label</p>
-</div></td>
+<td headers="Attribute" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">coefficients_label</span></td>
+<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_coefficients_type.html">tidy_add_coefficients_type()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Coefficients label</span></td>
 </tr>
 <tr>
-<td headers="Attribute" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>variable_labels</p>
-</div></td>
-<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="../reference/tidy_add_variable_labels.html">tidy_add_variable_labels()</a></code></p>
-</div></td>
-<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Custom variable labels passed to <code><a href="../reference/tidy_add_variable_labels.html">tidy_add_variable_labels()</a></code></p>
-</div></td>
+<td headers="Attribute" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">variable_labels</span></td>
+<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_variable_labels.html">tidy_add_variable_labels()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Custom variable labels passed to <code><a href="../reference/tidy_add_variable_labels.html">tidy_add_variable_labels()</a></code></span></td>
 </tr>
 <tr>
-<td headers="Attribute" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>term_labels</p>
-</div></td>
-<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels()</a></code></p>
-</div></td>
-<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Custom term labels passed to <code><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels()</a></code></p>
-</div></td>
+<td headers="Attribute" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">term_labels</span></td>
+<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Custom term labels passed to <code><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels()</a></code></span></td>
 </tr>
 <tr>
-<td headers="Attribute" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>N_obs</p>
-</div></td>
-<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="../reference/tidy_add_n.html">tidy_add_n()</a></code></p>
-</div></td>
-<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Total number of observations</p>
-</div></td>
+<td headers="Attribute" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">N_obs</span></td>
+<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_n.html">tidy_add_n()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Total number of observations</span></td>
 </tr>
 <tr>
-<td headers="Attribute" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>N_event</p>
-</div></td>
-<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="../reference/tidy_add_n.html">tidy_add_n()</a></code></p>
-</div></td>
-<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Total number of events</p>
-</div></td>
+<td headers="Attribute" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">N_event</span></td>
+<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_n.html">tidy_add_n()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Total number of events</span></td>
 </tr>
 <tr>
-<td headers="Attribute" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Exposure</p>
-</div></td>
-<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="../reference/tidy_add_n.html">tidy_add_n()</a></code></p>
-</div></td>
-<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Total of exposure time</p>
-</div></td>
+<td headers="Attribute" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">N_ind</span></td>
+<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_n.html">tidy_add_n()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Total number of individuals (for Cox models)</span></td>
 </tr>
 <tr>
-<td headers="Attribute" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>component</p>
-</div></td>
-<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="../reference/tidy_zeroinfl.html">tidy_zeroinfl()</a></code></p>
-</div></td>
-<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code>component</code> argument passed to <code><a href="../reference/tidy_zeroinfl.html">tidy_zeroinfl()</a></code></p>
-</div></td>
+<td headers="Attribute" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Exposure</span></td>
+<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_n.html">tidy_add_n()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Total of exposure time</span></td>
+</tr>
+<tr>
+<td headers="Attribute" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">component</span></td>
+<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_zeroinfl.html">tidy_zeroinfl()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code>component</code> argument passed to <code><a href="../reference/tidy_zeroinfl.html">tidy_zeroinfl()</a></code></span></td>
 </tr>
 </tbody>
 </table>
@@ -1658,23 +1512,23 @@ td {vertical-align: top;}
 <div class="section level2">
 <h2 id="supported-models">Supported models<a class="anchor" aria-label="anchor" href="#supported-models"></a>
 </h2>
-<div id="uehjmcuter" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#uehjmcuter table {
+<div id="stnbuefsqx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#stnbuefsqx table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#uehjmcuter thead, #uehjmcuter tbody, #uehjmcuter tfoot, #uehjmcuter tr, #uehjmcuter td, #uehjmcuter th {
+#stnbuefsqx thead, #stnbuefsqx tbody, #stnbuefsqx tfoot, #stnbuefsqx tr, #stnbuefsqx td, #stnbuefsqx th {
   border-style: none;
 }
 
-#uehjmcuter p {
+#stnbuefsqx p {
   margin: 0;
   padding: 0;
 }
 
-#uehjmcuter .gt_table {
+#stnbuefsqx .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1700,12 +1554,12 @@ td {vertical-align: top;}
   border-left-color: #D3D3D3;
 }
 
-#uehjmcuter .gt_caption {
+#stnbuefsqx .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#uehjmcuter .gt_title {
+#stnbuefsqx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1717,7 +1571,7 @@ td {vertical-align: top;}
   border-bottom-width: 0;
 }
 
-#uehjmcuter .gt_subtitle {
+#stnbuefsqx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1729,7 +1583,7 @@ td {vertical-align: top;}
   border-top-width: 0;
 }
 
-#uehjmcuter .gt_heading {
+#stnbuefsqx .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1741,13 +1595,13 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#uehjmcuter .gt_bottom_border {
+#stnbuefsqx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#uehjmcuter .gt_col_headings {
+#stnbuefsqx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1762,7 +1616,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#uehjmcuter .gt_col_heading {
+#stnbuefsqx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1782,7 +1636,7 @@ td {vertical-align: top;}
   overflow-x: hidden;
 }
 
-#uehjmcuter .gt_column_spanner_outer {
+#stnbuefsqx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1794,15 +1648,15 @@ td {vertical-align: top;}
   padding-right: 4px;
 }
 
-#uehjmcuter .gt_column_spanner_outer:first-child {
+#stnbuefsqx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#uehjmcuter .gt_column_spanner_outer:last-child {
+#stnbuefsqx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#uehjmcuter .gt_column_spanner {
+#stnbuefsqx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1814,11 +1668,11 @@ td {vertical-align: top;}
   width: 100%;
 }
 
-#uehjmcuter .gt_spanner_row {
+#stnbuefsqx .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#uehjmcuter .gt_group_heading {
+#stnbuefsqx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1844,7 +1698,7 @@ td {vertical-align: top;}
   text-align: left;
 }
 
-#uehjmcuter .gt_empty_group_heading {
+#stnbuefsqx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1859,15 +1713,15 @@ td {vertical-align: top;}
   vertical-align: middle;
 }
 
-#uehjmcuter .gt_from_md > :first-child {
+#stnbuefsqx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#uehjmcuter .gt_from_md > :last-child {
+#stnbuefsqx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#uehjmcuter .gt_row {
+#stnbuefsqx .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1886,7 +1740,7 @@ td {vertical-align: top;}
   overflow-x: hidden;
 }
 
-#uehjmcuter .gt_stub {
+#stnbuefsqx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1899,7 +1753,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#uehjmcuter .gt_stub_row_group {
+#stnbuefsqx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1913,15 +1767,15 @@ td {vertical-align: top;}
   vertical-align: top;
 }
 
-#uehjmcuter .gt_row_group_first td {
+#stnbuefsqx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#uehjmcuter .gt_row_group_first th {
+#stnbuefsqx .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#uehjmcuter .gt_summary_row {
+#stnbuefsqx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1931,16 +1785,16 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#uehjmcuter .gt_first_summary_row {
+#stnbuefsqx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#uehjmcuter .gt_first_summary_row.thick {
+#stnbuefsqx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#uehjmcuter .gt_last_summary_row {
+#stnbuefsqx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1950,7 +1804,7 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#uehjmcuter .gt_grand_summary_row {
+#stnbuefsqx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1960,7 +1814,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#uehjmcuter .gt_first_grand_summary_row {
+#stnbuefsqx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1970,7 +1824,7 @@ td {vertical-align: top;}
   border-top-color: #D3D3D3;
 }
 
-#uehjmcuter .gt_last_grand_summary_row_top {
+#stnbuefsqx .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1980,11 +1834,11 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#uehjmcuter .gt_striped {
+#stnbuefsqx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#uehjmcuter .gt_table_body {
+#stnbuefsqx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1993,7 +1847,7 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#uehjmcuter .gt_footnotes {
+#stnbuefsqx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2007,7 +1861,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#uehjmcuter .gt_footnote {
+#stnbuefsqx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2016,7 +1870,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#uehjmcuter .gt_sourcenotes {
+#stnbuefsqx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2030,7 +1884,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#uehjmcuter .gt_sourcenote {
+#stnbuefsqx .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2038,64 +1892,73 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#uehjmcuter .gt_left {
+#stnbuefsqx .gt_left {
   text-align: left;
 }
 
-#uehjmcuter .gt_center {
+#stnbuefsqx .gt_center {
   text-align: center;
 }
 
-#uehjmcuter .gt_right {
+#stnbuefsqx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#uehjmcuter .gt_font_normal {
+#stnbuefsqx .gt_font_normal {
   font-weight: normal;
 }
 
-#uehjmcuter .gt_font_bold {
+#stnbuefsqx .gt_font_bold {
   font-weight: bold;
 }
 
-#uehjmcuter .gt_font_italic {
+#stnbuefsqx .gt_font_italic {
   font-style: italic;
 }
 
-#uehjmcuter .gt_super {
+#stnbuefsqx .gt_super {
   font-size: 65%;
 }
 
-#uehjmcuter .gt_footnote_marks {
+#stnbuefsqx .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#uehjmcuter .gt_asterisk {
+#stnbuefsqx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#uehjmcuter .gt_indent_1 {
+#stnbuefsqx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#uehjmcuter .gt_indent_2 {
+#stnbuefsqx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#uehjmcuter .gt_indent_3 {
+#stnbuefsqx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#uehjmcuter .gt_indent_4 {
+#stnbuefsqx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#uehjmcuter .gt_indent_5 {
+#stnbuefsqx .gt_indent_5 {
   text-indent: 25px;
+}
+
+#stnbuefsqx .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#stnbuefsqx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
 }
 </style>
 <table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
@@ -2105,334 +1968,184 @@ td {vertical-align: top;}
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
-<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/betareg/man/betareg.html" class="external-link">betareg::betareg()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Use <code><a href="../reference/tidy_parameters.html">tidy_parameters()</a></code> as <code>tidy_fun</code> with <code>component</code> argument to control with coefficients to return. <code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">broom::tidy()</a></code> does not support the <code>exponentiate</code> argument for betareg models, use <code><a href="../reference/tidy_parameters.html">tidy_parameters()</a></code> instead.</p>
-</div></td>
+<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://betareg.R-Forge.R-project.org/man/betareg.html" class="external-link">betareg::betareg()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Use <code><a href="../reference/tidy_parameters.html">tidy_parameters()</a></code> as <code>tidy_fun</code> with <code>component</code> argument to control with coefficients to return. <code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">broom::tidy()</a></code> does not support the <code>exponentiate</code> argument for betareg models, use <code><a href="../reference/tidy_parameters.html">tidy_parameters()</a></code> instead.</span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/biglm/man/bigglm.html" class="external-link">biglm::bigglm()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
+<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/biglm/man/bigglm.html" class="external-link">biglm::bigglm()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"></span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/biglmm/man/bigglm.html" class="external-link">biglmm::bigglm()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
+<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://paul-buerkner.github.io/brms/reference/brm.html" class="external-link">brms::brm()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code>broom.mixed</code> package required</span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://paul-buerkner.github.io/brms/reference/brm.html" class="external-link">brms::brm()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code>broom.mixed</code> package required</p>
-</div></td>
+<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/cmprsk/man/crr.html" class="external-link">cmprsk::crr()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Limited support. It is recommended to use <code><a href="https://mskcc-epi-bio.github.io/tidycmprsk/reference/crr.html" class="external-link">tidycmprsk::crr()</a></code> instead.</span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/cmprsk/man/crr.html" class="external-link">cmprsk::crr()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Limited support. It is recommended to use <code><a href="https://mskcc-epi-bio.github.io/tidycmprsk/reference/crr.html" class="external-link">tidycmprsk::crr()</a></code> instead.</p>
-</div></td>
+<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://lrberge.github.io/fixest/reference/feglm.html" class="external-link">fixest::feglm()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">May fail with R &lt;= 4.0.</span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://lrberge.github.io/fixest/reference/feglm.html" class="external-link">fixest::feglm()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>May fail with R &lt;= 4.0.</p>
-</div></td>
+<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://lrberge.github.io/fixest/reference/femlm.html" class="external-link">fixest::femlm()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">May fail with R &lt;= 4.0.</span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://lrberge.github.io/fixest/reference/femlm.html" class="external-link">fixest::femlm()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>May fail with R &lt;= 4.0.</p>
-</div></td>
+<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://lrberge.github.io/fixest/reference/feNmlm.html" class="external-link">fixest::feNmlm()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">May fail with R &lt;= 4.0.</span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://lrberge.github.io/fixest/reference/feNmlm.html" class="external-link">fixest::feNmlm()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>May fail with R &lt;= 4.0.</p>
-</div></td>
+<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://lrberge.github.io/fixest/reference/feols.html" class="external-link">fixest::feols()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">May fail with R &lt;= 4.0.</span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://lrberge.github.io/fixest/reference/feols.html" class="external-link">fixest::feols()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>May fail with R &lt;= 4.0.</p>
-</div></td>
+<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/gam/man/gam.html" class="external-link">gam::gam()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"></span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/gam/man/gam.html" class="external-link">gam::gam()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
+<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/geepack/man/geeglm.html" class="external-link">geepack::geeglm()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"></span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/geepack/man/geeglm.html" class="external-link">geepack::geeglm()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
+<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/glmmTMB/man/glmmTMB.html" class="external-link">glmmTMB::glmmTMB()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code>broom.mixed</code> package required</span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/glmmTMB/man/glmmTMB.html" class="external-link">glmmTMB::glmmTMB()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code>broom.mixed</code> package required</p>
-</div></td>
+<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/lavaan/man/lavaan.html" class="external-link">lavaan::lavaan()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Limited support for categorical variables</span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/lavaan/man/lavaan.html" class="external-link">lavaan::lavaan()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Limited support for categorical variables</p>
-</div></td>
+<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/lfe/man/felm.html" class="external-link">lfe::felm()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"></span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/lfe/man/felm.html" class="external-link">lfe::felm()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
+<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/lme4/man/glmer.nb.html" class="external-link">lme4::glmer.nb()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code>broom.mixed</code> package required</span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/lme4/man/glmer.nb.html" class="external-link">lme4::glmer.nb()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code>broom.mixed</code> package required</p>
-</div></td>
+<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/lme4/man/glmer.html" class="external-link">lme4::glmer()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code>broom.mixed</code> package required</span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/lme4/man/glmer.html" class="external-link">lme4::glmer()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code>broom.mixed</code> package required</p>
-</div></td>
+<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lme4::lmer()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code>broom.mixed</code> package required</span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lme4::lmer()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code>broom.mixed</code> package required</p>
-</div></td>
+<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/logitr/man/logitr.html" class="external-link">logitr::logitr()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Requires logitr &gt;= 0.8.0</span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/logitr/man/logitr.html" class="external-link">logitr::logitr()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Requires logitr &gt;= 0.8.0</p>
-</div></td>
+<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/MASS/man/glm.nb.html" class="external-link">MASS::glm.nb()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"></span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/MASS/man/glm.nb.html" class="external-link">MASS::glm.nb()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
+<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/MASS/man/polr.html" class="external-link">MASS::polr()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"></span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/MASS/man/polr.html" class="external-link">MASS::polr()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
+<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/mgcv/man/gam.html" class="external-link">mgcv::gam()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Use default tidier <code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">broom::tidy()</a></code> for smooth terms only, or <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/custom_tidiers.html" class="external-link">gtsummary::tidy_gam()</a></code> to include parametric terms</span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/mgcv/man/gam.html" class="external-link">mgcv::gam()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Use default tidier <code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">broom::tidy()</a></code> for smooth terms only, or <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/custom_tidiers.html" class="external-link">gtsummary::tidy_gam()</a></code> to include parametric terms</p>
-</div></td>
+<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://amices.org/mice/reference/mira-class.html" class="external-link">mice::mira</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Limited support. If <code>mod</code> is a <code>mira</code> object, use <code>tidy_fun = function(x, ...) {mice::pool(x) %&gt;% mice::tidy(...)}</code></span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://amices.org/mice/reference/mira-class.html" class="external-link">mice::mira</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Limited support. If <code>mod</code> is a <code>mira</code> object, use <code>tidy_fun = function(x, ...) {mice::pool(x) %&gt;% mice::tidy(...)}</code></p>
-</div></td>
+<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://openpharma.github.io/mmrm/latest-tag/reference/mmrm.html" class="external-link">mmrm::mmrm()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"></span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://openpharma.github.io/mmrm/latest-tag/reference/mmrm.html" class="external-link">mmrm::mmrm()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
+<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/multgee/man/nomLORgee.html" class="external-link">multgee::nomLORgee()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Experimental support. Use <code><a href="../reference/tidy_multgee.html">tidy_multgee()</a></code> as <code>tidy_fun</code>.</span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/multgee/man/nomLORgee.html" class="external-link">multgee::nomLORgee()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Experimental support. Use <code><a href="../reference/tidy_multgee.html">tidy_multgee()</a></code> as <code>tidy_fun</code>.</p>
-</div></td>
+<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/multgee/man/ordLORgee.html" class="external-link">multgee::ordLORgee()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Experimental support. Use <code><a href="../reference/tidy_multgee.html">tidy_multgee()</a></code> as <code>tidy_fun</code>.</span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/multgee/man/ordLORgee.html" class="external-link">multgee::ordLORgee()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Experimental support. Use <code><a href="../reference/tidy_multgee.html">tidy_multgee()</a></code> as <code>tidy_fun</code>.</p>
-</div></td>
+<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/nnet/man/multinom.html" class="external-link">nnet::multinom()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"></span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/nnet/man/multinom.html" class="external-link">nnet::multinom()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
+<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/ordinal/man/clm.html" class="external-link">ordinal::clm()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Limited support for models with nominal predictors.</span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/ordinal/man/clm.html" class="external-link">ordinal::clm()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Limited support for models with nominal predictors.</p>
-</div></td>
+<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/ordinal/man/clmm.html" class="external-link">ordinal::clmm()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Limited support for models with nominal predictors.</span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/ordinal/man/clmm.html" class="external-link">ordinal::clmm()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Limited support for models with nominal predictors.</p>
-</div></td>
+<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://parsnip.tidymodels.org/reference/model_fit.html" class="external-link">parsnip::model_fit</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Supported as long as the type of model and the engine is supported.</span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://parsnip.tidymodels.org/reference/model_fit.html" class="external-link">parsnip::model_fit</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Supported as long as the type of model and the engine is supported.</p>
-</div></td>
+<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/plm/man/plm.html" class="external-link">plm::plm()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"></span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/plm/man/plm.html" class="external-link">plm::plm()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
+<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/pscl/man/hurdle.html" class="external-link">pscl::hurdle()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Use <code><a href="../reference/tidy_zeroinfl.html">tidy_zeroinfl()</a></code> as <code>tidy_fun</code>.</span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/pscl/man/hurdle.html" class="external-link">pscl::hurdle()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Use <code><a href="../reference/tidy_zeroinfl.html">tidy_zeroinfl()</a></code> as <code>tidy_fun</code>.</p>
-</div></td>
+<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/pscl/man/zeroinfl.html" class="external-link">pscl::zeroinfl()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Use <code><a href="../reference/tidy_zeroinfl.html">tidy_zeroinfl()</a></code> as <code>tidy_fun</code>.</span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/pscl/man/zeroinfl.html" class="external-link">pscl::zeroinfl()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Use <code><a href="../reference/tidy_zeroinfl.html">tidy_zeroinfl()</a></code> as <code>tidy_fun</code>.</p>
-</div></td>
+<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://mc-stan.org/rstanarm/reference/stan_glm.html" class="external-link">rstanarm::stan_glm()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code>broom.mixed</code> package required</span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://mc-stan.org/rstanarm/reference/stan_glm.html" class="external-link">rstanarm::stan_glm()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code>broom.mixed</code> package required</p>
-</div></td>
+<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://rdrr.io/r/stats/aov.html" class="external-link">stats::aov()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Reference rows are not relevant for such models.</span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/r/stats/aov.html" class="external-link">stats::aov()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Reference rows are not relevant for such models.</p>
-</div></td>
+<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">stats::glm()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"></span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">stats::glm()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
+<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">stats::lm()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"></span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">stats::lm()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
+<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://rdrr.io/r/stats/nls.html" class="external-link">stats::nls()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Limited support</span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/r/stats/nls.html" class="external-link">stats::nls()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Limited support</p>
-</div></td>
+<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/survey/man/svycoxph.html" class="external-link">survey::svycoxph()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"></span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/survey/man/svycoxph.html" class="external-link">survey::svycoxph()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
+<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/survey/man/svyglm.html" class="external-link">survey::svyglm()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"></span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/survey/man/svyglm.html" class="external-link">survey::svyglm()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
+<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/survey/man/svyolr.html" class="external-link">survey::svyolr()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"></span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/survey/man/svyolr.html" class="external-link">survey::svyolr()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
+<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/survival/man/cch.html" class="external-link">survival::cch()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">`Experimental support.</span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/survival/man/cch.html" class="external-link">survival::cch()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>`Experimental support.</p>
-</div></td>
+<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/survival/man/clogit.html" class="external-link">survival::clogit()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"></span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/survival/man/clogit.html" class="external-link">survival::clogit()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
+<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/survival/man/coxph.html" class="external-link">survival::coxph()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"></span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/survival/man/coxph.html" class="external-link">survival::coxph()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
+<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/survival/man/survreg.html" class="external-link">survival::survreg()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"></span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/survival/man/survreg.html" class="external-link">survival::survreg()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
+<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://mskcc-epi-bio.github.io/tidycmprsk/reference/crr.html" class="external-link">tidycmprsk::crr()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"></span></td>
 </tr>
 <tr>
-<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://mskcc-epi-bio.github.io/tidycmprsk/reference/crr.html" class="external-link">tidycmprsk::crr()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md"></div></td>
-</tr>
-<tr>
-<td headers="Model" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p><code><a href="https://rdrr.io/pkg/VGAM/man/vglm.html" class="external-link">VGAM::vglm()</a></code></p>
-</div></td>
-<td headers="Notes" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><div class="gt_from_md">
-<p>Limited support. It is recommended to use <code><a href="../reference/tidy_parameters.html">tidy_parameters()</a></code> as <code>tidy_fun</code>.</p>
-</div></td>
+<td headers="Model" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="https://rdrr.io/pkg/VGAM/man/vglm.html" class="external-link">VGAM::vglm()</a></code></span></td>
+<td headers="Notes" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Limited support. It is recommended to use <code><a href="../reference/tidy_parameters.html">tidy_parameters()</a></code> as <code>tidy_fun</code>.</span></td>
 </tr>
 </tbody>
 </table>
@@ -2441,35 +2154,26 @@ td {vertical-align: top;}
 may or may not work properly or partially with other types of models. Do
 not hesitate to provide feedback on <a href="https://github.com/larmarange/broom.helpers/issues" class="external-link">GitHub</a>.</p>
 </div>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
-
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
 
-      <footer><div class="copyright">
-  <p></p>
-<p>Developed by <a href="http://joseph.larmarange.net/" class="external-link">Joseph Larmarange</a>, <a href="http://www.danieldsjoberg.com/" class="external-link">Daniel D. Sjoberg</a>.</p>
+    <footer><div class="pkgdown-footer-left">
+  <p>Developed by <a href="http://joseph.larmarange.net/" class="external-link">Joseph Larmarange</a>, <a href="http://www.danieldsjoberg.com/" class="external-link">Daniel D. Sjoberg</a>.</p>
 </div>
 
-<div class="pkgdown">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+<div class="pkgdown-footer-right">
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
 
-  
 
 
-  
+
 
   </body>
 </html>

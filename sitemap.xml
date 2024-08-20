@@ -1,207 +1,71 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/404.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/articles/marginal_tidiers.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/articles/tidy.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/index.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/assert_package.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/dot-clean_backticks.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/dot-escape_regex.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/dot-formula_list_to_named_list.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/dot-generic_selector.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/dot-select_to_varnames.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/model_compute_terms_contributions.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/model_get_assign.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/model_get_coefficients_type.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/model_get_contrasts.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/model_get_model.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/model_get_model_frame.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/model_get_model_matrix.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/model_get_n.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/model_get_nlevels.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/model_get_offset.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/model_get_pairwise_contrasts.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/model_get_response.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/model_get_response_variable.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/model_get_terms.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/model_get_weights.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/model_get_xlevels.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/model_identify_variables.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/model_list_contrasts.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/model_list_higher_order_variables.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/model_list_terms_levels.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/model_list_variables.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/reexports.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/select_helpers.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/seq_range.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/supported_models.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/tidy_add_coefficients_type.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/tidy_add_contrasts.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/tidy_add_estimate_to_reference_rows.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/tidy_add_header_rows.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/tidy_add_n.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/tidy_add_pairwise_contrasts.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/tidy_add_reference_rows.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/tidy_add_term_labels.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/tidy_add_variable_labels.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/tidy_all_effects.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/tidy_attach_model.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/tidy_avg_comparisons.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/tidy_avg_slopes.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/tidy_broom.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/tidy_disambiguate_terms.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/tidy_ggpredict.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/tidy_identify_variables.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/tidy_marginal_contrasts.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/tidy_marginal_means.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/tidy_marginal_predictions.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/tidy_margins.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/tidy_multgee.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/tidy_parameters.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/tidy_plus_plus.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/tidy_remove_intercept.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/tidy_select_variables.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/tidy_with_broom_or_parameters.html</loc>
-  </url>
-  <url>
-    <loc>https://larmarange.github.io/broom.helpers/reference/tidy_zeroinfl.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://larmarange.github.io/broom.helpers/404.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/LICENSE.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/articles/index.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/articles/marginal_tidiers.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/articles/tidy.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/authors.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/index.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/news/index.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/assert_package.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/dot-clean_backticks.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/dot-escape_regex.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/dot-formula_list_to_named_list.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/dot-generic_selector.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/dot-select_to_varnames.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/index.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/model_compute_terms_contributions.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/model_get_assign.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/model_get_coefficients_type.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/model_get_contrasts.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/model_get_model.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/model_get_model_frame.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/model_get_model_matrix.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/model_get_n.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/model_get_nlevels.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/model_get_offset.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/model_get_pairwise_contrasts.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/model_get_response.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/model_get_response_variable.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/model_get_terms.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/model_get_weights.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/model_get_xlevels.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/model_identify_variables.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/model_list_contrasts.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/model_list_higher_order_variables.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/model_list_terms_levels.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/model_list_variables.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/reexports.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/select_helpers.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/seq_range.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/supported_models.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_add_coefficients_type.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_add_contrasts.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_add_estimate_to_reference_rows.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_add_header_rows.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_add_n.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_add_pairwise_contrasts.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_add_reference_rows.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_add_term_labels.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_add_variable_labels.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_all_effects.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_attach_model.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_avg_comparisons.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_avg_slopes.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_broom.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_disambiguate_terms.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_ggpredict.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_identify_variables.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_marginal_contrasts.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_marginal_means.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_marginal_predictions.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_margins.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_multgee.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_parameters.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_plus_plus.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_remove_intercept.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_select_variables.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_with_broom_or_parameters.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_zeroinfl.html</loc></url>
 </urlset>
+
