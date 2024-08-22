@@ -1,5 +1,10 @@
 # broom.helpers (development version)
 
+**Fixes**
+
+- `model_get_model_frame.coxph()` has been fixed to return a correct model
+  frame a subject identifier is passed to `survival::coxph()` (#268)
+
 # broom.helpers 1.16.0
 
 **New features**

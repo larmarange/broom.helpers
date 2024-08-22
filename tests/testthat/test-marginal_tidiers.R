@@ -4,7 +4,7 @@ test_that("tidy_margins()", {
 
   mod <- lm(Petal.Length ~ Petal.Width + Species, data = iris)
   expect_error(
-    t <- tidy_margins(mod),
+    suppressWarnings(t <- tidy_margins(mod)),
     NA
   )
   expect_error(
