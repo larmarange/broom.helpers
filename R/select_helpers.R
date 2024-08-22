@@ -88,7 +88,7 @@ all_intercepts <- function() {
 
 #' @rdname select_helpers
 #' @export
-all_contrasts <- function(contrasts_type = c("treatment", "sum", "poly", "helmert", "sdif", "other")) {
+all_contrasts <- function(contrasts_type = c("treatment", "sum", "poly", "helmert", "sdif", "other")) { # nolint
   contrasts_type <- rlang::arg_match(contrasts_type, multiple = TRUE)
   where(function(x) isTRUE(attr(x, "gtsummary.contrasts_type") %in% contrasts_type))
 }

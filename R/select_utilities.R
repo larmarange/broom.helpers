@@ -233,16 +233,6 @@
   # if var_info is provided, scope it
   if (!is.null(var_info)) data <- scope_tidy(var_info, data)
 
-  # # convert var_info to data frame if data not provided ------------------------
-  # if (is.null(data)) data <- .var_info_to_df(var_info)
-  #
-  # if (!is.null(var_info)) {
-  #   # scoping the variable types
-  #   .scope_var_info(var_info)
-  #   # un-scoping on exit
-  #   on.exit(rm(list = ls(envir = env_variable_type), envir = env_variable_type))
-  # }
-
   # determine if selecting input begins with `var()`
   select_input_starts_var <-
     !rlang::quo_is_symbol(select) && # if not a symbol (ie name)

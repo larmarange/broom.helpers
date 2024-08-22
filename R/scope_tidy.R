@@ -46,7 +46,7 @@ scope_tidy <- function(x, data = NULL) {
         unique() |>
         tidyr::drop_na()
       for (i in seq_len(nrow(df_class))) {
-        f <- switch (
+        f <- switch(
           df_class$var_class[i],
           "character" = as.character,
           "factor" = as.factor,
