@@ -21,8 +21,9 @@ See also \code{\link[=all_categorical]{all_categorical()}} and \code{\link[=all_
 
 \item{model}{the corresponding model, if not attached to \code{x}}
 
-\item{quiet}{logical argument whether broom.helpers should not return
-a message when requested output cannot be generated. Default is \code{FALSE}}
+\item{quiet}{(\code{logical})\cr
+Whether \code{broom.helpers} should not return a message when requested output
+cannot be generated. Default is \code{FALSE}.}
 }
 \description{
 For categorical variables with a treatment contrast

@@ -24,8 +24,9 @@ previously in \code{\link[=tidy_and_attach]{tidy_and_attach()}}, used only for s
 
 \item{model}{the corresponding model, if not attached to \code{x}}
 
-\item{quiet}{logical argument whether broom.helpers should not return
-a message when requested output cannot be generated. Default is \code{FALSE}}
+\item{quiet}{(\code{logical})\cr
+Whether \code{broom.helpers} should not return a message when requested output
+cannot be generated. Default is \code{FALSE}.}
 }
 \description{
 For categorical variables with a treatment contrast

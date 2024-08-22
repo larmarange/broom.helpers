@@ -6,11 +6,12 @@
 #' @details
 #' If the `variable` column is not yet available in `x`,
 #' [tidy_identify_variables()] will be automatically applied.
-#' @param x a tidy tibble
-#' @param include variables to include. Accepts [tidyselect][dplyr::select]
-#' syntax. Use `-` to remove a variable. Default is `everything()`.
+#' @param x (`data.frame`)\cr
+#' A tidy tibble.
+#' @param include ([`tidy-select`][dplyr::dplyr_tidy_select])\cr
+#' Variables to include. Default is `everything()`.
 #' See also [all_continuous()], [all_categorical()], [all_dichotomous()]
-#' and [all_interaction()]
+#' and [all_interaction()].
 #' @return
 #' The `x` tibble limited to the included variables (and eventually the intercept),
 #' sorted according to the `include` parameter.

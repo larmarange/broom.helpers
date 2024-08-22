@@ -28,11 +28,13 @@ labels of categorical terms with treatment or sum contrasts
 
 \item{model}{the corresponding model, if not attached to \code{x}}
 
-\item{quiet}{logical argument whether broom.helpers should not return
-a message when requested output cannot be generated. Default is \code{FALSE}}
+\item{quiet}{(\code{logical})\cr
+Whether \code{broom.helpers} should not return a message when requested output
+cannot be generated. Default is \code{FALSE}.}
 
-\item{strict}{logical argument whether broom.helpers should return an error
-when requested output cannot be generated. Default is \code{FALSE}}
+\item{strict}{(\code{logical})\cr
+Whether \code{broom.helpers} should return an error
+when requested output cannot be generated. Default is \code{FALSE}.}
 }
 \description{
 Will add term labels in a \code{label} column, based on:

@@ -34,13 +34,15 @@ see \code{\link[emmeans:contrast]{emmeans::contrast()}} (if \code{NULL}, use \co
 \item{conf.level}{confidence level, by default use the value indicated
 previously in \code{\link[=tidy_and_attach]{tidy_and_attach()}}}
 
-\item{emmeans_args}{list of additional parameter to pass to
-\code{\link[emmeans:emmeans]{emmeans::emmeans()}} when computing pairwise contrasts}
+\item{emmeans_args}{(\code{list})\cr
+List of additional parameter to pass to
+\code{\link[emmeans:emmeans]{emmeans::emmeans()}} when computing pairwise contrasts.}
 
 \item{model}{the corresponding model, if not attached to \code{x}}
 
-\item{quiet}{logical argument whether broom.helpers should not return
-a message when requested output cannot be generated. Default is \code{FALSE}}
+\item{quiet}{(\code{logical})\cr
+Whether \code{broom.helpers} should not return a message when requested output
+cannot be generated. Default is \code{FALSE}.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}

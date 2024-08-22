@@ -13,8 +13,9 @@ tidy_disambiguate_terms(x, sep = ".", model = tidy_get_model(x), quiet = FALSE)
 
 \item{model}{the corresponding model, if not attached to \code{x}}
 
-\item{quiet}{logical argument whether broom.helpers should not return
-a message when requested output cannot be generated. Default is \code{FALSE}}
+\item{quiet}{(\code{logical})\cr
+Whether \code{broom.helpers} should not return a message when requested output
+cannot be generated. Default is \code{FALSE}.}
 }
 \description{
 For mixed models, the \code{term} column returned by \code{broom.mixed} may have
