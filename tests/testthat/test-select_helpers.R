@@ -4,7 +4,7 @@ test_that("select_helpers: .select_to_varnames", {
   )
 
   expect_equal(
-    .select_to_varnames(select = vars(hp, mpg), data = mtcars),
+    .select_to_varnames(select = c(hp, mpg), data = mtcars),
     dplyr::select(mtcars, hp, mpg) |> colnames()
   )
 
@@ -259,25 +259,6 @@ test_that("select_helpers: tidy_add_variable_labels", {
 test_that("select_helpers: .select_to_varnames", {
   expect_error(
     .select_to_varnames(c(mpg, hp), data = mtcars, select_single = TRUE)
-  )
-})
-
-test_that("select_helpers: .generic_selector ", {
-  mod <- glm(response ~ age * trt + grade, gtsummary::trial, family = binomial)
-
-  expect_error(
-    tidy_and_attach(mod) |>
-      tidy_identify_variables() |>
-      tidy_add_variable_labels(labels = all_contrasts("helmert") ~ "HELMERT!")
-  )
-
-  expect_error(
-    all_continuous()
-  )
-
-  expect_equal(
-    .var_info_to_df(letters) |> names(),
-    letters
   )
 })
 

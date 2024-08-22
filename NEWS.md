@@ -1,5 +1,10 @@
 # broom.helpers (development version)
 
+**Fixes**
+
+- selectors such as `all_categorical()` are now compatible with `gtsummary`
+  version ≥ 2.0.0 (#270)
+
 # broom.helpers 1.16.0
 
 **New features**

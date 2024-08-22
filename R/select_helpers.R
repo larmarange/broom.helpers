@@ -14,13 +14,17 @@
 #'   (see `vignette("broom_mixed_intro", package = "broom.mixed")`)
 #' @name select_helpers
 #' @rdname select_helpers
-#' @param dichotomous Logical indicating whether to include dichotomous variables.
-#' Default is `TRUE`
+#' @param dichotomous logical indicating whether to include dichotomous
+#' variables, default is `TRUE`
 #' @param contrasts_type type of contrast to select. When `NULL`, all variables with a
 #' contrast will be selected. Default is `NULL`.  Select among contrast types
-#' `c("treatment", "sum", "poly", "helmert", "other")`
+#' `c("treatment", "sum", "poly", "helmert", "sdif", "other")`
+#' @param continuous2 (for compatibility with `{gtsummary}`) logical indicating
+#' whether to include continuous2 variables, default is `TRUE`, see
+#' [`gtsummary::all_continuous2()`]
 #'
 #' @return A character vector of column names selected
+#' @seealso [scope_tidy()]
 #' @examplesIf interactive()
 #' glm(response ~ age * trt + grade, gtsummary::trial, family = binomial) |>
 #'   tidy_plus_plus(exponentiate = TRUE, include = all_categorical())
@@ -38,95 +42,53 @@ NULL
 
 #' @rdname select_helpers
 #' @export
-all_continuous <- function() {
-  .generic_selector("variable", "var_type",
-    startsWith(.data$var_type, "continuous"),
-    fun_name = "all_continuous"
-  )
-}
+all_continuous <- function(continuous2 = TRUE) {
+  types <- if (continuous2) c("continuous", "continuous2") else "continuous"
 
-#' @rdname select_helpers
-#' @export
-all_dichotomous <- function() {
-  .generic_selector("variable", "var_type",
-    .data$var_type %in% "dichotomous",
-    fun_name = "all_dichotomous"
-  )
+  where(function(x) isTRUE(attr(x, "gtsummary.var_type") %in% types))
 }
 
 #' @rdname select_helpers
 #' @export
 all_categorical <- function(dichotomous = TRUE) {
-  types <- switch(dichotomous,
-    c("categorical", "dichotomous")
-  ) %||% "categorical"
+  types <- if (dichotomous) c("categorical", "dichotomous") else "categorical"
 
-  .generic_selector("variable", "var_type",
-    .data$var_type %in% .env$types,
-    fun_name = "all_categorical"
-  )
+  where(function(x) isTRUE(attr(x, "gtsummary.var_type") %in% types))
+}
+
+#' @rdname select_helpers
+#' @export
+all_dichotomous <- function() {
+  where(function(x) isTRUE(attr(x, "gtsummary.var_type") %in% "dichotomous"))
 }
 
 #' @rdname select_helpers
 #' @export
 all_interaction <- function() {
-  .generic_selector("variable", "var_type",
-    .data$var_type %in% "interaction",
-    fun_name = "all_interaction"
-  )
+  where(function(x) isTRUE(attr(x, "gtsummary.var_type") %in% "interaction"))
 }
 
 #' @rdname select_helpers
 #' @export
 all_ran_pars <- function() {
-  .generic_selector("variable", "var_type",
-    .data$var_type %in% "ran_pars",
-    fun_name = "all_ran_pars"
-  )
+  where(function(x) isTRUE(attr(x, "gtsummary.var_type") %in% "ran_pars"))
 }
 
 #' @rdname select_helpers
 #' @export
 all_ran_vals <- function() {
-  .generic_selector("variable", "var_type",
-    .data$var_type %in% "ran_vals",
-    fun_name = "all_ran_vals"
-  )
+  where(function(x) isTRUE(attr(x, "gtsummary.var_type") %in% "ran_vals"))
 }
-
 
 #' @rdname select_helpers
 #' @export
 all_intercepts <- function() {
-  .generic_selector("variable", "var_type",
-    .data$var_type %in% "intercept",
-    fun_name = "all_intercepts"
-  )
+  where(function(x) isTRUE(attr(x, "gtsummary.var_type") %in% "intercept"))
 }
 
 #' @rdname select_helpers
 #' @export
-all_contrasts <- function(contrasts_type = NULL) {
-  # if no types specified, select all contrasts
-  if (is.null(contrasts_type)) {
-    return(
-      .generic_selector("variable", "contrasts_type",
-        !is.na(.data$contrasts_type),
-        fun_name = "all_contrasts"
-      )
-    )
-    # otherwise, select those specified in `contrasts_type=`
-  } else {
-    contrasts_type <-
-      match.arg(contrasts_type,
-        c("treatment", "sum", "poly", "helmert", "other"),
-        several.ok = TRUE
-      )
-    return(
-      .generic_selector("variable", "contrasts_type",
-        .data$contrasts_type %in% .env$contrasts_type,
-        fun_name = "all_contrasts"
-      )
-    )
-  }
+all_contrasts <- function(contrasts_type = c("treatment", "sum", "poly", "helmert", "sdif", "other")) {
+  contrasts_type <- rlang::arg_match(contrasts_type, multiple = TRUE)
+  where(function(x) isTRUE(attr(x, "gtsummary.contrasts_type") %in% contrasts_type))
 }

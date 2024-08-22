@@ -8,7 +8,7 @@ NULL
 
 # because `where` is not exported by tidyselect
 # cf. https://github.com/r-lib/tidyselect/issues/201
-utils::globalVariables(c(".", "where"))
+utils::globalVariables(c("."))
 
 # update named vectors, y values overriding x values if common name
 .update_vector <- function(x, y) {

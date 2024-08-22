@@ -3,8 +3,8 @@
 \name{select_helpers}
 \alias{select_helpers}
 \alias{all_continuous}
-\alias{all_dichotomous}
 \alias{all_categorical}
+\alias{all_dichotomous}
 \alias{all_interaction}
 \alias{all_ran_pars}
 \alias{all_ran_vals}
@@ -12,11 +12,11 @@
 \alias{all_contrasts}
 \title{Select helper functions}
 \usage{
-all_continuous()
-
-all_dichotomous()
+all_continuous(continuous2 = TRUE)
 
 all_categorical(dichotomous = TRUE)
+
+all_dichotomous()
 
 all_interaction()
 
@@ -26,15 +26,21 @@ all_ran_vals()
 
 all_intercepts()
 
-all_contrasts(contrasts_type = NULL)
+all_contrasts(
+  contrasts_type = c("treatment", "sum", "poly", "helmert", "sdif", "other")
+)
 }
 \arguments{
-\item{dichotomous}{Logical indicating whether to include dichotomous variables.
-Default is \code{TRUE}}
+\item{continuous2}{(for compatibility with \code{{gtsummary}}) logical indicating
+whether to include continuous2 variables, default is \code{TRUE}, see
+\code{\link[gtsummary:select_helpers]{gtsummary::all_continuous2()}}}
+
+\item{dichotomous}{logical indicating whether to include dichotomous
+variables, default is \code{TRUE}}
 
 \item{contrasts_type}{type of contrast to select. When \code{NULL}, all variables with a
 contrast will be selected. Default is \code{NULL}.  Select among contrast types
-\code{c("treatment", "sum", "poly", "helmert", "other")}}
+\code{c("treatment", "sum", "poly", "helmert", "sdif", "other")}}
 }
 \value{
 A character vector of column names selected
@@ -70,4 +76,7 @@ glm(response ~ age + trt + grade + stage,
     include = all_contrasts(c("treatment", "sum"))
   )
 \dontshow{\}) # examplesIf}
+}
+\seealso{
+\code{\link[=scope_tidy]{scope_tidy()}}
 }
