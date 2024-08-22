@@ -238,7 +238,10 @@ test_that("model_get_n() works with lme4::glmer", {
 test_that("model_get_n() works with survival::coxph", {
   skip_on_cran()
   df <- survival::lung |> dplyr::mutate(sex = factor(sex))
-  mod <- survival::coxph(survival::Surv(time, status) ~ ph.ecog + age + sex, data = df)
+  mod <- survival::coxph(
+    survival::Surv(time, status) ~ ph.ecog + age + sex,
+    data = df
+  )
   expect_error(res <- mod |> model_get_n(), NA)
   expect_equivalent(
     names(res),
@@ -261,6 +264,15 @@ test_that("model_get_n() works with survival::coxph", {
   expect_equivalent(res$n_ind, c(10, 10))
   expect_equivalent(res$n_event, c(7, 7))
   expect_equivalent(res$exposure, c(43, 43))
+
+  # specific case when missing values in the `id`
+  # should not result in a warning
+  mod <- survival::coxph(
+    survival::Surv(ttdeath, death) ~ age + grade,
+    id = response,
+    data = gtsummary::trial
+  )
+  expect_no_warning(mod |> model_get_n())
 })
 
 test_that("model_get_n() works with survival::survreg", {

@@ -556,6 +556,7 @@ test_that("model_identify_variables() works with lavaan::lavaan", {
 
 test_that("model_identify_variables() message when failure", {
   skip_if_not_installed("survival")
+  trial <- gtsummary::trial
   df_models <-
     tibble::tibble(grade = c("I", "II", "III")) |>
     dplyr::mutate(
