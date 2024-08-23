@@ -14,14 +14,17 @@ tidy_add_variable_labels(
 )
 }
 \arguments{
-\item{x}{a tidy tibble}
+\item{x}{(\code{data.frame})\cr
+A tidy tibble as produced by \verb{tidy_*()} functions.}
 
-\item{labels}{an optional named list or named vector of
-custom variable labels}
+\item{labels}{(\code{\link[gtsummary:syntax]{formula-list-selector}})\cr
+An optional named list or a named vector of custom variable labels.}
 
-\item{interaction_sep}{separator for interaction terms}
+\item{interaction_sep}{(\code{string})\cr
+Separator for interaction terms.}
 
-\item{model}{the corresponding model, if not attached to \code{x}}
+\item{model}{(a model object, e.g. \code{glm})\cr
+The corresponding model, if not attached to \code{x}.}
 
 \item{quiet}{(\code{logical})\cr
 Whether \code{broom.helpers} should not return a message when requested output
