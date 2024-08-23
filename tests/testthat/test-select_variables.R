@@ -44,12 +44,6 @@ test_that("tidy_select_variables() works for basic models", {
     res |> tidy_select_variables(include = stage)
   )
 
-  # testing vars() selector
-  expect_equivalent(
-    res |> tidy_select_variables(include = vars(grade, trt)),
-    res |> tidy_select_variables(include = c(grade, trt))
-  )
-
   # no error when none selected
   expect_error(
     res |> tidy_select_variables(include = starts_with("zzzzzzz")),

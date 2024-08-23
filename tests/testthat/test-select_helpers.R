@@ -32,11 +32,6 @@ test_that("select_helpers: .select_to_varnames", {
     .select_to_varnames(select = NULL, data = mtcars),
     NULL
   )
-
-  expect_equal(
-    .select_to_varnames(select = vars(dplyr::everything(), -mpg), data = mtcars),
-    dplyr::select(mtcars, dplyr::everything(), -mpg) |> colnames()
-  )
 })
 
 test_that("select_helpers: all_*()", {
