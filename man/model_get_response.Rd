@@ -19,7 +19,7 @@ model_get_response(model)
 \method{model_get_response}{model_fit}(model)
 }
 \arguments{
-\item{x}{(a model object, e.g. \code{glm})\cr
+\item{model}{(a model object, e.g. \code{glm})\cr
 A model object.}
 }
 \description{

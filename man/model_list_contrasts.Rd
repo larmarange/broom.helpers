@@ -10,7 +10,7 @@ model_list_contrasts(model)
 \method{model_list_contrasts}{default}(model)
 }
 \arguments{
-\item{x}{(a model object, e.g. \code{glm})\cr
+\item{model}{(a model object, e.g. \code{glm})\cr
 A model object.}
 }
 \value{

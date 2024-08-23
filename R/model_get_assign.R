@@ -3,7 +3,7 @@
 #' Return the assign attribute attached to the object returned by
 #' [stats::model.matrix()].
 #'
-#' @param x (a model object, e.g. `glm`)\cr
+#' @param model (a model object, e.g. `glm`)\cr
 #' A model object.
 #' @export
 #' @family model_helpers

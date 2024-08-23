@@ -2,7 +2,7 @@
 #'
 #' It is computed with [emmeans::emmeans()].
 #'
-#' @param x (a model object, e.g. `glm`)\cr
+#' @param model (a model object, e.g. `glm`)\cr
 #' A model object.
 #' @param variables ([`tidy-select`][dplyr::dplyr_tidy_select])\cr
 #' Variables to add pairwise contrasts.

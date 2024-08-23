@@ -10,7 +10,7 @@ model_get_offset(model)
 \method{model_get_offset}{default}(model)
 }
 \arguments{
-\item{x}{(a model object, e.g. \code{glm})\cr
+\item{model}{(a model object, e.g. \code{glm})\cr
 A model object.}
 }
 \description{

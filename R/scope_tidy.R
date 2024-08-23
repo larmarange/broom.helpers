@@ -13,7 +13,7 @@
 #'
 #' @param x (`data.frame`)\cr
 #' A tidy tibble, with a `"variable"` column, as returned by
-#' [`tidy_identify_variables ()`].
+#' [`tidy_identify_variables()`].
 #' @param data (`data.frame`)\cr
 #' An optional data frame the attributes will be added to.
 #' @return A data frame.

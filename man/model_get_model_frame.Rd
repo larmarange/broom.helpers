@@ -25,7 +25,7 @@ model_get_model_frame(model)
 \method{model_get_model_frame}{fixest}(model)
 }
 \arguments{
-\item{x}{(a model object, e.g. \code{glm})\cr
+\item{model}{(a model object, e.g. \code{glm})\cr
 A model object.}
 }
 \description{

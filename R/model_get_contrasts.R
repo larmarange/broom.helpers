@@ -1,6 +1,6 @@
 #' Get contrasts used in the model
 #'
-#' @param x (a model object, e.g. `glm`)\cr
+#' @param model (a model object, e.g. `glm`)\cr
 #' A model object.
 #' @export
 #' @family model_helpers

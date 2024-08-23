@@ -10,7 +10,7 @@ model_compute_terms_contributions(model)
 \method{model_compute_terms_contributions}{default}(model)
 }
 \arguments{
-\item{x}{(a model object, e.g. \code{glm})\cr
+\item{model}{(a model object, e.g. \code{glm})\cr
 A model object.}
 }
 \description{

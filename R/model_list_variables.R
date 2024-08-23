@@ -2,7 +2,7 @@
 #'
 #' Including variables used only in an interaction.
 #'
-#' @param x (a model object, e.g. `glm`)\cr
+#' @param model (a model object, e.g. `glm`)\cr
 #' A model object.
 #' @param labels (`list` or `string`)\cr
 #' An optional named list or named vector of

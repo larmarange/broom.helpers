@@ -9,7 +9,7 @@ scope_tidy(x, data = NULL)
 \arguments{
 \item{x}{(\code{data.frame})\cr
 A tidy tibble, with a \code{"variable"} column, as returned by
-\code{\link[=tidy_identify_variables ]{tidy_identify_variables ()}}.}
+\code{\link[=tidy_identify_variables]{tidy_identify_variables()}}.}
 
 \item{data}{(\code{data.frame})\cr
 An optional data frame the attributes will be added to.}

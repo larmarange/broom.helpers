@@ -14,6 +14,9 @@ model_get_pairwise_contrasts(
 )
 }
 \arguments{
+\item{model}{(a model object, e.g. \code{glm})\cr
+A model object.}
+
 \item{variables}{(\code{\link[dplyr:dplyr_tidy_select]{tidy-select}})\cr
 Variables to add pairwise contrasts.}
 
@@ -30,9 +33,6 @@ Level of confidence for confidence intervals (default: 95\%).}
 \item{emmeans_args}{(\code{logical})\cr
 List of additional parameter to pass to
 \code{\link[emmeans:emmeans]{emmeans::emmeans()}} when computing pairwise contrasts.}
-
-\item{x}{(a model object, e.g. \code{glm})\cr
-A model object.}
 }
 \description{
 It is computed with \code{\link[emmeans:emmeans]{emmeans::emmeans()}}.

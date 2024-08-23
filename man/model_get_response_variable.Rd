@@ -10,7 +10,7 @@ model_get_response_variable(model)
 \method{model_get_response_variable}{default}(model)
 }
 \arguments{
-\item{x}{(a model object, e.g. \code{glm})\cr
+\item{model}{(a model object, e.g. \code{glm})\cr
 A model object.}
 }
 \description{

@@ -3,7 +3,7 @@
 #' Return the result of [stats::terms()] applied to the model
 #' or `NULL` if it is not possible to get terms from `model`.
 #'
-#' @param x (a model object, e.g. `glm`)\cr
+#' @param model (a model object, e.g. `glm`)\cr
 #' A model object.
 #' @export
 #' @family model_helpers

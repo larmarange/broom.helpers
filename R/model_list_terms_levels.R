@@ -4,7 +4,7 @@
 #' SAS, sum or successive differences contrasts (cf. [MASS::contr.sdif()]), and
 #' categorical variables with no contrast.
 #'
-#' @param x (a model object, e.g. `glm`)\cr
+#' @param model (a model object, e.g. `glm`)\cr
 #' A model object.
 #' @param label_pattern ([`glue pattern`][glue::glue()])\cr
 #' A [glue pattern][glue::glue()] for term labels (see examples).

@@ -64,7 +64,7 @@ model_get_coefficients_type(model)
 \method{model_get_coefficients_type}{LORgee}(model)
 }
 \arguments{
-\item{x}{(a model object, e.g. \code{glm})\cr
+\item{model}{(a model object, e.g. \code{glm})\cr
 A model object.}
 }
 \description{

@@ -3,7 +3,7 @@
 #' Indicate the type of coefficient among "generic", "logistic",
 #' "poisson", "relative_risk" or "prop_hazard".
 #'
-#' @param x (a model object, e.g. `glm`)\cr
+#' @param model (a model object, e.g. `glm`)\cr
 #' A model object.
 #' @export
 #' @family model_helpers

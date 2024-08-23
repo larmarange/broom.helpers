@@ -10,6 +10,8 @@
 #' Use `tidy_get_model()` to get the model attached to the tibble and
 #' `tidy_detach_model()` to remove the attribute containing the model.
 #' @inheritParams tidy_plus_plus
+#' @param x (`data.frame`)\cr
+#' A tidy tibble as produced by `tidy_*()` functions.
 #' @param model_matrix_attr (`logical`)\cr
 #' Whether model frame and model matrix should be added as attributes of
 #' `model` (respectively named `"model_frame"` and `"model_matrix"`) and

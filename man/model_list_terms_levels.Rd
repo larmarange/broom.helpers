@@ -20,6 +20,9 @@ model_list_terms_levels(
 )
 }
 \arguments{
+\item{model}{(a model object, e.g. \code{glm})\cr
+A model object.}
+
 \item{label_pattern}{(\code{\link[glue:glue]{glue pattern}})\cr
 A \link[glue:glue]{glue pattern} for term labels (see examples).}
 
@@ -30,9 +33,6 @@ custom variable labels passed to \code{\link[=model_list_variables]{model_list_v
 \item{sdif_term_level}{(\code{string})\cr
 For successive differences contrasts, how should term
 levels be named? \code{"diff"} for \code{"B - A"} (default), \code{"ratio"} for \code{"B / A"}.}
-
-\item{x}{(a model object, e.g. \code{glm})\cr
-A model object.}
 }
 \value{
 A tibble with ten columns:

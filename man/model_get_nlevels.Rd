@@ -10,7 +10,7 @@ model_get_nlevels(model)
 \method{model_get_nlevels}{default}(model)
 }
 \arguments{
-\item{x}{(a model object, e.g. \code{glm})\cr
+\item{model}{(a model object, e.g. \code{glm})\cr
 A model object.}
 }
 \value{

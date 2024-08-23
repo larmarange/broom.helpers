@@ -34,7 +34,7 @@ model_get_n(model)
 \method{model_get_n}{tidycrr}(model)
 }
 \arguments{
-\item{x}{(a model object, e.g. \code{glm})\cr
+\item{model}{(a model object, e.g. \code{glm})\cr
 A model object.}
 }
 \description{

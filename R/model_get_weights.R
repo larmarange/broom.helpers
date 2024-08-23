@@ -2,7 +2,7 @@
 #'
 #' This function does not cover `lavaan` models (`NULL` is returned).
 #'
-#' @param x (a model object, e.g. `glm`)\cr
+#' @param model (a model object, e.g. `glm`)\cr
 #' A model object.
 #' @note
 #' For class `svrepglm` objects (GLM on a survey object with replicate weights),

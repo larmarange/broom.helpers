@@ -24,6 +24,9 @@ tidy_get_model(x)
 tidy_detach_model(x)
 }
 \arguments{
+\item{x}{(\code{data.frame})\cr
+A tidy tibble as produced by \verb{tidy_*()} functions.}
+
 \item{model}{(a model object, e.g. \code{glm})\cr
 A model to be attached/tidied.}
 
