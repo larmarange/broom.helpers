@@ -7,14 +7,16 @@
 tidy_ggpredict(x, conf.int = TRUE, conf.level = 0.95, ...)
 }
 \arguments{
-\item{x}{a model}
+\item{x}{(a model object, e.g. \code{glm})\cr
+A model to be tidied.}
 
-\item{conf.int}{logical indicating whether or not to include a confidence
-interval in the tidied output}
+\item{conf.int}{(\code{logical})\cr
+Whether or not to include a confidence interval in the tidied output.}
 
-\item{conf.level}{the confidence level to use for the confidence interval}
+\item{conf.level}{(\code{numeric})\cr
+The confidence level to use for the confidence interval (between \code{0} ans \code{1}).}
 
-\item{...}{additional parameters passed to \code{ggeffects::ggpredict()}}
+\item{...}{Additional parameters passed to \code{ggeffects::ggpredict()}.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}

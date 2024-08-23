@@ -18,8 +18,9 @@ Depends:
     R (>= 4.2)
 Imports: 
     broom (>= 0.8),
+    cards,
     cli,
-    dplyr,
+    dplyr (>= 1.1.0),
     labelled,
     lifecycle,
     purrr,
@@ -49,7 +50,7 @@ Suggests:
     glmmTMB,
     glue,
     gt,
-    gtsummary (>= 1.6.3),
+    gtsummary (>= 2.0.0),
     knitr,
     lavaan,
     lfe,

@@ -21,11 +21,13 @@
 #' @note When applying `margins::margins()`, custom contrasts are ignored.
 #' Treatment contrasts (`stats::contr.treatment()`) are applied to all
 #' categorical variables. Interactions are also ignored.
-#' @param x a model
-#' @param conf.int logical indicating whether or not to include a confidence
-#' interval in the tidied output
-#' @param conf.level the confidence level to use for the confidence interval
-#' @param ... additional parameters passed to `margins::margins()`
+#' @param x (a model object, e.g. `glm`)\cr
+#' A model to be tidied.
+#' @param conf.int (`logical`)\cr
+#' Whether or not to include a confidence interval in the tidied output.
+#' @param conf.level (`numeric`)\cr
+#' The confidence level to use for the confidence interval (between `0` ans `1`).
+#' @param ... Additional parameters passed to `margins::margins()`.
 #' @family marginal_tieders
 #' @seealso `margins::margins()`
 #' @export
@@ -78,11 +80,13 @@ tidy_margins <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 #' @note
 #' If the model contains interactions, `effects::allEffects()` will return
 #' marginal predictions for the different levels of the interactions.
-#' @param x a model
-#' @param conf.int logical indicating whether or not to include a confidence
-#' interval in the tidied output
-#' @param conf.level the confidence level to use for the confidence interval
-#' @param ... additional parameters passed to `effects::allEffects()`
+#' @param x (a model object, e.g. `glm`)\cr
+#' A model to be tidied.
+#' @param conf.int (`logical`)\cr
+#' Whether or not to include a confidence interval in the tidied output.
+#' @param conf.level (`numeric`)\cr
+#' The confidence level to use for the confidence interval (between `0` ans `1`).
+#' @param ... Additional parameters passed to `effects::allEffects()`.
 #' @family marginal_tieders
 #' @seealso `effects::allEffects()`
 #' @export
@@ -189,11 +193,13 @@ effpoly_to_df <- function(x) {
 #' @note
 #' By default, `ggeffects::ggpredict()` estimates marginal predictions for each
 #' individual variable, regardless of eventual interactions.
-#' @param x a model
-#' @param conf.int logical indicating whether or not to include a confidence
-#' interval in the tidied output
-#' @param conf.level the confidence level to use for the confidence interval
-#' @param ... additional parameters passed to `ggeffects::ggpredict()`
+#' @param x (a model object, e.g. `glm`)\cr
+#' A model to be tidied.
+#' @param conf.int (`logical`)\cr
+#' Whether or not to include a confidence interval in the tidied output.
+#' @param conf.level (`numeric`)\cr
+#' The confidence level to use for the confidence interval (between `0` ans `1`).
+#' @param ... Additional parameters passed to `ggeffects::ggpredict()`.
 #' @family marginal_tieders
 #' @seealso `ggeffects::ggpredict()`
 #' @export
@@ -258,12 +264,14 @@ tidy_ggpredict <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 #' `marginaleffects::avg_slopes()`.
 #'
 #' For more information, see `vignette("marginal_tidiers", "broom.helpers")`.
-#' @param x a model
-#' @param conf.int logical indicating whether or not to include a confidence
-#' interval in the tidied output
-#' @param conf.level the confidence level to use for the confidence interval
-#' @param ... additional parameters passed to
-#' `marginaleffects::avg_slopes()`
+#' @param x (a model object, e.g. `glm`)\cr
+#' A model to be tidied.
+#' @param conf.int (`logical`)\cr
+#' Whether or not to include a confidence interval in the tidied output.
+#' @param conf.level (`numeric`)\cr
+#' The confidence level to use for the confidence interval (between `0` ans `1`).
+#' @param ... Additional parameters passed to
+#' `marginaleffects::avg_slopes()`.
 #' @family marginal_tieders
 #' @seealso `marginaleffects::avg_slopes()`
 #' @export
@@ -344,12 +352,14 @@ tidy_avg_slopes <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 #'
 #' See also `tidy_marginal_contrasts()` for taking into account interactions.
 #' For more information, see `vignette("marginal_tidiers", "broom.helpers")`.
-#' @param x a model
-#' @param conf.int logical indicating whether or not to include a confidence
-#' interval in the tidied output
-#' @param conf.level the confidence level to use for the confidence interval
-#' @param ... additional parameters passed to
-#' `marginaleffects::avg_comparisons()`
+#' @param x (a model object, e.g. `glm`)\cr
+#' A model to be tidied.
+#' @param conf.int (`logical`)\cr
+#' Whether or not to include a confidence interval in the tidied output.
+#' @param conf.level (`numeric`)\cr
+#' The confidence level to use for the confidence interval (between `0` ans `1`).
+#' @param ... Additional parameters passed to
+#' `marginaleffects::avg_comparisons()`.
 #' @family marginal_tieders
 #' @seealso `marginaleffects::avg_comparisons()`
 #' @export
@@ -436,12 +446,14 @@ tidy_avg_comparisons <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 #' are defined only for categorical variables.
 #'
 #' For more information, see `vignette("marginal_tidiers", "broom.helpers")`.
-#' @param x a model
-#' @param conf.int logical indicating whether or not to include a confidence
-#' interval in the tidied output
-#' @param conf.level the confidence level to use for the confidence interval
-#' @param ... additional parameters passed to
-#' `marginaleffects::marginal_means()`
+#' @param x (a model object, e.g. `glm`)\cr
+#' A model to be tidied.
+#' @param conf.int (`logical`)\cr
+#' Whether or not to include a confidence interval in the tidied output.
+#' @param conf.level (`numeric`)\cr
+#' The confidence level to use for the confidence interval (between `0` ans `1`).
+#' @param ... Additional parameters passed to
+#' `marginaleffects::marginal_means()`.
 #' @family marginal_tieders
 #' @seealso `marginaleffects::marginal_means()`
 #' @export
@@ -551,16 +563,19 @@ tidy_marginal_means <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 #' plots that could be combined with `patchwork::wrap_plots()` (see examples).
 #'
 #' For more information, see `vignette("marginal_tidiers", "broom.helpers")`.
-#' @param x a model
-#' @param variables_list a list whose elements will be sequentially passed to
+#' @param x (a model object, e.g. `glm`)\cr
+#' A model to be tidied.
+#' @param variables_list (`list` or `string`)\cr
+#' A list whose elements will be sequentially passed to
 #' `variables` in `marginaleffects::avg_predictions()` (see details below);
 #' alternatively, it could also be the string `"auto"` (default) or
-#' `"no_interaction"`
-#' @param conf.int logical indicating whether or not to include a confidence
-#' interval in the tidied output
-#' @param conf.level the confidence level to use for the confidence interval
-#' @param ... additional parameters passed to
-#' `marginaleffects::avg_predictions()`
+#' `"no_interaction"`.
+#' @param conf.int (`logical`)\cr
+#' Whether or not to include a confidence interval in the tidied output.
+#' @param conf.level (`numeric`)\cr
+#' The confidence level to use for the confidence interval (between `0` ans `1`).
+#' @param ... Additional parameters passed to
+#' `marginaleffects::avg_predictions()`.
 #' @family marginal_tieders
 #' @seealso `marginaleffects::avg_predictions()`
 #' @export
@@ -692,11 +707,15 @@ tidy_marginal_predictions <- function(x, variables_list = "auto",
 }
 
 #' @export
-#' @param model a model
-#' @param interactions should combinations of variables corresponding to
+#' @param model (a model object, e.g. `glm`)\cr
+#' A model.
+#' @param interactions (`logical`)\cr
+#' Should combinations of variables corresponding to
 #' interactions be returned?
-#' @param categorical default value for categorical variables
-#' @param continuous default value for continuous variables
+#' @param categorical ([`predictor values`][marginaleffects::predictions()])\cr
+#' Default values for categorical variables.
+#' @param continuous ([`predictor values`][marginaleffects::predictions()])\cr
+#' Default values for continuous variables.
 #' @rdname tidy_marginal_predictions
 variables_to_predict <- function(model, interactions = TRUE,
                                  categorical = unique,
@@ -910,16 +929,19 @@ plot_marginal_predictions <- function(x, variables_list = "auto",
 #' see the help file of `marginaleffects::avg_comparisons()`.
 #'
 #' For more information, see `vignette("marginal_tidiers", "broom.helpers")`.
-#' @param x a model
-#' @param variables_list a list whose elements will be sequentially passed to
+#' @param x (a model object, e.g. `glm`)\cr
+#' A model to be tidied.
+#' @param variables_list (`list` or `string`)\cr
+#' A list whose elements will be sequentially passed to
 #' `variables` in `marginaleffects::avg_comparisons()` (see details below);
 #' alternatively, it could also be the string `"auto"` (default), `"cross"` or
 #' `"no_interaction"`
-#' @param conf.int logical indicating whether or not to include a confidence
-#' interval in the tidied output
-#' @param conf.level the confidence level to use for the confidence interval
-#' @param ... additional parameters passed to
-#' `marginaleffects::avg_comparisons()`
+#' @param conf.int (`logical`)\cr
+#' Whether or not to include a confidence interval in the tidied output.
+#' @param conf.level (`numeric`)\cr
+#' The confidence level to use for the confidence interval (between `0` ans `1`).
+#' @param ... Additional parameters passed to
+#' `marginaleffects::avg_comparisons()`.
 #' @family marginal_tieders
 #' @seealso `marginaleffects::avg_comparisons()`, `tidy_avg_comparisons()`
 #' @export
@@ -1094,16 +1116,22 @@ tidy_marginal_contrasts <- function(x, variables_list = "auto",
 }
 
 #' @export
-#' @param model a model
-#' @param interactions should combinations of variables corresponding to
-#' interactions be returned?
-#' @param cross if `interaction` is `TRUE`, should "cross-contrasts" be
+#' @param model (a model object, e.g. `glm`)\cr
+#' A model.
+#' @param interactions (`logical`)\cr
+#' Should combinations of variables corresponding to interactions be returned?
+#' @param cross (`logical`)\cr
+#' If `interaction` is `TRUE`, should "cross-contrasts" be
 #' computed? (if `FALSE`, only the last term of an interaction is passed to
 #' `variable` and the other terms are passed to `by`)
-#' @param var_categorical default `variable` value for categorical variables
-#' @param var_continuous default `variable` value for continuous variables
-#' @param by_categorical default `by` value for categorical variables
-#' @param by_continuous default `by` value for continuous variables
+#' @param var_categorical ([`predictor values`][marginaleffects::comparisons()])\cr
+#' Default `variable` value for categorical variables.
+#' @param var_continuous ([`predictor values`][marginaleffects::comparisons()])\cr
+#' Default `variable` value for continuous variables.
+#' @param by_categorical ([`predictor values`][marginaleffects::comparisons()])\cr
+#' Default `by` value for categorical variables.
+#' @param by_continuous ([`predictor values`][marginaleffects::comparisons()])\cr
+#' Default `by` value for continuous variables.
 #' @rdname tidy_marginal_contrasts
 variables_to_contrast <- function(model,
                                   interactions = TRUE,

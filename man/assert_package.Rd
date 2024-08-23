@@ -21,22 +21,28 @@
 .get_min_version_required(pkg, pkg_search = "broom.helpers")
 }
 \arguments{
-\item{pkg}{Package required}
+\item{pkg}{(\code{string})\cr
+Name of the required package.}
 
-\item{fn}{Calling function from the user perspective. Used to write
+\item{fn}{(\code{string})\cr
+Name of the calling function from the user perspective. Used to write
 informative error messages.}
 
-\item{pkg_search}{the package the function will search for a minimum
+\item{pkg_search}{(\code{string})\cr
+Name of the package the function will search for a minimum
 required version from.}
 
-\item{boolean}{logical indicating whether to return a \code{TRUE}/\code{FALSE}, rather
+\item{boolean}{(\code{logical})\cr
+Whether to return a \code{TRUE}/\code{FALSE}, rather
 than error when package/package version not available. Default is \code{FALSE},
 which will return an error if \code{pkg} is not installed.}
 
-\item{remove_duplicates}{if several versions of a package are installed,
+\item{remove_duplicates}{(\code{logical})\cr
+If several versions of a package are installed,
 should only the first one be returned?}
 
-\item{lib.loc}{location of \code{R} library trees to search through, see
+\item{lib.loc}{(\code{string})\cr
+Location of \code{R} library trees to search through, see
 \code{utils::installed.packages()}.}
 }
 \value{

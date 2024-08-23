@@ -7,12 +7,13 @@
 .clean_backticks(x, variable_names = x)
 }
 \arguments{
-\item{x}{a character vector to be cleaned}
+\item{x}{(\code{string})\cr
+A character vector to be cleaned.}
 
-\item{variable_names}{list of variable names,
-could be obtained with
-\link[=model_list_variables]{model_list_variables(only_variable = TRUE)}
-to properly take into account interaction only terms/variables}
+\item{variable_names}{(\code{string})\cr
+Optional vector of variable names, could be obtained with
+\link[=model_list_variables]{model_list_variables(only_variable = TRUE)},
+to properly take into account interaction only terms/variables.}
 }
 \description{
 Remove backticks around variable names

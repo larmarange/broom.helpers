@@ -1,9 +1,27 @@
 # broom.helpers (development version)
 
+**Documentation**
+
+- Documentation has been improved, showing now clearly the type expected
+  for each argument (#272)
+  
+**Deprecated functions and changes in selectors functions**
+
+- selectors such as `all_categorical()` are now compatible with `gtsummary`
+  version ≥ 2.0.0 (#270)
+- new function `scope_tidy()` to scope a tidy tibble allowing
+  to tidy select (#270)
+- `.select_to_varnames()`, `.formula_list_to_named_list()`,
+  `.generic_selector()` and `.is_selector_scoped()` are now deprecated and
+  will be removed in a future release: you may consider
+  `cards::process_selectors()` and `cards::process_formula_selectors()` as
+  alternatives (#270)
+
 **Fixes**
 
 - `model_get_model_frame.coxph()` has been fixed to return a correct model
   frame a subject identifier is passed to `survival::coxph()` (#268)
+
 
 # broom.helpers 1.16.0
 
@@ -39,6 +57,7 @@
   (#260 @jackmwolf)
 - `tidy_marginal_predictions()` has been updated to avoid the use of the
   deprecated function `marginaleffects::datagridcf()` (#256)
+  
 
 # broom.helpers 1.15.0
 

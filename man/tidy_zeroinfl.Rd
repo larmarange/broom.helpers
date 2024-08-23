@@ -7,17 +7,19 @@
 tidy_zeroinfl(x, conf.int = TRUE, conf.level = 0.95, component = NULL, ...)
 }
 \arguments{
-\item{x}{a \code{pscl::zeroinfl()} or a \code{pscl::hurdle()} model}
+\item{x}{(\code{zeroinfl} or \code{hurdle})\cr
+A \code{pscl::zeroinfl()} or a \code{pscl::hurdle()} model.}
 
-\item{conf.int}{logical indicating whether or not to include a confidence
-interval in the tidied output}
+\item{conf.int}{(\code{logical})\cr
+Whether or not to include a confidence interval in the tidied output.}
 
-\item{conf.level}{the confidence level to use for the confidence interval}
+\item{conf.level}{(\code{numeric})\cr
+The confidence level to use for the confidence interval (between \code{0} ans \code{1}).}
 
-\item{component}{\code{NULL} or one of \code{"all"}, \code{"conditional"}, \code{"zi"}, or
-\code{"zero_inflated"}}
+\item{component}{(\code{string})\cr
+\code{NULL} or one of \code{"all"}, \code{"conditional"}, \code{"zi"}, or \code{"zero_inflated"}.}
 
-\item{...}{additional parameters passed to \code{parameters::model_parameters()}}
+\item{...}{Additional parameters passed to \code{parameters::model_parameters()}.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}

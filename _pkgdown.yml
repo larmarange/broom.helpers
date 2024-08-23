@@ -71,6 +71,7 @@ reference:
   - title: Variable type selectors
   - contents:
       - starts_with("all_")
+      - scope_tidy
 
   - title: Exported utility functions
   - contents:

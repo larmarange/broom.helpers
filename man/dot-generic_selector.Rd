@@ -23,9 +23,10 @@ This helps with error messaging.}
 custom selector functions
 }
 \description{
-Generate a custom selector function
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 }
 \details{
 \code{.is_selector_scoped()} checks if a selector has been properly registered
 in \code{env_variable_type$df_var_info}.
 }
+\keyword{internal}

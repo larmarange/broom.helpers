@@ -31,7 +31,13 @@ variable. Default is \code{FALSE}}
 A character vector of variable names
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}\cr
+This function will soon be removed from \code{broom.helpers}. Please consider
+\code{\link[cards:process_selectors]{cards::process_selectors()}} as an alternative.
+}
+\details{
 Function takes \code{select()}-like inputs and converts the selector to
 a character vector of variable names. Functions accepts tidyselect syntax,
 and additional selector functions defined within the package
 }
+\keyword{internal}

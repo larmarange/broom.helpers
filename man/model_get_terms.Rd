@@ -24,7 +24,8 @@ model_get_terms(model)
 \method{model_get_terms}{betareg}(model)
 }
 \arguments{
-\item{model}{a model object}
+\item{model}{(a model object, e.g. \code{glm})\cr
+A model object.}
 }
 \description{
 Return the result of \code{\link[stats:terms]{stats::terms()}} applied to the model

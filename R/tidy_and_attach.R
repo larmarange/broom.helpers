@@ -9,20 +9,16 @@
 #'
 #' Use `tidy_get_model()` to get the model attached to the tibble and
 #' `tidy_detach_model()` to remove the attribute containing the model.
-#' @param model a model to be attached/tidied
-#' @param x a tibble of model terms
-#' @param tidy_fun option to specify a custom tidier function
-#' @param conf.int logical indicating whether or not to include a confidence
-#' interval in the tidied output
-#' @param conf.level level of confidence for confidence intervals (default: 95%)
-#' @param exponentiate logical indicating whether or not to exponentiate the
-#' coefficient estimates. This is typical for logistic, Poisson and Cox models,
-#' but a bad idea if there is no log or logit link; defaults to `FALSE`
-#' @param model_matrix_attr logical indicating whether model frame and model
-#' matrix should be added as attributes of `model` (respectively named
-#' `"model_frame"` and `"model_matrix"`) and passed through
-#' @param .attributes named list of additional attributes to be attached to `x`
-#' @param ... other arguments passed to `tidy_fun()`
+#' @inheritParams tidy_plus_plus
+#' @param x (`data.frame`)\cr
+#' A tidy tibble as produced by `tidy_*()` functions.
+#' @param model_matrix_attr (`logical`)\cr
+#' Whether model frame and model matrix should be added as attributes of
+#' `model` (respectively named `"model_frame"` and `"model_matrix"`) and
+#' passed through
+#' @param .attributes (`list`)\cr
+#' Named list of additional attributes to be attached to `x`.
+#' @param ... Other arguments passed to `tidy_fun()`.
 #' @family tidy_helpers
 #' @examples
 #' mod <- lm(Sepal.Length ~ Sepal.Width + Species, data = iris)

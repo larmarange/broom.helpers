@@ -7,9 +7,11 @@
 tidy_add_n(x, model = tidy_get_model(x))
 }
 \arguments{
-\item{x}{a tidy tibble}
+\item{x}{(\code{data.frame})\cr
+A tidy tibble as produced by \verb{tidy_*()} functions.}
 
-\item{model}{the corresponding model, if not attached to \code{x}}
+\item{model}{(a model object, e.g. \code{glm})\cr
+The corresponding model, if not attached to \code{x}.}
 }
 \description{
 Add the number of observations in a new column \code{n_obs}, taking into account any

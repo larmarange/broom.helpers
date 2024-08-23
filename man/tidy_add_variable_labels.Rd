@@ -8,26 +8,21 @@ tidy_add_variable_labels(
   x,
   labels = NULL,
   interaction_sep = " * ",
-  model = tidy_get_model(x),
-  quiet = FALSE,
-  strict = FALSE
+  model = tidy_get_model(x)
 )
 }
 \arguments{
-\item{x}{a tidy tibble}
+\item{x}{(\code{data.frame})\cr
+A tidy tibble as produced by \verb{tidy_*()} functions.}
 
-\item{labels}{an optional named list or named vector of
-custom variable labels}
+\item{labels}{(\code{\link[gtsummary:syntax]{formula-list-selector}})\cr
+An optional named list or a named vector of custom variable labels.}
 
-\item{interaction_sep}{separator for interaction terms}
+\item{interaction_sep}{(\code{string})\cr
+Separator for interaction terms.}
 
-\item{model}{the corresponding model, if not attached to \code{x}}
-
-\item{quiet}{logical argument whether broom.helpers should not return
-a message when requested output cannot be generated. Default is \code{FALSE}}
-
-\item{strict}{logical argument whether broom.helpers should return an error
-when requested output cannot be generated. Default is \code{FALSE}}
+\item{model}{(a model object, e.g. \code{glm})\cr
+The corresponding model, if not attached to \code{x}.}
 }
 \description{
 Will add variable labels in a \code{var_label} column, based on:
@@ -58,9 +53,9 @@ glm(Survived ~ Class * Age * Sex, data = df, weights = df$n, family = binomial) 
   tidy_and_attach() |>
   tidy_add_variable_labels(
     labels = list(
-      "(Intercept)" = "Custom intercept",
-      Sex = "Gender",
-      "Class:Age" = "Custom label"
+      "(Intercept)" ~ "Custom intercept",
+      Sex ~ "Gender",
+      "Class:Age" ~ "Custom label"
     )
   )
 }

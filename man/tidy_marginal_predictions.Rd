@@ -24,29 +24,36 @@ variables_to_predict(
 plot_marginal_predictions(x, variables_list = "auto", conf.level = 0.95, ...)
 }
 \arguments{
-\item{x}{a model}
+\item{x}{(a model object, e.g. \code{glm})\cr
+A model to be tidied.}
 
-\item{variables_list}{a list whose elements will be sequentially passed to
+\item{variables_list}{(\code{list} or \code{string})\cr
+A list whose elements will be sequentially passed to
 \code{variables} in \code{marginaleffects::avg_predictions()} (see details below);
 alternatively, it could also be the string \code{"auto"} (default) or
-\code{"no_interaction"}}
+\code{"no_interaction"}.}
 
-\item{conf.int}{logical indicating whether or not to include a confidence
-interval in the tidied output}
+\item{conf.int}{(\code{logical})\cr
+Whether or not to include a confidence interval in the tidied output.}
 
-\item{conf.level}{the confidence level to use for the confidence interval}
+\item{conf.level}{(\code{numeric})\cr
+The confidence level to use for the confidence interval (between \code{0} ans \code{1}).}
 
-\item{...}{additional parameters passed to
-\code{marginaleffects::avg_predictions()}}
+\item{...}{Additional parameters passed to
+\code{marginaleffects::avg_predictions()}.}
 
-\item{model}{a model}
+\item{model}{(a model object, e.g. \code{glm})\cr
+A model.}
 
-\item{interactions}{should combinations of variables corresponding to
+\item{interactions}{(\code{logical})\cr
+Should combinations of variables corresponding to
 interactions be returned?}
 
-\item{categorical}{default value for categorical variables}
+\item{categorical}{(\code{\link[marginaleffects:predictions]{predictor values}})\cr
+Default values for categorical variables.}
 
-\item{continuous}{default value for continuous variables}
+\item{continuous}{(\code{\link[marginaleffects:predictions]{predictor values}})\cr
+Default values for continuous variables.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}

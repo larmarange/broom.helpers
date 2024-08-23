@@ -19,7 +19,8 @@ model_get_contrasts(model)
 \method{model_get_contrasts}{betareg}(model)
 }
 \arguments{
-\item{model}{a model object}
+\item{model}{(a model object, e.g. \code{glm})\cr
+A model object.}
 }
 \description{
 Get contrasts used in the model

@@ -18,12 +18,13 @@
 #'
 #' If the `label` column is not yet available in `x`,
 #' [tidy_add_term_labels()] will be automatically applied.
-#' @param x a tidy tibble
-#' @param show_single_row a vector indicating the names of binary
-#' variables that should be displayed on a single row.
-#' Accepts [tidyselect][dplyr::select] syntax. Default is `NULL`.
-#' See also [all_dichotomous()]
-#' @param model the corresponding model, if not attached to `x`
+#' @param x (`data.frame`)\cr
+#' A tidy tibble as produced by `tidy_*()` functions.
+#' @param show_single_row ([`tidy-select`][dplyr::dplyr_tidy_select])\cr
+#' Names of dichotomous variables that should be displayed on a single row.
+#' See also [all_dichotomous()].
+#' @param model (a model object, e.g. `glm`)\cr
+#' The corresponding model, if not attached to `x`.
 #' @inheritParams tidy_plus_plus
 #' @export
 #' @family tidy_helpers
@@ -91,10 +92,9 @@ tidy_add_header_rows <- function(x,
   # if reference_rows have been defined, removal of reference row
   variables_to_simplify <- NULL
   # obtain character vector of selected variables
-  show_single_row <- .select_to_varnames(
-    {{ show_single_row }},
-    var_info = x,
-    arg_name = "show_single_row"
+  cards::process_selectors(
+    data = scope_tidy(x),
+    show_single_row = {{ show_single_row }}
   )
 
   has_reference_row <- "reference_row" %in% names(x)

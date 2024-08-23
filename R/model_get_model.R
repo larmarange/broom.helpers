@@ -4,7 +4,8 @@
 #' model objects that store the proper object internally (e.g. mice models).
 #' This function extracts that model object in those cases.
 #'
-#' @param model a model object
+#' @param model (a model object, e.g. `glm`)\cr
+#' A model object.
 #' @export
 #' @family model_helpers
 #' @examples

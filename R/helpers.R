@@ -2,7 +2,8 @@
 #' meaning in a regular expression
 #'
 #' This functions has been adapted from `Hmisc::escapeRegex()`
-#' @param string a character vector
+#' @param string (`string`)\cr
+#' A character vector.
 #' @export
 #' @family other_helpers
 .escape_regex <- function(string) {
@@ -12,16 +13,14 @@
   )
 }
 
-
-
 #' Remove backticks around variable names
 #'
-#' @param x a character vector to be cleaned
-#' @param variable_names list of variable names,
-#' could be obtained with
-#' [model_list_variables(only_variable = TRUE)][model_list_variables()]
-#' to properly take into account interaction only terms/variables
-#'
+#' @param x (`string`)\cr
+#' A character vector to be cleaned.
+#' @param variable_names (`string`)\cr
+#' Optional vector of variable names, could be obtained with
+#' [model_list_variables(only_variable = TRUE)][model_list_variables()],
+#' to properly take into account interaction only terms/variables.
 #' @export
 #' @family other_helpers
 .clean_backticks <- function(x, variable_names = x) {

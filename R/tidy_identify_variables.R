@@ -19,8 +19,10 @@
 #'
 #' For dichotomous and categorical variables, `var_nlevels` corresponds to the number
 #' of original levels in the corresponding variables.
-#' @param x a tidy tibble
-#' @param model the corresponding model, if not attached to `x`
+#' @param x (`data.frame`)\cr
+#' A tidy tibble as produced by `tidy_*()` functions.
+#' @param model (a model object, e.g. `glm`)\cr
+#' The corresponding model, if not attached to `x`.
 #' @inheritParams tidy_plus_plus
 #' @export
 #' @seealso [model_identify_variables()]

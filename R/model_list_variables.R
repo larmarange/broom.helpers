@@ -2,12 +2,15 @@
 #'
 #' Including variables used only in an interaction.
 #'
-#' @param model a model object
-#' @param labels an optional named list or named vector of
-#' custom variable labels
-#' @param only_variable if `TRUE`, will return only "variable"
-#' column
-#' @param add_var_type if `TRUE`, add `var_nlevels` and `var_type` columns
+#' @param model (a model object, e.g. `glm`)\cr
+#' A model object.
+#' @param labels (`list` or `string`)\cr
+#' An optional named list or named vector of
+#' custom variable labels.
+#' @param only_variable (`logical`)\cr
+#' If `TRUE`, will return only "variable" column.
+#' @param add_var_type (`logical`)\cr
+#' If `TRUE`, add `var_nlevels` and `var_type` columns.
 #' @return
 #' A tibble with three columns:
 #' * `variable`: the corresponding variable

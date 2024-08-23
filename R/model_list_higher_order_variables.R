@@ -1,6 +1,7 @@
 #' List higher order variables of a model
 #'
-#' @param model a model object
+#' @param model (a model object, e.g. `glm`)\cr
+#' A model object.
 #' @export
 #' @family model_helpers
 #' @examples

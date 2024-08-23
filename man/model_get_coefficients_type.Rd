@@ -64,7 +64,8 @@ model_get_coefficients_type(model)
 \method{model_get_coefficients_type}{LORgee}(model)
 }
 \arguments{
-\item{model}{a model object}
+\item{model}{(a model object, e.g. \code{glm})\cr
+A model object.}
 }
 \description{
 Indicate the type of coefficient among "generic", "logistic",

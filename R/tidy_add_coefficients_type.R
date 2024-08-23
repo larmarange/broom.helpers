@@ -5,11 +5,13 @@
 #' as attributes to `x` (respectively
 #' named `coefficients_type` and `coefficients_label`).
 #'
-#' @param x a tidy tibble
-#' @param exponentiate logical indicating whether or not to exponentiate the
-#' coefficient estimates. It should be consistent with the original call to
-#' [broom::tidy()]
-#' @param model the corresponding model, if not attached to `x`
+#' @param x (`data.frame`)\cr
+#' A tidy tibble as produced by `tidy_*()` functions.
+#' @param exponentiate (`logical`)\cr
+#' Whether or not to exponentiate the coefficient estimates. It should be
+#' consistent with the original call to [broom::tidy()].
+#' @param model (a model object, e.g. `glm`)\cr
+#' The corresponding model, if not attached to `x`.
 #' @export
 #' @family tidy_helpers
 #' @examples

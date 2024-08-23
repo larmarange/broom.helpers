@@ -7,14 +7,16 @@
 tidy_select_variables(x, include = everything(), model = tidy_get_model(x))
 }
 \arguments{
-\item{x}{a tidy tibble}
+\item{x}{(\code{data.frame})\cr
+A tidy tibble as produced by \verb{tidy_*()} functions.}
 
-\item{include}{variables to include. Accepts \link[dplyr:select]{tidyselect}
-syntax. Use \code{-} to remove a variable. Default is \code{everything()}.
+\item{include}{(\code{\link[dplyr:dplyr_tidy_select]{tidy-select}})\cr
+Variables to include. Default is \code{everything()}.
 See also \code{\link[=all_continuous]{all_continuous()}}, \code{\link[=all_categorical]{all_categorical()}}, \code{\link[=all_dichotomous]{all_dichotomous()}}
-and \code{\link[=all_interaction]{all_interaction()}}}
+and \code{\link[=all_interaction]{all_interaction()}}.}
 
-\item{model}{the corresponding model, if not attached to \code{x}}
+\item{model}{(a model object, e.g. \code{glm})\cr
+The corresponding model, if not attached to \code{x}.}
 }
 \value{
 The \code{x} tibble limited to the included variables (and eventually the intercept),

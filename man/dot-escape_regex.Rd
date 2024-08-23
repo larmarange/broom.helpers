@@ -8,7 +8,8 @@ meaning in a regular expression}
 .escape_regex(string)
 }
 \arguments{
-\item{string}{a character vector}
+\item{string}{(\code{string})\cr
+A character vector.}
 }
 \description{
 This functions has been adapted from \code{Hmisc::escapeRegex()}

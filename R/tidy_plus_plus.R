@@ -17,57 +17,79 @@
 #' * [tidy_add_coefficients_type()]
 #' * [tidy_detach_model()]
 #'
-#' @param model a model to be attached/tidied
-#' @param tidy_fun option to specify a custom tidier function
-#' @param conf.int should confidence intervals be computed? (see [broom::tidy()])
-#' @param conf.level level of confidence for confidence intervals (default: 95%)
-#' @param exponentiate logical indicating whether or not to exponentiate the
-#' coefficient estimates. This is typical for logistic, Poisson and Cox models,
+#' @param model (a model object, e.g. `glm`)\cr
+#' A model to be attached/tidied.
+#' @param tidy_fun (`function`)\cr
+#' Option to specify a custom tidier function.
+#' @param conf.int (`logical`)\cr
+#' Should confidence intervals be computed? (see [broom::tidy()])
+#' @param conf.level (`numeric`)\cr
+#' Level of confidence for confidence intervals (default: 95%).
+#' @param exponentiate (`logical`)\cr
+#' Whether or not to exponentiate the coefficient estimates.
+#' This is typical for logistic, Poisson and Cox models,
 #' but a bad idea if there is no log or logit link; defaults to `FALSE`.
-#' @param model_matrix_attr logical indicating whether model frame and model
-#' matrix should be added as attributes of `model` (respectively named
-#' `"model_frame"` and `"model_matrix"`) and passed through
-#' @param variable_labels a named list or a named vector of custom variable labels
-#' @param term_labels a named list or a named vector of custom term labels
-#' @param interaction_sep separator for interaction terms
-#' @param categorical_terms_pattern a [glue pattern][glue::glue()] for
-#' labels of categorical terms with treatment or sum contrasts
-#' (see [model_list_terms_levels()])
-#' @param disambiguate_terms should terms be disambiguated with
+#' @param model_matrix_attr (`logical`)\cr
+#' Whether model frame and model matrix should be added as attributes of `model`
+#' (respectively named `"model_frame"` and `"model_matrix"`) and passed through.
+#' @param variable_labels ([`formula-list-selector`][gtsummary::syntax])\cr
+#' A named list or a named vector of custom variable labels.
+#' @param term_labels  (`list` or `vector`)\cr
+#' A named list or a named vector of custom term labels.
+#' @param interaction_sep  (`string`)\cr
+#' Separator for interaction terms.
+#' @param categorical_terms_pattern ([`glue pattern`][glue::glue()])\cr
+#' A [glue pattern][glue::glue()] for labels of categorical terms with treatment
+#' or sum contrasts (see [model_list_terms_levels()]).
+#' @param disambiguate_terms  (`logical`)\cr
+#' Should terms be disambiguated with
 #' [tidy_disambiguate_terms()]? (default `TRUE`)
-#' @param disambiguate_sep separator for [tidy_disambiguate_terms()]
-#' @param add_reference_rows should reference rows be added?
-#' @param no_reference_row variables (accepts [tidyselect][dplyr::select] notation)
-#' for those no reference row should be added, when `add_reference_rows = TRUE`
-#' @param add_pairwise_contrasts apply [tidy_add_pairwise_contrasts()]?
-#' `r lifecycle::badge("experimental")`
-#' @param pairwise_variables variables to add pairwise contrasts
-#' (accepts [tidyselect][dplyr::select] notation)
-#' @param keep_model_terms keep original model terms for variables where
+#' @param disambiguate_sep (`string`)\cr
+#' Separator for [tidy_disambiguate_terms()].
+#' @param add_reference_rows (`logical`)\cr
+#' Should reference rows be added?
+#' @param no_reference_row ([`tidy-select`][dplyr::dplyr_tidy_select])\cr
+#' Variables for those no reference row should be added,
+#' when `add_reference_rows = TRUE`.
+#' @param add_pairwise_contrasts (`logical`)\cr
+#' Apply [tidy_add_pairwise_contrasts()]?
+#' @param pairwise_variables ([`tidy-select`][dplyr::dplyr_tidy_select])\cr
+#' Variables to add pairwise contrasts.
+#' @param keep_model_terms (`logical`)\cr
+#' Keep original model terms for variables where
 #' pairwise contrasts are added? (default is `FALSE`)
-#' @param pairwise_reverse determines whether to use `"pairwise"` (if `TRUE`)
-#' or `"revpairwise"` (if `FALSE`), see [emmeans::contrast()]
-#' @param contrasts_adjust optional adjustment method when computing contrasts,
-#' see [emmeans::contrast()] (if `NULL`, use `emmeans` default)
-#' @param emmeans_args list of additional parameter to pass to
-#' [emmeans::emmeans()] when computing pairwise contrasts
-#' @param add_estimate_to_reference_rows should an estimate value be added
-#' to reference rows?
-#' @param add_header_rows should header rows be added?
-#' @param show_single_row variables that should be displayed
-#' on a single row (accepts [tidyselect][dplyr::select] notation), when
-#' `add_header_rows` is `TRUE`
-#' @param add_n should the number of observations be added?
-#' @param intercept should the intercept(s) be included?
+#' @param pairwise_reverse (`logical`)\cr
+#' Determines whether to use `"pairwise"` (if `TRUE`)
+#' or `"revpairwise"` (if `FALSE`), see [emmeans::contrast()].
+#' @param contrasts_adjust (`string`)\cr
+#' Optional adjustment method when computing contrasts,
+#' see [emmeans::contrast()] (if `NULL`, use `emmeans` default).
+#' @param emmeans_args (`list`)\cr
+#' List of additional parameter to pass to
+#' [emmeans::emmeans()] when computing pairwise contrasts.
+#' @param add_estimate_to_reference_rows (`logical`)\cr
+#' Should an estimate value be added to reference rows?
+#' @param add_header_rows (`logical`)\cr
+#' Should header rows be added?
+#' @param show_single_row ([`tidy-select`][dplyr::dplyr_tidy_select])\cr
+#' Variables that should be displayed on a single row,
+#' when `add_header_rows` is `TRUE`.
+#' @param add_n (`logical`)\cr
+#' Should the number of observations be added?
+#' @param intercept (`logical`)\cr
+#' Should the intercept(s) be included?
 #' @inheritParams tidy_select_variables
-#' @param keep_model should the model be kept as an attribute of the final
-#' result?
-#' @param tidy_post_fun custom function applied to the results at the end of
+#' @param keep_model (`logical`)\cr
+#' Should the model be kept as an attribute of the final result?
+#' @param tidy_post_fun (`function`)\cr
+#' Custom function applied to the results at the end of
 #' `tidy_plus_plus()` (see note)
-#' @param quiet logical argument whether broom.helpers should not return
-#' a message when requested output cannot be generated. Default is `FALSE`
-#' @param strict logical argument whether broom.helpers should return an error
-#' when requested output cannot be generated. Default is `FALSE`
+#' @param quiet (`logical`)\cr
+#' Whether `broom.helpers` should not return a message when requested output
+#' cannot be generated. Default is `FALSE`.
+#' @param strict (`logical`)\cr
+#' Whether `broom.helpers` should return an error
+#' when requested output cannot be generated. Default is `FALSE`.
 #' @param ... other arguments passed to `tidy_fun()`
 #' @note
 #' `tidy_post_fun` is applied to the result at the end of `tidy_plus_plus()`
@@ -200,8 +222,7 @@ tidy_plus_plus <- function(model,
   res <- res |>
     tidy_add_variable_labels(
       labels = variable_labels,
-      interaction_sep = interaction_sep,
-      quiet = quiet
+      interaction_sep = interaction_sep
     ) |>
     tidy_add_term_labels(
       labels = term_labels,
@@ -214,7 +235,8 @@ tidy_plus_plus <- function(model,
     res <- res |>
       tidy_add_header_rows(
         show_single_row = {{ show_single_row }},
-        strict = strict, quiet = quiet
+        strict = strict,
+        quiet = quiet
       )
   }
 

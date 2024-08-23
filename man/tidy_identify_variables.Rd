@@ -7,12 +7,15 @@
 tidy_identify_variables(x, model = tidy_get_model(x), quiet = FALSE)
 }
 \arguments{
-\item{x}{a tidy tibble}
+\item{x}{(\code{data.frame})\cr
+A tidy tibble as produced by \verb{tidy_*()} functions.}
 
-\item{model}{the corresponding model, if not attached to \code{x}}
+\item{model}{(a model object, e.g. \code{glm})\cr
+The corresponding model, if not attached to \code{x}.}
 
-\item{quiet}{logical argument whether broom.helpers should not return
-a message when requested output cannot be generated. Default is \code{FALSE}}
+\item{quiet}{(\code{logical})\cr
+Whether \code{broom.helpers} should not return a message when requested output
+cannot be generated. Default is \code{FALSE}.}
 }
 \description{
 \code{tidy_identify_variables()} will add to the tidy tibble

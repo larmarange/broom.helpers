@@ -39,89 +39,111 @@ tidy_plus_plus(
 )
 }
 \arguments{
-\item{model}{a model to be attached/tidied}
+\item{model}{(a model object, e.g. \code{glm})\cr
+A model to be attached/tidied.}
 
-\item{tidy_fun}{option to specify a custom tidier function}
+\item{tidy_fun}{(\code{function})\cr
+Option to specify a custom tidier function.}
 
-\item{conf.int}{should confidence intervals be computed? (see \code{\link[broom:reexports]{broom::tidy()}})}
+\item{conf.int}{(\code{logical})\cr
+Should confidence intervals be computed? (see \code{\link[broom:reexports]{broom::tidy()}})}
 
-\item{conf.level}{level of confidence for confidence intervals (default: 95\%)}
+\item{conf.level}{(\code{numeric})\cr
+Level of confidence for confidence intervals (default: 95\%).}
 
-\item{exponentiate}{logical indicating whether or not to exponentiate the
-coefficient estimates. This is typical for logistic, Poisson and Cox models,
+\item{exponentiate}{(\code{logical})\cr
+Whether or not to exponentiate the coefficient estimates.
+This is typical for logistic, Poisson and Cox models,
 but a bad idea if there is no log or logit link; defaults to \code{FALSE}.}
 
-\item{model_matrix_attr}{logical indicating whether model frame and model
-matrix should be added as attributes of \code{model} (respectively named
-\code{"model_frame"} and \code{"model_matrix"}) and passed through}
+\item{model_matrix_attr}{(\code{logical})\cr
+Whether model frame and model matrix should be added as attributes of \code{model}
+(respectively named \code{"model_frame"} and \code{"model_matrix"}) and passed through.}
 
-\item{variable_labels}{a named list or a named vector of custom variable labels}
+\item{variable_labels}{(\code{\link[gtsummary:syntax]{formula-list-selector}})\cr
+A named list or a named vector of custom variable labels.}
 
-\item{term_labels}{a named list or a named vector of custom term labels}
+\item{term_labels}{(\code{list} or \code{vector})\cr
+A named list or a named vector of custom term labels.}
 
-\item{interaction_sep}{separator for interaction terms}
+\item{interaction_sep}{(\code{string})\cr
+Separator for interaction terms.}
 
-\item{categorical_terms_pattern}{a \link[glue:glue]{glue pattern} for
-labels of categorical terms with treatment or sum contrasts
-(see \code{\link[=model_list_terms_levels]{model_list_terms_levels()}})}
+\item{categorical_terms_pattern}{(\code{\link[glue:glue]{glue pattern}})\cr
+A \link[glue:glue]{glue pattern} for labels of categorical terms with treatment
+or sum contrasts (see \code{\link[=model_list_terms_levels]{model_list_terms_levels()}}).}
 
-\item{disambiguate_terms}{should terms be disambiguated with
+\item{disambiguate_terms}{(\code{logical})\cr
+Should terms be disambiguated with
 \code{\link[=tidy_disambiguate_terms]{tidy_disambiguate_terms()}}? (default \code{TRUE})}
 
-\item{disambiguate_sep}{separator for \code{\link[=tidy_disambiguate_terms]{tidy_disambiguate_terms()}}}
+\item{disambiguate_sep}{(\code{string})\cr
+Separator for \code{\link[=tidy_disambiguate_terms]{tidy_disambiguate_terms()}}.}
 
-\item{add_reference_rows}{should reference rows be added?}
+\item{add_reference_rows}{(\code{logical})\cr
+Should reference rows be added?}
 
-\item{no_reference_row}{variables (accepts \link[dplyr:select]{tidyselect} notation)
-for those no reference row should be added, when \code{add_reference_rows = TRUE}}
+\item{no_reference_row}{(\code{\link[dplyr:dplyr_tidy_select]{tidy-select}})\cr
+Variables for those no reference row should be added,
+when \code{add_reference_rows = TRUE}.}
 
-\item{add_pairwise_contrasts}{apply \code{\link[=tidy_add_pairwise_contrasts]{tidy_add_pairwise_contrasts()}}?
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}}
+\item{add_pairwise_contrasts}{(\code{logical})\cr
+Apply \code{\link[=tidy_add_pairwise_contrasts]{tidy_add_pairwise_contrasts()}}?}
 
-\item{pairwise_variables}{variables to add pairwise contrasts
-(accepts \link[dplyr:select]{tidyselect} notation)}
+\item{pairwise_variables}{(\code{\link[dplyr:dplyr_tidy_select]{tidy-select}})\cr
+Variables to add pairwise contrasts.}
 
-\item{keep_model_terms}{keep original model terms for variables where
+\item{keep_model_terms}{(\code{logical})\cr
+Keep original model terms for variables where
 pairwise contrasts are added? (default is \code{FALSE})}
 
-\item{pairwise_reverse}{determines whether to use \code{"pairwise"} (if \code{TRUE})
-or \code{"revpairwise"} (if \code{FALSE}), see \code{\link[emmeans:contrast]{emmeans::contrast()}}}
+\item{pairwise_reverse}{(\code{logical})\cr
+Determines whether to use \code{"pairwise"} (if \code{TRUE})
+or \code{"revpairwise"} (if \code{FALSE}), see \code{\link[emmeans:contrast]{emmeans::contrast()}}.}
 
-\item{contrasts_adjust}{optional adjustment method when computing contrasts,
-see \code{\link[emmeans:contrast]{emmeans::contrast()}} (if \code{NULL}, use \code{emmeans} default)}
+\item{contrasts_adjust}{(\code{string})\cr
+Optional adjustment method when computing contrasts,
+see \code{\link[emmeans:contrast]{emmeans::contrast()}} (if \code{NULL}, use \code{emmeans} default).}
 
-\item{emmeans_args}{list of additional parameter to pass to
-\code{\link[emmeans:emmeans]{emmeans::emmeans()}} when computing pairwise contrasts}
+\item{emmeans_args}{(\code{list})\cr
+List of additional parameter to pass to
+\code{\link[emmeans:emmeans]{emmeans::emmeans()}} when computing pairwise contrasts.}
 
-\item{add_estimate_to_reference_rows}{should an estimate value be added
-to reference rows?}
+\item{add_estimate_to_reference_rows}{(\code{logical})\cr
+Should an estimate value be added to reference rows?}
 
-\item{add_header_rows}{should header rows be added?}
+\item{add_header_rows}{(\code{logical})\cr
+Should header rows be added?}
 
-\item{show_single_row}{variables that should be displayed
-on a single row (accepts \link[dplyr:select]{tidyselect} notation), when
-\code{add_header_rows} is \code{TRUE}}
+\item{show_single_row}{(\code{\link[dplyr:dplyr_tidy_select]{tidy-select}})\cr
+Variables that should be displayed on a single row,
+when \code{add_header_rows} is \code{TRUE}.}
 
-\item{add_n}{should the number of observations be added?}
+\item{add_n}{(\code{logical})\cr
+Should the number of observations be added?}
 
-\item{intercept}{should the intercept(s) be included?}
+\item{intercept}{(\code{logical})\cr
+Should the intercept(s) be included?}
 
-\item{include}{variables to include. Accepts \link[dplyr:select]{tidyselect}
-syntax. Use \code{-} to remove a variable. Default is \code{everything()}.
+\item{include}{(\code{\link[dplyr:dplyr_tidy_select]{tidy-select}})\cr
+Variables to include. Default is \code{everything()}.
 See also \code{\link[=all_continuous]{all_continuous()}}, \code{\link[=all_categorical]{all_categorical()}}, \code{\link[=all_dichotomous]{all_dichotomous()}}
-and \code{\link[=all_interaction]{all_interaction()}}}
+and \code{\link[=all_interaction]{all_interaction()}}.}
 
-\item{keep_model}{should the model be kept as an attribute of the final
-result?}
+\item{keep_model}{(\code{logical})\cr
+Should the model be kept as an attribute of the final result?}
 
-\item{tidy_post_fun}{custom function applied to the results at the end of
+\item{tidy_post_fun}{(\code{function})\cr
+Custom function applied to the results at the end of
 \code{tidy_plus_plus()} (see note)}
 
-\item{quiet}{logical argument whether broom.helpers should not return
-a message when requested output cannot be generated. Default is \code{FALSE}}
+\item{quiet}{(\code{logical})\cr
+Whether \code{broom.helpers} should not return a message when requested output
+cannot be generated. Default is \code{FALSE}.}
 
-\item{strict}{logical argument whether broom.helpers should return an error
-when requested output cannot be generated. Default is \code{FALSE}}
+\item{strict}{(\code{logical})\cr
+Whether \code{broom.helpers} should return an error
+when requested output cannot be generated. Default is \code{FALSE}.}
 
 \item{...}{other arguments passed to \code{tidy_fun()}}
 }

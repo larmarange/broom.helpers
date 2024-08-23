@@ -19,12 +19,13 @@
 #' [tidy_add_term_labels()] after `tidy_add_reference_rows()`
 #' rather than before. Similarly, it is better to apply
 #' `tidy_add_reference_rows()` before [tidy_add_n()].
-#' @param x a tidy tibble
-#' @param no_reference_row a vector indicating the name of variables
-#' for those no reference row should be added.
-#' Accepts [tidyselect][dplyr::select] syntax. Default is `NULL`.
-#' See also [all_categorical()] and [all_dichotomous()]
-#' @param model the corresponding model, if not attached to `x`
+#' @param x (`data.frame`)\cr
+#' A tidy tibble as produced by `tidy_*()` functions.
+#' @param no_reference_row ([`tidy-select`][dplyr::dplyr_tidy_select])\cr
+#' Variables for those no reference row should be added.
+#' See also [all_categorical()] and [all_dichotomous()].
+#' @param model (a model object, e.g. `glm`)\cr
+#' The corresponding model, if not attached to `x`.
 #' @inheritParams tidy_plus_plus
 #' @export
 #' @family tidy_helpers
@@ -120,10 +121,9 @@ tidy_add_reference_rows <- function(
   }
 
   # obtain character vector of selected variables
-  no_reference_row <- .select_to_varnames(
-    {{ no_reference_row }},
-    var_info = x,
-    arg_name = "no_reference_row"
+  cards::process_selectors(
+    data = scope_tidy(x),
+    no_reference_row = {{ no_reference_row }}
   )
 
   terms_levels <- model_list_terms_levels(model)

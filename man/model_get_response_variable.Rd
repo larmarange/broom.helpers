@@ -10,7 +10,8 @@ model_get_response_variable(model)
 \method{model_get_response_variable}{default}(model)
 }
 \arguments{
-\item{model}{a model object}
+\item{model}{(a model object, e.g. \code{glm})\cr
+A model object.}
 }
 \description{
 Get the name of the response variable

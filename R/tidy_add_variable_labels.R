@@ -12,11 +12,12 @@
 #'
 #' It is possible to pass a custom label for an interaction
 #' term in `labels` (see examples).
-#' @param x a tidy tibble
-#' @param labels an optional named list or named vector of
-#' custom variable labels
-#' @param interaction_sep separator for interaction terms
-#' @param model the corresponding model, if not attached to `x`
+#' @param x (`data.frame`)\cr
+#' A tidy tibble as produced by `tidy_*()` functions.
+#' @param labels ([`formula-list-selector`][gtsummary::syntax])\cr
+#' An optional named list or a named vector of custom variable labels.
+#' @param model (a model object, e.g. `glm`)\cr
+#' The corresponding model, if not attached to `x`.
 #' @inheritParams tidy_plus_plus
 #' @export
 #' @family tidy_helpers
@@ -33,17 +34,15 @@
 #'   tidy_and_attach() |>
 #'   tidy_add_variable_labels(
 #'     labels = list(
-#'       "(Intercept)" = "Custom intercept",
-#'       Sex = "Gender",
-#'       "Class:Age" = "Custom label"
+#'       "(Intercept)" ~ "Custom intercept",
+#'       Sex ~ "Gender",
+#'       "Class:Age" ~ "Custom label"
 #'     )
 #'   )
 tidy_add_variable_labels <- function(x,
                                      labels = NULL,
                                      interaction_sep = " * ",
-                                     model = tidy_get_model(x),
-                                     quiet = FALSE,
-                                     strict = FALSE) {
+                                     model = tidy_get_model(x)) {
   if (is.null(model)) {
     cli::cli_abort(c(
       "{.arg model} is not provided.",
@@ -68,10 +67,12 @@ tidy_add_variable_labels <- function(x,
     x <- x |> tidy_identify_variables(model = model)
   }
 
-  labels <- .formula_list_to_named_list(labels, var_info = x, arg_name = "labels")
-  if (is.list(labels)) {
-    labels <- unlist(labels)
-  }
+  if (is.atomic(labels)) labels <- as.list(labels) # vectors allowed
+  cards::process_formula_selectors(
+    data = scope_tidy(x),
+    labels = labels
+  )
+  labels <- unlist(labels)
 
   # start with the list of terms
   var_labels <- unique(x$term)
@@ -89,16 +90,6 @@ tidy_add_variable_labels <- function(x,
   names(additional_labels) <- variable_list$variable
   var_labels <- var_labels |>
     .update_vector(additional_labels)
-
-  # check if all elements of labels are in x
-  # show a message otherwise
-  not_found <- setdiff(names(labels), names(var_labels))
-  if (length(not_found) > 0 && !quiet) {
-    cli_alert_danger("{.code {not_found}} terms have not been found in {.code x}.")
-  }
-  if (length(not_found) > 0 && strict) {
-    cli::cli_abort("Incorrect call with `labels=`. Quitting execution.", call = NULL)
-  }
 
   var_labels <- var_labels |>
     .update_vector(labels)

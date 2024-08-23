@@ -1,6 +1,7 @@
 #' List contrasts used by a model
 #'
-#' @param model a model object
+#' @param model (a model object, e.g. `glm`)\cr
+#' A model object.
 #' @return
 #' A tibble with three columns:
 #' * `variable`: variable name

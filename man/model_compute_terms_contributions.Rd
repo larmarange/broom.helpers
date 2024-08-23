@@ -10,7 +10,8 @@ model_compute_terms_contributions(model)
 \method{model_compute_terms_contributions}{default}(model)
 }
 \arguments{
-\item{model}{a model object}
+\item{model}{(a model object, e.g. \code{glm})\cr
+A model object.}
 }
 \description{
 Used for \code{\link[=model_get_n]{model_get_n()}}. For each row and term, equal 1 if this row should

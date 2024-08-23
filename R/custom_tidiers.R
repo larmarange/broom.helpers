@@ -2,11 +2,13 @@
 #'
 #' Use [parameters::model_parameters()] to tidy a model and apply
 #' `parameters::standardize_names(style = "broom")` to the output
-#' @param x a model
-#' @param conf.int logical indicating whether or not to include a confidence
-#' interval in the tidied output
-#' @param conf.level the confidence level to use for the confidence interval
-#' @param ... additional parameters passed to [parameters::model_parameters()]
+#' @param x (a model object, e.g. `glm`)\cr
+#' A model to be tidied.
+#' @param conf.int (`logical`)\cr
+#' Whether or not to include a confidence interval in the tidied output.
+#' @param conf.level (`numeric`)\cr
+#' The confidence level to use for the confidence interval (between `0` ans `1`).
+#' @param ... Additional parameters passed to [parameters::model_parameters()].
 #' @note
 #' For [betareg::betareg()], the component column in the results is standardized
 #' with [broom::tidy()], using `"mean"` and `"precision"` values.
@@ -71,12 +73,14 @@ tidy_parameters <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 #'
 #' Try to tidy a model with `broom::tidy()`. If it fails, will try to tidy the
 #' model using `parameters::model_parameters()` through `tidy_parameters()`.
-#' @param x a model
-#' @param conf.int logical indicating whether or not to include a confidence
-#' interval in the tidied output
-#' @param conf.level the confidence level to use for the confidence interval
-#' @param ... additional parameters passed to `broom::tidy()` or
-#' `parameters::model_parameters()`
+#' @param x (a model object, e.g. `glm`)\cr
+#' A model to be tidied.
+#' @param conf.int (`logical`)\cr
+#' Whether or not to include a confidence interval in the tidied output.
+#' @param conf.level (`numeric`)\cr
+#' The confidence level to use for the confidence interval (between `0` ans `1`).
+#' @param ... Additional parameters passed to `broom::tidy()` or
+#' `parameters::model_parameters()`.
 #' @export
 #' @family custom_tieders
 tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, ...) {
@@ -239,8 +243,9 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
 
 #' Tidy with `broom::tidy()` and checks that all arguments are used
 #'
-#' @param x a model to tidy
-#' @param ... additional parameters passed to `broom::tidy()`
+#' @param x (a model object, e.g. `glm`)\cr
+#' A model to be tidied.
+#' @param ... Additional parameters passed to `broom::tidy()`.
 #' @family custom_tieders
 #' @export
 tidy_broom <- function(x, ...) {
@@ -254,11 +259,13 @@ tidy_broom <- function(x, ...) {
 #' A tidier for models generated with `multgee::nomLORgee()` or `multgee::ordLORgee()`.
 #' Term names will be updated to be consistent with generic models. The original
 #' term names are preserved in an `"original_term"` column.
-#' @param x a `multgee::nomLORgee()` or a `multgee::ordLORgee()` model
-#' @param conf.int logical indicating whether or not to include a confidence
-#' interval in the tidied output
-#' @param conf.level the confidence level to use for the confidence interval
-#' @param ... additional parameters passed to `parameters::model_parameters()`
+#' @param x (`LORgee`)\cr
+#' A `multgee::nomLORgee()` or a `multgee::ordLORgee()` model.
+#' @param conf.int (`logical`)\cr
+#' Whether or not to include a confidence interval in the tidied output.
+#' @param conf.level (`numeric`)\cr
+#' The confidence level to use for the confidence interval (between `0` ans `1`).
+#' @param ... Additional parameters passed to `parameters::model_parameters()`.
 #' @details
 #' To be noted, for `multgee::nomLORgee()`, the baseline `y` category is the
 #' latest modality of `y`.
@@ -334,13 +341,15 @@ tidy_multgee <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 #' A tidier for models generated with `pscl::zeroinfl()` or `pscl::hurdle()`.
 #' Term names will be updated to be consistent with generic models. The original
 #' term names are preserved in an `"original_term"` column.
-#' @param x a `pscl::zeroinfl()` or a `pscl::hurdle()` model
-#' @param conf.int logical indicating whether or not to include a confidence
-#' interval in the tidied output
-#' @param conf.level the confidence level to use for the confidence interval
-#' @param component `NULL` or one of `"all"`, `"conditional"`, `"zi"`, or
-#' `"zero_inflated"`
-#' @param ... additional parameters passed to `parameters::model_parameters()`
+#' @param x (`zeroinfl` or `hurdle`)\cr
+#' A `pscl::zeroinfl()` or a `pscl::hurdle()` model.
+#' @param conf.int (`logical`)\cr
+#' Whether or not to include a confidence interval in the tidied output.
+#' @param conf.level (`numeric`)\cr
+#' The confidence level to use for the confidence interval (between `0` ans `1`).
+#' @param component (`string`)\cr
+#' `NULL` or one of `"all"`, `"conditional"`, `"zi"`, or `"zero_inflated"`.
+#' @param ... Additional parameters passed to `parameters::model_parameters()`.
 #' @export
 #' @family custom_tieders
 #' @examplesIf interactive()

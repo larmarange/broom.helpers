@@ -31,7 +31,8 @@ model_get_xlevels(model)
 \method{model_get_xlevels}{model_fit}(model)
 }
 \arguments{
-\item{model}{a model object}
+\item{model}{(a model object, e.g. \code{glm})\cr
+A model object.}
 }
 \description{
 Get xlevels used in the model

@@ -8,7 +8,7 @@ NULL
 
 # because `where` is not exported by tidyselect
 # cf. https://github.com/r-lib/tidyselect/issues/201
-utils::globalVariables(c(".", "where"))
+utils::globalVariables(c("."))
 
 # update named vectors, y values overriding x values if common name
 .update_vector <- function(x, y) {
@@ -77,8 +77,10 @@ utils::globalVariables(c(".", "where"))
 
 #' Sequence generation between min and max
 #'
-#' @param x a numeric vector
-#' @param length.out desired length of the sequence
+#' @param x (`numeric`)\cr
+#' A numeric vector.
+#' @param length.out (`integer`)\cr
+#' Desired length of the sequence (a positive integer).
 #' @details
 #' `seq_range(x, length.out)` is a shortcut for
 #' `seq(min(x, na.rm = TRUE), max(x, na.rm = TRUE), length.out = length.out)`

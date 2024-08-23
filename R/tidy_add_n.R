@@ -57,8 +57,10 @@
 #' (`N_ind`), of events (`N_event`) and of exposure time (`Exposure`) are
 #' stored as attributes of the returned tibble.
 #'
-#' @param x a tidy tibble
-#' @param model the corresponding model, if not attached to `x`
+#' @param x (`data.frame`)\cr
+#' A tidy tibble as produced by `tidy_*()` functions.
+#' @param model (a model object, e.g. `glm`)\cr
+#' The corresponding model, if not attached to `x`.
 #' @export
 #' @family tidy_helpers
 #' @examplesIf interactive()

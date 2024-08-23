@@ -1,6 +1,7 @@
 #' Get the number of levels for each factor used in `xlevels`
 #'
-#' @param model a model object
+#' @param model (a model object, e.g. `glm`)\cr
+#' A model object.
 #' @return a tibble with two columns: `"variable"` and `"var_nlevels"`
 #' @export
 #' @family model_helpers
