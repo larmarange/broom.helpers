@@ -6,6 +6,14 @@
   version ≥ 2.0.0 (#270)
 - `model_get_model_frame.coxph()` has been fixed to return a correct model
   frame a subject identifier is passed to `survival::coxph()` (#268)
+  
+**Deprecated functions**
+
+- `.select_to_varnames()`, `.formula_list_to_named_list()`,
+  `.generic_selector()` and `.is_selector_scoped()` are now deprecated and
+  will be removed in a future release: you may consider
+  `cards::process_selectors()` and `cards::process_formula_selectors()` as
+  alternatives (#270)
 
 # broom.helpers 1.16.0
 

@@ -41,6 +41,11 @@ error message will be printed.}
 formulas?}
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}\cr
+This function will soon be removed from \code{broom.helpers}. Please consider
+\code{\link[cards:process_selectors]{cards::process_formula_selectors()}} as an alternative.
+}
+\details{
 Functions takes a list of formulas, a named list, or a combination of named
 elements with formula elements and returns a named list.
 For example, \code{list(age = 1, starts_with("stage") ~ 2)}.
@@ -56,3 +61,4 @@ formula in a list; e.g. \code{everything() ~ 1} is equivalent to
 passing \code{list(everything() ~ 1)}
 }
 
+\keyword{internal}

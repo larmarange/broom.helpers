@@ -1,5 +1,9 @@
 #' Convert formula selector to a named list
 #'
+#' `r lifecycle::badge("deprecated")`\cr
+#' This function will soon be removed from `broom.helpers`. Please consider
+#' [`cards::process_formula_selectors()`] as an alternative.
+#'
 #' Functions takes a list of formulas, a named list, or a combination of named
 #' elements with formula elements and returns a named list.
 #' For example, `list(age = 1, starts_with("stage") ~ 2)`.
@@ -23,12 +27,18 @@
 #' @param null_allowed Are `NULL` values accepted for the right hand side of
 #' formulas?
 #' @inheritParams .select_to_varnames
-#'
+#' @keywords internal
 #' @export
 .formula_list_to_named_list <- function(x, data = NULL, var_info = NULL,
                                         arg_name = NULL, select_single = FALSE,
                                         type_check = NULL, type_check_msg = NULL,
                                         null_allowed = TRUE) {
+  lifecycle::deprecate_soft(
+    "1.17.0",
+    ".formula_list_to_named_list()",
+    "cards::process_formula_selectors()"
+  )
+
   # if NULL provided, return NULL ----------------------------------------------
   if (is.null(x)) {
     return(NULL)
@@ -201,6 +211,10 @@
 
 #' Variable selector
 #'
+#' `r lifecycle::badge("deprecated")`\cr
+#' This function will soon be removed from `broom.helpers`. Please consider
+#' [`cards::process_selectors()`] as an alternative.
+#'
 #' Function takes `select()`-like inputs and converts the selector to
 #' a character vector of variable names. Functions accepts tidyselect syntax,
 #' and additional selector functions defined within the package
@@ -216,9 +230,16 @@
 #' variable. Default is `FALSE`
 #'
 #' @return A character vector of variable names
+#' @keywords internal
 #' @export
 .select_to_varnames <- function(select, data = NULL, var_info = NULL,
                                 arg_name = NULL, select_single = FALSE) {
+  lifecycle::deprecate_soft(
+    "1.17.0",
+    ".select_to_varnames()",
+    "cards::process_selectors()"
+  )
+
   if (is.null(data) && is.null(var_info)) {
     cli::cli_abort("At least one of {.arg data} or {.arg var_info} must be specified.")
   }
@@ -292,6 +313,8 @@
 
 #' Generate a custom selector function
 #'
+#' `r lifecycle::badge("deprecated")`
+#'
 #' @param variable_column string indicating column variable names are stored
 #' @param select_column character vector of columns used in the `select_expr=` argument
 #' @param select_expr unquoted predicate command to subset a data frame to select variables
@@ -303,8 +326,10 @@
 #' in `env_variable_type$df_var_info`.
 #'
 #' @return custom selector functions
+#' @keywords internal
 #' @export
 .generic_selector <- function(variable_column, select_column, select_expr, fun_name) {
+  lifecycle::deprecate_soft("1.17.0", ".generic_selector()")
   # ensuring the proper data has been scoped to use this function
   if (!.is_selector_scoped(variable_column, select_column)) {
     cli_alert_danger("Cannot use selector '{fun_name}()' in this context.")
@@ -324,8 +349,10 @@
 }
 
 #' @rdname dot-generic_selector
+#' @keywords internal
 #' @export
 .is_selector_scoped <- function(variable_column, select_column) {
+  lifecycle::deprecate_soft("1.17.0", ".is_selector_scoped()")
   exists("df_var_info", envir = env_variable_type) &&
     all(c(variable_column, select_column) %in% names(env_variable_type$df_var_info))
 }
