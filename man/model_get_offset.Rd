@@ -10,7 +10,8 @@ model_get_offset(model)
 \method{model_get_offset}{default}(model)
 }
 \arguments{
-\item{model}{a model object}
+\item{x}{(a model object, e.g. \code{glm})\cr
+A model object.}
 }
 \description{
 This function does not cover \code{lavaan} models (\code{NULL} is returned).

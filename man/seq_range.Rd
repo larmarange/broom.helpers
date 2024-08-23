@@ -7,9 +7,11 @@
 seq_range(x, length.out = 25)
 }
 \arguments{
-\item{x}{a numeric vector}
+\item{x}{(\code{numeric})\cr
+A numeric vector.}
 
-\item{length.out}{desired length of the sequence}
+\item{length.out}{(\code{integer})\cr
+Desired length of the sequence (a positive integer).}
 }
 \value{
 a numeric vector

@@ -14,16 +14,17 @@
 #'   (see `vignette("broom_mixed_intro", package = "broom.mixed")`)
 #' @name select_helpers
 #' @rdname select_helpers
-#' @param dichotomous logical indicating whether to include dichotomous
-#' variables, default is `TRUE`
-#' @param contrasts_type type of contrast to select. When `NULL`, all variables with a
-#' contrast will be selected. Default is `NULL`.  Select among contrast types
-#' `c("treatment", "sum", "poly", "helmert", "sdif", "other")`
-#' @param continuous2 (for compatibility with `{gtsummary}`) logical indicating
-#' whether to include continuous2 variables, default is `TRUE`, see
-#' [`gtsummary::all_continuous2()`]
+#' @param dichotomous (`logical`)\cr
+#' Whether to include dichotomous variables, default is `TRUE`.
+#' @param contrasts_type (`string`)\cr
+#' Type of contrast to select. When `NULL`, all variables with a
+#' contrast will be selected. Default is `NULL`. Select among contrast types
+#' `c("treatment", "sum", "poly", "helmert", "sdif", "other")`.
+#' @param continuous2 (`logical`)\cr
+#' Whether to include continuous2 variables, default is `TRUE`.
+#' For compatibility with `{gtsummary}`), see [`gtsummary::all_continuous2()`].
 #'
-#' @return A character vector of column names selected
+#' @return A character vector of column names selected.
 #' @seealso [scope_tidy()]
 #' @examplesIf interactive()
 #' glm(response ~ age * trt + grade, gtsummary::trial, family = binomial) |>

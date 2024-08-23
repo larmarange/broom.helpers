@@ -19,7 +19,8 @@ model_get_weights(model)
 \method{model_get_weights}{model_fit}(model)
 }
 \arguments{
-\item{model}{a model object}
+\item{x}{(a model object, e.g. \code{glm})\cr
+A model object.}
 }
 \description{
 This function does not cover \code{lavaan} models (\code{NULL} is returned).

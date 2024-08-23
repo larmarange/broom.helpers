@@ -7,13 +7,15 @@
 scope_tidy(x, data = NULL)
 }
 \arguments{
-\item{x}{a tidy tibble, with a \code{"variable"} column, as returned by
-\code{tidy_identify_variables ()}}
+\item{x}{(\code{data.frame})\cr
+A tidy tibble, with a \code{"variable"} column, as returned by
+\code{\link[=tidy_identify_variables ]{tidy_identify_variables ()}}.}
 
-\item{data}{an optional data frame the attributes will be added to}
+\item{data}{(\code{data.frame})\cr
+An optional data frame the attributes will be added to.}
 }
 \value{
-a data frame
+A data frame.
 }
 \description{
 This function uses the information from a model tidy tibble to generate

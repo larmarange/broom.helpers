@@ -69,7 +69,7 @@ A named list or a named vector of custom term labels.}
 \item{interaction_sep}{(\code{string})\cr
 Separator for interaction terms.}
 
-\item{categorical_terms_pattern}{(\code{string})\cr
+\item{categorical_terms_pattern}{(\code{\link[glue:glue]{glue pattern}})\cr
 A \link[glue:glue]{glue pattern} for labels of categorical terms with treatment
 or sum contrasts (see \code{\link[=model_list_terms_levels]{model_list_terms_levels()}}).}
 

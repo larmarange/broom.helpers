@@ -11,10 +11,12 @@
 #' Note: attributes are prefixed with `"gtsummary."` to be compatible with
 #' selectors provided by `{gtsummary}`.
 #'
-#' @param x a tidy tibble, with a `"variable"` column, as returned by
-#' `tidy_identify_variables ()`
-#' @param data an optional data frame the attributes will be added to
-#' @return a data frame
+#' @param x (`data.frame`)\cr
+#' A tidy tibble, with a `"variable"` column, as returned by
+#' [`tidy_identify_variables ()`].
+#' @param data (`data.frame`)\cr
+#' An optional data frame the attributes will be added to.
+#' @return A data frame.
 #' @export
 #' @examples
 #' mod <- lm(Sepal.Length ~ Sepal.Width * Species, data = iris)

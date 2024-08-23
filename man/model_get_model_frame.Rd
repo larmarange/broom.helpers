@@ -25,7 +25,8 @@ model_get_model_frame(model)
 \method{model_get_model_frame}{fixest}(model)
 }
 \arguments{
-\item{model}{a model object}
+\item{x}{(a model object, e.g. \code{glm})\cr
+A model object.}
 }
 \description{
 The structure of the object returned by \code{\link[stats:model.frame]{stats::model.frame()}}

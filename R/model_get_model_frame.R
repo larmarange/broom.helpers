@@ -6,7 +6,8 @@
 #' with the same data structure or `NULL` if it is not possible
 #' to compute model frame from `model`.
 #'
-#' @param model a model object
+#' @param x (a model object, e.g. `glm`)\cr
+#' A model object.
 #' @export
 #' @family model_helpers
 #' @seealso [stats::model.frame()]

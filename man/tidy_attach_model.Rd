@@ -24,28 +24,32 @@ tidy_get_model(x)
 tidy_detach_model(x)
 }
 \arguments{
-\item{x}{a tibble of model terms}
+\item{model}{(a model object, e.g. \code{glm})\cr
+A model to be attached/tidied.}
 
-\item{model}{a model to be attached/tidied}
+\item{.attributes}{(\code{list})\cr
+Named list of additional attributes to be attached to \code{x}.}
 
-\item{.attributes}{named list of additional attributes to be attached to \code{x}}
+\item{tidy_fun}{(\code{function})\cr
+Option to specify a custom tidier function.}
 
-\item{tidy_fun}{option to specify a custom tidier function}
+\item{conf.int}{(\code{logical})\cr
+Should confidence intervals be computed? (see \code{\link[broom:reexports]{broom::tidy()}})}
 
-\item{conf.int}{logical indicating whether or not to include a confidence
-interval in the tidied output}
+\item{conf.level}{(\code{numeric})\cr
+Level of confidence for confidence intervals (default: 95\%).}
 
-\item{conf.level}{level of confidence for confidence intervals (default: 95\%)}
+\item{exponentiate}{(\code{logical})\cr
+Whether or not to exponentiate the coefficient estimates.
+This is typical for logistic, Poisson and Cox models,
+but a bad idea if there is no log or logit link; defaults to \code{FALSE}.}
 
-\item{exponentiate}{logical indicating whether or not to exponentiate the
-coefficient estimates. This is typical for logistic, Poisson and Cox models,
-but a bad idea if there is no log or logit link; defaults to \code{FALSE}}
+\item{model_matrix_attr}{(\code{logical})\cr
+Whether model frame and model matrix should be added as attributes of
+\code{model} (respectively named \code{"model_frame"} and \code{"model_matrix"}) and
+passed through}
 
-\item{model_matrix_attr}{logical indicating whether model frame and model
-matrix should be added as attributes of \code{model} (respectively named
-\code{"model_frame"} and \code{"model_matrix"}) and passed through}
-
-\item{...}{other arguments passed to \code{tidy_fun()}}
+\item{...}{Other arguments passed to \code{tidy_fun()}.}
 }
 \description{
 To facilitate the use of broom helpers with pipe, it is recommended to

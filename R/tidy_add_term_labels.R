@@ -16,14 +16,17 @@
 #'
 #' It is possible to pass a custom label for any term in `labels`,
 #' including interaction terms.
-#' @param x a tidy tibble
-#' @param labels an optional named list or named vector of
-#' custom term labels
-#' @param interaction_sep separator for interaction terms
-#' @param categorical_terms_pattern a [glue pattern][glue::glue()] for
-#' labels of categorical terms with treatment or sum contrasts
-#' (see examples and [model_list_terms_levels()])
-#' @param model the corresponding model, if not attached to `x`
+#' @param x (`data.frame`)\cr
+#' A tidy tibble as produced by `tidy_*()` functions.
+#' @param labels (`list` or `string`)\cr
+#' An optional named list or named vector of custom term labels.
+#' @param interaction_sep  (`string`)\cr
+#' Separator for interaction terms.
+#' @param categorical_terms_pattern ([`glue pattern`][glue::glue()])\cr
+#' A [glue pattern][glue::glue()] for labels of categorical terms with treatment
+#' or sum contrasts (see examples and [model_list_terms_levels()]).
+#' @param model (a model object, e.g. `glm`)\cr
+#' The corresponding model, if not attached to `x`.
 #' @inheritParams tidy_plus_plus
 #' @export
 #' @family tidy_helpers

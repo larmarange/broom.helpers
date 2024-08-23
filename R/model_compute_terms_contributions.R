@@ -9,7 +9,8 @@
 #' @details
 #' This function does not cover `lavaan` models (`NULL` is returned).
 #'
-#' @param model a model object
+#' @param x (a model object, e.g. `glm`)\cr
+#' A model object.
 #' @export
 #' @family model_helpers
 #' @examplesIf interactive()

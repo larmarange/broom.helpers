@@ -8,17 +8,23 @@
 #' will return, if any, the minimum version of `pkg` required by `pkg_search`,
 #' `NULL` if no minimum version required.
 #'
-#' @param pkg Package required
-#' @param fn Calling function from the user perspective. Used to write
+#' @param pkg (`string`)\cr
+#' Name of the required package.
+#' @param fn (`string`)\cr
+#' Name of the calling function from the user perspective. Used to write
 #' informative error messages.
-#' @param pkg_search the package the function will search for a minimum
+#' @param pkg_search (`string`)\cr
+#' Name of the package the function will search for a minimum
 #' required version from.
-#' @param boolean logical indicating whether to return a `TRUE`/`FALSE`, rather
+#' @param boolean (`logical`)\cr
+#' Whether to return a `TRUE`/`FALSE`, rather
 #' than error when package/package version not available. Default is `FALSE`,
 #' which will return an error if `pkg` is not installed.
-#' @param remove_duplicates if several versions of a package are installed,
+#' @param remove_duplicates (`logical`)\cr
+#' If several versions of a package are installed,
 #' should only the first one be returned?
-#' @param lib.loc location of `R` library trees to search through, see
+#' @param lib.loc (`string`)\cr
+#' Location of `R` library trees to search through, see
 #' `utils::installed.packages()`.
 #' @details
 #' `get_all_packages_dependencies()` could be used to get the list of

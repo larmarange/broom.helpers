@@ -21,13 +21,16 @@
 #' If the `reference_row` column is not yet available in `x`,
 #' [tidy_add_reference_rows()] will be automatically applied.
 #'
-#' @param x a tidy tibble
-#' @param exponentiate logical indicating whether or not to exponentiate the
-#' coefficient estimates. It should be consistent with the original call to
-#' [broom::tidy()]
-#' @param conf.level confidence level, by default use the value indicated
-#' previously in [tidy_and_attach()], used only for sum contrasts
-#' @param model the corresponding model, if not attached to `x`
+#' @param x (`data.frame`)\cr
+#' A tidy tibble as produced by `tidy_*()` functions.
+#' @param exponentiate (`logical`)\cr
+#' Whether or not to exponentiate the coefficient estimates. It should be
+#' consistent with the original call to [broom::tidy()]
+#' @param conf.level (`numeric`)\cr
+#' Confidence level, by default use the value indicated
+#' previously in [tidy_and_attach()], used only for sum contrasts.
+#' @param model (a model object, e.g. `glm`)\cr
+#' The corresponding model, if not attached to `x`.
 #' @inheritParams tidy_plus_plus
 #' @export
 #' @family tidy_helpers

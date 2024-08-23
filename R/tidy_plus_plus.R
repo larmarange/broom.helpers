@@ -38,7 +38,7 @@
 #' A named list or a named vector of custom term labels.
 #' @param interaction_sep  (`string`)\cr
 #' Separator for interaction terms.
-#' @param categorical_terms_pattern (`string`)\cr
+#' @param categorical_terms_pattern ([`glue pattern`][glue::glue()])\cr
 #' A [glue pattern][glue::glue()] for labels of categorical terms with treatment
 #' or sum contrasts (see [model_list_terms_levels()]).
 #' @param disambiguate_terms  (`logical`)\cr

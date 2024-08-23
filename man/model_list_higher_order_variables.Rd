@@ -10,7 +10,8 @@ model_list_higher_order_variables(model)
 \method{model_list_higher_order_variables}{default}(model)
 }
 \arguments{
-\item{model}{a model object}
+\item{x}{(a model object, e.g. \code{glm})\cr
+A model object.}
 }
 \description{
 List higher order variables of a model

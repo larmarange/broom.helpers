@@ -31,7 +31,8 @@ model_identify_variables(model)
 \method{model_identify_variables}{logitr}(model)
 }
 \arguments{
-\item{model}{a model object}
+\item{x}{(a model object, e.g. \code{glm})\cr
+A model object.}
 }
 \value{
 A tibble with four columns:

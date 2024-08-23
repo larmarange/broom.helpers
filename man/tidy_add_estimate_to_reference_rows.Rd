@@ -13,16 +13,19 @@ tidy_add_estimate_to_reference_rows(
 )
 }
 \arguments{
-\item{x}{a tidy tibble}
+\item{x}{(\code{data.frame})\cr
+A tidy tibble as produced by \verb{tidy_*()} functions.}
 
-\item{exponentiate}{logical indicating whether or not to exponentiate the
-coefficient estimates. It should be consistent with the original call to
-\code{\link[broom:reexports]{broom::tidy()}}}
+\item{exponentiate}{(\code{logical})\cr
+Whether or not to exponentiate the coefficient estimates. It should be
+consistent with the original call to \code{\link[broom:reexports]{broom::tidy()}}}
 
-\item{conf.level}{confidence level, by default use the value indicated
-previously in \code{\link[=tidy_and_attach]{tidy_and_attach()}}, used only for sum contrasts}
+\item{conf.level}{(\code{numeric})\cr
+Confidence level, by default use the value indicated
+previously in \code{\link[=tidy_and_attach]{tidy_and_attach()}}, used only for sum contrasts.}
 
-\item{model}{the corresponding model, if not attached to \code{x}}
+\item{model}{(a model object, e.g. \code{glm})\cr
+The corresponding model, if not attached to \code{x}.}
 
 \item{quiet}{(\code{logical})\cr
 Whether \code{broom.helpers} should not return a message when requested output

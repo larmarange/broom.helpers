@@ -2,15 +2,20 @@
 #'
 #' It is computed with [emmeans::emmeans()].
 #'
-#' @param model a model object
-#' @param variables names of variables to add pairwise contrasts
-#' @param pairwise_reverse determines whether to use `"pairwise"` (if `TRUE`)
-#' or `"revpairwise"` (if `FALSE`), see [emmeans::contrast()]
+#' @param x (a model object, e.g. `glm`)\cr
+#' A model object.
+#' @param variables ([`tidy-select`][dplyr::dplyr_tidy_select])\cr
+#' Variables to add pairwise contrasts.
+#' @param pairwise_reverse (`logical`)\cr
+#' Determines whether to use `"pairwise"` (if `TRUE`)
+#' or `"revpairwise"` (if `FALSE`), see [emmeans::contrast()].
 #' @param contrasts_adjust optional adjustment method when computing contrasts,
 #' see [emmeans::contrast()] (if `NULL`, use `emmeans` default)
-#' @param conf.level level of confidence for confidence intervals
-#' @param emmeans_args list of additional parameter to pass to
-#' [emmeans::emmeans()] when computing pairwise contrasts
+#' @param conf.level (`numeric`)\cr
+#' Level of confidence for confidence intervals (default: 95%).
+#' @param emmeans_args (`logical`)\cr
+#' List of additional parameter to pass to
+#' [emmeans::emmeans()] when computing pairwise contrasts.
 #' @details
 #' `r lifecycle::badge("experimental")`
 #' For `pscl::zeroinfl()` and `pscl::hurdle()` models, pairwise contrasts are

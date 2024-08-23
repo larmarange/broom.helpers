@@ -8,9 +8,12 @@
 #' is kept in a new column `original_term`.
 #'
 #'
-#' @param x a tidy tibble
-#' @param sep character, separator added between group name and term
-#' @param model the corresponding model, if not attached to `x`
+#' @param x (`data.frame`)\cr
+#' A tidy tibble as produced by `tidy_*()` functions.
+#' @param sep (`string`)\cr
+#' Separator added between group name and term.
+#' @param model (a model object, e.g. `glm`)\cr
+#' The corresponding model, if not attached to `x`.
 #' @inheritParams tidy_plus_plus
 #' @export
 #' @family tidy_helpers

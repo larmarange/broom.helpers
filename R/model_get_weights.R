@@ -2,7 +2,8 @@
 #'
 #' This function does not cover `lavaan` models (`NULL` is returned).
 #'
-#' @param model a model object
+#' @param x (a model object, e.g. `glm`)\cr
+#' A model object.
 #' @note
 #' For class `svrepglm` objects (GLM on a survey object with replicate weights),
 #' it will return the original sampling weights of the data, not the replicate

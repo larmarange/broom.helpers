@@ -1,7 +1,8 @@
 #' Identify for each coefficient of a model the corresponding variable
 #'
 #' It will also identify interaction terms and intercept(s).
-#' @param model a model object
+#' @param x (a model object, e.g. `glm`)\cr
+#' A model object.
 #' @return
 #' A tibble with four columns:
 #' * `term`: coefficients of the model

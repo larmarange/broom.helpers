@@ -7,9 +7,10 @@
 tidy_broom(x, ...)
 }
 \arguments{
-\item{x}{a model to tidy}
+\item{x}{(a model object, e.g. \code{glm})\cr
+A model to be tidied.}
 
-\item{...}{additional parameters passed to \code{broom::tidy()}}
+\item{...}{Additional parameters passed to \code{broom::tidy()}.}
 }
 \description{
 Tidy with \code{broom::tidy()} and checks that all arguments are used

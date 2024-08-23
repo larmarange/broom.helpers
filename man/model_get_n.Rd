@@ -34,7 +34,8 @@ model_get_n(model)
 \method{model_get_n}{tidycrr}(model)
 }
 \arguments{
-\item{model}{a model object}
+\item{x}{(a model object, e.g. \code{glm})\cr
+A model object.}
 }
 \description{
 For binomial and multinomial logistic models, will also return

@@ -16,7 +16,8 @@ model_get_assign(model)
 \method{model_get_assign}{model_fit}(model)
 }
 \arguments{
-\item{model}{a model object}
+\item{x}{(a model object, e.g. \code{glm})\cr
+A model object.}
 }
 \description{
 Return the assign attribute attached to the object returned by

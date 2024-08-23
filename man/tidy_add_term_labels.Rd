@@ -15,18 +15,21 @@ tidy_add_term_labels(
 )
 }
 \arguments{
-\item{x}{a tidy tibble}
+\item{x}{(\code{data.frame})\cr
+A tidy tibble as produced by \verb{tidy_*()} functions.}
 
-\item{labels}{an optional named list or named vector of
-custom term labels}
+\item{labels}{(\code{list} or \code{string})\cr
+An optional named list or named vector of custom term labels.}
 
-\item{interaction_sep}{separator for interaction terms}
+\item{interaction_sep}{(\code{string})\cr
+Separator for interaction terms.}
 
-\item{categorical_terms_pattern}{a \link[glue:glue]{glue pattern} for
-labels of categorical terms with treatment or sum contrasts
-(see examples and \code{\link[=model_list_terms_levels]{model_list_terms_levels()}})}
+\item{categorical_terms_pattern}{(\code{\link[glue:glue]{glue pattern}})\cr
+A \link[glue:glue]{glue pattern} for labels of categorical terms with treatment
+or sum contrasts (see examples and \code{\link[=model_list_terms_levels]{model_list_terms_levels()}}).}
 
-\item{model}{the corresponding model, if not attached to \code{x}}
+\item{model}{(a model object, e.g. \code{glm})\cr
+The corresponding model, if not attached to \code{x}.}
 
 \item{quiet}{(\code{logical})\cr
 Whether \code{broom.helpers} should not return a message when requested output

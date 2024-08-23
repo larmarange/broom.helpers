@@ -4,12 +4,16 @@
 #' SAS, sum or successive differences contrasts (cf. [MASS::contr.sdif()]), and
 #' categorical variables with no contrast.
 #'
-#' @param model a model object
-#' @param label_pattern a [glue pattern][glue::glue()] for term labels (see examples)
-#' @param variable_labels an optional named list or named vector of
+#' @param x (a model object, e.g. `glm`)\cr
+#' A model object.
+#' @param label_pattern ([`glue pattern`][glue::glue()])\cr
+#' A [glue pattern][glue::glue()] for term labels (see examples).
+#' @param variable_labels (`list` or `string`)\cr
+#' An optional named list or named vector of
 #' custom variable labels passed to [model_list_variables()]
-#' @param sdif_term_level for successive differences contrasts, how should term
-#' levels be named? `"diff"` for `"B - A"` (default), `"ratio"` for `"B / A"`
+#' @param sdif_term_level (`string`)\cr
+#' For successive differences contrasts, how should term
+#' levels be named? `"diff"` for `"B - A"` (default), `"ratio"` for `"B / A"`.
 #' @return
 #' A tibble with ten columns:
 #' * `variable`: variable

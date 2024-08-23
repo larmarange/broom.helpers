@@ -46,9 +46,10 @@ model_get_model_matrix(model, ...)
 \method{model_get_terms}{cch}(model, ...)
 }
 \arguments{
-\item{model}{a model object}
+\item{...}{Additional arguments passed to \code{\link[stats:model.matrix]{stats::model.matrix()}}.}
 
-\item{...}{additional arguments passed to \code{\link[stats:model.matrix]{stats::model.matrix()}}}
+\item{x}{(a model object, e.g. \code{glm})\cr
+A model object.}
 }
 \description{
 The structure of the object returned by \code{\link[stats:model.matrix]{stats::model.matrix()}}

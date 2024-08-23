@@ -13,7 +13,8 @@ model_get_model(model)
 \method{model_get_model}{mira}(model)
 }
 \arguments{
-\item{model}{a model object}
+\item{x}{(a model object, e.g. \code{glm})\cr
+A model object.}
 }
 \description{
 Most model objects are proper R model objects. There are, however, some

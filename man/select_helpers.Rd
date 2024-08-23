@@ -31,19 +31,20 @@ all_contrasts(
 )
 }
 \arguments{
-\item{continuous2}{(for compatibility with \code{{gtsummary}}) logical indicating
-whether to include continuous2 variables, default is \code{TRUE}, see
-\code{\link[gtsummary:select_helpers]{gtsummary::all_continuous2()}}}
+\item{continuous2}{(\code{logical})\cr
+Whether to include continuous2 variables, default is \code{TRUE}.
+For compatibility with \code{{gtsummary}}), see \code{\link[gtsummary:select_helpers]{gtsummary::all_continuous2()}}.}
 
-\item{dichotomous}{logical indicating whether to include dichotomous
-variables, default is \code{TRUE}}
+\item{dichotomous}{(\code{logical})\cr
+Whether to include dichotomous variables, default is \code{TRUE}.}
 
-\item{contrasts_type}{type of contrast to select. When \code{NULL}, all variables with a
-contrast will be selected. Default is \code{NULL}.  Select among contrast types
-\code{c("treatment", "sum", "poly", "helmert", "sdif", "other")}}
+\item{contrasts_type}{(\code{string})\cr
+Type of contrast to select. When \code{NULL}, all variables with a
+contrast will be selected. Default is \code{NULL}. Select among contrast types
+\code{c("treatment", "sum", "poly", "helmert", "sdif", "other")}.}
 }
 \value{
-A character vector of column names selected
+A character vector of column names selected.
 }
 \description{
 Set of functions to supplement the \emph{tidyselect} set of

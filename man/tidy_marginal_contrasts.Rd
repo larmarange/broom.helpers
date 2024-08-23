@@ -24,37 +24,43 @@ variables_to_contrast(
 )
 }
 \arguments{
-\item{x}{a model}
+\item{x}{(a model object, e.g. \code{glm})\cr
+A model.}
 
-\item{variables_list}{a list whose elements will be sequentially passed to
+\item{variables_list}{(\code{list} or \code{string})\cr
+A list whose elements will be sequentially passed to
 \code{variables} in \code{marginaleffects::avg_comparisons()} (see details below);
 alternatively, it could also be the string \code{"auto"} (default), \code{"cross"} or
 \code{"no_interaction"}}
 
-\item{conf.int}{logical indicating whether or not to include a confidence
-interval in the tidied output}
+\item{conf.int}{(\code{logical})\cr
+Whether or not to include a confidence interval in the tidied output.}
 
-\item{conf.level}{the confidence level to use for the confidence interval}
+\item{conf.level}{(\code{numeric})\cr
+The confidence level to use for the confidence interval (between \code{0} ans \code{1}).}
 
-\item{...}{additional parameters passed to
-\code{marginaleffects::avg_comparisons()}}
+\item{...}{Additional parameters passed to
+\code{marginaleffects::avg_comparisons()}.}
 
-\item{model}{a model}
+\item{interactions}{(\code{logical})\cr
+Should combinations of variables corresponding to interactions be returned?}
 
-\item{interactions}{should combinations of variables corresponding to
-interactions be returned?}
-
-\item{cross}{if \code{interaction} is \code{TRUE}, should "cross-contrasts" be
+\item{cross}{(\code{logical})\cr
+If \code{interaction} is \code{TRUE}, should "cross-contrasts" be
 computed? (if \code{FALSE}, only the last term of an interaction is passed to
 \code{variable} and the other terms are passed to \code{by})}
 
-\item{var_categorical}{default \code{variable} value for categorical variables}
+\item{var_categorical}{(\code{\link[marginaleffects:comparisons]{predictor values}})\cr
+Default \code{variable} value for categorical variables.}
 
-\item{var_continuous}{default \code{variable} value for continuous variables}
+\item{var_continuous}{(\code{\link[marginaleffects:comparisons]{predictor values}})\cr
+Default \code{variable} value for continuous variables.}
 
-\item{by_categorical}{default \code{by} value for categorical variables}
+\item{by_categorical}{(\code{\link[marginaleffects:comparisons]{predictor values}})\cr
+Default \code{by} value for categorical variables.}
 
-\item{by_continuous}{default \code{by} value for continuous variables}
+\item{by_continuous}{(\code{\link[marginaleffects:comparisons]{predictor values}})\cr
+Default \code{by} value for continuous variables.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}

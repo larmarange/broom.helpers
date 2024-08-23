@@ -5,8 +5,9 @@
 #' `model_get_model_matrix()` will always return an object
 #' with the same structure as [stats::model.matrix.default()].
 #'
-#' @param model a model object
-#' @param ... additional arguments passed to [stats::model.matrix()]
+#' @param x (a model object, e.g. `glm`)\cr
+#' A model object.
+#' @param ... Additional arguments passed to [stats::model.matrix()].
 #' @export
 #' @family model_helpers
 #' @seealso [stats::model.matrix()]

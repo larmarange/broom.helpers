@@ -8,9 +8,12 @@
 #' If the `variable` column is not yet available in `x`,
 #' [tidy_identify_variables()] will be automatically applied.
 #'
-#' @param x a tidy tibble
-#' @param model the corresponding model, if not attached to `x`
-#' @param quiet logical argument whether broom.helpers should not return a message
+#' @param x (`data.frame`)\cr
+#' A tidy tibble as produced by `tidy_*()` functions.
+#' @param model (a model object, e.g. `glm`)\cr
+#' The corresponding model, if not attached to `x`.
+#' @param quiet (`logical`)\cr
+#' Whether broom.helpers should not return a message
 #' when `tidy_disambiguate_terms()` was already applied
 #' @export
 #' @family tidy_helpers

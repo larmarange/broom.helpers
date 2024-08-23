@@ -36,15 +36,18 @@ model_list_variables(
 )
 }
 \arguments{
-\item{model}{a model object}
+\item{labels}{(\code{list} or \code{string})\cr
+An optional named list or named vector of
+custom variable labels.}
 
-\item{labels}{an optional named list or named vector of
-custom variable labels}
+\item{only_variable}{(\code{logical})\cr
+If \code{TRUE}, will return only "variable" column.}
 
-\item{only_variable}{if \code{TRUE}, will return only "variable"
-column}
+\item{add_var_type}{(\code{logical})\cr
+If \code{TRUE}, add \code{var_nlevels} and \code{var_type} columns.}
 
-\item{add_var_type}{if \code{TRUE}, add \code{var_nlevels} and \code{var_type} columns}
+\item{x}{(a model object, e.g. \code{glm})\cr
+A model object.}
 }
 \value{
 A tibble with three columns:
