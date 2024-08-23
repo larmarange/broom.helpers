@@ -707,8 +707,8 @@ tidy_marginal_predictions <- function(x, variables_list = "auto",
 }
 
 #' @export
-#' @param x (a model object, e.g. `glm`)\cr
-#' A model to be tidied.
+#' @param model (a model object, e.g. `glm`)\cr
+#' A model.
 #' @param interactions (`logical`)\cr
 #' Should combinations of variables corresponding to
 #' interactions be returned?
@@ -1116,7 +1116,7 @@ tidy_marginal_contrasts <- function(x, variables_list = "auto",
 }
 
 #' @export
-#' @param x (a model object, e.g. `glm`)\cr
+#' @param model (a model object, e.g. `glm`)\cr
 #' A model.
 #' @param interactions (`logical`)\cr
 #' Should combinations of variables corresponding to interactions be returned?

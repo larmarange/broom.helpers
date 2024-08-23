@@ -25,7 +25,7 @@ variables_to_contrast(
 }
 \arguments{
 \item{x}{(a model object, e.g. \code{glm})\cr
-A model.}
+A model to be tidied.}
 
 \item{variables_list}{(\code{list} or \code{string})\cr
 A list whose elements will be sequentially passed to
@@ -41,6 +41,9 @@ The confidence level to use for the confidence interval (between \code{0} ans \c
 
 \item{...}{Additional parameters passed to
 \code{marginaleffects::avg_comparisons()}.}
+
+\item{model}{(a model object, e.g. \code{glm})\cr
+A model.}
 
 \item{interactions}{(\code{logical})\cr
 Should combinations of variables corresponding to interactions be returned?}

@@ -42,6 +42,9 @@ The confidence level to use for the confidence interval (between \code{0} ans \c
 \item{...}{Additional parameters passed to
 \code{marginaleffects::avg_predictions()}.}
 
+\item{model}{(a model object, e.g. \code{glm})\cr
+A model.}
+
 \item{interactions}{(\code{logical})\cr
 Should combinations of variables corresponding to
 interactions be returned?}
