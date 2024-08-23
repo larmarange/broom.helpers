@@ -76,7 +76,7 @@ tidy_add_term_labels <- function(x,
   }
 
   if (!"var_label" %in% names(x)) {
-    x <- x |> tidy_add_variable_labels(model = model, quiet = quiet)
+    x <- x |> tidy_add_variable_labels(model = model)
   }
   if (!"contrasts" %in% names(x)) {
     x <- x |> tidy_add_contrasts(model = model)

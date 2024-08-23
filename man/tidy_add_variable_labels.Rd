@@ -8,9 +8,7 @@ tidy_add_variable_labels(
   x,
   labels = NULL,
   interaction_sep = " * ",
-  model = tidy_get_model(x),
-  quiet = FALSE,
-  strict = FALSE
+  model = tidy_get_model(x)
 )
 }
 \arguments{
@@ -25,14 +23,6 @@ Separator for interaction terms.}
 
 \item{model}{(a model object, e.g. \code{glm})\cr
 The corresponding model, if not attached to \code{x}.}
-
-\item{quiet}{(\code{logical})\cr
-Whether \code{broom.helpers} should not return a message when requested output
-cannot be generated. Default is \code{FALSE}.}
-
-\item{strict}{(\code{logical})\cr
-Whether \code{broom.helpers} should return an error
-when requested output cannot be generated. Default is \code{FALSE}.}
 }
 \description{
 Will add variable labels in a \code{var_label} column, based on:
@@ -63,9 +53,9 @@ glm(Survived ~ Class * Age * Sex, data = df, weights = df$n, family = binomial) 
   tidy_and_attach() |>
   tidy_add_variable_labels(
     labels = list(
-      "(Intercept)" = "Custom intercept",
-      Sex = "Gender",
-      "Class:Age" = "Custom label"
+      "(Intercept)" ~ "Custom intercept",
+      Sex ~ "Gender",
+      "Class:Age" ~ "Custom label"
     )
   )
 }

@@ -51,32 +51,6 @@ test_that("tidy_add_variable_labels() works for basic models", {
     )
   )
 
-  # no error if providing labels not corresponding to an existing variable
-  # but display a message
-  expect_error(
-    mod |>
-      tidy_and_attach() |>
-      tidy_add_variable_labels(
-        labels = list(aaa = "aaa", bbb = "bbb", ccc = 44)
-      ),
-    NA
-  )
-  expect_message(
-    mod |>
-      tidy_and_attach() |>
-      tidy_add_variable_labels(
-        labels = list(aaa = "aaa", bbb = "bbb", ccc = 44)
-      )
-  )
-  expect_error(
-    mod |>
-      tidy_and_attach() |>
-      tidy_add_variable_labels(
-        labels = list(aaa = "aaa", bbb = "bbb", ccc = 44),
-        strict = TRUE
-      )
-  )
-
   # model with only an interaction term
   mod <- lm(age ~ factor(response):marker, gtsummary::trial)
   res <- mod |>

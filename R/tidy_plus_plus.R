@@ -222,8 +222,7 @@ tidy_plus_plus <- function(model,
   res <- res |>
     tidy_add_variable_labels(
       labels = variable_labels,
-      interaction_sep = interaction_sep,
-      quiet = quiet
+      interaction_sep = interaction_sep
     ) |>
     tidy_add_term_labels(
       labels = term_labels,
@@ -236,7 +235,8 @@ tidy_plus_plus <- function(model,
     res <- res |>
       tidy_add_header_rows(
         show_single_row = {{ show_single_row }},
-        strict = strict, quiet = quiet
+        strict = strict,
+        quiet = quiet
       )
   }
 
