@@ -214,6 +214,3 @@ test_that("select_helpers: tidy_add_variable_labels", {
     c("b0", "AGE", "Drug", "Grade", "Interaction")
   )
 })
-
-
-
