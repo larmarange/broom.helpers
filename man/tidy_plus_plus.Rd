@@ -39,7 +39,8 @@ tidy_plus_plus(
 )
 }
 \arguments{
-\item{model}{A model to be attached/tidied.}
+\item{model}{(a model object, e.g. \code{glm})\cr
+A model to be attached/tidied.}
 
 \item{tidy_fun}{(\code{function})\cr
 Option to specify a custom tidier function.}

@@ -36,7 +36,7 @@ scope_tidy <- function(x, data = NULL) {
     )
   }
 
-  # if data not passed, use table_body to construct one
+  # if data not passed, use x to construct one
   if (rlang::is_empty(data)) {
     data <- dplyr::tibble(
       !!!rlang::rep_named(
@@ -45,7 +45,7 @@ scope_tidy <- function(x, data = NULL) {
       )
     )
 
-    # if var_class available in x, convert colums
+    # if var_class available in x, convert columns
     if ("var_class" %in% names(x)) {
       df_class <- x[c("variable", "var_class")] |>
         unique() |>

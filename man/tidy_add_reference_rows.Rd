@@ -12,14 +12,15 @@ tidy_add_reference_rows(
 )
 }
 \arguments{
-\item{x}{a tidy tibble}
+\item{x}{(\code{data.frame})\cr
+A tidy tibble as produced by \verb{tidy_*()} functions.}
 
-\item{no_reference_row}{a vector indicating the name of variables
-for those no reference row should be added.
-Accepts \link[dplyr:select]{tidyselect} syntax. Default is \code{NULL}.
-See also \code{\link[=all_categorical]{all_categorical()}} and \code{\link[=all_dichotomous]{all_dichotomous()}}}
+\item{no_reference_row}{(\code{\link[dplyr:dplyr_tidy_select]{tidy-select}})\cr
+Variables for those no reference row should be added.
+See also \code{\link[=all_categorical]{all_categorical()}} and \code{\link[=all_dichotomous]{all_dichotomous()}}.}
 
-\item{model}{the corresponding model, if not attached to \code{x}}
+\item{model}{(a model object, e.g. \code{glm})\cr
+The corresponding model, if not attached to \code{x}.}
 
 \item{quiet}{(\code{logical})\cr
 Whether \code{broom.helpers} should not return a message when requested output

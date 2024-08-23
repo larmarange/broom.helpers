@@ -17,7 +17,8 @@
 #' * [tidy_add_coefficients_type()]
 #' * [tidy_detach_model()]
 #'
-#' @param model A model to be attached/tidied.
+#' @param model (a model object, e.g. `glm`)\cr
+#' A model to be attached/tidied.
 #' @param tidy_fun (`function`)\cr
 #' Option to specify a custom tidier function.
 #' @param conf.int (`logical`)\cr

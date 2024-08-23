@@ -7,16 +7,16 @@
 #' If the `variable` column is not yet available in `x`,
 #' [tidy_identify_variables()] will be automatically applied.
 #' @param x (`data.frame`)\cr
-#' A tidy tibble.
+#' A tidy tibble as produced by `tidy_*()` functions.
 #' @param include ([`tidy-select`][dplyr::dplyr_tidy_select])\cr
 #' Variables to include. Default is `everything()`.
 #' See also [all_continuous()], [all_categorical()], [all_dichotomous()]
 #' and [all_interaction()].
+#' @param model (a model object, e.g. `glm`)\cr
+#' The corresponding model, if not attached to `x`.
 #' @return
 #' The `x` tibble limited to the included variables (and eventually the intercept),
 #' sorted according to the `include` parameter.
-#'
-#' @param model the corresponding model, if not attached to `x`
 #' @export
 #' @family tidy_helpers
 #' @examples
@@ -54,7 +54,10 @@ tidy_select_variables <- function(
   .attributes <- .save_attributes(x)
 
   # obtain character vector of selected variables
-  include <- .select_to_varnames({{ include }}, var_info = x, arg_name = "include")
+  cards::process_selectors(
+    data = scope_tidy(x),
+    include = {{ include }}
+  )
 
   # order result, intercept first then by the order of include
   if ("y.level" %in% names(x)) {
