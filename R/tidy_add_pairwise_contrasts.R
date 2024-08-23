@@ -13,18 +13,24 @@
 #' For multi-components models, such as zero-inflated Poisson or beta
 #' regression, support of pairwise contrasts is still experimental.
 #'
-#' @param x a tidy tibble
-#' @param variables a vector indicating the name of variables
-#' for those pairwise contrasts should be added.
-#' Accepts [tidyselect][dplyr::select] syntax. Default is  [all_categorical()]
-#' @param keep_model_terms keep terms from the model?
-#' @param pairwise_reverse determines whether to use `"pairwise"` (if `TRUE`)
-#' or `"revpairwise"` (if `FALSE`), see [emmeans::contrast()]
-#' @param contrasts_adjust optional adjustment method when computing contrasts,
-#' see [emmeans::contrast()] (if `NULL`, use `emmeans` default)
-#' @param conf.level confidence level, by default use the value indicated
-#' previously in [tidy_and_attach()]
-#' @param model the corresponding model, if not attached to `x`
+#' @param x (`data.frame`)\cr
+#' A tidy tibble as produced by `tidy_*()` functions.
+#' @param variables include ([`tidy-select`][dplyr::dplyr_tidy_select])\cr
+#' Variables for those pairwise contrasts should be added.
+#' Default is  [all_categorical()].
+#' @param keep_model_terms (`logical`)\cr
+#' Keep terms from the model?
+#' @param pairwise_reverse (`logical`)\cr
+#' Determines whether to use `"pairwise"` (if `TRUE`)
+#' or `"revpairwise"` (if `FALSE`), see [emmeans::contrast()].
+#' @param contrasts_adjust (`string`)\cr
+#' Optional adjustment method when computing contrasts,
+#' see [emmeans::contrast()] (if `NULL`, use `emmeans` default).
+#' @param conf.level (`numeric`)\cr
+#' Confidence level, by default use the value indicated
+#' previously in [tidy_and_attach()].
+#' @param model (a model object, e.g. `glm`)\cr
+#' The corresponding model, if not attached to `x`.
 #' @inheritParams tidy_plus_plus
 #' @export
 #' @family tidy_helpers
@@ -94,10 +100,9 @@ tidy_add_pairwise_contrasts <- function(
   }
 
   # obtain character vector of selected variables
-  variables <- .select_to_varnames(
-    {{ variables }},
-    var_info = x,
-    arg_name = "variables"
+  cards::process_selectors(
+    data = scope_tidy(x),
+    variables = {{ variables }}
   )
 
   if (isTRUE(.attributes$exponentiate) && is.null(emmeans_args$type)) {

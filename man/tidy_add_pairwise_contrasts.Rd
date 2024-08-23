@@ -17,28 +17,34 @@ tidy_add_pairwise_contrasts(
 )
 }
 \arguments{
-\item{x}{a tidy tibble}
+\item{x}{(\code{data.frame})\cr
+A tidy tibble as produced by \verb{tidy_*()} functions.}
 
-\item{variables}{a vector indicating the name of variables
-for those pairwise contrasts should be added.
-Accepts \link[dplyr:select]{tidyselect} syntax. Default is  \code{\link[=all_categorical]{all_categorical()}}}
+\item{variables}{include (\code{\link[dplyr:dplyr_tidy_select]{tidy-select}})\cr
+Variables for those pairwise contrasts should be added.
+Default is  \code{\link[=all_categorical]{all_categorical()}}.}
 
-\item{keep_model_terms}{keep terms from the model?}
+\item{keep_model_terms}{(\code{logical})\cr
+Keep terms from the model?}
 
-\item{pairwise_reverse}{determines whether to use \code{"pairwise"} (if \code{TRUE})
-or \code{"revpairwise"} (if \code{FALSE}), see \code{\link[emmeans:contrast]{emmeans::contrast()}}}
+\item{pairwise_reverse}{(\code{logical})\cr
+Determines whether to use \code{"pairwise"} (if \code{TRUE})
+or \code{"revpairwise"} (if \code{FALSE}), see \code{\link[emmeans:contrast]{emmeans::contrast()}}.}
 
-\item{contrasts_adjust}{optional adjustment method when computing contrasts,
-see \code{\link[emmeans:contrast]{emmeans::contrast()}} (if \code{NULL}, use \code{emmeans} default)}
+\item{contrasts_adjust}{(\code{string})\cr
+Optional adjustment method when computing contrasts,
+see \code{\link[emmeans:contrast]{emmeans::contrast()}} (if \code{NULL}, use \code{emmeans} default).}
 
-\item{conf.level}{confidence level, by default use the value indicated
-previously in \code{\link[=tidy_and_attach]{tidy_and_attach()}}}
+\item{conf.level}{(\code{numeric})\cr
+Confidence level, by default use the value indicated
+previously in \code{\link[=tidy_and_attach]{tidy_and_attach()}}.}
 
 \item{emmeans_args}{(\code{list})\cr
 List of additional parameter to pass to
 \code{\link[emmeans:emmeans]{emmeans::emmeans()}} when computing pairwise contrasts.}
 
-\item{model}{the corresponding model, if not attached to \code{x}}
+\item{model}{(a model object, e.g. \code{glm})\cr
+The corresponding model, if not attached to \code{x}.}
 
 \item{quiet}{(\code{logical})\cr
 Whether \code{broom.helpers} should not return a message when requested output
