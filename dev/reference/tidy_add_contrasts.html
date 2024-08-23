@@ -54,15 +54,18 @@ categorical variable and a <code>contrasts_type</code> column equal to
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>a tidy tibble</p></dd>
+<dd><p>(<code>data.frame</code>)<br>
+A tidy tibble as produced by <code>tidy_*()</code> functions.</p></dd>
 
 
 <dt id="arg-model">model<a class="anchor" aria-label="anchor" href="#arg-model"></a></dt>
-<dd><p>the corresponding model, if not attached to <code>x</code></p></dd>
+<dd><p>(a model object, e.g. <code>glm</code>)<br>
+The corresponding model, if not attached to <code>x</code>.</p></dd>
 
 
 <dt id="arg-quiet">quiet<a class="anchor" aria-label="anchor" href="#arg-quiet"></a></dt>
-<dd><p>logical argument whether broom.helpers should not return a message
+<dd><p>(<code>logical</code>)<br>
+Whether broom.helpers should not return a message
 when <code><a href="tidy_disambiguate_terms.html">tidy_disambiguate_terms()</a></code> was already applied</p></dd>
 
 </dl></div>

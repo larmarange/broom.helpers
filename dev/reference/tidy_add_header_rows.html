@@ -66,28 +66,31 @@ These additional rows could be identified with <code>header_row</code> column.</
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>a tidy tibble</p></dd>
+<dd><p>(<code>data.frame</code>)<br>
+A tidy tibble as produced by <code>tidy_*()</code> functions.</p></dd>
 
 
 <dt id="arg-show-single-row">show_single_row<a class="anchor" aria-label="anchor" href="#arg-show-single-row"></a></dt>
-<dd><p>a vector indicating the names of binary
-variables that should be displayed on a single row.
-Accepts <a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">tidyselect</a> syntax. Default is <code>NULL</code>.
-See also <code><a href="select_helpers.html">all_dichotomous()</a></code></p></dd>
+<dd><p>(<code><a href="https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html" class="external-link">tidy-select</a></code>)<br>
+Names of dichotomous variables that should be displayed on a single row.
+See also <code><a href="select_helpers.html">all_dichotomous()</a></code>.</p></dd>
 
 
 <dt id="arg-model">model<a class="anchor" aria-label="anchor" href="#arg-model"></a></dt>
-<dd><p>the corresponding model, if not attached to <code>x</code></p></dd>
+<dd><p>(a model object, e.g. <code>glm</code>)<br>
+The corresponding model, if not attached to <code>x</code>.</p></dd>
 
 
 <dt id="arg-quiet">quiet<a class="anchor" aria-label="anchor" href="#arg-quiet"></a></dt>
-<dd><p>logical argument whether broom.helpers should not return
-a message when requested output cannot be generated. Default is <code>FALSE</code></p></dd>
+<dd><p>(<code>logical</code>)<br>
+Whether <code>broom.helpers</code> should not return a message when requested output
+cannot be generated. Default is <code>FALSE</code>.</p></dd>
 
 
 <dt id="arg-strict">strict<a class="anchor" aria-label="anchor" href="#arg-strict"></a></dt>
-<dd><p>logical argument whether broom.helpers should return an error
-when requested output cannot be generated. Default is <code>FALSE</code></p></dd>
+<dd><p>(<code>logical</code>)<br>
+Whether <code>broom.helpers</code> should return an error
+when requested output cannot be generated. Default is <code>FALSE</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

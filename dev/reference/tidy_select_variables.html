@@ -51,18 +51,20 @@ To remove the intercept, use <code><a href="tidy_remove_intercept.html">tidy_rem
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>a tidy tibble</p></dd>
+<dd><p>(<code>data.frame</code>)<br>
+A tidy tibble as produced by <code>tidy_*()</code> functions.</p></dd>
 
 
 <dt id="arg-include">include<a class="anchor" aria-label="anchor" href="#arg-include"></a></dt>
-<dd><p>variables to include. Accepts <a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">tidyselect</a>
-syntax. Use <code>-</code> to remove a variable. Default is <code><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything()</a></code>.
+<dd><p>(<code><a href="https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html" class="external-link">tidy-select</a></code>)<br>
+Variables to include. Default is <code><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything()</a></code>.
 See also <code><a href="select_helpers.html">all_continuous()</a></code>, <code><a href="select_helpers.html">all_categorical()</a></code>, <code><a href="select_helpers.html">all_dichotomous()</a></code>
-and <code><a href="select_helpers.html">all_interaction()</a></code></p></dd>
+and <code><a href="select_helpers.html">all_interaction()</a></code>.</p></dd>
 
 
 <dt id="arg-model">model<a class="anchor" aria-label="anchor" href="#arg-model"></a></dt>
-<dd><p>the corresponding model, if not attached to <code>x</code></p></dd>
+<dd><p>(a model object, e.g. <code>glm</code>)<br>
+The corresponding model, if not attached to <code>x</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

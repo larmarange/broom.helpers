@@ -128,147 +128,169 @@ tidy_detach_model()
 
 
 <dl><dt id="arg-model">model<a class="anchor" aria-label="anchor" href="#arg-model"></a></dt>
-<dd><p>a model to be attached/tidied</p></dd>
+<dd><p>(a model object, e.g. <code>glm</code>)<br>
+A model to be attached/tidied.</p></dd>
 
 
 <dt id="arg-tidy-fun">tidy_fun<a class="anchor" aria-label="anchor" href="#arg-tidy-fun"></a></dt>
-<dd><p>option to specify a custom tidier function</p></dd>
+<dd><p>(<code>function</code>)<br>
+Option to specify a custom tidier function.</p></dd>
 
 
 <dt id="arg-conf-int">conf.int<a class="anchor" aria-label="anchor" href="#arg-conf-int"></a></dt>
-<dd><p>should confidence intervals be computed? (see <code><a href="https://broom.tidymodels.org/reference/reexports.html" class="external-link">broom::tidy()</a></code>)</p></dd>
+<dd><p>(<code>logical</code>)<br>
+Should confidence intervals be computed? (see <code><a href="https://broom.tidymodels.org/reference/reexports.html" class="external-link">broom::tidy()</a></code>)</p></dd>
 
 
 <dt id="arg-conf-level">conf.level<a class="anchor" aria-label="anchor" href="#arg-conf-level"></a></dt>
-<dd><p>level of confidence for confidence intervals (default: 95%)</p></dd>
+<dd><p>(<code>numeric</code>)<br>
+Level of confidence for confidence intervals (default: 95%).</p></dd>
 
 
 <dt id="arg-exponentiate">exponentiate<a class="anchor" aria-label="anchor" href="#arg-exponentiate"></a></dt>
-<dd><p>logical indicating whether or not to exponentiate the
-coefficient estimates. This is typical for logistic, Poisson and Cox models,
+<dd><p>(<code>logical</code>)<br>
+Whether or not to exponentiate the coefficient estimates.
+This is typical for logistic, Poisson and Cox models,
 but a bad idea if there is no log or logit link; defaults to <code>FALSE</code>.</p></dd>
 
 
 <dt id="arg-model-matrix-attr">model_matrix_attr<a class="anchor" aria-label="anchor" href="#arg-model-matrix-attr"></a></dt>
-<dd><p>logical indicating whether model frame and model
-matrix should be added as attributes of <code>model</code> (respectively named
-<code>"model_frame"</code> and <code>"model_matrix"</code>) and passed through</p></dd>
+<dd><p>(<code>logical</code>)<br>
+Whether model frame and model matrix should be added as attributes of <code>model</code>
+(respectively named <code>"model_frame"</code> and <code>"model_matrix"</code>) and passed through.</p></dd>
 
 
 <dt id="arg-variable-labels">variable_labels<a class="anchor" aria-label="anchor" href="#arg-variable-labels"></a></dt>
-<dd><p>a named list or a named vector of custom variable labels</p></dd>
+<dd><p>(<code><a href="https://www.danieldsjoberg.com/gtsummary/reference/syntax.html" class="external-link">formula-list-selector</a></code>)<br>
+A named list or a named vector of custom variable labels.</p></dd>
 
 
 <dt id="arg-term-labels">term_labels<a class="anchor" aria-label="anchor" href="#arg-term-labels"></a></dt>
-<dd><p>a named list or a named vector of custom term labels</p></dd>
+<dd><p>(<code>list</code> or <code>vector</code>)<br>
+A named list or a named vector of custom term labels.</p></dd>
 
 
 <dt id="arg-interaction-sep">interaction_sep<a class="anchor" aria-label="anchor" href="#arg-interaction-sep"></a></dt>
-<dd><p>separator for interaction terms</p></dd>
+<dd><p>(<code>string</code>)<br>
+Separator for interaction terms.</p></dd>
 
 
 <dt id="arg-categorical-terms-pattern">categorical_terms_pattern<a class="anchor" aria-label="anchor" href="#arg-categorical-terms-pattern"></a></dt>
-<dd><p>a <a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue pattern</a> for
-labels of categorical terms with treatment or sum contrasts
-(see <code><a href="model_list_terms_levels.html">model_list_terms_levels()</a></code>)</p></dd>
+<dd><p>(<code><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue pattern</a></code>)<br>
+A <a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue pattern</a> for labels of categorical terms with treatment
+or sum contrasts (see <code><a href="model_list_terms_levels.html">model_list_terms_levels()</a></code>).</p></dd>
 
 
 <dt id="arg-disambiguate-terms">disambiguate_terms<a class="anchor" aria-label="anchor" href="#arg-disambiguate-terms"></a></dt>
-<dd><p>should terms be disambiguated with
+<dd><p>(<code>logical</code>)<br>
+Should terms be disambiguated with
 <code><a href="tidy_disambiguate_terms.html">tidy_disambiguate_terms()</a></code>? (default <code>TRUE</code>)</p></dd>
 
 
 <dt id="arg-disambiguate-sep">disambiguate_sep<a class="anchor" aria-label="anchor" href="#arg-disambiguate-sep"></a></dt>
-<dd><p>separator for <code><a href="tidy_disambiguate_terms.html">tidy_disambiguate_terms()</a></code></p></dd>
+<dd><p>(<code>string</code>)<br>
+Separator for <code><a href="tidy_disambiguate_terms.html">tidy_disambiguate_terms()</a></code>.</p></dd>
 
 
 <dt id="arg-add-reference-rows">add_reference_rows<a class="anchor" aria-label="anchor" href="#arg-add-reference-rows"></a></dt>
-<dd><p>should reference rows be added?</p></dd>
+<dd><p>(<code>logical</code>)<br>
+Should reference rows be added?</p></dd>
 
 
 <dt id="arg-no-reference-row">no_reference_row<a class="anchor" aria-label="anchor" href="#arg-no-reference-row"></a></dt>
-<dd><p>variables (accepts <a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">tidyselect</a> notation)
-for those no reference row should be added, when <code>add_reference_rows = TRUE</code></p></dd>
+<dd><p>(<code><a href="https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html" class="external-link">tidy-select</a></code>)<br>
+Variables for those no reference row should be added,
+when <code>add_reference_rows = TRUE</code>.</p></dd>
 
 
 <dt id="arg-add-pairwise-contrasts">add_pairwise_contrasts<a class="anchor" aria-label="anchor" href="#arg-add-pairwise-contrasts"></a></dt>
-<dd><p>apply <code><a href="tidy_add_pairwise_contrasts.html">tidy_add_pairwise_contrasts()</a></code>?
-<a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a></p></dd>
+<dd><p>(<code>logical</code>)<br>
+Apply <code><a href="tidy_add_pairwise_contrasts.html">tidy_add_pairwise_contrasts()</a></code>?</p></dd>
 
 
 <dt id="arg-pairwise-variables">pairwise_variables<a class="anchor" aria-label="anchor" href="#arg-pairwise-variables"></a></dt>
-<dd><p>variables to add pairwise contrasts
-(accepts <a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">tidyselect</a> notation)</p></dd>
+<dd><p>(<code><a href="https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html" class="external-link">tidy-select</a></code>)<br>
+Variables to add pairwise contrasts.</p></dd>
 
 
 <dt id="arg-keep-model-terms">keep_model_terms<a class="anchor" aria-label="anchor" href="#arg-keep-model-terms"></a></dt>
-<dd><p>keep original model terms for variables where
+<dd><p>(<code>logical</code>)<br>
+Keep original model terms for variables where
 pairwise contrasts are added? (default is <code>FALSE</code>)</p></dd>
 
 
 <dt id="arg-pairwise-reverse">pairwise_reverse<a class="anchor" aria-label="anchor" href="#arg-pairwise-reverse"></a></dt>
-<dd><p>determines whether to use <code>"pairwise"</code> (if <code>TRUE</code>)
-or <code>"revpairwise"</code> (if <code>FALSE</code>), see <code><a href="https://rvlenth.github.io/emmeans/reference/contrast.html" class="external-link">emmeans::contrast()</a></code></p></dd>
+<dd><p>(<code>logical</code>)<br>
+Determines whether to use <code>"pairwise"</code> (if <code>TRUE</code>)
+or <code>"revpairwise"</code> (if <code>FALSE</code>), see <code><a href="https://rvlenth.github.io/emmeans/reference/contrast.html" class="external-link">emmeans::contrast()</a></code>.</p></dd>
 
 
 <dt id="arg-contrasts-adjust">contrasts_adjust<a class="anchor" aria-label="anchor" href="#arg-contrasts-adjust"></a></dt>
-<dd><p>optional adjustment method when computing contrasts,
-see <code><a href="https://rvlenth.github.io/emmeans/reference/contrast.html" class="external-link">emmeans::contrast()</a></code> (if <code>NULL</code>, use <code>emmeans</code> default)</p></dd>
+<dd><p>(<code>string</code>)<br>
+Optional adjustment method when computing contrasts,
+see <code><a href="https://rvlenth.github.io/emmeans/reference/contrast.html" class="external-link">emmeans::contrast()</a></code> (if <code>NULL</code>, use <code>emmeans</code> default).</p></dd>
 
 
 <dt id="arg-emmeans-args">emmeans_args<a class="anchor" aria-label="anchor" href="#arg-emmeans-args"></a></dt>
-<dd><p>list of additional parameter to pass to
-<code><a href="https://rvlenth.github.io/emmeans/reference/emmeans.html" class="external-link">emmeans::emmeans()</a></code> when computing pairwise contrasts</p></dd>
+<dd><p>(<code>list</code>)<br>
+List of additional parameter to pass to
+<code><a href="https://rvlenth.github.io/emmeans/reference/emmeans.html" class="external-link">emmeans::emmeans()</a></code> when computing pairwise contrasts.</p></dd>
 
 
 <dt id="arg-add-estimate-to-reference-rows">add_estimate_to_reference_rows<a class="anchor" aria-label="anchor" href="#arg-add-estimate-to-reference-rows"></a></dt>
-<dd><p>should an estimate value be added
-to reference rows?</p></dd>
+<dd><p>(<code>logical</code>)<br>
+Should an estimate value be added to reference rows?</p></dd>
 
 
 <dt id="arg-add-header-rows">add_header_rows<a class="anchor" aria-label="anchor" href="#arg-add-header-rows"></a></dt>
-<dd><p>should header rows be added?</p></dd>
+<dd><p>(<code>logical</code>)<br>
+Should header rows be added?</p></dd>
 
 
 <dt id="arg-show-single-row">show_single_row<a class="anchor" aria-label="anchor" href="#arg-show-single-row"></a></dt>
-<dd><p>variables that should be displayed
-on a single row (accepts <a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">tidyselect</a> notation), when
-<code>add_header_rows</code> is <code>TRUE</code></p></dd>
+<dd><p>(<code><a href="https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html" class="external-link">tidy-select</a></code>)<br>
+Variables that should be displayed on a single row,
+when <code>add_header_rows</code> is <code>TRUE</code>.</p></dd>
 
 
 <dt id="arg-add-n">add_n<a class="anchor" aria-label="anchor" href="#arg-add-n"></a></dt>
-<dd><p>should the number of observations be added?</p></dd>
+<dd><p>(<code>logical</code>)<br>
+Should the number of observations be added?</p></dd>
 
 
 <dt id="arg-intercept">intercept<a class="anchor" aria-label="anchor" href="#arg-intercept"></a></dt>
-<dd><p>should the intercept(s) be included?</p></dd>
+<dd><p>(<code>logical</code>)<br>
+Should the intercept(s) be included?</p></dd>
 
 
 <dt id="arg-include">include<a class="anchor" aria-label="anchor" href="#arg-include"></a></dt>
-<dd><p>variables to include. Accepts <a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">tidyselect</a>
-syntax. Use <code>-</code> to remove a variable. Default is <code><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything()</a></code>.
+<dd><p>(<code><a href="https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html" class="external-link">tidy-select</a></code>)<br>
+Variables to include. Default is <code><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything()</a></code>.
 See also <code><a href="select_helpers.html">all_continuous()</a></code>, <code><a href="select_helpers.html">all_categorical()</a></code>, <code><a href="select_helpers.html">all_dichotomous()</a></code>
-and <code><a href="select_helpers.html">all_interaction()</a></code></p></dd>
+and <code><a href="select_helpers.html">all_interaction()</a></code>.</p></dd>
 
 
 <dt id="arg-keep-model">keep_model<a class="anchor" aria-label="anchor" href="#arg-keep-model"></a></dt>
-<dd><p>should the model be kept as an attribute of the final
-result?</p></dd>
+<dd><p>(<code>logical</code>)<br>
+Should the model be kept as an attribute of the final result?</p></dd>
 
 
 <dt id="arg-tidy-post-fun">tidy_post_fun<a class="anchor" aria-label="anchor" href="#arg-tidy-post-fun"></a></dt>
-<dd><p>custom function applied to the results at the end of
+<dd><p>(<code>function</code>)<br>
+Custom function applied to the results at the end of
 <code>tidy_plus_plus()</code> (see note)</p></dd>
 
 
 <dt id="arg-quiet">quiet<a class="anchor" aria-label="anchor" href="#arg-quiet"></a></dt>
-<dd><p>logical argument whether broom.helpers should not return
-a message when requested output cannot be generated. Default is <code>FALSE</code></p></dd>
+<dd><p>(<code>logical</code>)<br>
+Whether <code>broom.helpers</code> should not return a message when requested output
+cannot be generated. Default is <code>FALSE</code>.</p></dd>
 
 
 <dt id="arg-strict">strict<a class="anchor" aria-label="anchor" href="#arg-strict"></a></dt>
-<dd><p>logical argument whether broom.helpers should return an error
-when requested output cannot be generated. Default is <code>FALSE</code></p></dd>
+<dd><p>(<code>logical</code>)<br>
+Whether <code>broom.helpers</code> should return an error
+when requested output cannot be generated. Default is <code>FALSE</code>.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>

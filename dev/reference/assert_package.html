@@ -76,32 +76,38 @@ will return, if any, the minimum version of <code>pkg</code> required by <code>p
 
 
 <dl><dt id="arg-pkg">pkg<a class="anchor" aria-label="anchor" href="#arg-pkg"></a></dt>
-<dd><p>Package required</p></dd>
+<dd><p>(<code>string</code>)<br>
+Name of the required package.</p></dd>
 
 
 <dt id="arg-fn">fn<a class="anchor" aria-label="anchor" href="#arg-fn"></a></dt>
-<dd><p>Calling function from the user perspective. Used to write
+<dd><p>(<code>string</code>)<br>
+Name of the calling function from the user perspective. Used to write
 informative error messages.</p></dd>
 
 
 <dt id="arg-pkg-search">pkg_search<a class="anchor" aria-label="anchor" href="#arg-pkg-search"></a></dt>
-<dd><p>the package the function will search for a minimum
+<dd><p>(<code>string</code>)<br>
+Name of the package the function will search for a minimum
 required version from.</p></dd>
 
 
 <dt id="arg-boolean">boolean<a class="anchor" aria-label="anchor" href="#arg-boolean"></a></dt>
-<dd><p>logical indicating whether to return a <code>TRUE</code>/<code>FALSE</code>, rather
+<dd><p>(<code>logical</code>)<br>
+Whether to return a <code>TRUE</code>/<code>FALSE</code>, rather
 than error when package/package version not available. Default is <code>FALSE</code>,
 which will return an error if <code>pkg</code> is not installed.</p></dd>
 
 
 <dt id="arg-remove-duplicates">remove_duplicates<a class="anchor" aria-label="anchor" href="#arg-remove-duplicates"></a></dt>
-<dd><p>if several versions of a package are installed,
+<dd><p>(<code>logical</code>)<br>
+If several versions of a package are installed,
 should only the first one be returned?</p></dd>
 
 
 <dt id="arg-lib-loc">lib.loc<a class="anchor" aria-label="anchor" href="#arg-lib-loc"></a></dt>
-<dd><p>location of <code>R</code> library trees to search through, see
+<dd><p>(<code>string</code>)<br>
+Location of <code>R</code> library trees to search through, see
 <code><a href="https://rdrr.io/r/utils/installed.packages.html" class="external-link">utils::installed.packages()</a></code>.</p></dd>
 
 </dl></div>

@@ -61,17 +61,19 @@ named <code>coefficients_type</code> and <code>coefficients_label</code>).</p>
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>a tidy tibble</p></dd>
+<dd><p>(<code>data.frame</code>)<br>
+A tidy tibble as produced by <code>tidy_*()</code> functions.</p></dd>
 
 
 <dt id="arg-exponentiate">exponentiate<a class="anchor" aria-label="anchor" href="#arg-exponentiate"></a></dt>
-<dd><p>logical indicating whether or not to exponentiate the
-coefficient estimates. It should be consistent with the original call to
-<code><a href="https://broom.tidymodels.org/reference/reexports.html" class="external-link">broom::tidy()</a></code></p></dd>
+<dd><p>(<code>logical</code>)<br>
+Whether or not to exponentiate the coefficient estimates. It should be
+consistent with the original call to <code><a href="https://broom.tidymodels.org/reference/reexports.html" class="external-link">broom::tidy()</a></code>.</p></dd>
 
 
 <dt id="arg-model">model<a class="anchor" aria-label="anchor" href="#arg-model"></a></dt>
-<dd><p>the corresponding model, if not attached to <code>x</code></p></dd>
+<dd><p>(a model object, e.g. <code>glm</code>)<br>
+The corresponding model, if not attached to <code>x</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

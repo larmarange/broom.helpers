@@ -76,11 +76,11 @@ values from a mixed model
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">all_continuous</span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">all_dichotomous</span><span class="op">(</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">all_continuous</span><span class="op">(</span>continuous2 <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">all_categorical</span><span class="op">(</span>dichotomous <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">all_dichotomous</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">all_interaction</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
@@ -90,27 +90,40 @@ values from a mixed model
 <span></span>
 <span><span class="fu">all_intercepts</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">all_contrasts</span><span class="op">(</span>contrasts_type <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">all_contrasts</span><span class="op">(</span></span>
+<span>  contrasts_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"treatment"</span>, <span class="st">"sum"</span>, <span class="st">"poly"</span>, <span class="st">"helmert"</span>, <span class="st">"sdif"</span>, <span class="st">"other"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
 
-<dl><dt id="arg-dichotomous">dichotomous<a class="anchor" aria-label="anchor" href="#arg-dichotomous"></a></dt>
-<dd><p>Logical indicating whether to include dichotomous variables.
-Default is <code>TRUE</code></p></dd>
+<dl><dt id="arg-continuous-">continuous2<a class="anchor" aria-label="anchor" href="#arg-continuous-"></a></dt>
+<dd><p>(<code>logical</code>)<br>
+Whether to include continuous2 variables, default is <code>TRUE</code>.
+For compatibility with <code>{gtsummary}</code>), see <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/select_helpers.html" class="external-link">gtsummary::all_continuous2()</a></code>.</p></dd>
+
+
+<dt id="arg-dichotomous">dichotomous<a class="anchor" aria-label="anchor" href="#arg-dichotomous"></a></dt>
+<dd><p>(<code>logical</code>)<br>
+Whether to include dichotomous variables, default is <code>TRUE</code>.</p></dd>
 
 
 <dt id="arg-contrasts-type">contrasts_type<a class="anchor" aria-label="anchor" href="#arg-contrasts-type"></a></dt>
-<dd><p>type of contrast to select. When <code>NULL</code>, all variables with a
-contrast will be selected. Default is <code>NULL</code>.  Select among contrast types
-<code>c("treatment", "sum", "poly", "helmert", "other")</code></p></dd>
+<dd><p>(<code>string</code>)<br>
+Type of contrast to select. When <code>NULL</code>, all variables with a
+contrast will be selected. Default is <code>NULL</code>. Select among contrast types
+<code>c("treatment", "sum", "poly", "helmert", "sdif", "other")</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A character vector of column names selected</p>
+    <p>A character vector of column names selected.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p><code><a href="scope_tidy.html">scope_tidy()</a></code></p></div>
     </div>
 
     <div class="section level2">
