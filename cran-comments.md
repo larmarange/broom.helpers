@@ -13,7 +13,7 @@ cf. https://github.com/larmarange/broom.helpers/actions/workflows/R-CMD-check.ya
 
 ## revdepcheck results
 
-We checked 11 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 13 reverse dependencies (12 from CRAN + 1 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
 
  * We saw 0 new problems
  * We failed to check 1 packages
@@ -30,7 +30,7 @@ Issues with CRAN packages are summarised below.
 Check status summary:
                   OK
   Source packages  1
-  Reverse depends 11
+  Reverse depends 13
 
 Check results summary:
 broom.helpers ... OK
@@ -42,9 +42,11 @@ rdepends_gtreg ... OK
 rdepends_gtsummary ... OK
 rdepends_iNZightRegression ... OK
 rdepends_logitr ... OK
+rdepends_pubh ... OK
 rdepends_regport ... OK
 rdepends_simstudy ... OK
 rdepends_smdi ... OK
+rdepends_tidycmprsk ... OK
 
 ------- Check for regressions ------
 No changes between old and new version

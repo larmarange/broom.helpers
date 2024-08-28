@@ -10,7 +10,7 @@
 |collate  |French_France.utf8                               |
 |ctype    |French_France.utf8                               |
 |tz       |Europe/Paris                                     |
-|date     |2024-08-14                                       |
+|date     |2024-08-28                                       |
 |rstudio  |2023.12.1+402 Ocean Storm (desktop)              |
 |pandoc   |3.1.11 @ C:\PROGRA~1\Quarto\bin\tools\pandoc.exe |
 
@@ -18,14 +18,15 @@
 
 |package       |old    |new         |Δ  |
 |:-------------|:------|:-----------|:--|
-|broom.helpers |1.15.0 |1.15.0.9000 |*  |
+|broom.helpers |1.16.0 |1.16.0.9000 |*  |
 |backports     |1.5.0  |1.5.0       |   |
 |bit           |4.0.5  |4.0.5       |   |
 |bit64         |4.0.5  |4.0.5       |   |
 |broom         |1.0.6  |1.0.6       |   |
+|cards         |NA     |0.2.1       |*  |
 |cli           |3.6.3  |3.6.3       |   |
 |clipr         |0.8.0  |0.8.0       |   |
-|cpp11         |0.4.7  |0.4.7       |   |
+|cpp11         |0.5.0  |0.5.0       |   |
 |crayon        |1.5.3  |1.5.3       |   |
 |dplyr         |1.1.4  |1.1.4       |   |
 |fansi         |1.0.6  |1.0.6       |   |
@@ -58,9 +59,10 @@
 
 # Revdeps
 
-## Failed to check (1)
+## Failed to check (2)
 
 |package   |version |error |warning |note |
 |:---------|:-------|:-----|:-------|:----|
-|gtsummary |2.0.0   |1     |        |     |
+|gtsummary |2.0.1   |1     |        |     |
+|simstudy  |?       |      |        |     |
 
