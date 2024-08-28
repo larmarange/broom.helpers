@@ -1,10 +1,5 @@
 # broom.helpers (development version)
 
-**Documentation**
-
-- Documentation has been improved, showing now clearly the type expected
-  for each argument (#272)
-  
 **Deprecated functions and changes in selectors functions**
 
 - selectors such as `all_categorical()` are now compatible with `gtsummary`
@@ -22,6 +17,11 @@
 - `model_get_model_frame.coxph()` has been fixed to return a correct model
   frame a subject identifier is passed to `survival::coxph()` (#268)
 
+
+**Documentation**
+
+- Documentation has been improved, showing now clearly the type expected
+  for each argument (#272)
 
 # broom.helpers 1.16.0
 
