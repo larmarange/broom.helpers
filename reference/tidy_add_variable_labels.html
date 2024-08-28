@@ -19,7 +19,7 @@ variable name otherwise.
 
     <a class="navbar-brand me-2" href="../index.html">broom.helpers</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.16.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.17.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,7 +42,7 @@ variable name otherwise.
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Add variable labels</h1>
-      <small class="dont-index">Source: <a href="https://github.com/larmarange/broom.helpers/blob/v1.16.0/R/tidy_add_variable_labels.R" class="external-link"><code>R/tidy_add_variable_labels.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/larmarange/broom.helpers/blob/main/R/tidy_add_variable_labels.R" class="external-link"><code>R/tidy_add_variable_labels.R</code></a></small>
       <div class="d-none name"><code>tidy_add_variable_labels.Rd</code></div>
     </div>
 
@@ -59,9 +59,7 @@ the <code>label</code> attribute (cf. <code><a href="https://larmarange.github.i
 <span>  <span class="va">x</span>,</span>
 <span>  labels <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  interaction_sep <span class="op">=</span> <span class="st">" * "</span>,</span>
-<span>  model <span class="op">=</span> <span class="fu"><a href="tidy_attach_model.html">tidy_get_model</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
-<span>  quiet <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  strict <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  model <span class="op">=</span> <span class="fu"><a href="tidy_attach_model.html">tidy_get_model</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -70,30 +68,23 @@ the <code>label</code> attribute (cf. <code><a href="https://larmarange.github.i
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>a tidy tibble</p></dd>
+<dd><p>(<code>data.frame</code>)<br>
+A tidy tibble as produced by <code>tidy_*()</code> functions.</p></dd>
 
 
 <dt id="arg-labels">labels<a class="anchor" aria-label="anchor" href="#arg-labels"></a></dt>
-<dd><p>an optional named list or named vector of
-custom variable labels</p></dd>
+<dd><p>(<code><a href="https://www.danieldsjoberg.com/gtsummary/reference/syntax.html" class="external-link">formula-list-selector</a></code>)<br>
+An optional named list or a named vector of custom variable labels.</p></dd>
 
 
 <dt id="arg-interaction-sep">interaction_sep<a class="anchor" aria-label="anchor" href="#arg-interaction-sep"></a></dt>
-<dd><p>separator for interaction terms</p></dd>
+<dd><p>(<code>string</code>)<br>
+Separator for interaction terms.</p></dd>
 
 
 <dt id="arg-model">model<a class="anchor" aria-label="anchor" href="#arg-model"></a></dt>
-<dd><p>the corresponding model, if not attached to <code>x</code></p></dd>
-
-
-<dt id="arg-quiet">quiet<a class="anchor" aria-label="anchor" href="#arg-quiet"></a></dt>
-<dd><p>logical argument whether broom.helpers should not return
-a message when requested output cannot be generated. Default is <code>FALSE</code></p></dd>
-
-
-<dt id="arg-strict">strict<a class="anchor" aria-label="anchor" href="#arg-strict"></a></dt>
-<dd><p>logical argument whether broom.helpers should return an error
-when requested output cannot be generated. Default is <code>FALSE</code></p></dd>
+<dd><p>(a model object, e.g. <code>glm</code>)<br>
+The corresponding model, if not attached to <code>x</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -136,9 +127,9 @@ term in <code>labels</code> (see examples).</p>
 <span class="r-in"><span>  <span class="fu"><a href="tidy_attach_model.html">tidy_and_attach</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu">tidy_add_variable_labels</span><span class="op">(</span></span></span>
 <span class="r-in"><span>    labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>      <span class="st">"(Intercept)"</span> <span class="op">=</span> <span class="st">"Custom intercept"</span>,</span></span>
-<span class="r-in"><span>      Sex <span class="op">=</span> <span class="st">"Gender"</span>,</span></span>
-<span class="r-in"><span>      <span class="st">"Class:Age"</span> <span class="op">=</span> <span class="st">"Custom label"</span></span></span>
+<span class="r-in"><span>      <span class="st">"(Intercept)"</span> <span class="op">~</span> <span class="st">"Custom intercept"</span>,</span></span>
+<span class="r-in"><span>      <span class="va">Sex</span> <span class="op">~</span> <span class="st">"Gender"</span>,</span></span>
+<span class="r-in"><span>      <span class="st">"Class:Age"</span> <span class="op">~</span> <span class="st">"Custom label"</span></span></span>
 <span class="r-in"><span>    <span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>glm.fit: fitted probabilities numerically 0 or 1 occurred</span>

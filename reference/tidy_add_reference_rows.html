@@ -13,7 +13,7 @@ a sum contrast (stats::contr.sum()), or successive differences contrast
 
     <a class="navbar-brand me-2" href="../index.html">broom.helpers</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.16.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.17.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,7 +36,7 @@ a sum contrast (stats::contr.sum()), or successive differences contrast
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Add references rows for categorical variables</h1>
-      <small class="dont-index">Source: <a href="https://github.com/larmarange/broom.helpers/blob/v1.16.0/R/tidy_add_reference_rows.R" class="external-link"><code>R/tidy_add_reference_rows.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/larmarange/broom.helpers/blob/main/R/tidy_add_reference_rows.R" class="external-link"><code>R/tidy_add_reference_rows.R</code></a></small>
       <div class="d-none name"><code>tidy_add_reference_rows.Rd</code></div>
     </div>
 
@@ -62,23 +62,25 @@ a sum contrast (<code><a href="https://rdrr.io/r/stats/contrast.html" class="ext
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>a tidy tibble</p></dd>
+<dd><p>(<code>data.frame</code>)<br>
+A tidy tibble as produced by <code>tidy_*()</code> functions.</p></dd>
 
 
 <dt id="arg-no-reference-row">no_reference_row<a class="anchor" aria-label="anchor" href="#arg-no-reference-row"></a></dt>
-<dd><p>a vector indicating the name of variables
-for those no reference row should be added.
-Accepts <a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">tidyselect</a> syntax. Default is <code>NULL</code>.
-See also <code><a href="select_helpers.html">all_categorical()</a></code> and <code><a href="select_helpers.html">all_dichotomous()</a></code></p></dd>
+<dd><p>(<code><a href="https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html" class="external-link">tidy-select</a></code>)<br>
+Variables for those no reference row should be added.
+See also <code><a href="select_helpers.html">all_categorical()</a></code> and <code><a href="select_helpers.html">all_dichotomous()</a></code>.</p></dd>
 
 
 <dt id="arg-model">model<a class="anchor" aria-label="anchor" href="#arg-model"></a></dt>
-<dd><p>the corresponding model, if not attached to <code>x</code></p></dd>
+<dd><p>(a model object, e.g. <code>glm</code>)<br>
+The corresponding model, if not attached to <code>x</code>.</p></dd>
 
 
 <dt id="arg-quiet">quiet<a class="anchor" aria-label="anchor" href="#arg-quiet"></a></dt>
-<dd><p>logical argument whether broom.helpers should not return
-a message when requested output cannot be generated. Default is <code>FALSE</code></p></dd>
+<dd><p>(<code>logical</code>)<br>
+Whether <code>broom.helpers</code> should not return a message when requested output
+cannot be generated. Default is <code>FALSE</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

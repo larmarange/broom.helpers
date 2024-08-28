@@ -15,7 +15,7 @@ See marginaleffects::avg_comparisons() for a list of supported models."></head><
 
     <a class="navbar-brand me-2" href="../index.html">broom.helpers</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.16.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.17.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,7 +38,7 @@ See marginaleffects::avg_comparisons() for a list of supported models."></head><
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Marginal Contrasts with <code>marginaleffects::avg_comparisons()</code></h1>
-      <small class="dont-index">Source: <a href="https://github.com/larmarange/broom.helpers/blob/v1.16.0/R/marginal_tidiers.R" class="external-link"><code>R/marginal_tidiers.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/larmarange/broom.helpers/blob/main/R/marginal_tidiers.R" class="external-link"><code>R/marginal_tidiers.R</code></a></small>
       <div class="d-none name"><code>tidy_marginal_contrasts.Rd</code></div>
     </div>
 
@@ -76,59 +76,68 @@ See <code><a href="https://marginaleffects.com/man/comparisons.html" class="exte
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>a model</p></dd>
+<dd><p>(a model object, e.g. <code>glm</code>)<br>
+A model to be tidied.</p></dd>
 
 
 <dt id="arg-variables-list">variables_list<a class="anchor" aria-label="anchor" href="#arg-variables-list"></a></dt>
-<dd><p>a list whose elements will be sequentially passed to
+<dd><p>(<code>list</code> or <code>string</code>)<br>
+A list whose elements will be sequentially passed to
 <code>variables</code> in <code><a href="https://marginaleffects.com/man/comparisons.html" class="external-link">marginaleffects::avg_comparisons()</a></code> (see details below);
 alternatively, it could also be the string <code>"auto"</code> (default), <code>"cross"</code> or
 <code>"no_interaction"</code></p></dd>
 
 
 <dt id="arg-conf-int">conf.int<a class="anchor" aria-label="anchor" href="#arg-conf-int"></a></dt>
-<dd><p>logical indicating whether or not to include a confidence
-interval in the tidied output</p></dd>
+<dd><p>(<code>logical</code>)<br>
+Whether or not to include a confidence interval in the tidied output.</p></dd>
 
 
 <dt id="arg-conf-level">conf.level<a class="anchor" aria-label="anchor" href="#arg-conf-level"></a></dt>
-<dd><p>the confidence level to use for the confidence interval</p></dd>
+<dd><p>(<code>numeric</code>)<br>
+The confidence level to use for the confidence interval (between <code>0</code> ans <code>1</code>).</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>additional parameters passed to
-<code><a href="https://marginaleffects.com/man/comparisons.html" class="external-link">marginaleffects::avg_comparisons()</a></code></p></dd>
+<dd><p>Additional parameters passed to
+<code><a href="https://marginaleffects.com/man/comparisons.html" class="external-link">marginaleffects::avg_comparisons()</a></code>.</p></dd>
 
 
 <dt id="arg-model">model<a class="anchor" aria-label="anchor" href="#arg-model"></a></dt>
-<dd><p>a model</p></dd>
+<dd><p>(a model object, e.g. <code>glm</code>)<br>
+A model.</p></dd>
 
 
 <dt id="arg-interactions">interactions<a class="anchor" aria-label="anchor" href="#arg-interactions"></a></dt>
-<dd><p>should combinations of variables corresponding to
-interactions be returned?</p></dd>
+<dd><p>(<code>logical</code>)<br>
+Should combinations of variables corresponding to interactions be returned?</p></dd>
 
 
 <dt id="arg-cross">cross<a class="anchor" aria-label="anchor" href="#arg-cross"></a></dt>
-<dd><p>if <code>interaction</code> is <code>TRUE</code>, should "cross-contrasts" be
+<dd><p>(<code>logical</code>)<br>
+If <code>interaction</code> is <code>TRUE</code>, should "cross-contrasts" be
 computed? (if <code>FALSE</code>, only the last term of an interaction is passed to
 <code>variable</code> and the other terms are passed to <code>by</code>)</p></dd>
 
 
 <dt id="arg-var-categorical">var_categorical<a class="anchor" aria-label="anchor" href="#arg-var-categorical"></a></dt>
-<dd><p>default <code>variable</code> value for categorical variables</p></dd>
+<dd><p>(<code><a href="https://marginaleffects.com/man/comparisons.html" class="external-link">predictor values</a></code>)<br>
+Default <code>variable</code> value for categorical variables.</p></dd>
 
 
 <dt id="arg-var-continuous">var_continuous<a class="anchor" aria-label="anchor" href="#arg-var-continuous"></a></dt>
-<dd><p>default <code>variable</code> value for continuous variables</p></dd>
+<dd><p>(<code><a href="https://marginaleffects.com/man/comparisons.html" class="external-link">predictor values</a></code>)<br>
+Default <code>variable</code> value for continuous variables.</p></dd>
 
 
 <dt id="arg-by-categorical">by_categorical<a class="anchor" aria-label="anchor" href="#arg-by-categorical"></a></dt>
-<dd><p>default <code>by</code> value for categorical variables</p></dd>
+<dd><p>(<code><a href="https://marginaleffects.com/man/comparisons.html" class="external-link">predictor values</a></code>)<br>
+Default <code>by</code> value for categorical variables.</p></dd>
 
 
 <dt id="arg-by-continuous">by_continuous<a class="anchor" aria-label="anchor" href="#arg-by-continuous"></a></dt>
-<dd><p>default <code>by</code> value for continuous variables</p></dd>
+<dd><p>(<code><a href="https://marginaleffects.com/man/comparisons.html" class="external-link">predictor values</a></code>)<br>
+Default <code>by</code> value for continuous variables.</p></dd>
 
 </dl></div>
     <div class="section level2">

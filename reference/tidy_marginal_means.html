@@ -11,7 +11,7 @@ the option newdata = "marginalmeans".'></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">broom.helpers</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.16.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.17.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,7 +34,7 @@ the option newdata = "marginalmeans".'></head><body>
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Marginal Means with <code>marginaleffects::marginal_means()</code></h1>
-      <small class="dont-index">Source: <a href="https://github.com/larmarange/broom.helpers/blob/v1.16.0/R/marginal_tidiers.R" class="external-link"><code>R/marginal_tidiers.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/larmarange/broom.helpers/blob/main/R/marginal_tidiers.R" class="external-link"><code>R/marginal_tidiers.R</code></a></small>
       <div class="d-none name"><code>tidy_marginal_means.Rd</code></div>
     </div>
 
@@ -54,21 +54,23 @@ the option <code>newdata = "marginalmeans"</code>.</p>
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>a model</p></dd>
+<dd><p>(a model object, e.g. <code>glm</code>)<br>
+A model to be tidied.</p></dd>
 
 
 <dt id="arg-conf-int">conf.int<a class="anchor" aria-label="anchor" href="#arg-conf-int"></a></dt>
-<dd><p>logical indicating whether or not to include a confidence
-interval in the tidied output</p></dd>
+<dd><p>(<code>logical</code>)<br>
+Whether or not to include a confidence interval in the tidied output.</p></dd>
 
 
 <dt id="arg-conf-level">conf.level<a class="anchor" aria-label="anchor" href="#arg-conf-level"></a></dt>
-<dd><p>the confidence level to use for the confidence interval</p></dd>
+<dd><p>(<code>numeric</code>)<br>
+The confidence level to use for the confidence interval (between <code>0</code> ans <code>1</code>).</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>additional parameters passed to
-<code><a href="https://marginaleffects.com/man/marginal_means.html" class="external-link">marginaleffects::marginal_means()</a></code></p></dd>
+<dd><p>Additional parameters passed to
+<code><a href="https://marginaleffects.com/man/marginal_means.html" class="external-link">marginaleffects::marginal_means()</a></code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

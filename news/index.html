@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">broom.helpers</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.16.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.17.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,9 +30,22 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/larmarange/broom.helpers/blob/v1.16.0/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/larmarange/broom.helpers/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.17.0" id="broomhelpers-1170">broom.helpers 1.17.0<a class="anchor" aria-label="anchor" href="#broomhelpers-1170"></a></h2><p class="text-muted">CRAN release: 2024-08-28</p>
+<p><strong>Deprecated functions and changes in selectors functions</strong></p>
+<ul><li>selectors such as <code><a href="../reference/select_helpers.html">all_categorical()</a></code> are now compatible with <code>gtsummary</code> version ≥ 2.0.0 (<a href="https://github.com/larmarange/broom.helpers/issues/270" class="external-link">#270</a>)</li>
+<li>new function <code><a href="../reference/scope_tidy.html">scope_tidy()</a></code> to scope a tidy tibble allowing to tidy select (<a href="https://github.com/larmarange/broom.helpers/issues/270" class="external-link">#270</a>)</li>
+<li>
+<code><a href="../reference/dot-select_to_varnames.html">.select_to_varnames()</a></code>, <code><a href="../reference/dot-formula_list_to_named_list.html">.formula_list_to_named_list()</a></code>, <code><a href="../reference/dot-generic_selector.html">.generic_selector()</a></code> and <code><a href="../reference/dot-generic_selector.html">.is_selector_scoped()</a></code> are now deprecated and will be removed in a future release: you may consider <code><a href="https://insightsengineering.github.io/cards/latest-tag/reference/process_selectors.html" class="external-link">cards::process_selectors()</a></code> and <code><a href="https://insightsengineering.github.io/cards/latest-tag/reference/process_selectors.html" class="external-link">cards::process_formula_selectors()</a></code> as alternatives (<a href="https://github.com/larmarange/broom.helpers/issues/270" class="external-link">#270</a>)</li>
+</ul><p><strong>Fixes</strong></p>
+<ul><li>
+<code><a href="../reference/model_get_model_frame.html">model_get_model_frame.coxph()</a></code> has been fixed to return a correct model frame a subject identifier is passed to <code><a href="https://rdrr.io/pkg/survival/man/coxph.html" class="external-link">survival::coxph()</a></code> (<a href="https://github.com/larmarange/broom.helpers/issues/268" class="external-link">#268</a>)</li>
+</ul><p><strong>Documentation</strong></p>
+<ul><li>Documentation has been improved, showing now clearly the type expected for each argument (<a href="https://github.com/larmarange/broom.helpers/issues/272" class="external-link">#272</a>)</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.16.0" id="broomhelpers-1160">broom.helpers 1.16.0<a class="anchor" aria-label="anchor" href="#broomhelpers-1160"></a></h2><p class="text-muted">CRAN release: 2024-08-20</p>
 <p><strong>New features</strong></p>

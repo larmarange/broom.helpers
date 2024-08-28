@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">broom.helpers</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.16.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.17.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,7 +30,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>List all the variables used in a model</h1>
-      <small class="dont-index">Source: <a href="https://github.com/larmarange/broom.helpers/blob/v1.16.0/R/model_list_variables.R" class="external-link"><code>R/model_list_variables.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/larmarange/broom.helpers/blob/main/R/model_list_variables.R" class="external-link"><code>R/model_list_variables.R</code></a></small>
       <div class="d-none name"><code>model_list_variables.Rd</code></div>
     </div>
 
@@ -77,21 +77,24 @@
 
 
 <dl><dt id="arg-model">model<a class="anchor" aria-label="anchor" href="#arg-model"></a></dt>
-<dd><p>a model object</p></dd>
+<dd><p>(a model object, e.g. <code>glm</code>)<br>
+A model object.</p></dd>
 
 
 <dt id="arg-labels">labels<a class="anchor" aria-label="anchor" href="#arg-labels"></a></dt>
-<dd><p>an optional named list or named vector of
-custom variable labels</p></dd>
+<dd><p>(<code>list</code> or <code>string</code>)<br>
+An optional named list or named vector of
+custom variable labels.</p></dd>
 
 
 <dt id="arg-only-variable">only_variable<a class="anchor" aria-label="anchor" href="#arg-only-variable"></a></dt>
-<dd><p>if <code>TRUE</code>, will return only "variable"
-column</p></dd>
+<dd><p>(<code>logical</code>)<br>
+If <code>TRUE</code>, will return only "variable" column.</p></dd>
 
 
 <dt id="arg-add-var-type">add_var_type<a class="anchor" aria-label="anchor" href="#arg-add-var-type"></a></dt>
-<dd><p>if <code>TRUE</code>, add <code>var_nlevels</code> and <code>var_type</code> columns</p></dd>
+<dd><p>(<code>logical</code>)<br>
+If <code>TRUE</code>, add <code>var_nlevels</code> and <code>var_type</code> columns.</p></dd>
 
 </dl></div>
     <div class="section level2">

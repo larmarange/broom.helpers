@@ -13,7 +13,7 @@ vignette("models", package = "emmeans").'></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">broom.helpers</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.16.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.17.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,7 +36,7 @@ vignette("models", package = "emmeans").'></head><body>
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Add pairwise contrasts for categorical variables</h1>
-      <small class="dont-index">Source: <a href="https://github.com/larmarange/broom.helpers/blob/v1.16.0/R/tidy_add_pairwise_contrasts.R" class="external-link"><code>R/tidy_add_pairwise_contrasts.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/larmarange/broom.helpers/blob/main/R/tidy_add_pairwise_contrasts.R" class="external-link"><code>R/tidy_add_pairwise_contrasts.R</code></a></small>
       <div class="d-none name"><code>tidy_add_pairwise_contrasts.Rd</code></div>
     </div>
 
@@ -67,46 +67,54 @@ results tibble. Works only with models supported by <code>emmeans</code>, see
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>a tidy tibble</p></dd>
+<dd><p>(<code>data.frame</code>)<br>
+A tidy tibble as produced by <code>tidy_*()</code> functions.</p></dd>
 
 
 <dt id="arg-variables">variables<a class="anchor" aria-label="anchor" href="#arg-variables"></a></dt>
-<dd><p>a vector indicating the name of variables
-for those pairwise contrasts should be added.
-Accepts <a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">tidyselect</a> syntax. Default is  <code><a href="select_helpers.html">all_categorical()</a></code></p></dd>
+<dd><p>include (<code><a href="https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html" class="external-link">tidy-select</a></code>)<br>
+Variables for those pairwise contrasts should be added.
+Default is  <code><a href="select_helpers.html">all_categorical()</a></code>.</p></dd>
 
 
 <dt id="arg-keep-model-terms">keep_model_terms<a class="anchor" aria-label="anchor" href="#arg-keep-model-terms"></a></dt>
-<dd><p>keep terms from the model?</p></dd>
+<dd><p>(<code>logical</code>)<br>
+Keep terms from the model?</p></dd>
 
 
 <dt id="arg-pairwise-reverse">pairwise_reverse<a class="anchor" aria-label="anchor" href="#arg-pairwise-reverse"></a></dt>
-<dd><p>determines whether to use <code>"pairwise"</code> (if <code>TRUE</code>)
-or <code>"revpairwise"</code> (if <code>FALSE</code>), see <code><a href="https://rvlenth.github.io/emmeans/reference/contrast.html" class="external-link">emmeans::contrast()</a></code></p></dd>
+<dd><p>(<code>logical</code>)<br>
+Determines whether to use <code>"pairwise"</code> (if <code>TRUE</code>)
+or <code>"revpairwise"</code> (if <code>FALSE</code>), see <code><a href="https://rvlenth.github.io/emmeans/reference/contrast.html" class="external-link">emmeans::contrast()</a></code>.</p></dd>
 
 
 <dt id="arg-contrasts-adjust">contrasts_adjust<a class="anchor" aria-label="anchor" href="#arg-contrasts-adjust"></a></dt>
-<dd><p>optional adjustment method when computing contrasts,
-see <code><a href="https://rvlenth.github.io/emmeans/reference/contrast.html" class="external-link">emmeans::contrast()</a></code> (if <code>NULL</code>, use <code>emmeans</code> default)</p></dd>
+<dd><p>(<code>string</code>)<br>
+Optional adjustment method when computing contrasts,
+see <code><a href="https://rvlenth.github.io/emmeans/reference/contrast.html" class="external-link">emmeans::contrast()</a></code> (if <code>NULL</code>, use <code>emmeans</code> default).</p></dd>
 
 
 <dt id="arg-conf-level">conf.level<a class="anchor" aria-label="anchor" href="#arg-conf-level"></a></dt>
-<dd><p>confidence level, by default use the value indicated
-previously in <code><a href="tidy_attach_model.html">tidy_and_attach()</a></code></p></dd>
+<dd><p>(<code>numeric</code>)<br>
+Confidence level, by default use the value indicated
+previously in <code><a href="tidy_attach_model.html">tidy_and_attach()</a></code>.</p></dd>
 
 
 <dt id="arg-emmeans-args">emmeans_args<a class="anchor" aria-label="anchor" href="#arg-emmeans-args"></a></dt>
-<dd><p>list of additional parameter to pass to
-<code><a href="https://rvlenth.github.io/emmeans/reference/emmeans.html" class="external-link">emmeans::emmeans()</a></code> when computing pairwise contrasts</p></dd>
+<dd><p>(<code>list</code>)<br>
+List of additional parameter to pass to
+<code><a href="https://rvlenth.github.io/emmeans/reference/emmeans.html" class="external-link">emmeans::emmeans()</a></code> when computing pairwise contrasts.</p></dd>
 
 
 <dt id="arg-model">model<a class="anchor" aria-label="anchor" href="#arg-model"></a></dt>
-<dd><p>the corresponding model, if not attached to <code>x</code></p></dd>
+<dd><p>(a model object, e.g. <code>glm</code>)<br>
+The corresponding model, if not attached to <code>x</code>.</p></dd>
 
 
 <dt id="arg-quiet">quiet<a class="anchor" aria-label="anchor" href="#arg-quiet"></a></dt>
-<dd><p>logical argument whether broom.helpers should not return
-a message when requested output cannot be generated. Default is <code>FALSE</code></p></dd>
+<dd><p>(<code>logical</code>)<br>
+Whether <code>broom.helpers</code> should not return a message when requested output
+cannot be generated. Default is <code>FALSE</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
