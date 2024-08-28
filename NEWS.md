@@ -1,4 +1,4 @@
-# broom.helpers (development version)
+# broom.helpers 1.17.0
 
 **Deprecated functions and changes in selectors functions**
 
