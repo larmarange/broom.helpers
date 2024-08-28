@@ -214,3 +214,45 @@ test_that("select_helpers: tidy_add_variable_labels", {
     c("b0", "AGE", "Drug", "Grade", "Interaction")
   )
 })
+
+test_that("select helpers are consistent with gtsummary", {
+  skip_on_cran()
+  skip_if_not_installed("gtsummary")
+
+  mod <- glm(response ~ age * trt + grade, gtsummary::trial, family = binomial)
+  x <- mod |>
+    tidy_and_attach() |>
+    tidy_identify_variables() |>
+    tidy_add_contrasts() |>
+    scope_tidy()
+
+  expect_equal(
+    x |> dplyr::select(broom.helpers::all_categorical()) |> colnames(),
+    x |> dplyr::select(gtsummary::all_categorical()) |> colnames()
+  )
+
+  expect_equal(
+    x |> dplyr::select(broom.helpers::all_continuous()) |> colnames(),
+    x |> dplyr::select(gtsummary::all_continuous()) |> colnames()
+  )
+
+  expect_equal(
+    x |> dplyr::select(broom.helpers::all_contrasts("treatment")) |> colnames(),
+    x |> dplyr::select(gtsummary::all_contrasts("treatment")) |> colnames()
+  )
+
+  expect_equal(
+    x |> dplyr::select(broom.helpers::all_dichotomous()) |> colnames(),
+    x |> dplyr::select(gtsummary::all_dichotomous()) |> colnames()
+  )
+
+  expect_equal(
+    x |> dplyr::select(broom.helpers::all_interaction()) |> colnames(),
+    x |> dplyr::select(gtsummary::all_interaction()) |> colnames()
+  )
+
+  expect_equal(
+    x |> dplyr::select(broom.helpers::all_intercepts()) |> colnames(),
+    x |> dplyr::select(gtsummary::all_intercepts()) |> colnames()
+  )
+})
