@@ -35,7 +35,9 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="broomhelpers-development-version">broom.helpers (development version)<a class="anchor" aria-label="anchor" href="#broomhelpers-development-version"></a></h2>
-</div>
+<p><strong>Fixes</strong></p>
+<ul><li>variable labels are now returned by <code><a href="../reference/model_list_variables.html">model_list_variables()</a></code> for <code>svycoxph</code> models (<a href="https://github.com/larmarange/broom.helpers/issues/275" class="external-link">#275</a>)</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.17.0" id="broomhelpers-1170">broom.helpers 1.17.0<a class="anchor" aria-label="anchor" href="#broomhelpers-1170"></a></h2><p class="text-muted">CRAN release: 2024-08-28</p>
 <p><strong>Deprecated functions and changes in selectors functions</strong></p>
@@ -90,7 +92,7 @@
 <p><strong>New features</strong></p>
 <ul><li>support for <code><a href="https://rdrr.io/pkg/MASS/man/contr.sdif.html" class="external-link">MASS::contr.sdif()</a></code> contrasts (<a href="https://github.com/larmarange/broom.helpers/issues/230" class="external-link">#230</a>)</li>
 <li>support for <code><a href="https://rdrr.io/pkg/pscl/man/zeroinfl.html" class="external-link">pscl::zeroinfl()</a></code> and <code><a href="https://rdrr.io/pkg/pscl/man/hurdle.html" class="external-link">pscl::hurdle()</a></code> models (<a href="https://github.com/larmarange/broom.helpers/issues/232" class="external-link">#232</a>)</li>
-<li>support for <code><a href="https://betareg.R-Forge.R-project.org/man/betareg.html" class="external-link">betareg::betareg()</a></code> models (<a href="https://github.com/larmarange/broom.helpers/issues/234" class="external-link">#234</a>)</li>
+<li>support for <code><a href="https://rdrr.io/pkg/betareg/man/betareg.html" class="external-link">betareg::betareg()</a></code> models (<a href="https://github.com/larmarange/broom.helpers/issues/234" class="external-link">#234</a>)</li>
 </ul><p><strong>Fix</strong></p>
 <ul><li>input of <code><a href="https://rdrr.io/r/utils/packageDescription.html" class="external-link">packageVersion()</a></code> should be a character string (<a href="https://github.com/larmarange/broom.helpers/issues/225" class="external-link">#225</a>)</li>
 </ul></div>
@@ -253,7 +255,7 @@
 <li>New functions <code><a href="../reference/model_get_n.html">model_get_n()</a></code>, <code><a href="../reference/model_get_weights.html">model_get_weights()</a></code>, <code><a href="../reference/model_get_offset.html">model_get_offset()</a></code>, <code><a href="../reference/model_get_response.html">model_get_response()</a></code> and <code><a href="../reference/model_compute_terms_contributions.html">model_compute_terms_contributions()</a></code> (<a href="https://github.com/larmarange/broom.helpers/issues/64" class="external-link">#64</a>)</li>
 </ul><p><strong>New supported models</strong></p>
 <ul><li>Support of <code><a href="https://rdrr.io/pkg/lfe/man/felm.html" class="external-link">lfe::felm()</a></code> models (<a href="https://github.com/larmarange/broom.helpers/issues/79" class="external-link">#79</a>)</li>
-<li>Support of <code><a href="https://paul-buerkner.github.io/brms/reference/brm.html" class="external-link">brms::brm()</a></code> models (<a href="https://github.com/larmarange/broom.helpers/issues/89" class="external-link">#89</a>)</li>
+<li>Support of <code><a href="https://paulbuerkner.com/brms/reference/brm.html" class="external-link">brms::brm()</a></code> models (<a href="https://github.com/larmarange/broom.helpers/issues/89" class="external-link">#89</a>)</li>
 <li>Basic support of <code><a href="https://rdrr.io/pkg/cmprsk/man/crr.html" class="external-link">cmprsk::crr()</a></code> models (<a href="https://github.com/larmarange/broom.helpers/issues/91" class="external-link">#91</a>)</li>
 <li>Basic support of <code><a href="https://rdrr.io/r/stats/nls.html" class="external-link">stats::nls()</a></code> models (<a href="https://github.com/larmarange/broom.helpers/issues/97" class="external-link">#97</a>)</li>
 <li>Models with categorical variable and no intercept now supported (<a href="https://github.com/larmarange/broom.helpers/issues/85" class="external-link">#85</a>)</li>
@@ -327,7 +329,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer></div>
