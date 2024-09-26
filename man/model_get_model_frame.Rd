@@ -4,6 +4,7 @@
 \alias{model_get_model_frame}
 \alias{model_get_model_frame.default}
 \alias{model_get_model_frame.coxph}
+\alias{model_get_model_frame.svycoxph}
 \alias{model_get_model_frame.survreg}
 \alias{model_get_model_frame.biglm}
 \alias{model_get_model_frame.model_fit}
@@ -15,6 +16,8 @@ model_get_model_frame(model)
 \method{model_get_model_frame}{default}(model)
 
 \method{model_get_model_frame}{coxph}(model)
+
+\method{model_get_model_frame}{svycoxph}(model)
 
 \method{model_get_model_frame}{survreg}(model)
 

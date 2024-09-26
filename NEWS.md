@@ -1,5 +1,10 @@
 # broom.helpers (development version)
 
+**Fixes**
+
+- variable labels are now returned by `model_list_variables()` for `svycoxph`
+  models (#275)
+
 # broom.helpers 1.17.0
 
 **Deprecated functions and changes in selectors functions**

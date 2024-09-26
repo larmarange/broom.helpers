@@ -331,7 +331,10 @@ test_that("tidy_plus_plus() works with survey::svyglm", {
 test_that("tidy_plus_plus() works with survey::svycoxph", {
   skip_on_cran()
   skip_if_not_installed("survey")
-  dpbc <- survey::svydesign(id = ~1, prob = ~1, strata = ~edema, data = survival::pbc)
+  skip_if_not_installed("labelled")
+  d <- survival::pbc
+  labelled::var_label(d$albumin) <- "Custom label"
+  dpbc <- survey::svydesign(id = ~1, prob = ~1, strata = ~edema, data = d)
   mod <- survey::svycoxph(
     Surv(time, status > 0) ~ log(bili) + protime + albumin,
     design = dpbc
@@ -339,6 +342,10 @@ test_that("tidy_plus_plus() works with survey::svycoxph", {
   expect_error(
     res <- mod |> tidy_plus_plus(),
     NA
+  )
+  expect_equivalent(
+    res[res$term == "albumin", "var_label"][[1]][1],
+    "Custom label"
   )
 })
 
