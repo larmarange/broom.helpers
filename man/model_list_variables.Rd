@@ -84,20 +84,19 @@ if (.assert_package("gtsummary", boolean = TRUE)) {
   ) |>
   model_list_variables()
 
-  iris |>
-    lm(
-      Sepal.Length ~ poly(Sepal.Width, 2) + Species,
-      data = _,
-      contrasts = list(Species = contr.sum)
-    ) |>
-    model_list_variables()
-
-  glm(
-    response ~ poly(age, 3) + stage + grade * trt,
-    na.omit(gtsummary::trial),
-    family = binomial,
+lm(
+   Sepal.Length ~ poly(Sepal.Width, 2) + Species,
+   data = iris,
+   contrasts = list(Species = contr.sum)
   ) |>
-    model_list_variables()
+  model_list_variables()
+
+glm(
+  response ~ poly(age, 3) + stage + grade * trt,
+  na.omit(gtsummary::trial),
+  family = binomial,
+) |>
+  model_list_variables()
 }
 \dontshow{\}) # examplesIf}
 }
