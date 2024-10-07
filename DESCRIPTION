@@ -15,7 +15,7 @@ License: GPL (>= 3)
 URL: https://larmarange.github.io/broom.helpers/, https://github.com/larmarange/broom.helpers
 BugReports: https://github.com/larmarange/broom.helpers/issues
 Depends:
-    R (>= 4.2)
+    R (>= 4.1)
 Imports: 
     broom (>= 0.8),
     cards,

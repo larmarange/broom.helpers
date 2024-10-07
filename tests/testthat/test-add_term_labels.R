@@ -254,11 +254,10 @@ test_that("tidy_add_term_labels() works with variables having non standard name"
     )
   )
 
-  res <- gtsummary::trial |>
-    dplyr::select(response, `age at dx` = age, `drug type` = trt) |>
-    lm(
+  res <- lm(
       response ~ `age at dx` + `drug type`,
-      data = _
+      data = gtsummary::trial |>
+        dplyr::select(response, `age at dx` = age, `drug type` = trt)
     ) |>
     tidy_and_attach() |>
     tidy_add_variable_labels(list(`age at dx` = "AGGGGGGGE")) |>
