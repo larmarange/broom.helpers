@@ -694,7 +694,7 @@ test_that("tidy_plus_plus() works with fixest models", {
     NA
   )
 
-  mod <- fixest::feols(mpg ~ disp| cyl | wt ~ qsec, data = mtcars)
+  mod <- fixest::feols(mpg ~ disp | cyl | wt ~ qsec, data = mtcars)
   expect_error(
     res <- mod |> tidy_plus_plus(),
     NA
@@ -706,12 +706,12 @@ test_that("tidy_plus_plus() works with fixest models", {
   res <- mod |> tidy_plus_plus(instrumental_suffix = " (IV)")
   expect_equivalent(res$var_label[res$term == "wt"], "wt (IV)")
 
-  mod <- fixest::feols(mpg ~ disp| 1 | factor(cyl) ~ qsec, data = mtcars)
+  mod <- fixest::feols(mpg ~ disp | 1 | factor(cyl) ~ qsec, data = mtcars)
   expect_error(
     res <- mod |> tidy_plus_plus(),
     NA
   )
-  expect_equal(nrow(res[res$instrumental,]), 3L)
+  expect_equal(nrow(res[res$instrumental, ]), 3L)
 })
 
 test_that("tidy_plus_plus() works with logitr models", {
