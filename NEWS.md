@@ -1,5 +1,11 @@
 # broom.helpers (development version)
 
+**New features**
+
+- support of instrumental variables for `fixest` models (#279)
+- new argument `instrumental_suffix` for `model_list_variables()`,
+  `tidy_add_variable_labels()` and `tidy_plus_plus()`
+
 **Fixes**
 
 - variable labels are now returned by `model_list_variables()` for `svycoxph`
