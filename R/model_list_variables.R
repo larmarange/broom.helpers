@@ -119,7 +119,7 @@ model_list_variables.default <- function(model,
   if (inherits(model, "fixest") && !is.null(instrumental_suffix)) {
     iv <- all.vars(model$iv_endo_fml)
     res <- res |>
-      mutate(
+      dplyr::mutate(
         var_label = dplyr::if_else(
           .data$variable %in% iv,
           paste0(.data$var_label, instrumental_suffix),

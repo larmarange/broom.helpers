@@ -71,7 +71,7 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x),
   # specific case for fixest models to handle instrumental variables
   if (inherits(model, "fixest")) {
     x <- x |>
-      mutate(
+      dplyr::mutate(
         original_term = .data$term,
         instrumental = .data$term |> stringr::str_starts("fit_"),
         term = dplyr::if_else(
