@@ -11,6 +11,7 @@
 - variable labels are now returned by `model_list_variables()` for `svycoxph`
   models (#275)
 - compatibility with R version 4.1 minimum (#276)
+- fix for `tidy_add_n()` with models with a subset argument (#278)
 
 # broom.helpers 1.17.0
 
