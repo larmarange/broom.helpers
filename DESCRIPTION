@@ -48,6 +48,7 @@ Suggests:
     ggeffects (>= 1.3.2),
     ggstats (>= 0.2.1),
     glmmTMB,
+    glmtoolbox,
     glue,
     gt,
     gtsummary (>= 2.0.0),

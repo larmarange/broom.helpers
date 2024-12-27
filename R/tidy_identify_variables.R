@@ -19,6 +19,9 @@
 #'
 #' For dichotomous and categorical variables, `var_nlevels` corresponds to the number
 #' of original levels in the corresponding variables.
+#'
+#' For `fixest` models, a new column `instrumental` is added to indicate
+#' instrumental variables.
 #' @param x (`data.frame`)\cr
 #' A tidy tibble as produced by `tidy_*()` functions.
 #' @param model (a model object, e.g. `glm`)\cr
@@ -64,6 +67,20 @@ tidy_identify_variables <- function(x, model = tidy_get_model(x),
   }
 
   .attributes <- .save_attributes(x)
+
+  # specific case for fixest models to handle instrumental variables
+  if (inherits(model, "fixest")) {
+    x <- x |>
+      dplyr::mutate(
+        original_term = .data$term,
+        instrumental = .data$term |> stringr::str_starts("fit_"),
+        term = dplyr::if_else(
+          .data$term |> stringr::str_starts("fit_"),
+          .data$term |> stringr::str_sub(5),
+          .data$term
+        )
+      )
+  }
 
   # specific case for marginal means / effects / predictions / contrasts
   if (

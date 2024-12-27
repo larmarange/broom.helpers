@@ -296,7 +296,7 @@ td {vertical-align: top;}
 # nolint start
 tibble::tribble(
   ~Column, ~Function, ~Description,
-  "original_term", "`tidy_disambiguate_terms()`, `tidy_multgee()` or `tidy_zeroinfl()`", "Original term before disambiguation. This columns is added only when disambiguation is needed (i.e. for mixed models). Also used for \"multgee\", \"zeroinfl\" and \"hurdle\" models.",
+  "original_term", "`tidy_disambiguate_terms()`, `tidy_multgee()`, `tidy_zeroinfl()` or `tidy_identify_variables()`", "Original term before disambiguation. This columns is added only when disambiguation is needed (i.e. for mixed models). Also used for \"multgee\", \"zeroinfl\" and \"hurdle\" models. For instrumental variables in \"fixest\" models, the \"fit_\" prefix is removed, and the original terms is stored in this column.",
   "variable", "`tidy_identify_variables()`", "String of variable names from the model. For categorical variables and polynomial terms defined with `stats::poly()`, terms belonging to the variable are identified.",
   "var_class", "`tidy_identify_variables()`", "Class of the variable.",
   "var_type", "`tidy_identify_variables()`", "One of \"intercept\", \"continuous\", \"dichotomous\", \"categorical\", \"interaction\", \"ran_pars\" or \"ran_vals\"",
@@ -310,7 +310,8 @@ tibble::tribble(
   "n_obs", "`tidy_add_n()`", "Number of observations",
   "n_ind", "`tidy_add_n()`", "Number of individuals (for Cox models)",
   "n_event", "`tidy_add_n()`", "Number of events (for binomial and multinomial logistic models, Poisson and Cox models)",
-  "exposure", "`tidy_add_n()`", "Exposure time (for Poisson and Cox models)"
+  "exposure", "`tidy_add_n()`", "Exposure time (for Poisson and Cox models)",
+  "instrumental", "`tidy_identify_variables()`", "For \"fixest\" models, indicate if a variable was instrumental."
 ) |>
   gt::gt() |>
   gt::fmt_markdown(columns = everything()) |>

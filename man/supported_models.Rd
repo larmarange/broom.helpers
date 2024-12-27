@@ -31,6 +31,7 @@ Listing of Supported Models
    \code{gam::gam()} \tab  \cr
    \code{geepack::geeglm()} \tab  \cr
    \code{glmmTMB::glmmTMB()} \tab \code{broom.mixed} package required \cr
+   \code{glmtoolbox::glmgee()} \tab  \cr
    \code{lavaan::lavaan()} \tab Limited support for categorical variables \cr
    \code{lfe::felm()} \tab  \cr
    \code{lme4::glmer.nb()} \tab \code{broom.mixed} package required \cr
@@ -40,7 +41,7 @@ Listing of Supported Models
    \code{MASS::glm.nb()} \tab  \cr
    \code{MASS::polr()} \tab  \cr
    \code{mgcv::gam()} \tab Use default tidier \code{broom::tidy()} for smooth terms only, or \code{gtsummary::tidy_gam()} to include parametric terms \cr
-   \code{mice::mira} \tab Limited support. If \code{mod} is a \code{mira} object, use \code{tidy_fun = function(x, ...) {mice::pool(x) \%>\% mice::tidy(...)}} \cr
+   \code{mice::mira} \tab Limited support. If \code{mod} is a \code{mira} object, use \verb{tidy_fun = function(x, ...) \{mice::pool(x) &#124;> mice::tidy(...)\}} \cr
    \code{mmrm::mmrm()} \tab  \cr
    \code{multgee::nomLORgee()} \tab Experimental support. Use \code{tidy_multgee()} as \code{tidy_fun}. \cr
    \code{multgee::ordLORgee()} \tab Experimental support. Use \code{tidy_multgee()} as \code{tidy_fun}. \cr

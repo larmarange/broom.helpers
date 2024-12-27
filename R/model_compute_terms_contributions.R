@@ -84,8 +84,7 @@ model_compute_terms_contributions.default <- function(model) {
       } # stop
 
       # continuous variables converted to 1 to force positive values
-      d <- model |> purrr::pluck("data")
-      if (is.null(d)) d <- model |> model_get_model_frame()
+      d <- model |> model_get_model_frame()
 
       if (is.null(d)) {
         return(NULL)

@@ -1,10 +1,21 @@
 # broom.helpers (development version)
 
+**New supported models**
+
+- support for `glmtoolbox::glmgee()` models (#274)
+
+**New features**
+
+- support of instrumental variables for `fixest` models (#279)
+- new argument `instrumental_suffix` for `model_list_variables()`,
+  `tidy_add_variable_labels()` and `tidy_plus_plus()`
+
 **Fixes**
 
 - variable labels are now returned by `model_list_variables()` for `svycoxph`
   models (#275)
 - compatibility with R version 4.1 minimum (#276)
+- fix for `tidy_add_n()` with models with a subset argument (#278)
 
 # broom.helpers 1.17.0
 

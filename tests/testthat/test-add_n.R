@@ -282,3 +282,15 @@ test_that("tidy_add_n() works with lavaan::lavaan", {
   expect_error(res <- mod |> tidy_and_attach() |> tidy_add_n(), NA)
   expect_true(all(is.na(res$n)))
 })
+
+test_that("model_compute_terms_contributions() with subset", {
+  mod <- glm(mpg ~ gear, data = mtcars, subset = mpg < 30)
+  expect_warning(
+    res <- mod |> model_compute_terms_contributions(),
+    NA
+  )
+  expect_equal(
+    nrow(res),
+    nrow(mtcars[mtcars$mpg < 30, ])
+  )
+})

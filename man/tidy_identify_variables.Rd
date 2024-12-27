@@ -39,6 +39,9 @@ will fail to identify the list of variables
 
 For dichotomous and categorical variables, \code{var_nlevels} corresponds to the number
 of original levels in the corresponding variables.
+
+For \code{fixest} models, a new column \code{instrumental} is added to indicate
+instrumental variables.
 }
 \examples{
 df <- Titanic |>

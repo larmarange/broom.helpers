@@ -16,6 +16,9 @@
 #' A tidy tibble as produced by `tidy_*()` functions.
 #' @param labels ([`formula-list-selector`][gtsummary::syntax])\cr
 #' An optional named list or a named vector of custom variable labels.
+#' @param instrumental_suffix (`string`)\cr
+#' Suffix added to variable labels for instrumental variables (`fixest` models).
+#' `NULL` to add nothing.
 #' @param model (a model object, e.g. `glm`)\cr
 #' The corresponding model, if not attached to `x`.
 #' @inheritParams tidy_plus_plus
@@ -42,6 +45,7 @@
 tidy_add_variable_labels <- function(x,
                                      labels = NULL,
                                      interaction_sep = " * ",
+                                     instrumental_suffix = " (instrumental)",
                                      model = tidy_get_model(x)) {
   if (is.null(model)) {
     cli::cli_abort(c(
@@ -85,7 +89,11 @@ tidy_add_variable_labels <- function(x,
     .update_vector(additional_labels)
 
   # add the list of variables from model_list_variables
-  variable_list <- model_list_variables(model, labels = labels)
+  variable_list <- model_list_variables(
+    model,
+    labels = labels,
+    instrumental_suffix = instrumental_suffix
+  )
   additional_labels <- variable_list$var_label
   names(additional_labels) <- variable_list$variable
   var_labels <- var_labels |>

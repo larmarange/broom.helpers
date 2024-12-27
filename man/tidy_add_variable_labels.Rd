@@ -8,6 +8,7 @@ tidy_add_variable_labels(
   x,
   labels = NULL,
   interaction_sep = " * ",
+  instrumental_suffix = " (instrumental)",
   model = tidy_get_model(x)
 )
 }
@@ -20,6 +21,10 @@ An optional named list or a named vector of custom variable labels.}
 
 \item{interaction_sep}{(\code{string})\cr
 Separator for interaction terms.}
+
+\item{instrumental_suffix}{(\code{string})\cr
+Suffix added to variable labels for instrumental variables (\code{fixest} models).
+\code{NULL} to add nothing.}
 
 \item{model}{(a model object, e.g. \code{glm})\cr
 The corresponding model, if not attached to \code{x}.}

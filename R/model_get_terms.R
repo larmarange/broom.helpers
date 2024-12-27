@@ -64,10 +64,34 @@ model_get_terms.betareg <- function(model) {
 }
 
 #' @export
-#' @rdname model_get_model_matrix
-model_get_terms.cch <- function(model, ...) {
+#' @rdname model_get_terms
+model_get_terms.cch <- function(model) {
   stats::terms.formula(
     model$call$formula |> stats::formula(),
     data = model |> model_get_model_frame()
   )
+}
+
+#' @export
+#' @rdname model_get_terms
+#' @details
+#' For `fixest` models, return a term object combining main variables and
+#' instrumental variables.
+#'
+model_get_terms.fixest <- function(model) {
+  fml <- model$fml
+  fiv <- model$iv_endo_fml
+
+  if (is.null(fiv)) {
+    f <- fml
+  } else {
+    f <-
+      paste(
+        deparse(fml),
+        "+",
+        deparse(fiv[[3]])
+      ) |>
+      stats::as.formula()
+  }
+  stats::terms(f)
 }

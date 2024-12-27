@@ -90,5 +90,8 @@ model_get_model_frame.model_fit <- function(model) {
 #' @export
 #' @rdname model_get_model_frame
 model_get_model_frame.fixest <- function(model) {
-  stats::model.frame.default(model$fml, data = get(model$call$data, model$call_env))
+  stats::model.frame.default(
+    model_get_terms(model),
+    data = get(model$call$data, model$call_env)
+  )
 }
