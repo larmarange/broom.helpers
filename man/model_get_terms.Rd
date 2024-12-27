@@ -25,7 +25,7 @@ model_get_terms(model)
 
 \method{model_get_terms}{betareg}(model)
 
-\method{model_get_terms}{cch}(model, ...)
+\method{model_get_terms}{cch}(model)
 
 \method{model_get_terms}{fixest}(model)
 }

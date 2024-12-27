@@ -65,7 +65,7 @@ model_get_terms.betareg <- function(model) {
 
 #' @export
 #' @rdname model_get_terms
-model_get_terms.cch <- function(model, ...) {
+model_get_terms.cch <- function(model) {
   stats::terms.formula(
     model$call$formula |> stats::formula(),
     data = model |> model_get_model_frame()
