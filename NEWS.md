@@ -1,5 +1,9 @@
 # broom.helpers (development version)
 
+**New supported models**
+
+- support for `glmtoolbox::glmgee()` models (#274)
+
 **New features**
 
 - support of instrumental variables for `fixest` models (#279)
