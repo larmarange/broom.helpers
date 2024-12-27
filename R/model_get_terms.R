@@ -91,7 +91,7 @@ model_get_terms.fixest <- function(model) {
         "+",
         deparse(fiv[[3]])
       ) |>
-      as.formula()
+      stats::as.formula()
   }
   stats::terms(f)
 }
