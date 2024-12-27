@@ -987,7 +987,7 @@ test_that("tidy_plus_plus() works with glmtoolbox::glmgee() models", {
   data("spruces", package = "glmtoolbox")
 
   mod <- glmtoolbox::glmgee(
-    size ~ poly(days,4) + treat,
+    size ~ poly(days, 4) + treat,
     id = tree,
     family = Gamma(log),
     corstr = "AR-M-dependent(1)",
