@@ -60,12 +60,11 @@ glm(
 ) |>
   model_identify_variables()
 
-iris |>
-  lm(
-    Sepal.Length ~ poly(Sepal.Width, 2) + Species,
-    data = _,
-    contrasts = list(Species = contr.sum)
-  ) |>
+lm(
+  Sepal.Length ~ poly(Sepal.Width, 2) + Species,
+  data = iris,
+  contrasts = list(Species = contr.sum)
+) |>
   model_identify_variables()
 }
 \seealso{
