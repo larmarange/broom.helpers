@@ -11,6 +11,9 @@
 #' If `TRUE`, will return only "variable" column.
 #' @param add_var_type (`logical`)\cr
 #' If `TRUE`, add `var_nlevels` and `var_type` columns.
+#' @param instrumental_suffix (`string`)\cr
+#' Suffix added to variable labels for instrumental variables (`fixest` models).
+#' `NULL` to add nothing.
 #' @return
 #' A tibble with three columns:
 #' * `variable`: the corresponding variable
@@ -55,15 +58,21 @@
 #'   ) |>
 #'     model_list_variables()
 #' }
-model_list_variables <- function(model, labels = NULL,
-                                 only_variable = FALSE, add_var_type = FALSE) {
+model_list_variables <- function(model,
+                                 labels = NULL,
+                                 only_variable = FALSE,
+                                 add_var_type = FALSE,
+                                 instrumental_suffix = " (instrumental)") {
   UseMethod("model_list_variables")
 }
 
 #' @rdname model_list_variables
 #' @export
-model_list_variables.default <- function(model, labels = NULL,
-                                         only_variable = FALSE, add_var_type = FALSE) {
+model_list_variables.default <- function(model,
+                                         labels = NULL,
+                                         only_variable = FALSE,
+                                         add_var_type = FALSE,
+                                         instrumental_suffix = " (instrumental)") {
   model_frame <- model_get_model_frame(model)
   model_terms <- model_get_terms(model)
 
@@ -106,6 +115,19 @@ model_list_variables.default <- function(model, labels = NULL,
     return(res$variable)
   }
 
+  # specific case for instrumental variables
+  if (inherits(model, "fixest") && !is.null(instrumental_suffix)) {
+    iv <- all.vars(model$iv_endo_fml)
+    res <- res |>
+      mutate(
+        var_label = dplyr::if_else(
+          .data$variable %in% iv,
+          paste0(.data$var_label, instrumental_suffix),
+          .data$var_label
+        )
+      )
+  }
+
   if (add_var_type) {
     return(.add_var_type(res, model))
   }
@@ -116,8 +138,11 @@ model_list_variables.default <- function(model, labels = NULL,
 
 #' @rdname model_list_variables
 #' @export
-model_list_variables.lavaan <- function(model, labels = NULL,
-                                        only_variable = FALSE, add_var_type = FALSE) {
+model_list_variables.lavaan <- function(model,
+                                        labels = NULL,
+                                        only_variable = FALSE,
+                                        add_var_type = FALSE,
+                                        instrumental_suffix = " (instrumental)") {
   res <- tibble::tibble(
     variable = .clean_backticks(unique(model@ParTable$lhs))
   ) |>
@@ -151,8 +176,11 @@ model_list_variables.lavaan <- function(model, labels = NULL,
 
 #' @rdname model_list_variables
 #' @export
-model_list_variables.logitr <- function(model, labels = NULL,
-                                        only_variable = FALSE, add_var_type = FALSE) {
+model_list_variables.logitr <- function(model,
+                                        labels = NULL,
+                                        only_variable = FALSE,
+                                        add_var_type = FALSE,
+                                        instrumental_suffix = " (instrumental)") {
   res <- model_list_variables.default(model, labels, FALSE)
 
   if (!is.null(model$data$scalePar)) {

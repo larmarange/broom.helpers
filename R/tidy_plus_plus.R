@@ -34,6 +34,9 @@
 #' (respectively named `"model_frame"` and `"model_matrix"`) and passed through.
 #' @param variable_labels ([`formula-list-selector`][gtsummary::syntax])\cr
 #' A named list or a named vector of custom variable labels.
+#' @param instrumental_suffix (`string`)\cr
+#' Suffix added to variable labels for instrumental variables (`fixest` models).
+#' `NULL` to add nothing.
 #' @param term_labels  (`list` or `vector`)\cr
 #' A named list or a named vector of custom term labels.
 #' @param interaction_sep  (`string`)\cr
@@ -153,6 +156,7 @@ tidy_plus_plus <- function(model,
                            exponentiate = FALSE,
                            model_matrix_attr = TRUE,
                            variable_labels = NULL,
+                           instrumental_suffix = " (instrumental)",
                            term_labels = NULL,
                            interaction_sep = " * ",
                            categorical_terms_pattern = "{level}",
@@ -222,7 +226,8 @@ tidy_plus_plus <- function(model,
   res <- res |>
     tidy_add_variable_labels(
       labels = variable_labels,
-      interaction_sep = interaction_sep
+      interaction_sep = interaction_sep,
+      instrumental_suffix = instrumental_suffix
     ) |>
     tidy_add_term_labels(
       labels = term_labels,

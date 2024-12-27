@@ -12,6 +12,7 @@ tidy_plus_plus(
   exponentiate = FALSE,
   model_matrix_attr = TRUE,
   variable_labels = NULL,
+  instrumental_suffix = " (instrumental)",
   term_labels = NULL,
   interaction_sep = " * ",
   categorical_terms_pattern = "{level}",
@@ -62,6 +63,10 @@ Whether model frame and model matrix should be added as attributes of \code{mode
 
 \item{variable_labels}{(\code{\link[gtsummary:syntax]{formula-list-selector}})\cr
 A named list or a named vector of custom variable labels.}
+
+\item{instrumental_suffix}{(\code{string})\cr
+Suffix added to variable labels for instrumental variables (\code{fixest} models).
+\code{NULL} to add nothing.}
 
 \item{term_labels}{(\code{list} or \code{vector})\cr
 A named list or a named vector of custom term labels.}

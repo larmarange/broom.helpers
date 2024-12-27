@@ -51,7 +51,7 @@ utils::globalVariables(c("."))
       dplyr::any_of(
         c(
           "y.level", "component", "term", "original_term", "variable",
-          "var_label", "var_class", "var_type",
+          "instrumental", "var_label", "var_class", "var_type",
           "var_nlevels", "header_row", "contrasts", "contrasts_type",
           "reference_row", "label", "n_obs", "n_ind", "n_event", "exposure"
         )

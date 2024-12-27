@@ -156,6 +156,11 @@ tidy_add_reference_rows <- function(
     x$var_label <- NA_character_
   } # temporary populate it
 
+  has_instrumental <- "instrumental" %in% names(x)
+  if (!has_instrumental) {
+    x$instrumental <- NA
+  } # temporary populate it
+
   x <- x |>
     dplyr::mutate(
       reference_row = dplyr::if_else(
@@ -186,7 +191,11 @@ tidy_add_reference_rows <- function(
   ref_rows <- terms_levels |>
     dplyr::filter(.data$reference) |>
     dplyr::mutate(reference_row = TRUE) |>
-    dplyr::select(dplyr::all_of(c("term", "variable", "label", "reference_row", "rank")))
+    dplyr::select(
+      dplyr::all_of(
+        c("term", "variable", "label", "reference_row", "rank")
+      )
+    )
 
   if (!"label" %in% names(x)) {
     ref_rows <- ref_rows |> dplyr::select(-all_of("label"))
@@ -204,6 +213,7 @@ tidy_add_reference_rows <- function(
       var_class = dplyr::first(.data$var_class),
       var_type = dplyr::first(.data$var_type),
       var_label = dplyr::first(.data$var_label),
+      instrumental = dplyr::first(.data$instrumental),
       var_nlevels = dplyr::first(.data$var_nlevels),
       effect = dplyr::first(.data$effect),
       contrasts = dplyr::first(.data$contrasts),
@@ -242,6 +252,10 @@ tidy_add_reference_rows <- function(
 
   if (!has_var_label) {
     x <- x |> dplyr::select(-dplyr::all_of("var_label"))
+  }
+
+  if (!has_instrumental) {
+    x <- x |> dplyr::select(-dplyr::all_of("instrumental"))
   }
 
   x |>

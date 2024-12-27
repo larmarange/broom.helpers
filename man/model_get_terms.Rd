@@ -7,6 +7,8 @@
 \alias{model_get_terms.glmmTMB}
 \alias{model_get_terms.model_fit}
 \alias{model_get_terms.betareg}
+\alias{model_get_terms.cch}
+\alias{model_get_terms.fixest}
 \title{Get the terms of a model}
 \usage{
 model_get_terms(model)
@@ -22,6 +24,10 @@ model_get_terms(model)
 \method{model_get_terms}{betareg}(model)
 
 \method{model_get_terms}{betareg}(model)
+
+\method{model_get_terms}{cch}(model, ...)
+
+\method{model_get_terms}{fixest}(model)
 }
 \arguments{
 \item{model}{(a model object, e.g. \code{glm})\cr
@@ -35,6 +41,9 @@ or \code{NULL} if it is not possible to get terms from \code{model}.
 For models fitted with \code{glmmTMB::glmmTMB()}, it will return a terms object
 taking into account all components ("cond" and "zi"). For a more
 restricted terms object, please refer to \code{glmmTMB::terms.glmmTMB()}.
+
+For \code{fixest} models, return a term object combining main variables and
+instrumental variables.
 }
 \examples{
 lm(hp ~ mpg + factor(cyl), mtcars) |>
