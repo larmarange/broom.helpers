@@ -44,7 +44,8 @@
 <span>  <span class="va">model</span>,</span>
 <span>  labels <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  only_variable <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  add_var_type <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  add_var_type <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  instrumental_suffix <span class="op">=</span> <span class="st">" (instrumental)"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Default S3 method</span></span>
@@ -52,7 +53,8 @@
 <span>  <span class="va">model</span>,</span>
 <span>  labels <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  only_variable <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  add_var_type <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  add_var_type <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  instrumental_suffix <span class="op">=</span> <span class="st">" (instrumental)"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'lavaan'</span></span>
@@ -60,7 +62,8 @@
 <span>  <span class="va">model</span>,</span>
 <span>  labels <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  only_variable <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  add_var_type <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  add_var_type <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  instrumental_suffix <span class="op">=</span> <span class="st">" (instrumental)"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'logitr'</span></span>
@@ -68,7 +71,8 @@
 <span>  <span class="va">model</span>,</span>
 <span>  labels <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  only_variable <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  add_var_type <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  add_var_type <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  instrumental_suffix <span class="op">=</span> <span class="st">" (instrumental)"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -95,6 +99,12 @@ If <code>TRUE</code>, will return only "variable" column.</p></dd>
 <dt id="arg-add-var-type">add_var_type<a class="anchor" aria-label="anchor" href="#arg-add-var-type"></a></dt>
 <dd><p>(<code>logical</code>)<br>
 If <code>TRUE</code>, add <code>var_nlevels</code> and <code>var_type</code> columns.</p></dd>
+
+
+<dt id="arg-instrumental-suffix">instrumental_suffix<a class="anchor" aria-label="anchor" href="#arg-instrumental-suffix"></a></dt>
+<dd><p>(<code>string</code>)<br>
+Suffix added to variable labels for instrumental variables (<code>fixest</code> models).
+<code>NULL</code> to add nothing.</p></dd>
 
 </dl></div>
     <div class="section level2">

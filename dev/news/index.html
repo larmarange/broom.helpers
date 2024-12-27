@@ -35,9 +35,16 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="broomhelpers-development-version">broom.helpers (development version)<a class="anchor" aria-label="anchor" href="#broomhelpers-development-version"></a></h2>
-<p><strong>Fixes</strong></p>
+<p><strong>New supported models</strong></p>
+<ul><li>support for <code><a href="https://rdrr.io/pkg/glmtoolbox/man/glmgee.html" class="external-link">glmtoolbox::glmgee()</a></code> models (<a href="https://github.com/larmarange/broom.helpers/issues/274" class="external-link">#274</a>)</li>
+</ul><p><strong>New features</strong></p>
+<ul><li>support of instrumental variables for <code>fixest</code> models (<a href="https://github.com/larmarange/broom.helpers/issues/279" class="external-link">#279</a>)</li>
+<li>new argument <code>instrumental_suffix</code> for <code><a href="../reference/model_list_variables.html">model_list_variables()</a></code>, <code><a href="../reference/tidy_add_variable_labels.html">tidy_add_variable_labels()</a></code> and <code><a href="../reference/tidy_plus_plus.html">tidy_plus_plus()</a></code>
+</li>
+</ul><p><strong>Fixes</strong></p>
 <ul><li>variable labels are now returned by <code><a href="../reference/model_list_variables.html">model_list_variables()</a></code> for <code>svycoxph</code> models (<a href="https://github.com/larmarange/broom.helpers/issues/275" class="external-link">#275</a>)</li>
 <li>compatibility with R version 4.1 minimum (<a href="https://github.com/larmarange/broom.helpers/issues/276" class="external-link">#276</a>)</li>
+<li>fix for <code><a href="../reference/tidy_add_n.html">tidy_add_n()</a></code> with models with a subset argument (<a href="https://github.com/larmarange/broom.helpers/issues/278" class="external-link">#278</a>)</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.17.0" id="broomhelpers-1170">broom.helpers 1.17.0<a class="anchor" aria-label="anchor" href="#broomhelpers-1170"></a></h2><p class="text-muted">CRAN release: 2024-08-28</p>

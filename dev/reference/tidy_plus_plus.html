@@ -96,6 +96,7 @@ tidy_detach_model()
 <span>  exponentiate <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  model_matrix_attr <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  variable_labels <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  instrumental_suffix <span class="op">=</span> <span class="st">" (instrumental)"</span>,</span>
 <span>  term_labels <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  interaction_sep <span class="op">=</span> <span class="st">" * "</span>,</span>
 <span>  categorical_terms_pattern <span class="op">=</span> <span class="st">"{level}"</span>,</span>
@@ -163,6 +164,12 @@ Whether model frame and model matrix should be added as attributes of <code>mode
 <dt id="arg-variable-labels">variable_labels<a class="anchor" aria-label="anchor" href="#arg-variable-labels"></a></dt>
 <dd><p>(<code><a href="https://www.danieldsjoberg.com/gtsummary/reference/syntax.html" class="external-link">formula-list-selector</a></code>)<br>
 A named list or a named vector of custom variable labels.</p></dd>
+
+
+<dt id="arg-instrumental-suffix">instrumental_suffix<a class="anchor" aria-label="anchor" href="#arg-instrumental-suffix"></a></dt>
+<dd><p>(<code>string</code>)<br>
+Suffix added to variable labels for instrumental variables (<code>fixest</code> models).
+<code>NULL</code> to add nothing.</p></dd>
 
 
 <dt id="arg-term-labels">term_labels<a class="anchor" aria-label="anchor" href="#arg-term-labels"></a></dt>
