@@ -1,10 +1,10 @@
 pandoc: 3.1.11
-pkgdown: 2.1.0
+pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   articles/marginal_tidiers: marginal_tidiers.html
   tidy: tidy.html
-last_built: 2024-08-28T13:32Z
+last_built: 2025-01-07T15:08Z
 urls:
   reference: https://larmarange.github.io/broom.helpers/reference
   article: https://larmarange.github.io/broom.helpers/articles
