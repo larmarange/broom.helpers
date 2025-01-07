@@ -1,14 +1,12 @@
 test_that("tidy_plus_plus() works for basic models", {
   mod <- lm(Petal.Length ~ Petal.Width, iris)
-  expect_error(
-    mod |> tidy_plus_plus(),
-    NA
+  expect_no_error(
+    mod |> tidy_plus_plus()
   )
 
   mod <- glm(response ~ stage + grade + trt, gtsummary::trial, family = binomial)
-  expect_error(
-    mod |> tidy_plus_plus(add_header_rows = TRUE, include = c(stage, grade)),
-    NA
+  expect_no_error(
+    mod |> tidy_plus_plus(add_header_rows = TRUE, include = c(stage, grade))
   )
 
   # combining custom variable labels with categorical_terms_pattern
@@ -19,12 +17,13 @@ test_that("tidy_plus_plus() works for basic models", {
       add_reference_rows = FALSE,
       categorical_terms_pattern = "{var_label}:{level}/{reference_level}"
     )
-  expect_equivalent(
+  expect_equal(
     res$label,
     c(
       "T Stage:T2/T1", "T Stage:T3/T1", "T Stage:T4/T1", "custom:II/I",
       "custom:III/I", "Chemotherapy Treatment:Drug B/Drug A"
-    )
+    ),
+    ignore_attr = TRUE
   )
 
   # works with add_n
@@ -34,19 +33,19 @@ test_that("tidy_plus_plus() works for basic models", {
 
 test_that("tidy_plus_plus() works with no intercept models", {
   mod <- glm(response ~ stage + grade - 1, data = gtsummary::trial, family = binomial)
-  expect_error(
-    res <- mod |> tidy_plus_plus(),
-    NA
+  expect_no_error(
+    res <- mod |> tidy_plus_plus()
   )
-  expect_equivalent(
+  expect_equal(
     res$variable,
     c("stage", "stage", "stage", "stage", "grade", "grade", "grade")
   )
-  expect_equivalent(
+  expect_equal(
     res$label,
-    c("T1", "T2", "T3", "T4", "I", "II", "III")
+    c("T1", "T2", "T3", "T4", "I", "II", "III"),
+    ignore_attr = TRUE
   )
-  expect_equivalent(
+  expect_equal(
     res$contrasts_type,
     c(
       "no.contrast", "no.contrast", "no.contrast", "no.contrast",
@@ -58,7 +57,7 @@ test_that("tidy_plus_plus() works with no intercept models", {
 test_that("tidy_plus_plus() and functionnal programming", {
   skip_on_cran()
   # works with glm
-  expect_error(
+  expect_no_error(
     res <- dplyr::tibble(grade = c("I", "II", "III")) |>
       dplyr::mutate(
         df_model = purrr::map(grade, ~ gtsummary::trial |> dplyr::filter(grade == ..1)),
@@ -74,8 +73,7 @@ test_that("tidy_plus_plus() and functionnal programming", {
             mv_model_form,
             ~ tidy_plus_plus(..1, exponentiate = TRUE, add_header_rows = TRUE)
           )
-      ),
-    NA
+      )
   )
 
   # for coxph, identification of variables will not work
@@ -114,13 +112,12 @@ test_that("tidy_plus_plus() with mice objects", {
   mod <- with(imputed_trial, lm(age ~ marker + grade))
 
   # testing pre-pooled results
-  expect_error(
+  expect_no_error(
     tidy_plus_plus(
       mod,
       exponentiate = FALSE,
       tidy_fun = function(x, ...) mice::pool(x) |> mice::tidy(...)
-    ),
-    NA
+    )
   )
 })
 
@@ -130,14 +127,13 @@ test_that("tidy_plus_plus() with tidyselect", {
   # build regression model
   mod <- lm(age ~ trt + marker + grade, gtsummary::trial)
 
-  expect_error(
+  expect_no_error(
     tidy_plus_plus(
       mod,
       add_header_rows = TRUE,
       show_single_row = trt,
       no_reference_row = grade
-    ),
-    NA
+    )
   )
 
   expect_equal(
@@ -159,11 +155,10 @@ test_that("tidy_plus_plus() with tidyselect", {
 test_that("tidy_plus_plus() works with stats::aov", {
   skip_on_cran()
   mod <- aov(yield ~ block + N * P * K, npk)
-  expect_error(
-    res <- tidy_plus_plus(mod),
-    NA
+  expect_no_error(
+    res <- tidy_plus_plus(mod)
   )
-  expect_equivalent(
+  expect_equal(
     res$variable,
     c("block", "N", "P", "K", "N:P", "N:K", "P:K")
   )
@@ -174,13 +169,11 @@ test_that("tidy_plus_plus() works with lme4::lmer", {
   skip_if_not_installed("lme4")
   skip_if_not_installed("broom.mixed")
   mod <- lme4::lmer(Reaction ~ Days + (Days | Subject), lme4::sleepstudy)
-  expect_error(
-    res <- mod |> tidy_plus_plus(),
-    NA
+  expect_no_error(
+    res <- mod |> tidy_plus_plus()
   )
-  expect_error(
-    res <- mod |> tidy_plus_plus(tidy_fun = tidy_parameters),
-    NA
+  expect_no_error(
+    res <- mod |> tidy_plus_plus(tidy_fun = tidy_parameters)
   )
 })
 
@@ -192,16 +185,14 @@ test_that("tidy_plus_plus() works with lme4::glmer", {
     family = binomial, data = lme4::cbpp
   )
   skip_if_not_installed("broom.mixed")
-  expect_error(
-    res <- mod |> tidy_plus_plus(),
-    NA
+  expect_no_error(
+    res <- mod |> tidy_plus_plus()
   )
   mod <- lme4::glmer(cbind(incidence, size - incidence) ~ period + (1 | herd),
     family = binomial("probit"), data = lme4::cbpp
   )
-  expect_error(
-    res <- mod |> tidy_plus_plus(),
-    NA
+  expect_no_error(
+    res <- mod |> tidy_plus_plus()
   )
 })
 
@@ -215,9 +206,8 @@ test_that("tidy_plus_plus() works with lme4::glmer.nb", {
     mod <- lme4::glmer.nb(Days ~ Age + Eth + (1 | Sex), data = MASS::quine)
   )
   skip_if_not_installed("broom.mixed")
-  expect_error(
-    res <- mod |> tidy_plus_plus(),
-    NA
+  expect_no_error(
+    res <- mod |> tidy_plus_plus()
   )
 })
 
@@ -225,9 +215,8 @@ test_that("tidy_plus_plus() works with survival::coxph", {
   skip_on_cran()
   df <- survival::lung |> dplyr::mutate(sex = factor(sex))
   mod <- survival::coxph(survival::Surv(time, status) ~ ph.ecog + age + sex, data = df)
-  expect_error(
-    res <- mod |> tidy_plus_plus(),
-    NA
+  expect_no_error(
+    res <- mod |> tidy_plus_plus()
   )
 })
 
@@ -238,9 +227,8 @@ test_that("tidy_plus_plus() works with survival::survreg", {
     survival::ovarian,
     dist = "exponential"
   )
-  expect_error(
-    res <- mod |> tidy_plus_plus(),
-    NA
+  expect_no_error(
+    res <- mod |> tidy_plus_plus()
   )
 })
 
@@ -257,9 +245,8 @@ test_that("tidy_plus_plus() works with survival::clogit", {
   )
   logan2$case <- (logan2$occupation == logan2$tocc)
   mod <- survival::clogit(case ~ tocc + tocc:education + strata(id), logan2)
-  expect_error(
-    res <- mod |> tidy_plus_plus(),
-    NA
+  expect_no_error(
+    res <- mod |> tidy_plus_plus()
   )
 })
 
@@ -273,18 +260,17 @@ test_that("tidy_plus_plus() works with nnet::multinom", {
       trace = FALSE
     )
   )
-  expect_error(
-    res <- mod |> tidy_plus_plus(),
-    NA
+  expect_no_error(
+    res <- mod |> tidy_plus_plus()
   )
-  expect_equivalent(
+  expect_equal(
     res$y.level,
     c(
       "II", "II", "II", "II", "II", "II",
       "III", "III", "III", "III", "III", "III"
     )
   )
-  expect_equivalent(
+  expect_equal(
     res$term,
     c(
       "stageT1", "stageT2", "stageT3", "stageT4", "marker", "age",
@@ -300,9 +286,8 @@ test_that("tidy_plus_plus() works with nnet::multinom", {
       trace = FALSE
     )
   )
-  expect_error(
-    res <- mod |> tidy_plus_plus(),
-    NA
+  expect_no_error(
+    res <- mod |> tidy_plus_plus()
   )
 })
 
@@ -311,9 +296,8 @@ test_that("tidy_plus_plus() works with survey::svyglm", {
   skip_if_not_installed("survey")
   df <- survey::svydesign(~1, weights = ~1, data = gtsummary::trial)
   mod <- survey::svyglm(response ~ age + grade * trt, df, family = quasibinomial)
-  expect_error(
-    res <- mod |> tidy_plus_plus(),
-    NA
+  expect_no_error(
+    res <- mod |> tidy_plus_plus()
   )
 
   df_rep <- survey::as.svrepdesign(df)
@@ -322,9 +306,8 @@ test_that("tidy_plus_plus() works with survey::svyglm", {
     df_rep,
     family = quasibinomial
   )
-  expect_error(
-    res <- mod_rep |> tidy_plus_plus(),
-    NA
+  expect_no_error(
+    res <- mod_rep |> tidy_plus_plus()
   )
 })
 
@@ -339,13 +322,13 @@ test_that("tidy_plus_plus() works with survey::svycoxph", {
     Surv(time, status > 0) ~ log(bili) + protime + albumin,
     design = dpbc
   )
-  expect_error(
-    res <- mod |> tidy_plus_plus(),
-    NA
+  expect_no_error(
+    res <- mod |> tidy_plus_plus()
   )
-  expect_equivalent(
+  expect_equal(
     res[res$term == "albumin", "var_label"][[1]][1],
-    "Custom label"
+    "Custom label",
+    ignore_attr = TRUE
   )
 })
 
@@ -356,9 +339,8 @@ test_that("tidy_plus_plus() works with survey::svyolr", {
   fpc <- survey::svydesign(id = ~dnum, weights = ~pw, data = apiclus1, fpc = ~fpc)
   fpc <- update(fpc, mealcat = cut(meals, c(0, 25, 50, 75, 100)))
   mod <- survey::svyolr(mealcat ~ avg.ed + mobility + stype, design = fpc)
-  expect_error(
-    res <- mod |> tidy_plus_plus(),
-    NA
+  expect_no_error(
+    res <- mod |> tidy_plus_plus()
   )
 })
 
@@ -367,9 +349,8 @@ test_that("tidy_plus_plus() works with ordinal::clm", {
   skip_if_not_installed("ordinal")
 
   mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine)
-  expect_error(
-    res <- mod |> tidy_plus_plus(),
-    NA
+  expect_no_error(
+    res <- mod |> tidy_plus_plus()
   )
 })
 
@@ -379,9 +360,8 @@ test_that("tidy_plus_plus() works with ordinal::clmm", {
   skip_if_not_installed("ordinal")
 
   mod <- ordinal::clmm(rating ~ temp * contact + (1 | judge), data = ordinal::wine)
-  expect_error(
-    res <- mod |> tidy_plus_plus(),
-    NA
+  expect_no_error(
+    res <- mod |> tidy_plus_plus()
   )
 })
 
@@ -389,9 +369,8 @@ test_that("tidy_plus_plus() works with ordinal::clmm", {
 test_that("tidy_plus_plus() works with MASS::polr", {
   skip_on_cran()
   mod <- MASS::polr(Sat ~ Infl + Type + Cont, weights = Freq, data = MASS::housing)
-  expect_error(
-    res <- mod |> tidy_plus_plus(),
-    NA
+  expect_no_error(
+    res <- mod |> tidy_plus_plus()
   )
 })
 
@@ -399,9 +378,8 @@ test_that("tidy_plus_plus() works with MASS::polr", {
 test_that("tidy_plus_plus() works with MASS::glm.nb", {
   skip_on_cran()
   mod <- MASS::glm.nb(Days ~ Sex / (Age + Eth * Lrn), data = MASS::quine)
-  expect_error(
-    suppressWarnings(res <- mod |> tidy_plus_plus()),
-    NA
+  expect_no_error(
+    suppressWarnings(res <- mod |> tidy_plus_plus())
   )
 })
 
@@ -415,9 +393,8 @@ test_that("tidy_plus_plus() works with geepack::geeglm", {
   suppressWarnings(
     mod <- geepack::geeglm(mf, data = df, id = Pig, family = poisson("log"), corstr = "ar1")
   )
-  expect_error(
-    res <- mod |> tidy_plus_plus(),
-    NA
+  expect_no_error(
+    res <- mod |> tidy_plus_plus()
   )
 })
 
@@ -427,9 +404,8 @@ test_that("tidy_plus_plus() works with gam::gam", {
   skip_if_not_installed("gam")
   data(kyphosis, package = "gam")
   mod <- gam::gam(Kyphosis ~ gam::s(Age, 4) + Number, family = binomial, data = kyphosis)
-  expect_error(
-    res <- mod |> tidy_plus_plus(),
-    NA
+  expect_no_error(
+    res <- mod |> tidy_plus_plus()
   )
 })
 
@@ -443,9 +419,8 @@ test_that("tidy_plus_plus() works with brms::brm", {
 
   load(system.file("extdata", "brms_example.rda", package = "broom.mixed"))
   mod <- brms_crossedRE
-  expect_error(
-    res <- mod |> tidy_plus_plus(),
-    NA
+  expect_no_error(
+    res <- mod |> tidy_plus_plus()
   )
 })
 
@@ -460,9 +435,8 @@ test_that("tidy_plus_plus() works with rstanarm::stan_glm", {
     refresh = 0,
     family = binomial
   )
-  expect_error(
-    res <- mod |> tidy_plus_plus(tidy_fun = broom.mixed::tidy),
-    NA
+  expect_no_error(
+    res <- mod |> tidy_plus_plus(tidy_fun = broom.mixed::tidy)
   )
 })
 
@@ -476,9 +450,8 @@ test_that("tidy_plus_plus() works with cmprsk::crr", {
   cov <- matrix(runif(600), nrow = 200)
   dimnames(cov)[[2]] <- c("x1", "x2", "x3")
   mod <- cmprsk::crr(ftime, fstatus, cov)
-  expect_error(
-    res <- mod |> tidy_plus_plus(quiet = TRUE),
-    NA
+  expect_no_error(
+    res <- mod |> tidy_plus_plus(quiet = TRUE)
   )
 })
 
@@ -487,9 +460,8 @@ test_that("tidy_plus_plus() works with tidycmprsk::crr", {
   skip_if_not_installed("tidycmprsk")
 
   mod <- tidycmprsk::crr(Surv(ttdeath, death_cr) ~ age + grade, tidycmprsk::trial)
-  expect_error(
-    res <- mod |> tidy_plus_plus(quiet = TRUE),
-    NA
+  expect_no_error(
+    res <- mod |> tidy_plus_plus(quiet = TRUE)
   )
 })
 
@@ -501,9 +473,8 @@ test_that("tidy_plus_plus() works with stats::nls", {
     data = iris,
     start = list(a = 1, b = 1)
   )
-  expect_error(
-    res <- mod |> tidy_plus_plus(),
-    NA
+  expect_no_error(
+    res <- mod |> tidy_plus_plus()
   )
 })
 
@@ -521,9 +492,8 @@ test_that("tidy_plus_plus() works with lavaan::lavaan", {
     auto.var = TRUE, auto.fix.first = TRUE,
     auto.cov.lv.x = TRUE
   )
-  expect_error(
-    res <- mod |> tidy_plus_plus(),
-    NA
+  expect_no_error(
+    res <- mod |> tidy_plus_plus()
   )
 })
 
@@ -532,9 +502,8 @@ test_that("tidy_plus_plus() works with lfe::felm", {
   skip_on_cran()
   skip_if_not_installed("lfe")
   mod <- lfe::felm(marker ~ age + grade | stage | 0, gtsummary::trial)
-  expect_error(
-    res <- mod |> tidy_plus_plus(),
-    NA
+  expect_no_error(
+    res <- mod |> tidy_plus_plus()
   )
 })
 
@@ -578,16 +547,16 @@ test_that("tidy_plus_plus() works with mgcv::gam", {
   gam_smooth_only <- mgcv::gam(response ~ s(marker, ttdeath), data = gtsummary::trial)
   gam_param_only <- mgcv::gam(response ~ grade, data = gtsummary::trial)
 
-  expect_error(tbl_gam_logistic <- gam_logistic |> tidy_plus_plus(tidy_fun = tidy_gam), NA)
-  expect_error(gam_logistic |> tidy_plus_plus(), NA)
+  expect_no_error(tbl_gam_logistic <- gam_logistic |> tidy_plus_plus(tidy_fun = tidy_gam))
+  expect_no_error(gam_logistic |> tidy_plus_plus())
 
-  expect_error(tbl_gam_linear <- gam_linear |> tidy_plus_plus(tidy_fun = tidy_gam), NA)
-  expect_error(gam_linear |> tidy_plus_plus(), NA)
+  expect_no_error(tbl_gam_linear <- gam_linear |> tidy_plus_plus(tidy_fun = tidy_gam))
+  expect_no_error(gam_linear |> tidy_plus_plus())
 
-  expect_error(tbl_gam_smooth_only <- gam_smooth_only |> tidy_plus_plus(tidy_fun = tidy_gam), NA)
-  expect_error(gam_smooth_only |> tidy_plus_plus(), NA)
+  expect_no_error(tbl_gam_smooth_only <- gam_smooth_only |> tidy_plus_plus(tidy_fun = tidy_gam))
+  expect_no_error(gam_smooth_only |> tidy_plus_plus())
 
-  expect_error(tbl_gam_param_only <- gam_param_only |> tidy_plus_plus(tidy_fun = tidy_gam), NA)
+  expect_no_error(tbl_gam_param_only <- gam_param_only |> tidy_plus_plus(tidy_fun = tidy_gam))
   # the default tidier return a df with no columns and no rows...it fails.
 })
 
@@ -608,9 +577,8 @@ test_that("tidy_plus_plus() works with VGAM::vglm", {
     data = df,
     trace = FALSE
   )
-  expect_error(
-    res <- mod |> tidy_plus_plus(),
-    NA
+  expect_no_error(
+    res <- mod |> tidy_plus_plus()
   )
 })
 
@@ -627,9 +595,8 @@ test_that("tidy_plus_plus() works with plm::plm", {
     index = c("firm", "year")
   )
 
-  expect_error(
-    res <- mod |> tidy_plus_plus(),
-    NA
+  expect_no_error(
+    res <- mod |> tidy_plus_plus()
   )
 })
 
@@ -645,9 +612,8 @@ test_that("tidy_plus_plus() works with biglm::bigglm", {
     family = binomial()
   )
 
-  expect_error(
-    res <- mod |> tidy_plus_plus(),
-    NA
+  expect_no_error(
+    res <- mod |> tidy_plus_plus()
   )
 
   # check that reference rows are properly added
@@ -670,11 +636,10 @@ test_that("tidy_plus_plus() works with parsnip::model_fit object", {
     parsnip::fit(response ~ stage + grade + trt, data = d)
 
   res1 <- mod1 |> tidy_plus_plus(exponentiate = TRUE)
-  expect_error(
-    res2 <- mod2 |> tidy_plus_plus(exponentiate = TRUE),
-    NA
+  expect_no_error(
+    res2 <- mod2 |> tidy_plus_plus(exponentiate = TRUE)
   )
-  expect_equivalent(res1, res2)
+  expect_equal(res1, res2)
 })
 
 test_that("tidy_plus_plus() works with fixest models", {
@@ -683,33 +648,29 @@ test_that("tidy_plus_plus() works with fixest models", {
   skip_if(compareVersion(as.character(getRversion()), "4.1") < 0)
 
   mod <- fixest::feols(fml = mpg ~ am + factor(carb), data = mtcars)
-  expect_error(
-    res <- mod |> tidy_plus_plus(),
-    NA
+  expect_no_error(
+    res <- mod |> tidy_plus_plus()
   )
 
   mod <- fixest::feglm(Sepal.Length ~ Sepal.Width + Petal.Length | Species, iris, "poisson")
-  expect_error(
-    res <- mod |> tidy_plus_plus(),
-    NA
+  expect_no_error(
+    res <- mod |> tidy_plus_plus()
   )
 
   mod <- fixest::feols(mpg ~ disp | cyl | wt ~ qsec, data = mtcars)
-  expect_error(
-    res <- mod |> tidy_plus_plus(),
-    NA
+  expect_no_error(
+    res <- mod |> tidy_plus_plus()
   )
   expect_equal(nrow(res), 2L)
   expect_true(res$instrumental[res$term == "wt"])
   res <- mod |> tidy_plus_plus(instrumental_suffix = NULL)
-  expect_equivalent(res$var_label[res$term == "wt"], "wt")
+  expect_equal(res$var_label[res$term == "wt"], "wt", ignore_attr = TRUE)
   res <- mod |> tidy_plus_plus(instrumental_suffix = " (IV)")
-  expect_equivalent(res$var_label[res$term == "wt"], "wt (IV)")
+  expect_equal(res$var_label[res$term == "wt"], "wt (IV)", ignore_attr = TRUE)
 
   mod <- fixest::feols(mpg ~ disp | 1 | factor(cyl) ~ qsec, data = mtcars)
-  expect_error(
-    res <- mod |> tidy_plus_plus(),
-    NA
+  expect_no_error(
+    res <- mod |> tidy_plus_plus()
   )
   expect_equal(nrow(res[res$instrumental, ]), 3L)
 })
@@ -727,9 +688,8 @@ test_that("tidy_plus_plus() works with logitr models", {
     randScale      = "n",
     numMultiStarts = 1
   )
-  expect_error(
-    res <- mod |> tidy_plus_plus(),
-    NA
+  expect_no_error(
+    res <- mod |> tidy_plus_plus()
   )
   expect_true("scalePar" %in% res$variable)
 })
@@ -752,11 +712,10 @@ test_that("tidy_plus_plus() works with multgee models", {
     id = id,
     repeated = time,
   )
-  expect_error(
-    res <- mod |> tidy_plus_plus(),
-    NA
+  expect_no_error(
+    res <- mod |> tidy_plus_plus()
   )
-  expect_equivalent(
+  expect_equal(
     res$y.level,
     c(
       "street", "street", "street", "street", "street", "street",
@@ -764,7 +723,7 @@ test_that("tidy_plus_plus() works with multgee models", {
       "community", "community", "community", "community"
     )
   )
-  expect_equivalent(
+  expect_equal(
     res$term,
     c(
       "factor(time)0", "factor(time)6", "factor(time)12", "factor(time)24",
@@ -781,9 +740,8 @@ test_that("tidy_plus_plus() works with multgee models", {
     repeated = time,
     LORstr = "uniform"
   )
-  expect_error(
-    res <- mod2 |> tidy_plus_plus(),
-    NA
+  expect_no_error(
+    res <- mod2 |> tidy_plus_plus()
   )
 })
 
@@ -806,33 +764,28 @@ test_that("tidy_plus_plus() works with pscl::zeroinfl() &  hurdle() models", {
     res <- m4 |> tidy_plus_plus()
   )
 
-  expect_error(
-    res <- m1 |> tidy_plus_plus(exponentiate = TRUE, tidy_fun = tidy_zeroinfl),
-    NA
+  expect_no_error(
+    res <- m1 |> tidy_plus_plus(exponentiate = TRUE, tidy_fun = tidy_zeroinfl)
   )
   expect_equal(nrow(res), 10)
 
-  expect_error(
-    res <- m1 |> tidy_plus_plus(intercept = TRUE, tidy_fun = tidy_zeroinfl),
-    NA
+  expect_no_error(
+    res <- m1 |> tidy_plus_plus(intercept = TRUE, tidy_fun = tidy_zeroinfl)
   )
   expect_equal(nrow(res), 12)
 
-  expect_error(
-    res <- m2 |> tidy_plus_plus(intercept = TRUE, tidy_fun = tidy_zeroinfl),
-    NA
+  expect_no_error(
+    res <- m2 |> tidy_plus_plus(intercept = TRUE, tidy_fun = tidy_zeroinfl)
   )
   expect_equal(nrow(res), 7)
 
-  expect_error(
-    res <- m3 |> tidy_plus_plus(intercept = TRUE, tidy_fun = tidy_zeroinfl),
-    NA
+  expect_no_error(
+    res <- m3 |> tidy_plus_plus(intercept = TRUE, tidy_fun = tidy_zeroinfl)
   )
   expect_equal(nrow(res), 9)
 
-  expect_error(
-    res <- m4 |> tidy_plus_plus(intercept = TRUE, tidy_fun = tidy_zeroinfl),
-    NA
+  expect_no_error(
+    res <- m4 |> tidy_plus_plus(intercept = TRUE, tidy_fun = tidy_zeroinfl)
   )
   expect_equal(nrow(res), 9)
 
@@ -857,56 +810,46 @@ test_that("tidy_plus_plus() works with betareg::betareg() models", {
   m3 <- betareg(yield ~ temp | temp + batch, data = GasolineYield)
   m4 <- betareg(yield ~ temp + batch | temp + batch, data = GasolineYield)
 
-  expect_error(
-    res <- m1 |> tidy_plus_plus(intercept = TRUE),
-    NA
+  expect_no_error(
+    res <- m1 |> tidy_plus_plus(intercept = TRUE)
   )
   expect_equal(nrow(res), 13)
-  expect_error(
-    res <- m1 |> tidy_plus_plus(exponentiate = TRUE),
-    NA
+  expect_no_error(
+    res <- m1 |> tidy_plus_plus(exponentiate = TRUE)
   )
   expect_equal(nrow(res), 11)
-  expect_error(
-    res <- m1 |> tidy_plus_plus(add_header_rows = TRUE),
-    NA
+  expect_no_error(
+    res <- m1 |> tidy_plus_plus(add_header_rows = TRUE)
   )
   expect_equal(nrow(res), 12)
 
-  expect_error(
-    res <- m2 |> tidy_plus_plus(intercept = TRUE),
-    NA
+  expect_no_error(
+    res <- m2 |> tidy_plus_plus(intercept = TRUE)
   )
   expect_equal(nrow(res), 15)
-  expect_error(
-    res <- m2 |> tidy_plus_plus(exponentiate = TRUE),
-    NA
+  expect_no_error(
+    res <- m2 |> tidy_plus_plus(exponentiate = TRUE)
   )
   expect_equal(nrow(res), 13)
-  expect_error(
-    res <- m2 |> tidy_plus_plus(component = "conditional"),
-    NA
+  expect_no_error(
+    res <- m2 |> tidy_plus_plus(component = "conditional")
   )
   expect_equal(nrow(res), 11)
-  expect_error(
-    res <- m2 |> tidy_plus_plus(add_header_rows = TRUE),
-    NA
+  expect_no_error(
+    res <- m2 |> tidy_plus_plus(add_header_rows = TRUE)
   )
   expect_equal(nrow(res), 14)
 
-  expect_error(
-    res <- m3 |> tidy_plus_plus(intercept = TRUE),
-    NA
+  expect_no_error(
+    res <- m3 |> tidy_plus_plus(intercept = TRUE)
   )
   expect_equal(nrow(res), 14)
-  expect_error(
-    res <- m3 |> tidy_plus_plus(exponentiate = TRUE),
-    NA
+  expect_no_error(
+    res <- m3 |> tidy_plus_plus(exponentiate = TRUE)
   )
   expect_equal(nrow(res), 12)
-  expect_error(
-    res <- m3 |> tidy_plus_plus(component = "mean"),
-    NA
+  expect_no_error(
+    res <- m3 |> tidy_plus_plus(component = "mean")
   )
   expect_equal(nrow(res), 1)
 
@@ -914,9 +857,8 @@ test_that("tidy_plus_plus() works with betareg::betareg() models", {
     m3 |> tidy_plus_plus(add_pairwise_contrasts = TRUE)
   )
 
-  expect_error(
-    res <- m4 |> tidy_plus_plus(add_header_rows = TRUE),
-    NA
+  expect_no_error(
+    res <- m4 |> tidy_plus_plus(add_header_rows = TRUE)
   )
   expect_equal(nrow(res), 24)
 })
@@ -928,27 +870,23 @@ test_that("tidy_plus_plus() works with mmrm::mmrm() models", {
   m1 <- mmrm::mmrm(FEV1 ~ SEX + ARMCD + AVISIT + us(AVISIT | USUBJID), data = mmrm::fev_data)
   m2 <- mmrm::mmrm(FEV1 ~ SEX + ARMCD * AVISIT + us(AVISIT | USUBJID), data = mmrm::fev_data)
 
-  expect_error(
-    res <- m1 |> tidy_plus_plus(intercept = TRUE),
-    NA
+  expect_no_error(
+    res <- m1 |> tidy_plus_plus(intercept = TRUE)
   )
   expect_equal(nrow(res), 9)
 
-  expect_error(
-    res <- m1 |> tidy_plus_plus(add_header_rows = TRUE),
-    NA
+  expect_no_error(
+    res <- m1 |> tidy_plus_plus(add_header_rows = TRUE)
   )
   expect_equal(nrow(res), 11)
 
-  expect_error(
-    res <- m2 |> tidy_plus_plus(intercept = TRUE),
-    NA
+  expect_no_error(
+    res <- m2 |> tidy_plus_plus(intercept = TRUE)
   )
   expect_equal(nrow(res), 12)
 
-  expect_error(
-    res <- m2 |> tidy_plus_plus(add_header_rows = TRUE),
-    NA
+  expect_no_error(
+    res <- m2 |> tidy_plus_plus(add_header_rows = TRUE)
   )
   expect_equal(nrow(res), 15)
 })
@@ -960,9 +898,8 @@ test_that("tidy_post_fun argument of `tidy_plus_plus()`", {
     x$titi <- "titi"
     x
   }
-  expect_error(
-    res <- tidy_plus_plus(mod, tidy_post_fun = add_titi),
-    NA
+  expect_no_error(
+    res <- tidy_plus_plus(mod, tidy_post_fun = add_titi)
   )
   expect_true("titi" %in% names(res))
   expect_true(res$titi[1] == "titi")
@@ -970,9 +907,8 @@ test_that("tidy_post_fun argument of `tidy_plus_plus()`", {
   keep_2_rows <- function(res) {
     head(res, n = 2)
   }
-  expect_error(
-    res <- tidy_plus_plus(mod, tidy_post_fun = keep_2_rows),
-    NA
+  expect_no_error(
+    res <- tidy_plus_plus(mod, tidy_post_fun = keep_2_rows)
   )
   expect_equal(nrow(res), 2L)
 })
@@ -993,9 +929,8 @@ test_that("tidy_plus_plus() works with glmtoolbox::glmgee() models", {
     corstr = "AR-M-dependent(1)",
     data = spruces
   )
-  expect_error(
-    res <- mod |> tidy_plus_plus(),
-    NA
+  expect_no_error(
+    res <- mod |> tidy_plus_plus()
   )
   expect_equal(nrow(res), 6)
 })

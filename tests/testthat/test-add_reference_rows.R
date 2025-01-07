@@ -9,7 +9,7 @@ test_that("tidy_add_reference_rows() works as expected", {
     tidy_and_attach() |>
     tidy_add_reference_rows()
   if ("stage2" %in% names(coef(mod))) {
-    expect_equivalent(
+    expect_equal(
       res$term,
       c(
         "(Intercept)", "stage1", "stage2", "stage3", "stage4", "grade1",
@@ -17,7 +17,7 @@ test_that("tidy_add_reference_rows() works as expected", {
       )
     )
   } else {
-    expect_equivalent(
+    expect_equal(
       res$term,
       c(
         "(Intercept)", "stageT1", "stageT2", "stageT3", "stageT4",
@@ -27,21 +27,22 @@ test_that("tidy_add_reference_rows() works as expected", {
     )
   }
 
-  expect_equivalent(
+  expect_equal(
     res$reference_row,
     c(
       NA, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, FALSE, TRUE,
       NA, NA
     )
   )
-  expect_equivalent(
+  expect_equal(
     res$var_class,
     c(
       NA, "factor", "factor", "factor", "factor", "factor", "factor",
       "factor", "character", "character", NA, NA
-    )
+    ),
+    ignore_attr = TRUE
   )
-  expect_equivalent(
+  expect_equal(
     res$var_type,
     c(
       "intercept", "categorical", "categorical", "categorical", "categorical",
@@ -49,9 +50,10 @@ test_that("tidy_add_reference_rows() works as expected", {
       "interaction", "interaction"
     )
   )
-  expect_equivalent(
+  expect_equal(
     res$var_nlevels,
-    c(NA, 4L, 4L, 4L, 4L, 3L, 3L, 3L, 2L, 2L, NA, NA)
+    c(NA, 4L, 4L, 4L, 4L, 3L, 3L, 3L, 2L, 2L, NA, NA),
+    ignore_attr = TRUE
   )
 
   # no reference row added if other contrasts are used
@@ -71,7 +73,7 @@ test_that("tidy_add_reference_rows() works as expected", {
   res <- mod |>
     tidy_and_attach() |>
     tidy_add_reference_rows()
-  expect_equivalent(
+  expect_equal(
     res$reference_row,
     c(NA, NA, NA)
   )
@@ -87,7 +89,7 @@ test_that("tidy_add_reference_rows() works as expected", {
     tidy_and_attach() |>
     tidy_add_reference_rows(no_reference_row = c("stage", "grade"))
   if ("stage2" %in% names(coef(mod))) {
-    expect_equivalent(
+    expect_equal(
       res$term,
       c(
         "(Intercept)", "stage2", "stage3", "stage4", "grade1", "grade2",
@@ -95,7 +97,7 @@ test_that("tidy_add_reference_rows() works as expected", {
       )
     )
   } else {
-    expect_equivalent(
+    expect_equal(
       res$term,
       c(
         "(Intercept)", "stageT2", "stageT3", "stageT4", "gradeI", "gradeII",
@@ -106,7 +108,7 @@ test_that("tidy_add_reference_rows() works as expected", {
 
 
 
-  expect_equivalent(
+  expect_equal(
     res$reference_row,
     c(NA, NA, NA, NA, NA, NA, FALSE, TRUE, NA, NA)
   )
@@ -170,7 +172,7 @@ test_that("tidy_add_reference_rows() works with different values of base in cont
     tidy_and_attach() |>
     tidy_add_reference_rows()
   if ("stage2" %in% names(coef(mod))) {
-    expect_equivalent(
+    expect_equal(
       res$term,
       c(
         "(Intercept)", "stage1", "stage2", "stage3", "stage4", "grade1",
@@ -178,7 +180,7 @@ test_that("tidy_add_reference_rows() works with different values of base in cont
       )
     )
   } else {
-    expect_equivalent(
+    expect_equal(
       res$term,
       c(
         "(Intercept)", "stageT1", "stageT2", "stageT3", "stageT4", "gradeI",
@@ -188,7 +190,7 @@ test_that("tidy_add_reference_rows() works with different values of base in cont
   }
 
 
-  expect_equivalent(
+  expect_equal(
     res$reference_row,
     c(
       NA, FALSE, FALSE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE, TRUE,
@@ -208,13 +210,14 @@ test_that("tidy_add_reference_rows() use var_label if available", {
     tidy_add_variable_labels() |>
     tidy_add_reference_rows()
 
-  expect_equivalent(
+  expect_equal(
     res$var_label,
     c(
       "(Intercept)", "T Stage", "T Stage", "T Stage", "T Stage",
       "Grade", "Grade", "Grade", "Chemotherapy Treatment", "Chemotherapy Treatment",
       "Grade * Chemotherapy Treatment", "Grade * Chemotherapy Treatment"
-    )
+    ),
+    ignore_attr = TRUE
   )
 })
 
@@ -225,7 +228,7 @@ test_that("tidy_add_reference_rows() works with nnet::multinom", {
   res <- mod |>
     tidy_and_attach() |>
     tidy_add_reference_rows()
-  expect_equivalent(
+  expect_equal(
     res$reference_row,
     c(
       NA, TRUE, FALSE, FALSE, FALSE, NA, NA, NA, TRUE, FALSE, FALSE,
@@ -268,7 +271,7 @@ test_that("tidy_add_reference_rows() works with glmmTMB::glmmTMB", {
   res <- mod |>
     tidy_and_attach() |>
     tidy_add_reference_rows()
-  expect_equivalent(
+  expect_equal(
     res$reference_row,
     c(
       NA, TRUE, FALSE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,

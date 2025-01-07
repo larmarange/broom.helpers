@@ -8,24 +8,26 @@ test_that("tidy_add_header_rows() works as expected", {
   res <- mod |>
     tidy_and_attach() |>
     tidy_add_header_rows()
-  expect_equivalent(
+  expect_equal(
     res$label,
     c(
       "(Intercept)", "T Stage", "T2", "T3", "T4", "Grade", "I", "II",
       "Chemotherapy Treatment", "Drug A", "Grade * Chemotherapy Treatment",
       "I * Drug A", "II * Drug A"
-    )
+    ),
+    ignore_attr = TRUE
   )
-  expect_equivalent(
+  expect_equal(
     res$header_row,
     c(
       NA, TRUE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, TRUE, FALSE,
       TRUE, FALSE, FALSE
     )
   )
-  expect_equivalent(
+  expect_equal(
     res$var_nlevels,
-    c(NA, 4L, 4L, 4L, 4L, 3L, 3L, 3L, 2L, 2L, NA, NA, NA)
+    c(NA, 4L, 4L, 4L, 4L, 3L, 3L, 3L, 2L, 2L, NA, NA, NA),
+    ignore_attr = TRUE
   )
 
   # show_single_row has an effect only on variables with one term (2 if a ref term)
@@ -33,15 +35,16 @@ test_that("tidy_add_header_rows() works as expected", {
     tidy_and_attach() |>
     tidy_identify_variables() |>
     tidy_add_header_rows(show_single_row = everything(), quiet = TRUE)
-  expect_equivalent(
+  expect_equal(
     res$label,
     c(
       "(Intercept)", "T Stage", "T2", "T3", "T4", "Grade", "I", "II",
       "Chemotherapy Treatment", "Grade * Chemotherapy Treatment", "I * Drug A",
       "II * Drug A"
-    )
+    ),
+    ignore_attr = TRUE
   )
-  expect_equivalent(
+  expect_equal(
     res$header_row,
     c(
       NA, TRUE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, NA, TRUE,
@@ -54,15 +57,16 @@ test_that("tidy_add_header_rows() works as expected", {
     tidy_and_attach() |>
     tidy_add_reference_rows() |>
     tidy_add_header_rows()
-  expect_equivalent(
+  expect_equal(
     res$label,
     c(
       "(Intercept)", "T Stage", "T1", "T2", "T3", "T4", "Grade",
       "I", "II", "III", "Chemotherapy Treatment", "Drug A", "Drug B",
       "Grade * Chemotherapy Treatment", "I * Drug A", "II * Drug A"
-    )
+    ),
+    ignore_attr = TRUE
   )
-  expect_equivalent(
+  expect_equal(
     res$header_row,
     c(
       NA, TRUE, FALSE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE,
@@ -72,9 +76,8 @@ test_that("tidy_add_header_rows() works as expected", {
 
   # no warning with an intercept only model
   mod <- lm(mpg ~ 1, mtcars)
-  expect_warning(
-    mod |> tidy_and_attach() |> tidy_add_header_rows(),
-    NA
+  expect_no_warning(
+    mod |> tidy_and_attach() |> tidy_add_header_rows()
   )
 
   # header row for all categorical variable (even if no reference row)
@@ -84,7 +87,7 @@ test_that("tidy_add_header_rows() works as expected", {
   res <- mod |>
     tidy_and_attach() |>
     tidy_add_header_rows(show_single_row = "trt")
-  expect_equivalent(
+  expect_equal(
     res$header_row,
     c(NA, TRUE, FALSE, NA, NA, TRUE, FALSE)
   )
@@ -94,7 +97,7 @@ test_that("tidy_add_header_rows() works as expected", {
   res <- mod |>
     tidy_and_attach() |>
     tidy_add_header_rows(show_single_row = "factor(response):marker")
-  expect_equivalent(
+  expect_equal(
     res$header_row,
     c(NA, TRUE, FALSE, NA, NA)
   )
@@ -102,16 +105,17 @@ test_that("tidy_add_header_rows() works as expected", {
     tidy_and_attach() |>
     tidy_add_reference_rows() |>
     tidy_add_header_rows(show_single_row = "factor(response):marker")
-  expect_equivalent(
+  expect_equal(
     res$header_row,
     c(NA, TRUE, FALSE, FALSE, NA, NA)
   )
-  expect_equivalent(
+  expect_equal(
     res$var_label,
     c(
       "(Intercept)", "factor(response)", "factor(response)", "factor(response)",
       "Marker Level (ng/mL)", "factor(response) * Marker Level (ng/mL)"
-    )
+    ),
+    ignore_attr = TRUE
   )
 
   # no standard name
@@ -122,7 +126,7 @@ test_that("tidy_add_header_rows() works as expected", {
   res <- mod |>
     tidy_and_attach() |>
     tidy_add_header_rows()
-  expect_equivalent(
+  expect_equal(
     res$header_row,
     c(NA, NA)
   )
@@ -133,7 +137,7 @@ test_that("tidy_add_header_rows() works as expected", {
   res <- mod |>
     tidy_and_attach() |>
     tidy_add_header_rows()
-  expect_equivalent(
+  expect_equal(
     res$header_row,
     c(NA, TRUE, FALSE, FALSE)
   )
@@ -161,7 +165,7 @@ test_that("tidy_add_header_rows() works with nnet::multinom", {
     tidy_and_attach() |>
     tidy_add_reference_rows() |>
     tidy_add_header_rows()
-  expect_equivalent(
+  expect_equal(
     res$header_row,
     c(
       NA, TRUE, FALSE, FALSE, FALSE, FALSE, NA, NA, TRUE, FALSE,
@@ -169,7 +173,7 @@ test_that("tidy_add_header_rows() works with nnet::multinom", {
       FALSE
     )
   )
-  expect_equivalent(
+  expect_equal(
     res$label,
     c(
       "(Intercept)", "T Stage", "T1", "T2", "T3", "T4",
@@ -177,27 +181,29 @@ test_that("tidy_add_header_rows() works with nnet::multinom", {
       "Drug A", "Drug B", "(Intercept)", "T Stage", "T1", "T2",
       "T3", "T4", "Marker Level (ng/mL)", "Age",
       "Chemotherapy Treatment", "Drug A", "Drug B"
-    )
+    ),
+    ignore_attr = TRUE
   )
   res <- mod |>
     tidy_and_attach() |>
     tidy_add_reference_rows() |>
     tidy_add_header_rows(show_single_row = everything(), quiet = TRUE)
-  expect_equivalent(
+  expect_equal(
     res$header_row,
     c(
       NA, TRUE, FALSE, FALSE, FALSE, FALSE, NA, NA, NA, NA, TRUE,
       FALSE, FALSE, FALSE, FALSE, NA, NA, NA
     )
   )
-  expect_equivalent(
+  expect_equal(
     res$label,
     c(
       "(Intercept)", "T Stage", "T1", "T2", "T3", "T4",
       "Marker Level (ng/mL)", "Age", "Chemotherapy Treatment",
       "(Intercept)", "T Stage", "T1", "T2", "T3", "T4",
       "Marker Level (ng/mL)", "Age", "Chemotherapy Treatment"
-    )
+    ),
+    ignore_attr = TRUE
   )
 })
 

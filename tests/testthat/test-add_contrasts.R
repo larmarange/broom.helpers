@@ -3,14 +3,14 @@ test_that("tidy_add_contrast() works for basic models", {
   res <- mod |>
     tidy_and_attach() |>
     tidy_add_contrasts()
-  expect_equivalent(
+  expect_equal(
     res$contrasts,
     c(
       NA, "contr.treatment", "contr.treatment", "contr.treatment",
       "contr.treatment", "contr.treatment", "contr.treatment"
     )
   )
-  expect_equivalent(
+  expect_equal(
     res$contrasts_type,
     c(
       NA, "treatment", "treatment", "treatment", "treatment", "treatment",
@@ -25,14 +25,14 @@ test_that("tidy_add_contrast() works for basic models", {
   res <- mod |>
     tidy_and_attach() |>
     tidy_add_contrasts()
-  expect_equivalent(
+  expect_equal(
     res$contrasts,
     c(
       NA, "contr.sum", "contr.sum", "contr.sum", "contr.helmert",
       "contr.helmert", "contr.SAS"
     )
   )
-  expect_equivalent(
+  expect_equal(
     res$contrasts_type,
     c(NA, "sum", "sum", "sum", "helmert", "helmert", "treatment")
   )
@@ -44,14 +44,14 @@ test_that("tidy_add_contrast() works for basic models", {
   res <- mod |>
     tidy_and_attach() |>
     tidy_add_contrasts()
-  expect_equivalent(
+  expect_equal(
     res$contrasts,
     c(
       NA, "contr.poly", "contr.poly", "contr.poly", "contr.treatment",
       "contr.treatment", "custom"
     )
   )
-  expect_equivalent(
+  expect_equal(
     res$contrasts_type,
     c(NA, "poly", "poly", "poly", "treatment", "treatment", "other")
   )
@@ -68,7 +68,7 @@ test_that("tidy_add_contrast() works for basic models", {
   res <- mod |>
     tidy_and_attach() |>
     tidy_add_contrasts()
-  expect_equivalent(
+  expect_equal(
     res$contrasts,
     c(
       NA, "contr.treatment(base=3)", "contr.treatment(base=3)", "contr.treatment(base=3)",
@@ -76,7 +76,7 @@ test_that("tidy_add_contrast() works for basic models", {
       "custom"
     )
   )
-  expect_equivalent(
+  expect_equal(
     res$contrasts_type,
     c(
       NA, "treatment", "treatment", "treatment", "treatment", "treatment",
@@ -91,14 +91,14 @@ test_that("tidy_add_contrast() works for basic models", {
   res <- mod |>
     tidy_and_attach() |>
     tidy_add_contrasts()
-  expect_equivalent(
+  expect_equal(
     res$contrasts,
     c(
       NA, "contr.sum", "contr.sum", "contr.sum", "contr.helmert",
       "contr.helmert", "contr.SAS"
     )
   )
-  expect_equivalent(
+  expect_equal(
     res$contrasts_type,
     c(NA, "sum", "sum", "sum", "helmert", "helmert", "treatment")
   )
@@ -119,12 +119,12 @@ test_that("tidy_add_contrast() works for basic models", {
   res <- mod |>
     tidy_and_attach() |>
     tidy_add_contrasts()
-  expect_equivalent(
+  expect_equal(
     res$contrasts,
     c(NA, "contr.sdif", "contr.sdif", "contr.sdif", "contr.sdif",
       "contr.sdif", "contr.sdif")
   )
-  expect_equivalent(
+  expect_equal(
     res$contrasts_type,
     c(NA, "sdif", "sdif", "sdif", "sdif", "sdif", "sdif")
   )
@@ -149,7 +149,7 @@ test_that("tidy_add_contrasts() works with no intercept models", {
   res <- mod |>
     tidy_and_attach() |>
     tidy_add_contrasts()
-  expect_equivalent(
+  expect_equal(
     res$contrasts_type,
     c(
       "no.contrast", "no.contrast", "no.contrast", "no.contrast",
@@ -164,7 +164,7 @@ test_that("tidy_add_contrasts() works with variables having non standard name", 
   res <- mod |>
     tidy_and_attach() |>
     tidy_add_contrasts()
-  expect_equivalent(
+  expect_equal(
     res$contrasts,
     c(
       NA, "contr.treatment", "contr.treatment", "contr.treatment",
@@ -179,7 +179,7 @@ test_that("tidy_add_contrasts() works with variables having non standard name", 
   res <- mod |>
     tidy_and_attach() |>
     tidy_add_contrasts()
-  expect_equivalent(
+  expect_equal(
     res$contrasts,
     c(
       NA, "contr.treatment", "contr.treatment", "contr.treatment",
@@ -196,7 +196,7 @@ test_that("tidy_add_contrasts() works with lme4::lmer", {
   df$stage <- as.character(df$stage)
   df$group <- rep.int(1:2, 100)
   mod <- lme4::lmer(marker ~ stage + grade + (1 | group), df)
-  expect_error(mod |> tidy_and_attach(tidy_fun = broom.mixed::tidy) |> tidy_add_contrasts(), NA)
+  expect_no_error(mod |> tidy_and_attach(tidy_fun = broom.mixed::tidy) |> tidy_add_contrasts())
 })
 
 
@@ -209,14 +209,14 @@ test_that("tidy_add_contrasts() works with lme4::glmer", {
   suppressMessages(
     mod <- lme4::glmer(response ~ stage + grade + (1 | group), df, family = binomial)
   )
-  expect_error(mod |> tidy_and_attach(tidy_fun = broom.mixed::tidy) |> tidy_add_contrasts(), NA)
+  expect_no_error(mod |> tidy_and_attach(tidy_fun = broom.mixed::tidy) |> tidy_add_contrasts())
 })
 
 
 test_that("tidy_add_contrasts() works with survival::coxph", {
   df <- survival::lung |> dplyr::mutate(sex = factor(sex))
   mod <- survival::coxph(survival::Surv(time, status) ~ ph.ecog + age + sex, data = df)
-  expect_error(mod |> tidy_and_attach() |> tidy_add_contrasts(), NA)
+  expect_no_error(mod |> tidy_and_attach() |> tidy_add_contrasts())
 })
 
 test_that("tidy_add_contrasts() works with survival::survreg", {
@@ -225,24 +225,24 @@ test_that("tidy_add_contrasts() works with survival::survreg", {
     survival::ovarian,
     dist = "exponential"
   )
-  expect_error(mod |> tidy_and_attach() |> tidy_add_contrasts(), NA)
+  expect_no_error(mod |> tidy_and_attach() |> tidy_add_contrasts())
 })
 
 test_that("tidy_add_contrasts() works with nnet::multinom", {
   skip_if_not_installed("nnet")
   mod <- nnet::multinom(grade ~ stage + marker + age, data = gtsummary::trial, trace = FALSE)
-  expect_error(mod |> tidy_and_attach() |> tidy_add_contrasts(), NA)
+  expect_no_error(mod |> tidy_and_attach() |> tidy_add_contrasts())
 
   mod <- nnet::multinom(
     grade ~ stage + marker + age,
     data = gtsummary::trial, trace = FALSE,
     contrasts = list(stage = contr.sum)
   )
-  expect_error(mod |> tidy_and_attach() |> tidy_add_contrasts(), NA)
+  expect_no_error(mod |> tidy_and_attach() |> tidy_add_contrasts())
   res <- mod |>
     tidy_and_attach() |>
     tidy_add_contrasts()
-  expect_equivalent(
+  expect_equal(
     res$contrasts,
     c(
       NA, "contr.sum", "contr.sum", "contr.sum", NA, NA, NA, "contr.sum",
@@ -255,24 +255,24 @@ test_that("tidy_add_contrasts() works with survey::svyglm", {
   skip_if_not_installed("survey")
   df <- survey::svydesign(~1, weights = ~1, data = gtsummary::trial)
   mod <- survey::svyglm(response ~ age + grade * trt, df, family = quasibinomial)
-  expect_error(mod |> tidy_and_attach() |> tidy_add_contrasts(), NA)
+  expect_no_error(mod |> tidy_and_attach() |> tidy_add_contrasts())
 })
 
 test_that("tidy_add_contrasts() works with ordinal::clm", {
   mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine)
-  expect_error(mod |> tidy_and_attach() |> tidy_add_contrasts(), NA)
+  expect_no_error(mod |> tidy_and_attach() |> tidy_add_contrasts())
 })
 
 
 test_that("tidy_add_contrasts() works with ordinal::clmm", {
   mod <- ordinal::clmm(rating ~ temp * contact + (1 | judge), data = ordinal::wine)
-  expect_error(mod |> tidy_and_attach() |> tidy_add_contrasts(), NA)
+  expect_no_error(mod |> tidy_and_attach() |> tidy_add_contrasts())
 })
 
 
 test_that("tidy_add_contrasts() works with MASS::polr", {
   mod <- MASS::polr(Sat ~ Infl + Type + Cont, weights = Freq, data = MASS::housing)
-  expect_error(mod |> tidy_and_attach() |> tidy_add_contrasts(), NA)
+  expect_no_error(mod |> tidy_and_attach() |> tidy_add_contrasts())
 })
 
 
@@ -285,7 +285,7 @@ test_that("tidy_add_contrasts() works with geepack::geeglm", {
   suppressWarnings(
     mod <- geepack::geeglm(mf, data = df, id = Pig, family = poisson("identity"), corstr = "ar1")
   )
-  expect_error(mod |> tidy_and_attach() |> tidy_add_contrasts(), NA)
+  expect_no_error(mod |> tidy_and_attach() |> tidy_add_contrasts())
 })
 
 
@@ -293,7 +293,7 @@ test_that("tidy_add_contrasts() works with gam::gam", {
   skip_if_not_installed("gam")
   data(kyphosis, package = "gam")
   mod <- gam::gam(Kyphosis ~ gam::s(Age, 4) + Number, family = binomial, data = kyphosis)
-  expect_error(mod |> tidy_and_attach() |> tidy_add_contrasts(), NA)
+  expect_no_error(mod |> tidy_and_attach() |> tidy_add_contrasts())
 })
 
 
@@ -309,7 +309,7 @@ test_that("tidy_add_contrasts() works with lavaan::lavaan", {
     auto.var = TRUE, auto.fix.first = TRUE,
     auto.cov.lv.x = TRUE
   )
-  expect_error(mod |> tidy_and_attach() |> tidy_add_contrasts(), NA)
+  expect_no_error(mod |> tidy_and_attach() |> tidy_add_contrasts())
 })
 
 

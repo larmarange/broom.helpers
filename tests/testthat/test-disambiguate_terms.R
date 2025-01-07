@@ -6,7 +6,7 @@ test_that("tidy_disambiguate_terms() changes nothing for basic models", {
 
   # no change by default
   res2 <- res |> tidy_disambiguate_terms()
-  expect_equivalent(res, res2)
+  expect_equal(res, res2)
   expect_false("original_term" %in% names(res2))
 })
 
@@ -18,7 +18,7 @@ test_that("tidy_disambiguate_terms() works for mixed models", {
   res <- mod |>
     tidy_and_attach() |>
     tidy_disambiguate_terms(sep = ".")
-  expect_equivalent(
+  expect_equal(
     res$term,
     c(
       "(Intercept)", "Days", "Subject.sd__(Intercept)",
@@ -31,7 +31,7 @@ test_that("tidy_disambiguate_terms() works for mixed models", {
   res <- mod |>
     tidy_and_attach() |>
     tidy_disambiguate_terms(sep = "_")
-  expect_equivalent(
+  expect_equal(
     res$term,
     c(
       "(Intercept)", "Days", "Subject_sd__(Intercept)",
@@ -52,16 +52,9 @@ test_that("test tidy_disambiguate_terms() checks", {
   expect_error(mod |> broom.mixed::tidy() |> tidy_disambiguate_terms())
 
   # could be apply twice (no error but a message)
-  expect_error(
+  expect_no_error(
     mod |>
       tidy_and_attach() |>
-      tidy_disambiguate_terms() |>
-      tidy_disambiguate_terms(),
-    NA
-  )
-  expect_message(
-    mod |>
-      tidy_and_attach(tidy_fun = broom::tidy) |>
       tidy_disambiguate_terms() |>
       tidy_disambiguate_terms()
   )
@@ -69,7 +62,12 @@ test_that("test tidy_disambiguate_terms() checks", {
     mod |>
       tidy_and_attach(tidy_fun = broom::tidy) |>
       tidy_disambiguate_terms() |>
-      tidy_disambiguate_terms(quiet = TRUE),
-    NA
+      tidy_disambiguate_terms()
+  )
+  expect_no_message(
+    mod |>
+      tidy_and_attach(tidy_fun = broom::tidy) |>
+      tidy_disambiguate_terms() |>
+      tidy_disambiguate_terms(quiet = TRUE)
   )
 })

@@ -16,8 +16,7 @@ test_that("test tidy_remove_intercept() checks", {
   expect_error(mod |> broom::tidy() |> tidy_remove_intercept())
 
   # could be apply twice (no error)
-  expect_error(
-    mod |> tidy_and_attach() |> tidy_remove_intercept() |> tidy_remove_intercept(),
-    NA
+  expect_no_error(
+    mod |> tidy_and_attach() |> tidy_remove_intercept() |> tidy_remove_intercept()
   )
 })

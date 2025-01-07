@@ -6,91 +6,91 @@ test_that("tidy_add_coefficients_type() works for common models", {
   res <- mod |>
     tidy_and_attach() |>
     tidy_add_coefficients_type()
-  expect_equivalent(attr(res, "coefficients_type"), "generic")
-  expect_equivalent(attr(res, "coefficients_label"), "Beta")
+  expect_equal(attr(res, "coefficients_type"), "generic")
+  expect_equal(attr(res, "coefficients_label"), "Beta")
 
   mod <- glm(Sepal.Length ~ Sepal.Width, iris, family = gaussian)
   res <- mod |>
     tidy_and_attach(exponentiate = TRUE) |>
     tidy_add_coefficients_type()
-  expect_equivalent(attr(res, "coefficients_type"), "generic")
-  expect_equivalent(attr(res, "coefficients_label"), "exp(Beta)")
+  expect_equal(attr(res, "coefficients_type"), "generic")
+  expect_equal(attr(res, "coefficients_label"), "exp(Beta)")
 
   mod <- glm(response ~ age + grade * trt, gtsummary::trial, family = binomial)
   res <- mod |>
     tidy_and_attach() |>
     tidy_add_coefficients_type()
-  expect_equivalent(attr(res, "coefficients_type"), "logistic")
-  expect_equivalent(attr(res, "coefficients_label"), "log(OR)")
+  expect_equal(attr(res, "coefficients_type"), "logistic")
+  expect_equal(attr(res, "coefficients_label"), "log(OR)")
   res <- mod |>
     tidy_and_attach(exponentiate = TRUE) |>
     tidy_add_coefficients_type()
-  expect_equivalent(attr(res, "coefficients_type"), "logistic")
-  expect_equivalent(attr(res, "coefficients_label"), "OR")
+  expect_equal(attr(res, "coefficients_type"), "logistic")
+  expect_equal(attr(res, "coefficients_label"), "OR")
 
   mod <- glm(response ~ age + grade * trt, gtsummary::trial, family = binomial(probit))
   res <- mod |>
     tidy_and_attach() |>
     tidy_add_coefficients_type()
-  expect_equivalent(attr(res, "coefficients_type"), "generic")
-  expect_equivalent(attr(res, "coefficients_label"), "Beta")
+  expect_equal(attr(res, "coefficients_type"), "generic")
+  expect_equal(attr(res, "coefficients_label"), "Beta")
   res <- mod |>
     tidy_and_attach(exponentiate = TRUE) |>
     tidy_add_coefficients_type()
-  expect_equivalent(attr(res, "coefficients_type"), "generic")
-  expect_equivalent(attr(res, "coefficients_label"), "exp(Beta)")
+  expect_equal(attr(res, "coefficients_type"), "generic")
+  expect_equal(attr(res, "coefficients_label"), "exp(Beta)")
 
   mod <- glm(response ~ age + grade * trt, gtsummary::trial, family = binomial(log))
   res <- mod |>
     tidy_and_attach() |>
     tidy_add_coefficients_type()
-  expect_equivalent(attr(res, "coefficients_type"), "relative_risk")
-  expect_equivalent(attr(res, "coefficients_label"), "log(RR)")
+  expect_equal(attr(res, "coefficients_type"), "relative_risk")
+  expect_equal(attr(res, "coefficients_label"), "log(RR)")
   res <- mod |>
     tidy_and_attach(exponentiate = TRUE) |>
     tidy_add_coefficients_type()
-  expect_equivalent(attr(res, "coefficients_type"), "relative_risk")
-  expect_equivalent(attr(res, "coefficients_label"), "RR")
+  expect_equal(attr(res, "coefficients_type"), "relative_risk")
+  expect_equal(attr(res, "coefficients_label"), "RR")
 
   mod <- glm(response ~ age + grade * trt, gtsummary::trial, family = binomial(cloglog))
   res <- mod |>
     tidy_and_attach(exponentiate = TRUE) |>
     tidy_add_coefficients_type()
-  expect_equivalent(attr(res, "coefficients_type"), "prop_hazard")
-  expect_equivalent(attr(res, "coefficients_label"), "HR")
+  expect_equal(attr(res, "coefficients_type"), "prop_hazard")
+  expect_equal(attr(res, "coefficients_label"), "HR")
 
   mod <- glm(response ~ age + grade * trt, gtsummary::trial, family = poisson)
   res <- mod |>
     tidy_and_attach() |>
     tidy_add_coefficients_type()
-  expect_equivalent(attr(res, "coefficients_type"), "poisson")
-  expect_equivalent(attr(res, "coefficients_label"), "log(IRR)")
+  expect_equal(attr(res, "coefficients_type"), "poisson")
+  expect_equal(attr(res, "coefficients_label"), "log(IRR)")
   res <- mod |>
     tidy_and_attach(exponentiate = TRUE) |>
     tidy_add_coefficients_type()
-  expect_equivalent(attr(res, "coefficients_type"), "poisson")
-  expect_equivalent(attr(res, "coefficients_label"), "IRR")
+  expect_equal(attr(res, "coefficients_type"), "poisson")
+  expect_equal(attr(res, "coefficients_label"), "IRR")
 
   mod <- glm(response ~ age + grade * trt, gtsummary::trial, family = poisson("identity"))
   res <- mod |>
     tidy_and_attach(conf.int = FALSE) |>
     tidy_add_coefficients_type()
-  expect_equivalent(attr(res, "coefficients_type"), "generic")
-  expect_equivalent(attr(res, "coefficients_label"), "Beta")
+  expect_equal(attr(res, "coefficients_type"), "generic")
+  expect_equal(attr(res, "coefficients_label"), "Beta")
 
   mod <- glm(response ~ age + grade * trt, gtsummary::trial, family = quasipoisson)
   res <- mod |>
     tidy_and_attach() |>
     tidy_add_coefficients_type(exponentiate = TRUE)
-  expect_equivalent(attr(res, "coefficients_type"), "poisson")
-  expect_equivalent(attr(res, "coefficients_label"), "IRR")
+  expect_equal(attr(res, "coefficients_type"), "poisson")
+  expect_equal(attr(res, "coefficients_label"), "IRR")
 
   mod <- glm(response ~ age + grade * trt, gtsummary::trial, family = quasibinomial)
   res <- mod |>
     tidy_and_attach() |>
     tidy_add_coefficients_type(exponentiate = TRUE)
-  expect_equivalent(attr(res, "coefficients_type"), "logistic")
-  expect_equivalent(attr(res, "coefficients_label"), "OR")
+  expect_equal(attr(res, "coefficients_type"), "logistic")
+  expect_equal(attr(res, "coefficients_label"), "OR")
 })
 
 test_that("test tidy_add_coefficients_type() checks", {
@@ -103,9 +103,8 @@ test_that("test tidy_add_coefficients_type() checks", {
   expect_error(mod |> broom::tidy() |> tidy_attach_model(mod) |> tidy_add_coefficients_type())
 
   # could be apply twice (no error)
-  expect_error(
-    mod |> tidy_and_attach() |> tidy_add_coefficients_type() |> tidy_add_coefficients_type(),
-    NA
+  expect_no_error(
+    mod |> tidy_and_attach() |> tidy_add_coefficients_type() |> tidy_add_coefficients_type()
   )
 })
 
@@ -114,7 +113,7 @@ test_that("model_get_coefficients_type() works with lme4::lmer", {
   skip_if_not_installed("lme4")
   mod <- lme4::lmer(Reaction ~ Days + (Days | Subject), lme4::sleepstudy)
   res <- mod |> model_get_coefficients_type()
-  expect_equivalent(res, "generic")
+  expect_equal(res, "generic")
 })
 
 
@@ -125,23 +124,23 @@ test_that("model_identify_variables() works with lme4::glmer", {
     family = binomial, data = lme4::cbpp
   )
   res <- mod |> model_get_coefficients_type()
-  expect_equivalent(res, "logistic")
+  expect_equal(res, "logistic")
 
   mod <- lme4::glmer(cbind(incidence, size - incidence) ~ period + (1 | herd),
     family = binomial("probit"), data = lme4::cbpp
   )
   res <- mod |> model_get_coefficients_type()
-  expect_equivalent(res, "generic")
+  expect_equal(res, "generic")
 
   mod <- lme4::glmer(cbind(incidence, size - incidence) ~ period + (1 | herd),
     family = binomial("log"), data = lme4::cbpp
   )
   res <- mod |> model_get_coefficients_type()
-  expect_equivalent(res, "relative_risk")
+  expect_equal(res, "relative_risk")
 
   mod <- lme4::glmer(response ~ trt + (1 | grade), gtsummary::trial, family = poisson)
   res <- mod |> model_get_coefficients_type()
-  expect_equivalent(res, "poisson")
+  expect_equal(res, "poisson")
 })
 
 
@@ -149,7 +148,7 @@ test_that("model_get_coefficients_type() works with survival::coxph", {
   df <- survival::lung |> dplyr::mutate(sex = factor(sex))
   mod <- survival::coxph(survival::Surv(time, status) ~ ph.ecog + age + sex, data = df)
   res <- mod |> model_get_coefficients_type()
-  expect_equivalent(res, "prop_hazard")
+  expect_equal(res, "prop_hazard")
 })
 
 test_that("model_get_coefficients_type() works with survival::survreg", {
@@ -159,7 +158,7 @@ test_that("model_get_coefficients_type() works with survival::survreg", {
     dist = "exponential"
   )
   res <- mod |> model_get_coefficients_type()
-  expect_equivalent(res, "generic")
+  expect_equal(res, "generic")
 })
 
 
@@ -175,7 +174,7 @@ test_that("model_get_coefficients_type() works with survival::clogit", {
   mod <- survival::clogit(case ~ tocc + tocc:education + strata(id), logan2)
 
   res <- mod |> model_get_coefficients_type()
-  expect_equivalent(res, "logistic")
+  expect_equal(res, "logistic")
 })
 
 
@@ -183,7 +182,7 @@ test_that("model_get_coefficients_type() works with nnet::multinom", {
   skip_if_not_installed("nnet")
   mod <- nnet::multinom(grade ~ stage + marker + age, data = gtsummary::trial, trace = FALSE)
   res <- mod |> model_get_coefficients_type()
-  expect_equivalent(res, "logistic")
+  expect_equal(res, "logistic")
 })
 
 test_that("model_get_coefficients_type() works with survey::svyglm", {
@@ -191,7 +190,7 @@ test_that("model_get_coefficients_type() works with survey::svyglm", {
   df <- survey::svydesign(~1, weights = ~1, data = gtsummary::trial)
   mod <- survey::svyglm(response ~ age + grade * trt, df, family = quasibinomial)
   res <- mod |> model_get_coefficients_type()
-  expect_equivalent(res, "logistic")
+  expect_equal(res, "logistic")
 })
 
 
@@ -203,7 +202,7 @@ test_that("model_get_coefficients_type() works with survey::svycoxph", {
     design = dpbc
   )
   res <- mod |> model_get_coefficients_type()
-  expect_equivalent(res, "prop_hazard")
+  expect_equal(res, "prop_hazard")
 })
 
 test_that("tidy_plus_plus() works with survey::svyolr", {
@@ -213,27 +212,27 @@ test_that("tidy_plus_plus() works with survey::svyolr", {
   fpc <- update(fpc, mealcat = cut(meals, c(0, 25, 50, 75, 100)))
   mod <- survey::svyolr(mealcat ~ avg.ed + mobility + stype, design = fpc)
   res <- mod |> model_get_coefficients_type()
-  expect_equivalent(res, "logistic")
+  expect_equal(res, "logistic")
 })
 
 test_that("model_get_coefficients_type() works with ordinal::clm", {
   mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine)
   res <- mod |> model_get_coefficients_type()
-  expect_equivalent(res, "logistic")
+  expect_equal(res, "logistic")
 })
 
 
 test_that("model_get_coefficients_type() works with ordinal::clmm", {
   mod <- ordinal::clmm(rating ~ temp * contact + (1 | judge), data = ordinal::wine)
   res <- mod |> model_get_coefficients_type()
-  expect_equivalent(res, "logistic")
+  expect_equal(res, "logistic")
 })
 
 
 test_that("model_get_coefficients_type() works with MASS::polr", {
   mod <- MASS::polr(Sat ~ Infl + Type + Cont, weights = Freq, data = MASS::housing)
   res <- mod |> model_get_coefficients_type()
-  expect_equivalent(res, "logistic")
+  expect_equal(res, "logistic")
 
   mod <- MASS::polr(
     Sat ~ Infl + Type + Cont,
@@ -242,7 +241,7 @@ test_that("model_get_coefficients_type() works with MASS::polr", {
     method = "probit"
   )
   res <- mod |> model_get_coefficients_type()
-  expect_equivalent(res, "generic")
+  expect_equal(res, "generic")
 })
 
 
@@ -257,7 +256,7 @@ test_that("model_get_coefficients_type() works with geepack::geeglm", {
   )
 
   res <- mod |> model_get_coefficients_type()
-  expect_equivalent(res, "poisson")
+  expect_equal(res, "poisson")
 })
 
 
@@ -266,14 +265,14 @@ test_that("model_get_coefficients_type() works with gam::gam", {
   data(kyphosis, package = "gam")
   mod <- gam::gam(Kyphosis ~ gam::s(Age, 4) + Number, family = binomial, data = kyphosis)
   res <- mod |> model_get_coefficients_type()
-  expect_equivalent(res, "logistic")
+  expect_equal(res, "logistic")
 
   mod <- suppressWarnings(gam::gam(
     Ozone^(1 / 3) ~ gam::lo(Solar.R) + gam::lo(Wind, Temp),
     data = datasets::airquality, na = gam::na.gam.replace
   ))
   res <- mod |> model_get_coefficients_type()
-  expect_equivalent(res, "generic")
+  expect_equal(res, "generic")
 })
 
 
@@ -290,5 +289,5 @@ test_that("model_get_coefficients_type() works with lavaan::lavaan", {
     auto.cov.lv.x = TRUE
   )
   res <- mod |> model_get_coefficients_type()
-  expect_equivalent(res, "generic")
+  expect_equal(res, "generic")
 })

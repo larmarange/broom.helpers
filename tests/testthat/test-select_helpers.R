@@ -194,9 +194,8 @@ test_that("select_helpers: tidy_add_variable_labels", {
   mod <- glm(response ~ age * trt + grade, gtsummary::trial, family = binomial)
   mod_tidy <- tidy_and_attach(mod)
 
-  expect_error(
-    tidy_add_variable_labels(mod_tidy, labels = where(is.numeric) ~ "NUMERIC"),
-    NA
+  expect_no_error(
+    tidy_add_variable_labels(mod_tidy, labels = where(is.numeric) ~ "NUMERIC")
   )
 
   expect_equal(

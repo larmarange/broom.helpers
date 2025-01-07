@@ -13,8 +13,7 @@ test_that(".update_vector()", {
 
 test_that(".superscript_numbers ()", {
   # works with non character vector
-  expect_error(
-    .superscript_numbers(1:4),
-    NA
+  expect_no_error(
+    .superscript_numbers(1:4)
   )
 })

@@ -1,8 +1,7 @@
 test_that(".assert_package() works", {
   # broom will always be installed with broom.helpers
-  expect_error(
-    .assert_package("broom"),
-    NA
+  expect_no_error(
+    .assert_package("broom")
   )
   expect_true(.assert_package("broom", boolean = TRUE))
 
@@ -21,9 +20,8 @@ test_that(".assert_package() works", {
     .get_min_version_required("broom", pkg_search = NULL)
   )
 
-  expect_error(
-    df_deps <- .get_package_dependencies(),
-    NA
+  expect_no_error(
+    df_deps <- .get_package_dependencies()
   )
 
   expect_true(
@@ -35,9 +33,8 @@ test_that(".assert_package() works", {
     c("pkg_search", "pkg_search_version", "dependency_type", "pkg", "version", "compare")
   )
 
-  expect_error(
-    deps <- .get_all_packages_dependencies(),
-    NA
+  expect_no_error(
+    deps <- .get_all_packages_dependencies()
   )
   expect_true(nrow(deps) > 100)
 
