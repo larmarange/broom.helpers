@@ -20,40 +20,74 @@ We checked 14 reverse dependencies (13 from CRAN + 1 from Bioconductor), compari
 
 Issues with CRAN packages are summarised below.
 
-### Failed to check
-
-* cardx     (NA)
-* gtsummary (NA)
-* mmrm      (NA)
-* smdi      (NA)
-
-## recheck GitHub action
-
 ------- Check results summary ------
 Check status summary:
-                  NOTE OK
-  Source packages    0  1
-  Reverse depends    1 13
+                  WARNING NOTE OK
+  Source packages       0    1  0
+  Reverse depends       1   13 27
 
 Check results summary:
-broom.helpers ... OK
+labelled ... NOTE
+* checking package dependencies ... NOTE
+* checking R code for possible problems ... NOTE
 rdepends_GGally ... OK
-rdepends_cardx ... OK
-rdepends_dcurves ... OK
+rdepends_REDCapDM ... NOTE
+* checking data for non-ASCII characters ... NOTE
+rdepends_REDCapTidieR ... OK
+rdepends_Rrepest ... NOTE
+* checking data for non-ASCII characters ... NOTE
+rdepends_SEERaBomb ... WARNING
+* checking whether package ‘SEERaBomb’ can be installed ... WARNING
+rdepends_broom.helpers ... OK
+rdepends_bulkreadr ... OK
+rdepends_cesR ... NOTE
+* checking package subdirectories ... NOTE
+rdepends_codebook ... NOTE
+* checking data for non-ASCII characters ... NOTE
+rdepends_crosswalkr ... OK
+rdepends_datadictionary ... OK
+rdepends_dataset ... OK
+rdepends_dbGaPCheckup ... NOTE
+* checking Rd files ... NOTE
+rdepends_dm ... OK
+rdepends_ech ... NOTE
+* checking data for non-ASCII characters ... NOTE
+rdepends_forestmodel ... NOTE
+* checking LazyData ... NOTE
+rdepends_ggblanket ... OK
+rdepends_ggeasy ... OK
+rdepends_ggformula ... NOTE
+* checking Rd cross-references ... NOTE
 rdepends_ggstats ... OK
-rdepends_gtreg ... OK
-rdepends_gtsummary ... OK
-rdepends_iNZightRegression ... OK
-rdepends_logitr ... OK
-rdepends_mmrm ... NOTE
+rdepends_growthcleanr ... NOTE
 * checking installed package size ... NOTE
-rdepends_pubh ... OK
-rdepends_regport ... OK
-rdepends_simstudy ... OK
-rdepends_smdi ... OK
-rdepends_tidycmprsk ... OK
+rdepends_jsmodule ... OK
+rdepends_jstable ... OK
+rdepends_modelsummary ... OK
+rdepends_opalr ... OK
+rdepends_plotor ... OK
+rdepends_pollster ... OK
+rdepends_questionr ... NOTE
+* checking data for non-ASCII characters ... NOTE
+rdepends_readabs ... OK
+rdepends_retroharmonize ... NOTE
+* checking installed package size ... NOTE
+* checking Rd files ... NOTE
+rdepends_robotoolbox ... NOTE
+* checking data for non-ASCII characters ... NOTE
+rdepends_saros ... OK
+rdepends_saros.base ... OK
+rdepends_speedycode ... OK
+rdepends_stevemisc ... OK
+rdepends_surveyPrev ... NOTE
+* checking package dependencies ... NOTE
+* checking installed package size ... NOTE
+rdepends_tableone ... OK
+rdepends_testdat ... OK
+rdepends_tntpr ... OK
+rdepends_xportr ... OK
+rdepends_zmisc ... OK
 
 ------- Check for regressions ------
 No changes between old and new version
-
 cf. https://github.com/larmarange/broom.helpers/actions/workflows/recheck.yml
