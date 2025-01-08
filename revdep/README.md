@@ -10,7 +10,7 @@
 |collate  |French_France.utf8                    |
 |ctype    |French_France.utf8                    |
 |tz       |Europe/Paris                          |
-|date     |2025-01-02                            |
+|date     |2025-01-07                            |
 |rstudio  |2024.12.0+467 Kousa Dogwood (desktop) |
 |pandoc   |NA                                    |
 
@@ -59,13 +59,10 @@
 
 # Revdeps
 
-## Failed to check (5)
+## Failed to check (2)
 
 |package   |version |error |warning |note |
 |:---------|:-------|:-----|:-------|:----|
-|cardx     |0.2.2   |1     |        |     |
 |gtsummary |2.0.4   |1     |        |     |
 |mmrm      |0.3.14  |1     |        |1    |
-|simstudy  |?       |      |        |     |
-|smdi      |0.3.1   |2     |        |     |
 
