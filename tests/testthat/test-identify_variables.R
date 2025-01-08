@@ -4,15 +4,15 @@ library(gtsummary)
 test_that("model_list_variables() tests", {
   mod <- glm(response ~ age + grade * trt + death, gtsummary::trial, family = binomial)
   res <- mod |> model_list_variables()
-  expect_equivalent(
+  expect_equal(
     res$variable,
     c("response", "age", "grade", "trt", "death", "grade:trt")
   )
-  expect_equivalent(
+  expect_equal(
     res$variable,
     mod |> model_list_variables(only_variable = TRUE)
   )
-  expect_equivalent(
+  expect_equal(
     res$var_class,
     c(
       response = "integer", age = "numeric", grade = "factor", trt = "character",
@@ -25,13 +25,15 @@ test_that("model_list_variables() tests", {
     model_list_variables(
       labels = list(marker = "MARKER", "as.logical(response)" = "RESPONSE")
     )
-  expect_equivalent(
+  expect_equal(
     res$var_class,
-    c("numeric", "logical")
+    c("numeric", "logical"),
+    ignore_attr = TRUE
   )
-  expect_equivalent(
+  expect_equal(
     res$var_label,
-    c("MARKER", "RESPONSE")
+    c("MARKER", "RESPONSE"),
+    ignore_attr = TRUE
   )
 
   expect_equal(
@@ -45,24 +47,26 @@ test_that("tidy_identify_variables() works for common models", {
   res <- mod |>
     tidy_and_attach() |>
     tidy_identify_variables()
-  expect_equivalent(
+  expect_equal(
     res$variable,
     c("(Intercept)", "age", "grade", "grade", "trt", "death", "grade:trt", "grade:trt")
   )
-  expect_equivalent(
+  expect_equal(
     res$var_class,
-    c(NA, "numeric", "factor", "factor", "character", "integer", NA, NA)
+    c(NA, "numeric", "factor", "factor", "character", "integer", NA, NA),
+    ignore_attr = TRUE
   )
-  expect_equivalent(
+  expect_equal(
     res$var_type,
     c(
       "intercept", "continuous", "categorical", "categorical", "dichotomous",
       "continuous", "interaction", "interaction"
     )
   )
-  expect_equivalent(
+  expect_equal(
     res$var_nlevels,
-    c(NA, NA, 3L, 3L, 2L, NA, NA, NA)
+    c(NA, NA, 3L, 3L, 2L, NA, NA, NA),
+    ignore_attr = TRUE
   )
 })
 
@@ -72,9 +76,8 @@ test_that("test tidy_identify_variables() checks", {
   expect_error(mod |> broom::tidy() |> tidy_identify_variables())
 
   # could be apply twice (no error)
-  expect_error(
-    mod |> tidy_and_attach() |> tidy_identify_variables() |> tidy_identify_variables(),
-    NA
+  expect_no_error(
+    mod |> tidy_and_attach() |> tidy_identify_variables() |> tidy_identify_variables()
   )
   res <- mod |>
     tidy_and_attach() |>
@@ -97,15 +100,16 @@ test_that("model_dientify_variables() works well with logical variables", {
       dplyr::mutate(response = as.logical(response))
   )
   res <- model_identify_variables(mod)
-  expect_equivalent(
+  expect_equal(
     res |> dplyr::filter(variable == "response") |> purrr::pluck("var_type"),
     "dichotomous"
   )
-  expect_equivalent(
+  expect_equal(
     res |> dplyr::filter(variable == "response") |> purrr::pluck("var_nlevels"),
-    2
+    2,
+    ignore_attr = TRUE
   )
-  expect_equivalent(
+  expect_equal(
     model_get_xlevels(mod)$response,
     c("FALSE", "TRUE")
   )
@@ -120,14 +124,14 @@ test_that("model_identify_variables() works with different contrasts", {
     contrasts = list(stage = contr.treatment, grade = contr.SAS, trt = contr.SAS)
   )
   res <- mod |> model_identify_variables()
-  expect_equivalent(
+  expect_equal(
     res$variable,
     c(
       NA, "stage", "stage", "stage", "grade", "grade", "trt", "grade:trt",
       "grade:trt"
     )
   )
-  expect_error(mod |> tidy_and_attach() |> tidy_identify_variables(), NA)
+  expect_no_error(mod |> tidy_and_attach() |> tidy_identify_variables())
 
   mod <- glm(
     response ~ stage + grade * trt,
@@ -136,26 +140,26 @@ test_that("model_identify_variables() works with different contrasts", {
     contrasts = list(stage = contr.poly, grade = contr.helmert, trt = contr.sum)
   )
   res <- mod |> model_identify_variables()
-  expect_equivalent(
+  expect_equal(
     res$variable,
     c(NA, "stage", "stage", "stage", "grade", "grade", "trt", "grade:trt", "grade:trt")
   )
-  expect_error(mod |> tidy_and_attach() |> tidy_identify_variables(), NA)
+  expect_no_error(mod |> tidy_and_attach() |> tidy_identify_variables())
 })
 
 
 test_that("model_identify_variables() works with stats::poly()", {
   mod <- lm(Sepal.Length ~ poly(Sepal.Width, 3) + poly(Petal.Length, 2), iris)
   res <- mod |> model_identify_variables()
-  expect_equivalent(
+  expect_equal(
     res$variable,
     c(
       NA, "Sepal.Width", "Sepal.Width", "Sepal.Width",
       "Petal.Length", "Petal.Length"
     )
   )
-  expect_error(tb <- mod |> tidy_and_attach() |> tidy_identify_variables(), NA)
-  expect_equivalent(
+  expect_no_error(tb <- mod |> tidy_and_attach() |> tidy_identify_variables())
+  expect_equal(
     tb$variable,
     c(
       "(Intercept)", "Sepal.Width", "Sepal.Width", "Sepal.Width", "Petal.Length",
@@ -172,33 +176,34 @@ test_that("tidy_identify_variables() works with variables having non standard na
   res <- mod |>
     tidy_and_attach() |>
     tidy_identify_variables()
-  expect_equivalent(
+  expect_equal(
     res$variable,
     c(
       "(Intercept)", "marker", "grade of kids", "grade of kids", "marker:grade of kids",
       "marker:grade of kids"
     )
   )
-  expect_equivalent(
+  expect_equal(
     res$var_class,
-    c(NA, "numeric", "factor", "factor", NA, NA)
+    c(NA, "numeric", "factor", "factor", NA, NA),
+    ignore_attr = TRUE
   )
-  expect_error(mod |> tidy_and_attach() |> tidy_identify_variables(), NA)
+  expect_no_error(mod |> tidy_and_attach() |> tidy_identify_variables())
 
   # interaction only term
   mod <- lm(age ~ marker:`grade of kids`, df)
-  expect_equivalent(
+  expect_equal(
     mod |> model_list_variables(only_variable = TRUE),
     c("age", "marker", "grade of kids", "marker:grade of kids")
   )
-  expect_equivalent(
+  expect_equal(
     mod |> model_identify_variables() |> purrr::pluck("variable"),
     c(NA, "marker:grade of kids", "marker:grade of kids", "marker:grade of kids")
   )
   res <- mod |>
     tidy_and_attach() |>
     tidy_identify_variables()
-  expect_equivalent(
+  expect_equal(
     res$variable,
     c("(Intercept)", "marker:grade of kids", "marker:grade of kids", "marker:grade of kids")
   )
@@ -219,14 +224,14 @@ test_that("tidy_identify_variables() works with variables having non standard na
     tidy_and_attach() |>
     tidy_identify_variables() |>
     tidy_remove_intercept()
-  expect_equivalent(
+  expect_equal(
     res$variable,
     c(
       "treatment +name", "disease stage",
       "disease stage", "disease stage"
     )
   )
-  expect_equivalent(
+  expect_equal(
     res$var_type,
     c("dichotomous", "categorical", "categorical", "categorical")
   )
@@ -239,7 +244,7 @@ test_that("tidy_identify_variables() works with variables having non standard na
     )
   )
   res <- tidy_plus_plus(mod)
-  expect_equivalent(
+  expect_equal(
     res$variable,
     c(
       "factor(`type of transmission`)",
@@ -256,15 +261,14 @@ test_that("model_identify_variables() works with lme4::lmer", {
   skip_if_not_installed("lme4")
   mod <- lme4::lmer(Reaction ~ Days + (Days | Subject), lme4::sleepstudy)
   res <- mod |> model_identify_variables()
-  expect_equivalent(
+  expect_equal(
     res$variable,
     c(NA, "Days")
   )
-  expect_error(
+  expect_no_error(
     mod |>
       tidy_and_attach(tidy_fun = broom.mixed::tidy) |>
-      tidy_identify_variables(),
-    NA
+      tidy_identify_variables()
   )
 
   mod <- lme4::lmer(
@@ -291,15 +295,14 @@ test_that("model_identify_variables() works with lme4::glmer", {
     family = binomial, data = lme4::cbpp
   )
   res <- mod |> model_identify_variables()
-  expect_equivalent(
+  expect_equal(
     res$variable,
     c(NA, "period", "period", "period")
   )
-  expect_error(
+  expect_no_error(
     mod |>
       tidy_and_attach(tidy_fun = broom.mixed::tidy) |>
-      tidy_identify_variables(),
-    NA
+      tidy_identify_variables()
   )
 })
 
@@ -308,11 +311,11 @@ test_that("model_identify_variables() works with survival::coxph", {
   df <- survival::lung |> dplyr::mutate(sex = factor(sex))
   mod <- survival::coxph(survival::Surv(time, status) ~ ph.ecog + age + sex, data = df)
   res <- mod |> model_identify_variables()
-  expect_equivalent(
+  expect_equal(
     res$variable,
     c("ph.ecog", "age", "sex")
   )
-  expect_error(mod |> tidy_and_attach() |> tidy_identify_variables(), NA)
+  expect_no_error(mod |> tidy_and_attach() |> tidy_identify_variables())
 })
 
 test_that("model_identify_variables() works with survival::survreg", {
@@ -322,27 +325,27 @@ test_that("model_identify_variables() works with survival::survreg", {
     dist = "exponential"
   )
   res <- mod |> model_identify_variables()
-  expect_equivalent(
+  expect_equal(
     res$variable,
     c(NA, "ecog.ps", "rx")
   )
-  expect_error(mod |> tidy_and_attach() |> tidy_identify_variables(), NA)
+  expect_no_error(mod |> tidy_and_attach() |> tidy_identify_variables())
 })
 
 test_that("model_identify_variables() works with nnet::multinom", {
   skip_if_not_installed("nnet")
   mod <- nnet::multinom(grade ~ stage + marker + age, data = gtsummary::trial, trace = FALSE)
   res <- mod |> model_identify_variables()
-  expect_equivalent(
+  expect_equal(
     res$variable,
     c(NA, "stage", "stage", "stage", "marker", "age")
   )
-  expect_error(mod |> tidy_and_attach() |> tidy_identify_variables(), NA)
+  expect_no_error(mod |> tidy_and_attach() |> tidy_identify_variables())
 
   res <- mod |>
     tidy_and_attach() |>
     tidy_identify_variables()
-  expect_equivalent(
+  expect_equal(
     res$variable,
     c(
       "(Intercept)", "stage", "stage", "stage", "marker", "age", "(Intercept)", "stage",
@@ -359,7 +362,7 @@ test_that("model_identify_variables() works with nnet::multinom", {
   res <- mod |>
     tidy_and_attach() |>
     tidy_identify_variables()
-  expect_equivalent(
+  expect_equal(
     res$variable,
     c(
       "(Intercept)", "stage", "stage", "stage", "marker", "age", "(Intercept)", "stage",
@@ -375,7 +378,7 @@ test_that("model_identify_variables() works with nnet::multinom", {
   res <- mod |>
     tidy_and_attach() |>
     tidy_identify_variables()
-  expect_equivalent(
+  expect_equal(
     res$variable,
     c(
       "(Intercept)", "stage", "stage", "stage", "marker", "age", "(Intercept)", "stage",
@@ -391,7 +394,7 @@ test_that("model_identify_variables() works with nnet::multinom", {
   res <- mod |>
     tidy_and_attach() |>
     tidy_identify_variables()
-  expect_equivalent(
+  expect_equal(
     res$variable,
     c(
       "(Intercept)", "stage", "stage", "stage", "marker", "age",
@@ -405,11 +408,11 @@ test_that("model_identify_variables() works with survey::svyglm", {
   df <- survey::svydesign(~1, weights = ~1, data = gtsummary::trial)
   mod <- survey::svyglm(response ~ age + grade * trt, df, family = quasibinomial)
   res <- mod |> model_identify_variables()
-  expect_equivalent(
+  expect_equal(
     res$variable,
     c(NA, "age", "grade", "grade", "trt", "grade:trt", "grade:trt")
   )
-  expect_error(mod |> tidy_and_attach() |> tidy_identify_variables(), NA)
+  expect_no_error(mod |> tidy_and_attach() |> tidy_identify_variables())
 })
 
 test_that("model_identify_variables() works with ordinal::clm", {
@@ -417,7 +420,7 @@ test_that("model_identify_variables() works with ordinal::clm", {
   res <- mod |>
     tidy_and_attach() |>
     tidy_identify_variables()
-  expect_equivalent(
+  expect_equal(
     res$variable,
     c("1|2", "2|3", "3|4", "4|5", "temp", "contact", "temp:contact")
   )
@@ -426,7 +429,7 @@ test_that("model_identify_variables() works with ordinal::clm", {
   res <- mod |>
     tidy_and_attach() |>
     tidy_identify_variables()
-  expect_equivalent(
+  expect_equal(
     res$variable,
     c("central.1", "central.2", "spacing.1", "temp", "contact", "temp:contact")
   )
@@ -435,7 +438,7 @@ test_that("model_identify_variables() works with ordinal::clm", {
   res <- mod |>
     tidy_and_attach() |>
     tidy_identify_variables()
-  expect_equivalent(
+  expect_equal(
     res$variable,
     c("spacing.1", "spacing.2", "temp", "contact", "temp:contact")
   )
@@ -444,7 +447,7 @@ test_that("model_identify_variables() works with ordinal::clm", {
   res <- mod |>
     tidy_and_attach() |>
     tidy_identify_variables()
-  expect_equivalent(
+  expect_equal(
     res$variable,
     c("threshold.1", "spacing", "temp", "contact", "temp:contact")
   )
@@ -455,7 +458,7 @@ test_that("model_identify_variables() works with ordinal::clm", {
 
   # mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine, nominal = ~contact)
   # res <- mod |> tidy_and_attach() |> tidy_identify_variables()
-  # expect_equivalent(
+  # expect_equal(
   #   res$variable,
   #   c("1|2.(Intercept)", "2|3.(Intercept)", "3|4.(Intercept)", "4|5.(Intercept)",
   #     "contact", "contact", "contact", "contact", "temp", "contactyes",
@@ -470,7 +473,7 @@ test_that("model_identify_variables() works with ordinal::clmm", {
   res <- mod |>
     tidy_and_attach() |>
     tidy_identify_variables()
-  expect_equivalent(
+  expect_equal(
     res$variable,
     c("1|2", "2|3", "3|4", "4|5", "temp", "contact", "temp:contact")
   )
@@ -480,11 +483,11 @@ test_that("model_identify_variables() works with ordinal::clmm", {
 test_that("model_identify_variables() works with MASS::polr", {
   mod <- MASS::polr(Sat ~ Infl + Type + Cont, weights = Freq, data = MASS::housing)
   res <- mod |> model_identify_variables()
-  expect_equivalent(
+  expect_equal(
     res$variable,
     c(NA, "Infl", "Infl", "Type", "Type", "Type", "Cont")
   )
-  expect_error(mod |> tidy_and_attach() |> tidy_identify_variables(), NA)
+  expect_no_error(mod |> tidy_and_attach() |> tidy_identify_variables())
 })
 
 
@@ -499,11 +502,11 @@ test_that("model_identify_variables() works with geepack::geeglm", {
   )
 
   res <- mod |> model_identify_variables()
-  expect_equivalent(
+  expect_equal(
     res$variable,
     c(NA, "Cu", "Cu", "Time", "Cu:Time", "Cu:Time")
   )
-  expect_error(mod |> tidy_and_attach() |> tidy_identify_variables(), NA)
+  expect_no_error(mod |> tidy_and_attach() |> tidy_identify_variables())
 })
 
 
@@ -512,22 +515,22 @@ test_that("model_identify_variables() works with gam::gam", {
   data(kyphosis, package = "gam")
   mod <- gam::gam(Kyphosis ~ gam::s(Age, 4) + Number, family = binomial, data = kyphosis)
   res <- mod |> model_identify_variables()
-  expect_equivalent(
+  expect_equal(
     res$variable,
     c(NA, "gam::s(Age, 4)", "Number")
   )
-  expect_error(mod |> tidy_and_attach() |> tidy_identify_variables(), NA)
+  expect_no_error(mod |> tidy_and_attach() |> tidy_identify_variables())
 
   mod <- suppressWarnings(gam::gam(
     Ozone^(1 / 3) ~ gam::lo(Solar.R) + gam::lo(Wind, Temp),
     data = datasets::airquality, na = gam::na.gam.replace
   ))
   res <- mod |> model_identify_variables()
-  expect_equivalent(
+  expect_equal(
     res$variable,
     c(NA, "gam::lo(Solar.R)", "gam::lo(Wind, Temp)", "gam::lo(Wind, Temp)")
   )
-  expect_error(mod |> tidy_and_attach() |> tidy_identify_variables(), NA)
+  expect_no_error(mod |> tidy_and_attach() |> tidy_identify_variables())
 })
 
 
@@ -544,11 +547,11 @@ test_that("model_identify_variables() works with lavaan::lavaan", {
     auto.cov.lv.x = TRUE
   )
   res <- mod |> model_identify_variables()
-  expect_equivalent(
+  expect_equal(
     res$variable,
     mod@ParTable$lhs
   )
-  expect_error(mod |> tidy_and_attach() |> tidy_identify_variables(), NA)
+  expect_no_error(mod |> tidy_and_attach() |> tidy_identify_variables())
   expect_vector(
     mod |> model_list_variables(only_variable = TRUE)
   )
@@ -596,17 +599,16 @@ test_that("model_identify_variables() works with glmmTMB::glmmTMB", {
   )
 
   res <- mod |> model_identify_variables()
-  expect_equivalent(
+  expect_equal(
     res$variable,
     c(
       NA, "mined", "spp", "spp", "spp", "spp", "spp", "spp"
     )
   )
-  expect_error(
+  expect_no_error(
     mod |>
       tidy_and_attach() |>
-      tidy_identify_variables(),
-    NA
+      tidy_identify_variables()
   )
 })
 
@@ -624,15 +626,15 @@ test_that("model_identify_variables() works with plm::plm", {
   )
 
   res <- mod |> model_identify_variables()
-  expect_equivalent(
+  expect_equal(
     mod |> model_get_model_matrix() |> colnames(),
     c("(Intercept)", "value", "capital")
   )
-  expect_equivalent(
+  expect_equal(
     res$term,
     c("(Intercept)", "value", "capital")
   )
-  expect_equivalent(
+  expect_equal(
     res$variable,
     c(NA, "value", "capital")
   )

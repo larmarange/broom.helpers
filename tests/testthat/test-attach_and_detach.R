@@ -6,9 +6,10 @@ test_that("Attach and Detach models works", {
   )
 
   tb <- broom::tidy(mod)
-  expect_equivalent(
+  expect_equal(
     tb,
-    tb |> tidy_attach_model(mod) |> tidy_detach_model()
+    tb |> tidy_attach_model(mod) |> tidy_detach_model(),
+    ignore_attr = TRUE
   )
 
   # an error should occur if 'exponentiate = TRUE' for a linear model
@@ -31,5 +32,5 @@ test_that("tidy_and_attach() handles models without exponentiate arguments", {
     auto.cov.lv.x = TRUE
   )
   expect_error(mod |> tidy_and_attach(exponentiate = TRUE))
-  expect_error(mod |> tidy_and_attach(), NA)
+  expect_no_error(mod |> tidy_and_attach())
 })

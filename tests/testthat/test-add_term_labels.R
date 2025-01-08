@@ -1,8 +1,7 @@
 test_that("tidy_add_term_labels() works for basic models", {
   mod <- lm(Petal.Length ~ Petal.Width, iris)
-  expect_error(
-    mod |> tidy_and_attach() |> tidy_add_term_labels(),
-    NA
+  expect_no_error(
+    mod |> tidy_and_attach() |> tidy_add_term_labels()
   )
 
   df <- gtsummary::trial
@@ -10,9 +9,10 @@ test_that("tidy_add_term_labels() works for basic models", {
   res <- mod |>
     tidy_and_attach() |>
     tidy_add_term_labels()
-  expect_equivalent(
+  expect_equal(
     res$label,
-    c("(Intercept)", "Age", "II", "III", "Drug B")
+    c("(Intercept)", "Age", "II", "III", "Drug B"),
+    ignore_attr = TRUE
   )
 
   df <- gtsummary::trial
@@ -21,9 +21,10 @@ test_that("tidy_add_term_labels() works for basic models", {
     tidy_and_attach() |>
     tidy_add_reference_rows() |>
     tidy_add_term_labels()
-  expect_equivalent(
+  expect_equal(
     res$label,
-    c("(Intercept)", "Age", "I", "II", "III", "Drug A", "Drug B")
+    c("(Intercept)", "Age", "I", "II", "III", "Drug A", "Drug B"),
+    ignore_attr = TRUE
   )
 
   # if labels provided in `labels`, taken into account
@@ -37,22 +38,22 @@ test_that("tidy_add_term_labels() works for basic models", {
         gradeIII = "third grade"
       )
     )
-  expect_equivalent(
+  expect_equal(
     res$label,
     c(
       "the intercept", "Age", "I", "II", "third grade", "the reference term",
       "Drug B"
-    )
+    ),
+    ignore_attr = TRUE
   )
   # no error if providing labels not corresponding to an existing variable
   # but display a message
-  expect_error(
+  expect_no_error(
     mod |>
       tidy_and_attach() |>
       tidy_add_term_labels(
         labels = list(aaa = "aaa", bbb = "bbb", ccc = 44)
-      ),
-    NA
+      )
   )
   expect_message(
     mod |>
@@ -76,9 +77,10 @@ test_that("tidy_add_term_labels() works for basic models", {
   res <- mod |>
     tidy_and_attach() |>
     tidy_add_term_labels()
-  expect_equivalent(
+  expect_equal(
     res$label,
-    c("(Intercept)", "0 * Marker Level (ng/mL)", "1 * Marker Level (ng/mL)")
+    c("(Intercept)", "0 * Marker Level (ng/mL)", "1 * Marker Level (ng/mL)"),
+    ignore_attr = TRUE
   )
 })
 
@@ -89,9 +91,8 @@ test_that("test tidy_add_term_labels() checks", {
   expect_error(mod |> broom::tidy() |> tidy_add_term_labels())
 
   # could be apply twice (no error)
-  expect_error(
-    mod |> tidy_and_attach() |> tidy_add_term_labels() |> tidy_add_term_labels(),
-    NA
+  expect_no_error(
+    mod |> tidy_and_attach() |> tidy_add_term_labels() |> tidy_add_term_labels()
   )
 
   # cannot be applied after tidy_add_header_rows
@@ -107,13 +108,14 @@ test_that("tidy_add_term_labels() correctly manages interaction terms", {
     tidy_and_attach() |>
     tidy_add_reference_rows() |>
     tidy_add_term_labels()
-  expect_equivalent(
+  expect_equal(
     res$label,
     c(
       "(Intercept)", "Age", "I", "II", "III", "Drug A", "Drug B",
       "Age * II", "Age * III", "Age * Drug B", "II * Drug B", "III * Drug B",
       "Age * II * Drug B", "Age * III * Drug B"
-    )
+    ),
+    ignore_attr = TRUE
   )
 
   # custom separator and custom labels for certain interaction terms
@@ -127,13 +129,14 @@ test_that("tidy_add_term_labels() correctly manages interaction terms", {
         "gradeII:trtDrug B" = "a second custom label"
       )
     )
-  expect_equivalent(
+  expect_equal(
     res$label,
     c(
       "(Intercept)", "Age", "I", "II", "III", "Drug A", "Drug B",
       "custom interaction label", "Age:::III", "Age:::Drug B", "a second custom label",
       "III:::Drug B", "Age:::II:::Drug B", "Age:::III:::Drug B"
-    )
+    ),
+    ignore_attr = TRUE
   )
 
   # case with sum contrasts
@@ -146,13 +149,14 @@ test_that("tidy_add_term_labels() correctly manages interaction terms", {
     tidy_and_attach() |>
     tidy_add_reference_rows() |>
     tidy_add_term_labels()
-  expect_equivalent(
+  expect_equal(
     res$label,
     c(
       "(Intercept)", "T1", "T2", "T3", "T4", "T1 * Months to Death/Censor",
       "T2 * Months to Death/Censor", "T3 * Months to Death/Censor",
       "T4 * Months to Death/Censor"
-    )
+    ),
+    ignore_attr = TRUE
   )
 
   # complex case: model with no intercept and sum contrasts
@@ -165,12 +169,13 @@ test_that("tidy_add_term_labels() correctly manages interaction terms", {
     tidy_and_attach() |>
     tidy_add_reference_rows() |>
     tidy_add_term_labels()
-  expect_equivalent(
+  expect_equal(
     res$label,
     c(
       "setosa", "versicolor", "virginica", "Petal.Width",
       "setosa * Petal.Width", "versicolor * Petal.Width"
-    )
+    ),
+    ignore_attr = TRUE
   )
 })
 
@@ -182,9 +187,8 @@ test_that("tidy_add_term_labels() works with poly or helmert contrasts", {
     contrasts = list(stage = contr.sum, grade = contr.helmert, trt = contr.SAS)
   )
   # should not produce an error
-  expect_error(
-    mod |> tidy_and_attach() |> tidy_add_term_labels(),
-    NA
+  expect_no_error(
+    mod |> tidy_and_attach() |> tidy_add_term_labels()
   )
 })
 
@@ -197,32 +201,32 @@ test_that("tidy_add_term_labels() works with sdif contrasts", {
     contrasts = list(stage = MASS::contr.sdif, grade = MASS::contr.sdif)
   )
   # should not produce an error
-  expect_error(
-    res <- mod |> tidy_and_attach() |> tidy_add_term_labels(),
-    NA
+  expect_no_error(
+    res <- mod |> tidy_and_attach() |> tidy_add_term_labels()
   )
-  expect_equivalent(
+  expect_equal(
     res$label,
     c(
       `(Intercept)` = "(Intercept)", `stageT2-T1` = "T2 - T1",
       `stageT3-T2` = "T3 - T2", `stageT4-T3` = "T4 - T3",
       `gradeII-I` = "II - I", `gradeIII-II` = "III - II"
-    )
+    ),
+    ignore_attr = TRUE
   )
   # should not produce an error
-  expect_error(
+  expect_no_error(
     res <- mod |>
       tidy_and_attach(exponentiate = TRUE) |>
-      tidy_add_term_labels(),
-    NA
+      tidy_add_term_labels()
   )
-  expect_equivalent(
+  expect_equal(
     res$label,
     c(
       `(Intercept)` = "(Intercept)", `stageT2-T1` = "T2 / T1",
       `stageT3-T2` = "T3 / T2", `stageT4-T3` = "T4 / T3",
       `gradeII-I` = "II / I", `gradeIII-II` = "III / II"
-    )
+    ),
+    ignore_attr = TRUE
   )
 })
 
@@ -238,14 +242,15 @@ test_that("tidy_add_term_labels() works with variables having non standard name"
     tidy_and_attach() |>
     tidy_add_reference_rows() |>
     tidy_add_term_labels()
-  expect_equivalent(
+  expect_equal(
     res$label,
     c(
       "(Intercept)", "Marker Level (ng/mL)", "I", "II", "III", "0",
       "1", "Marker Level (ng/mL) * II", "Marker Level (ng/mL) * III"
-    )
+    ),
+    ignore_attr = TRUE
   )
-  expect_equivalent(
+  expect_equal(
     res$variable,
     c(
       "(Intercept)", "marker", "grade of kids...", "grade of kids...", "grade of kids...",
@@ -263,9 +268,10 @@ test_that("tidy_add_term_labels() works with variables having non standard name"
     tidy_and_attach() |>
     tidy_add_variable_labels(list(`age at dx` = "AGGGGGGGE")) |>
     tidy_add_term_labels()
-  expect_equivalent(
+  expect_equal(
     res$label,
-    c("(Intercept)", "AGGGGGGGE", "Drug B")
+    c("(Intercept)", "AGGGGGGGE", "Drug B"),
+    ignore_attr = TRUE
   )
 })
 
@@ -277,12 +283,13 @@ test_that("tidy_add_term_labels() works with stats::poly()", {
   res <- mod |>
     tidy_and_attach() |>
     tidy_add_term_labels()
-  expect_equivalent(
+  expect_equal(
     res$label,
     c(
       "(Intercept)", "Sepal.Width", "Sepal.Width²", "Sepal.Width³",
       "Petal.Length", "Petal.Length²"
-    )
+    ),
+    ignore_attr = TRUE
   )
 })
 
@@ -292,7 +299,7 @@ test_that("tidy_add_term_labels() works with lme4::lmer", {
   skip_on_cran()
   skip_if_not_installed("lme4")
   mod <- lme4::lmer(Reaction ~ Days + (Days | Subject), lme4::sleepstudy)
-  expect_error(mod |> tidy_and_attach(tidy_fun = broom.mixed::tidy) |> tidy_add_term_labels(), NA)
+  expect_no_error(mod |> tidy_and_attach(tidy_fun = broom.mixed::tidy) |> tidy_add_term_labels())
 })
 
 
@@ -302,7 +309,7 @@ test_that("tidy_add_term_labels() works with lme4::glmer", {
   mod <- lme4::glmer(cbind(incidence, size - incidence) ~ period + (1 | herd),
     family = binomial, data = lme4::cbpp
   )
-  expect_error(mod |> tidy_and_attach(tidy_fun = broom.mixed::tidy) |> tidy_add_term_labels(), NA)
+  expect_no_error(mod |> tidy_and_attach(tidy_fun = broom.mixed::tidy) |> tidy_add_term_labels())
 })
 
 
@@ -310,7 +317,7 @@ test_that("tidy_add_term_labels() works with survival::coxph", {
   skip_on_cran()
   df <- survival::lung |> dplyr::mutate(sex = factor(sex))
   mod <- survival::coxph(survival::Surv(time, status) ~ ph.ecog + age + sex, data = df)
-  expect_error(mod |> tidy_and_attach() |> tidy_add_term_labels(), NA)
+  expect_no_error(mod |> tidy_and_attach() |> tidy_add_term_labels())
 })
 
 test_that("tidy_add_term_labels() works with survival::survreg", {
@@ -320,13 +327,13 @@ test_that("tidy_add_term_labels() works with survival::survreg", {
     survival::ovarian,
     dist = "exponential"
   )
-  expect_error(mod |> tidy_and_attach() |> tidy_add_term_labels(), NA)
+  expect_no_error(mod |> tidy_and_attach() |> tidy_add_term_labels())
 })
 
 test_that("tidy_add_term_labels() works with nnet::multinom", {
   skip_on_cran()
   mod <- nnet::multinom(grade ~ stage + marker + age, data = gtsummary::trial, trace = FALSE)
-  expect_error(mod |> tidy_and_attach() |> tidy_add_term_labels(), NA)
+  expect_no_error(mod |> tidy_and_attach() |> tidy_add_term_labels())
 })
 
 test_that("tidy_add_term_labels() works with survey::svyglm", {
@@ -334,27 +341,27 @@ test_that("tidy_add_term_labels() works with survey::svyglm", {
   skip_if_not_installed("survey")
   df <- survey::svydesign(~1, weights = ~1, data = gtsummary::trial)
   mod <- survey::svyglm(response ~ age + grade * trt, df, family = quasibinomial)
-  expect_error(mod |> tidy_and_attach() |> tidy_add_term_labels(), NA)
+  expect_no_error(mod |> tidy_and_attach() |> tidy_add_term_labels())
 })
 
 test_that("tidy_add_term_labels() works with ordinal::clm", {
   skip_on_cran()
   mod <- ordinal::clm(rating ~ temp * contact, data = ordinal::wine)
-  expect_error(mod |> tidy_and_attach() |> tidy_add_term_labels(), NA)
+  expect_no_error(mod |> tidy_and_attach() |> tidy_add_term_labels())
 })
 
 
 test_that("tidy_add_term_labels() works with ordinal::clmm", {
   skip_on_cran()
   mod <- ordinal::clmm(rating ~ temp * contact + (1 | judge), data = ordinal::wine)
-  expect_error(mod |> tidy_and_attach() |> tidy_add_term_labels(), NA)
+  expect_no_error(mod |> tidy_and_attach() |> tidy_add_term_labels())
 })
 
 
 test_that("tidy_add_term_labels() works with MASS::polr", {
   skip_on_cran()
   mod <- MASS::polr(Sat ~ Infl + Type + Cont, weights = Freq, data = MASS::housing)
-  expect_error(mod |> tidy_and_attach() |> tidy_add_term_labels(), NA)
+  expect_no_error(mod |> tidy_and_attach() |> tidy_add_term_labels())
 })
 
 
@@ -368,7 +375,7 @@ test_that("tidy_add_term_labels() works with geepack::geeglm", {
   suppressWarnings(
     mod <- geepack::geeglm(mf, data = df, id = Pig, family = poisson("identity"), corstr = "ar1")
   )
-  expect_error(mod |> tidy_and_attach() |> tidy_add_term_labels(), NA)
+  expect_no_error(mod |> tidy_and_attach() |> tidy_add_term_labels())
 })
 
 
@@ -377,13 +384,13 @@ test_that("tidy_add_term_labels() works with gam::gam", {
   skip_if_not_installed("gam")
   data(kyphosis, package = "gam")
   mod <- gam::gam(Kyphosis ~ gam::s(Age, 4) + Number, family = binomial, data = kyphosis)
-  expect_error(mod |> tidy_and_attach() |> tidy_add_term_labels(), NA)
+  expect_no_error(mod |> tidy_and_attach() |> tidy_add_term_labels())
 
   mod <- suppressWarnings(gam::gam(
     Ozone^(1 / 3) ~ gam::lo(Solar.R) + gam::lo(Wind, Temp),
     data = datasets::airquality, na = gam::na.gam.replace
   ))
-  expect_error(mod |> tidy_and_attach() |> tidy_add_term_labels(), NA)
+  expect_no_error(mod |> tidy_and_attach() |> tidy_add_term_labels())
 })
 
 
@@ -400,5 +407,5 @@ test_that("tidy_add_term_labels() works with lavaan::lavaan", {
     auto.var = TRUE, auto.fix.first = TRUE,
     auto.cov.lv.x = TRUE
   )
-  expect_error(mod |> tidy_and_attach() |> tidy_add_term_labels(), NA)
+  expect_no_error(mod |> tidy_and_attach() |> tidy_add_term_labels())
 })
