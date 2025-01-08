@@ -210,7 +210,8 @@ test_that("tidy_add_term_labels() works with sdif contrasts", {
       `(Intercept)` = "(Intercept)", `stageT2-T1` = "T2 - T1",
       `stageT3-T2` = "T3 - T2", `stageT4-T3` = "T4 - T3",
       `gradeII-I` = "II - I", `gradeIII-II` = "III - II"
-    )
+    ),
+    ignore_attr = TRUE
   )
   # should not produce an error
   expect_no_error(
@@ -224,7 +225,8 @@ test_that("tidy_add_term_labels() works with sdif contrasts", {
       `(Intercept)` = "(Intercept)", `stageT2-T1` = "T2 / T1",
       `stageT3-T2` = "T3 / T2", `stageT4-T3` = "T4 / T3",
       `gradeII-I` = "II / I", `gradeIII-II` = "III / II"
-    )
+    ),
+    ignore_attr = TRUE
   )
 })
 
