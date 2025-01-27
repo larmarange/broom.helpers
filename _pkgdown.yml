@@ -81,3 +81,6 @@ reference:
       - starts_with("\\.")
       - seq_range
 
+  - title: Deprecated
+  - contents:
+      - tidy_marginal_means

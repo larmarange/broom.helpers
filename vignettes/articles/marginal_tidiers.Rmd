@@ -331,11 +331,11 @@ The `{emmeans}` package adopted, by default, another approach based on **margina
 
 It will consider a grid of predictors with all combinations of the observed modalities of the categorical variables and fixing continuous variables at their means.
 
-Let's call `marginaleffects::predictions()` with `newdata = "marginalmeans"`.
+Let's call `marginaleffects::predictions()` with `newdata = "balanced"`.
 
 ```{r}
-pred <- predictions(mod, newdata = "marginalmeans")
-pred
+pred <- predictions(mod, newdata = "balanced")
+pred |> dplyr::as_tibble()
 ```
 
 As we can see, `pred` contains 8 rows, one for each combination of `trt` (2 modalities) and `stage` (4 modalities). `age` is fixed at its mean (`mean(d$age)`) as well as `marker`.
@@ -369,13 +369,13 @@ predictions(mod,
 )
 ```
 
-Marginal means are defined only for categorical variables. However, we can define **marginal predictions at marginal means** for both continuous and categorical variables, calling `tidy_marginal_predictions()` with the option `newdata = "marginalmeans"`. For categorical variables, marginal predictions at marginal means will be equal to marginal means.
+Marginal means are defined only for categorical variables. However, we can define **marginal predictions at marginal means** for both continuous and categorical variables, calling `tidy_marginal_predictions()` with the option `newdata = "balanced"`. For categorical variables, marginal predictions at marginal means will be equal to marginal means.
 
 ```{r}
 mod |>
   tbl_regression(
     tidy_fun = tidy_marginal_predictions,
-    newdata = "marginalmeans",
+    newdata = "balanced",
     variables_list = "no_interaction",
     estimate_fun = scales::label_percent(accuracy = .1),
     label = list(age = "Age in years")
@@ -565,13 +565,13 @@ mod |>
 
 ### Alternative approaches
 
-Other assumptions, such as `"marginalmeans"` or `"median"`, could be defined using `newdata`. See the documentation of `marginaleffects::comparisons()`.
+Other assumptions, such as `"balanced"` or `"median"`, could be defined using `newdata`. See the documentation of `marginaleffects::comparisons()`.
 
 ```{r}
 mod |>
   tbl_regression(
     tidy_fun = tidy_avg_comparisons,
-    newdata = "marginalmeans",
+    newdata = "balanced",
     estimate_fun = scales::label_percent(style_positive = "plus"),
     label = list(age = "Age in years")
   ) |>
@@ -582,7 +582,7 @@ mod |>
 mod |>
   ggstats::ggcoef_model(
     tidy_fun = tidy_avg_comparisons,
-    tidy_args = list(newdata = "marginalmeans"),
+    tidy_args = list(newdata = "balanced"),
     variable_labels = c(age = "Age in years")
   ) +
   ggplot2::scale_x_continuous(
@@ -771,13 +771,13 @@ mod |>
 
 ### Marginal Effects at Marginal Means
 
-Simply use `newdata = "marginalmeans"`.
+Simply use `newdata = "balanced"`.
 
 ```{r}
 mod |>
   tbl_regression(
     tidy_fun = tidy_avg_slopes,
-    newdata = "marginalmeans",
+    newdata = "balanced",
     estimate_fun = scales::label_percent(style_positive = "plus"),
     label = list(age = "Age in years")
   ) |>
@@ -788,7 +788,7 @@ mod |>
 mod |>
   ggstats::ggcoef_model(
     tidy_fun = tidy_avg_slopes,
-    tidy_args = list(newdata = "marginalmeans"),
+    tidy_args = list(newdata = "balanced"),
     variable_labels = c(age = "Age in years")
   ) +
   ggplot2::scale_x_continuous(

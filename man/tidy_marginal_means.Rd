@@ -22,5 +22,5 @@ The confidence level to use for the confidence interval (between \code{0} ans \c
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 This function is deprecated. \code{marginal_means()} is not anymore exported
 by \code{marginaleffects}. Use instead \code{tidy_marginal_predictions()} with
-the option \code{newdata = "marginalmeans"}.
+the option \code{newdata = "balanced"}.
 }
