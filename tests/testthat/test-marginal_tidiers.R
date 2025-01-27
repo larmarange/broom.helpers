@@ -164,7 +164,7 @@ test_that("tidy_marginal_predictions()", {
     res <- tidy_plus_plus(
       mod,
       tidy_fun = tidy_marginal_predictions,
-      newdata = "marginalmeans"
+      newdata = "balanced"
     )
   )
   expect_equal(
@@ -232,7 +232,7 @@ test_that("tidy_avg_slopes()", {
     res <- tidy_plus_plus(
       mod,
       tidy_fun = tidy_avg_slopes,
-      newdata = "marginalmeans"
+      newdata = "balanced"
     )
   )
   expect_equal(
@@ -307,7 +307,7 @@ test_that("tidy_marginal_contrasts()", {
     res <- tidy_plus_plus(
       mod,
       tidy_fun = tidy_marginal_contrasts,
-      newdata = "marginalmeans"
+      newdata = "balanced"
     )
   )
   expect_equal(
@@ -365,7 +365,7 @@ test_that("tidy_avg_comparisons()", {
     res <- tidy_plus_plus(
       mod,
       tidy_fun = tidy_avg_comparisons,
-      newdata = "marginalmeans"
+      newdata = "balanced"
     )
   )
   expect_equal(
