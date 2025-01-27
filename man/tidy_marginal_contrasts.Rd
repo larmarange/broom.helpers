@@ -66,7 +66,6 @@ Default \code{by} value for categorical variables.}
 Default \code{by} value for continuous variables.}
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 Use \code{marginaleffects::avg_comparisons()} to estimate marginal contrasts for
 each variable of a model and return a tibble tidied in a way that it could
 be used by \code{broom.helpers} functions.
@@ -191,7 +190,6 @@ Other marginal_tieders:
 \code{\link{tidy_avg_comparisons}()},
 \code{\link{tidy_avg_slopes}()},
 \code{\link{tidy_ggpredict}()},
-\code{\link{tidy_marginal_means}()},
 \code{\link{tidy_marginal_predictions}()},
 \code{\link{tidy_margins}()}
 }

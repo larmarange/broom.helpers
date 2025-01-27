@@ -67,7 +67,6 @@ Other marginal_tieders:
 \code{\link{tidy_avg_slopes}()},
 \code{\link{tidy_ggpredict}()},
 \code{\link{tidy_marginal_contrasts}()},
-\code{\link{tidy_marginal_means}()},
 \code{\link{tidy_marginal_predictions}()}
 }
 \concept{marginal_tieders}

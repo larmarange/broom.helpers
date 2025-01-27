@@ -20,7 +20,6 @@ The confidence level to use for the confidence interval (between \code{0} ans \c
 \code{marginaleffects::avg_slopes()}.}
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 Use \code{marginaleffects::avg_slopes()} to estimate marginal slopes / effects and
 return a tibble tidied in a way that it could be used by \code{broom.helpers}
 functions. See \code{marginaleffects::avg_slopes()} for a list of supported
@@ -67,7 +66,6 @@ Other marginal_tieders:
 \code{\link{tidy_avg_comparisons}()},
 \code{\link{tidy_ggpredict}()},
 \code{\link{tidy_marginal_contrasts}()},
-\code{\link{tidy_marginal_means}()},
 \code{\link{tidy_marginal_predictions}()},
 \code{\link{tidy_margins}()}
 }

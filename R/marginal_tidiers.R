@@ -437,7 +437,6 @@ tidy_avg_comparisons <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 #' @param conf.level (`numeric`)\cr
 #' The confidence level to use for the confidence interval (between `0` ans `1`).
 #' @param ... Additional parameters.
-#' @family marginal_tieders
 #' @export
 tidy_marginal_means <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
   lifecycle::deprecate_stop(
