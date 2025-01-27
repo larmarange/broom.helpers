@@ -427,83 +427,25 @@ tidy_avg_comparisons <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 #' Marginal Means with `marginaleffects::marginal_means()`
 #'
 #' `r lifecycle::badge("deprecated")`
-#' This function is deprecated. Use instead `tidy_marginal_predictions()` with
+#' This function is deprecated. `marginal_means()` is not anymore exported
+#' by `marginaleffects`. Use instead `tidy_marginal_predictions()` with
 #' the option `newdata = "marginalmeans"`.
-#'
-#' Use `marginaleffects::marginal_means()` to estimate marginal means and
-#' return a tibble tidied in a way that it could be used by `broom.helpers`
-#' functions. See `marginaleffects::marginal_means()()` for a list of supported
-#' models.
-#' @details
-#' `marginaleffects::marginal_means()` estimate marginal means:
-#' adjusted predictions, averaged across a grid of categorical predictors,
-#' holding other numeric predictors at their means. Please refer to the
-#' documentation page of `marginaleffects::marginal_means()`. Marginal means
-#' are defined only for categorical variables.
-#'
-#' For more information, see `vignette("marginal_tidiers", "broom.helpers")`.
 #' @param x (a model object, e.g. `glm`)\cr
 #' A model to be tidied.
 #' @param conf.int (`logical`)\cr
 #' Whether or not to include a confidence interval in the tidied output.
 #' @param conf.level (`numeric`)\cr
 #' The confidence level to use for the confidence interval (between `0` ans `1`).
-#' @param ... Additional parameters passed to
-#' `marginaleffects::marginal_means()`.
+#' @param ... Additional parameters.
 #' @family marginal_tieders
-#' @seealso `marginaleffects::marginal_means()`
 #' @export
-#' @examplesIf interactive()
-#' # Average Marginal Means
-#'
-#' df <- Titanic |>
-#'   dplyr::as_tibble() |>
-#'   tidyr::uncount(n) |>
-#'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
-#' mod <- glm(
-#'   Survived ~ Class + Age + Sex,
-#'   data = df, family = binomial
-#' )
-#' tidy_marginal_means(mod)
-#' tidy_plus_plus(mod, tidy_fun = tidy_marginal_means)
-#'
-#' mod2 <- lm(Petal.Length ~ poly(Petal.Width, 2) + Species, data = iris)
-#' tidy_marginal_means(mod2)
 tidy_marginal_means <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
-  lifecycle::deprecate_warn(
-    when = "1.16.0",
+  lifecycle::deprecate_stop(
+    when = "1.19.0",
     what = "tidy_marginal_means()",
     with = "tidy_marginal_predictions()",
     details = "Specify `newdata = \"marginalmeans\"`."
   )
-
-  .assert_package("marginaleffects")
-
-  dots <- rlang::dots_list(...)
-  if (isTRUE(dots$exponentiate)) {
-    cli::cli_abort("{.arg exponentiate = TRUE} is not relevant for {.fun broom.helpers::tidy_marginal_means}.") # nolint
-  }
-  dots$exponentiate <- NULL
-  dots$conf_level <- conf.level
-  dots$model <- x
-
-  res <- do.call(marginaleffects::marginal_means, dots) |>
-    dplyr::rename(
-      variable = "term",
-      term = "value"
-    ) |>
-    dplyr::mutate(term = as.character(.data$term))
-
-  # multinomial models
-  if ("group" %in% names(res)) {
-    res <- res |>
-      dplyr::rename(y.level = "group") |>
-      dplyr::relocate("y.level")
-  }
-
-  attr(res, "coefficients_type") <- "marginal_means"
-  attr(res, "skip_add_reference_rows") <- TRUE
-  res |> dplyr::as_tibble()
 }
 
 #' Marginal Predictions with `marginaleffects::avg_predictions()`

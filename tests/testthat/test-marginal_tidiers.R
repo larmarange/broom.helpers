@@ -316,16 +316,6 @@ test_that("tidy_marginal_contrasts()", {
   )
 })
 
-test_that("tidy_marginal_means()", {
-  skip_on_cran()
-  skip_if_not_installed("marginaleffects")
-
-  mod <- lm(Petal.Length ~ Petal.Width * Species + Sepal.Length, data = iris)
-  lifecycle::expect_deprecated(
-    tidy_marginal_means(mod)
-  )
-})
-
 test_that("tidy_avg_comparisons()", {
   skip_on_cran()
   skip_if_not_installed("marginaleffects")
