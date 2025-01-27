@@ -71,7 +71,7 @@
 
 - `tidy_marginal_means()` is now deprecated, following deprecation of
   `marginaleffects::marginal_means()`. Use instead `tidy_marginal_predictions()`
-  with the option `newdata = "marginalmeans"`.
+  with the option `newdata = "balanced"`.
 - `tidy_margins()` is now indicated as superseded and may be deprecated if
   `margins` is removed from CRAN. `tidy_avg_slopes()` could be used as an
   alternative. (#252)

@@ -324,7 +324,7 @@ tidy_avg_slopes <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
   attr(res, "coefficients_type") <- dplyr::case_when(
     is.null(dots$newdata) ~ "marginal_effects_average",
     isTRUE(dots$newdata == "mean") ~ "marginal_effects_at_mean",
-    isTRUE(dots$newdata == "marginalmeans") ~ "marginal_effects_at_marginalmeans",
+    isTRUE(dots$newdata == "balanced") ~ "marginal_effects_at_marginalmeans",
     TRUE ~ "marginal_effects"
   )
   attr(res, "skip_add_reference_rows") <- TRUE
@@ -417,7 +417,7 @@ tidy_avg_comparisons <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
   attr(res, "coefficients_type") <- dplyr::case_when(
     is.null(dots$newdata) ~ "marginal_contrasts_average",
     isTRUE(dots$newdata == "mean") ~ "marginal_contrasts_at_mean",
-    isTRUE(dots$newdata == "marginalmeans") ~ "marginal_contrasts_at_marginalmeans",
+    isTRUE(dots$newdata == "balanced") ~ "marginal_contrasts_at_marginalmeans",
     TRUE ~ "marginal_contrasts"
   )
   attr(res, "skip_add_reference_rows") <- TRUE
@@ -609,7 +609,7 @@ tidy_marginal_predictions <- function(x, variables_list = "auto",
   attr(res, "coefficients_type") <- dplyr::case_when(
     is.null(dots$newdata) ~ "marginal_predictions_average",
     isTRUE(dots$newdata == "mean") ~ "marginal_predictions_at_mean",
-    isTRUE(dots$newdata == "marginalmeans") ~ "marginal_predictions_at_marginalmeans",
+    isTRUE(dots$newdata == "balanced") ~ "marginal_predictions_at_marginalmeans",
     TRUE ~ "marginal_predictions"
   )
   attr(res, "skip_add_reference_rows") <- TRUE
@@ -981,7 +981,7 @@ tidy_marginal_contrasts <- function(x, variables_list = "auto",
   attr(res, "coefficients_type") <- dplyr::case_when(
     is.null(dots$newdata) ~ "marginal_contrasts_average",
     isTRUE(dots$newdata == "mean") ~ "marginal_contrasts_at_mean",
-    isTRUE(dots$newdata == "marginalmeans") ~ "marginal_contrasts_at_marginalmeans",
+    isTRUE(dots$newdata == "balanced") ~ "marginal_contrasts_at_marginalmeans",
     TRUE ~ "marginal_contrasts"
   )
   attr(res, "skip_add_reference_rows") <- TRUE
