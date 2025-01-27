@@ -2,7 +2,7 @@
 % Please edit documentation in R/marginal_tidiers.R
 \name{tidy_marginal_means}
 \alias{tidy_marginal_means}
-\title{Marginal Means with \code{marginaleffects::marginal_means()}}
+\title{Marginal Means with deprecated \code{marginaleffects::marginal_means()}}
 \usage{
 tidy_marginal_means(x, conf.int = TRUE, conf.level = 0.95, ...)
 }

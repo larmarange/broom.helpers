@@ -1,5 +1,9 @@
 # broom.helpers (development version)
 
+**Deprecated function**
+
+- `tidy_marginal_means()` is now hard deprecated (#284)
+
 # broom.helpers 1.18.0
 
 **New supported models**

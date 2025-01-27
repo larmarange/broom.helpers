@@ -424,7 +424,7 @@ tidy_avg_comparisons <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
   res |> dplyr::as_tibble()
 }
 
-#' Marginal Means with `marginaleffects::marginal_means()`
+#' Marginal Means with deprecated `marginaleffects::marginal_means()`
 #'
 #' `r lifecycle::badge("deprecated")`
 #' This function is deprecated. `marginal_means()` is not anymore exported
