@@ -62,7 +62,6 @@ tidy_margins <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 
 #' Marginal Predictions at the mean with `effects::allEffects()`
 #'
-#' `r lifecycle::badge("experimental")`
 #' Use `effects::allEffects()` to estimate marginal predictions and
 #' return a tibble tidied in a way that it could be used by `broom.helpers`
 #' functions.
@@ -178,7 +177,6 @@ effpoly_to_df <- function(x) {
 
 #' Marginal Predictions with `ggeffects::ggpredict()`
 #'
-#' `r lifecycle::badge("experimental")`
 #' Use `ggeffects::ggpredict()` to estimate marginal predictions
 #' and return a tibble tidied in a way that it could be used by `broom.helpers`
 #' functions.
@@ -250,7 +248,6 @@ tidy_ggpredict <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 
 #' Marginal Slopes / Effects with `marginaleffects::avg_slopes()`
 #'
-#' `r lifecycle::badge("experimental")`
 #' Use `marginaleffects::avg_slopes()` to estimate marginal slopes / effects and
 #' return a tibble tidied in a way that it could be used by `broom.helpers`
 #' functions. See `marginaleffects::avg_slopes()` for a list of supported
@@ -336,7 +333,6 @@ tidy_avg_slopes <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 
 #' Marginal Contrasts with `marginaleffects::avg_comparisons()`
 #'
-#' `r lifecycle::badge("experimental")`
 #' Use `marginaleffects::avg_comparisons()` to estimate marginal contrasts and
 #' return a tibble tidied in a way that it could be used by `broom.helpers`
 #' functions. See `marginaleffects::avg_comparisons()` for a list of supported
@@ -512,7 +508,6 @@ tidy_marginal_means <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 
 #' Marginal Predictions with `marginaleffects::avg_predictions()`
 #'
-#' `r lifecycle::badge("experimental")`
 #' Use `marginaleffects::avg_predictions()` to estimate marginal predictions for
 #' each variable of a model and return a tibble tidied in a way that it could
 #' be used by `broom.helpers` functions.
@@ -877,7 +872,6 @@ plot_marginal_predictions <- function(x, variables_list = "auto",
 
 #' Marginal Contrasts with `marginaleffects::avg_comparisons()`
 #'
-#' `r lifecycle::badge("experimental")`
 #' Use `marginaleffects::avg_comparisons()` to estimate marginal contrasts for
 #' each variable of a model and return a tibble tidied in a way that it could
 #' be used by `broom.helpers` functions.
