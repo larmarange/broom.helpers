@@ -51,7 +51,6 @@ Whether \code{broom.helpers} should not return a message when requested output
 cannot be generated. Default is \code{FALSE}.}
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 Computes pairwise contrasts with \code{\link[emmeans:emmeans]{emmeans::emmeans()}} and add them to the
 results tibble. Works only with models supported by \code{emmeans}, see
 \code{vignette("models", package = "emmeans")}.
@@ -60,7 +59,6 @@ results tibble. Works only with models supported by \code{emmeans}, see
 If the \code{contrasts} column is not yet available in \code{x},
 \code{\link[=tidy_add_contrasts]{tidy_add_contrasts()}} will be automatically applied.
 
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 For multi-components models, such as zero-inflated Poisson or beta
 regression, support of pairwise contrasts is still experimental.
 }

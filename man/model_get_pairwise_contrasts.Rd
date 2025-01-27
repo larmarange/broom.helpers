@@ -38,11 +38,10 @@ List of additional parameter to pass to
 It is computed with \code{\link[emmeans:emmeans]{emmeans::emmeans()}}.
 }
 \details{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 For \code{pscl::zeroinfl()} and \code{pscl::hurdle()} models, pairwise contrasts are
 computed separately for each component, using \code{mode = "count"} and
 \code{mode = "zero"} (see documentation of \code{emmeans}) and a component column
-is added to the results. This support is still experimental.
+is added to the results.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
