@@ -3926,23 +3926,22 @@ marginal means</em> (a.k.a. emmeans).</p>
 observed modalities of the categorical variables and fixing continuous
 variables at their means.</p>
 <p>Let’s call <code><a href="https://marginaleffects.com/man/r/predictions.html" class="external-link">marginaleffects::predictions()</a></code> with
-<code>newdata = "marginalmeans"</code>.</p>
+<code>newdata = "balanced"</code>.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://marginaleffects.com/man/r/predictions.html" class="external-link">predictions</a></span><span class="op">(</span><span class="va">mod</span>, newdata <span class="op">=</span> <span class="st">"marginalmeans"</span><span class="op">)</span></span>
-<span><span class="va">pred</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;  Estimate Pr(&gt;|z|)    S  2.5 % 97.5 %</span></span>
-<span><span class="co">#&gt;     0.353  0.11462  3.1 0.2042  0.537</span></span>
-<span><span class="co">#&gt;     0.194  &lt; 0.001 10.8 0.0969  0.351</span></span>
-<span><span class="co">#&gt;     0.318  0.07405  3.8 0.1678  0.519</span></span>
-<span><span class="co">#&gt;     0.265  0.01648  5.9 0.1351  0.453</span></span>
-<span><span class="co">#&gt;     0.419  0.39097  1.4 0.2541  0.604</span></span>
-<span><span class="co">#&gt;     0.242  0.00282  8.5 0.1308  0.403</span></span>
-<span><span class="co">#&gt;     0.381  0.24194  2.0 0.2147  0.581</span></span>
-<span><span class="co">#&gt;     0.322  0.06889  3.9 0.1760  0.514</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Type:  invlink(link) </span></span>
-<span><span class="co">#&gt; Columns: rowid, estimate, p.value, s.value, conf.low, conf.high, trt, marker, stage, age, response</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://marginaleffects.com/man/r/predictions.html" class="external-link">predictions</a></span><span class="op">(</span><span class="va">mod</span>, newdata <span class="op">=</span> <span class="st">"balanced"</span><span class="op">)</span></span>
+<span><span class="va">pred</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 8 × 11</span></span></span>
+<span><span class="co">#&gt;   rowid estimate  p.value s.value conf.low conf.high trt    marker stage   age</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1    0.353 0.115       3.13   0.204      0.537 Drug A  0.919 T1     46.9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2    0.194 0.000<span style="text-decoration: underline;">572</span>   10.8    0.096<span style="text-decoration: underline;">9</span>     0.351 Drug A  0.919 T2     46.9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3    0.318 0.074<span style="text-decoration: underline;">1</span>      3.76   0.168      0.519 Drug A  0.919 T3     46.9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4    0.265 0.016<span style="text-decoration: underline;">5</span>      5.92   0.135      0.453 Drug A  0.919 T4     46.9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>     5    0.419 0.391       1.35   0.254      0.604 Drug B  0.919 T1     46.9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>     6    0.242 0.002<span style="text-decoration: underline;">82</span>     8.47   0.131      0.403 Drug B  0.919 T2     46.9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span>     7    0.381 0.242       2.05   0.215      0.581 Drug B  0.919 T3     46.9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span>     8    0.322 0.068<span style="text-decoration: underline;">9</span>      3.86   0.176      0.514 Drug B  0.919 T4     46.9</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1 more variable: response &lt;int&gt;</span></span></span></code></pre></div>
 <p>As we can see, <code>pred</code> contains 8 rows, one for each
 combination of <code>trt</code> (2 modalities) and <code>stage</code> (4
 modalities). <code>age</code> is fixed at its mean
@@ -4006,14 +4005,13 @@ with <code>marginaleffects::prediction()</code> using
 we can define <strong>marginal predictions at marginal means</strong>
 for both continuous and categorical variables, calling
 <code><a href="../reference/tidy_marginal_predictions.html">tidy_marginal_predictions()</a></code> with the option
-<code>newdata = "marginalmeans"</code>. For categorical variables,
-marginal predictions at marginal means will be equal to marginal
-means.</p>
+<code>newdata = "balanced"</code>. For categorical variables, marginal
+predictions at marginal means will be equal to marginal means.</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mod</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html" class="external-link">tbl_regression</a></span><span class="op">(</span></span>
 <span>    tidy_fun <span class="op">=</span> <span class="va">tidy_marginal_predictions</span>,</span>
-<span>    newdata <span class="op">=</span> <span class="st">"marginalmeans"</span>,</span>
+<span>    newdata <span class="op">=</span> <span class="st">"balanced"</span>,</span>
 <span>    variables_list <span class="op">=</span> <span class="st">"no_interaction"</span>,</span>
 <span>    estimate_fun <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>accuracy <span class="op">=</span> <span class="fl">.1</span><span class="op">)</span>,</span>
 <span>    label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>age <span class="op">=</span> <span class="st">"Age in years"</span><span class="op">)</span></span>
@@ -8145,14 +8143,14 @@ to pass <code>newdata = "mean"</code>.</p>
 <div class="section level3">
 <h3 id="alternative-approaches-1">Alternative approaches<a class="anchor" aria-label="anchor" href="#alternative-approaches-1"></a>
 </h3>
-<p>Other assumptions, such as <code>"marginalmeans"</code> or
+<p>Other assumptions, such as <code>"balanced"</code> or
 <code>"median"</code>, could be defined using <code>newdata</code>. See
 the documentation of <code><a href="https://marginaleffects.com/man/r/comparisons.html" class="external-link">marginaleffects::comparisons()</a></code>.</p>
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mod</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html" class="external-link">tbl_regression</a></span><span class="op">(</span></span>
 <span>    tidy_fun <span class="op">=</span> <span class="va">tidy_avg_comparisons</span>,</span>
-<span>    newdata <span class="op">=</span> <span class="st">"marginalmeans"</span>,</span>
+<span>    newdata <span class="op">=</span> <span class="st">"balanced"</span>,</span>
 <span>    estimate_fun <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>style_positive <span class="op">=</span> <span class="st">"plus"</span><span class="op">)</span>,</span>
 <span>    label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>age <span class="op">=</span> <span class="st">"Age in years"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -8688,7 +8686,7 @@ the documentation of <code><a href="https://marginaleffects.com/man/r/comparison
 <code class="sourceCode R"><span><span class="va">mod</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">ggstats</span><span class="fu">::</span><span class="fu"><a href="https://larmarange.github.io/ggstats/reference/ggcoef_model.html" class="external-link">ggcoef_model</a></span><span class="op">(</span></span>
 <span>    tidy_fun <span class="op">=</span> <span class="va">tidy_avg_comparisons</span>,</span>
-<span>    tidy_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="st">"marginalmeans"</span><span class="op">)</span>,</span>
+<span>    tidy_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="st">"balanced"</span><span class="op">)</span>,</span>
 <span>    variable_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>age <span class="op">=</span> <span class="st">"Age in years"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span></span>
@@ -12069,12 +12067,12 @@ continuous variables and the mode of categorical variables.&lt;/p&gt;'><sup>2</s
 <div class="section level3">
 <h3 id="marginal-effects-at-marginal-means">Marginal Effects at Marginal Means<a class="anchor" aria-label="anchor" href="#marginal-effects-at-marginal-means"></a>
 </h3>
-<p>Simply use <code>newdata = "marginalmeans"</code>.</p>
+<p>Simply use <code>newdata = "balanced"</code>.</p>
 <div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mod</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html" class="external-link">tbl_regression</a></span><span class="op">(</span></span>
 <span>    tidy_fun <span class="op">=</span> <span class="va">tidy_avg_slopes</span>,</span>
-<span>    newdata <span class="op">=</span> <span class="st">"marginalmeans"</span>,</span>
+<span>    newdata <span class="op">=</span> <span class="st">"balanced"</span>,</span>
 <span>    estimate_fun <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>style_positive <span class="op">=</span> <span class="st">"plus"</span><span class="op">)</span>,</span>
 <span>    label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>age <span class="op">=</span> <span class="st">"Age in years"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -12547,7 +12545,7 @@ continuous variables and the mode of categorical variables.&lt;/p&gt;'><sup>2</s
 <tr>
 <td headers="label" class="gt_row gt_left">    dY/dX</td>
 <td headers="estimate" class="gt_row gt_center">+0.4%</td>
-<td headers="conf.low" class="gt_row gt_center">-0.08%, +0.9%</td>
+<td headers="conf.low" class="gt_row gt_center">-0.09%, +0.9%</td>
 <td headers="p.value" class="gt_row gt_center">0.10</td>
 </tr>
 <tr>
@@ -12610,7 +12608,7 @@ continuous variables and the mode of categorical variables.&lt;/p&gt;'><sup>2</s
 <code class="sourceCode R"><span><span class="va">mod</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">ggstats</span><span class="fu">::</span><span class="fu"><a href="https://larmarange.github.io/ggstats/reference/ggcoef_model.html" class="external-link">ggcoef_model</a></span><span class="op">(</span></span>
 <span>    tidy_fun <span class="op">=</span> <span class="va">tidy_avg_slopes</span>,</span>
-<span>    tidy_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="st">"marginalmeans"</span><span class="op">)</span>,</span>
+<span>    tidy_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="st">"balanced"</span><span class="op">)</span>,</span>
 <span>    variable_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>age <span class="op">=</span> <span class="st">"Age in years"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span></span>
