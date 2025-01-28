@@ -255,6 +255,7 @@ test_that("model_get_n() works with lme4::glmer", {
 
 test_that("model_get_n() works with survival::coxph", {
   skip_on_cran()
+  skip_if_not_installed("survival")
   df <- survival::lung |> dplyr::mutate(sex = factor(sex))
   mod <- survival::coxph(
     survival::Surv(time, status) ~ ph.ecog + age + sex,
@@ -295,6 +296,7 @@ test_that("model_get_n() works with survival::coxph", {
 
 test_that("model_get_n() works with survival::survreg", {
   skip_on_cran()
+  skip_if_not_installed("survival")
   mod <- survival::survreg(
     survival::Surv(futime, fustat) ~ factor(ecog.ps) + rx,
     survival::ovarian,
@@ -443,6 +445,7 @@ test_that("model_get_n() works with lavaan::lavaan", {
 test_that("model_get_n() works with tidycmprsk::crr", {
   skip_on_cran()
   skip_if_not_installed("tidycmprsk")
+  skip_if_not_installed("survival")
 
   mod <- tidycmprsk::crr(
     survival::Surv(ttdeath, death_cr) ~ age + grade,

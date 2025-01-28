@@ -184,6 +184,7 @@ test_that("tidy_add_n() works with lme4::glmer", {
 
 test_that("tidy_add_n() works with survival::coxph", {
   skip_on_cran()
+  skip_if_not_installed("survival")
   df <- survival::lung |> dplyr::mutate(sex = factor(sex))
   mod <- survival::coxph(survival::Surv(time, status) ~ ph.ecog + age + sex, data = df)
   expect_no_error(res <- mod |> tidy_and_attach() |> tidy_add_n())
@@ -193,6 +194,7 @@ test_that("tidy_add_n() works with survival::coxph", {
 
 test_that("tidy_add_n() works with survival::survreg", {
   skip_on_cran()
+  skip_if_not_installed("survival")
   mod <- survival::survreg(
     survival::Surv(futime, fustat) ~ factor(ecog.ps) + rx,
     survival::ovarian,

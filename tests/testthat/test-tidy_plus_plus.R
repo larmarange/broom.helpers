@@ -79,6 +79,7 @@ test_that("tidy_plus_plus() and functionnal programming", {
   # for coxph, identification of variables will not work
   # will display a message
   # but a result should be returned
+  skip_if_not_installed("survival")
   expect_message(
     suppressWarnings(
       res <- dplyr::tibble(grade = c("I", "II", "III")) |>
@@ -213,6 +214,7 @@ test_that("tidy_plus_plus() works with lme4::glmer.nb", {
 
 test_that("tidy_plus_plus() works with survival::coxph", {
   skip_on_cran()
+  skip_if_not_installed("survival")
   df <- survival::lung |> dplyr::mutate(sex = factor(sex))
   mod <- survival::coxph(survival::Surv(time, status) ~ ph.ecog + age + sex, data = df)
   expect_no_error(
@@ -222,6 +224,7 @@ test_that("tidy_plus_plus() works with survival::coxph", {
 
 test_that("tidy_plus_plus() works with survival::survreg", {
   skip_on_cran()
+  skip_if_not_installed("survival")
   mod <- survival::survreg(
     survival::Surv(futime, fustat) ~ ecog.ps + rx,
     survival::ovarian,
@@ -235,6 +238,7 @@ test_that("tidy_plus_plus() works with survival::survreg", {
 
 test_that("tidy_plus_plus() works with survival::clogit", {
   skip_on_cran()
+  skip_if_not_installed("survival")
   library(survival)
   resp <- levels(survival::logan$occupation)
   n <- nrow(survival::logan)
@@ -315,6 +319,7 @@ test_that("tidy_plus_plus() works with survey::svycoxph", {
   skip_on_cran()
   skip_if_not_installed("survey")
   skip_if_not_installed("labelled")
+  skip_if_not_installed("survival")
   d <- survival::pbc
   labelled::var_label(d$albumin) <- "Custom label"
   dpbc <- survey::svydesign(id = ~1, prob = ~1, strata = ~edema, data = d)

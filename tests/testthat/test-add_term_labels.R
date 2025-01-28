@@ -315,6 +315,7 @@ test_that("tidy_add_term_labels() works with lme4::glmer", {
 
 test_that("tidy_add_term_labels() works with survival::coxph", {
   skip_on_cran()
+  skip_if_not_installed("survival")
   df <- survival::lung |> dplyr::mutate(sex = factor(sex))
   mod <- survival::coxph(survival::Surv(time, status) ~ ph.ecog + age + sex, data = df)
   expect_no_error(mod |> tidy_and_attach() |> tidy_add_term_labels())
@@ -322,6 +323,7 @@ test_that("tidy_add_term_labels() works with survival::coxph", {
 
 test_that("tidy_add_term_labels() works with survival::survreg", {
   skip_on_cran()
+  skip_if_not_installed("survival")
   mod <- survival::survreg(
     survival::Surv(futime, fustat) ~ ecog.ps + rx,
     survival::ovarian,

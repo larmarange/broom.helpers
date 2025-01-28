@@ -145,6 +145,7 @@ test_that("model_identify_variables() works with lme4::glmer", {
 
 
 test_that("model_get_coefficients_type() works with survival::coxph", {
+  skip_if_not_installed("survival")
   df <- survival::lung |> dplyr::mutate(sex = factor(sex))
   mod <- survival::coxph(survival::Surv(time, status) ~ ph.ecog + age + sex, data = df)
   res <- mod |> model_get_coefficients_type()
@@ -152,6 +153,7 @@ test_that("model_get_coefficients_type() works with survival::coxph", {
 })
 
 test_that("model_get_coefficients_type() works with survival::survreg", {
+  skip_if_not_installed("survival")
   mod <- survival::survreg(
     survival::Surv(futime, fustat) ~ ecog.ps + rx,
     survival::ovarian,
@@ -163,6 +165,7 @@ test_that("model_get_coefficients_type() works with survival::survreg", {
 
 
 test_that("model_get_coefficients_type() works with survival::clogit", {
+  skip_if_not_installed("survival")
   resp <- levels(survival::logan$occupation)
   n <- nrow(survival::logan)
   indx <- rep(1:n, length(resp))
@@ -196,6 +199,7 @@ test_that("model_get_coefficients_type() works with survey::svyglm", {
 
 test_that("model_get_coefficients_type() works with survey::svycoxph", {
   skip_if_not_installed("survey")
+  skip_if_not_installed("survival")
   dpbc <- survey::svydesign(id = ~1, prob = ~1, strata = ~edema, data = survival::pbc)
   mod <- survey::svycoxph(
     Surv(time, status > 0) ~ log(bili) + protime + albumin,
@@ -207,6 +211,7 @@ test_that("model_get_coefficients_type() works with survey::svycoxph", {
 
 test_that("tidy_plus_plus() works with survey::svyolr", {
   skip_if_not_installed("survey")
+  skip_if_not_installed("survival")
   data(api, package = "survey")
   fpc <- survey::svydesign(id = ~dnum, weights = ~pw, data = apiclus1, fpc = ~fpc)
   fpc <- update(fpc, mealcat = cut(meals, c(0, 25, 50, 75, 100)))
