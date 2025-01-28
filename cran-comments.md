@@ -1,6 +1,6 @@
 ## Test environments
 
-* local R installation (windows 11): R 4.4.1
+* local R installation (windows 11): R 4.4.2
 * macos-latest (on github actions): R-release
 * windows-latest (on github actions): R-release
 * ubuntu-latest  (on github actions): R-devel, R-release, R-oldrel-1
@@ -16,14 +16,7 @@ cf. https://github.com/larmarange/broom.helpers/actions/workflows/R-CMD-check.ya
 We checked 14 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
  * We saw 0 new problems
- * We failed to check 2 packages
-
-Issues with CRAN packages are summarised below.
-
-### Failed to check
-
-* gtsummary (NA)
-* mmrm      (NA)
+ * We failed to check 0 packages
 
 ## recheck GitHub action
 
