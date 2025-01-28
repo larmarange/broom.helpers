@@ -1,5 +1,4 @@
 ## usethis namespace: start
-#' @importFrom lifecycle deprecate_soft
 #' @importFrom cli cli_alert_info cli_alert_info cli_alert_danger cli_code cli_ul
 #' @importFrom rlang .data .env
 #' @importFrom purrr %||%
