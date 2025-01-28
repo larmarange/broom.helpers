@@ -255,7 +255,6 @@ tidy_broom <- function(x, ...) {
 
 #' Tidy a `multgee` model
 #'
-#' `r lifecycle::badge("experimental")`
 #' A tidier for models generated with `multgee::nomLORgee()` or `multgee::ordLORgee()`.
 #' Term names will be updated to be consistent with generic models. The original
 #' term names are preserved in an `"original_term"` column.
@@ -337,7 +336,6 @@ tidy_multgee <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 
 #' Tidy a `zeroinfl` or a `hurdle` model
 #'
-#' `r lifecycle::badge("experimental")`
 #' A tidier for models generated with `pscl::zeroinfl()` or `pscl::hurdle()`.
 #' Term names will be updated to be consistent with generic models. The original
 #' term names are preserved in an `"original_term"` column.

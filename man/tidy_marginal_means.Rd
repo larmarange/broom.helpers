@@ -2,7 +2,7 @@
 % Please edit documentation in R/marginal_tidiers.R
 \name{tidy_marginal_means}
 \alias{tidy_marginal_means}
-\title{Marginal Means with \code{marginaleffects::marginal_means()}}
+\title{Marginal Means with deprecated \code{marginaleffects::marginal_means()}}
 \usage{
 tidy_marginal_means(x, conf.int = TRUE, conf.level = 0.95, ...)
 }
@@ -16,57 +16,11 @@ Whether or not to include a confidence interval in the tidied output.}
 \item{conf.level}{(\code{numeric})\cr
 The confidence level to use for the confidence interval (between \code{0} ans \code{1}).}
 
-\item{...}{Additional parameters passed to
-\code{marginaleffects::marginal_means()}.}
+\item{...}{Additional parameters.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
-This function is deprecated. Use instead \code{tidy_marginal_predictions()} with
-the option \code{newdata = "marginalmeans"}.
+This function is deprecated. \code{marginal_means()} is not anymore exported
+by \code{marginaleffects}. Use instead \code{tidy_marginal_predictions()} with
+the option \code{newdata = "balanced"}.
 }
-\details{
-Use \code{marginaleffects::marginal_means()} to estimate marginal means and
-return a tibble tidied in a way that it could be used by \code{broom.helpers}
-functions. See \code{marginaleffects::marginal_means()()} for a list of supported
-models.
-
-\code{marginaleffects::marginal_means()} estimate marginal means:
-adjusted predictions, averaged across a grid of categorical predictors,
-holding other numeric predictors at their means. Please refer to the
-documentation page of \code{marginaleffects::marginal_means()}. Marginal means
-are defined only for categorical variables.
-
-For more information, see \code{vignette("marginal_tidiers", "broom.helpers")}.
-}
-\examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-# Average Marginal Means
-
-df <- Titanic |>
-  dplyr::as_tibble() |>
-  tidyr::uncount(n) |>
-  dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
-mod <- glm(
-  Survived ~ Class + Age + Sex,
-  data = df, family = binomial
-)
-tidy_marginal_means(mod)
-tidy_plus_plus(mod, tidy_fun = tidy_marginal_means)
-
-mod2 <- lm(Petal.Length ~ poly(Petal.Width, 2) + Species, data = iris)
-tidy_marginal_means(mod2)
-\dontshow{\}) # examplesIf}
-}
-\seealso{
-\code{marginaleffects::marginal_means()}
-
-Other marginal_tieders: 
-\code{\link{tidy_all_effects}()},
-\code{\link{tidy_avg_comparisons}()},
-\code{\link{tidy_avg_slopes}()},
-\code{\link{tidy_ggpredict}()},
-\code{\link{tidy_marginal_contrasts}()},
-\code{\link{tidy_marginal_predictions}()},
-\code{\link{tidy_margins}()}
-}
-\concept{marginal_tieders}

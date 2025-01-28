@@ -22,7 +22,6 @@ The confidence level to use for the confidence interval (between \code{0} ans \c
 \item{...}{Additional parameters passed to \code{parameters::model_parameters()}.}
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 A tidier for models generated with \code{pscl::zeroinfl()} or \code{pscl::hurdle()}.
 Term names will be updated to be consistent with generic models. The original
 term names are preserved in an \code{"original_term"} column.

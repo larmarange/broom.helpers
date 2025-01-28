@@ -66,7 +66,6 @@ reference:
       - tidy_marginal_contrasts
       - tidy_avg_slopes
       - tidy_margins
-      - tidy_marginal_means
 
   - title: Get information from model objects
   - contents:
@@ -82,3 +81,6 @@ reference:
       - starts_with("\\.")
       - seq_range
 
+  - title: Deprecated
+  - contents:
+      - tidy_marginal_means

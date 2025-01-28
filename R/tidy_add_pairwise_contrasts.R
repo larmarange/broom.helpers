@@ -1,6 +1,5 @@
 #' Add pairwise contrasts for categorical variables
 #'
-#' `r lifecycle::badge("experimental")`
 #' Computes pairwise contrasts with [emmeans::emmeans()] and add them to the
 #' results tibble. Works only with models supported by `emmeans`, see
 #' `vignette("models", package = "emmeans")`.
@@ -9,7 +8,6 @@
 #' If the `contrasts` column is not yet available in `x`,
 #' [tidy_add_contrasts()] will be automatically applied.
 #'
-#' `r lifecycle::badge("experimental")`
 #' For multi-components models, such as zero-inflated Poisson or beta
 #' regression, support of pairwise contrasts is still experimental.
 #'

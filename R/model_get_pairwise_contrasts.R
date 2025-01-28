@@ -17,11 +17,10 @@
 #' List of additional parameter to pass to
 #' [emmeans::emmeans()] when computing pairwise contrasts.
 #' @details
-#' `r lifecycle::badge("experimental")`
 #' For `pscl::zeroinfl()` and `pscl::hurdle()` models, pairwise contrasts are
 #' computed separately for each component, using `mode = "count"` and
 #' `mode = "zero"` (see documentation of `emmeans`) and a component column
-#' is added to the results. This support is still experimental.
+#' is added to the results.
 #' @family model_helpers
 #' @export
 #' @examplesIf interactive()
