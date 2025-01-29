@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">broom.helpers</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.18.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.19.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,7 +34,13 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.18.0" id="broomhelpers-1180">broom.helpers 1.18.0<a class="anchor" aria-label="anchor" href="#broomhelpers-1180"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.19.0" id="broomhelpers-1190">broom.helpers 1.19.0<a class="anchor" aria-label="anchor" href="#broomhelpers-1190"></a></h2>
+<p><strong>Deprecated function</strong></p>
+<ul><li>
+<code><a href="../reference/tidy_marginal_means.html">tidy_marginal_means()</a></code> is now hard deprecated (<a href="https://github.com/larmarange/broom.helpers/issues/284" class="external-link">#284</a>)</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.18.0" id="broomhelpers-1180">broom.helpers 1.18.0<a class="anchor" aria-label="anchor" href="#broomhelpers-1180"></a></h2><p class="text-muted">CRAN release: 2025-01-07</p>
 <p><strong>New supported models</strong></p>
 <ul><li>support for <code><a href="https://rdrr.io/pkg/glmtoolbox/man/glmgee.html" class="external-link">glmtoolbox::glmgee()</a></code> models (<a href="https://github.com/larmarange/broom.helpers/issues/274" class="external-link">#274</a>)</li>
 </ul><p><strong>New features</strong></p>
@@ -72,7 +78,7 @@
 <code>biglmm::bigglm()</code> not supported anymore as <code>biglmm</code> has been removed from CRAN</li>
 </ul><p><strong>Deprecated functions</strong></p>
 <ul><li>
-<code><a href="../reference/tidy_marginal_means.html">tidy_marginal_means()</a></code> is now deprecated, following deprecation of <code><a href="https://marginaleffects.com/man/r/marginal_means.html" class="external-link">marginaleffects::marginal_means()</a></code>. Use instead <code><a href="../reference/tidy_marginal_predictions.html">tidy_marginal_predictions()</a></code> with the option <code>newdata = "marginalmeans"</code>.</li>
+<code><a href="../reference/tidy_marginal_means.html">tidy_marginal_means()</a></code> is now deprecated, following deprecation of <code><a href="https://marginaleffects.com/man/r/marginal_means.html" class="external-link">marginaleffects::marginal_means()</a></code>. Use instead <code><a href="../reference/tidy_marginal_predictions.html">tidy_marginal_predictions()</a></code> with the option <code>newdata = "balanced"</code>.</li>
 <li>
 <code><a href="../reference/tidy_margins.html">tidy_margins()</a></code> is now indicated as superseded and may be deprecated if <code>margins</code> is removed from CRAN. <code><a href="../reference/tidy_avg_slopes.html">tidy_avg_slopes()</a></code> could be used as an alternative. (<a href="https://github.com/larmarange/broom.helpers/issues/252" class="external-link">#252</a>)</li>
 </ul><p><strong>Fixes</strong></p>
