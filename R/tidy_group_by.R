@@ -39,7 +39,7 @@ tidy_group_by <- function(
       tidyr::unite(col = "group_by", dplyr::all_of(group_vars), remove = FALSE)
     groups <- unique(x$group_by)
     x$group_by <- factor(x$group_by, levels = )
-    x |> dplyr::arrange(group_by)
+    x <- x |> dplyr::arrange(group_by)
 
     # group labels
     if (!is.null(group_labels)) {
