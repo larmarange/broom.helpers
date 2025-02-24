@@ -14,6 +14,7 @@
 #' * [tidy_add_n()]
 #' * [tidy_remove_intercept()]
 #' * [tidy_select_variables()]
+#' * [tidy_group_by()]
 #' * [tidy_add_coefficients_type()]
 #' * [tidy_detach_model()]
 #'
@@ -82,6 +83,7 @@
 #' @param intercept (`logical`)\cr
 #' Should the intercept(s) be included?
 #' @inheritParams tidy_select_variables
+#' @inheritParams tidy_group_by
 #' @param keep_model (`logical`)\cr
 #' Should the model be kept as an attribute of the final result?
 #' @param tidy_post_fun (`function`)\cr
@@ -176,6 +178,8 @@ tidy_plus_plus <- function(model,
                            add_n = TRUE,
                            intercept = FALSE,
                            include = everything(),
+                           group_by = auto_group_by(),
+                           group_labels = NULL,
                            keep_model = FALSE,
                            tidy_post_fun = NULL,
                            quiet = FALSE,
@@ -256,6 +260,10 @@ tidy_plus_plus <- function(model,
   res <- res |>
     tidy_select_variables(
       include = {{ include }},
+    ) |>
+    tidy_group_by(
+      group_by = {{ group_by }},
+      group_labels = group_labels
     ) |>
     tidy_add_coefficients_type()
 

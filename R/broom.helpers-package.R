@@ -49,8 +49,8 @@ utils::globalVariables(c("."))
     dplyr::select(
       dplyr::any_of(
         c(
-          "y.level", "component", "term", "original_term", "variable",
-          "instrumental", "var_label", "var_class", "var_type",
+          "group_by", "y.level", "component", "term", "original_term",
+          "variable", "instrumental", "var_label", "var_class", "var_type",
           "var_nlevels", "header_row", "contrasts", "contrasts_type",
           "reference_row", "label", "n_obs", "n_ind", "n_event", "exposure"
         )
