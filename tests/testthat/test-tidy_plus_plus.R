@@ -722,11 +722,9 @@ test_that("tidy_plus_plus() works with multgee models", {
   )
   expect_equal(
     res$y.level,
-    c(
-      "street", "street", "street", "street", "street", "street",
-      "street", "street", "community", "community", "community", "community",
-      "community", "community", "community", "community"
-    )
+    c("community", "community", "community", "community", "community",
+      "community", "community", "community", "street", "street", "street",
+      "street", "street", "street", "street", "street")
   )
   expect_equal(
     res$term,
