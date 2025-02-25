@@ -48,6 +48,7 @@ reference:
       - starts_with("tidy_disambiguate")
       - starts_with("tidy_remove")
       - starts_with("tidy_select")
+      - tidy_group_by
 
   - title: Custom tidiers
   - contents:
