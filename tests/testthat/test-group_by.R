@@ -42,6 +42,11 @@ test_that("tidy_group_by() works with nnet::multinom", {
       tidy_and_attach() |>
       tidy_group_by(group_labels = c(III = "group 3"))
   )
+  expect_error(
+    res <- mod |>
+      tidy_and_attach() |>
+      tidy_group_by(group_labels = c("group 3"))
+  )
   expect_equal(
     levels(res$group_by),
     c("II", "group 3")
@@ -55,5 +60,16 @@ test_that("tidy_group_by() works with nnet::multinom", {
   expect_equal(
     length(levels(res$group_by)),
     6
+  )
+  x <- mod |> tidy_and_attach() |> tidy_identify_variables()
+  # by default, keep any pre-existing group_by
+  expect_equal(
+    x |> tidy_group_by(group_by = "var_type"),
+    x |> tidy_group_by(group_by = "var_type") |>  tidy_group_by()
+  )
+  # NULL to remove any pre-existing group_by
+  expect_equal(
+    x,
+    x |> tidy_group_by() |> tidy_group_by(group_by = NULL)
   )
 })
