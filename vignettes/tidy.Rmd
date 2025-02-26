@@ -354,7 +354,7 @@ tibble::tribble(
   "Exposure", "`tidy_add_n()`", "Total of exposure time",
   "component", "`tidy_zeroinfl()`", "`component` argument passed to `tidy_zeroinfl()`"
 ) |>
-  dplyr::arrange(Attribute, .locale = "en") |> 
+  dplyr::arrange(Attribute, .locale = "en") |>
   gt::gt() |>
   gt::fmt_markdown(columns = everything()) |>
   gt::tab_options(column_labels.font.weight = "bold") |>
