@@ -61,7 +61,7 @@ tidy_group_by <- function(
       keep <- names(group_labels) %in% levels(x$group_by)
       drop <- group_labels[!keep]
       if (length(drop) > 0) {
-        cli::cli_warn(c(
+        cli::cli_alert_warning(c(
           "Problem in {.arg group_labels}:\n",
           "value{?s} {.strong {drop}} not found in the data and ignored."
         ))
