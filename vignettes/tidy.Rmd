@@ -311,8 +311,10 @@ tibble::tribble(
   "n_ind", "`tidy_add_n()`", "Number of individuals (for Cox models)",
   "n_event", "`tidy_add_n()`", "Number of events (for binomial and multinomial logistic models, Poisson and Cox models)",
   "exposure", "`tidy_add_n()`", "Exposure time (for Poisson and Cox models)",
-  "instrumental", "`tidy_identify_variables()`", "For \"fixest\" models, indicate if a variable was instrumental."
+  "instrumental", "`tidy_identify_variables()`", "For \"fixest\" models, indicate if a variable was instrumental.",
+  "group_by", "`tidy_group_by()`", "Grouping variable (particularly for multinomial or multi-components models).",
 ) |>
+  dplyr::arrange(Column, .locale = "en") |> 
   gt::gt() |>
   gt::fmt_markdown(columns = everything()) |>
   gt::tab_options(
@@ -352,6 +354,7 @@ tibble::tribble(
   "Exposure", "`tidy_add_n()`", "Total of exposure time",
   "component", "`tidy_zeroinfl()`", "`component` argument passed to `tidy_zeroinfl()`"
 ) |>
+  dplyr::arrange(Attribute, .locale = "en") |> 
   gt::gt() |>
   gt::fmt_markdown(columns = everything()) |>
   gt::tab_options(column_labels.font.weight = "bold") |>
