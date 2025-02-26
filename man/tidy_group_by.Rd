@@ -37,6 +37,20 @@ Indicates that results should be grouped. By default
 \code{y.level} column (for multinomial models) or the \code{component} column
 (multi-components models) if any.
 }
+\examples{
+if (require("nnet")) {
+  mod <- multinom(Species ~ Petal.Width + Petal.Length, data = iris)
+  mod |> tidy_and_attach() |> tidy_group_by()
+  mod |>
+    tidy_and_attach() |>
+    tidy_group_by(group_labels = c(versicolor = "harlequin blueflag"))
+  mod |> tidy_and_attach() |> tidy_group_by(group_by = NULL)
+  mod |>
+    tidy_and_attach() |>
+    tidy_identify_variables() |>
+    tidy_group_by(group_by = variable)
+}
+}
 \seealso{
 Other tidy_helpers: 
 \code{\link{tidy_add_coefficients_type}()},
