@@ -1,5 +1,10 @@
 # broom.helpers (development version)
 
+**New features**
+
+- new `tidy_group_by()` function to indicate how to group results (#288)
+- new arguments `group_by` and `group_labels` for `tidy_plus_plus()` (#288)
+
 # broom.helpers 1.19.0
 
 **Deprecated function**

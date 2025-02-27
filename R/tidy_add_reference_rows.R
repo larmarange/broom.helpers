@@ -175,11 +175,7 @@ tidy_add_reference_rows <- function(
   if ("component" %in% names(x)) {
     group <- "component"
   }
-  if (
-    "y.level" %in% names(x) &&
-      # specific case for multinomial models
-      (inherits(model, "multinom") || inherits(model, "LORgee"))
-  ) {
+  if ("y.level" %in% names(x)) {
     group <- "y.level"
   }
   if (!is.null(group)) {

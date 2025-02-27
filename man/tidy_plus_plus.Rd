@@ -32,6 +32,8 @@ tidy_plus_plus(
   add_n = TRUE,
   intercept = FALSE,
   include = everything(),
+  group_by = auto_group_by(),
+  group_labels = NULL,
   keep_model = FALSE,
   tidy_post_fun = NULL,
   quiet = FALSE,
@@ -135,6 +137,13 @@ Variables to include. Default is \code{everything()}.
 See also \code{\link[=all_continuous]{all_continuous()}}, \code{\link[=all_categorical]{all_categorical()}}, \code{\link[=all_dichotomous]{all_dichotomous()}}
 and \code{\link[=all_interaction]{all_interaction()}}.}
 
+\item{group_by}{(\code{\link[dplyr:dplyr_tidy_select]{tidy-select}})\cr
+One or several variables to group by. Default is \code{auto_group_by()}.
+Use \code{NULL} to force ungrouping.}
+
+\item{group_labels}{(\code{string})\cr
+An optional named vector of custom term labels.}
+
 \item{keep_model}{(\code{logical})\cr
 Should the model be kept as an attribute of the final result?}
 
@@ -168,6 +177,7 @@ This function will apply sequentially:
 \item \code{\link[=tidy_add_n]{tidy_add_n()}}
 \item \code{\link[=tidy_remove_intercept]{tidy_remove_intercept()}}
 \item \code{\link[=tidy_select_variables]{tidy_select_variables()}}
+\item \code{\link[=tidy_group_by]{tidy_group_by()}}
 \item \code{\link[=tidy_add_coefficients_type]{tidy_add_coefficients_type()}}
 \item \code{\link[=tidy_detach_model]{tidy_detach_model()}}
 }
@@ -242,6 +252,7 @@ Other tidy_helpers:
 \code{\link{tidy_add_variable_labels}()},
 \code{\link{tidy_attach_model}()},
 \code{\link{tidy_disambiguate_terms}()},
+\code{\link{tidy_group_by}()},
 \code{\link{tidy_identify_variables}()},
 \code{\link{tidy_remove_intercept}()},
 \code{\link{tidy_select_variables}()}
