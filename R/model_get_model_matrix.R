@@ -150,3 +150,15 @@ model_get_model_matrix.cch <- function(model, ...) {
     data = model |> model_get_model_frame()
   )
 }
+
+#' @export
+#' @rdname model_get_model_matrix
+model_get_model_matrix.vglm <- function(model, ...) {
+  stats::model.matrix(model, ..., type = "lm")
+}
+
+#' @export
+#' @rdname model_get_model_matrix
+model_get_model_matrix.vgam <- function(model, ...) {
+  stats::model.matrix(model, ..., type = "lm")
+}
