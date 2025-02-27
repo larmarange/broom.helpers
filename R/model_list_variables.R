@@ -266,7 +266,7 @@ model_list_variables.logitr <- function(model,
   if (is.numeric(x)) {
     return("numeric")
   }
-  return("other")
+  "other"
 }
 
 .compute_var_label <- function(x, labels = NULL) {

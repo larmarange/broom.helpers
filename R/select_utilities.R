@@ -146,7 +146,7 @@
     cli::cli_abort(err_msg, call = NULL)
   }
 
-  return(invisible())
+  invisible()
 }
 
 # checking the type/class/NULL of the RHS of formula
@@ -175,7 +175,7 @@
     }
   )
 
-  return(invisible())
+  invisible()
 }
 
 .single_formula_to_list <- function(x, data, var_info, arg_name,
@@ -368,7 +368,7 @@
   # saving var_info to selecting environment, where it may be utilized by selecting fns
   env_variable_type$df_var_info <- x
 
-  return(invisible(NULL))
+  invisible(NULL)
 }
 
 # function that converts a meta_data tibble to a tibble of variable names (to be used in selecting)

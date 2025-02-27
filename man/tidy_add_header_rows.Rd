@@ -100,6 +100,7 @@ Other tidy_helpers:
 \code{\link{tidy_add_variable_labels}()},
 \code{\link{tidy_attach_model}()},
 \code{\link{tidy_disambiguate_terms}()},
+\code{\link{tidy_group_by}()},
 \code{\link{tidy_identify_variables}()},
 \code{\link{tidy_plus_plus}()},
 \code{\link{tidy_remove_intercept}()},

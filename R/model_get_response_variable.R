@@ -32,8 +32,8 @@ model_get_response_variable.default <- function(model) {
   model_frame <- model |> model_get_model_frame()
   model_terms <- model |> model_get_terms()
   if (!is.null(model_terms) && inherits(model_terms, "terms")) {
-    return(names(model_frame)[attr(model_terms, "response")])
+    names(model_frame)[attr(model_terms, "response")]
   } else {
-    return(NULL)
+    NULL
   }
 }
