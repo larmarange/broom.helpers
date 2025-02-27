@@ -585,6 +585,34 @@ test_that("tidy_plus_plus() works with VGAM::vglm", {
   expect_no_error(
     res <- mod |> tidy_plus_plus()
   )
+
+  # multinomial
+  mod <- vglm(stage ~ grade + age, multinomial, data = gtsummary::trial)
+  expect_no_error(
+    res <- mod |> tidy_plus_plus(exponentiate = TRUE)
+  )
+  expect_true("y.level" %in% colnames(res))
+
+  mod <- vglm(
+    stage ~ grade + age,
+    multinomial(parallel = TRUE),
+    data = gtsummary::trial
+  )
+  expect_no_error(
+    res <- mod |> tidy_plus_plus(exponentiate = TRUE)
+  )
+
+  d <- gtsummary::trial
+  d$grade <- ordered(d$grade)
+  mod <- vglm(
+    grade ~ stage + age,
+    cumulative(),
+    data = d
+  )
+  expect_no_error(
+    res <- mod |> tidy_plus_plus(exponentiate = TRUE)
+  )
+  expect_true("component" %in% colnames(res))
 })
 
 
