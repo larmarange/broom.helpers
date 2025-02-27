@@ -63,7 +63,7 @@ values from a mixed model
 }
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\donttest{
 glm(response ~ age * trt + grade, gtsummary::trial, family = binomial) |>
   tidy_plus_plus(exponentiate = TRUE, include = all_categorical())
 
@@ -76,7 +76,7 @@ glm(response ~ age + trt + grade + stage,
     exponentiate = TRUE,
     include = all_contrasts(c("treatment", "sum"))
   )
-\dontshow{\}) # examplesIf}
+}
 }
 \seealso{
 \code{\link[=scope_tidy]{scope_tidy()}}

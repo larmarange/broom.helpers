@@ -27,12 +27,12 @@ For \code{\link[betareg:betareg]{betareg::betareg()}}, the component column in t
 with \code{\link[broom:reexports]{broom::tidy()}}, using \code{"mean"} and \code{"precision"} values.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\donttest{
 if (.assert_package("parameters", boolean = TRUE)) {
   lm(Sepal.Length ~ Sepal.Width + Species, data = iris) |>
     tidy_parameters()
 }
-\dontshow{\}) # examplesIf}
+}
 }
 \seealso{
 Other custom_tieders: 

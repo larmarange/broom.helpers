@@ -60,7 +60,7 @@ It is possible to pass a custom label for any term in \code{labels},
 including interaction terms.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\donttest{
 df <- Titanic |>
   dplyr::as_tibble() |>
   dplyr::mutate(Survived = factor(Survived, c("No", "Yes"))) |>
@@ -80,7 +80,7 @@ mod |>
     interaction_sep = " x ",
     categorical_terms_pattern = "{level} / {reference_level}"
   )
-\dontshow{\}) # examplesIf}
+}
 }
 \seealso{
 Other tidy_helpers: 

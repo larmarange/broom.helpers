@@ -22,7 +22,7 @@ be taken into account in the estimate of the number of observations,
 This function does not cover \code{lavaan} models (\code{NULL} is returned).
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\donttest{
 mod <- lm(Sepal.Length ~ Sepal.Width, iris)
 mod |> model_compute_terms_contributions()
 
@@ -64,7 +64,7 @@ d <- dplyr::as_tibble(Titanic) |>
   )
 mod <- glm(cbind(n_survived, n_dead) ~ Class * Age + Sex, data = d, family = binomial)
 mod |> model_compute_terms_contributions()
-\dontshow{\}) # examplesIf}
+}
 }
 \seealso{
 Other model_helpers: 

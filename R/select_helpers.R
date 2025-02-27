@@ -26,7 +26,8 @@
 #'
 #' @return A character vector of column names selected.
 #' @seealso [scope_tidy()]
-#' @examplesIf interactive()
+#' @examples
+#' \donttest{
 #' glm(response ~ age * trt + grade, gtsummary::trial, family = binomial) |>
 #'   tidy_plus_plus(exponentiate = TRUE, include = all_categorical())
 #'
@@ -39,6 +40,7 @@
 #'     exponentiate = TRUE,
 #'     include = all_contrasts(c("treatment", "sum"))
 #'   )
+#' }
 NULL
 
 #' @rdname select_helpers

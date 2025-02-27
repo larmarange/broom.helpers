@@ -31,7 +31,8 @@
 #'
 #' @export
 #' @family model_helpers
-#' @examplesIf interactive()
+#' @examples
+#' \donttest{
 #' if (.assert_package("gtsummary", boolean = TRUE)) {
 #'   df <- Titanic |>
 #'     dplyr::as_tibble() |>
@@ -56,6 +57,7 @@
 #'   family = binomial,
 #' ) |>
 #'   model_list_variables()
+#' }
 #' }
 model_list_variables <- function(model,
                                  labels = NULL,

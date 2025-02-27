@@ -22,20 +22,28 @@ The confidence level to use for the confidence interval (between \code{0} ans \c
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 A tidier for models generated with \code{VGAM::vglm()} or \code{VGAM::vgam()}.
 Term names will be updated to be consistent with generic models. The original
-term names are preserved in an \code{"original_term"} column.
+term names are preserved in an \code{"original_term"} column. Depending on the
+model, additional column \code{"group"}, \code{"component"} and/or \code{"y.level"} may be
+added to the results.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-if (.assert_package("pscl", boolean = TRUE)) {
-  library(pscl)
-  mod <- zeroinfl(
-    art ~ fem + mar + phd,
-    data = pscl::bioChemists
+\donttest{
+if (.assert_package("VGAM", boolean = TRUE)) {
+  library(VGAM)
+  mod <- vglm(
+    Species ~ Sepal.Length + Sepal.Width,
+    family = multinomial(),
+    data = iris
   )
-
-  mod |> tidy_zeroinfl(exponentiate = TRUE)
+  mod |> tidy_vgam(exponentiate = TRUE)
+  mod <- vglm(
+    Species ~ Sepal.Length + Sepal.Width,
+    family = multinomial(parallel = TRUE),
+    data = iris
+  )
+  mod |> tidy_vgam(exponentiate = TRUE)
 }
-\dontshow{\}) # examplesIf}
+}
 }
 \seealso{
 Other custom_tieders: 

@@ -30,7 +30,8 @@
 #' @inheritParams tidy_plus_plus
 #' @export
 #' @family tidy_helpers
-#' @examplesIf interactive()
+#' @examples
+#' \donttest{
 #' df <- Titanic |>
 #'   dplyr::as_tibble() |>
 #'   dplyr::mutate(Survived = factor(Survived, c("No", "Yes"))) |>
@@ -50,6 +51,7 @@
 #'     interaction_sep = " x ",
 #'     categorical_terms_pattern = "{level} / {reference_level}"
 #'   )
+#' }
 tidy_add_term_labels <- function(x,
                                  labels = NULL,
                                  interaction_sep = " * ",

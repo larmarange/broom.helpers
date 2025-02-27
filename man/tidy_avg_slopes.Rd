@@ -36,7 +36,7 @@ could be computed. Please refer to the documentation page of
 For more information, see \code{vignette("marginal_tidiers", "broom.helpers")}.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\donttest{
 # Average Marginal Effects (AME)
 
 df <- Titanic |>
@@ -56,7 +56,7 @@ tidy_avg_slopes(mod2)
 # Marginal Effects at the Mean (MEM)
 tidy_avg_slopes(mod, newdata = "mean")
 tidy_plus_plus(mod, tidy_fun = tidy_avg_slopes, newdata = "mean")
-\dontshow{\}) # examplesIf}
+}
 }
 \seealso{
 \code{marginaleffects::avg_slopes()}

@@ -17,7 +17,8 @@
 #' @inheritParams tidy_plus_plus
 #' @export
 #' @family tidy_helpers
-#' @examplesIf interactive()
+#' @examples
+#' \donttest{
 #' if (
 #'   .assert_package("lme4", boolean = TRUE) &&
 #'     .assert_package("broom.mixed", boolean = TRUE) &&
@@ -27,6 +28,7 @@
 #'   mod |>
 #'     tidy_and_attach() |>
 #'     tidy_disambiguate_terms()
+#' }
 #' }
 tidy_disambiguate_terms <- function(x, sep = ".", model = tidy_get_model(x), quiet = FALSE) {
   if (is.null(model)) {

@@ -13,7 +13,8 @@
 #' A model object.
 #' @export
 #' @family model_helpers
-#' @examplesIf interactive()
+#' @examples
+#' \donttest{
 #' mod <- lm(Sepal.Length ~ Sepal.Width, iris)
 #' mod |> model_compute_terms_contributions()
 #'
@@ -55,6 +56,7 @@
 #'   )
 #' mod <- glm(cbind(n_survived, n_dead) ~ Class * Age + Sex, data = d, family = binomial)
 #' mod |> model_compute_terms_contributions()
+#' }
 model_compute_terms_contributions <- function(model) {
   UseMethod("model_compute_terms_contributions")
 }

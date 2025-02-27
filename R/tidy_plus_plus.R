@@ -103,7 +103,8 @@
 #' if `keep_model = FALSE`. Therefore, it is possible to use [tidy_get_model()]
 #' within `tidy_fun` if, for any reason, you need to access the source model.
 #' @family tidy_helpers
-#' @examplesIf interactive()
+#' @examples
+#' \donttest{
 #' ex1 <- lm(Sepal.Length ~ Sepal.Width + Species, data = iris) |>
 #'   tidy_plus_plus()
 #' ex1
@@ -149,6 +150,7 @@
 #'       keep_model = TRUE
 #'     )
 #'   ex3
+#' }
 #' }
 #' @export
 tidy_plus_plus <- function(model,
