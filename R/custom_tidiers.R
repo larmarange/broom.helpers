@@ -477,7 +477,10 @@ tidy_vgam <- function(
         dplyr::select(dplyr::all_of("original_term", "term", "group")),
       by = "original_term"
     ) |>
-    dplyr::relocate(.data$term, .data$group, .after = .data$original_term)
+    dplyr::relocate(
+      dplyr::all_of("term", "group"),
+      .after = dplyr::all_of("original_term")
+    )
 
   # component names
   if (!is.null(x@misc$predictors.names)) {
