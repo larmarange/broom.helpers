@@ -417,7 +417,9 @@ tidy_zeroinfl <- function(
 #' `r lifecycle::badge("experimental")`
 #' A tidier for models generated with `VGAM::vglm()` or `VGAM::vgam()`.
 #' Term names will be updated to be consistent with generic models. The original
-#' term names are preserved in an `"original_term"` column.
+#' term names are preserved in an `"original_term"` column. Depending on the
+#' model, additional column `"group"`, `"component"` and/or `"y.level"` may be
+#' added to the results.
 #' @param x (`vglm` or `vgam`)\cr
 #' A `VGAM::vglm()` or a `VGAM::vgam()` model.
 #' @param conf.int (`logical`)\cr
@@ -484,7 +486,7 @@ tidy_vgam <- function(
   }
 
   # remove component if all empty
-  if (all(res$component == "") || "y.level" %in% names(res))
+  if (all(res$component == ""))
     res <- res |> dplyr::select(-.data$component, -.data$group)
 
   res
