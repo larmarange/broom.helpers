@@ -22,7 +22,7 @@
 tidy_parameters <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   .assert_package("parameters", fn = "broom.helpers::tidy_parameters()")
   args <- list(...)
-  if (!conf.int) conf.level <- NULL
+  if (conf.int) conf.level <- NULL
   args$ci <- conf.level
   args$model <- x
   if (is.null(args$pretty_names)) args$pretty_names <- FALSE
@@ -116,6 +116,24 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
       "Add {.code tidy_fun = broom.helpers::tidy_zeroinfl} to quiet these messages."
     )
     return(tidy_zeroinfl(x, conf.int = conf.int, conf.level = conf.level, ...))
+  }
+
+  if (inherits(x, "vglm")) {
+    cli::cli_alert_info("{.cls vglm} model detected.")
+    cli::cli_alert_success("{.fn tidy_vgam} used instead.")
+    cli::cli_alert_info(
+      "Add {.code tidy_fun = broom.helpers::tidy_vgam} to quiet these messages."
+    )
+    return(tidy_vgam(x, conf.int = conf.int, conf.level = conf.level, ...))
+  }
+
+  if (inherits(x, "vgam")) {
+    cli::cli_alert_info("{.cls vgam} model detected.")
+    cli::cli_alert_success("{.fn tidy_vgam} used instead.")
+    cli::cli_alert_info(
+      "Add {.code tidy_fun = broom.helpers::tidy_vgam} to quiet these messages."
+    )
+    return(tidy_vgam(x, conf.int = conf.int, conf.level = conf.level, ...))
   }
 
   tidy_args <- list(...)
@@ -392,4 +410,106 @@ tidy_zeroinfl <- function(
 
   attr(res, "component") <- component
   res
+}
+
+#' Tidy a `vglm` or a `vgam` model
+#'
+#' `r lifecycle::badge("experimental")`
+#' A tidier for models generated with `VGAM::vglm()` or `VGAM::vgam()`.
+#' Term names will be updated to be consistent with generic models. The original
+#' term names are preserved in an `"original_term"` column.
+#' @param x (`vglm` or `vgam`)\cr
+#' A `VGAM::vglm()` or a `VGAM::vgam()` model.
+#' @param conf.int (`logical`)\cr
+#' Whether or not to include a confidence interval in the tidied output.
+#' @param conf.level (`numeric`)\cr
+#' The confidence level to use for the confidence interval (between `0` ans `1`).
+#' @param ... Additional parameters passed to `parameters::model_parameters()`.
+#' @export
+#' @family custom_tieders
+#' @examplesIf interactive()
+#' if (.assert_package("pscl", boolean = TRUE)) {
+#'   library(pscl)
+#'   mod <- zeroinfl(
+#'     art ~ fem + mar + phd,
+#'     data = pscl::bioChemists
+#'   )
+#'
+#'   mod |> tidy_zeroinfl(exponentiate = TRUE)
+#' }
+tidy_vgam <- function(
+    x,
+    conf.int = TRUE,
+    conf.level = .95,
+    ...) {
+  if (!inherits(x, "vgam") && !inherits(x, "vglm")) {
+    cli::cli_abort("{.arg x} should be of class {.cls vglm} or {.cls vgam}")
+  } # nolint
+
+  res <- tidy_parameters(
+    x,
+    conf.int = conf.int,
+    conf.level = conf.level,
+    ...
+  )
+  res <- res |> dplyr::rename(original_term = .data$term)
+
+  # identify groups
+  res <- res |>
+    dplyr::left_join(
+      .vgam_identify_groups(x) |>
+        dplyr::select(.data$original_term, term, group),
+      by = "original_term"
+    ) |>
+    dplyr::relocate(.data$term, .data$group, .after = .data$original_term)
+
+  # component names
+  if (!is.null(x@misc$predictors.names)) {
+    res$component <- x@misc$predictors.names[as.integer(res$group)]
+    if (!is.null(x@misc$parallel) && !isFALSE(x@misc$parallel)) {
+      res$component <- res$component |> tidyr::replace_na("parallel")
+    } else {
+      res$component <- res$component |> tidyr::replace_na("")
+    }
+  }
+
+  # identification of y.level (multinomial models)
+  if (
+    !is.null(x@misc$refLevel) &&
+      length(x@misc$predictors.names) == length(x@misc$ynames) - 1
+  ) {
+    ylevels <- x@misc$ynames[-x@misc$refLevel]
+    res$y.level <- ylevels[as.integer(res$group)]
+    res$y.level[res$component == "parallel"] <- "parallel"
+  }
+
+  # remove component if all empty
+  if (all(res$component == "") || "y.level" %in% names(res))
+    res <- res |> dplyr::select(-.data$component, -.data$group)
+
+  res
+}
+
+# exploring assign and vassign from model.matrix to identify potential groups
+.vgam_identify_groups <- function(x) {
+  # exploring assign and vassign from model.matrix to identify potential groups
+  mm <- stats::model.matrix(x)
+  a <- attr(mm, "assign")
+  a <- dplyr::tibble(variable = names(a), pos = a) |> tidyr::unnest("pos")
+  va <- attr(mm, "vassign")
+  va <- dplyr::tibble(vvariable = names(va), pos = va) |> tidyr::unnest("pos")
+  t <- mm |> colnames()
+  t <- dplyr::tibble(original_term = t, pos = seq_along(t))
+  t <- t |> dplyr::full_join(a, by = "pos") |> dplyr::full_join(va, by = "pos")
+  t$group <- t$vvariable |>
+    stringr::str_sub(start = stringr::str_length(t$variable) + 2)
+  t$term <- t$original_term |>
+    stringr::str_sub(
+      end = dplyr::if_else(
+        stringr::str_length(t$group) == 0,
+        -1L,
+        -1 * stringr::str_length(t$group) - 2
+      )
+    )
+  t
 }
