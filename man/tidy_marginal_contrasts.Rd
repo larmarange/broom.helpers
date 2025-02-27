@@ -121,6 +121,7 @@ For more information, see \code{vignette("marginal_tidiers", "broom.helpers")}.
 }
 \examples{
 \donttest{
+if (.assert_package("marginaleffects", boolean = TRUE)) {
 # Average Marginal Contrasts
 df <- Titanic |>
   dplyr::as_tibble() |>
@@ -180,6 +181,7 @@ tidy_marginal_contrasts(
 # Marginal Contrasts at the Mean
 tidy_marginal_contrasts(mod, newdata = "mean")
 tidy_marginal_contrasts(mod3, newdata = "mean")
+}
 }
 }
 \seealso{

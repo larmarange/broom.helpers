@@ -41,6 +41,7 @@ marginal predictions for the different levels of the interactions.
 }
 \examples{
 \donttest{
+if (.assert_package("effects", boolean = TRUE)) {
 df <- Titanic |>
   dplyr::as_tibble() |>
   tidyr::uncount(n) |>
@@ -51,7 +52,7 @@ mod <- glm(
 )
 tidy_all_effects(mod)
 tidy_plus_plus(mod, tidy_fun = tidy_all_effects)
-}
+}}
 }
 \seealso{
 \code{effects::allEffects()}

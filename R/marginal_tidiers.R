@@ -33,6 +33,7 @@
 #' @export
 #' @examples
 #' \donttest{
+#' if (.assert_package("margins", boolean = TRUE)) {
 #' df <- Titanic |>
 #'   dplyr::as_tibble() |>
 #'   tidyr::uncount(n) |>
@@ -43,6 +44,7 @@
 #' )
 #' tidy_margins(mod)
 #' tidy_plus_plus(mod, tidy_fun = tidy_margins)
+#' }
 #' }
 tidy_margins <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
   .assert_package("margins")
@@ -93,6 +95,7 @@ tidy_margins <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 #' @export
 #' @examples
 #' \donttest{
+#' if (.assert_package("effects", boolean = TRUE)) {
 #' df <- Titanic |>
 #'   dplyr::as_tibble() |>
 #'   tidyr::uncount(n) |>
@@ -103,7 +106,7 @@ tidy_margins <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 #' )
 #' tidy_all_effects(mod)
 #' tidy_plus_plus(mod, tidy_fun = tidy_all_effects)
-#' }
+#' }}
 tidy_all_effects <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   .assert_package("effects")
 
@@ -207,6 +210,7 @@ effpoly_to_df <- function(x) {
 #' @export
 #' @examples
 #' \donttest{
+#' if (.assert_package("ggeffects", boolean = TRUE)) {
 #' df <- Titanic |>
 #'   dplyr::as_tibble() |>
 #'   tidyr::uncount(n) |>
@@ -217,6 +221,7 @@ effpoly_to_df <- function(x) {
 #' )
 #' tidy_ggpredict(mod)
 #' tidy_plus_plus(mod, tidy_fun = tidy_ggpredict)
+#' }
 #' }
 tidy_ggpredict <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   .assert_package("ggeffects")
@@ -280,6 +285,7 @@ tidy_ggpredict <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 #' @export
 #' @examples
 #' \donttest{
+#' if (.assert_package("marginaleffects", boolean = TRUE)) {
 #' # Average Marginal Effects (AME)
 #'
 #' df <- Titanic |>
@@ -299,6 +305,7 @@ tidy_ggpredict <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 #' # Marginal Effects at the Mean (MEM)
 #' tidy_avg_slopes(mod, newdata = "mean")
 #' tidy_plus_plus(mod, tidy_fun = tidy_avg_slopes, newdata = "mean")
+#' }
 #' }
 tidy_avg_slopes <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
   .assert_package("marginaleffects")
@@ -369,6 +376,7 @@ tidy_avg_slopes <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 #' @export
 #' @examples
 #' \donttest{
+#' if (.assert_package("marginaleffects", boolean = TRUE)) {
 #' # Average Marginal Contrasts
 #'
 #' df <- Titanic |>
@@ -394,6 +402,7 @@ tidy_avg_slopes <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 #' # Marginal Contrasts at the Mean
 #' tidy_avg_comparisons(mod, newdata = "mean")
 #' tidy_plus_plus(mod, tidy_fun = tidy_avg_comparisons, newdata = "mean")
+#' }
 #' }
 tidy_avg_comparisons <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
   .assert_package("marginaleffects")
@@ -527,6 +536,7 @@ tidy_marginal_means <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 #' @export
 #' @examples
 #' \donttest{
+#' if (.assert_package("marginaleffects", boolean = TRUE)) {
 #' # Average Marginal Predictions
 #' df <- Titanic |>
 #'   dplyr::as_tibble() |>
@@ -592,6 +602,7 @@ tidy_marginal_means <- function(x, conf.int = TRUE, conf.level = 0.95, ...) {
 #' if (require("patchwork")) {
 #'   plot_marginal_predictions(mod, newdata = "mean") |>
 #'     patchwork::wrap_plots()
+#' }
 #' }
 #' }
 tidy_marginal_predictions <- function(x, variables_list = "auto",
@@ -894,6 +905,7 @@ plot_marginal_predictions <- function(x, variables_list = "auto",
 #' @export
 #' @examples
 #' \donttest{
+#' if (.assert_package("marginaleffects", boolean = TRUE)) {
 #' # Average Marginal Contrasts
 #' df <- Titanic |>
 #'   dplyr::as_tibble() |>
@@ -953,6 +965,7 @@ plot_marginal_predictions <- function(x, variables_list = "auto",
 #' # Marginal Contrasts at the Mean
 #' tidy_marginal_contrasts(mod, newdata = "mean")
 #' tidy_marginal_contrasts(mod3, newdata = "mean")
+#' }
 #' }
 tidy_marginal_contrasts <- function(x, variables_list = "auto",
                                     conf.int = TRUE, conf.level = 0.95, ...) {

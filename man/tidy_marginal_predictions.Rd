@@ -110,6 +110,7 @@ For more information, see \code{vignette("marginal_tidiers", "broom.helpers")}.
 }
 \examples{
 \donttest{
+if (.assert_package("marginaleffects", boolean = TRUE)) {
 # Average Marginal Predictions
 df <- Titanic |>
   dplyr::as_tibble() |>
@@ -175,6 +176,7 @@ tidy_marginal_predictions(mod, newdata = "mean")
 if (require("patchwork")) {
   plot_marginal_predictions(mod, newdata = "mean") |>
     patchwork::wrap_plots()
+}
 }
 }
 }

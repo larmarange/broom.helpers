@@ -37,6 +37,7 @@ For more information, see \code{vignette("marginal_tidiers", "broom.helpers")}.
 }
 \examples{
 \donttest{
+if (.assert_package("marginaleffects", boolean = TRUE)) {
 # Average Marginal Effects (AME)
 
 df <- Titanic |>
@@ -56,6 +57,7 @@ tidy_avg_slopes(mod2)
 # Marginal Effects at the Mean (MEM)
 tidy_avg_slopes(mod, newdata = "mean")
 tidy_plus_plus(mod, tidy_fun = tidy_avg_slopes, newdata = "mean")
+}
 }
 }
 \seealso{

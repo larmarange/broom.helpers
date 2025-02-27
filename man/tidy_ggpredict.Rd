@@ -38,6 +38,7 @@ individual variable, regardless of eventual interactions.
 }
 \examples{
 \donttest{
+if (.assert_package("ggeffects", boolean = TRUE)) {
 df <- Titanic |>
   dplyr::as_tibble() |>
   tidyr::uncount(n) |>
@@ -48,6 +49,7 @@ mod <- glm(
 )
 tidy_ggpredict(mod)
 tidy_plus_plus(mod, tidy_fun = tidy_ggpredict)
+}
 }
 }
 \seealso{

@@ -46,6 +46,7 @@ categorical variables. Interactions are also ignored.
 }
 \examples{
 \donttest{
+if (.assert_package("margins", boolean = TRUE)) {
 df <- Titanic |>
   dplyr::as_tibble() |>
   tidyr::uncount(n) |>
@@ -56,6 +57,7 @@ mod <- glm(
 )
 tidy_margins(mod)
 tidy_plus_plus(mod, tidy_fun = tidy_margins)
+}
 }
 }
 \seealso{
