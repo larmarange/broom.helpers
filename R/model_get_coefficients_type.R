@@ -177,3 +177,24 @@ model_get_coefficients_type.LORgee <- function(model) {
 
   "generic"
 }
+
+#' @export
+#' @rdname model_get_coefficients_type
+model_get_coefficients_type.vglm <- function(model) {
+  if (model@family@vfamily[1] == "binomialff" && model@misc$link[1] == "logitlink")
+    return("logistic")
+  if (model@family@vfamily[1] == "poissonff" && model@misc$link[1] == "loglink")
+    return("poisson")
+  if (model@family@vfamily[1] == "negbinomial" && model@misc$link[1] == "loglink")
+    return("poisson")
+  if (model@family@vfamily[1] == "multinomial" && model@misc$link[1] == "multilogitlink")
+    return("logistic")
+  if (model@family@vfamily[1] == "cumulative" && model@misc$link[1] == "logitlink")
+    return("logistic")
+
+  "generic"
+}
+
+#' @export
+#' @rdname model_get_coefficients_type
+model_get_coefficients_type.vgam <- model_get_coefficients_type.vglm
