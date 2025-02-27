@@ -191,7 +191,8 @@ see the help file of <code><a href="https://marginaleffects.com/man/r/comparison
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="assert_package.html">.assert_package</a></span><span class="op">(</span><span class="st">"marginaleffects"</span>, boolean <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="co"># Average Marginal Contrasts</span></span></span>
 <span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">Titanic</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
@@ -252,6 +253,19 @@ see the help file of <code><a href="https://marginaleffects.com/man/r/comparison
 <span class="r-in"><span><span class="fu">tidy_marginal_contrasts</span><span class="op">(</span><span class="va">mod</span>, newdata <span class="op">=</span> <span class="st">"mean"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">tidy_marginal_contrasts</span><span class="op">(</span><span class="va">mod3</span>, newdata <span class="op">=</span> <span class="st">"mean"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   variable                   term    estimate  std.error  statistic</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    Class              2nd - 1st -0.20575641 0.03889922 -5.2894733</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2    Class              3rd - 1st -0.29710778 0.03330055 -8.9220082</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3    Class             Crew - 1st -0.16816852 0.03583195 -4.6932563</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  Sex:Age Female * Child - Adult -0.01826595 0.05710961 -0.3198401</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  Sex:Age   Male * Child - Adult  0.41025175 0.06569429  6.2448616</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        p.value    s.value   conf.low   conf.high</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 1.226691e-07 22.9587252 -0.2819975 -0.12951533</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 4.579082e-19 60.9215753 -0.3623757 -0.23183990</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 2.688903e-06 18.5045510 -0.2383978 -0.09793919</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 7.490895e-01  0.4167899 -0.1301987  0.09366684</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 4.241755e-10 31.1346196  0.2814933  0.53901020</span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
