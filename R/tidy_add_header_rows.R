@@ -28,7 +28,8 @@
 #' @inheritParams tidy_plus_plus
 #' @export
 #' @family tidy_helpers
-#' @examplesIf interactive()
+#' @examples
+#' \donttest{
 #' if (.assert_package("gtsummary", boolean = TRUE)) {
 #'   df <- Titanic |>
 #'     dplyr::as_tibble() |>
@@ -59,6 +60,7 @@
 #'     tidy_and_attach() |>
 #'     tidy_add_reference_rows() |>
 #'     tidy_add_header_rows()
+#' }
 #' }
 tidy_add_header_rows <- function(x,
                                  show_single_row = NULL,

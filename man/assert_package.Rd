@@ -64,9 +64,9 @@ will return, if any, the minimum version of \code{pkg} required by \code{pkg_sea
 dependencies of all installed packages.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\donttest{
 .assert_package("broom", boolean = TRUE)
 .get_package_dependencies()
 .get_min_version_required("brms")
-\dontshow{\}) # examplesIf}
+}
 }

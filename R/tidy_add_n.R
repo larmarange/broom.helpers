@@ -63,7 +63,8 @@
 #' The corresponding model, if not attached to `x`.
 #' @export
 #' @family tidy_helpers
-#' @examplesIf interactive()
+#' @examples
+#' \donttest{
 #' lm(Petal.Length ~ ., data = iris) |>
 #'   tidy_and_attach() |>
 #'   tidy_add_n()
@@ -111,6 +112,7 @@
 #' ) |>
 #'   tidy_and_attach() |>
 #'   tidy_add_n()
+#' }
 tidy_add_n <- function(x, model = tidy_get_model(x)) {
   if (is.null(model)) {
     cli::cli_abort(c(

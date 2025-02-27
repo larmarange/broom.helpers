@@ -17,7 +17,8 @@
 #' @inheritParams tidy_plus_plus
 #' @export
 #' @family tidy_helpers
-#' @examplesIf interactive()
+#' @examples
+#' \donttest{
 #' if (
 #'   .assert_package("lme4", boolean = TRUE) &&
 #'     .assert_package("broom.mixed", boolean = TRUE) &&
@@ -27,6 +28,7 @@
 #'   mod |>
 #'     tidy_and_attach() |>
 #'     tidy_disambiguate_terms()
+#' }
 #' }
 tidy_disambiguate_terms <- function(x, sep = ".", model = tidy_get_model(x), quiet = FALSE) {
   if (is.null(model)) {
@@ -40,7 +42,9 @@ tidy_disambiguate_terms <- function(x, sep = ".", model = tidy_get_model(x), qui
       !quiet &&
         !inherits(model, "LORgee") && # no alert for multgee models
         !inherits(model, "zeroinfl") && # or zeroninfl/hurdle
-        !inherits(model, "hurdle")
+        !inherits(model, "hurdle") &&
+        !inherits(model, "vgam") && # vgam models
+        !inherits(model, "vglm")
     ) {
       cli_alert_danger(paste(
         "{.code tidy_disambiguate_terms()} has already been applied.",

@@ -27,7 +27,7 @@ Term names will be updated to be consistent with generic models. The original
 term names are preserved in an \code{"original_term"} column.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\donttest{
 if (.assert_package("pscl", boolean = TRUE)) {
   library(pscl)
   mod <- zeroinfl(
@@ -37,13 +37,14 @@ if (.assert_package("pscl", boolean = TRUE)) {
 
   mod |> tidy_zeroinfl(exponentiate = TRUE)
 }
-\dontshow{\}) # examplesIf}
+}
 }
 \seealso{
 Other custom_tieders: 
 \code{\link{tidy_broom}()},
 \code{\link{tidy_multgee}()},
 \code{\link{tidy_parameters}()},
+\code{\link{tidy_vgam}()},
 \code{\link{tidy_with_broom_or_parameters}()}
 }
 \concept{custom_tieders}

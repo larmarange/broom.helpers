@@ -120,7 +120,8 @@ see the help file of \code{marginaleffects::avg_comparisons()}.
 For more information, see \code{vignette("marginal_tidiers", "broom.helpers")}.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\donttest{
+if (.assert_package("marginaleffects", boolean = TRUE)) {
 # Average Marginal Contrasts
 df <- Titanic |>
   dplyr::as_tibble() |>
@@ -180,7 +181,8 @@ tidy_marginal_contrasts(
 # Marginal Contrasts at the Mean
 tidy_marginal_contrasts(mod, newdata = "mean")
 tidy_marginal_contrasts(mod3, newdata = "mean")
-\dontshow{\}) # examplesIf}
+}
+}
 }
 \seealso{
 \code{marginaleffects::avg_comparisons()}, \code{tidy_avg_comparisons()}

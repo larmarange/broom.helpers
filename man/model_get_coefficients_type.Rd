@@ -21,6 +21,8 @@
 \alias{model_get_coefficients_type.cch}
 \alias{model_get_coefficients_type.model_fit}
 \alias{model_get_coefficients_type.LORgee}
+\alias{model_get_coefficients_type.vglm}
+\alias{model_get_coefficients_type.vgam}
 \title{Get coefficient type}
 \usage{
 model_get_coefficients_type(model)
@@ -62,6 +64,10 @@ model_get_coefficients_type(model)
 \method{model_get_coefficients_type}{model_fit}(model)
 
 \method{model_get_coefficients_type}{LORgee}(model)
+
+\method{model_get_coefficients_type}{vglm}(model)
+
+\method{model_get_coefficients_type}{vgam}(model)
 }
 \arguments{
 \item{model}{(a model object, e.g. \code{glm})\cr

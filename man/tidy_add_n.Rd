@@ -73,7 +73,7 @@ The (weighted) total number of observations (\code{N_obs}), of individuals
 stored as attributes of the returned tibble.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\donttest{
 lm(Petal.Length ~ ., data = iris) |>
   tidy_and_attach() |>
   tidy_add_n()
@@ -121,7 +121,7 @@ glm(
 ) |>
   tidy_and_attach() |>
   tidy_add_n()
-\dontshow{\}) # examplesIf}
+}
 }
 \seealso{
 Other tidy_helpers: 

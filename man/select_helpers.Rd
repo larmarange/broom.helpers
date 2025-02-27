@@ -63,20 +63,22 @@ values from a mixed model
 }
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\donttest{
 glm(response ~ age * trt + grade, gtsummary::trial, family = binomial) |>
   tidy_plus_plus(exponentiate = TRUE, include = all_categorical())
 
-glm(response ~ age + trt + grade + stage,
-  gtsummary::trial,
-  family = binomial,
-  contrasts = list(trt = contr.SAS, grade = contr.sum, stage = contr.poly)
-) |>
-  tidy_plus_plus(
-    exponentiate = TRUE,
-    include = all_contrasts(c("treatment", "sum"))
-  )
-\dontshow{\}) # examplesIf}
+if (.assert_package("emmeans", boolean = TRUE)) {
+  glm(response ~ age + trt + grade + stage,
+    gtsummary::trial,
+    family = binomial,
+    contrasts = list(trt = contr.SAS, grade = contr.sum, stage = contr.poly)
+  ) |>
+    tidy_plus_plus(
+      exponentiate = TRUE,
+      include = all_contrasts(c("treatment", "sum"))
+    )
+  }
+}
 }
 \seealso{
 \code{\link[=scope_tidy]{scope_tidy()}}

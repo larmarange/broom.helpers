@@ -80,7 +80,7 @@ or \code{"interaction"}
 Including variables used only in an interaction.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\donttest{
 if (.assert_package("gtsummary", boolean = TRUE)) {
   df <- Titanic |>
     dplyr::as_tibble() |>
@@ -106,7 +106,7 @@ glm(
 ) |>
   model_list_variables()
 }
-\dontshow{\}) # examplesIf}
+}
 }
 \seealso{
 Other model_helpers: 

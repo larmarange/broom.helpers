@@ -63,7 +63,7 @@ For multi-components models, such as zero-inflated Poisson or beta
 regression, support of pairwise contrasts is still experimental.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\donttest{
 if (.assert_package("emmeans", boolean = TRUE)) {
   mod1 <- lm(Sepal.Length ~ Species, data = iris)
   mod1 |>
@@ -93,7 +93,7 @@ if (.assert_package("emmeans", boolean = TRUE)) {
       tidy_add_pairwise_contrasts()
   }
 }
-\dontshow{\}) # examplesIf}
+}
 }
 \seealso{
 Other tidy_helpers: 

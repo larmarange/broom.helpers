@@ -190,7 +190,7 @@ if \code{keep_model = FALSE}. Therefore, it is possible to use \code{\link[=tidy
 within \code{tidy_fun} if, for any reason, you need to access the source model.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\donttest{
 ex1 <- lm(Sepal.Length ~ Sepal.Width + Species, data = iris) |>
   tidy_plus_plus()
 ex1
@@ -216,7 +216,7 @@ ex2 <- glm(
     add_n = TRUE
   )
 ex2
-if (.assert_package("gtsummary", boolean = TRUE)) {
+if (.assert_package("gtsummary", boolean = TRUE) && .assert_package("emmeans", boolean = TRUE)) {
   ex3 <-
     glm(
       response ~ poly(age, 3) + stage + grade * trt,
@@ -237,7 +237,7 @@ if (.assert_package("gtsummary", boolean = TRUE)) {
     )
   ex3
 }
-\dontshow{\}) # examplesIf}
+}
 }
 \seealso{
 Other tidy_helpers: 
