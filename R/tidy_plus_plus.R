@@ -130,7 +130,7 @@
 #'     add_n = TRUE
 #'   )
 #' ex2
-#' if (.assert_package("gtsummary", boolean = TRUE)) {
+#' if (.assert_package("gtsummary", boolean = TRUE) && .assert_package("emmeans", boolean = TRUE)) {
 #'   ex3 <-
 #'     glm(
 #'       response ~ poly(age, 3) + stage + grade * trt,
