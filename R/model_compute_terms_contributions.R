@@ -66,7 +66,7 @@ model_compute_terms_contributions.default <- function(model) {
 
   # check poly contrasts
   # we change the contrasts arguments to force positive values
-  if (!is.null(contr)) {
+  if (!is.null(contr) && length(contr) > 0) {
     list.contr.poly <- model |>
       model_list_contrasts() |>
       dplyr::filter(.data$contrasts == "contr.poly") |>
