@@ -13,6 +13,7 @@ tidy_add_header_rows()
 tidy_add_n()
 tidy_remove_intercept()
 tidy_select_variables()
+tidy_group_by()
 tidy_add_coefficients_type()
 tidy_detach_model()
 
@@ -30,6 +31,7 @@ tidy_add_header_rows()
 tidy_add_n()
 tidy_remove_intercept()
 tidy_select_variables()
+tidy_group_by()
 tidy_add_coefficients_type()
 tidy_detach_model()
 
@@ -82,6 +84,7 @@ tidy_detach_model()
 <li><p><code><a href="tidy_add_n.html">tidy_add_n()</a></code></p></li>
 <li><p><code><a href="tidy_remove_intercept.html">tidy_remove_intercept()</a></code></p></li>
 <li><p><code><a href="tidy_select_variables.html">tidy_select_variables()</a></code></p></li>
+<li><p><code><a href="tidy_group_by.html">tidy_group_by()</a></code></p></li>
 <li><p><code><a href="tidy_add_coefficients_type.html">tidy_add_coefficients_type()</a></code></p></li>
 <li><p><code><a href="tidy_attach_model.html">tidy_detach_model()</a></code></p></li>
 </ul></div>
@@ -116,6 +119,8 @@ tidy_detach_model()
 <span>  add_n <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  intercept <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  include <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  group_by <span class="op">=</span> <span class="fu"><a href="tidy_group_by.html">auto_group_by</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  group_labels <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  keep_model <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  tidy_post_fun <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  quiet <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -277,6 +282,17 @@ See also <code><a href="select_helpers.html">all_continuous()</a></code>, <code>
 and <code><a href="select_helpers.html">all_interaction()</a></code>.</p></dd>
 
 
+<dt id="arg-group-by">group_by<a class="anchor" aria-label="anchor" href="#arg-group-by"></a></dt>
+<dd><p>(<code><a href="https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html" class="external-link">tidy-select</a></code>)<br>
+One or several variables to group by. Default is <code><a href="tidy_group_by.html">auto_group_by()</a></code>.
+Use <code>NULL</code> to force ungrouping.</p></dd>
+
+
+<dt id="arg-group-labels">group_labels<a class="anchor" aria-label="anchor" href="#arg-group-labels"></a></dt>
+<dd><p>(<code>string</code>)<br>
+An optional named vector of custom term labels.</p></dd>
+
+
 <dt id="arg-keep-model">keep_model<a class="anchor" aria-label="anchor" href="#arg-keep-model"></a></dt>
 <dd><p>(<code>logical</code>)<br>
 Should the model be kept as an attribute of the final result?</p></dd>
@@ -326,6 +342,7 @@ within <code>tidy_fun</code> if, for any reason, you need to access the source m
 <code><a href="tidy_add_variable_labels.html">tidy_add_variable_labels</a>()</code>,
 <code><a href="tidy_attach_model.html">tidy_attach_model</a>()</code>,
 <code><a href="tidy_disambiguate_terms.html">tidy_disambiguate_terms</a>()</code>,
+<code><a href="tidy_group_by.html">tidy_group_by</a>()</code>,
 <code><a href="tidy_identify_variables.html">tidy_identify_variables</a>()</code>,
 <code><a href="tidy_remove_intercept.html">tidy_remove_intercept</a>()</code>,
 <code><a href="tidy_select_variables.html">tidy_select_variables</a>()</code></p></div>

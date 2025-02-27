@@ -35,9 +35,12 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="broomhelpers-development-version">broom.helpers (development version)<a class="anchor" aria-label="anchor" href="#broomhelpers-development-version"></a></h2>
-</div>
+<p><strong>New features</strong></p>
+<ul><li>new <code><a href="../reference/tidy_group_by.html">tidy_group_by()</a></code> function to indicate how to group results (<a href="https://github.com/larmarange/broom.helpers/issues/288" class="external-link">#288</a>)</li>
+<li>new arguments <code>group_by</code> and <code>group_labels</code> for <code><a href="../reference/tidy_plus_plus.html">tidy_plus_plus()</a></code> (<a href="https://github.com/larmarange/broom.helpers/issues/288" class="external-link">#288</a>)</li>
+</ul></div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.19.0" id="broomhelpers-1190">broom.helpers 1.19.0<a class="anchor" aria-label="anchor" href="#broomhelpers-1190"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.19.0" id="broomhelpers-1190">broom.helpers 1.19.0<a class="anchor" aria-label="anchor" href="#broomhelpers-1190"></a></h2><p class="text-muted">CRAN release: 2025-01-29</p>
 <p><strong>Deprecated function</strong></p>
 <ul><li>
 <code><a href="../reference/tidy_marginal_means.html">tidy_marginal_means()</a></code> is now hard deprecated (<a href="https://github.com/larmarange/broom.helpers/issues/284" class="external-link">#284</a>)</li>
@@ -81,14 +84,14 @@
 <code>biglmm::bigglm()</code> not supported anymore as <code>biglmm</code> has been removed from CRAN</li>
 </ul><p><strong>Deprecated functions</strong></p>
 <ul><li>
-<code><a href="../reference/tidy_marginal_means.html">tidy_marginal_means()</a></code> is now deprecated, following deprecation of <code><a href="https://marginaleffects.com/man/r/marginal_means.html" class="external-link">marginaleffects::marginal_means()</a></code>. Use instead <code><a href="../reference/tidy_marginal_predictions.html">tidy_marginal_predictions()</a></code> with the option <code>newdata = "balanced"</code>.</li>
+<code><a href="../reference/tidy_marginal_means.html">tidy_marginal_means()</a></code> is now deprecated, following deprecation of <code>marginaleffects::marginal_means()</code>. Use instead <code><a href="../reference/tidy_marginal_predictions.html">tidy_marginal_predictions()</a></code> with the option <code>newdata = "balanced"</code>.</li>
 <li>
 <code><a href="../reference/tidy_margins.html">tidy_margins()</a></code> is now indicated as superseded and may be deprecated if <code>margins</code> is removed from CRAN. <code><a href="../reference/tidy_avg_slopes.html">tidy_avg_slopes()</a></code> could be used as an alternative. (<a href="https://github.com/larmarange/broom.helpers/issues/252" class="external-link">#252</a>)</li>
 </ul><p><strong>Fixes</strong></p>
 <ul><li>
 <code><a href="../reference/tidy_multgee.html">tidy_multgee()</a></code> has been fixed to properly identify the different <code>y.levels</code> (<a href="https://github.com/larmarange/broom.helpers/issues/260" class="external-link">#260</a> <a href="https://github.com/jackmwolf" class="external-link">@jackmwolf</a>)</li>
 <li>
-<code><a href="../reference/tidy_marginal_predictions.html">tidy_marginal_predictions()</a></code> has been updated to avoid the use of the deprecated function <code><a href="https://marginaleffects.com/man/r/datagridcf.html" class="external-link">marginaleffects::datagridcf()</a></code> (<a href="https://github.com/larmarange/broom.helpers/issues/256" class="external-link">#256</a>)</li>
+<code><a href="../reference/tidy_marginal_predictions.html">tidy_marginal_predictions()</a></code> has been updated to avoid the use of the deprecated function <code>marginaleffects::datagridcf()</code> (<a href="https://github.com/larmarange/broom.helpers/issues/256" class="external-link">#256</a>)</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.15.0" id="broomhelpers-1150">broom.helpers 1.15.0<a class="anchor" aria-label="anchor" href="#broomhelpers-1150"></a></h2><p class="text-muted">CRAN release: 2024-04-05</p>

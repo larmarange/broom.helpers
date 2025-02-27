@@ -906,74 +906,14 @@ td {vertical-align: top;}
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
-<td headers="Column" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">original_term</span></td>
-<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_disambiguate_terms.html">tidy_disambiguate_terms()</a></code>, <code><a href="../reference/tidy_multgee.html">tidy_multgee()</a></code>, <code><a href="../reference/tidy_zeroinfl.html">tidy_zeroinfl()</a></code> or <code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code></span></td>
-<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Original term before disambiguation. This columns is added only when disambiguation is needed (i.e. for mixed models). Also used for “multgee”, “zeroinfl” and “hurdle” models. For instrumental variables in “fixest” models, the “fit_” prefix is removed, and the original terms is stored in this column.</span></td>
-</tr>
-<tr>
-<td headers="Column" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">variable</span></td>
-<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code></span></td>
-<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">String of variable names from the model. For categorical variables and polynomial terms defined with <code><a href="https://rdrr.io/r/stats/poly.html" class="external-link">stats::poly()</a></code>, terms belonging to the variable are identified.</span></td>
-</tr>
-<tr>
-<td headers="Column" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">var_class</span></td>
-<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code></span></td>
-<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Class of the variable.</span></td>
-</tr>
-<tr>
-<td headers="Column" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">var_type</span></td>
-<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code></span></td>
-<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">One of “intercept”, “continuous”, “dichotomous”, “categorical”, “interaction”, “ran_pars” or “ran_vals”</span></td>
-</tr>
-<tr>
-<td headers="Column" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">var_nlevels</span></td>
-<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code></span></td>
-<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Number of original levels for categorical variables</span></td>
-</tr>
-<tr>
-<td headers="Column" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">contrasts</span></td>
-<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_contrasts.html">tidy_add_contrasts()</a></code></span></td>
-<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Contrasts used for categorical variables.<br><em>Require “variable” column. If needed, will automatically apply <code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code>.</em></span></td>
-</tr>
-<tr>
-<td headers="Column" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">contrasts_type</span></td>
+<td headers="Column" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">contrasts</span></td>
 <td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_contrasts.html">tidy_add_contrasts()</a></code></span></td>
-<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Type of contrasts (“treatment”, “sum”, “poly”, “helmert”, “sdif”, “other” or “no.contrast”). “pairwise is used for pairwise contrasts computed with <code><a href="../reference/tidy_add_pairwise_contrasts.html">tidy_add_pairwise_contrasts()</a></code>.</span></td>
+<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Contrasts used for categorical variables.<br><em>Require “variable” column. If needed, will automatically apply <code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code>.</em></span></td>
 </tr>
 <tr>
-<td headers="Column" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">reference_row</span></td>
-<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows()</a></code></span></td>
-<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Logical indicating if a row is a reference row for categorical variables using a treatment or a sum contrast. Is equal to <code>NA</code> for variables who do not have a reference row.<br><em>Require “contrasts” column. If needed, will automatically apply <code><a href="../reference/tidy_add_contrasts.html">tidy_add_contrasts()</a></code>.<br><code><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows()</a></code> will not populate the label of the reference term. It is therefore better to apply <code><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels()</a></code> after <code><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows()</a></code> rather than before.</em></span></td>
-</tr>
-<tr>
-<td headers="Column" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">var_label</span></td>
-<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_variable_labels.html">tidy_add_variable_labels()</a></code></span></td>
-<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">String of variable labels from the model. Columns labelled with the <code>labelled</code> package are retained. It is possible to pass a custom label for an interaction term with the <code>labels</code> argument. <br><em>Require “variable” column. If needed, will automatically apply <code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code>.</em></span></td>
-</tr>
-<tr>
-<td headers="Column" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">label</span></td>
-<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels()</a></code></span></td>
-<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">String of term labels based on (1) labels provided in <code>labels</code> argument if provided; (2) factor levels for categorical variables coded with treatment, SAS or sum contrasts; (3) variable labels when there is only one term per variable; and (4) term name otherwise.<br><em>Require “variable_label” column. If needed, will automatically apply <code><a href="../reference/tidy_add_variable_labels.html">tidy_add_variable_labels()</a></code>.<br>Require “contrasts” column. If needed, will automatically apply <code><a href="../reference/tidy_add_contrasts.html">tidy_add_contrasts()</a></code>.</em></span></td>
-</tr>
-<tr>
-<td headers="Column" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">header_row</span></td>
-<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_header_rows.html">tidy_add_header_rows()</a></code></span></td>
-<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Logical indicating if a row is a header row for variables with several terms. Is equal to <code>NA</code> for variables who do not have an header row.<em>Require “label” column. If needed, will automatically apply <code><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels()</a></code>.<br>It is better to apply <code><a href="../reference/tidy_add_header_rows.html">tidy_add_header_rows()</a></code> after other <code>tidy_*</code> functions</em></span></td>
-</tr>
-<tr>
-<td headers="Column" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">n_obs</span></td>
-<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_n.html">tidy_add_n()</a></code></span></td>
-<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Number of observations</span></td>
-</tr>
-<tr>
-<td headers="Column" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">n_ind</span></td>
-<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_n.html">tidy_add_n()</a></code></span></td>
-<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Number of individuals (for Cox models)</span></td>
-</tr>
-<tr>
-<td headers="Column" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">n_event</span></td>
-<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_n.html">tidy_add_n()</a></code></span></td>
-<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Number of events (for binomial and multinomial logistic models, Poisson and Cox models)</span></td>
+<td headers="Column" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">contrasts_type</span></td>
+<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_contrasts.html">tidy_add_contrasts()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Type of contrasts (“treatment”, “sum”, “poly”, “helmert”, “sdif”, “other” or “no.contrast”). “pairwise is used for pairwise contrasts computed with <code><a href="../reference/tidy_add_pairwise_contrasts.html">tidy_add_pairwise_contrasts()</a></code>.</span></td>
 </tr>
 <tr>
 <td headers="Column" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">exposure</span></td>
@@ -981,9 +921,74 @@ td {vertical-align: top;}
 <td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Exposure time (for Poisson and Cox models)</span></td>
 </tr>
 <tr>
+<td headers="Column" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">group_by</span></td>
+<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_group_by.html">tidy_group_by()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Grouping variable (particularly for multinomial or multi-components models).</span></td>
+</tr>
+<tr>
+<td headers="Column" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">header_row</span></td>
+<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_header_rows.html">tidy_add_header_rows()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Logical indicating if a row is a header row for variables with several terms. Is equal to <code>NA</code> for variables who do not have an header row.<em>Require “label” column. If needed, will automatically apply <code><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels()</a></code>.<br>It is better to apply <code><a href="../reference/tidy_add_header_rows.html">tidy_add_header_rows()</a></code> after other <code>tidy_*</code> functions</em></span></td>
+</tr>
+<tr>
 <td headers="Column" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">instrumental</span></td>
 <td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code></span></td>
 <td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">For “fixest” models, indicate if a variable was instrumental.</span></td>
+</tr>
+<tr>
+<td headers="Column" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">label</span></td>
+<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">String of term labels based on (1) labels provided in <code>labels</code> argument if provided; (2) factor levels for categorical variables coded with treatment, SAS or sum contrasts; (3) variable labels when there is only one term per variable; and (4) term name otherwise.<br><em>Require “variable_label” column. If needed, will automatically apply <code><a href="../reference/tidy_add_variable_labels.html">tidy_add_variable_labels()</a></code>.<br>Require “contrasts” column. If needed, will automatically apply <code><a href="../reference/tidy_add_contrasts.html">tidy_add_contrasts()</a></code>.</em></span></td>
+</tr>
+<tr>
+<td headers="Column" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">n_event</span></td>
+<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_n.html">tidy_add_n()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Number of events (for binomial and multinomial logistic models, Poisson and Cox models)</span></td>
+</tr>
+<tr>
+<td headers="Column" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">n_ind</span></td>
+<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_n.html">tidy_add_n()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Number of individuals (for Cox models)</span></td>
+</tr>
+<tr>
+<td headers="Column" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">n_obs</span></td>
+<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_n.html">tidy_add_n()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Number of observations</span></td>
+</tr>
+<tr>
+<td headers="Column" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">original_term</span></td>
+<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_disambiguate_terms.html">tidy_disambiguate_terms()</a></code>, <code><a href="../reference/tidy_multgee.html">tidy_multgee()</a></code>, <code><a href="../reference/tidy_zeroinfl.html">tidy_zeroinfl()</a></code> or <code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Original term before disambiguation. This columns is added only when disambiguation is needed (i.e. for mixed models). Also used for “multgee”, “zeroinfl” and “hurdle” models. For instrumental variables in “fixest” models, the “fit_” prefix is removed, and the original terms is stored in this column.</span></td>
+</tr>
+<tr>
+<td headers="Column" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">reference_row</span></td>
+<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Logical indicating if a row is a reference row for categorical variables using a treatment or a sum contrast. Is equal to <code>NA</code> for variables who do not have a reference row.<br><em>Require “contrasts” column. If needed, will automatically apply <code><a href="../reference/tidy_add_contrasts.html">tidy_add_contrasts()</a></code>.<br><code><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows()</a></code> will not populate the label of the reference term. It is therefore better to apply <code><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels()</a></code> after <code><a href="../reference/tidy_add_reference_rows.html">tidy_add_reference_rows()</a></code> rather than before.</em></span></td>
+</tr>
+<tr>
+<td headers="Column" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">var_class</span></td>
+<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Class of the variable.</span></td>
+</tr>
+<tr>
+<td headers="Column" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">var_label</span></td>
+<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_variable_labels.html">tidy_add_variable_labels()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">String of variable labels from the model. Columns labelled with the <code>labelled</code> package are retained. It is possible to pass a custom label for an interaction term with the <code>labels</code> argument. <br><em>Require “variable” column. If needed, will automatically apply <code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code>.</em></span></td>
+</tr>
+<tr>
+<td headers="Column" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">var_nlevels</span></td>
+<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Number of original levels for categorical variables</span></td>
+</tr>
+<tr>
+<td headers="Column" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">var_type</span></td>
+<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">One of “intercept”, “continuous”, “dichotomous”, “categorical”, “interaction”, “ran_pars” or “ran_vals”</span></td>
+</tr>
+<tr>
+<td headers="Column" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">variable</span></td>
+<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_identify_variables.html">tidy_identify_variables()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">String of variable names from the model. For categorical variables and polynomial terms defined with <code><a href="https://rdrr.io/r/stats/poly.html" class="external-link">stats::poly()</a></code>, terms belonging to the variable are identified.</span></td>
 </tr>
 </tbody>
 </table>
@@ -1002,23 +1007,23 @@ short description.</p>
 <style>
 td {vertical-align: top;}
 </style>
-<div id="gqflgkjhvq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#gqflgkjhvq table {
+<div id="hvqltorlvu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hvqltorlvu table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#gqflgkjhvq thead, #gqflgkjhvq tbody, #gqflgkjhvq tfoot, #gqflgkjhvq tr, #gqflgkjhvq td, #gqflgkjhvq th {
+#hvqltorlvu thead, #hvqltorlvu tbody, #hvqltorlvu tfoot, #hvqltorlvu tr, #hvqltorlvu td, #hvqltorlvu th {
   border-style: none;
 }
 
-#gqflgkjhvq p {
+#hvqltorlvu p {
   margin: 0;
   padding: 0;
 }
 
-#gqflgkjhvq .gt_table {
+#hvqltorlvu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1044,12 +1049,12 @@ td {vertical-align: top;}
   border-left-color: #D3D3D3;
 }
 
-#gqflgkjhvq .gt_caption {
+#hvqltorlvu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#gqflgkjhvq .gt_title {
+#hvqltorlvu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1061,7 +1066,7 @@ td {vertical-align: top;}
   border-bottom-width: 0;
 }
 
-#gqflgkjhvq .gt_subtitle {
+#hvqltorlvu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1073,7 +1078,7 @@ td {vertical-align: top;}
   border-top-width: 0;
 }
 
-#gqflgkjhvq .gt_heading {
+#hvqltorlvu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1085,13 +1090,13 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#gqflgkjhvq .gt_bottom_border {
+#hvqltorlvu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#gqflgkjhvq .gt_col_headings {
+#hvqltorlvu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1106,7 +1111,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#gqflgkjhvq .gt_col_heading {
+#hvqltorlvu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1126,7 +1131,7 @@ td {vertical-align: top;}
   overflow-x: hidden;
 }
 
-#gqflgkjhvq .gt_column_spanner_outer {
+#hvqltorlvu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1138,15 +1143,15 @@ td {vertical-align: top;}
   padding-right: 4px;
 }
 
-#gqflgkjhvq .gt_column_spanner_outer:first-child {
+#hvqltorlvu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gqflgkjhvq .gt_column_spanner_outer:last-child {
+#hvqltorlvu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gqflgkjhvq .gt_column_spanner {
+#hvqltorlvu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1158,11 +1163,11 @@ td {vertical-align: top;}
   width: 100%;
 }
 
-#gqflgkjhvq .gt_spanner_row {
+#hvqltorlvu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#gqflgkjhvq .gt_group_heading {
+#hvqltorlvu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1188,7 +1193,7 @@ td {vertical-align: top;}
   text-align: left;
 }
 
-#gqflgkjhvq .gt_empty_group_heading {
+#hvqltorlvu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1203,15 +1208,15 @@ td {vertical-align: top;}
   vertical-align: middle;
 }
 
-#gqflgkjhvq .gt_from_md > :first-child {
+#hvqltorlvu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gqflgkjhvq .gt_from_md > :last-child {
+#hvqltorlvu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gqflgkjhvq .gt_row {
+#hvqltorlvu .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1230,7 +1235,7 @@ td {vertical-align: top;}
   overflow-x: hidden;
 }
 
-#gqflgkjhvq .gt_stub {
+#hvqltorlvu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1243,7 +1248,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#gqflgkjhvq .gt_stub_row_group {
+#hvqltorlvu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1257,15 +1262,15 @@ td {vertical-align: top;}
   vertical-align: top;
 }
 
-#gqflgkjhvq .gt_row_group_first td {
+#hvqltorlvu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#gqflgkjhvq .gt_row_group_first th {
+#hvqltorlvu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#gqflgkjhvq .gt_summary_row {
+#hvqltorlvu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1275,16 +1280,16 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#gqflgkjhvq .gt_first_summary_row {
+#hvqltorlvu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#gqflgkjhvq .gt_first_summary_row.thick {
+#hvqltorlvu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#gqflgkjhvq .gt_last_summary_row {
+#hvqltorlvu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1294,7 +1299,7 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#gqflgkjhvq .gt_grand_summary_row {
+#hvqltorlvu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1304,7 +1309,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#gqflgkjhvq .gt_first_grand_summary_row {
+#hvqltorlvu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1314,7 +1319,7 @@ td {vertical-align: top;}
   border-top-color: #D3D3D3;
 }
 
-#gqflgkjhvq .gt_last_grand_summary_row_top {
+#hvqltorlvu .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1324,11 +1329,11 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#gqflgkjhvq .gt_striped {
+#hvqltorlvu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#gqflgkjhvq .gt_table_body {
+#hvqltorlvu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1337,7 +1342,7 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#gqflgkjhvq .gt_footnotes {
+#hvqltorlvu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1351,7 +1356,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#gqflgkjhvq .gt_footnote {
+#hvqltorlvu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1360,7 +1365,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#gqflgkjhvq .gt_sourcenotes {
+#hvqltorlvu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1374,7 +1379,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#gqflgkjhvq .gt_sourcenote {
+#hvqltorlvu .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1382,72 +1387,72 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#gqflgkjhvq .gt_left {
+#hvqltorlvu .gt_left {
   text-align: left;
 }
 
-#gqflgkjhvq .gt_center {
+#hvqltorlvu .gt_center {
   text-align: center;
 }
 
-#gqflgkjhvq .gt_right {
+#hvqltorlvu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gqflgkjhvq .gt_font_normal {
+#hvqltorlvu .gt_font_normal {
   font-weight: normal;
 }
 
-#gqflgkjhvq .gt_font_bold {
+#hvqltorlvu .gt_font_bold {
   font-weight: bold;
 }
 
-#gqflgkjhvq .gt_font_italic {
+#hvqltorlvu .gt_font_italic {
   font-style: italic;
 }
 
-#gqflgkjhvq .gt_super {
+#hvqltorlvu .gt_super {
   font-size: 65%;
 }
 
-#gqflgkjhvq .gt_footnote_marks {
+#hvqltorlvu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#gqflgkjhvq .gt_asterisk {
+#hvqltorlvu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#gqflgkjhvq .gt_indent_1 {
+#hvqltorlvu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#gqflgkjhvq .gt_indent_2 {
+#hvqltorlvu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#gqflgkjhvq .gt_indent_3 {
+#hvqltorlvu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#gqflgkjhvq .gt_indent_4 {
+#hvqltorlvu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#gqflgkjhvq .gt_indent_5 {
+#hvqltorlvu .gt_indent_5 {
   text-indent: 25px;
 }
 
-#gqflgkjhvq .katex-display {
+#hvqltorlvu .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#gqflgkjhvq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#hvqltorlvu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1459,9 +1464,19 @@ td {vertical-align: top;}
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
-<td headers="Attribute" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">exponentiate</span></td>
-<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_attach_model.html">tidy_and_attach()</a></code></span></td>
-<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Indicates if estimates were exponentiated</span></td>
+<td headers="Attribute" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">coefficients_label</span></td>
+<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_coefficients_type.html">tidy_add_coefficients_type()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Coefficients label</span></td>
+</tr>
+<tr>
+<td headers="Attribute" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">coefficients_type</span></td>
+<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_coefficients_type.html">tidy_add_coefficients_type()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Type of coefficients</span></td>
+</tr>
+<tr>
+<td headers="Attribute" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">component</span></td>
+<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_zeroinfl.html">tidy_zeroinfl()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code>component</code> argument passed to <code><a href="../reference/tidy_zeroinfl.html">tidy_zeroinfl()</a></code></span></td>
 </tr>
 <tr>
 <td headers="Attribute" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">conf.level</span></td>
@@ -1469,39 +1484,9 @@ td {vertical-align: top;}
 <td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Level of confidence used for confidence intervals</span></td>
 </tr>
 <tr>
-<td headers="Attribute" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">coefficients_type</span></td>
-<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_coefficients_type.html">tidy_add_coefficients_type()</a></code></span></td>
-<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Type of coefficients</span></td>
-</tr>
-<tr>
-<td headers="Attribute" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">coefficients_label</span></td>
-<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_coefficients_type.html">tidy_add_coefficients_type()</a></code></span></td>
-<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Coefficients label</span></td>
-</tr>
-<tr>
-<td headers="Attribute" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">variable_labels</span></td>
-<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_variable_labels.html">tidy_add_variable_labels()</a></code></span></td>
-<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Custom variable labels passed to <code><a href="../reference/tidy_add_variable_labels.html">tidy_add_variable_labels()</a></code></span></td>
-</tr>
-<tr>
-<td headers="Attribute" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">term_labels</span></td>
-<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels()</a></code></span></td>
-<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Custom term labels passed to <code><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels()</a></code></span></td>
-</tr>
-<tr>
-<td headers="Attribute" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">N_obs</span></td>
-<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_n.html">tidy_add_n()</a></code></span></td>
-<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Total number of observations</span></td>
-</tr>
-<tr>
-<td headers="Attribute" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">N_event</span></td>
-<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_n.html">tidy_add_n()</a></code></span></td>
-<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Total number of events</span></td>
-</tr>
-<tr>
-<td headers="Attribute" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">N_ind</span></td>
-<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_n.html">tidy_add_n()</a></code></span></td>
-<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Total number of individuals (for Cox models)</span></td>
+<td headers="Attribute" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">exponentiate</span></td>
+<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_attach_model.html">tidy_and_attach()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Indicates if estimates were exponentiated</span></td>
 </tr>
 <tr>
 <td headers="Attribute" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Exposure</span></td>
@@ -1509,9 +1494,29 @@ td {vertical-align: top;}
 <td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Total of exposure time</span></td>
 </tr>
 <tr>
-<td headers="Attribute" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">component</span></td>
-<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_zeroinfl.html">tidy_zeroinfl()</a></code></span></td>
-<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code>component</code> argument passed to <code><a href="../reference/tidy_zeroinfl.html">tidy_zeroinfl()</a></code></span></td>
+<td headers="Attribute" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">N_event</span></td>
+<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_n.html">tidy_add_n()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Total number of events</span></td>
+</tr>
+<tr>
+<td headers="Attribute" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">N_ind</span></td>
+<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_n.html">tidy_add_n()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Total number of individuals (for Cox models)</span></td>
+</tr>
+<tr>
+<td headers="Attribute" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">N_obs</span></td>
+<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_n.html">tidy_add_n()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Total number of observations</span></td>
+</tr>
+<tr>
+<td headers="Attribute" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">term_labels</span></td>
+<td headers="Function" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left gt_striped" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Custom term labels passed to <code><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels()</a></code></span></td>
+</tr>
+<tr>
+<td headers="Attribute" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">variable_labels</span></td>
+<td headers="Function" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md"><code><a href="../reference/tidy_add_variable_labels.html">tidy_add_variable_labels()</a></code></span></td>
+<td headers="Description" class="gt_row gt_left" style="vertical-align:top; font-size: 12px;"><span class="gt_from_md">Custom variable labels passed to <code><a href="../reference/tidy_add_variable_labels.html">tidy_add_variable_labels()</a></code></span></td>
 </tr>
 </tbody>
 </table>
@@ -1520,23 +1525,23 @@ td {vertical-align: top;}
 <div class="section level2">
 <h2 id="supported-models">Supported models<a class="anchor" aria-label="anchor" href="#supported-models"></a>
 </h2>
-<div id="vhncrookxg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#vhncrookxg table {
+<div id="ookxgzuhzo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ookxgzuhzo table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#vhncrookxg thead, #vhncrookxg tbody, #vhncrookxg tfoot, #vhncrookxg tr, #vhncrookxg td, #vhncrookxg th {
+#ookxgzuhzo thead, #ookxgzuhzo tbody, #ookxgzuhzo tfoot, #ookxgzuhzo tr, #ookxgzuhzo td, #ookxgzuhzo th {
   border-style: none;
 }
 
-#vhncrookxg p {
+#ookxgzuhzo p {
   margin: 0;
   padding: 0;
 }
 
-#vhncrookxg .gt_table {
+#ookxgzuhzo .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1562,12 +1567,12 @@ td {vertical-align: top;}
   border-left-color: #D3D3D3;
 }
 
-#vhncrookxg .gt_caption {
+#ookxgzuhzo .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#vhncrookxg .gt_title {
+#ookxgzuhzo .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1579,7 +1584,7 @@ td {vertical-align: top;}
   border-bottom-width: 0;
 }
 
-#vhncrookxg .gt_subtitle {
+#ookxgzuhzo .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1591,7 +1596,7 @@ td {vertical-align: top;}
   border-top-width: 0;
 }
 
-#vhncrookxg .gt_heading {
+#ookxgzuhzo .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1603,13 +1608,13 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#vhncrookxg .gt_bottom_border {
+#ookxgzuhzo .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#vhncrookxg .gt_col_headings {
+#ookxgzuhzo .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1624,7 +1629,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#vhncrookxg .gt_col_heading {
+#ookxgzuhzo .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1644,7 +1649,7 @@ td {vertical-align: top;}
   overflow-x: hidden;
 }
 
-#vhncrookxg .gt_column_spanner_outer {
+#ookxgzuhzo .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1656,15 +1661,15 @@ td {vertical-align: top;}
   padding-right: 4px;
 }
 
-#vhncrookxg .gt_column_spanner_outer:first-child {
+#ookxgzuhzo .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vhncrookxg .gt_column_spanner_outer:last-child {
+#ookxgzuhzo .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vhncrookxg .gt_column_spanner {
+#ookxgzuhzo .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1676,11 +1681,11 @@ td {vertical-align: top;}
   width: 100%;
 }
 
-#vhncrookxg .gt_spanner_row {
+#ookxgzuhzo .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#vhncrookxg .gt_group_heading {
+#ookxgzuhzo .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1706,7 +1711,7 @@ td {vertical-align: top;}
   text-align: left;
 }
 
-#vhncrookxg .gt_empty_group_heading {
+#ookxgzuhzo .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1721,15 +1726,15 @@ td {vertical-align: top;}
   vertical-align: middle;
 }
 
-#vhncrookxg .gt_from_md > :first-child {
+#ookxgzuhzo .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vhncrookxg .gt_from_md > :last-child {
+#ookxgzuhzo .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vhncrookxg .gt_row {
+#ookxgzuhzo .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1748,7 +1753,7 @@ td {vertical-align: top;}
   overflow-x: hidden;
 }
 
-#vhncrookxg .gt_stub {
+#ookxgzuhzo .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1761,7 +1766,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#vhncrookxg .gt_stub_row_group {
+#ookxgzuhzo .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1775,15 +1780,15 @@ td {vertical-align: top;}
   vertical-align: top;
 }
 
-#vhncrookxg .gt_row_group_first td {
+#ookxgzuhzo .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#vhncrookxg .gt_row_group_first th {
+#ookxgzuhzo .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#vhncrookxg .gt_summary_row {
+#ookxgzuhzo .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1793,16 +1798,16 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#vhncrookxg .gt_first_summary_row {
+#ookxgzuhzo .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#vhncrookxg .gt_first_summary_row.thick {
+#ookxgzuhzo .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#vhncrookxg .gt_last_summary_row {
+#ookxgzuhzo .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1812,7 +1817,7 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#vhncrookxg .gt_grand_summary_row {
+#ookxgzuhzo .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1822,7 +1827,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#vhncrookxg .gt_first_grand_summary_row {
+#ookxgzuhzo .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1832,7 +1837,7 @@ td {vertical-align: top;}
   border-top-color: #D3D3D3;
 }
 
-#vhncrookxg .gt_last_grand_summary_row_top {
+#ookxgzuhzo .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1842,11 +1847,11 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#vhncrookxg .gt_striped {
+#ookxgzuhzo .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vhncrookxg .gt_table_body {
+#ookxgzuhzo .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1855,7 +1860,7 @@ td {vertical-align: top;}
   border-bottom-color: #D3D3D3;
 }
 
-#vhncrookxg .gt_footnotes {
+#ookxgzuhzo .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1869,7 +1874,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#vhncrookxg .gt_footnote {
+#ookxgzuhzo .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1878,7 +1883,7 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#vhncrookxg .gt_sourcenotes {
+#ookxgzuhzo .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1892,7 +1897,7 @@ td {vertical-align: top;}
   border-right-color: #D3D3D3;
 }
 
-#vhncrookxg .gt_sourcenote {
+#ookxgzuhzo .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1900,72 +1905,72 @@ td {vertical-align: top;}
   padding-right: 5px;
 }
 
-#vhncrookxg .gt_left {
+#ookxgzuhzo .gt_left {
   text-align: left;
 }
 
-#vhncrookxg .gt_center {
+#ookxgzuhzo .gt_center {
   text-align: center;
 }
 
-#vhncrookxg .gt_right {
+#ookxgzuhzo .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vhncrookxg .gt_font_normal {
+#ookxgzuhzo .gt_font_normal {
   font-weight: normal;
 }
 
-#vhncrookxg .gt_font_bold {
+#ookxgzuhzo .gt_font_bold {
   font-weight: bold;
 }
 
-#vhncrookxg .gt_font_italic {
+#ookxgzuhzo .gt_font_italic {
   font-style: italic;
 }
 
-#vhncrookxg .gt_super {
+#ookxgzuhzo .gt_super {
   font-size: 65%;
 }
 
-#vhncrookxg .gt_footnote_marks {
+#ookxgzuhzo .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#vhncrookxg .gt_asterisk {
+#ookxgzuhzo .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#vhncrookxg .gt_indent_1 {
+#ookxgzuhzo .gt_indent_1 {
   text-indent: 5px;
 }
 
-#vhncrookxg .gt_indent_2 {
+#ookxgzuhzo .gt_indent_2 {
   text-indent: 10px;
 }
 
-#vhncrookxg .gt_indent_3 {
+#ookxgzuhzo .gt_indent_3 {
   text-indent: 15px;
 }
 
-#vhncrookxg .gt_indent_4 {
+#ookxgzuhzo .gt_indent_4 {
   text-indent: 20px;
 }
 
-#vhncrookxg .gt_indent_5 {
+#ookxgzuhzo .gt_indent_5 {
   text-indent: 25px;
 }
 
-#vhncrookxg .katex-display {
+#ookxgzuhzo .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#vhncrookxg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ookxgzuhzo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>

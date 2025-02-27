@@ -588,12 +588,8 @@ and <code>age</code>). We will include an interaction between
 <table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead><tr class="gt_col_headings">
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span class="gt_from_md"><strong>Characteristic</strong></span></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="estimate">
-<span class="gt_from_md"><strong>OR</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
-</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low">
-<span class="gt_from_md"><strong>95% CI</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
-</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="estimate"><span class="gt_from_md"><strong>OR</strong></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low"><span class="gt_from_md"><strong>95% CI</strong></span></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="p.value"><span class="gt_from_md"><strong>p-value</strong></span></th>
     </tr></thead>
 <tbody class="gt_table_body">
@@ -682,10 +678,8 @@ and <code>age</code>). We will include an interaction between
 <td headers="p.value" class="gt_row gt_center">0.6</td>
 </tr>
 </tbody>
-<tfoot class="gt_footnotes"><tr>
-<td class="gt_footnote" colspan="4">
-<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">OR = Odds Ratio, CI = Confidence Interval</span>
-</td>
+<tfoot class="gt_sourcenotes"><tr>
+<td class="gt_sourcenote" colspan="4"><span class="gt_from_md">Abbreviations: CI = Confidence Interval, OR = Odds Ratio</span></td>
     </tr></tfoot>
 </table>
 </div>
@@ -1293,9 +1287,7 @@ tieder.</p>
 <thead><tr class="gt_col_headings">
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span class="gt_from_md"><strong>Characteristic</strong></span></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="estimate"><span class="gt_from_md"><strong>Marginal Predictions at the Mean</strong></span></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low">
-<span class="gt_from_md"><strong>95% CI</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
-</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low"><span class="gt_from_md"><strong>95% CI</strong></span></th>
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
@@ -1379,10 +1371,8 @@ tieder.</p>
 <td headers="conf.low" class="gt_row gt_center">26.7%, 91.7%</td>
 </tr>
 </tbody>
-<tfoot class="gt_footnotes"><tr>
-<td class="gt_footnote" colspan="3">
-<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">CI = Confidence Interval</span>
-</td>
+<tfoot class="gt_sourcenotes"><tr>
+<td class="gt_sourcenote" colspan="3"><span class="gt_from_md">Abbreviation: CI = Confidence Interval</span></td>
     </tr></tfoot>
 </table>
 </div>
@@ -1418,8 +1408,7 @@ modality) of categorical regressors. For that, we should call
 <span><span class="co">#&gt;     T3    0.381     0.0977 3.90   &lt;0.001 13.3 0.190  0.573</span></span>
 <span><span class="co">#&gt;     T4    0.322     0.0892 3.61   &lt;0.001 11.7 0.148  0.497</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Type:  response </span></span>
-<span><span class="co">#&gt; Columns: stage, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high</span></span></code></pre></div>
+<span><span class="co">#&gt; Type:  response</span></span></code></pre></div>
 <p>Four “mean individuals” were generated, with just the value of
 <code>stage</code> being different from one individual to the other,
 before predicting the probability of <code>response</code>.</p>
@@ -1441,8 +1430,7 @@ the third quartile and the maximum.</p>
 <span><span class="co">#&gt;   57    0.280     0.0771 3.629  &lt; 0.001 11.8  0.1287  0.431</span></span>
 <span><span class="co">#&gt;   83    0.395     0.2104 1.878  0.06044  4.0 -0.0173  0.807</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Type:  response </span></span>
-<span><span class="co">#&gt; Columns: age, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high</span></span></code></pre></div>
+<span><span class="co">#&gt; Type:  response</span></span></code></pre></div>
 <p><a href="https://larmarange.github.io/broom.helpers/">broom.helpers</a> provides a global tidier
 <code><a href="../reference/tidy_marginal_predictions.html">tidy_marginal_predictions()</a></code> to compute the marginal
 predictions for each variable or combination of variables before
@@ -1917,9 +1905,7 @@ higher order combinations of variables (as identified with
 <thead><tr class="gt_col_headings">
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span class="gt_from_md"><strong>Characteristic</strong></span></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="estimate"><span class="gt_from_md"><strong>Marginal Predictions at the Mean</strong></span></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low">
-<span class="gt_from_md"><strong>95% CI</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
-</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low"><span class="gt_from_md"><strong>95% CI</strong></span></th>
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
@@ -2033,10 +2019,8 @@ higher order combinations of variables (as identified with
 <td headers="conf.low" class="gt_row gt_center">13.9%, 95.7%</td>
 </tr>
 </tbody>
-<tfoot class="gt_footnotes"><tr>
-<td class="gt_footnote" colspan="3">
-<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">CI = Confidence Interval</span>
-</td>
+<tfoot class="gt_sourcenotes"><tr>
+<td class="gt_sourcenote" colspan="3"><span class="gt_from_md">Abbreviation: CI = Confidence Interval</span></td>
     </tr></tfoot>
 </table>
 </div>
@@ -2507,9 +2491,7 @@ considering existing interactions.</p>
 <thead><tr class="gt_col_headings">
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span class="gt_from_md"><strong>Characteristic</strong></span></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="estimate"><span class="gt_from_md"><strong>Marginal Predictions at the Mean</strong></span></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low">
-<span class="gt_from_md"><strong>95% CI</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
-</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low"><span class="gt_from_md"><strong>95% CI</strong></span></th>
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
@@ -2613,10 +2595,8 @@ considering existing interactions.</p>
 <td headers="conf.low" class="gt_row gt_center">-1.7%, 80.7%</td>
 </tr>
 </tbody>
-<tfoot class="gt_footnotes"><tr>
-<td class="gt_footnote" colspan="3">
-<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">CI = Confidence Interval</span>
-</td>
+<tfoot class="gt_sourcenotes"><tr>
+<td class="gt_sourcenote" colspan="3"><span class="gt_from_md">Abbreviation: CI = Confidence Interval</span></td>
     </tr></tfoot>
 </table>
 </div>
@@ -2708,8 +2688,7 @@ value is provided to <code>newdata</code>.</p>
 <span><span class="co">#&gt;  Drug A    0.283     0.0484 5.85   &lt;0.001 27.6 0.188  0.378</span></span>
 <span><span class="co">#&gt;  Drug B    0.343     0.0490 7.01   &lt;0.001 38.6 0.247  0.439</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Type:  response </span></span>
-<span><span class="co">#&gt; Columns: trt, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high</span></span></code></pre></div>
+<span><span class="co">#&gt; Type:  response</span></span></code></pre></div>
 <p><strong>Important:</strong> since version 0.10.0 of
 <code>marginaleffects</code>, we had to add
 <code>type = "response"</code> to get this result: for <code>glm</code>
@@ -2725,8 +2704,7 @@ identical to the average of predictions.</p>
 <span><span class="co">#&gt;  Drug A    0.283     0.0484 5.85   &lt;0.001 27.6 0.188  0.378</span></span>
 <span><span class="co">#&gt;  Drug B    0.343     0.0490 7.01   &lt;0.001 38.6 0.247  0.439</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Type:  response </span></span>
-<span><span class="co">#&gt; Columns: trt, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high</span></span>
+<span><span class="co">#&gt; Type:  response</span></span>
 <span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html" class="external-link">binomial</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">mod</span>, newdata <span class="op">=</span> <span class="va">dA</span>, type <span class="op">=</span> <span class="st">"link"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -3204,9 +3182,7 @@ representation.</p>
 <thead><tr class="gt_col_headings">
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span class="gt_from_md"><strong>Characteristic</strong></span></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="estimate"><span class="gt_from_md"><strong>Average Marginal Predictions</strong></span></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low">
-<span class="gt_from_md"><strong>95% CI</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
-</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low"><span class="gt_from_md"><strong>95% CI</strong></span></th>
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
@@ -3310,10 +3286,8 @@ representation.</p>
 <td headers="conf.low" class="gt_row gt_center">10.0%, 84.2%</td>
 </tr>
 </tbody>
-<tfoot class="gt_footnotes"><tr>
-<td class="gt_footnote" colspan="3">
-<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">CI = Confidence Interval</span>
-</td>
+<tfoot class="gt_sourcenotes"><tr>
+<td class="gt_sourcenote" colspan="3"><span class="gt_from_md">Abbreviation: CI = Confidence Interval</span></td>
     </tr></tfoot>
 </table>
 </div>
@@ -3780,9 +3754,7 @@ representation.</p>
 <thead><tr class="gt_col_headings">
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span class="gt_from_md"><strong>Characteristic</strong></span></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="estimate"><span class="gt_from_md"><strong>Average Marginal Predictions</strong></span></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low">
-<span class="gt_from_md"><strong>95% CI</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
-</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low"><span class="gt_from_md"><strong>95% CI</strong></span></th>
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
@@ -3896,10 +3868,8 @@ representation.</p>
 <td headers="conf.low" class="gt_row gt_center">29.3%, 100.6%</td>
 </tr>
 </tbody>
-<tfoot class="gt_footnotes"><tr>
-<td class="gt_footnote" colspan="3">
-<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">CI = Confidence Interval</span>
-</td>
+<tfoot class="gt_sourcenotes"><tr>
+<td class="gt_sourcenote" colspan="3"><span class="gt_from_md">Abbreviation: CI = Confidence Interval</span></td>
     </tr></tfoot>
 </table>
 </div>
@@ -3932,7 +3902,7 @@ variables at their means.</p>
 <span><span class="va">pred</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 8 × 11</span></span></span>
 <span><span class="co">#&gt;   rowid estimate  p.value s.value conf.low conf.high trt    marker stage   age</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1    0.353 0.115       3.13   0.204      0.537 Drug A  0.919 T1     46.9</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2    0.194 0.000<span style="text-decoration: underline;">572</span>   10.8    0.096<span style="text-decoration: underline;">9</span>     0.351 Drug A  0.919 T2     46.9</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3    0.318 0.074<span style="text-decoration: underline;">1</span>      3.76   0.168      0.519 Drug A  0.919 T3     46.9</span></span>
@@ -3974,8 +3944,8 @@ modalities). <code>age</code> is fixed at its mean
 <span><span class="co">#&gt; Intervals are back-transformed from the logit scale</span></span></code></pre></div>
 <p>These estimates could be computed, for each categorical variable,
 with <code>marginaleffects::prediction()</code> using
-<code>datagrid(grid_type = "balanced")</code><a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;The function
-&lt;code&gt;&lt;a href="https://marginaleffects.com/man/r/marginalmeans.html" class="external-link"&gt;marginaleffects::marginalmeans()&lt;/a&gt;&lt;/code&gt; is now deprecated.&lt;/p&gt;'><sup>1</sup></a>.</p>
+<code>datagrid(grid_type = "balanced")</code><a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;The function
+&lt;code&gt;marginaleffects::marginalmeans()&lt;/code&gt; is now deprecated.&lt;/p&gt;"><sup>1</sup></a>.</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://marginaleffects.com/man/r/predictions.html" class="external-link">predictions</a></span><span class="op">(</span><span class="va">mod</span>,</span>
 <span>  by <span class="op">=</span> <span class="st">"trt"</span>,</span>
@@ -3986,8 +3956,7 @@ with <code>marginaleffects::prediction()</code> using
 <span><span class="co">#&gt;  Drug A    0.282     0.0572 4.94   &lt;0.001 20.3 0.170  0.394</span></span>
 <span><span class="co">#&gt;  Drug B    0.341     0.0584 5.84   &lt;0.001 27.5 0.227  0.455</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Type:  response </span></span>
-<span><span class="co">#&gt; Columns: trt, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high</span></span>
+<span><span class="co">#&gt; Type:  response</span></span>
 <span><span class="fu"><a href="https://marginaleffects.com/man/r/predictions.html" class="external-link">predictions</a></span><span class="op">(</span><span class="va">mod</span>,</span>
 <span>  by <span class="op">=</span> <span class="st">"stage"</span>,</span>
 <span>  newdata <span class="op">=</span> <span class="fu"><a href="https://marginaleffects.com/man/r/datagrid.html" class="external-link">datagrid</a></span><span class="op">(</span>grid_type <span class="op">=</span> <span class="st">"balanced"</span><span class="op">)</span></span>
@@ -3999,8 +3968,7 @@ with <code>marginaleffects::prediction()</code> using
 <span><span class="co">#&gt;     T3    0.349     0.0870 4.02   &lt;0.001 14.0 0.1789  0.520</span></span>
 <span><span class="co">#&gt;     T4    0.294     0.0786 3.74   &lt;0.001 12.4 0.1395  0.447</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Type:  response </span></span>
-<span><span class="co">#&gt; Columns: stage, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high</span></span></code></pre></div>
+<span><span class="co">#&gt; Type:  response</span></span></code></pre></div>
 <p>Marginal means are defined only for categorical variables. However,
 we can define <strong>marginal predictions at marginal means</strong>
 for both continuous and categorical variables, calling
@@ -4471,9 +4439,7 @@ predictions at marginal means will be equal to marginal means.</p>
 <thead><tr class="gt_col_headings">
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span class="gt_from_md"><strong>Characteristic</strong></span></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="estimate"><span class="gt_from_md"><strong>Marginal Predictions at Marginal Means</strong></span></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low">
-<span class="gt_from_md"><strong>95% CI</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
-</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low"><span class="gt_from_md"><strong>95% CI</strong></span></th>
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
@@ -4544,7 +4510,7 @@ predictions at marginal means will be equal to marginal means.</p>
 <tr>
 <td headers="label" class="gt_row gt_left">    T4</td>
 <td headers="estimate" class="gt_row gt_center">29.4%</td>
-<td headers="conf.low" class="gt_row gt_center">14.0%, 44.8%</td>
+<td headers="conf.low" class="gt_row gt_center">14.0%, 44.7%</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left" style="font-weight: bold;">Age in years</td>
@@ -4577,10 +4543,8 @@ predictions at marginal means will be equal to marginal means.</p>
 <td headers="conf.low" class="gt_row gt_center">10.0%, 85.4%</td>
 </tr>
 </tbody>
-<tfoot class="gt_footnotes"><tr>
-<td class="gt_footnote" colspan="3">
-<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">CI = Confidence Interval</span>
-</td>
+<tfoot class="gt_sourcenotes"><tr>
+<td class="gt_sourcenote" colspan="3"><span class="gt_from_md">Abbreviation: CI = Confidence Interval</span></td>
     </tr></tfoot>
 </table>
 </div>
@@ -5059,9 +5023,7 @@ categorical variables at their mode). Simply use
 <thead><tr class="gt_col_headings">
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span class="gt_from_md"><strong>Characteristic</strong></span></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="estimate"><span class="gt_from_md"><strong>Marginal Predictions</strong></span></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low">
-<span class="gt_from_md"><strong>95% CI</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
-</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low"><span class="gt_from_md"><strong>95% CI</strong></span></th>
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
@@ -5165,10 +5127,8 @@ categorical variables at their mode). Simply use
 <td headers="conf.low" class="gt_row gt_center">-3.5%, 77.0%</td>
 </tr>
 </tbody>
-<tfoot class="gt_footnotes"><tr>
-<td class="gt_footnote" colspan="3">
-<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">CI = Confidence Interval</span>
-</td>
+<tfoot class="gt_sourcenotes"><tr>
+<td class="gt_sourcenote" colspan="3"><span class="gt_from_md">Abbreviation: CI = Confidence Interval</span></td>
     </tr></tfoot>
 </table>
 </div>
@@ -5647,9 +5607,7 @@ tidier.</p>
 <thead><tr class="gt_col_headings">
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span class="gt_from_md"><strong>Characteristic</strong></span></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="estimate"><span class="gt_from_md"><strong>Marginal Predictions</strong></span></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low">
-<span class="gt_from_md"><strong>95% CI</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
-</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low"><span class="gt_from_md"><strong>95% CI</strong></span></th>
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
@@ -6813,10 +6771,8 @@ tidier.</p>
 <td headers="conf.low" class="gt_row gt_center">21.6%, 88.8%</td>
 </tr>
 </tbody>
-<tfoot class="gt_footnotes"><tr>
-<td class="gt_footnote" colspan="3">
-<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">CI = Confidence Interval</span>
-</td>
+<tfoot class="gt_sourcenotes"><tr>
+<td class="gt_sourcenote" colspan="3"><span class="gt_from_md">Abbreviation: CI = Confidence Interval</span></td>
     </tr></tfoot>
 </table>
 </div>
@@ -6855,8 +6811,7 @@ Average Marginal Predictions are obtained with
 <span><span class="co">#&gt;     T3    0.354     0.0786 4.51   &lt;0.001 17.2 0.200  0.508</span></span>
 <span><span class="co">#&gt;     T4    0.300     0.0706 4.25   &lt;0.001 15.5 0.161  0.438</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Type:  response </span></span>
-<span><span class="co">#&gt; Columns: stage, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high</span></span></code></pre></div>
+<span><span class="co">#&gt; Type:  response</span></span></code></pre></div>
 <p>The contrast between <code>"T2"</code> and <code>"T1"</code> is
 simply the difference between the two adjusted predictions:</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
@@ -6874,8 +6829,7 @@ to compute all differences between adjusted predictions.</p>
 <span><span class="co">#&gt;   T4 - T1  -0.0895     0.1004 -0.891   0.3727 1.4 -0.286 0.1073</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Term: stage</span></span>
-<span><span class="co">#&gt; Type:  response </span></span>
-<span><span class="co">#&gt; Columns: term, contrast, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high</span></span></code></pre></div>
+<span><span class="co">#&gt; Type:  response</span></span></code></pre></div>
 <p><em>Note:</em> in fact, <code><a href="https://marginaleffects.com/man/r/comparisons.html" class="external-link">avg_comparisons()</a></code> has computed
 the contrasts for each observed values before averaging it. By
 construction, it is equivalent to the difference of the average marginal
@@ -6893,8 +6847,7 @@ reference.</p>
 <span><span class="co">#&gt;   T4 - T1  -0.0895     0.1004 -0.891   0.3727 1.4 -0.286 0.1073</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Term: stage</span></span>
-<span><span class="co">#&gt; Type:  response </span></span>
-<span><span class="co">#&gt; Columns: term, contrast, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high</span></span></code></pre></div>
+<span><span class="co">#&gt; Type:  response</span></span></code></pre></div>
 <p>Other types of contrasts could be specified using the
 <code>variables</code> argument.</p>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
@@ -6906,8 +6859,7 @@ reference.</p>
 <span><span class="co">#&gt;   T4 - T3  -0.0544     0.1060 -0.513   0.6081 0.7 -0.2622 0.1535</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Term: stage</span></span>
-<span><span class="co">#&gt; Type:  response </span></span>
-<span><span class="co">#&gt; Columns: term, contrast, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high</span></span>
+<span><span class="co">#&gt; Type:  response</span></span>
 <span><span class="fu"><a href="https://marginaleffects.com/man/r/comparisons.html" class="external-link">avg_comparisons</a></span><span class="op">(</span><span class="va">mod</span>, variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>stage <span class="op">=</span> <span class="st">"pairwise"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  Contrast Estimate Std. Error      z Pr(&gt;|z|)   S   2.5 % 97.5 %</span></span>
@@ -6919,8 +6871,7 @@ reference.</p>
 <span><span class="co">#&gt;   T4 - T3  -0.0544     0.1060 -0.513   0.6081 0.7 -0.2622 0.1535</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Term: stage</span></span>
-<span><span class="co">#&gt; Type:  response </span></span>
-<span><span class="co">#&gt; Columns: term, contrast, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high</span></span></code></pre></div>
+<span><span class="co">#&gt; Type:  response</span></span></code></pre></div>
 <p>Let’s consider a continuous variable:</p>
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://marginaleffects.com/man/r/comparisons.html" class="external-link">avg_comparisons</a></span><span class="op">(</span><span class="va">mod</span>, variables <span class="op">=</span> <span class="st">"age"</span><span class="op">)</span></span>
@@ -6930,8 +6881,7 @@ reference.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Term: age</span></span>
 <span><span class="co">#&gt; Type:  response </span></span>
-<span><span class="co">#&gt; Comparison: +1</span></span>
-<span><span class="co">#&gt; Columns: term, contrast, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high, predicted_lo, predicted_hi, predicted</span></span></code></pre></div>
+<span><span class="co">#&gt; Comparison: +1</span></span></code></pre></div>
 <p>By default, <code><a href="https://marginaleffects.com/man/r/comparisons.html" class="external-link">marginaleffects::avg_comparisons()</a></code> computes,
 for each observed value, the effect of increasing <code>age</code> by
 one unit (comparing adjusted predictions when the regressor is equal to
@@ -6946,8 +6896,7 @@ difference for an increase of 10 years:</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Term: age</span></span>
 <span><span class="co">#&gt; Type:  response </span></span>
-<span><span class="co">#&gt; Comparison: +10</span></span>
-<span><span class="co">#&gt; Columns: term, contrast, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high, predicted_lo, predicted_hi, predicted</span></span></code></pre></div>
+<span><span class="co">#&gt; Comparison: +10</span></span></code></pre></div>
 <p>Contrasts for all individual predictors could be easily obtained:</p>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://marginaleffects.com/man/r/comparisons.html" class="external-link">avg_comparisons</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span>
@@ -6967,8 +6916,7 @@ difference for an increase of 10 years:</p>
 <span><span class="co">#&gt;  0.10726</span></span>
 <span><span class="co">#&gt;  0.19517</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Type:  response </span></span>
-<span><span class="co">#&gt; Columns: term, contrast, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high</span></span></code></pre></div>
+<span><span class="co">#&gt; Type:  response</span></span></code></pre></div>
 <p>It should be noted that column names are not consistent with other
 tidiers used by <code>broom.helpers</code>. Therefore, a
 <code>comparisons</code> object should not be passed directly to
@@ -7467,9 +7415,7 @@ and the suit of other functions provided by
 <thead><tr class="gt_col_headings">
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span class="gt_from_md"><strong>Characteristic</strong></span></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="estimate"><span class="gt_from_md"><strong>Average Marginal Contrasts</strong></span></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low">
-<span class="gt_from_md"><strong>95% CI</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
-</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low"><span class="gt_from_md"><strong>95% CI</strong></span></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="p.value"><span class="gt_from_md"><strong>p-value</strong></span></th>
     </tr></thead>
 <tbody class="gt_table_body">
@@ -7534,10 +7480,8 @@ and the suit of other functions provided by
 <td headers="p.value" class="gt_row gt_center">0.4</td>
 </tr>
 </tbody>
-<tfoot class="gt_footnotes"><tr>
-<td class="gt_footnote" colspan="4">
-<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">CI = Confidence Interval</span>
-</td>
+<tfoot class="gt_sourcenotes"><tr>
+<td class="gt_sourcenote" colspan="4"><span class="gt_from_md">Abbreviation: CI = Confidence Interval</span></td>
     </tr></tfoot>
 </table>
 </div>
@@ -7570,23 +7514,21 @@ values and where categorical predictors will be set to the mode
 <code class="sourceCode R"><span><span class="va">pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://marginaleffects.com/man/r/predictions.html" class="external-link">predictions</a></span><span class="op">(</span><span class="va">mod</span>, variables <span class="op">=</span> <span class="st">"trt"</span>, newdata <span class="op">=</span> <span class="st">"mean"</span><span class="op">)</span></span>
 <span><span class="va">pred</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;  marker stage  age    trt Estimate Pr(&gt;|z|)    S  2.5 % 97.5 %</span></span>
-<span><span class="co">#&gt;   0.919    T2 46.9 Drug A    0.194  &lt; 0.001 10.8 0.0969  0.351</span></span>
-<span><span class="co">#&gt;   0.919    T2 46.9 Drug B    0.242  0.00282  8.5 0.1308  0.403</span></span>
+<span><span class="co">#&gt;  Estimate Pr(&gt;|z|)    S  2.5 % 97.5 %</span></span>
+<span><span class="co">#&gt;     0.194  &lt; 0.001 10.8 0.0969  0.351</span></span>
+<span><span class="co">#&gt;     0.242  0.00282  8.5 0.1308  0.403</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Type:  invlink(link) </span></span>
-<span><span class="co">#&gt; Columns: rowid, rowidcf, estimate, p.value, s.value, conf.low, conf.high, marker, stage, age, response, trt</span></span>
+<span><span class="co">#&gt; Type:  invlink(link)</span></span>
 <span><span class="va">pred</span><span class="op">$</span><span class="va">estimate</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">-</span> <span class="va">pred</span><span class="op">$</span><span class="va">estimate</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
 <span><span class="co">#&gt; [1] 0.04738154</span></span>
 <span><span class="fu"><a href="https://marginaleffects.com/man/r/comparisons.html" class="external-link">comparisons</a></span><span class="op">(</span><span class="va">mod</span>, variables <span class="op">=</span> <span class="st">"trt"</span>, newdata <span class="op">=</span> <span class="st">"mean"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;  Estimate Std. Error     z Pr(&gt;|z|)   S  2.5 % 97.5 % marker stage  age</span></span>
-<span><span class="co">#&gt;    0.0474     0.0579 0.819    0.413 1.3 -0.066  0.161  0.919    T2 46.9</span></span>
+<span><span class="co">#&gt;  Estimate Std. Error     z Pr(&gt;|z|)   S  2.5 % 97.5 %</span></span>
+<span><span class="co">#&gt;    0.0474     0.0579 0.819    0.413 1.3 -0.066  0.161</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Term: trt</span></span>
 <span><span class="co">#&gt; Type:  response </span></span>
-<span><span class="co">#&gt; Comparison: Drug B - Drug A</span></span>
-<span><span class="co">#&gt; Columns: rowid, term, contrast, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high, predicted_lo, predicted_hi, predicted, trt, marker, stage, age, response</span></span></code></pre></div>
+<span><span class="co">#&gt; Comparison: Drug B - Drug A</span></span></code></pre></div>
 <p>The <code>newdata</code> argument can be passed to
 <code><a href="../reference/tidy_avg_comparisons.html">tidy_avg_comparisons()</a></code>, <code>tidy_plus_plus</code> or
 <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html" class="external-link">gtsummary::tbl_regression()</a></code>.</p>
@@ -8052,9 +7994,7 @@ values and where categorical predictors will be set to the mode
 <thead><tr class="gt_col_headings">
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span class="gt_from_md"><strong>Characteristic</strong></span></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="estimate"><span class="gt_from_md"><strong>Marginal Contrasts at the Mean</strong></span></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low">
-<span class="gt_from_md"><strong>95% CI</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
-</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low"><span class="gt_from_md"><strong>95% CI</strong></span></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="p.value"><span class="gt_from_md"><strong>p-value</strong></span></th>
     </tr></thead>
 <tbody class="gt_table_body">
@@ -8119,10 +8059,8 @@ values and where categorical predictors will be set to the mode
 <td headers="p.value" class="gt_row gt_center">0.4</td>
 </tr>
 </tbody>
-<tfoot class="gt_footnotes"><tr>
-<td class="gt_footnote" colspan="4">
-<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">CI = Confidence Interval</span>
-</td>
+<tfoot class="gt_sourcenotes"><tr>
+<td class="gt_sourcenote" colspan="4"><span class="gt_from_md">Abbreviation: CI = Confidence Interval</span></td>
     </tr></tfoot>
 </table>
 </div>
@@ -8608,9 +8546,7 @@ the documentation of <code><a href="https://marginaleffects.com/man/r/comparison
 <thead><tr class="gt_col_headings">
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span class="gt_from_md"><strong>Characteristic</strong></span></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="estimate"><span class="gt_from_md"><strong>Marginal Contrasts at Marginal Means</strong></span></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low">
-<span class="gt_from_md"><strong>95% CI</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
-</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low"><span class="gt_from_md"><strong>95% CI</strong></span></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="p.value"><span class="gt_from_md"><strong>p-value</strong></span></th>
     </tr></thead>
 <tbody class="gt_table_body">
@@ -8675,10 +8611,8 @@ the documentation of <code><a href="https://marginaleffects.com/man/r/comparison
 <td headers="p.value" class="gt_row gt_center">0.4</td>
 </tr>
 </tbody>
-<tfoot class="gt_footnotes"><tr>
-<td class="gt_footnote" colspan="4">
-<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">CI = Confidence Interval</span>
-</td>
+<tfoot class="gt_sourcenotes"><tr>
+<td class="gt_sourcenote" colspan="4"><span class="gt_from_md">Abbreviation: CI = Confidence Interval</span></td>
     </tr></tfoot>
 </table>
 </div>
@@ -8711,13 +8645,13 @@ contrast of <code>marker</code> for each value of <code>trt</code>.</p>
 <span>  by <span class="op">=</span> <span class="st">"trt"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;    Term    trt Estimate Std. Error     z Pr(&gt;|z|)   S   2.5 % 97.5 %</span></span>
-<span><span class="co">#&gt;  marker Drug A   0.0472     0.0573 0.824   0.4101 1.3 -0.0651  0.159</span></span>
-<span><span class="co">#&gt;  marker Drug B   0.1004     0.0590 1.703   0.0887 3.5 -0.0152  0.216</span></span>
+<span><span class="co">#&gt;     trt Estimate Std. Error     z Pr(&gt;|z|)   S   2.5 % 97.5 %</span></span>
+<span><span class="co">#&gt;  Drug A   0.0472     0.0573 0.824   0.4101 1.3 -0.0651  0.159</span></span>
+<span><span class="co">#&gt;  Drug B   0.1004     0.0590 1.703   0.0887 3.5 -0.0152  0.216</span></span>
 <span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Term: marker</span></span>
 <span><span class="co">#&gt; Type:  response </span></span>
-<span><span class="co">#&gt; Comparison: +1</span></span>
-<span><span class="co">#&gt; Columns: term, contrast, trt, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high</span></span></code></pre></div>
+<span><span class="co">#&gt; Comparison: +1</span></span></code></pre></div>
 <p>Alternatively, it is possible to compute “cross-contrasts” showing
 what is happening when both <code>marker</code> and <code>trt</code> are
 changing.</p>
@@ -8731,8 +8665,8 @@ changing.</p>
 <span><span class="co">#&gt;  C: marker          C: trt Estimate Std. Error    z Pr(&gt;|z|)   S   2.5 % 97.5 %</span></span>
 <span><span class="co">#&gt;         +1 Drug B - Drug A    0.161     0.0959 1.67   0.0941 3.4 -0.0274  0.348</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Type:  response </span></span>
-<span><span class="co">#&gt; Columns: term, contrast_marker, contrast_trt, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high, predicted_lo, predicted_hi, predicted</span></span></code></pre></div>
+<span><span class="co">#&gt; Term: cross</span></span>
+<span><span class="co">#&gt; Type:  response</span></span></code></pre></div>
 <p>The tidier <code><a href="../reference/tidy_marginal_contrasts.html">tidy_marginal_contrasts()</a></code> allows to compute
 directly several combinations of variables and to stack all the results
 in a unique tibble.</p>
@@ -9197,9 +9131,7 @@ in a unique tibble.</p>
 <thead><tr class="gt_col_headings">
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span class="gt_from_md"><strong>Characteristic</strong></span></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="estimate"><span class="gt_from_md"><strong>Average Marginal Contrasts</strong></span></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low">
-<span class="gt_from_md"><strong>95% CI</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
-</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low"><span class="gt_from_md"><strong>95% CI</strong></span></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="p.value"><span class="gt_from_md"><strong>p-value</strong></span></th>
     </tr></thead>
 <tbody class="gt_table_body">
@@ -9258,10 +9190,8 @@ in a unique tibble.</p>
 <td headers="p.value" class="gt_row gt_center">0.089</td>
 </tr>
 </tbody>
-<tfoot class="gt_footnotes"><tr>
-<td class="gt_footnote" colspan="4">
-<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">CI = Confidence Interval</span>
-</td>
+<tfoot class="gt_sourcenotes"><tr>
+<td class="gt_sourcenote" colspan="4"><span class="gt_from_md">Abbreviation: CI = Confidence Interval</span></td>
     </tr></tfoot>
 </table>
 </div>
@@ -9740,9 +9670,7 @@ Tukey’s five numbers).</p>
 <thead><tr class="gt_col_headings">
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span class="gt_from_md"><strong>Characteristic</strong></span></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="estimate"><span class="gt_from_md"><strong>Average Marginal Contrasts</strong></span></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low">
-<span class="gt_from_md"><strong>95% CI</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
-</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low"><span class="gt_from_md"><strong>95% CI</strong></span></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="p.value"><span class="gt_from_md"><strong>p-value</strong></span></th>
     </tr></thead>
 <tbody class="gt_table_body">
@@ -9795,10 +9723,8 @@ Tukey’s five numbers).</p>
 <td headers="p.value" class="gt_row gt_center">0.094</td>
 </tr>
 </tbody>
-<tfoot class="gt_footnotes"><tr>
-<td class="gt_footnote" colspan="4">
-<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">CI = Confidence Interval</span>
-</td>
+<tfoot class="gt_sourcenotes"><tr>
+<td class="gt_sourcenote" colspan="4"><span class="gt_from_md">Abbreviation: CI = Confidence Interval</span></td>
     </tr></tfoot>
 </table>
 </div>
@@ -10267,9 +10193,7 @@ considering interactions.</p>
 <thead><tr class="gt_col_headings">
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span class="gt_from_md"><strong>Characteristic</strong></span></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="estimate"><span class="gt_from_md"><strong>Average Marginal Contrasts</strong></span></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low">
-<span class="gt_from_md"><strong>95% CI</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
-</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low"><span class="gt_from_md"><strong>95% CI</strong></span></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="p.value"><span class="gt_from_md"><strong>p-value</strong></span></th>
     </tr></thead>
 <tbody class="gt_table_body">
@@ -10334,10 +10258,8 @@ considering interactions.</p>
 <td headers="p.value" class="gt_row gt_center">0.10</td>
 </tr>
 </tbody>
-<tfoot class="gt_footnotes"><tr>
-<td class="gt_footnote" colspan="4">
-<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">CI = Confidence Interval</span>
-</td>
+<tfoot class="gt_sourcenotes"><tr>
+<td class="gt_sourcenote" colspan="4"><span class="gt_from_md">Abbreviation: CI = Confidence Interval</span></td>
     </tr></tfoot>
 </table>
 </div>
@@ -10399,8 +10321,7 @@ being averaged with <code><a href="https://marginaleffects.com/man/r/slopes.html
 <span><span class="co">#&gt;  0.10726</span></span>
 <span><span class="co">#&gt;  0.19517</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Type:  response </span></span>
-<span><span class="co">#&gt; Columns: term, contrast, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high</span></span></code></pre></div>
+<span><span class="co">#&gt; Type:  response</span></span></code></pre></div>
 <p>Column names are not consistent with other tidiers used by
 <a href="https://larmarange.github.io/broom.helpers/">broom.helpers</a>. Use <code><a href="../reference/tidy_avg_slopes.html">tidy_avg_slopes()</a></code>
 instead.</p>
@@ -10865,9 +10786,7 @@ instead.</p>
 <thead><tr class="gt_col_headings">
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span class="gt_from_md"><strong>Characteristic</strong></span></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="estimate"><span class="gt_from_md"><strong>Average Marginal Effects</strong></span></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low">
-<span class="gt_from_md"><strong>95% CI</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
-</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low"><span class="gt_from_md"><strong>95% CI</strong></span></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="p.value"><span class="gt_from_md"><strong>p-value</strong></span></th>
     </tr></thead>
 <tbody class="gt_table_body">
@@ -10932,10 +10851,8 @@ instead.</p>
 <td headers="p.value" class="gt_row gt_center">0.4</td>
 </tr>
 </tbody>
-<tfoot class="gt_footnotes"><tr>
-<td class="gt_footnote" colspan="4">
-<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">CI = Confidence Interval</span>
-</td>
+<tfoot class="gt_sourcenotes"><tr>
+<td class="gt_sourcenote" colspan="4"><span class="gt_from_md">Abbreviation: CI = Confidence Interval</span></td>
     </tr></tfoot>
 </table>
 </div>
@@ -11434,9 +11351,7 @@ command. As <code><a href="https://rdrr.io/pkg/margins/man/margins.html" class="
 <thead><tr class="gt_col_headings">
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span class="gt_from_md"><strong>Characteristic</strong></span></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="estimate"><span class="gt_from_md"><strong>Average Marginal Effects</strong></span></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low">
-<span class="gt_from_md"><strong>95% CI</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
-</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low"><span class="gt_from_md"><strong>95% CI</strong></span></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="p.value"><span class="gt_from_md"><strong>p-value</strong></span></th>
     </tr></thead>
 <tbody class="gt_table_body">
@@ -11501,10 +11416,8 @@ command. As <code><a href="https://rdrr.io/pkg/margins/man/margins.html" class="
 <td headers="p.value" class="gt_row gt_center">0.4</td>
 </tr>
 </tbody>
-<tfoot class="gt_footnotes"><tr>
-<td class="gt_footnote" colspan="4">
-<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">CI = Confidence Interval</span>
-</td>
+<tfoot class="gt_sourcenotes"><tr>
+<td class="gt_sourcenote" colspan="4"><span class="gt_from_md">Abbreviation: CI = Confidence Interval</span></td>
     </tr></tfoot>
 </table>
 </div>
@@ -11512,9 +11425,9 @@ command. As <code><a href="https://rdrr.io/pkg/margins/man/margins.html" class="
 <div class="section level3">
 <h3 id="marginal-effects-at-the-mean-mem">Marginal Effects at the Mean (MEM)<a class="anchor" aria-label="anchor" href="#marginal-effects-at-the-mean-mem"></a>
 </h3>
-<p>For marginal effects at the mean<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;More precisely,
-&lt;code&gt;&lt;a href="https://marginaleffects.com/man/r/marginaleffects.html" class="external-link"&gt;marginaleffects::marginaleffects()&lt;/a&gt;&lt;/code&gt; use the mean of
-continuous variables and the mode of categorical variables.&lt;/p&gt;'><sup>2</sup></a>, simple use
+<p>For marginal effects at the mean<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;More precisely,
+&lt;code&gt;marginaleffects::marginaleffects()&lt;/code&gt; use the mean of
+continuous variables and the mode of categorical variables.&lt;/p&gt;"><sup>2</sup></a>, simple use
 <code>newdata = "mean"</code>.</p>
 <div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mod</span> <span class="op">|&gt;</span></span>
@@ -11978,9 +11891,7 @@ continuous variables and the mode of categorical variables.&lt;/p&gt;'><sup>2</s
 <thead><tr class="gt_col_headings">
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span class="gt_from_md"><strong>Characteristic</strong></span></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="estimate"><span class="gt_from_md"><strong>Marginal Effects at the Mean</strong></span></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low">
-<span class="gt_from_md"><strong>95% CI</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
-</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low"><span class="gt_from_md"><strong>95% CI</strong></span></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="p.value"><span class="gt_from_md"><strong>p-value</strong></span></th>
     </tr></thead>
 <tbody class="gt_table_body">
@@ -12045,10 +11956,8 @@ continuous variables and the mode of categorical variables.&lt;/p&gt;'><sup>2</s
 <td headers="p.value" class="gt_row gt_center">0.4</td>
 </tr>
 </tbody>
-<tfoot class="gt_footnotes"><tr>
-<td class="gt_footnote" colspan="4">
-<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">CI = Confidence Interval</span>
-</td>
+<tfoot class="gt_sourcenotes"><tr>
+<td class="gt_sourcenote" colspan="4"><span class="gt_from_md">Abbreviation: CI = Confidence Interval</span></td>
     </tr></tfoot>
 </table>
 </div>
@@ -12530,9 +12439,7 @@ continuous variables and the mode of categorical variables.&lt;/p&gt;'><sup>2</s
 <thead><tr class="gt_col_headings">
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span class="gt_from_md"><strong>Characteristic</strong></span></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="estimate"><span class="gt_from_md"><strong>Marginal Effects at Marginal Means</strong></span></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low">
-<span class="gt_from_md"><strong>95% CI</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
-</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low"><span class="gt_from_md"><strong>95% CI</strong></span></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="p.value"><span class="gt_from_md"><strong>p-value</strong></span></th>
     </tr></thead>
 <tbody class="gt_table_body">
@@ -12597,10 +12504,8 @@ continuous variables and the mode of categorical variables.&lt;/p&gt;'><sup>2</s
 <td headers="p.value" class="gt_row gt_center">0.4</td>
 </tr>
 </tbody>
-<tfoot class="gt_footnotes"><tr>
-<td class="gt_footnote" colspan="4">
-<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">CI = Confidence Interval</span>
-</td>
+<tfoot class="gt_sourcenotes"><tr>
+<td class="gt_sourcenote" colspan="4"><span class="gt_from_md">Abbreviation: CI = Confidence Interval</span></td>
     </tr></tfoot>
 </table>
 </div>
