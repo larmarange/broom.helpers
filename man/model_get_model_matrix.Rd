@@ -14,6 +14,8 @@
 \alias{model_get_model_matrix.LORgee}
 \alias{model_get_model_matrix.betareg}
 \alias{model_get_model_matrix.cch}
+\alias{model_get_model_matrix.vglm}
+\alias{model_get_model_matrix.vgam}
 \title{Get the model matrix of a model}
 \usage{
 model_get_model_matrix(model, ...)
@@ -41,6 +43,10 @@ model_get_model_matrix(model, ...)
 \method{model_get_model_matrix}{betareg}(model, ...)
 
 \method{model_get_model_matrix}{cch}(model, ...)
+
+\method{model_get_model_matrix}{vglm}(model, ...)
+
+\method{model_get_model_matrix}{vgam}(model, ...)
 }
 \arguments{
 \item{model}{(a model object, e.g. \code{glm})\cr
