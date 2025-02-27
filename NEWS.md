@@ -1,5 +1,10 @@
 # broom.helpers (development version)
 
+**New supported models**
+
+- improved support for `VGAM::vglm()` and `VGAM::vgam()` models, see the
+  experimental tidier `tidy_vgam()` (#253)
+
 **New features**
 
 - new `tidy_group_by()` function to indicate how to group results (#288)
