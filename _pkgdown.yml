@@ -19,25 +19,6 @@ authors:
   Daniel D. Sjoberg:
     href: "http://www.danieldsjoberg.com/"
 
-navbar:
-  type: default
-  left:
-  - icon: fa-home
-    href: index.html
-  - text: Reference
-    href: reference/index.html
-  - text: Getting Started
-    href: articles/tidy.html
-  - text: Marginal estimates
-    href: articles/marginal_tidiers.html
-  - text: News
-    href: news/index.html
-  right:
-  - icon: fa-github fa-lg
-    href: https://github.com/larmarange/broom.helpers
-
-
-
 reference:
   - title: All-in-one function
   - contents:
