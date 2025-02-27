@@ -478,7 +478,7 @@ tidy_vgam <- function(
       by = "original_term"
     ) |>
     dplyr::relocate(
-      dplyr::all_of("term", "group"),
+      dplyr::all_of(c("term", "group")),
       .after = dplyr::all_of("original_term")
     )
 
