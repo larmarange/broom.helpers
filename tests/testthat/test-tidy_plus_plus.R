@@ -570,6 +570,7 @@ test_that("tidy_plus_plus() works with VGAM::vglm", {
   skip_on_cran()
   skip_if_not_installed("VGAM")
   skip_if_not_installed("parameters")
+  library(VGAM)
 
   df <- data.frame(
     treatment = gl(3, 3),
