@@ -474,7 +474,7 @@ tidy_vgam <- function(
   res <- res |>
     dplyr::left_join(
       .vgam_identify_groups(x) |>
-        dplyr::select(.data$original_term, .data$term, .data$group),
+        dplyr::select(dplyr::all_of("original_term", "term", "group")),
       by = "original_term"
     ) |>
     dplyr::relocate(.data$term, .data$group, .after = .data$original_term)
