@@ -1,30 +1,31 @@
 # Platform
 
-|field    |value                                         |
-|:--------|:---------------------------------------------|
-|version  |R version 4.4.2 (2024-10-31 ucrt)             |
-|os       |Windows 11 x64 (build 26100)                  |
-|system   |x86_64, mingw32                               |
-|ui       |RStudio                                       |
-|language |(EN)                                          |
-|collate  |French_France.utf8                            |
-|ctype    |French_France.utf8                            |
-|tz       |Europe/Paris                                  |
-|date     |2025-01-28                                    |
-|rstudio  |2024.12.0+467 Kousa Dogwood (desktop)         |
-|pandoc   |3.4 @ C:\PROGRA~1\Quarto\bin\tools\pandoc.exe |
+|field    |value                                                                                                                                                             |
+|:--------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|version  |R version 4.4.2 (2024-10-31 ucrt)                                                                                                                                 |
+|os       |Windows 11 x64 (build 26100)                                                                                                                                      |
+|system   |x86_64, mingw32                                                                                                                                                   |
+|ui       |RStudio                                                                                                                                                           |
+|language |(EN)                                                                                                                                                              |
+|collate  |French_France.utf8                                                                                                                                                |
+|ctype    |French_France.utf8                                                                                                                                                |
+|tz       |Europe/Paris                                                                                                                                                      |
+|date     |2025-02-28                                                                                                                                                        |
+|rstudio  |2024.12.0+467 Kousa Dogwood (desktop)                                                                                                                             |
+|pandoc   |3.4 @ C:\PROGRA~1\Quarto\bin\tools\pandoc.exe                                                                                                                     |
+|quarto   |ERROR: Unknown command "TMPDIR=C:/Users/josep/AppData/Local/Temp/RtmpeAZ9O5/file3e1467b0182f". Did you mean command "create"? @ C:\PROGRA~1\Quarto\bin\quarto.exe |
 
 # Dependencies
 
 |package       |old     |new         |Δ  |
 |:-------------|:-------|:-----------|:--|
-|broom.helpers |1.18.0  |1.18.0.9000 |*  |
+|broom.helpers |1.19.0  |1.19.0.9000 |*  |
 |backports     |1.5.0   |1.5.0       |   |
 |bit           |4.5.0.1 |4.5.0.1     |   |
 |bit64         |4.6.0-1 |4.6.0-1     |   |
 |broom         |1.0.7   |1.0.7       |   |
-|cards         |0.4.0   |0.4.0       |   |
-|cli           |3.6.3   |3.6.3       |   |
+|cards         |0.5.0   |0.5.0       |   |
+|cli           |3.6.4   |3.6.4       |   |
 |clipr         |0.8.0   |0.8.0       |   |
 |cpp11         |0.5.1   |0.5.1       |   |
 |crayon        |1.5.3   |1.5.3       |   |
@@ -42,8 +43,8 @@
 |pkgconfig     |2.0.3   |2.0.3       |   |
 |prettyunits   |1.2.0   |1.2.0       |   |
 |progress      |1.2.3   |1.2.3       |   |
-|purrr         |1.0.2   |1.0.2       |   |
-|R6            |2.5.1   |2.5.1       |   |
+|purrr         |1.0.4   |1.0.4       |   |
+|R6            |2.6.1   |2.6.1       |   |
 |readr         |2.1.5   |2.1.5       |   |
 |rlang         |1.1.5   |1.1.5       |   |
 |stringi       |1.8.4   |1.8.4       |   |

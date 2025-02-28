@@ -32,8 +32,8 @@ rdepends_GGally ... OK
 rdepends_cardx ... OK
 rdepends_dcurves ... OK
 rdepends_ggstats ... OK
-rdepends_gtreg ... OK
 rdepends_gtsummary ... OK
+rdepends_guideR ... OK
 rdepends_iNZightRegression ... OK
 rdepends_logitr ... OK
 rdepends_mmrm ... NOTE
