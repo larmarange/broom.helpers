@@ -33,7 +33,7 @@
                                         arg_name = NULL, select_single = FALSE,
                                         type_check = NULL, type_check_msg = NULL,
                                         null_allowed = TRUE) {
-  lifecycle::deprecate_warn(
+  lifecycle::deprecate_stop(
     "1.17.0",
     ".formula_list_to_named_list()",
     "cards::process_formula_selectors()"
@@ -234,7 +234,7 @@
 #' @export
 .select_to_varnames <- function(select, data = NULL, var_info = NULL,
                                 arg_name = NULL, select_single = FALSE) {
-  lifecycle::deprecate_warn(
+  lifecycle::deprecate_stop(
     "1.17.0",
     ".select_to_varnames()",
     "cards::process_selectors()"
@@ -329,7 +329,7 @@
 #' @keywords internal
 #' @export
 .generic_selector <- function(variable_column, select_column, select_expr, fun_name) {
-  lifecycle::deprecate_warn("1.17.0", ".generic_selector()")
+  lifecycle::deprecate_stop("1.17.0", ".generic_selector()")
   # ensuring the proper data has been scoped to use this function
   if (!.is_selector_scoped(variable_column, select_column)) {
     cli_alert_danger("Cannot use selector '{fun_name}()' in this context.")
@@ -352,7 +352,7 @@
 #' @keywords internal
 #' @export
 .is_selector_scoped <- function(variable_column, select_column) {
-  lifecycle::deprecate_warn("1.17.0", ".is_selector_scoped()")
+  lifecycle::deprecate_stop("1.17.0", ".is_selector_scoped()")
   exists("df_var_info", envir = env_variable_type) &&
     all(c(variable_column, select_column) %in% names(env_variable_type$df_var_info))
 }
