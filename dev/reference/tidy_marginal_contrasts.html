@@ -196,7 +196,6 @@ see the help file of <code><a href="https://marginaleffects.com/man/r/comparison
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="assert_package.html">.assert_package</a></span><span class="op">(</span><span class="st">"marginaleffects"</span>, boolean <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="co"># Average Marginal Contrasts</span></span></span>
 <span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">Titanic</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
@@ -207,10 +206,43 @@ see the help file of <code><a href="https://marginaleffects.com/man/r/comparison
 <span class="r-in"><span>  data <span class="op">=</span> <span class="va">df</span>, family <span class="op">=</span> <span class="va">binomial</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">tidy_marginal_contrasts</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   variable          term   estimate  std.error  statistic      p.value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    Class     2nd - 1st -0.1951651 0.03654057  -5.341051 9.240906e-08</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2    Class     3rd - 1st -0.3066202 0.03069777  -9.988355 1.714025e-23</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3    Class    Crew - 1st -0.1676466 0.03230024  -5.190258 2.100029e-07</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4      Age Child - Adult  0.1972150 0.04867887   4.051347 5.092362e-05</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5      Sex Male - Female -0.5073533 0.02452155 -20.690097 4.253562e-95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     s.value   conf.low  conf.high predicted_lo predicted_hi predicted</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  23.36739 -0.2667833 -0.1235469           NA           NA        NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  75.62696 -0.3667867 -0.2464537           NA           NA        NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  22.18309 -0.2309539 -0.1043393           NA           NA        NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  14.26131  0.1018062  0.2926238    0.1039594    0.2511586 0.2511586</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 313.49450 -0.5554146 -0.4592919    0.7904463    0.2511586 0.2511586</span>
 <span class="r-in"><span><span class="fu"><a href="tidy_plus_plus.html">tidy_plus_plus</a></span><span class="op">(</span><span class="va">mod</span>, tidy_fun <span class="op">=</span> <span class="va">tidy_marginal_contrasts</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 23</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   term          variable var_label var_class var_type    var_nlevels contrasts  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 2nd - 1st     Class    Class     character categorical           4 contr.trea…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 3rd - 1st     Class    Class     character categorical           4 contr.trea…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Crew - 1st    Class    Class     character categorical           4 contr.trea…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Child - Adult Age      Age       character dichotomous           2 contr.trea…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Male - Female Sex      Sex       character dichotomous           2 contr.trea…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 16 more variables: contrasts_type &lt;chr&gt;, reference_row &lt;lgl&gt;, label &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   n_obs &lt;dbl&gt;, n_event &lt;dbl&gt;, estimate &lt;dbl&gt;, std.error &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   statistic &lt;dbl&gt;, p.value &lt;dbl&gt;, s.value &lt;dbl&gt;, conf.low &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   conf.high &lt;dbl&gt;, predicted_lo &lt;dbl&gt;, predicted_hi &lt;dbl&gt;, predicted &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   label_attr &lt;chr&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">mod2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Petal.Length</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html" class="external-link">poly</a></span><span class="op">(</span><span class="va">Petal.Width</span>, <span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">tidy_marginal_contrasts</span><span class="op">(</span><span class="va">mod2</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      variable                term  estimate std.error statistic      p.value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Petal.Width                  +1 0.9961779 0.1523954  6.536799 6.284962e-11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2     Species versicolor - setosa 1.3170279 0.3145654  4.186817 2.828938e-05</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3     Species  virginica - setosa 1.9123142 0.3733402  5.122176 3.020300e-07</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    s.value  conf.low conf.high predicted_lo predicted_hi predicted</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 33.88931 0.6974884  1.294867     1.390159     2.802537  1.390159</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 15.10938 0.7004910  1.933565           NA           NA        NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 21.65880 1.1805808  2.644048           NA           NA        NA</span>
 <span class="r-in"><span><span class="fu">tidy_marginal_contrasts</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="va">mod2</span>,</span></span>
 <span class="r-in"><span>  variables_list <span class="op">=</span> <span class="fu"><a href="tidy_marginal_predictions.html">variables_to_predict</a></span><span class="op">(</span></span></span>
@@ -219,6 +251,16 @@ see the help file of <code><a href="https://marginaleffects.com/man/r/comparison
 <span class="r-in"><span>    categorical <span class="op">=</span> <span class="st">"pairwise"</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      variable                   term  estimate std.error statistic      p.value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Petal.Width                     +3 1.7390991 1.0011046  1.737180 8.235537e-02</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2     Species    versicolor - setosa 1.3170279 0.3145654  4.186817 2.828938e-05</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3     Species     virginica - setosa 1.9123142 0.3733402  5.122176 3.020300e-07</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4     Species virginica - versicolor 0.5952863 0.1305792  4.558814 5.144328e-06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     s.value   conf.low conf.high predicted_lo predicted_hi predicted</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  3.601993 -0.2230299 3.7012282     1.390159     4.377859  1.390159</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 15.109380  0.7004910 1.9335648           NA           NA        NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 21.658805  1.1805808 2.6440476           NA           NA        NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 17.568586  0.3393558 0.8512168           NA           NA        NA</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Model with interactions</span></span></span>
 <span class="r-in"><span><span class="va">mod3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span></span></span>
@@ -226,8 +268,47 @@ see the help file of <code><a href="https://marginaleffects.com/man/r/comparison
 <span class="r-in"><span>  data <span class="op">=</span> <span class="va">df</span>, family <span class="op">=</span> <span class="va">binomial</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">tidy_marginal_contrasts</span><span class="op">(</span><span class="va">mod3</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   variable                   term    estimate  std.error statistic      p.value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    Class              2nd - 1st -0.19208546 0.03613415 -5.315898 1.061324e-07</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2    Class              3rd - 1st -0.30271279 0.03049293 -9.927311 3.166809e-23</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3    Class             Crew - 1st -0.15351506 0.03217010 -4.771980 1.824240e-06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  Sex:Age Female * Child - Adult -0.02017115 0.06255589 -0.322450 7.471118e-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  Sex:Age   Male * Child - Adult  0.36915555 0.06129914  6.022198 1.720646e-09</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      s.value   conf.low   conf.high</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 23.1676312 -0.2629071 -0.12126383</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 74.7413161 -0.3624778 -0.24294775</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 19.0642732 -0.2165673 -0.09046282</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  0.4206039 -0.1427784  0.10243615</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 29.1144025  0.2490114  0.48929966</span>
 <span class="r-in"><span><span class="fu">tidy_marginal_contrasts</span><span class="op">(</span><span class="va">mod3</span>, <span class="st">"no_interaction"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   variable          term   estimate  std.error  statistic       p.value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1      Sex Male - Female -0.5216026 0.02386423 -21.857087 6.655897e-106</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2      Age Child - Adult  0.2891015 0.05091793   5.677793  1.364433e-08</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3    Class     2nd - 1st -0.1920855 0.03613415  -5.315898  1.061324e-07</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4    Class     3rd - 1st -0.3027128 0.03049293  -9.927311  3.166809e-23</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5    Class    Crew - 1st -0.1535151 0.03217010  -4.771980  1.824240e-06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     s.value   conf.low   conf.high predicted_lo predicted_hi predicted</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 349.38974 -0.5683756 -0.47482955   0.56491193    0.3884185 0.3884185</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  26.12712  0.1893042  0.38889880   0.09568894    0.3884185 0.3884185</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  23.16763 -0.2629071 -0.12126383           NA           NA        NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  74.74132 -0.3624778 -0.24294775           NA           NA        NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  19.06427 -0.2165673 -0.09046282           NA           NA        NA</span>
 <span class="r-in"><span><span class="fu">tidy_marginal_contrasts</span><span class="op">(</span><span class="va">mod3</span>, <span class="st">"cross"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   variable                          term   estimate  std.error statistic</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    Class                     2nd - 1st -0.1920855 0.03613415 -5.315898</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2    Class                     3rd - 1st -0.3027128 0.03049293 -9.927311</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3    Class                    Crew - 1st -0.1535151 0.03217010 -4.771980</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  Sex:Age Child - Adult * Male - Female -0.1695523 0.06280633 -2.699605</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        p.value   s.value   conf.low   conf.high predicted_lo predicted_hi</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 1.061324e-07 23.167631 -0.2629071 -0.12126383           NA           NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 3.166809e-23 74.741316 -0.3624778 -0.24294775           NA           NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 1.824240e-06 19.064273 -0.2165673 -0.09046282           NA           NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 6.942175e-03  7.170397 -0.2926505 -0.04645417    0.5917294    0.3884185</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   predicted</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1        NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2        NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3        NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 0.3884185</span>
 <span class="r-in"><span><span class="fu">tidy_marginal_contrasts</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="va">mod3</span>,</span></span>
 <span class="r-in"><span>  variables_list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
@@ -236,9 +317,61 @@ see the help file of <code><a href="https://marginaleffects.com/man/r/comparison
 <span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>Class <span class="op">=</span> <span class="st">"sequential"</span>, Sex <span class="op">=</span> <span class="st">"reference"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     variable                       term    estimate  std.error  statistic</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  Sex:Class         Female * 2nd - 1st -0.13997749 0.02991494  -4.679184</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  Sex:Class         Female * 3rd - 1st -0.30766670 0.02947081 -10.439711</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  Sex:Class         Female * 3rd - 2nd -0.16768921 0.03644975  -4.600559</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  Sex:Class        Female * Crew - 1st -0.10025576 0.02214882  -4.526461</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  Sex:Class        Female * Crew - 2nd  0.03972173 0.03075434   1.291581</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  Sex:Class        Female * Crew - 3rd  0.20741095 0.02966665   6.991383</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7  Sex:Class           Male * 2nd - 1st -0.20622418 0.03884619  -5.308736</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8  Sex:Class           Male * 3rd - 1st -0.30253894 0.03297582  -9.174568</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9  Sex:Class           Male * 3rd - 2nd -0.09631477 0.02470330  -3.898862</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10 Sex:Class          Male * Crew - 1st -0.16777963 0.03553556  -4.721458</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11 Sex:Class          Male * Crew - 2nd  0.03844455 0.02847019   1.350344</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12 Sex:Class          Male * Crew - 3rd  0.13475931 0.01866581   7.219578</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13       Age              Adult - Child -0.28910149 0.05091793  -5.677793</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14       Age              Child - Adult  0.28910149 0.05091793   5.677793</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15 Class:Sex  2nd - 1st * Male - Female -0.69156750 0.03221261 -21.468846</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16 Class:Sex  3rd - 2nd * Male - Female -0.64790478 0.03583072 -18.082385</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17 Class:Sex Crew - 3rd * Male - Female -0.34545626 0.03495969  -9.881560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          p.value    s.value    conf.low   conf.high</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   2.880191e-06  18.405404 -0.19860969 -0.08134529</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   1.633079e-25  82.340608 -0.36542842 -0.24990498</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3   4.213585e-06  17.856520 -0.23912940 -0.09624902</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4   5.997974e-06  17.347093 -0.14366664 -0.05684487</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5   1.965021e-01   2.347383 -0.02055566  0.09999913</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6   2.721895e-12  38.418525  0.14926537  0.26555652</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7   1.103879e-07  23.110914 -0.28236131 -0.13008704</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8   4.533874e-20  64.257818 -0.36717037 -0.23790752</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9   9.664587e-05  13.336932 -0.14473235 -0.04789718</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10  2.341602e-06  18.704073 -0.23742804 -0.09813122</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11  1.769057e-01   2.498948 -0.01735600  0.09424509</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12  5.214898e-13  40.802426  0.09817499  0.17134364</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13  1.364433e-08  26.127123 -0.38889880 -0.18930418</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14  1.364433e-08  26.127123  0.18930418  0.38889880</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15 3.044879e-102 337.230281 -0.75470306 -0.62843195</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16  4.386928e-73 240.367540 -0.71813169 -0.57767787</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17  5.004764e-23  74.081044 -0.41397599 -0.27693653</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">mod4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Petal.Length</span> <span class="op">*</span> <span class="va">Petal.Width</span> <span class="op">+</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">tidy_marginal_contrasts</span><span class="op">(</span><span class="va">mod4</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   variable                term     estimate std.error</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                  Species versicolor - setosa -1.462933106 0.3719381</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2                  Species  virginica - setosa -1.984239711 0.4231549</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 Petal.Length:Petal.Width              1 * +1 -0.125145768 0.3141612</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 Petal.Length:Petal.Width            1.6 * +1 -0.105804839 0.2767317</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 Petal.Length:Petal.Width           4.35 * +1 -0.017158912 0.1587605</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 Petal.Length:Petal.Width            5.1 * +1  0.007017249 0.1594941</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7 Petal.Length:Petal.Width            6.9 * +1  0.065040037 0.2256260</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     statistic      p.value     s.value   conf.low  conf.high</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 -3.93326994 8.379804e-05 13.54272399 -2.1919185 -0.7339477</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 -4.68915671 2.743332e-06 18.47563910 -2.8136081 -1.1548713</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 -0.39834888 6.903730e-01  0.53455198 -0.7408904  0.4905989</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 -0.38233719 7.022113e-01  0.51002294 -0.6481891  0.4365794</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 -0.10808052 9.139318e-01  0.12984155 -0.3283237  0.2940059</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  0.04399693 9.649069e-01  0.05153841 -0.3055854  0.3196199</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7  0.28826483 7.731440e-01  0.37119090 -0.3771788  0.5072588</span>
 <span class="r-in"><span><span class="fu">tidy_marginal_contrasts</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="va">mod4</span>,</span></span>
 <span class="r-in"><span>  variables_list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
@@ -252,11 +385,50 @@ see the help file of <code><a href="https://marginaleffects.com/man/r/comparison
 <span class="r-in"><span>    <span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            variable                       term   estimate</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1              Petal.Length:Species    2 * versicolor - setosa -1.4629331</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2              Petal.Length:Species 2 * virginica - versicolor -0.5213066</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3              Petal.Length:Species    5 * versicolor - setosa -1.4629331</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4              Petal.Length:Species 5 * virginica - versicolor -0.5213066</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  Species:Petal.Width:Petal.Length            setosa * 2 * +2  1.8375120</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  Species:Petal.Width:Petal.Length            setosa * 3 * +2  1.9019817</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7  Species:Petal.Width:Petal.Length            setosa * 4 * +2  1.9664515</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8  Species:Petal.Width:Petal.Length        versicolor * 2 * +2  1.8375120</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9  Species:Petal.Width:Petal.Length        versicolor * 3 * +2  1.9019817</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10 Species:Petal.Width:Petal.Length        versicolor * 4 * +2  1.9664515</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11 Species:Petal.Width:Petal.Length         virginica * 2 * +2  1.8375120</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12 Species:Petal.Width:Petal.Length         virginica * 3 * +2  1.9019817</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13 Species:Petal.Width:Petal.Length         virginica * 4 * +2  1.9664515</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    std.error statistic      p.value  s.value   conf.low  conf.high</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  0.3719381 -3.933270 8.379805e-05 13.54272 -2.1919185 -0.7339477</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  0.1263081 -4.127262 3.671076e-05 14.73344 -0.7688659 -0.2737473</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  0.3719381 -3.933270 8.379793e-05 13.54273 -2.1919184 -0.7339478</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  0.1263081 -4.127262 3.671076e-05 14.73344 -0.7688659 -0.2737473</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  0.1601261 11.475403 1.753594e-30 98.84753  1.5236705  2.1513535</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  0.2541642  7.483280 7.249039e-14 43.64920  1.4038291  2.4001344</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7  0.3833691  5.129395 2.906752e-07 21.71409  1.2150619  2.7178412</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8  0.1601261 11.475403 1.753595e-30 98.84753  1.5236705  2.1513535</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9  0.2541642  7.483280 7.249036e-14 43.64920  1.4038291  2.4001344</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10 0.3833691  5.129394 2.906758e-07 21.71409  1.2150618  2.7178412</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11 0.1601261 11.475403 1.753595e-30 98.84753  1.5236705  2.1513535</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12 0.2541642  7.483280 7.249033e-14 43.64920  1.4038291  2.4001344</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13 0.3833691  5.129394 2.906758e-07 21.71409  1.2150618  2.7178412</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Marginal Contrasts at the Mean</span></span></span>
 <span class="r-in"><span><span class="fu">tidy_marginal_contrasts</span><span class="op">(</span><span class="va">mod</span>, newdata <span class="op">=</span> <span class="st">"mean"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   variable          term   estimate  std.error  statistic       p.value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    Class     2nd - 1st -0.2083189 0.03909115  -5.329054  9.872545e-08</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2    Class     3rd - 1st -0.3030788 0.03320759  -9.126792  7.055934e-20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3    Class    Crew - 1st -0.1815385 0.03558936  -5.100919  3.380076e-07</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4      Age Child - Adult  0.2315175 0.06082479   3.806301  1.410609e-04</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5      Sex Male - Female -0.5405541 0.02514911 -21.493967 1.772950e-102</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     s.value   conf.low  conf.high rowid predicted_lo predicted_hi predicted</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  23.27200 -0.2849361 -0.1317016    NA           NA           NA        NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  63.61972 -0.3681645 -0.2379931    NA           NA           NA        NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  21.49644 -0.2512924 -0.1117846    NA           NA           NA        NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  12.79139  0.1123030  0.3507319     1    0.2254997    0.4570172 0.2254997</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 338.01051 -0.5898454 -0.4912627     1    0.7660538    0.2254997 0.2254997</span>
 <span class="r-in"><span><span class="fu">tidy_marginal_contrasts</span><span class="op">(</span><span class="va">mod3</span>, newdata <span class="op">=</span> <span class="st">"mean"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   variable                   term    estimate  std.error  statistic</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1    Class              2nd - 1st -0.20575641 0.03889922 -5.2894733</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2    Class              3rd - 1st -0.29710778 0.03330055 -8.9220082</span>
