@@ -109,7 +109,6 @@ individual variable, regardless of eventual interactions.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="assert_package.html">.assert_package</a></span><span class="op">(</span><span class="st">"ggeffects"</span>, boolean <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">Titanic</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/uncount.html" class="external-link">uncount</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
@@ -119,8 +118,6 @@ individual variable, regardless of eventual interactions.</p>
 <span class="r-in"><span>  data <span class="op">=</span> <span class="va">df</span>, family <span class="op">=</span> <span class="va">binomial</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">tidy_ggpredict</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="tidy_plus_plus.html">tidy_plus_plus</a></span><span class="op">(</span><span class="va">mod</span>, tidy_fun <span class="op">=</span> <span class="va">tidy_ggpredict</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Some of the focal terms are of type `character`. This may lead to</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   unexpected results. It is recommended to convert these variables to</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   factors before fitting the model.</span>
@@ -133,6 +130,18 @@ individual variable, regardless of eventual interactions.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   unexpected results. It is recommended to convert these variables to</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   factors before fitting the model.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   The following variables are of type character: `Sex`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 8 × 6</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   variable term   estimate std.error conf.low conf.high</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Class    3rd       0.104    0.127    0.083<span style="text-decoration: underline;">0</span>     0.130</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Class    1st       0.407    0.136    0.345      0.473</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Class    2nd       0.199    0.155    0.155      0.252</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Class    Crew      0.225    0.080<span style="text-decoration: underline;">5</span>   0.199      0.254</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Age      Child     0.457    0.257    0.337      0.582</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> Age      Adult     0.225    0.080<span style="text-decoration: underline;">5</span>   0.199      0.254</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> Sex      Male      0.225    0.080<span style="text-decoration: underline;">5</span>   0.199      0.254</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span> Sex      Female    0.766    0.159    0.706      0.817</span>
+<span class="r-in"><span><span class="fu"><a href="tidy_plus_plus.html">tidy_plus_plus</a></span><span class="op">(</span><span class="va">mod</span>, tidy_fun <span class="op">=</span> <span class="va">tidy_ggpredict</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Some of the focal terms are of type `character`. This may lead to</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   unexpected results. It is recommended to convert these variables to</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   factors before fitting the model.</span>

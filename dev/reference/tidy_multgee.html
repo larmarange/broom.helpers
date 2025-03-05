@@ -94,8 +94,8 @@ latest modality of <code>y</code>.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="assert_package.html">.assert_package</a></span><span class="op">(</span><span class="st">"multgee"</span>, boolean <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/AnestisTouloumis/multgee" class="external-link">multgee</a></span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: gnm</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="va">h</span> <span class="op">&lt;-</span> <span class="va">housing</span></span></span>
 <span class="r-in"><span>  <span class="va">h</span><span class="op">$</span><span class="va">status</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span></span></span>
@@ -110,6 +110,40 @@ latest modality of <code>y</code>.</p>
 <span class="r-in"><span>    repeated <span class="op">=</span> <span class="va">time</span>,</span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">mod</span> <span class="op">|&gt;</span> <span class="fu">tidy_multgee</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  term    estimate std.error conf.level   conf.low   conf.high</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1         (Intercept)  1.66073121   0.25026       0.95  1.1702306  2.15123179</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2       factor(time)6 -1.87010328   0.31876       0.95 -2.4948614 -1.24534516</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3      factor(time)12 -2.92505659   0.36829       0.95 -3.6468917 -2.20322145</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4      factor(time)24 -2.81358954   0.34258       0.95 -3.4850340 -2.14214508</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                 sec -0.53680111   0.33704       0.95 -1.1973874  0.12378515</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6   factor(time)6:sec -1.18218145   0.46036       0.95 -2.0844705 -0.27989243</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7  factor(time)12:sec  0.07915600   0.48306       0.95 -0.8676242  1.02593621</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8  factor(time)24:sec  0.03272988   0.46558       0.95 -0.8797902  0.94524991</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9         (Intercept)  1.16643489   0.26273       0.95  0.6514935  1.68137622</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10      factor(time)6 -0.25454473   0.30080       0.95 -0.8441019  0.33501244</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11     factor(time)12 -0.57052156   0.31176       0.95 -1.1815599  0.04051681</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12     factor(time)24 -1.04101141   0.30716       0.95 -1.6430339 -0.43898887</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13                sec -0.10704331   0.34759       0.95 -0.7883072  0.57422057</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14  factor(time)6:sec -1.62341648   0.41349       0.95 -2.4338420 -0.81299097</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15 factor(time)12:sec -2.04850478   0.44543       0.95 -2.9215315 -1.17547803</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16 factor(time)24:sec -1.04965297   0.41831       0.95 -1.8695255 -0.22978044</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    statistic df.error      p.value        original_term   y.level</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    6.63594      Inf 3.224410e-11               beta10    street</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   -5.86682      Inf 4.442325e-09      factor(time)6:1    street</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3   -7.94235      Inf 1.983862e-15     factor(time)12:1    street</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4   -8.21301      Inf 2.157116e-16     factor(time)24:1    street</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5   -1.59271      Inf 1.112253e-01                sec:1    street</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6   -2.56797      Inf 1.022960e-02  factor(time)6:sec:1    street</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7    0.16386      Inf 8.698414e-01 factor(time)12:sec:1    street</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8    0.07030      Inf 9.439549e-01 factor(time)24:sec:1    street</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9    4.43974      Inf 9.006762e-06               beta20 community</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10  -0.84623      Inf 3.974244e-01      factor(time)6:2 community</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11  -1.83000      Inf 6.724994e-02     factor(time)12:2 community</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12  -3.38916      Inf 7.010709e-04     factor(time)24:2 community</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13  -0.30796      Inf 7.581128e-01                sec:2 community</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14  -3.92613      Inf 8.632351e-05  factor(time)6:sec:2 community</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15  -4.59898      Inf 4.245645e-06 factor(time)12:sec:2 community</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16  -2.50925      Inf 1.209878e-02 factor(time)24:sec:2 community</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="va">mod2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/multgee/man/ordLORgee.html" class="external-link">ordLORgee</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    formula <span class="op">=</span> <span class="va">y</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">time</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">trt</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">baseline</span><span class="op">)</span>,</span></span>
@@ -119,8 +153,6 @@ latest modality of <code>y</code>.</p>
 <span class="r-in"><span>    LORstr <span class="op">=</span> <span class="st">"uniform"</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">mod2</span> <span class="op">|&gt;</span> <span class="fu">tidy_multgee</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: gnm</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                 term     estimate std.error conf.level   conf.low   conf.high</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1             beta10 -1.843153449   0.38929       0.95 -2.6061478 -1.08015907</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2             beta20  0.266916287   0.35013       0.95 -0.4193259  0.95315848</span>
