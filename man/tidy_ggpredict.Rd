@@ -37,8 +37,8 @@ By default, \code{ggeffects::ggpredict()} estimates marginal predictions for eac
 individual variable, regardless of eventual interactions.
 }
 \examples{
+\dontshow{if (.assert_package("ggeffects", boolean = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
-if (.assert_package("ggeffects", boolean = TRUE)) {
 df <- Titanic |>
   dplyr::as_tibble() |>
   tidyr::uncount(n) |>
@@ -50,7 +50,7 @@ mod <- glm(
 tidy_ggpredict(mod)
 tidy_plus_plus(mod, tidy_fun = tidy_ggpredict)
 }
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{ggeffects::ggpredict()}

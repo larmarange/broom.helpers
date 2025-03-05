@@ -131,7 +131,7 @@
 #'   )
 #' ex2
 #' }
-#' @examplesIf .assert_package("gtsummary", boolean = TRUE) && .assert_package("emmeans", boolean = TRUE)
+#' @examplesIf require("gtsummary") && require("emmeans")
 #' \donttest{
 #' ex3 <-
 #'   glm(

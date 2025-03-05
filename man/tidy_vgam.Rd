@@ -27,8 +27,8 @@ model, additional column \code{"group"}, \code{"component"} and/or \code{"y.leve
 added to the results.
 }
 \examples{
+\dontshow{if (.assert_package("VGAM", boolean = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
-if (.assert_package("VGAM", boolean = TRUE)) {
   library(VGAM)
   mod <- vglm(
     Species ~ Sepal.Length + Sepal.Width,
@@ -43,7 +43,7 @@ if (.assert_package("VGAM", boolean = TRUE)) {
   )
   mod |> tidy_vgam(exponentiate = TRUE)
 }
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other custom_tieders: 

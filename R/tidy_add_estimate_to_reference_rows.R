@@ -34,9 +34,8 @@
 #' @inheritParams tidy_plus_plus
 #' @export
 #' @family tidy_helpers
-#' @examples
+#' @examplesIf require("gtsummary") && require("emmeans")
 #' \donttest{
-#' if (.assert_package("gtsummary", boolean = TRUE) && .assert_package("emmeans", boolean = TRUE)) {
 #'   df <- Titanic |>
 #'     dplyr::as_tibble() |>
 #'     dplyr::mutate(dplyr::across(where(is.character), factor))
@@ -63,7 +62,6 @@
 #'     tidy_and_attach() |>
 #'     tidy_add_reference_rows() |>
 #'     tidy_add_estimate_to_reference_rows()
-#' }
 #' }
 tidy_add_estimate_to_reference_rows <- function(
     x,

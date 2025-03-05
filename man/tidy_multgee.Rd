@@ -28,8 +28,8 @@ To be noted, for \code{multgee::nomLORgee()}, the baseline \code{y} category is 
 latest modality of \code{y}.
 }
 \examples{
+\dontshow{if (.assert_package("multgee", boolean = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
-if (.assert_package("multgee", boolean = TRUE)) {
   library(multgee)
 
   h <- housing
@@ -55,7 +55,7 @@ if (.assert_package("multgee", boolean = TRUE)) {
   )
   mod2 |> tidy_multgee()
 }
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other custom_tieders: 

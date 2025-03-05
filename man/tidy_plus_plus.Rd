@@ -217,7 +217,7 @@ ex2 <- glm(
   )
 ex2
 }
-\dontshow{if (.assert_package("gtsummary", boolean = TRUE) && .assert_package("emmeans", boolean = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (require("gtsummary") && require("emmeans")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
 ex3 <-
   glm(

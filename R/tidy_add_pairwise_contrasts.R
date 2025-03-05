@@ -32,9 +32,8 @@
 #' @inheritParams tidy_plus_plus
 #' @export
 #' @family tidy_helpers
-#' @examples
+#' @examplesIf .assert_package("emmeans", boolean = TRUE)
 #' \donttest{
-#' if (.assert_package("emmeans", boolean = TRUE)) {
 #'   mod1 <- lm(Sepal.Length ~ Species, data = iris)
 #'   mod1 |>
 #'     tidy_and_attach() |>
@@ -62,7 +61,6 @@
 #'       tidy_and_attach(exponentiate = TRUE) |>
 #'       tidy_add_pairwise_contrasts()
 #'   }
-#' }
 #' }
 tidy_add_pairwise_contrasts <- function(
     x,

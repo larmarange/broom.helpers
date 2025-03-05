@@ -66,8 +66,9 @@ values from a mixed model
 \donttest{
 glm(response ~ age * trt + grade, gtsummary::trial, family = binomial) |>
   tidy_plus_plus(exponentiate = TRUE, include = all_categorical())
-
-if (.assert_package("emmeans", boolean = TRUE)) {
+}
+\dontshow{if (.assert_package("emmeans", boolean = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\donttest{
   glm(response ~ age + trt + grade + stage,
     gtsummary::trial,
     family = binomial,
@@ -77,8 +78,8 @@ if (.assert_package("emmeans", boolean = TRUE)) {
       exponentiate = TRUE,
       include = all_contrasts(c("treatment", "sum"))
     )
-  }
 }
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=scope_tidy]{scope_tidy()}}

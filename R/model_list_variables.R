@@ -31,9 +31,8 @@
 #'
 #' @export
 #' @family model_helpers
-#' @examples
+#' @examplesIf .assert_package("gtsummary", boolean = TRUE)
 #' \donttest{
-#' if (.assert_package("gtsummary", boolean = TRUE)) {
 #'   df <- Titanic |>
 #'     dplyr::as_tibble() |>
 #'     dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
@@ -57,7 +56,6 @@
 #'   family = binomial,
 #' ) |>
 #'   model_list_variables()
-#' }
 #' }
 model_list_variables <- function(model,
                                  labels = NULL,

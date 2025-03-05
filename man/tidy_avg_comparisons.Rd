@@ -38,8 +38,8 @@ See also \code{tidy_marginal_contrasts()} for taking into account interactions.
 For more information, see \code{vignette("marginal_tidiers", "broom.helpers")}.
 }
 \examples{
+\dontshow{if (.assert_package("marginaleffects", boolean = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
-if (.assert_package("marginaleffects", boolean = TRUE)) {
 # Average Marginal Contrasts
 
 df <- Titanic |>
@@ -66,7 +66,7 @@ tidy_avg_comparisons(
 tidy_avg_comparisons(mod, newdata = "mean")
 tidy_plus_plus(mod, tidy_fun = tidy_avg_comparisons, newdata = "mean")
 }
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{marginaleffects::avg_comparisons()}

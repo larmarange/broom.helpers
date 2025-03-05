@@ -54,8 +54,8 @@ If the \code{reference_row} column is not yet available in \code{x},
 \code{\link[=tidy_add_reference_rows]{tidy_add_reference_rows()}} will be automatically applied.
 }
 \examples{
+\dontshow{if (require("gtsummary") && require("emmeans")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
-if (.assert_package("gtsummary", boolean = TRUE) && .assert_package("emmeans", boolean = TRUE)) {
   df <- Titanic |>
     dplyr::as_tibble() |>
     dplyr::mutate(dplyr::across(where(is.character), factor))
@@ -83,7 +83,7 @@ if (.assert_package("gtsummary", boolean = TRUE) && .assert_package("emmeans", b
     tidy_add_reference_rows() |>
     tidy_add_estimate_to_reference_rows()
 }
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other tidy_helpers: 

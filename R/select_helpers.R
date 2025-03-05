@@ -30,8 +30,9 @@
 #' \donttest{
 #' glm(response ~ age * trt + grade, gtsummary::trial, family = binomial) |>
 #'   tidy_plus_plus(exponentiate = TRUE, include = all_categorical())
-#'
-#' if (.assert_package("emmeans", boolean = TRUE)) {
+#' }
+#' @examplesIf .assert_package("emmeans", boolean = TRUE)
+#' \donttest{
 #'   glm(response ~ age + trt + grade + stage,
 #'     gtsummary::trial,
 #'     family = binomial,
@@ -41,7 +42,6 @@
 #'       exponentiate = TRUE,
 #'       include = all_contrasts(c("treatment", "sum"))
 #'     )
-#'   }
 #' }
 NULL
 

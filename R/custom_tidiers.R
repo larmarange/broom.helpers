@@ -12,12 +12,10 @@
 #' @note
 #' For [betareg::betareg()], the component column in the results is standardized
 #' with [broom::tidy()], using `"mean"` and `"precision"` values.
-#' @examples
+#' @examplesIf .assert_package("parameters", boolean = TRUE)
 #' \donttest{
-#' if (.assert_package("parameters", boolean = TRUE)) {
 #'   lm(Sepal.Length ~ Sepal.Width + Species, data = iris) |>
 #'     tidy_parameters()
-#' }
 #' }
 #' @export
 #' @family custom_tieders
@@ -291,9 +289,8 @@ tidy_broom <- function(x, ...) {
 #'
 #' @export
 #' @family custom_tieders
-#' @examples
+#' @examplesIf .assert_package("multgee", boolean = TRUE)
 #' \donttest{
-#' if (.assert_package("multgee", boolean = TRUE)) {
 #'   library(multgee)
 #'
 #'   h <- housing
@@ -318,7 +315,6 @@ tidy_broom <- function(x, ...) {
 #'     LORstr = "uniform"
 #'   )
 #'   mod2 |> tidy_multgee()
-#' }
 #' }
 tidy_multgee <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   if (!inherits(x, "LORgee")) {
@@ -372,9 +368,8 @@ tidy_multgee <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 #' @param ... Additional parameters passed to `parameters::model_parameters()`.
 #' @export
 #' @family custom_tieders
-#' @examples
+#' @examplesIf .assert_package("pscl", boolean = TRUE)
 #' \donttest{
-#' if (.assert_package("pscl", boolean = TRUE)) {
 #'   library(pscl)
 #'   mod <- zeroinfl(
 #'     art ~ fem + mar + phd,
@@ -382,7 +377,6 @@ tidy_multgee <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 #'   )
 #'
 #'   mod |> tidy_zeroinfl(exponentiate = TRUE)
-#' }
 #' }
 tidy_zeroinfl <- function(
     x,
@@ -435,9 +429,8 @@ tidy_zeroinfl <- function(
 #' @param ... Additional parameters passed to `parameters::model_parameters()`.
 #' @export
 #' @family custom_tieders
-#' @examples
+#' @examplesIf .assert_package("VGAM", boolean = TRUE)
 #' \donttest{
-#' if (.assert_package("VGAM", boolean = TRUE)) {
 #'   library(VGAM)
 #'   mod <- vglm(
 #'     Species ~ Sepal.Length + Sepal.Width,
@@ -451,7 +444,6 @@ tidy_zeroinfl <- function(
 #'     data = iris
 #'   )
 #'   mod |> tidy_vgam(exponentiate = TRUE)
-#' }
 #' }
 tidy_vgam <- function(
     x,

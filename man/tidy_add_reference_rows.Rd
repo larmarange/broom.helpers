@@ -50,8 +50,8 @@ rather than before. Similarly, it is better to apply
 \code{tidy_add_reference_rows()} before \code{\link[=tidy_add_n]{tidy_add_n()}}.
 }
 \examples{
+\dontshow{if (.assert_package("gtsummary", boolean = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
-if (.assert_package("gtsummary", boolean = TRUE)) {
   df <- Titanic |>
     dplyr::as_tibble() |>
     dplyr::mutate(Survived = factor(Survived, c("No", "Yes")))
@@ -80,7 +80,7 @@ if (.assert_package("gtsummary", boolean = TRUE)) {
     tidy_and_attach() |>
     tidy_add_reference_rows()
 }
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other tidy_helpers: 

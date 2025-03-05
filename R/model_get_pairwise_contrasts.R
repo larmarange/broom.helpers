@@ -23,9 +23,8 @@
 #' is added to the results.
 #' @family model_helpers
 #' @export
-#' @examples
+#' @examplesIf .assert_package("emmeans", boolean = TRUE)
 #' \donttest{
-#' if (.assert_package("emmeans", boolean = TRUE)) {
 #'   mod <- lm(Sepal.Length ~ Species, data = iris)
 #'   mod |> model_get_pairwise_contrasts(variables = "Species")
 #'   mod |>
@@ -33,7 +32,6 @@
 #'       variables = "Species",
 #'       contrasts_adjust = "none"
 #'     )
-#' }
 #' }
 model_get_pairwise_contrasts <- function(
     model,
