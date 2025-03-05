@@ -216,28 +216,30 @@ ex2 <- glm(
     add_n = TRUE
   )
 ex2
-if (.assert_package("gtsummary", boolean = TRUE) && .assert_package("emmeans", boolean = TRUE)) {
-  ex3 <-
-    glm(
-      response ~ poly(age, 3) + stage + grade * trt,
-      na.omit(gtsummary::trial),
-      family = binomial,
-      contrasts = list(
-        stage = contr.treatment(4, base = 3),
-        grade = contr.sum
-      )
-    ) |>
-    tidy_plus_plus(
-      exponentiate = TRUE,
-      variable_labels = c(age = "Age (in years)"),
-      add_header_rows = TRUE,
-      show_single_row = all_dichotomous(),
-      term_labels = c("poly(age, 3)3" = "Cubic age"),
-      keep_model = TRUE
+}
+\dontshow{if (.assert_package("gtsummary", boolean = TRUE) && .assert_package("emmeans", boolean = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\donttest{
+ex3 <-
+  glm(
+    response ~ poly(age, 3) + stage + grade * trt,
+    na.omit(gtsummary::trial),
+    family = binomial,
+    contrasts = list(
+      stage = contr.treatment(4, base = 3),
+      grade = contr.sum
     )
-  ex3
+  ) |>
+  tidy_plus_plus(
+    exponentiate = TRUE,
+    variable_labels = c(age = "Age (in years)"),
+    add_header_rows = TRUE,
+    show_single_row = all_dichotomous(),
+    term_labels = c("poly(age, 3)3" = "Cubic age"),
+    keep_model = TRUE
+  )
+ex3
 }
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other tidy_helpers: 

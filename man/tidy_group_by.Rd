@@ -38,18 +38,21 @@ Indicates that results should be grouped. By default
 (multi-components models) if any.
 }
 \examples{
-if (require("nnet")) {
-  mod <- multinom(Species ~ Petal.Width + Petal.Length, data = iris)
-  mod |> tidy_and_attach() |> tidy_group_by()
-  mod |>
-    tidy_and_attach() |>
-    tidy_group_by(group_labels = c(versicolor = "harlequin blueflag"))
-  mod |> tidy_and_attach() |> tidy_group_by(group_by = NULL)
-  mod |>
-    tidy_and_attach() |>
-    tidy_identify_variables() |>
-    tidy_group_by(group_by = variable)
-}
+\dontshow{if (require("nnet")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+mod <- multinom(Species ~ Petal.Width + Petal.Length, data = iris)
+mod |> tidy_and_attach() |> tidy_group_by()
+
+mod |>
+  tidy_and_attach() |>
+  tidy_group_by(group_labels = c(versicolor = "harlequin blueflag"))
+
+mod |> tidy_and_attach() |> tidy_group_by(group_by = NULL)
+
+mod |>
+  tidy_and_attach() |>
+  tidy_identify_variables() |>
+  tidy_group_by(group_by = variable)
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other tidy_helpers: 
