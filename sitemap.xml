@@ -1,9 +1,9 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>https://larmarange.github.io/broom.helpers/404.html</loc></url>
 <url><loc>https://larmarange.github.io/broom.helpers/LICENSE.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/articles/broom-helpers.html</loc></url>
 <url><loc>https://larmarange.github.io/broom.helpers/articles/index.html</loc></url>
 <url><loc>https://larmarange.github.io/broom.helpers/articles/marginal_tidiers.html</loc></url>
-<url><loc>https://larmarange.github.io/broom.helpers/articles/tidy.html</loc></url>
 <url><loc>https://larmarange.github.io/broom.helpers/authors.html</loc></url>
 <url><loc>https://larmarange.github.io/broom.helpers/index.html</loc></url>
 <url><loc>https://larmarange.github.io/broom.helpers/news/index.html</loc></url>
@@ -56,6 +56,7 @@
 <url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_broom.html</loc></url>
 <url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_disambiguate_terms.html</loc></url>
 <url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_ggpredict.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_group_by.html</loc></url>
 <url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_identify_variables.html</loc></url>
 <url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_marginal_contrasts.html</loc></url>
 <url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_marginal_means.html</loc></url>
@@ -66,6 +67,7 @@
 <url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_plus_plus.html</loc></url>
 <url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_remove_intercept.html</loc></url>
 <url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_select_variables.html</loc></url>
+<url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_vgam.html</loc></url>
 <url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_with_broom_or_parameters.html</loc></url>
 <url><loc>https://larmarange.github.io/broom.helpers/reference/tidy_zeroinfl.html</loc></url>
 </urlset>

@@ -11,11 +11,11 @@ a list of supported models.'></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
-    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="default" aria-label="Site navigation"><div class="container">
+    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
 
     <a class="navbar-brand me-2" href="../index.html">broom.helpers</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.19.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.20.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,12 +23,16 @@ a list of supported models.'></head><body>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../index.html"><span class="fa fa-home"></span></a></li>
+      <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../articles/broom-helpers.html">Get started</a></li>
 <li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
-<li class="nav-item"><a class="nav-link" href="../articles/tidy.html">Getting Started</a></li>
-<li class="nav-item"><a class="nav-link" href="../articles/marginal_tidiers.html">Marginal estimates</a></li>
-<li class="nav-item"><a class="nav-link" href="../news/index.html">News</a></li>
-      </ul><ul class="navbar-nav"><li class="nav-item"><a class="external-link nav-link" href="https://github.com/larmarange/broom.helpers"><span class="fa fa-github fa-lg"></span></a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/marginal_tidiers.html">Marginal effects / slopes, contrasts, means and predictions with broom.helpers</a></li>
+  </ul></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
+      </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/larmarange/broom.helpers/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul></div>
 
 
@@ -107,7 +111,7 @@ marginal predictions for the different levels of the interactions.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">Titanic</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/uncount.html" class="external-link">uncount</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
@@ -117,8 +121,31 @@ marginal predictions for the different levels of the interactions.</p>
 <span class="r-in"><span>  data <span class="op">=</span> <span class="va">df</span>, family <span class="op">=</span> <span class="va">binomial</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">tidy_all_effects</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   variable   term  estimate  std.error  conf.low conf.high</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    Class    1st 0.5481319 0.03259139 0.4838117 0.6108835</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2    Class    2nd 0.3047099 0.03088545 0.2477413 0.3683636</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3    Class    3rd 0.1701399 0.01556823 0.1417601 0.2028582</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4    Class   Crew 0.3397182 0.01922242 0.3031143 0.3783425</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5      Age  Adult 0.2877415 0.01134968 0.2660183 0.3104882</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6      Age  Child 0.5387134 0.05844277 0.4241446 0.6493334</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7      Sex Female 0.7406740 0.02264426 0.6938988 0.7825415</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8      Sex   Male 0.2025252 0.01029278 0.1830988 0.2234490</span>
 <span class="r-in"><span><span class="fu"><a href="tidy_plus_plus.html">tidy_plus_plus</a></span><span class="op">(</span><span class="va">mod</span>, tidy_fun <span class="op">=</span> <span class="va">tidy_all_effects</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 8 × 17</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   term   variable var_label var_class var_type    var_nlevels contrasts      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1st    Class    Class     character categorical           4 contr.treatment</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 2nd    Class    Class     character categorical           4 contr.treatment</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 3rd    Class    Class     character categorical           4 contr.treatment</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Crew   Class    Class     character categorical           4 contr.treatment</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Adult  Age      Age       character dichotomous           2 contr.treatment</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> Child  Age      Age       character dichotomous           2 contr.treatment</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> Female Sex      Sex       character dichotomous           2 contr.treatment</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span> Male   Sex      Sex       character dichotomous           2 contr.treatment</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 10 more variables: contrasts_type &lt;chr&gt;, reference_row &lt;lgl&gt;, label &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   n_obs &lt;dbl&gt;, n_event &lt;dbl&gt;, estimate &lt;dbl&gt;, std.error &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;, label_attr &lt;chr&gt;</span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

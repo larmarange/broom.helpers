@@ -9,11 +9,11 @@ models."></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
-    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="default" aria-label="Site navigation"><div class="container">
+    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
 
     <a class="navbar-brand me-2" href="../index.html">broom.helpers</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.19.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.20.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,12 +21,16 @@ models."></head><body>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../index.html"><span class="fa fa-home"></span></a></li>
+      <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../articles/broom-helpers.html">Get started</a></li>
 <li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
-<li class="nav-item"><a class="nav-link" href="../articles/tidy.html">Getting Started</a></li>
-<li class="nav-item"><a class="nav-link" href="../articles/marginal_tidiers.html">Marginal estimates</a></li>
-<li class="nav-item"><a class="nav-link" href="../news/index.html">News</a></li>
-      </ul><ul class="navbar-nav"><li class="nav-item"><a class="external-link nav-link" href="https://github.com/larmarange/broom.helpers"><span class="fa fa-github fa-lg"></span></a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/marginal_tidiers.html">Marginal effects / slopes, contrasts, means and predictions with broom.helpers</a></li>
+  </ul></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
+      </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/larmarange/broom.helpers/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul></div>
 
 
@@ -102,7 +106,7 @@ For more information, see <code>vignette("marginal_tidiers", "broom.helpers")</c
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="co"># Average Marginal Contrasts</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">Titanic</span> <span class="op">|&gt;</span></span></span>
@@ -114,21 +118,77 @@ For more information, see <code>vignette("marginal_tidiers", "broom.helpers")</c
 <span class="r-in"><span>  data <span class="op">=</span> <span class="va">df</span>, family <span class="op">=</span> <span class="va">binomial</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">tidy_avg_comparisons</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 9</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   variable term          estimate std.error statistic  p.value s.value conf.low</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Age      Child - Adult    0.197    0.048<span style="text-decoration: underline;">7</span>      4.05 5.09<span style="color: #949494;">e</span><span style="color: #BB0000;">- 5</span>    14.3    0.102</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Class    2nd - 1st       -<span style="color: #BB0000;">0.195</span>    0.036<span style="text-decoration: underline;">5</span>     -<span style="color: #BB0000;">5.34</span> 9.24<span style="color: #949494;">e</span><span style="color: #BB0000;">- 8</span>    23.4   -<span style="color: #BB0000;">0.267</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Class    3rd - 1st       -<span style="color: #BB0000;">0.307</span>    0.030<span style="text-decoration: underline;">7</span>     -<span style="color: #BB0000;">9.99</span> 1.71<span style="color: #949494;">e</span><span style="color: #BB0000;">-23</span>    75.6   -<span style="color: #BB0000;">0.367</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Class    Crew - 1st      -<span style="color: #BB0000;">0.168</span>    0.032<span style="text-decoration: underline;">3</span>     -<span style="color: #BB0000;">5.19</span> 2.10<span style="color: #949494;">e</span><span style="color: #BB0000;">- 7</span>    22.2   -<span style="color: #BB0000;">0.231</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Sex      Male - Female   -<span style="color: #BB0000;">0.507</span>    0.024<span style="text-decoration: underline;">5</span>    -<span style="color: #BB0000;">20.7</span>  4.25<span style="color: #949494;">e</span><span style="color: #BB0000;">-95</span>   313.    -<span style="color: #BB0000;">0.555</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: conf.high &lt;dbl&gt;</span></span>
 <span class="r-in"><span><span class="fu"><a href="tidy_plus_plus.html">tidy_plus_plus</a></span><span class="op">(</span><span class="va">mod</span>, tidy_fun <span class="op">=</span> <span class="va">tidy_avg_comparisons</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 20</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   term          variable var_label var_class var_type    var_nlevels contrasts  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Child - Adult Age      Age       character dichotomous           2 contr.trea…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 2nd - 1st     Class    Class     character categorical           4 contr.trea…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 3rd - 1st     Class    Class     character categorical           4 contr.trea…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Crew - 1st    Class    Class     character categorical           4 contr.trea…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Male - Female Sex      Sex       character dichotomous           2 contr.trea…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 13 more variables: contrasts_type &lt;chr&gt;, reference_row &lt;lgl&gt;, label &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   n_obs &lt;dbl&gt;, n_event &lt;dbl&gt;, estimate &lt;dbl&gt;, std.error &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   statistic &lt;dbl&gt;, p.value &lt;dbl&gt;, s.value &lt;dbl&gt;, conf.low &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   conf.high &lt;dbl&gt;, label_attr &lt;chr&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">mod2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Petal.Length</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html" class="external-link">poly</a></span><span class="op">(</span><span class="va">Petal.Width</span>, <span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">tidy_avg_comparisons</span><span class="op">(</span><span class="va">mod2</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 9</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   variable    term        estimate std.error statistic  p.value s.value conf.low</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Petal.Width +1             0.996     0.152      6.54 6.28<span style="color: #949494;">e</span><span style="color: #BB0000;">-11</span>    33.9    0.697</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Species     versicolor…    1.32      0.315      4.19 2.83<span style="color: #949494;">e</span><span style="color: #BB0000;">- 5</span>    15.1    0.700</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Species     virginica …    1.91      0.373      5.12 3.02<span style="color: #949494;">e</span><span style="color: #BB0000;">- 7</span>    21.7    1.18 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: conf.high &lt;dbl&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Custumizing the type of contrasts</span></span></span>
 <span class="r-in"><span><span class="fu">tidy_avg_comparisons</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="va">mod2</span>,</span></span>
 <span class="r-in"><span>  variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>Petal.Width <span class="op">=</span> <span class="fl">2</span>, Species <span class="op">=</span> <span class="st">"pairwise"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 9</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   variable term  estimate std.error statistic p.value s.value conf.low conf.high</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Petal.W… +2       1.58      0.435      3.62 2.96<span style="color: #949494;">e</span><span style="color: #BB0000;">-4</span>    11.7    0.722     2.43 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Species  vers…    1.32      0.315      4.19 2.83<span style="color: #949494;">e</span><span style="color: #BB0000;">-5</span>    15.1    0.700     1.93 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Species  virg…    1.91      0.373      5.12 3.02<span style="color: #949494;">e</span><span style="color: #BB0000;">-7</span>    21.7    1.18      2.64 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Species  virg…    0.595     0.131      4.56 5.14<span style="color: #949494;">e</span><span style="color: #BB0000;">-6</span>    17.6    0.339     0.851</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Marginal Contrasts at the Mean</span></span></span>
 <span class="r-in"><span><span class="fu">tidy_avg_comparisons</span><span class="op">(</span><span class="va">mod</span>, newdata <span class="op">=</span> <span class="st">"mean"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 9</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   variable term          estimate std.error statistic   p.value s.value conf.low</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Age      Child - Adult    0.232    0.060<span style="text-decoration: underline;">8</span>      3.81 1.41<span style="color: #949494;">e</span><span style="color: #BB0000;">-  4</span>    12.8    0.112</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Class    2nd - 1st       -<span style="color: #BB0000;">0.208</span>    0.039<span style="text-decoration: underline;">1</span>     -<span style="color: #BB0000;">5.33</span> 9.87<span style="color: #949494;">e</span><span style="color: #BB0000;">-  8</span>    23.3   -<span style="color: #BB0000;">0.285</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Class    3rd - 1st       -<span style="color: #BB0000;">0.303</span>    0.033<span style="text-decoration: underline;">2</span>     -<span style="color: #BB0000;">9.13</span> 7.06<span style="color: #949494;">e</span><span style="color: #BB0000;">- 20</span>    63.6   -<span style="color: #BB0000;">0.368</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Class    Crew - 1st      -<span style="color: #BB0000;">0.182</span>    0.035<span style="text-decoration: underline;">6</span>     -<span style="color: #BB0000;">5.10</span> 3.38<span style="color: #949494;">e</span><span style="color: #BB0000;">-  7</span>    21.5   -<span style="color: #BB0000;">0.251</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Sex      Male - Female   -<span style="color: #BB0000;">0.541</span>    0.025<span style="text-decoration: underline;">1</span>    -<span style="color: #BB0000;">21.5</span>  1.77<span style="color: #949494;">e</span><span style="color: #BB0000;">-102</span>   338.    -<span style="color: #BB0000;">0.590</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: conf.high &lt;dbl&gt;</span></span>
 <span class="r-in"><span><span class="fu"><a href="tidy_plus_plus.html">tidy_plus_plus</a></span><span class="op">(</span><span class="va">mod</span>, tidy_fun <span class="op">=</span> <span class="va">tidy_avg_comparisons</span>, newdata <span class="op">=</span> <span class="st">"mean"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 20</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   term          variable var_label var_class var_type    var_nlevels contrasts  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Child - Adult Age      Age       character dichotomous           2 contr.trea…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 2nd - 1st     Class    Class     character categorical           4 contr.trea…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 3rd - 1st     Class    Class     character categorical           4 contr.trea…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Crew - 1st    Class    Class     character categorical           4 contr.trea…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Male - Female Sex      Sex       character dichotomous           2 contr.trea…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 13 more variables: contrasts_type &lt;chr&gt;, reference_row &lt;lgl&gt;, label &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   n_obs &lt;dbl&gt;, n_event &lt;dbl&gt;, estimate &lt;dbl&gt;, std.error &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   statistic &lt;dbl&gt;, p.value &lt;dbl&gt;, s.value &lt;dbl&gt;, conf.low &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   conf.high &lt;dbl&gt;, label_attr &lt;chr&gt;</span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

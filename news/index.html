@@ -3,11 +3,11 @@
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
-    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="default" aria-label="Site navigation"><div class="container">
+    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
 
     <a class="navbar-brand me-2" href="../index.html">broom.helpers</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.19.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.20.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,12 +15,16 @@
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../index.html"><span class="fa fa-home"></span></a></li>
+      <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../articles/broom-helpers.html">Get started</a></li>
 <li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
-<li class="nav-item"><a class="nav-link" href="../articles/tidy.html">Getting Started</a></li>
-<li class="nav-item"><a class="nav-link" href="../articles/marginal_tidiers.html">Marginal estimates</a></li>
-<li class="active nav-item"><a class="nav-link" href="../news/index.html">News</a></li>
-      </ul><ul class="navbar-nav"><li class="nav-item"><a class="external-link nav-link" href="https://github.com/larmarange/broom.helpers"><span class="fa fa-github fa-lg"></span></a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/marginal_tidiers.html">Marginal effects / slopes, contrasts, means and predictions with broom.helpers</a></li>
+  </ul></li>
+<li class="active nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
+      </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/larmarange/broom.helpers/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul></div>
 
 
@@ -34,7 +38,18 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.19.0" id="broomhelpers-1190">broom.helpers 1.19.0<a class="anchor" aria-label="anchor" href="#broomhelpers-1190"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.20.0" id="broomhelpers-1200">broom.helpers 1.20.0<a class="anchor" aria-label="anchor" href="#broomhelpers-1200"></a></h2>
+<p><strong>New supported models</strong></p>
+<ul><li>improved support for <code><a href="https://rdrr.io/pkg/VGAM/man/vglm.html" class="external-link">VGAM::vglm()</a></code> and <code><a href="https://rdrr.io/pkg/VGAM/man/vgam.html" class="external-link">VGAM::vgam()</a></code> models, see the experimental tidier <code><a href="../reference/tidy_vgam.html">tidy_vgam()</a></code> (<a href="https://github.com/larmarange/broom.helpers/issues/253" class="external-link">#253</a>)</li>
+</ul><p><strong>New features</strong></p>
+<ul><li>new <code><a href="../reference/tidy_group_by.html">tidy_group_by()</a></code> function to indicate how to group results (<a href="https://github.com/larmarange/broom.helpers/issues/288" class="external-link">#288</a>)</li>
+<li>new arguments <code>group_by</code> and <code>group_labels</code> for <code><a href="../reference/tidy_plus_plus.html">tidy_plus_plus()</a></code> (<a href="https://github.com/larmarange/broom.helpers/issues/288" class="external-link">#288</a>)</li>
+</ul><p><strong>Deprecated functions</strong></p>
+<ul><li>
+<code><a href="../reference/dot-select_to_varnames.html">.select_to_varnames()</a></code>, <code><a href="../reference/dot-formula_list_to_named_list.html">.formula_list_to_named_list()</a></code>, <code><a href="../reference/dot-generic_selector.html">.generic_selector()</a></code> and <code><a href="../reference/dot-generic_selector.html">.is_selector_scoped()</a></code> are now hard deprecated.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.19.0" id="broomhelpers-1190">broom.helpers 1.19.0<a class="anchor" aria-label="anchor" href="#broomhelpers-1190"></a></h2><p class="text-muted">CRAN release: 2025-01-29</p>
 <p><strong>Deprecated function</strong></p>
 <ul><li>
 <code><a href="../reference/tidy_marginal_means.html">tidy_marginal_means()</a></code> is now hard deprecated (<a href="https://github.com/larmarange/broom.helpers/issues/284" class="external-link">#284</a>)</li>
@@ -78,14 +93,14 @@
 <code>biglmm::bigglm()</code> not supported anymore as <code>biglmm</code> has been removed from CRAN</li>
 </ul><p><strong>Deprecated functions</strong></p>
 <ul><li>
-<code><a href="../reference/tidy_marginal_means.html">tidy_marginal_means()</a></code> is now deprecated, following deprecation of <code><a href="https://marginaleffects.com/man/r/marginal_means.html" class="external-link">marginaleffects::marginal_means()</a></code>. Use instead <code><a href="../reference/tidy_marginal_predictions.html">tidy_marginal_predictions()</a></code> with the option <code>newdata = "balanced"</code>.</li>
+<code><a href="../reference/tidy_marginal_means.html">tidy_marginal_means()</a></code> is now deprecated, following deprecation of <code>marginaleffects::marginal_means()</code>. Use instead <code><a href="../reference/tidy_marginal_predictions.html">tidy_marginal_predictions()</a></code> with the option <code>newdata = "balanced"</code>.</li>
 <li>
 <code><a href="../reference/tidy_margins.html">tidy_margins()</a></code> is now indicated as superseded and may be deprecated if <code>margins</code> is removed from CRAN. <code><a href="../reference/tidy_avg_slopes.html">tidy_avg_slopes()</a></code> could be used as an alternative. (<a href="https://github.com/larmarange/broom.helpers/issues/252" class="external-link">#252</a>)</li>
 </ul><p><strong>Fixes</strong></p>
 <ul><li>
 <code><a href="../reference/tidy_multgee.html">tidy_multgee()</a></code> has been fixed to properly identify the different <code>y.levels</code> (<a href="https://github.com/larmarange/broom.helpers/issues/260" class="external-link">#260</a> <a href="https://github.com/jackmwolf" class="external-link">@jackmwolf</a>)</li>
 <li>
-<code><a href="../reference/tidy_marginal_predictions.html">tidy_marginal_predictions()</a></code> has been updated to avoid the use of the deprecated function <code><a href="https://marginaleffects.com/man/r/datagridcf.html" class="external-link">marginaleffects::datagridcf()</a></code> (<a href="https://github.com/larmarange/broom.helpers/issues/256" class="external-link">#256</a>)</li>
+<code><a href="../reference/tidy_marginal_predictions.html">tidy_marginal_predictions()</a></code> has been updated to avoid the use of the deprecated function <code>marginaleffects::datagridcf()</code> (<a href="https://github.com/larmarange/broom.helpers/issues/256" class="external-link">#256</a>)</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.15.0" id="broomhelpers-1150">broom.helpers 1.15.0<a class="anchor" aria-label="anchor" href="#broomhelpers-1150"></a></h2><p class="text-muted">CRAN release: 2024-04-05</p>
