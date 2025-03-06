@@ -60,7 +60,7 @@ tidy_group_by <- function(
       if (is.null(names(group_labels)) || any(names(group_labels) == ""))
         cli::cli_abort("All elements of {.arg group_labels} should be named.")
       keep <- names(group_labels) %in% levels(x$group_by)
-      drop <- group_labels[!keep]
+      drop <- names(group_labels[!keep])
       if (length(drop) > 0) {
         cli::cli_alert_warning(c(
           "Problem in {.arg group_labels}:\n",
