@@ -75,10 +75,10 @@ tidy_group_by <- function(
     }
   }
   if (length(group_vars) == 0 && "group_by" %in% names(x))
-    x <- x |> dplyr::select(-.data$group_by)
+    x <- x |> dplyr::select(-dplyr::all_of("group_by"))
   # sometimes, group_by not relevant after tidy_select_variable
   if ("group_by" %in% names(x) && all(x$group_by == ""))
-    x <- x |> dplyr::select(-.data$group_by)
+    x <- x |> dplyr::select(-dplyr::all_of("group_by"))
   x |>
     tidy_attach_model(model = model, .attributes = .attributes)
 }

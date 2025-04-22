@@ -460,7 +460,7 @@ tidy_vgam <- function(
     conf.level = conf.level,
     ...
   )
-  res <- res |> dplyr::rename(original_term = .data$term)
+  res <- res |> dplyr::rename(original_term = dplyr::all_of("term"))
 
   # identify groups
   res <- res |>
@@ -496,7 +496,7 @@ tidy_vgam <- function(
 
   # remove component if all empty
   if (all(res$component == ""))
-    res <- res |> dplyr::select(-.data$component, -.data$group)
+    res <- res |> dplyr::select(-dplyr::all_of(c("component", "group")))
 
   res
 }
