@@ -104,6 +104,3 @@ model_get_model_frame.svy_vglm <- function(model) {
     data = model$design$variables
   )
 }
-
-
-

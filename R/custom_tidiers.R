@@ -501,7 +501,7 @@ tidy_vgam <- function(
   # identification of y.level (multinomial models)
   if (
     !is.null(x@misc$refLevel) &&
-    length(x@misc$predictors.names) == length(x@misc$ynames) - 1
+      length(x@misc$predictors.names) == length(x@misc$ynames) - 1
   ) {
     ylevels <- x@misc$ynames[-x@misc$refLevel]
     res$y.level <- ylevels[as.integer(res$group)]
