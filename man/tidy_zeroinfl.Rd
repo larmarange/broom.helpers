@@ -44,6 +44,7 @@ Other custom_tieders:
 \code{\link{tidy_broom}()},
 \code{\link{tidy_multgee}()},
 \code{\link{tidy_parameters}()},
+\code{\link{tidy_svy_vglm}()},
 \code{\link{tidy_vgam}()},
 \code{\link{tidy_with_broom_or_parameters}()}
 }
