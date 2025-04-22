@@ -617,6 +617,25 @@ test_that("tidy_plus_plus() works with VGAM::vglm", {
 })
 
 
+test_that("tidy_plus_plus() works with svyVGAM::svy_vglm", {
+  skip_on_cran()
+  skip_if_not_installed("svyVGAM")
+  skip_if_not_installed("parameters")
+  skip_if_not_installed("survey")
+  library(svyVGAM)
+
+  mod <- svy_vglm(
+    stage ~ grade + age,
+    VGAM::multinomial(),
+    design = survey::svydesign(~ 1, data = gtsummary::trial, weights = ~ 1)
+  )
+
+  expect_no_error(
+    res <- mod |> tidy_plus_plus()
+  )
+  expect_true("y.level" %in% colnames(res))
+})
+
 test_that("tidy_plus_plus() works with plm::plm", {
   skip_on_cran()
   skip_if_not_installed("plm")
@@ -633,7 +652,6 @@ test_that("tidy_plus_plus() works with plm::plm", {
     res <- mod |> tidy_plus_plus()
   )
 })
-
 
 test_that("tidy_plus_plus() works with biglm::bigglm", {
   skip_on_cran()
