@@ -9,6 +9,7 @@ tidy_add_term_labels(
   labels = NULL,
   interaction_sep = " * ",
   categorical_terms_pattern = "{level}",
+  relabel_poly = FALSE,
   model = tidy_get_model(x),
   quiet = FALSE,
   strict = FALSE
@@ -27,6 +28,8 @@ Separator for interaction terms.}
 \item{categorical_terms_pattern}{(\code{\link[glue:glue]{glue pattern}})\cr
 A \link[glue:glue]{glue pattern} for labels of categorical terms with treatment
 or sum contrasts (see examples and \code{\link[=model_list_terms_levels]{model_list_terms_levels()}}).}
+
+\item{relabel_poly}{Should terms generated with \code{\link[stats:poly]{stats::poly()}} be relabeled?}
 
 \item{model}{(a model object, e.g. \code{glm})\cr
 The corresponding model, if not attached to \code{x}.}

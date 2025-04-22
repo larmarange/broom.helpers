@@ -25,6 +25,7 @@
 #' @param categorical_terms_pattern ([`glue pattern`][glue::glue()])\cr
 #' A [glue pattern][glue::glue()] for labels of categorical terms with treatment
 #' or sum contrasts (see examples and [model_list_terms_levels()]).
+#' @param relabel_poly Should terms generated with [stats::poly()] be relabeled?
 #' @param model (a model object, e.g. `glm`)\cr
 #' The corresponding model, if not attached to `x`.
 #' @inheritParams tidy_plus_plus
@@ -56,6 +57,7 @@ tidy_add_term_labels <- function(x,
                                  labels = NULL,
                                  interaction_sep = " * ",
                                  categorical_terms_pattern = "{level}",
+                                 relabel_poly = FALSE,
                                  model = tidy_get_model(x),
                                  quiet = FALSE,
                                  strict = FALSE) {
@@ -200,18 +202,20 @@ tidy_add_term_labels <- function(x,
   }
 
   # labels for polynomial terms
-  poly_terms <- xx |>
-    dplyr::filter(
-      .data$term |> stringr::str_starts("poly\\(")
-    ) |>
-    dplyr::mutate(
-      degree = .data$term |> stringr::str_replace("poly\\(.+\\)([0-9]+)", "\\1"),
-      label = paste0(.data$var_label, .superscript_numbers(.data$degree))
-    )
-  poly_labels <- poly_terms$label
-  names(poly_labels) <- poly_terms$term
-  term_labels <- term_labels |>
-    .update_vector(poly_labels)
+  if (relabel_poly) {
+    poly_terms <- xx |>
+      dplyr::filter(
+        .data$term |> stringr::str_starts("poly\\(")
+      ) |>
+      dplyr::mutate(
+        degree = .data$term |> stringr::str_replace("poly\\(.+\\)([0-9]+)", "\\1"),
+        label = paste0(.data$var_label, .superscript_numbers(.data$degree))
+      )
+    poly_labels <- poly_terms$label
+    names(poly_labels) <- poly_terms$term
+    term_labels <- term_labels |>
+      .update_vector(poly_labels)
+  }
 
   # labels argument
   term_labels <- term_labels |>

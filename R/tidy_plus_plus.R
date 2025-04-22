@@ -45,6 +45,7 @@
 #' @param categorical_terms_pattern ([`glue pattern`][glue::glue()])\cr
 #' A [glue pattern][glue::glue()] for labels of categorical terms with treatment
 #' or sum contrasts (see [model_list_terms_levels()]).
+#' @param relabel_poly Should terms generated with [stats::poly()] be relabeled?
 #' @param disambiguate_terms  (`logical`)\cr
 #' Should terms be disambiguated with
 #' [tidy_disambiguate_terms()]? (default `TRUE`)
@@ -165,6 +166,7 @@ tidy_plus_plus <- function(model,
                            term_labels = NULL,
                            interaction_sep = " * ",
                            categorical_terms_pattern = "{level}",
+                           relabel_poly = FALSE,
                            disambiguate_terms = TRUE,
                            disambiguate_sep = ".",
                            add_reference_rows = TRUE,
@@ -208,10 +210,11 @@ tidy_plus_plus <- function(model,
     tidy_add_contrasts()
 
   if (add_reference_rows) {
-    res <- res |> tidy_add_reference_rows(
-      no_reference_row = {{ no_reference_row }},
-      quiet = quiet
-    )
+    res <- res |>
+      tidy_add_reference_rows(
+        no_reference_row = {{ no_reference_row }},
+        quiet = quiet
+      )
   }
 
   if (add_pairwise_contrasts) {
@@ -240,6 +243,7 @@ tidy_plus_plus <- function(model,
       labels = term_labels,
       interaction_sep = interaction_sep,
       categorical_terms_pattern = categorical_terms_pattern,
+      relabel_poly = relabel_poly,
       quiet = quiet
     )
 

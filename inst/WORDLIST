@@ -3,7 +3,6 @@ Arel
 Bundock
 CMD
 Codecov
-DOI
 Heiss
 Helmert
 Lifecycle
@@ -24,8 +23,6 @@ helmert
 labelled
 logitr
 poisson
-quartile
-quartiles
 sdiff
 tibble
 tibbles
@@ -34,6 +31,7 @@ tidyselect
 tieder
 tieders
 un
+ungrouping
 unselected
 varnames
 xlevels
