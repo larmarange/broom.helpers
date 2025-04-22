@@ -67,7 +67,7 @@ model_identify_variables.default <- function(model) {
   ) |>
     # specific case of polynomial terms defined with poly()
     dplyr::mutate(
-      variable = stringr::str_replace(.data$variable, "^poly\\((.*),(.*)\\)$", "\\1")
+      variable = stringr::str_replace(.data$variable, "^poly\\(([^,]*),(.*)\\)$", "\\1")
     ) |>
     dplyr::left_join(
       model_list_variables(model) |>

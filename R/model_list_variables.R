@@ -106,7 +106,7 @@ model_list_variables.default <- function(model,
     .add_label_attr(model) |>
     # specific case of polynomial terms defined with poly()
     dplyr::mutate(
-      variable = stringr::str_replace(.data$variable, "^poly\\((.*),(.*)\\)$", "\\1")
+      variable = stringr::str_replace(.data$variable, "^poly\\(([^,]*),(.*)\\)$", "\\1")
     ) |>
     .compute_var_label(labels)
 
