@@ -286,9 +286,12 @@ test_that("tidy_add_term_labels() works with stats::poly()", {
   expect_equal(
     res$label,
     c(
-      `(Intercept)` = "(Intercept)", `poly(Sepal.Width, 3)1` = "poly(Sepal.Width, 3)1",
-      `poly(Sepal.Width, 3)2` = "poly(Sepal.Width, 3)2", `poly(Sepal.Width, 3)3` = "poly(Sepal.Width, 3)3",
-      `poly(Petal.Length, 2)1` = "poly(Petal.Length, 2)1", `poly(Petal.Length, 2)2` = "poly(Petal.Length, 2)2"
+      `(Intercept)` = "(Intercept)",
+      `poly(Sepal.Width, 3)1` = "poly(Sepal.Width, 3)1",
+      `poly(Sepal.Width, 3)2` = "poly(Sepal.Width, 3)2",
+      `poly(Sepal.Width, 3)3` = "poly(Sepal.Width, 3)3",
+      `poly(Petal.Length, 2)1` = "poly(Petal.Length, 2)1",
+      `poly(Petal.Length, 2)2` = "poly(Petal.Length, 2)2"
     ),
     ignore_attr = TRUE
   )
