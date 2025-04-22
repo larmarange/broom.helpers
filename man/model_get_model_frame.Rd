@@ -9,6 +9,7 @@
 \alias{model_get_model_frame.biglm}
 \alias{model_get_model_frame.model_fit}
 \alias{model_get_model_frame.fixest}
+\alias{model_get_model_frame.svy_vglm}
 \title{Get the model frame of a model}
 \usage{
 model_get_model_frame(model)
@@ -26,6 +27,8 @@ model_get_model_frame(model)
 \method{model_get_model_frame}{model_fit}(model)
 
 \method{model_get_model_frame}{fixest}(model)
+
+\method{model_get_model_frame}{svy_vglm}(model)
 }
 \arguments{
 \item{model}{(a model object, e.g. \code{glm})\cr

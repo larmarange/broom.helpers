@@ -95,3 +95,9 @@ model_get_terms.fixest <- function(model) {
   }
   stats::terms(f)
 }
+
+#' @export
+#' @rdname model_get_terms
+model_get_terms.svy_vglm <- function(model) {
+  model_get_terms(model$fit)
+}

@@ -10,6 +10,7 @@
 \alias{model_get_xlevels.glmmTMB}
 \alias{model_get_xlevels.plm}
 \alias{model_get_xlevels.model_fit}
+\alias{model_get_xlevels.svy_vglm}
 \title{Get xlevels used in the model}
 \usage{
 model_get_xlevels(model)
@@ -29,6 +30,8 @@ model_get_xlevels(model)
 \method{model_get_xlevels}{plm}(model)
 
 \method{model_get_xlevels}{model_fit}(model)
+
+\method{model_get_xlevels}{svy_vglm}(model)
 }
 \arguments{
 \item{model}{(a model object, e.g. \code{glm})\cr

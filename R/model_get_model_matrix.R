@@ -162,3 +162,9 @@ model_get_model_matrix.vglm <- function(model, ...) {
 model_get_model_matrix.vgam <- function(model, ...) {
   stats::model.matrix(model, ..., type = "lm")
 }
+
+#' @export
+#' @rdname model_get_model_matrix
+model_get_model_matrix.svy_vglm <- function(model) {
+  model_get_model_matrix(model$fit)
+}

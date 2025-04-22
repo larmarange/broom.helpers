@@ -16,6 +16,7 @@
 \alias{model_get_model_matrix.cch}
 \alias{model_get_model_matrix.vglm}
 \alias{model_get_model_matrix.vgam}
+\alias{model_get_model_matrix.svy_vglm}
 \title{Get the model matrix of a model}
 \usage{
 model_get_model_matrix(model, ...)
@@ -47,6 +48,8 @@ model_get_model_matrix(model, ...)
 \method{model_get_model_matrix}{vglm}(model, ...)
 
 \method{model_get_model_matrix}{vgam}(model, ...)
+
+\method{model_get_model_matrix}{svy_vglm}(model)
 }
 \arguments{
 \item{model}{(a model object, e.g. \code{glm})\cr

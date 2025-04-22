@@ -3,11 +3,14 @@
 \name{model_get_nlevels}
 \alias{model_get_nlevels}
 \alias{model_get_nlevels.default}
+\alias{model_get_nlevels.svy_vglm}
 \title{Get the number of levels for each factor used in \code{xlevels}}
 \usage{
 model_get_nlevels(model)
 
 \method{model_get_nlevels}{default}(model)
+
+\method{model_get_nlevels}{svy_vglm}(model)
 }
 \arguments{
 \item{model}{(a model object, e.g. \code{glm})\cr

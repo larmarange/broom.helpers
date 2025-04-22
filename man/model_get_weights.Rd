@@ -6,6 +6,7 @@
 \alias{model_get_weights.svyglm}
 \alias{model_get_weights.svrepglm}
 \alias{model_get_weights.model_fit}
+\alias{model_get_weights.svy_vglm}
 \title{Get sampling weights used by a model}
 \usage{
 model_get_weights(model)
@@ -17,6 +18,8 @@ model_get_weights(model)
 \method{model_get_weights}{svrepglm}(model)
 
 \method{model_get_weights}{model_fit}(model)
+
+\method{model_get_weights}{svy_vglm}(model)
 }
 \arguments{
 \item{model}{(a model object, e.g. \code{glm})\cr

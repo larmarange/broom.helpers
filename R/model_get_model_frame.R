@@ -95,3 +95,15 @@ model_get_model_frame.fixest <- function(model) {
     data = get(model$call$data, model$call_env)
   )
 }
+
+#' @export
+#' @rdname model_get_model_frame
+model_get_model_frame.svy_vglm <- function(model) {
+  stats::model.frame.default(
+    model |> model_get_terms(),
+    data = model$design$variables
+  )
+}
+
+
+
