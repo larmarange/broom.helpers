@@ -155,7 +155,7 @@ See the documentation of `tidy_plus_plus()` for the full list of available optio
 
 ### Polynomial terms
 
-When polynomial terms of a continuous variable are defined with `stats::poly()`, `broom.helpers` will be able to identify the corresponding variable, create appropriate labels and add header rows.
+When polynomial terms of a continuous variable are defined with `stats::poly()`, `broom.helpers` will be able to identify the corresponding variable, and add header rows.
 
 ```{r}
 model_poly <- glm(response ~ poly(age, 3) + ttdeath, na.omit(trial), family = binomial)
@@ -168,6 +168,23 @@ model_poly |>
   ) |>
   print_table()
 ```
+
+You also have an option to relabel polynomial terms. Be aware that, by default, `stats::poly()` generates orthogonal polynomials. Relabels are more appropriate with raw polynomials.
+
+
+```{r}
+model_poly2 <- glm(response ~ poly(age, 3, raw = TRUE) + ttdeath, na.omit(trial), family = binomial)
+
+model_poly2 |>
+  tidy_plus_plus(
+    exponentiate = TRUE,
+    add_header_rows = TRUE,
+    variable_labels = c(age = "Age in years"),
+    relabel_poly = TRUE
+  ) |>
+  print_table()
+```
+
 
 ### Different type of contrasts
 
