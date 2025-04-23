@@ -38,6 +38,8 @@ supported_models <-
     "Experimental support. It is recommended to use `tidy_vgam()` as `tidy_fun`.",
     "`VGAM::vgam()`",
     "Experimental support. It is recommended to use `tidy_vgam()` as `tidy_fun`.",
+    "`svyVGAM::svy_vglm()`",
+    "Experimental support. It is recommended to use `tidy_svy_vglm()` as `tidy_fun`.",
     "`cmprsk::crr()`",
     "Limited support. It is recommended to use `tidycmprsk::crr()` instead.",
     "`tidycmprsk::crr()`", "",

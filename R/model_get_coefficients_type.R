@@ -198,3 +198,9 @@ model_get_coefficients_type.vglm <- function(model) {
 #' @export
 #' @rdname model_get_coefficients_type
 model_get_coefficients_type.vgam <- model_get_coefficients_type.vglm
+
+#' @export
+#' @rdname model_get_coefficients_type
+model_get_coefficients_type.svy_vglm <- function(model) {
+  model_get_coefficients_type(model$fit)
+}

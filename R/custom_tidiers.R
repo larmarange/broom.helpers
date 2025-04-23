@@ -136,6 +136,15 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
     return(tidy_vgam(x, conf.int = conf.int, conf.level = conf.level, ...))
   }
 
+  if (inherits(x, "svy_vglm")) {
+    cli::cli_alert_info("{.cls svy_vglm} model detected.")
+    cli::cli_alert_success("{.fn tidy_svy_vglm} used instead.")
+    cli::cli_alert_info(
+      "Add {.code tidy_fun = broom.helpers::tidy_svy_vglm} to quiet these messages."
+    )
+    return(tidy_svy_vglm(x, conf.int = conf.int, conf.level = conf.level, ...))
+  }
+
   tidy_args <- list(...)
   tidy_args$x <- x
   tidy_args$conf.int <- conf.int
@@ -460,6 +469,11 @@ tidy_vgam <- function(
     conf.level = conf.level,
     ...
   )
+
+  .process_vgam_tidy_tbl(res, x)
+}
+
+.process_vgam_tidy_tbl <- function(res, x) {
   res <- res |> dplyr::rename(original_term = .data$term)
 
   # identify groups
@@ -523,4 +537,51 @@ tidy_vgam <- function(
       )
     )
   t
+}
+
+#' Tidy a `svy_vglm` model
+#'
+#' `r lifecycle::badge("experimental")`
+#' A tidier for models generated with `svyVGAM::svy_vglm()`.
+#' Term names will be updated to be consistent with generic models. The original
+#' term names are preserved in an `"original_term"` column. Depending on the
+#' model, additional column `"group"`, `"component"` and/or `"y.level"` may be
+#' added to the results.
+#' @param x (`svy_vglm`)\cr
+#' A `svyVGAM::svy_vglm()` model.
+#' @param conf.int (`logical`)\cr
+#' Whether or not to include a confidence interval in the tidied output.
+#' @param conf.level (`numeric`)\cr
+#' The confidence level to use for the confidence interval (between `0` ans `1`).
+#' @param ... Additional parameters passed to `parameters::model_parameters()`.
+#' @export
+#' @family custom_tieders
+#' @examplesIf .assert_package("svyVGAM", boolean = TRUE)
+#' \donttest{
+#'   library(svyVGAM)
+#'
+#'   mod <- svy_vglm(
+#'     Species ~ Sepal.Length + Sepal.Width,
+#'     family = multinomial(),
+#'     design = survey::svydesign(~1, data = iris)
+#'   )
+#'   mod |> tidy_svy_vglm(exponentiate = TRUE)
+#' }
+tidy_svy_vglm <- function(
+    x,
+    conf.int = TRUE,
+    conf.level = .95,
+    ...) {
+  if (!inherits(x, "svy_vglm")) {
+    cli::cli_abort("{.arg x} should be of class {.cls svy_vglm}.")
+  } # nolint
+
+  res <- tidy_parameters(
+    x,
+    conf.int = conf.int,
+    conf.level = conf.level,
+    ...
+  )
+
+  .process_vgam_tidy_tbl(res, x$fit)
 }

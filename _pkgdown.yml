@@ -43,6 +43,7 @@ reference:
       - tidy_multgee
       - tidy_zeroinfl
       - tidy_vgam
+      - tidy_svy_vglm
 
   - title: Tidiers for marginal predictions, contrasts, and effects
   - contents:

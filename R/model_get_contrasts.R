@@ -85,3 +85,9 @@ model_get_contrasts.betareg <- function(model) {
   for (v in names(mc$precision)) res[[v]] <- mc$precision[[v]]
   res
 }
+
+#' @export
+#' @rdname model_get_contrasts
+model_get_contrasts.svy_vglm <- function(model) {
+  model_get_contrasts(model$fit)
+}

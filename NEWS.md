@@ -1,5 +1,10 @@
 # broom.helpers (development version)
 
+**New supported models**
+
+- basic support for `svyVGAM::svy_vglm()` models, see the
+  experimental tidier `tidy_svy_vglm()` (#293)
+
 # broom.helpers 1.20.0
 
 **New supported models**

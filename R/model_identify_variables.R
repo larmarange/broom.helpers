@@ -214,3 +214,9 @@ model_identify_variables.logitr <- function(model) {
       )
     )
 }
+
+#' @export
+#' @rdname model_identify_variables
+model_identify_variables.svy_vglm <- function(model) {
+  model_identify_variables(model$fit)
+}
