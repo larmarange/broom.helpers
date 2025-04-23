@@ -49,7 +49,7 @@ model_get_model_matrix(model, ...)
 
 \method{model_get_model_matrix}{vgam}(model, ...)
 
-\method{model_get_model_matrix}{svy_vglm}(model)
+\method{model_get_model_matrix}{svy_vglm}(model, ...)
 }
 \arguments{
 \item{model}{(a model object, e.g. \code{glm})\cr
