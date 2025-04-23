@@ -11,7 +11,6 @@
   `stats::poly()`) by default. The feature is style accessible using
   `relabel_poly = TRUE` (#292)
 
-
 # broom.helpers 1.20.0
 
 **New supported models**
