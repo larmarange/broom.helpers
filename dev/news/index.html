@@ -41,6 +41,9 @@
 <h2 class="pkg-version" data-toc-text="development version" id="broomhelpers-development-version">broom.helpers (development version)<a class="anchor" aria-label="anchor" href="#broomhelpers-development-version"></a></h2>
 <p><strong>New supported models</strong></p>
 <ul><li>basic support for <code><a href="https://rdrr.io/pkg/svyVGAM/man/svy_vglm.html" class="external-link">svyVGAM::svy_vglm()</a></code> models, see the experimental tidier <code><a href="../reference/tidy_svy_vglm.html">tidy_svy_vglm()</a></code> (<a href="https://github.com/larmarange/broom.helpers/issues/293" class="external-link">#293</a>)</li>
+</ul><p><strong>Minor breaking changes</strong></p>
+<ul><li>
+<code><a href="../reference/tidy_add_term_labels.html">tidy_add_term_labels()</a></code> does not relabel polynomial terms (defined with <code><a href="https://rdrr.io/r/stats/poly.html" class="external-link">stats::poly()</a></code>) by default. The feature is style accessible using <code>relabel_poly = TRUE</code> (<a href="https://github.com/larmarange/broom.helpers/issues/292" class="external-link">#292</a>)</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.20.0" id="broomhelpers-1200">broom.helpers 1.20.0<a class="anchor" aria-label="anchor" href="#broomhelpers-1200"></a></h2><p class="text-muted">CRAN release: 2025-03-06</p>

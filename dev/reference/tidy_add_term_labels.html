@@ -70,6 +70,7 @@ customized with <code>categorical_terms_pattern</code> argument);</p></li>
 <span>  labels <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  interaction_sep <span class="op">=</span> <span class="st">" * "</span>,</span>
 <span>  categorical_terms_pattern <span class="op">=</span> <span class="st">"{level}"</span>,</span>
+<span>  relabel_poly <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  model <span class="op">=</span> <span class="fu"><a href="tidy_attach_model.html">tidy_get_model</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  quiet <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  strict <span class="op">=</span> <span class="cn">FALSE</span></span>
@@ -99,6 +100,10 @@ Separator for interaction terms.</p></dd>
 <dd><p>(<code><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue pattern</a></code>)<br>
 A <a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue pattern</a> for labels of categorical terms with treatment
 or sum contrasts (see examples and <code><a href="model_list_terms_levels.html">model_list_terms_levels()</a></code>).</p></dd>
+
+
+<dt id="arg-relabel-poly">relabel_poly<a class="anchor" aria-label="anchor" href="#arg-relabel-poly"></a></dt>
+<dd><p>Should terms generated with <code><a href="https://rdrr.io/r/stats/poly.html" class="external-link">stats::poly()</a></code> be relabeled?</p></dd>
 
 
 <dt id="arg-model">model<a class="anchor" aria-label="anchor" href="#arg-model"></a></dt>
