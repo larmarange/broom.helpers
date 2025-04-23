@@ -80,7 +80,8 @@ Suggests:
     survival,
     testthat (>= 3.0.0),
     tidycmprsk,
-    VGAM
+    VGAM,
+    svyVGAM
 VignetteBuilder: 
     knitr
 RdMacros: 
