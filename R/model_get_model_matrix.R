@@ -165,6 +165,6 @@ model_get_model_matrix.vgam <- function(model, ...) {
 
 #' @export
 #' @rdname model_get_model_matrix
-model_get_model_matrix.svy_vglm <- function(model) {
-  model_get_model_matrix(model$fit)
+model_get_model_matrix.svy_vglm <- function(model, ...) {
+  model_get_model_matrix(model$fit, ...)
 }
