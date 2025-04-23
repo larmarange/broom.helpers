@@ -16,6 +16,7 @@ tidy_plus_plus(
   term_labels = NULL,
   interaction_sep = " * ",
   categorical_terms_pattern = "{level}",
+  relabel_poly = FALSE,
   disambiguate_terms = TRUE,
   disambiguate_sep = ".",
   add_reference_rows = TRUE,
@@ -79,6 +80,8 @@ Separator for interaction terms.}
 \item{categorical_terms_pattern}{(\code{\link[glue:glue]{glue pattern}})\cr
 A \link[glue:glue]{glue pattern} for labels of categorical terms with treatment
 or sum contrasts (see \code{\link[=model_list_terms_levels]{model_list_terms_levels()}}).}
+
+\item{relabel_poly}{Should terms generated with \code{\link[stats:poly]{stats::poly()}} be relabeled?}
 
 \item{disambiguate_terms}{(\code{logical})\cr
 Should terms be disambiguated with

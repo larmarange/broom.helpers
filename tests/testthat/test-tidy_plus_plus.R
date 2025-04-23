@@ -762,7 +762,7 @@ test_that("tidy_plus_plus() works with multgee models", {
     status ~ factor(time) * sec,
     data = h,
     id = id,
-    repeated = time,
+    repeated = time
   )
   expect_no_error(
     res <- mod |> tidy_plus_plus()
