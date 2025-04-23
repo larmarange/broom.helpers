@@ -9,6 +9,7 @@
 \alias{model_get_terms.betareg}
 \alias{model_get_terms.cch}
 \alias{model_get_terms.fixest}
+\alias{model_get_terms.svy_vglm}
 \title{Get the terms of a model}
 \usage{
 model_get_terms(model)
@@ -28,6 +29,8 @@ model_get_terms(model)
 \method{model_get_terms}{cch}(model)
 
 \method{model_get_terms}{fixest}(model)
+
+\method{model_get_terms}{svy_vglm}(model)
 }
 \arguments{
 \item{model}{(a model object, e.g. \code{glm})\cr

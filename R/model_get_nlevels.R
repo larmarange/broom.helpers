@@ -27,3 +27,9 @@ model_get_nlevels.default <- function(model) {
     var_nlevels = unlist(nlevels)
   )
 }
+
+#' @export
+#' @rdname model_get_nlevels
+model_get_nlevels.svy_vglm <- function(model) {
+  model_get_nlevels(model$fit)
+}

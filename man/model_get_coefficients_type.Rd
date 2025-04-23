@@ -23,6 +23,7 @@
 \alias{model_get_coefficients_type.LORgee}
 \alias{model_get_coefficients_type.vglm}
 \alias{model_get_coefficients_type.vgam}
+\alias{model_get_coefficients_type.svy_vglm}
 \title{Get coefficient type}
 \usage{
 model_get_coefficients_type(model)
@@ -68,6 +69,8 @@ model_get_coefficients_type(model)
 \method{model_get_coefficients_type}{vglm}(model)
 
 \method{model_get_coefficients_type}{vgam}(model)
+
+\method{model_get_coefficients_type}{svy_vglm}(model)
 }
 \arguments{
 \item{model}{(a model object, e.g. \code{glm})\cr

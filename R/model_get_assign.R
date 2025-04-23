@@ -54,6 +54,12 @@ model_get_assign.vglm <- function(model) {
 
 #' @export
 #' @rdname model_get_assign
+model_get_assign.svy_vglm <- function(model) {
+  model_get_assign(model$fit)
+}
+
+#' @export
+#' @rdname model_get_assign
 model_get_assign.model_fit <- function(model) {
   model_get_assign(model$fit)
 }
