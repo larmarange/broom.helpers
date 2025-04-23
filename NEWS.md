@@ -5,6 +5,13 @@
 - basic support for `svyVGAM::svy_vglm()` models, see the
   experimental tidier `tidy_svy_vglm()` (#293)
 
+**Minor breaking changes**
+
+- `tidy_add_term_labels()` does not relabel polynomial terms (defined with
+  `stats::poly()`) by default. The feature is style accessible using
+  `relabel_poly = TRUE` (#292)
+
+
 # broom.helpers 1.20.0
 
 **New supported models**
