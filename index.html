@@ -8,8 +8,8 @@
 <title>Helpers for Model Coefficients Tibbles • broom.helpers</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/Source_Sans_Pro-0.4.9/font.css" rel="stylesheet">
-<link href="deps/Source_Code_Pro-0.4.9/font.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/Source_Sans_Pro-0.4.10/font.css" rel="stylesheet">
+<link href="deps/Source_Code_Pro-0.4.10/font.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Helpers for Model Coefficients Tibbles">
@@ -24,7 +24,7 @@
 
     <a class="navbar-brand me-2" href="index.html">broom.helpers</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.20.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.21.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -170,7 +170,7 @@
 <span><span class="co">#&gt; $ contrasts      &lt;chr&gt; NA, NA, NA, NA, "contr.treatment(base=3)", "contr.treat…</span></span>
 <span><span class="co">#&gt; $ contrasts_type &lt;chr&gt; NA, NA, NA, NA, "treatment", "treatment", "treatment", …</span></span>
 <span><span class="co">#&gt; $ reference_row  &lt;lgl&gt; NA, NA, NA, NA, NA, FALSE, FALSE, TRUE, FALSE, NA, FALS…</span></span>
-<span><span class="co">#&gt; $ label          &lt;chr&gt; "Age (in years)", "Age (in years)", "Age (in years)²", …</span></span>
+<span><span class="co">#&gt; $ label          &lt;chr&gt; "Age (in years)", "poly(age, 3)1", "poly(age, 3)2", "po…</span></span>
 <span><span class="co">#&gt; $ n_obs          &lt;dbl&gt; NA, 173, 173, 173, NA, 46, 50, 35, 42, NA, 63, 53, 57, …</span></span>
 <span><span class="co">#&gt; $ n_event        &lt;dbl&gt; NA, 54, 54, 54, NA, 17, 12, 13, 12, NA, 20, 16, 18, 30,…</span></span>
 <span><span class="co">#&gt; $ estimate       &lt;dbl&gt; NA, 20.2416394, 1.2337899, 0.4931553, NA, 1.0047885, 0.…</span></span>
@@ -275,7 +275,7 @@
 <span><span class="co">#&gt; $ contrasts      &lt;chr&gt; NA, NA, NA, NA, NA, "contr.treatment(base=3)", "contr.t…</span></span>
 <span><span class="co">#&gt; $ contrasts_type &lt;chr&gt; NA, NA, NA, NA, NA, "treatment", "treatment", "treatmen…</span></span>
 <span><span class="co">#&gt; $ reference_row  &lt;lgl&gt; NA, NA, NA, NA, NA, NA, FALSE, FALSE, TRUE, FALSE, NA, …</span></span>
-<span><span class="co">#&gt; $ label          &lt;chr&gt; "(Intercept)", "Age in years", "Age in years", "Age in …</span></span>
+<span><span class="co">#&gt; $ label          &lt;chr&gt; "(Intercept)", "Age in years", "poly(age, 3)1", "poly(a…</span></span>
 <span><span class="co">#&gt; $ estimate       &lt;dbl&gt; 0.5266376, NA, 20.2416394, 1.2337899, 0.4931553, NA, 1.…</span></span>
 <span><span class="co">#&gt; $ std.error      &lt;dbl&gt; 0.4130930, NA, 2.3254455, 2.3512842, 2.3936657, NA, 0.4…</span></span>
 <span><span class="co">#&gt; $ statistic      &lt;dbl&gt; -1.55229592, NA, 1.29340459, 0.08935144, -0.29533409, N…</span></span>
