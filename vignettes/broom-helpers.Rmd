@@ -166,6 +166,7 @@ model_poly |>
     add_header_rows = TRUE,
     variable_labels = c(age = "Age in years")
   ) |>
+  select(term, variable, label, header_row, estimate) |> 
   print_table()
 ```
 
@@ -182,6 +183,7 @@ model_poly2 |>
     variable_labels = c(age = "Age in years"),
     relabel_poly = TRUE
   ) |>
+  select(term, variable, label, header_row, estimate) |> 
   print_table()
 ```
 
