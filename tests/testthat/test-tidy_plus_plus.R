@@ -986,3 +986,28 @@ test_that("tidy_plus_plus() works with glmtoolbox::glmgee() models", {
   )
   expect_equal(nrow(res), 6)
 })
+
+test_that("tidy_plus_plus() works with quantreg::rq() models", {
+  skip_on_cran()
+  skip_if_not_installed("quantreg")
+
+  data("stackloss", package = "datasets")
+
+  mod <- quantreg::rq(
+    stack.loss ~ stack.x,
+    tau  = .5
+  )
+  expect_no_error(
+    res <- mod |> tidy_plus_plus()
+  )
+  expect_equal(nrow(res), 3)
+
+  mod <- quantreg::rq(
+    stack.loss ~ stack.x,
+    tau  = 1:3 / 4
+  )
+  expect_no_error(
+    res <- mod |> tidy_plus_plus(intercept = TRUE)
+  )
+  expect_equal(nrow(res), 12)
+})
