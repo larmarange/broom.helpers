@@ -40,7 +40,7 @@ term names are preserved in an \code{"original_term"} column.
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other custom_tieders: 
+Other custom_tidiers: 
 \code{\link{tidy_broom}()},
 \code{\link{tidy_multgee}()},
 \code{\link{tidy_parameters}()},
@@ -48,4 +48,4 @@ Other custom_tieders:
 \code{\link{tidy_vgam}()},
 \code{\link{tidy_with_broom_or_parameters}()}
 }
-\concept{custom_tieders}
+\concept{custom_tidiers}

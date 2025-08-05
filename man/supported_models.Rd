@@ -52,6 +52,7 @@ Listing of Supported Models
    \code{plm::plm()} \tab  \cr
    \code{pscl::hurdle()} \tab Use \code{tidy_zeroinfl()} as \code{tidy_fun}. \cr
    \code{pscl::zeroinfl()} \tab Use \code{tidy_zeroinfl()} as \code{tidy_fun}. \cr
+   \code{quantreg::rq()} \tab If several quantiles are estimated, use \code{tidy_with_broom_or_parameters()} tidier, the default tidier used by \code{tidy_plus_plus()}. \cr
    \code{rstanarm::stan_glm()} \tab \code{broom.mixed} package required \cr
    \code{stats::aov()} \tab Reference rows are not relevant for such models. \cr
    \code{stats::glm()} \tab  \cr

@@ -46,7 +46,7 @@ added to the results.
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other custom_tieders: 
+Other custom_tidiers: 
 \code{\link{tidy_broom}()},
 \code{\link{tidy_multgee}()},
 \code{\link{tidy_parameters}()},
@@ -54,4 +54,4 @@ Other custom_tieders:
 \code{\link{tidy_with_broom_or_parameters}()},
 \code{\link{tidy_zeroinfl}()}
 }
-\concept{custom_tieders}
+\concept{custom_tidiers}

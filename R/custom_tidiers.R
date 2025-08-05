@@ -10,15 +10,15 @@
 #' The confidence level to use for the confidence interval (between `0` ans `1`).
 #' @param ... Additional parameters passed to [parameters::model_parameters()].
 #' @note
-#' For [betareg::betareg()], the component column in the results is standardized
-#' with [broom::tidy()], using `"mean"` and `"precision"` values.
+#' For [betareg::betareg()] models, the component column in the results is
+#' standardized with [broom::tidy()], using `"mean"` and `"precision"` values.
 #' @examplesIf .assert_package("parameters", boolean = TRUE)
 #' \donttest{
 #'   lm(Sepal.Length ~ Sepal.Width + Species, data = iris) |>
 #'     tidy_parameters()
 #' }
 #' @export
-#' @family custom_tieders
+#' @family custom_tidiers
 tidy_parameters <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   .assert_package("parameters", fn = "broom.helpers::tidy_parameters()")
   args <- list(...)
@@ -81,8 +81,12 @@ tidy_parameters <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 #' The confidence level to use for the confidence interval (between `0` ans `1`).
 #' @param ... Additional parameters passed to `broom::tidy()` or
 #' `parameters::model_parameters()`.
+#' @note
+#' For [quantreg::rq()] models, if the result contains several *tau* values,
+#' a `"component"` column is added and populated
+#' with the value of the `"tau"` column.
 #' @export
-#' @family custom_tieders
+#' @family custom_tidiers
 tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, ...) {
   exponentiate_later <- FALSE
 
@@ -152,7 +156,9 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
 
   # class of models known for tidy() not supporting exponentiate argument
   # and for ignoring it
-  if (any(c("fixest", "plm", "felm", "lavaan", "nls", "survreg") %in% class(x))) {
+  mods_no_exp <-
+    c("fixest", "plm", "felm", "lavaan", "nls", "survreg")
+  if (any(mods_no_exp %in% class(x))) {
     if (isFALSE(tidy_args$exponentiate)) {
       tidy_args$exponentiate <- NULL
     } else {
@@ -166,6 +172,13 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
     if (isTRUE(tidy_args$exponentiate)) {
       exponentiate_later <- TRUE
     }
+    tidy_args$exponentiate <- NULL
+    tidy_args$conf.int <- NULL
+  }
+
+  # specific case for quantreg::rq models
+  # exponentiate and conf.int not supported by broom::tidy()
+  if (inherits(x, "rq") || inherits(x, "rqs")) {
     tidy_args$exponentiate <- NULL
     tidy_args$conf.int <- NULL
   }
@@ -265,6 +278,16 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
     res <- .exponentiate(res)
   }
 
+  # specific case for quantreg::rq models
+  if (
+    "tau" %in% names(res) &&
+      !"component" %in% names(res) &&
+      length(unique(res$tau)) > 1
+  ) {
+    res <- res |>
+      dplyr::mutate(component = .data$tau)
+  }
+
   res
 }
 
@@ -273,7 +296,7 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
 #' @param x (a model object, e.g. `glm`)\cr
 #' A model to be tidied.
 #' @param ... Additional parameters passed to `broom::tidy()`.
-#' @family custom_tieders
+#' @family custom_tidiers
 #' @export
 tidy_broom <- function(x, ...) {
   rlang::check_dots_used()
@@ -297,7 +320,7 @@ tidy_broom <- function(x, ...) {
 #' latest modality of `y`.
 #'
 #' @export
-#' @family custom_tieders
+#' @family custom_tidiers
 #' @examplesIf .assert_package("multgee", boolean = TRUE)
 #' \donttest{
 #'   library(multgee)
@@ -376,7 +399,7 @@ tidy_multgee <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 #' `NULL` or one of `"all"`, `"conditional"`, `"zi"`, or `"zero_inflated"`.
 #' @param ... Additional parameters passed to `parameters::model_parameters()`.
 #' @export
-#' @family custom_tieders
+#' @family custom_tidiers
 #' @examplesIf .assert_package("pscl", boolean = TRUE)
 #' \donttest{
 #'   library(pscl)
@@ -437,7 +460,7 @@ tidy_zeroinfl <- function(
 #' The confidence level to use for the confidence interval (between `0` ans `1`).
 #' @param ... Additional parameters passed to `parameters::model_parameters()`.
 #' @export
-#' @family custom_tieders
+#' @family custom_tidiers
 #' @examplesIf .assert_package("VGAM", boolean = TRUE)
 #' \donttest{
 #'   library(VGAM)
@@ -555,7 +578,7 @@ tidy_vgam <- function(
 #' The confidence level to use for the confidence interval (between `0` ans `1`).
 #' @param ... Additional parameters passed to `parameters::model_parameters()`.
 #' @export
-#' @family custom_tieders
+#' @family custom_tidiers
 #' @examplesIf .assert_package("svyVGAM", boolean = TRUE)
 #' \donttest{
 #'   library(svyVGAM)

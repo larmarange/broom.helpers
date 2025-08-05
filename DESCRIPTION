@@ -72,6 +72,7 @@ Suggests:
     patchwork,
     plm,
     pscl,
+    quantreg,
     rmarkdown,
     rstanarm,
     scales,
