@@ -24,7 +24,7 @@ Try to tidy a model with \code{broom::tidy()}. If it fails, will try to tidy the
 model using \code{parameters::model_parameters()} through \code{tidy_parameters()}.
 }
 \seealso{
-Other custom_tieders: 
+Other custom_tidiers: 
 \code{\link{tidy_broom}()},
 \code{\link{tidy_multgee}()},
 \code{\link{tidy_parameters}()},
@@ -32,4 +32,4 @@ Other custom_tieders:
 \code{\link{tidy_vgam}()},
 \code{\link{tidy_zeroinfl}()}
 }
-\concept{custom_tieders}
+\concept{custom_tidiers}
