@@ -709,13 +709,13 @@ same definition of “typical values”.</p>
 <div class="section level4">
 <h4 id="the-effectss-approach">the <code>{effects}</code>’s approach<a class="anchor" aria-label="anchor" href="#the-effectss-approach"></a>
 </h4>
-<p>The <a href="https://www.r-project.org" class="external-link">effects</a> package offer an
+<p>The <a href="https://cran.r-project.org/package=effects" class="external-link">effects</a> package offer an
 <code><a href="https://rdrr.io/pkg/effects/man/effect.html" class="external-link">effects::Effect()</a></code> function to compute marginal predictions
 at typical values. Although the function is named <code><a href="https://rdrr.io/pkg/effects/man/effect.html" class="external-link">Effect()</a></code>,
 the produced estimates are marginal predictions according to the
 terminology presented at the beginning of this vignette.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://www.r-project.org" class="external-link">effects</a></span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://cran.r-project.org/package=effects" class="external-link">effects</a></span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; lattice theme set by effectsTheme()</span></span>
 <span><span class="co">#&gt; See ?effectsTheme for details.</span></span>
 <span><span class="va">e</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/effects/man/effect.html" class="external-link">Effect</a></span><span class="op">(</span><span class="st">"stage"</span>, <span class="va">mod</span><span class="op">)</span></span>

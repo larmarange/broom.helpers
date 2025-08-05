@@ -75,8 +75,14 @@ The confidence level to use for the confidence interval (between <code>0</code> 
 
 </dl></div>
     <div class="section level2">
+    <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
+    <p>For <code><a href="https://rdrr.io/pkg/quantreg/man/rq.html" class="external-link">quantreg::rq()</a></code> models, if the result contains several <em>tau</em> values,
+a <code>"component"</code> column is added and populated
+with the value of the <code>"tau"</code> column.</p>
+    </div>
+    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p>Other custom_tieders:
+    <div class="dont-index"><p>Other custom_tidiers:
 <code><a href="tidy_broom.html">tidy_broom</a>()</code>,
 <code><a href="tidy_multgee.html">tidy_multgee</a>()</code>,
 <code><a href="tidy_parameters.html">tidy_parameters</a>()</code>,
