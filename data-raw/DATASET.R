@@ -59,6 +59,7 @@ supported_models <-
     "`betareg::betareg()`", "Use `tidy_parameters()` as `tidy_fun` with `component` argument to control with coefficients to return. `broom::tidy()` does not support the `exponentiate` argument for betareg models, use `tidy_parameters()` instead.", # nolint
     "`survival::cch()`", "Experimental support.",
     "`glmtoolbox::glmgee()`", "",
+    "`quantreg::rq()`", "If several quantiles are estimated, use `tidy_with_broom_or_parameters()` tidier, the default tidier used by `tidy_plus_plus()`.",
   ) |>
   dplyr::arrange(.data$model, .locale = "en")
 
