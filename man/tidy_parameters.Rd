@@ -25,9 +25,6 @@ Use \code{\link[parameters:model_parameters]{parameters::model_parameters()}} to
 \note{
 For \code{\link[betareg:betareg]{betareg::betareg()}} models, the component column in the results is
 standardized with \code{\link[broom:reexports]{broom::tidy()}}, using \code{"mean"} and \code{"precision"} values.
-
-For \code{\link[quantreg:rq]{quantreg::rq()}} models, a \code{"component"} column is added and populated
-with the value of the \code{"tau"} column.
 }
 \examples{
 \dontshow{if (.assert_package("parameters", boolean = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

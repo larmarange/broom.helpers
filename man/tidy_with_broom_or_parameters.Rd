@@ -23,6 +23,11 @@ The confidence level to use for the confidence interval (between \code{0} ans \c
 Try to tidy a model with \code{broom::tidy()}. If it fails, will try to tidy the
 model using \code{parameters::model_parameters()} through \code{tidy_parameters()}.
 }
+\note{
+For \code{\link[quantreg:rq]{quantreg::rq()}} models, if the result contains several \emph{tau} values,
+a \code{"component"} column is added and populated
+with the value of the \code{"tau"} column.
+}
 \seealso{
 Other custom_tidiers: 
 \code{\link{tidy_broom}()},

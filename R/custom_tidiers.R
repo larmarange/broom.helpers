@@ -12,9 +12,6 @@
 #' @note
 #' For [betareg::betareg()] models, the component column in the results is
 #' standardized with [broom::tidy()], using `"mean"` and `"precision"` values.
-#'
-#' For [quantreg::rq()] models, a `"component"` column is added and populated
-#' with the value of the `"tau"` column.
 #' @examplesIf .assert_package("parameters", boolean = TRUE)
 #' \donttest{
 #'   lm(Sepal.Length ~ Sepal.Width + Species, data = iris) |>
@@ -84,6 +81,10 @@ tidy_parameters <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 #' The confidence level to use for the confidence interval (between `0` ans `1`).
 #' @param ... Additional parameters passed to `broom::tidy()` or
 #' `parameters::model_parameters()`.
+#' @note
+#' For [quantreg::rq()] models, if the result contains several *tau* values,
+#' a `"component"` column is added and populated
+#' with the value of the `"tau"` column.
 #' @export
 #' @family custom_tidiers
 tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, ...) {
@@ -278,7 +279,11 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
   }
 
   # specific case for quantreg::rq models
-  if ("tau" %in% names(res) && !"component" %in% names(res)) {
+  if (
+    "tau" %in% names(res) &&
+      !"component" %in% names(res) &&
+      length(unique(res$tau)) > 1
+  ) {
     res <- res |>
       dplyr::mutate(component = .data$tau)
   }
