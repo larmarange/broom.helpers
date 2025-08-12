@@ -4,6 +4,10 @@
 
 - support for `quantreg::rq()` models, use `tidy_with_broom_or_parameters()`,
   default tidier of `tidy_plus_plus()` (#299)
+  
+**Fixes**
+
+- bug fix for `fixest` models when using a sub-setted data frame (#301)
 
 # broom.helpers 1.21.0
 
