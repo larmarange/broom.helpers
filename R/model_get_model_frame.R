@@ -92,7 +92,7 @@ model_get_model_frame.model_fit <- function(model) {
 model_get_model_frame.fixest <- function(model) {
   stats::model.frame.default(
     model_get_terms(model),
-    data = get(model$call$data, model$call_env)
+    data = eval(model$call$data, model$call_env)
   )
 }
 

@@ -119,7 +119,7 @@ model_get_model_matrix.model_fit <- function(model, ...) {
 model_get_model_matrix.fixest <- function(model, ...) {
   stats::model.matrix.default(
     model_get_terms(model),
-    data = get(model$call$data, model$call_env),
+    data = eval(model$call$data, model$call_env),
     ...
   )
 }

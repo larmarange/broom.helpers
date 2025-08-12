@@ -725,6 +725,11 @@ test_that("tidy_plus_plus() works with fixest models", {
     res <- mod |> tidy_plus_plus()
   )
   expect_equal(nrow(res[res$instrumental, ]), 3L)
+
+  mod <- fixest::feols(mpg ~ cyl, data = mtcars[mtcars$carb != 1,])
+  expect_no_error(
+    res <- mod |> tidy_plus_plus()
+  )
 })
 
 test_that("tidy_plus_plus() works with logitr models", {
