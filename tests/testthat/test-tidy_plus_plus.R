@@ -699,6 +699,7 @@ test_that("tidy_plus_plus() works with fixest models", {
   skip_if_not_installed("fixest")
   skip_if(compareVersion(as.character(getRversion()), "4.1") < 0)
 
+  data("mtcars")
   mod <- fixest::feols(fml = mpg ~ am + factor(carb), data = mtcars)
   expect_no_error(
     res <- mod |> tidy_plus_plus()
