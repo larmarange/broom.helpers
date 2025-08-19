@@ -112,20 +112,6 @@ model_get_model_matrix.model_fit <- function(model, ...) {
 
 #' @export
 #' @rdname model_get_model_matrix
-#' @details
-#' For `fixest` models, will recreate a model matrix with both main variables
-#' and instrumental variables. For more options, see
-#' [fixest::model.matrix.fixest].
-model_get_model_matrix.fixest <- function(model, ...) {
-  stats::model.matrix.default(
-    model_get_terms(model),
-    data = eval(model$call$data, model$call_env),
-    ...
-  )
-}
-
-#' @export
-#' @rdname model_get_model_matrix
 model_get_model_matrix.LORgee <- function(model, ...) {
   stats::model.matrix.default(
     model,

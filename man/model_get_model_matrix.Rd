@@ -10,7 +10,6 @@
 \alias{model_get_model_matrix.plm}
 \alias{model_get_model_matrix.biglm}
 \alias{model_get_model_matrix.model_fit}
-\alias{model_get_model_matrix.fixest}
 \alias{model_get_model_matrix.LORgee}
 \alias{model_get_model_matrix.betareg}
 \alias{model_get_model_matrix.cch}
@@ -36,8 +35,6 @@ model_get_model_matrix(model, ...)
 \method{model_get_model_matrix}{biglm}(model, ...)
 
 \method{model_get_model_matrix}{model_fit}(model, ...)
-
-\method{model_get_model_matrix}{fixest}(model, ...)
 
 \method{model_get_model_matrix}{LORgee}(model, ...)
 
@@ -69,10 +66,6 @@ taking into account all components ("cond", "zi" and "disp"). For a more
 restricted model matrix, please refer to \code{glmmTMB::model.matrix.glmmTMB()}.
 
 For \code{\link[plm:plm]{plm::plm()}} models, constant columns are not removed.
-
-For \code{fixest} models, will recreate a model matrix with both main variables
-and instrumental variables. For more options, see
-\link[fixest:model.matrix.fixest]{fixest::model.matrix.fixest}.
 }
 \examples{
 lm(hp ~ mpg + factor(cyl), mtcars) |>

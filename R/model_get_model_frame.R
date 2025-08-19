@@ -90,10 +90,15 @@ model_get_model_frame.model_fit <- function(model) {
 #' @export
 #' @rdname model_get_model_frame
 model_get_model_frame.fixest <- function(model) {
-  stats::model.frame.default(
+  # observations to be removed should be removed after model.frame()
+  mf <- stats::model.frame.default(
     model_get_terms(model),
-    data = eval(model$call$data, model$call_env)
+    data = eval(model$call$data, model$call_env),
+    na.action = NULL
   )
+  if (!is.null(model$obs_selection$obsRemoved))
+    mf <- mf[model$obs_selection$obsRemoved, ]
+  mf
 }
 
 #' @export

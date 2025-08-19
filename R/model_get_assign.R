@@ -63,3 +63,16 @@ model_get_assign.svy_vglm <- function(model) {
 model_get_assign.model_fit <- function(model) {
   model_get_assign(model$fit)
 }
+
+#' @export
+#' @rdname model_get_assign
+model_get_assign.fixest <- function(model) {
+  model_matrix <- stats::model.matrix.default(
+    model_get_terms(model),
+    data = eval(model$call$data, model$call_env)
+  )
+  get_assign <- purrr::attr_getter("assign")
+  assign <- model_matrix |> get_assign()
+  attr(assign, "model_matrix") <- model_matrix
+  assign
+}
