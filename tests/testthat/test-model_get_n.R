@@ -482,7 +482,7 @@ test_that("model_get_n() works with fixest", {
   skip_if_not_installed("fixest")
 
   d <- iris
-  d$bin_out <- sample(c(0,1), nrow(iris), replace = TRUE)
+  d$bin_out <- sample(c(0, 1), nrow(iris), replace = TRUE)
   d$bin_out[1:50] <- 0 # set setosa to constant outcome and therefore dropped
   d$bin_out[150] <- NA # add an NA for comparison
 
