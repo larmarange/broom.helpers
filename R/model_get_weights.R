@@ -91,3 +91,13 @@ model_get_weights.model_fit <- function(model) {
 model_get_weights.svy_vglm <- function(model) {
   stats::weights(model$design)
 }
+
+#' @export
+#' @rdname model_get_weights
+model_get_weights.fixest <- function(model) {
+  if (!is.null(model$weights)) {
+    model$weights
+  } else {
+    rep(1, model$nobs)
+  }
+}

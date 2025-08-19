@@ -476,3 +476,25 @@ test_that("tidy_add_n() does not duplicates rows with gam model", {
     tidy_add_n()
   expect_equal(nrow(res), 7L)
 })
+
+test_that("model_get_n() works with fixest", {
+  skip_on_cran()
+  skip_if_not_installed("fixest")
+
+  d <- iris
+  d$bin_out <- sample(c(0,1), nrow(iris), replace = TRUE)
+  d$bin_out[1:50] <- 0 # set setosa to constant outcome and therefore dropped
+  d$bin_out[150] <- NA # add an NA for comparison
+
+  mod <- fixest::feglm(
+    bin_out ~ Sepal.Length | Species,
+    data = d,
+    family = binomial(logit)
+  )
+  res <- mod |> tidy_plus_plus()
+  expect_equal(
+    res$n_obs,
+    c(99),
+    ignore_attr = TRUE
+  )
+})

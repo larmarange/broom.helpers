@@ -6,6 +6,7 @@
 \alias{model_get_assign.vglm}
 \alias{model_get_assign.svy_vglm}
 \alias{model_get_assign.model_fit}
+\alias{model_get_assign.fixest}
 \title{Get the assign attribute of model matrix of a model}
 \usage{
 model_get_assign(model)
@@ -17,6 +18,8 @@ model_get_assign(model)
 \method{model_get_assign}{svy_vglm}(model)
 
 \method{model_get_assign}{model_fit}(model)
+
+\method{model_get_assign}{fixest}(model)
 }
 \arguments{
 \item{model}{(a model object, e.g. \code{glm})\cr
