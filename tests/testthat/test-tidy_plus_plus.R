@@ -705,7 +705,12 @@ test_that("tidy_plus_plus() works with fixest models", {
     res <- mod |> tidy_plus_plus()
   )
 
-  mod <- fixest::feglm(Sepal.Length ~ Sepal.Width + Petal.Length | Species, iris, "poisson")
+  data("iris")
+  mod <- fixest::feglm(
+    Sepal.Length ~ Sepal.Width + Petal.Length | Species,
+    iris,
+    "poisson"
+  )
   expect_no_error(
     res <- mod |> tidy_plus_plus()
   )
