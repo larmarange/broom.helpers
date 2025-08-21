@@ -97,7 +97,7 @@ model_get_model_frame.fixest <- function(model) {
     na.action = NULL
   )
   if (!is.null(model$obs_selection$obsRemoved))
-    mf <- mf[model$obs_selection$obsRemoved, ]
+    mf <- mf |> dplyr::slice(model$obs_selection$obsRemoved)
   mf
 }
 
