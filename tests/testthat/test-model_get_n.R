@@ -485,6 +485,7 @@ test_that("model_get_n() works with fixest", {
   d$bin_out <- sample(c(0, 1), nrow(iris), replace = TRUE)
   d$bin_out[1:50] <- 0 # set setosa to constant outcome and therefore dropped
   d$bin_out[150] <- NA # add an NA for comparison
+  labelled::var_label(d$Sepal.Length) <- "test"
 
   mod <- fixest::feglm(
     bin_out ~ Sepal.Length | Species,
@@ -497,4 +498,6 @@ test_that("model_get_n() works with fixest", {
     c(99),
     ignore_attr = TRUE
   )
+  # check that variable labels are preserved
+  expect_equal(res$label, "test", ignore_attr = TRUE)
 })
