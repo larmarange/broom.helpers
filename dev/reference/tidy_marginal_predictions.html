@@ -191,23 +191,23 @@ plots that could be combined with <code><a href="https://patchwork.data-imaginis
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">tidy_marginal_predictions</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   variable   term  estimate   std.error statistic       p.value   s.value</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1    Class    1st 0.5181374 0.027913631  18.56217  6.503000e-77 253.08736</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2    Class    2nd 0.3229724 0.024270457  13.30722  2.101515e-40 131.80569</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3    Class    3rd 0.2115172 0.013107421  16.13721  1.397101e-58 192.18939</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4    Class   Crew 0.3504908 0.015030218  23.31908 2.839357e-120 397.12581</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5      Age  Adult 0.3140462 0.008827755  35.57486 3.429334e-277 918.39615</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6      Age  Child 0.5112612 0.047737204  10.70991  9.145005e-27  86.49907</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7      Sex Female 0.7255784 0.021732728  33.38644 2.157304e-244 809.44123</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8      Sex   Male 0.2182251 0.009932243  21.97138 5.410116e-107 353.01065</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    Class    1st 0.5181374 0.027913515  18.56224  6.493660e-77 253.08943</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2    Class    2nd 0.3229724 0.024270396  13.30726  2.100569e-40 131.80634</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3    Class    3rd 0.2115172 0.013107421  16.13721  1.397091e-58 192.18940</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4    Class   Crew 0.3504908 0.015030300  23.31895 2.847801e-120 397.12152</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5      Age  Adult 0.3140462 0.008827744  35.57491 3.424025e-277 918.39839</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6      Age  Child 0.5112612 0.047737044  10.70995  9.141455e-27  86.49963</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7      Sex Female 0.7255784 0.021732608  33.38662 2.143988e-244 809.45016</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8      Sex   Male 0.2182251 0.009932224  21.97142 5.405188e-107 353.01196</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    conf.low conf.high  df</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.4634277 0.5728471 Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 0.2754031 0.3705416 Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.4634279 0.5728469 Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 0.2754033 0.3705415 Inf</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3 0.1858272 0.2372073 Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 0.3210322 0.3799495 Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 0.2967441 0.3313483 Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 0.4176980 0.6048244 Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7 0.6829830 0.7681737 Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8 0.1987582 0.2376919 Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 0.3210320 0.3799497 Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 0.2967441 0.3313482 Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 0.4176983 0.6048241 Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7 0.6829832 0.7681735 Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8 0.1987583 0.2376919 Inf</span>
 <span class="r-in"><span><span class="fu"><a href="tidy_plus_plus.html">tidy_plus_plus</a></span><span class="op">(</span><span class="va">mod</span>, tidy_fun <span class="op">=</span> <span class="va">tidy_marginal_predictions</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 8 × 21</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   term   variable var_label var_class var_type    var_nlevels contrasts      </span>
@@ -330,42 +330,42 @@ plots that could be combined with <code><a href="https://patchwork.data-imaginis
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">tidy_marginal_predictions</span><span class="op">(</span><span class="va">mod3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   variable           term  estimate   std.error statistic       p.value</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1    Class            1st 0.5122895 0.027808505 18.422043  8.743951e-76</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2    Class            2nd 0.3202040 0.023739078 13.488477  1.828376e-41</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3    Class            3rd 0.2095767 0.012826120 16.339834  5.139230e-60</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4    Class           Crew 0.3587744 0.014931458 24.028090 1.414851e-127</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  Sex:Age Female * Adult 0.7419417 0.021989818 33.740241 1.486474e-249</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  Sex:Age Female * Child 0.7217706 0.059574157 12.115498  8.743100e-34</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7  Sex:Age   Male * Adult 0.2032339 0.009817932 20.700274  3.444077e-95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8  Sex:Age   Male * Child 0.5723894 0.060149442  9.516122  1.797624e-21</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    s.value  conf.low conf.high  df</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 249.3382 0.4577858 0.5667931 Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 135.3285 0.2736763 0.3667318 Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 196.9541 0.1844379 0.2347154 Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 421.3842 0.3295093 0.3880395 Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 826.5882 0.6988425 0.7850410 Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 109.8174 0.6050074 0.8385338 Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7 313.7991 0.1839911 0.2224767 Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8  68.9144 0.4544987 0.6902802 Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    Class            1st 0.5122895 0.027808537 18.422022  8.747378e-76</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2    Class            2nd 0.3202040 0.023739107 13.488461  1.828773e-41</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3    Class            3rd 0.2095767 0.012826104 16.339855  5.137458e-60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4    Class           Crew 0.3587744 0.014931355 24.028256 1.409203e-127</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  Sex:Age Female * Adult 0.7419417 0.021989703 33.740416 1.477691e-249</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  Sex:Age Female * Child 0.7217706 0.059574530 12.115422  8.751209e-34</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7  Sex:Age   Male * Adult 0.2032339 0.009817925 20.700288  3.443036e-95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8  Sex:Age   Male * Child 0.5723894 0.060149318  9.516142  1.797282e-21</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     s.value  conf.low conf.high  df</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 249.33768 0.4577857 0.5667932 Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 135.32818 0.2736762 0.3667318 Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 196.95463 0.1844380 0.2347154 Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 421.38999 0.3295095 0.3880393 Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 826.59675 0.6988427 0.7850408 Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 109.81607 0.6050067 0.8385345 Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7 313.79949 0.1839911 0.2224767 Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8  68.91467 0.4544989 0.6902799 Inf</span>
 <span class="r-in"><span><span class="fu">tidy_marginal_predictions</span><span class="op">(</span><span class="va">mod3</span>, <span class="st">"no_interaction"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   variable   term  estimate   std.error statistic       p.value  s.value</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1      Sex Female 0.7407251 0.021107074  35.09369 8.413373e-270 893.8479</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2      Sex   Male 0.2191225 0.009889623  22.15681 8.967719e-109 358.9254</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3      Age  Adult 0.3142777 0.008706739  36.09591 2.629104e-285 945.3549</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4      Age  Child 0.6033792 0.050063951  12.05217  1.889135e-33 108.7059</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5    Class    1st 0.5122895 0.027808505  18.42204  8.743951e-76 249.3382</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6    Class    2nd 0.3202040 0.023739078  13.48848  1.828376e-41 135.3285</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7    Class    3rd 0.2095767 0.012826120  16.33983  5.139230e-60 196.9541</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8    Class   Crew 0.3587744 0.014931458  24.02809 1.414851e-127 421.3842</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1      Sex Female 0.7407251 0.021106996  35.09382 8.375192e-270 893.8545</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2      Sex   Male 0.2191225 0.009889620  22.15682 8.966336e-109 358.9256</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3      Age  Adult 0.3142777 0.008706732  36.09594 2.626188e-285 945.3565</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4      Age  Child 0.6033792 0.050063504  12.05228  1.886667e-33 108.7078</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5    Class    1st 0.5122895 0.027808537  18.42202  8.747378e-76 249.3377</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6    Class    2nd 0.3202040 0.023739107  13.48846  1.828773e-41 135.3282</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7    Class    3rd 0.2095767 0.012826104  16.33986  5.137458e-60 196.9546</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8    Class   Crew 0.3587744 0.014931355  24.02826 1.409203e-127 421.3900</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    conf.low conf.high  df</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.6993560 0.7820942 Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.6993562 0.7820941 Inf</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2 0.1997392 0.2385058 Inf</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3 0.2972128 0.3313426 Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 0.5052556 0.7015027 Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 0.4577858 0.5667931 Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 0.2736763 0.3667318 Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7 0.1844379 0.2347154 Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8 0.3295093 0.3880395 Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 0.5052565 0.7015018 Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 0.4577857 0.5667932 Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 0.2736762 0.3667318 Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7 0.1844380 0.2347154 Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8 0.3295095 0.3880393 Inf</span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://patchwork.data-imaginist.com" class="external-link">"patchwork"</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="fu">plot_marginal_predictions</span><span class="op">(</span><span class="va">mod3</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>    <span class="fu">patchwork</span><span class="fu">::</span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/wrap_plots.html" class="external-link">wrap_plots</a></span><span class="op">(</span><span class="op">)</span></span></span>
@@ -381,19 +381,19 @@ plots that could be combined with <code><a href="https://patchwork.data-imaginis
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    variable          term  estimate   std.error statistic       p.value</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Class:Sex  1st * Female 0.8980680 0.015940375  56.33920  0.000000e+00</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 Class:Sex  2nd * Female 0.7580905 0.030941811  24.50052 1.458306e-132</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 Class:Sex  3rd * Female 0.5904013 0.031062754  19.00673  1.500218e-80</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 Class:Sex Crew * Female 0.7978123 0.026646079  29.94108 5.749545e-197</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5       Age         Adult 0.3142777 0.008706739  36.09591 2.629104e-285</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6       Age         Child 0.6033792 0.050063951  12.05217  1.889135e-33</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Class:Sex  1st * Female 0.8980680 0.015940475  56.33885  0.000000e+00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 Class:Sex  2nd * Female 0.7580905 0.030941646  24.50065 1.453635e-132</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 Class:Sex  3rd * Female 0.5904013 0.031062772  19.00672  1.500524e-80</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 Class:Sex Crew * Female 0.7978123 0.026646014  29.94115 5.736981e-197</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5       Age         Adult 0.3142777 0.008706732  36.09594 2.626188e-285</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6       Age         Child 0.6033792 0.050063504  12.05228  1.886667e-33</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    s.value  conf.low conf.high  df</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1      Inf 0.8668255 0.9293106 Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 437.9502 0.6974457 0.8187354 Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 265.1691 0.5295195 0.6512832 Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 651.8964 0.7455869 0.8500376 Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 945.3549 0.2972128 0.3313426 Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 108.7059 0.5052556 0.7015027 Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1      Inf 0.8668253 0.9293108 Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 437.9548 0.6974460 0.8187351 Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 265.1688 0.5295194 0.6512832 Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 651.8995 0.7455871 0.8500375 Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 945.3565 0.2972128 0.3313426 Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 108.7078 0.5052565 0.7015018 Inf</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Marginal Predictions at the Mean</span></span></span>
 <span class="r-in"><span><span class="fu">tidy_marginal_predictions</span><span class="op">(</span><span class="va">mod</span>, newdata <span class="op">=</span> <span class="st">"mean"</span><span class="op">)</span></span></span>
@@ -403,7 +403,7 @@ plots that could be combined with <code><a href="https://patchwork.data-imaginis
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3    Class    3rd 0.1039594 0.01182240  8.793426  1.450667e-18  59.25799</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4    Class   Crew 0.2254997 0.01405834 16.040279  6.685371e-58 189.93082</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5      Age  Adult 0.2254997 0.01405834 16.040279  6.685371e-58 189.93082</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6      Age  Child 0.4570172 0.06370387  7.174088  7.279073e-13  40.32131</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6      Age  Child 0.4570172 0.06370387  7.174088  7.279079e-13  40.32131</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 7      Sex Female 0.7660538 0.02841756 26.957057 4.714993e-160 529.27124</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 8      Sex   Male 0.2254997 0.01405834 16.040279  6.685371e-58 189.93082</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     conf.low conf.high  df</span>
@@ -412,7 +412,7 @@ plots that could be combined with <code><a href="https://patchwork.data-imaginis
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3 0.08078793 0.1271309 Inf</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4 0.19794588 0.2530536 Inf</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5 0.19794588 0.2530536 Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 0.33215989 0.5818745 Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 0.33215988 0.5818745 Inf</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 7 0.71035641 0.8217512 Inf</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 8 0.19794588 0.2530536 Inf</span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://patchwork.data-imaginist.com" class="external-link">"patchwork"</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>

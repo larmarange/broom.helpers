@@ -212,14 +212,14 @@ see the help file of <code><a href="https://marginaleffects.com/man/r/comparison
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3    Class    Crew - 1st -0.1676466 0.03230024  -5.190258 2.100029e-07</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4      Age Child - Adult  0.1972150 0.04867887   4.051347 5.092362e-05</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5      Sex Male - Female -0.5073533 0.02452155 -20.690097 4.253562e-95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     s.value   conf.low  conf.high predicted_lo predicted_hi predicted</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  23.36739 -0.2667833 -0.1235469           NA           NA        NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  75.62696 -0.3667867 -0.2464537           NA           NA        NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  22.18309 -0.2309539 -0.1043393           NA           NA        NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  14.26131  0.1018062  0.2926238    0.1039594    0.2511586 0.2511586</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 313.49450 -0.5554146 -0.4592919    0.7904463    0.2511586 0.2511586</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     s.value   conf.low  conf.high</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  23.36739 -0.2667833 -0.1235469</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  75.62696 -0.3667867 -0.2464537</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  22.18309 -0.2309539 -0.1043393</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  14.26131  0.1018062  0.2926238</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 313.49450 -0.5554146 -0.4592919</span>
 <span class="r-in"><span><span class="fu"><a href="tidy_plus_plus.html">tidy_plus_plus</a></span><span class="op">(</span><span class="va">mod</span>, tidy_fun <span class="op">=</span> <span class="va">tidy_marginal_contrasts</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 23</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 20</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   term          variable var_label var_class var_type    var_nlevels contrasts  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 2nd - 1st     Class    Class     character categorical           4 contr.trea…</span>
@@ -227,11 +227,10 @@ see the help file of <code><a href="https://marginaleffects.com/man/r/comparison
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Crew - 1st    Class    Class     character categorical           4 contr.trea…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Child - Adult Age      Age       character dichotomous           2 contr.trea…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Male - Female Sex      Sex       character dichotomous           2 contr.trea…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 16 more variables: contrasts_type &lt;chr&gt;, reference_row &lt;lgl&gt;, label &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 13 more variables: contrasts_type &lt;chr&gt;, reference_row &lt;lgl&gt;, label &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   n_obs &lt;dbl&gt;, n_event &lt;dbl&gt;, estimate &lt;dbl&gt;, std.error &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   statistic &lt;dbl&gt;, p.value &lt;dbl&gt;, s.value &lt;dbl&gt;, conf.low &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   conf.high &lt;dbl&gt;, predicted_lo &lt;dbl&gt;, predicted_hi &lt;dbl&gt;, predicted &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   label_attr &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   conf.high &lt;dbl&gt;, label_attr &lt;chr&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">mod2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Petal.Length</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html" class="external-link">poly</a></span><span class="op">(</span><span class="va">Petal.Width</span>, <span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">tidy_marginal_contrasts</span><span class="op">(</span><span class="va">mod2</span><span class="op">)</span></span></span>
@@ -239,10 +238,10 @@ see the help file of <code><a href="https://marginaleffects.com/man/r/comparison
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 Petal.Width                  +1 0.9961779 0.1523954  6.536799 6.284962e-11</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2     Species versicolor - setosa 1.3170279 0.3145654  4.186817 2.828938e-05</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3     Species  virginica - setosa 1.9123142 0.3733402  5.122176 3.020300e-07</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    s.value  conf.low conf.high predicted_lo predicted_hi predicted</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 33.88931 0.6974884  1.294867     1.390159     2.802537  1.390159</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 15.10938 0.7004910  1.933565           NA           NA        NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 21.65880 1.1805808  2.644048           NA           NA        NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    s.value  conf.low conf.high</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 33.88931 0.6974884  1.294867</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 15.10938 0.7004910  1.933565</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 21.65880 1.1805808  2.644048</span>
 <span class="r-in"><span><span class="fu">tidy_marginal_contrasts</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="va">mod2</span>,</span></span>
 <span class="r-in"><span>  variables_list <span class="op">=</span> <span class="fu"><a href="tidy_marginal_predictions.html">variables_to_predict</a></span><span class="op">(</span></span></span>
@@ -256,11 +255,11 @@ see the help file of <code><a href="https://marginaleffects.com/man/r/comparison
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2     Species    versicolor - setosa 1.3170279 0.3145654  4.186817 2.828938e-05</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3     Species     virginica - setosa 1.9123142 0.3733402  5.122176 3.020300e-07</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4     Species virginica - versicolor 0.5952863 0.1305792  4.558814 5.144328e-06</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     s.value   conf.low conf.high predicted_lo predicted_hi predicted</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  3.601993 -0.2230299 3.7012282     1.390159     4.377859  1.390159</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 15.109380  0.7004910 1.9335648           NA           NA        NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 21.658805  1.1805808 2.6440476           NA           NA        NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 17.568586  0.3393558 0.8512168           NA           NA        NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     s.value   conf.low conf.high</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  3.601993 -0.2230299 3.7012282</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 15.109380  0.7004910 1.9335648</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 21.658805  1.1805808 2.6440476</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 17.568586  0.3393558 0.8512168</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Model with interactions</span></span></span>
 <span class="r-in"><span><span class="va">mod3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span></span></span>
@@ -287,28 +286,23 @@ see the help file of <code><a href="https://marginaleffects.com/man/r/comparison
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3    Class     2nd - 1st -0.1920855 0.03613415  -5.315898  1.061324e-07</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4    Class     3rd - 1st -0.3027128 0.03049293  -9.927311  3.166809e-23</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5    Class    Crew - 1st -0.1535151 0.03217010  -4.771980  1.824240e-06</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     s.value   conf.low   conf.high predicted_lo predicted_hi predicted</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 349.38974 -0.5683756 -0.47482955   0.56491193    0.3884185 0.3884185</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  26.12712  0.1893042  0.38889880   0.09568894    0.3884185 0.3884185</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  23.16763 -0.2629071 -0.12126383           NA           NA        NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  74.74132 -0.3624778 -0.24294775           NA           NA        NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  19.06427 -0.2165673 -0.09046282           NA           NA        NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     s.value   conf.low   conf.high</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 349.38974 -0.5683756 -0.47482955</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  26.12712  0.1893042  0.38889880</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  23.16763 -0.2629071 -0.12126383</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  74.74132 -0.3624778 -0.24294775</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  19.06427 -0.2165673 -0.09046282</span>
 <span class="r-in"><span><span class="fu">tidy_marginal_contrasts</span><span class="op">(</span><span class="va">mod3</span>, <span class="st">"cross"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   variable                          term   estimate  std.error statistic</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1    Class                     2nd - 1st -0.1920855 0.03613415 -5.315898</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2    Class                     3rd - 1st -0.3027128 0.03049293 -9.927311</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3    Class                    Crew - 1st -0.1535151 0.03217010 -4.771980</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4  Sex:Age Child - Adult * Male - Female -0.1695523 0.06280633 -2.699605</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        p.value   s.value   conf.low   conf.high predicted_lo predicted_hi</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 1.061324e-07 23.167631 -0.2629071 -0.12126383           NA           NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 3.166809e-23 74.741316 -0.3624778 -0.24294775           NA           NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 1.824240e-06 19.064273 -0.2165673 -0.09046282           NA           NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 6.942175e-03  7.170397 -0.2926505 -0.04645417    0.5917294    0.3884185</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   predicted</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1        NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2        NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3        NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 0.3884185</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        p.value   s.value   conf.low   conf.high</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 1.061324e-07 23.167631 -0.2629071 -0.12126383</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 3.166809e-23 74.741316 -0.3624778 -0.24294775</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 1.824240e-06 19.064273 -0.2165673 -0.09046282</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 6.942175e-03  7.170397 -0.2926505 -0.04645417</span>
 <span class="r-in"><span><span class="fu">tidy_marginal_contrasts</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="va">mod3</span>,</span></span>
 <span class="r-in"><span>  variables_list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
@@ -422,12 +416,18 @@ see the help file of <code><a href="https://marginaleffects.com/man/r/comparison
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3    Class    Crew - 1st -0.1815385 0.03558936  -5.100919  3.380076e-07</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4      Age Child - Adult  0.2315175 0.06082479   3.806301  1.410609e-04</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5      Sex Male - Female -0.5405541 0.02514911 -21.493967 1.772950e-102</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     s.value   conf.low  conf.high rowid predicted_lo predicted_hi predicted</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  23.27200 -0.2849361 -0.1317016    NA           NA           NA        NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  63.61972 -0.3681645 -0.2379931    NA           NA           NA        NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  21.49644 -0.2512924 -0.1117846    NA           NA           NA        NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  12.79139  0.1123030  0.3507319     1    0.2254997    0.4570172 0.2254997</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 338.01051 -0.5898454 -0.4912627     1    0.7660538    0.2254997 0.2254997</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     s.value   conf.low  conf.high rowid Age.x Class.x Sex.x Survived.x Age.y</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  23.27200 -0.2849361 -0.1317016    NA  &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;  &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  63.61972 -0.3681645 -0.2379931    NA  &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;  &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  21.49644 -0.2512924 -0.1117846    NA  &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;  &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  12.79139  0.1123030  0.3507319     1 Adult    Crew  Male         No Adult</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 338.01051 -0.5898454 -0.4912627     1 Adult    Crew  Male         No Adult</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Class.y Sex.y Survived.y predicted_lo predicted_hi predicted</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;           NA           NA        NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2    &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;           NA           NA        NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3    &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;           NA           NA        NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4    Crew  Male         No    0.2254997    0.4570172        NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5    Crew  Male         No    0.7660538    0.2254997        NA</span>
 <span class="r-in"><span><span class="fu">tidy_marginal_contrasts</span><span class="op">(</span><span class="va">mod3</span>, newdata <span class="op">=</span> <span class="st">"mean"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   variable                   term    estimate  std.error  statistic</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1    Class              2nd - 1st -0.20575641 0.03889922 -5.2894733</span>
