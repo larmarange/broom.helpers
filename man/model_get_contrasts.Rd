@@ -7,6 +7,7 @@
 \alias{model_get_contrasts.hurdle}
 \alias{model_get_contrasts.betareg}
 \alias{model_get_contrasts.svy_vglm}
+\alias{model_get_contrasts.fixest}
 \title{Get contrasts used in the model}
 \usage{
 model_get_contrasts(model)
@@ -20,6 +21,8 @@ model_get_contrasts(model)
 \method{model_get_contrasts}{betareg}(model)
 
 \method{model_get_contrasts}{svy_vglm}(model)
+
+\method{model_get_contrasts}{fixest}(model)
 }
 \arguments{
 \item{model}{(a model object, e.g. \code{glm})\cr

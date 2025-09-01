@@ -91,3 +91,13 @@ model_get_contrasts.betareg <- function(model) {
 model_get_contrasts.svy_vglm <- function(model) {
   model_get_contrasts(model$fit)
 }
+
+#' @export
+#' @rdname model_get_contrasts
+model_get_contrasts.fixest <- function(model) {
+  mm <- stats::model.matrix.default(
+    model_get_terms(model),
+    data = eval(model$call$data, model$call_env)
+  )
+  attr(mm, "contrasts")
+}
