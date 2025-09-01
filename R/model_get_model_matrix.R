@@ -155,12 +155,3 @@ model_get_model_matrix.svy_vglm <- function(model, ...) {
   model_get_model_matrix(model$fit, ...)
 }
 
-#' @export
-#' @rdname model_get_model_matrix
-model_get_model_matrix.fixest <- function(model) {
-  mm <- stats::model.matrix.default(
-    model_get_terms(model),
-    data = eval(model$call$data, model$call_env)
-  )
-  mm
-}
