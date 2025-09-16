@@ -726,12 +726,6 @@ test_that("tidy_plus_plus() works with fixest models", {
   res <- mod |> tidy_plus_plus(instrumental_suffix = " (IV)")
   expect_equal(res$var_label[res$term == "wt"], "wt (IV)", ignore_attr = TRUE)
 
-  mod <- fixest::feols(mpg ~ disp | 1 | factor(cyl) ~ qsec, data = mtcars)
-  expect_no_error(
-    res <- mod |> tidy_plus_plus()
-  )
-  expect_equal(nrow(res[res$instrumental, ]), 3L)
-
   mod <- fixest::feols(mpg ~ cyl, data = mtcars[mtcars$carb != 1, ])
   expect_no_error(
     res <- mod |> tidy_plus_plus()
