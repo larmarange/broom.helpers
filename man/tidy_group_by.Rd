@@ -38,7 +38,7 @@ Indicates that results should be grouped. By default
 (multi-components models) if any.
 }
 \examples{
-\dontshow{if (require("nnet")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (require("nnet")) withAutoprint(\{ # examplesIf}
 mod <- multinom(Species ~ Petal.Width + Petal.Length, data = iris)
 mod |> tidy_and_attach() |> tidy_group_by()
 

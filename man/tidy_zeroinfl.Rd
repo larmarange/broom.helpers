@@ -27,7 +27,7 @@ Term names will be updated to be consistent with generic models. The original
 term names are preserved in an \code{"original_term"} column.
 }
 \examples{
-\dontshow{if (.assert_package("pscl", boolean = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (.assert_package("pscl", boolean = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
   library(pscl)
   mod <- zeroinfl(

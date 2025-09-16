@@ -27,7 +27,7 @@ For \code{\link[betareg:betareg]{betareg::betareg()}} models, the component colu
 standardized with \code{\link[broom:reexports]{broom::tidy()}}, using \code{"mean"} and \code{"precision"} values.
 }
 \examples{
-\dontshow{if (.assert_package("parameters", boolean = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (.assert_package("parameters", boolean = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
   lm(Sepal.Length ~ Sepal.Width + Species, data = iris) |>
     tidy_parameters()

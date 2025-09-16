@@ -220,7 +220,7 @@ ex2 <- glm(
   )
 ex2
 }
-\dontshow{if (require("gtsummary") && require("emmeans")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (require("gtsummary") && require("emmeans")) withAutoprint(\{ # examplesIf}
 \donttest{
 ex3 <-
   glm(

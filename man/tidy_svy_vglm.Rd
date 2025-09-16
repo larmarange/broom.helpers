@@ -27,7 +27,7 @@ model, additional column \code{"group"}, \code{"component"} and/or \code{"y.leve
 added to the results.
 }
 \examples{
-\dontshow{if (.assert_package("svyVGAM", boolean = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (.assert_package("svyVGAM", boolean = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
   library(svyVGAM)
 

@@ -67,7 +67,7 @@ values from a mixed model
 glm(response ~ age * trt + grade, gtsummary::trial, family = binomial) |>
   tidy_plus_plus(exponentiate = TRUE, include = all_categorical())
 }
-\dontshow{if (.assert_package("emmeans", boolean = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (.assert_package("emmeans", boolean = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
   glm(response ~ age + trt + grade + stage,
     gtsummary::trial,

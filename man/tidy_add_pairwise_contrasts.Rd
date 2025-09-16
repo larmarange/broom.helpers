@@ -63,7 +63,7 @@ For multi-components models, such as zero-inflated Poisson or beta
 regression, support of pairwise contrasts is still experimental.
 }
 \examples{
-\dontshow{if (.assert_package("emmeans", boolean = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (.assert_package("emmeans", boolean = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
   mod1 <- lm(Sepal.Length ~ Species, data = iris)
   mod1 |>

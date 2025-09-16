@@ -80,7 +80,7 @@ or \code{"interaction"}
 Including variables used only in an interaction.
 }
 \examples{
-\dontshow{if (.assert_package("gtsummary", boolean = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (.assert_package("gtsummary", boolean = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
   df <- Titanic |>
     dplyr::as_tibble() |>

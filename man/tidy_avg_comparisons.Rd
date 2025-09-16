@@ -38,7 +38,7 @@ See also \code{tidy_marginal_contrasts()} for taking into account interactions.
 For more information, see \code{vignette("marginal_tidiers", "broom.helpers")}.
 }
 \examples{
-\dontshow{if (.assert_package("marginaleffects", boolean = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (.assert_package("marginaleffects", boolean = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
 # Average Marginal Contrasts
 

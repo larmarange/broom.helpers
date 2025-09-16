@@ -45,7 +45,7 @@ Treatment contrasts (\code{stats::contr.treatment()}) are applied to all
 categorical variables. Interactions are also ignored.
 }
 \examples{
-\dontshow{if (.assert_package("margins", boolean = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (.assert_package("margins", boolean = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
 df <- Titanic |>
   dplyr::as_tibble() |>

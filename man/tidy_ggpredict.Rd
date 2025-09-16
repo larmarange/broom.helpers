@@ -37,7 +37,7 @@ By default, \code{ggeffects::ggpredict()} estimates marginal predictions for eac
 individual variable, regardless of eventual interactions.
 }
 \examples{
-\dontshow{if (.assert_package("ggeffects", boolean = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (.assert_package("ggeffects", boolean = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
 df <- Titanic |>
   dplyr::as_tibble() |>

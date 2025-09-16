@@ -40,7 +40,7 @@ If the model contains interactions, \code{effects::allEffects()} will return
 marginal predictions for the different levels of the interactions.
 }
 \examples{
-\dontshow{if (.assert_package("effects", boolean = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (.assert_package("effects", boolean = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
 df <- Titanic |>
   dplyr::as_tibble() |>
