@@ -2692,8 +2692,8 @@ value is provided to <code>newdata</code>.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://marginaleffects.com/man/r/predictions.html" class="external-link">avg_predictions</a></span><span class="op">(</span><span class="va">mod</span>, variables <span class="op">=</span> <span class="st">"trt"</span>, by <span class="op">=</span> <span class="st">"trt"</span>, type <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;     trt Estimate Std. Error    z Pr(&gt;|z|)    S 2.5 % 97.5 %</span></span>
-<span><span class="co">#&gt;  Drug A    0.283     0.0484 5.85   &lt;0.001 27.6 0.188  0.378</span></span>
-<span><span class="co">#&gt;  Drug B    0.343     0.0490 7.01   &lt;0.001 38.6 0.247  0.439</span></span>
+<span><span class="co">#&gt;  Drug A    0.282     0.0486 5.79   &lt;0.001 27.1 0.186  0.377</span></span>
+<span><span class="co">#&gt;  Drug B    0.342     0.0493 6.93   &lt;0.001 37.8 0.245  0.439</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Type: response</span></span></code></pre></div>
 <p><strong>Important:</strong> since version 0.10.0 of
@@ -2708,8 +2708,8 @@ identical to the average of predictions.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://marginaleffects.com/man/r/predictions.html" class="external-link">avg_predictions</a></span><span class="op">(</span><span class="va">mod</span>, variables <span class="op">=</span> <span class="st">"trt"</span>, by <span class="op">=</span> <span class="st">"trt"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;     trt Estimate Std. Error    z Pr(&gt;|z|)    S 2.5 % 97.5 %</span></span>
-<span><span class="co">#&gt;  Drug A    0.283     0.0484 5.85   &lt;0.001 27.6 0.188  0.378</span></span>
-<span><span class="co">#&gt;  Drug B    0.343     0.0490 7.01   &lt;0.001 38.6 0.247  0.439</span></span>
+<span><span class="co">#&gt;  Drug A    0.282     0.0486 5.79   &lt;0.001 27.1 0.186  0.377</span></span>
+<span><span class="co">#&gt;  Drug B    0.342     0.0493 6.93   &lt;0.001 37.8 0.245  0.439</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Type: response</span></span>
 <span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html" class="external-link">binomial</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -3199,13 +3199,13 @@ representation.</p>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    Drug A</td>
-<td headers="estimate" class="gt_row gt_center">28.3%</td>
-<td headers="conf.low" class="gt_row gt_center">18.8%, 37.8%</td>
+<td headers="estimate" class="gt_row gt_center">28.2%</td>
+<td headers="conf.low" class="gt_row gt_center">18.6%, 37.7%</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    Drug B</td>
-<td headers="estimate" class="gt_row gt_center">34.3%</td>
-<td headers="conf.low" class="gt_row gt_center">24.7%, 43.9%</td>
+<td headers="estimate" class="gt_row gt_center">34.2%</td>
+<td headers="conf.low" class="gt_row gt_center">24.5%, 43.9%</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left" style="font-weight: bold;">Marker Level (ng/mL)</td>
@@ -3214,28 +3214,28 @@ representation.</p>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    0.005</td>
-<td headers="estimate" class="gt_row gt_center">25.0%</td>
-<td headers="conf.low" class="gt_row gt_center">15.9%, 34.0%</td>
+<td headers="estimate" class="gt_row gt_center">24.7%</td>
+<td headers="conf.low" class="gt_row gt_center">15.6%, 33.8%</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    0.215</td>
-<td headers="estimate" class="gt_row gt_center">26.3%</td>
-<td headers="conf.low" class="gt_row gt_center">18.0%, 34.6%</td>
+<td headers="estimate" class="gt_row gt_center">26.1%</td>
+<td headers="conf.low" class="gt_row gt_center">17.7%, 34.4%</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    0.662</td>
-<td headers="estimate" class="gt_row gt_center">29.3%</td>
-<td headers="conf.low" class="gt_row gt_center">22.3%, 36.4%</td>
+<td headers="estimate" class="gt_row gt_center">29.1%</td>
+<td headers="conf.low" class="gt_row gt_center">22.0%, 36.2%</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    1.406</td>
-<td headers="estimate" class="gt_row gt_center">34.8%</td>
-<td headers="conf.low" class="gt_row gt_center">26.8%, 42.8%</td>
+<td headers="estimate" class="gt_row gt_center">34.6%</td>
+<td headers="conf.low" class="gt_row gt_center">26.5%, 42.7%</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    3.874</td>
 <td headers="estimate" class="gt_row gt_center">54.5%</td>
-<td headers="conf.low" class="gt_row gt_center">28.5%, 80.4%</td>
+<td headers="conf.low" class="gt_row gt_center">28.2%, 80.9%</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left" style="font-weight: bold;">T Stage</td>
@@ -3244,23 +3244,23 @@ representation.</p>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    T1</td>
-<td headers="estimate" class="gt_row gt_center">38.9%</td>
-<td headers="conf.low" class="gt_row gt_center">24.9%, 52.9%</td>
+<td headers="estimate" class="gt_row gt_center">38.7%</td>
+<td headers="conf.low" class="gt_row gt_center">24.6%, 52.9%</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    T2</td>
-<td headers="estimate" class="gt_row gt_center">22.5%</td>
-<td headers="conf.low" class="gt_row gt_center">11.2%, 33.8%</td>
+<td headers="estimate" class="gt_row gt_center">22.3%</td>
+<td headers="conf.low" class="gt_row gt_center">10.9%, 33.6%</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    T3</td>
-<td headers="estimate" class="gt_row gt_center">35.4%</td>
-<td headers="conf.low" class="gt_row gt_center">20.0%, 50.8%</td>
+<td headers="estimate" class="gt_row gt_center">35.2%</td>
+<td headers="conf.low" class="gt_row gt_center">19.6%, 50.8%</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    T4</td>
-<td headers="estimate" class="gt_row gt_center">30.0%</td>
-<td headers="conf.low" class="gt_row gt_center">16.1%, 43.8%</td>
+<td headers="estimate" class="gt_row gt_center">29.7%</td>
+<td headers="conf.low" class="gt_row gt_center">15.8%, 43.6%</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left" style="font-weight: bold;">Age in years</td>
@@ -3269,28 +3269,28 @@ representation.</p>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    6</td>
-<td headers="estimate" class="gt_row gt_center">17.4%</td>
-<td headers="conf.low" class="gt_row gt_center">-12.9%, 47.6%</td>
+<td headers="estimate" class="gt_row gt_center">27.0%</td>
+<td headers="conf.low" class="gt_row gt_center">17.7%, 36.3%</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    37</td>
-<td headers="estimate" class="gt_row gt_center">27.1%</td>
-<td headers="conf.low" class="gt_row gt_center">18.8%, 35.4%</td>
+<td headers="estimate" class="gt_row gt_center">30.0%</td>
+<td headers="conf.low" class="gt_row gt_center">22.7%, 37.3%</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    47</td>
-<td headers="estimate" class="gt_row gt_center">30.9%</td>
-<td headers="conf.low" class="gt_row gt_center">22.4%, 39.5%</td>
+<td headers="estimate" class="gt_row gt_center">31.0%</td>
+<td headers="conf.low" class="gt_row gt_center">23.6%, 38.4%</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    57</td>
-<td headers="estimate" class="gt_row gt_center">35.1%</td>
-<td headers="conf.low" class="gt_row gt_center">26.0%, 44.2%</td>
+<td headers="estimate" class="gt_row gt_center">32.1%</td>
+<td headers="conf.low" class="gt_row gt_center">24.7%, 39.4%</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    83</td>
-<td headers="estimate" class="gt_row gt_center">47.1%</td>
-<td headers="conf.low" class="gt_row gt_center">10.0%, 84.2%</td>
+<td headers="estimate" class="gt_row gt_center">34.9%</td>
+<td headers="conf.low" class="gt_row gt_center">25.7%, 44.1%</td>
 </tr>
 </tbody>
 <tfoot class="gt_sourcenotes"><tr>
@@ -3771,23 +3771,23 @@ representation.</p>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    T1</td>
-<td headers="estimate" class="gt_row gt_center">38.9%</td>
-<td headers="conf.low" class="gt_row gt_center">24.9%, 52.9%</td>
+<td headers="estimate" class="gt_row gt_center">38.7%</td>
+<td headers="conf.low" class="gt_row gt_center">24.6%, 52.9%</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    T2</td>
-<td headers="estimate" class="gt_row gt_center">22.5%</td>
-<td headers="conf.low" class="gt_row gt_center">11.2%, 33.8%</td>
+<td headers="estimate" class="gt_row gt_center">22.3%</td>
+<td headers="conf.low" class="gt_row gt_center">10.9%, 33.6%</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    T3</td>
-<td headers="estimate" class="gt_row gt_center">35.4%</td>
-<td headers="conf.low" class="gt_row gt_center">20.0%, 50.8%</td>
+<td headers="estimate" class="gt_row gt_center">35.2%</td>
+<td headers="conf.low" class="gt_row gt_center">19.6%, 50.8%</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    T4</td>
-<td headers="estimate" class="gt_row gt_center">30.0%</td>
-<td headers="conf.low" class="gt_row gt_center">16.1%, 43.8%</td>
+<td headers="estimate" class="gt_row gt_center">29.7%</td>
+<td headers="conf.low" class="gt_row gt_center">15.8%, 43.6%</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left" style="font-weight: bold;">Age in years</td>
@@ -3796,28 +3796,28 @@ representation.</p>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    6</td>
-<td headers="estimate" class="gt_row gt_center">17.4%</td>
-<td headers="conf.low" class="gt_row gt_center">-12.9%, 47.6%</td>
+<td headers="estimate" class="gt_row gt_center">27.0%</td>
+<td headers="conf.low" class="gt_row gt_center">17.7%, 36.3%</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    37</td>
-<td headers="estimate" class="gt_row gt_center">27.1%</td>
-<td headers="conf.low" class="gt_row gt_center">18.8%, 35.4%</td>
+<td headers="estimate" class="gt_row gt_center">30.0%</td>
+<td headers="conf.low" class="gt_row gt_center">22.7%, 37.3%</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    47</td>
-<td headers="estimate" class="gt_row gt_center">30.9%</td>
-<td headers="conf.low" class="gt_row gt_center">22.4%, 39.5%</td>
+<td headers="estimate" class="gt_row gt_center">31.0%</td>
+<td headers="conf.low" class="gt_row gt_center">23.6%, 38.4%</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    57</td>
-<td headers="estimate" class="gt_row gt_center">35.1%</td>
-<td headers="conf.low" class="gt_row gt_center">26.0%, 44.2%</td>
+<td headers="estimate" class="gt_row gt_center">32.1%</td>
+<td headers="conf.low" class="gt_row gt_center">24.7%, 39.4%</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    83</td>
-<td headers="estimate" class="gt_row gt_center">47.1%</td>
-<td headers="conf.low" class="gt_row gt_center">10.0%, 84.2%</td>
+<td headers="estimate" class="gt_row gt_center">34.9%</td>
+<td headers="conf.low" class="gt_row gt_center">25.7%, 44.1%</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left" style="font-weight: bold;">Chemotherapy Treatment * Marker Level (ng/mL)</td>
@@ -3826,53 +3826,53 @@ representation.</p>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    Drug A * 0.005</td>
-<td headers="estimate" class="gt_row gt_center">24.2%</td>
-<td headers="conf.low" class="gt_row gt_center">10.9%, 37.6%</td>
+<td headers="estimate" class="gt_row gt_center">23.9%</td>
+<td headers="conf.low" class="gt_row gt_center">10.6%, 37.3%</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    Drug A * 0.215</td>
-<td headers="estimate" class="gt_row gt_center">25.1%</td>
-<td headers="conf.low" class="gt_row gt_center">13.0%, 37.3%</td>
+<td headers="estimate" class="gt_row gt_center">24.8%</td>
+<td headers="conf.low" class="gt_row gt_center">12.6%, 37.0%</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    Drug A * 0.662</td>
-<td headers="estimate" class="gt_row gt_center">27.0%</td>
-<td headers="conf.low" class="gt_row gt_center">16.9%, 37.2%</td>
+<td headers="estimate" class="gt_row gt_center">26.8%</td>
+<td headers="conf.low" class="gt_row gt_center">16.6%, 37.0%</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    Drug A * 1.406</td>
-<td headers="estimate" class="gt_row gt_center">30.5%</td>
-<td headers="conf.low" class="gt_row gt_center">19.9%, 41.0%</td>
+<td headers="estimate" class="gt_row gt_center">30.2%</td>
+<td headers="conf.low" class="gt_row gt_center">19.5%, 40.9%</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    Drug A * 3.874</td>
 <td headers="estimate" class="gt_row gt_center">43.1%</td>
-<td headers="conf.low" class="gt_row gt_center">5.7%, 80.5%</td>
+<td headers="conf.low" class="gt_row gt_center">5.0%, 81.1%</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    Drug B * 0.005</td>
-<td headers="estimate" class="gt_row gt_center">25.6%</td>
-<td headers="conf.low" class="gt_row gt_center">13.4%, 37.9%</td>
+<td headers="estimate" class="gt_row gt_center">25.3%</td>
+<td headers="conf.low" class="gt_row gt_center">13.0%, 37.7%</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    Drug B * 0.215</td>
-<td headers="estimate" class="gt_row gt_center">27.4%</td>
-<td headers="conf.low" class="gt_row gt_center">16.2%, 38.7%</td>
+<td headers="estimate" class="gt_row gt_center">27.1%</td>
+<td headers="conf.low" class="gt_row gt_center">15.7%, 38.5%</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    Drug B * 0.662</td>
-<td headers="estimate" class="gt_row gt_center">31.5%</td>
-<td headers="conf.low" class="gt_row gt_center">21.6%, 41.3%</td>
+<td headers="estimate" class="gt_row gt_center">31.2%</td>
+<td headers="conf.low" class="gt_row gt_center">21.3%, 41.2%</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    Drug B * 1.406</td>
-<td headers="estimate" class="gt_row gt_center">38.8%</td>
-<td headers="conf.low" class="gt_row gt_center">26.9%, 50.7%</td>
+<td headers="estimate" class="gt_row gt_center">38.7%</td>
+<td headers="conf.low" class="gt_row gt_center">26.6%, 50.8%</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    Drug B * 3.874</td>
-<td headers="estimate" class="gt_row gt_center">64.9%</td>
-<td headers="conf.low" class="gt_row gt_center">29.3%, 100.6%</td>
+<td headers="estimate" class="gt_row gt_center">65.2%</td>
+<td headers="conf.low" class="gt_row gt_center">29.1%, 101.2%</td>
 </tr>
 </tbody>
 <tfoot class="gt_sourcenotes"><tr>
@@ -3890,7 +3890,9 @@ representation.</p>
 <span><span class="va">p</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">p</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">+</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Age in years"</span><span class="op">)</span></span>
 <span><span class="va">p</span> <span class="op">+</span> <span class="fu">patchwork</span><span class="fu">::</span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html" class="external-link">plot_annotation</a></span><span class="op">(</span></span>
 <span>  title <span class="op">=</span> <span class="st">"Average Marginal Predictions"</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: Removed 1 row containing missing values or values outside the scale range</span></span>
+<span><span class="co">#&gt; (`geom_ribbon()`).</span></span></code></pre></div>
 <p><img src="marginal_tidiers_files/figure-html/unnamed-chunk-24-1.png" width="700"></p>
 </div>
 <div class="section level3">
@@ -4526,28 +4528,28 @@ predictions at marginal means will be equal to marginal means.</p>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    6</td>
-<td headers="estimate" class="gt_row gt_center">17.4%</td>
-<td headers="conf.low" class="gt_row gt_center">-13.2%, 48.0%</td>
+<td headers="estimate" class="gt_row gt_center">28.7%</td>
+<td headers="conf.low" class="gt_row gt_center">20.6%, 36.9%</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    37</td>
-<td headers="estimate" class="gt_row gt_center">27.3%</td>
-<td headers="conf.low" class="gt_row gt_center">18.7%, 35.9%</td>
+<td headers="estimate" class="gt_row gt_center">30.6%</td>
+<td headers="conf.low" class="gt_row gt_center">23.4%, 37.9%</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    47</td>
-<td headers="estimate" class="gt_row gt_center">31.2%</td>
-<td headers="conf.low" class="gt_row gt_center">22.3%, 40.1%</td>
+<td headers="estimate" class="gt_row gt_center">31.3%</td>
+<td headers="conf.low" class="gt_row gt_center">24.0%, 38.6%</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    57</td>
-<td headers="estimate" class="gt_row gt_center">35.5%</td>
-<td headers="conf.low" class="gt_row gt_center">26.1%, 44.9%</td>
+<td headers="estimate" class="gt_row gt_center">31.9%</td>
+<td headers="conf.low" class="gt_row gt_center">24.6%, 39.2%</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    83</td>
-<td headers="estimate" class="gt_row gt_center">47.7%</td>
-<td headers="conf.low" class="gt_row gt_center">10.0%, 85.4%</td>
+<td headers="estimate" class="gt_row gt_center">33.7%</td>
+<td headers="conf.low" class="gt_row gt_center">25.7%, 41.7%</td>
 </tr>
 </tbody>
 <tfoot class="gt_sourcenotes"><tr>
@@ -6813,17 +6815,17 @@ Average Marginal Predictions are obtained with
 <span><span class="va">pred</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  stage Estimate Std. Error    z Pr(&gt;|z|)    S 2.5 % 97.5 %</span></span>
-<span><span class="co">#&gt;     T1    0.389     0.0715 5.44   &lt;0.001 24.2 0.249  0.529</span></span>
-<span><span class="co">#&gt;     T2    0.225     0.0577 3.91   &lt;0.001 13.4 0.112  0.338</span></span>
-<span><span class="co">#&gt;     T3    0.354     0.0786 4.51   &lt;0.001 17.2 0.200  0.508</span></span>
-<span><span class="co">#&gt;     T4    0.300     0.0706 4.25   &lt;0.001 15.5 0.161  0.438</span></span>
+<span><span class="co">#&gt;     T1    0.387     0.0723 5.36   &lt;0.001 23.5 0.246  0.529</span></span>
+<span><span class="co">#&gt;     T2    0.223     0.0579 3.85   &lt;0.001 13.0 0.109  0.336</span></span>
+<span><span class="co">#&gt;     T3    0.352     0.0795 4.43   &lt;0.001 16.7 0.196  0.508</span></span>
+<span><span class="co">#&gt;     T4    0.297     0.0709 4.19   &lt;0.001 15.2 0.158  0.436</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Type: response</span></span></code></pre></div>
 <p>The contrast between <code>"T2"</code> and <code>"T1"</code> is
 simply the difference between the two adjusted predictions:</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pred</span><span class="op">$</span><span class="va">estimate</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">-</span> <span class="va">pred</span><span class="op">$</span><span class="va">estimate</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
-<span><span class="co">#&gt; [1] -0.1637819</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] -0.1648346</span></span></code></pre></div>
 <p>The <code><a href="https://marginaleffects.com/man/r/comparisons.html" class="external-link">marginaleffects::avg_comparisons()</a></code> function allows
 to compute all differences between adjusted predictions.</p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
@@ -6883,8 +6885,8 @@ reference.</p>
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://marginaleffects.com/man/r/comparisons.html" class="external-link">avg_comparisons</a></span><span class="op">(</span><span class="va">mod</span>, variables <span class="op">=</span> <span class="st">"age"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;  Estimate Std. Error    z Pr(&gt;|z|)   S  2.5 %  97.5 %</span></span>
-<span><span class="co">#&gt;   0.00399    0.00239 1.67   0.0954 3.4 -7e-04 0.00868</span></span>
+<span><span class="co">#&gt;  Estimate Std. Error  z Pr(&gt;|z|)  S 2.5 % 97.5 %</span></span>
+<span><span class="co">#&gt;         0         NA NA       NA NA    NA     NA</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Term: age</span></span>
 <span><span class="co">#&gt; Type: response</span></span>
@@ -6898,8 +6900,8 @@ difference for an increase of 10 years:</p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://marginaleffects.com/man/r/comparisons.html" class="external-link">avg_comparisons</a></span><span class="op">(</span><span class="va">mod</span>, variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>age <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;  Estimate Std. Error    z Pr(&gt;|z|)   S   2.5 % 97.5 %</span></span>
-<span><span class="co">#&gt;    0.0412     0.0288 1.43    0.152 2.7 -0.0152 0.0976</span></span>
+<span><span class="co">#&gt;  Estimate Std. Error  z Pr(&gt;|z|)  S 2.5 % 97.5 %</span></span>
+<span><span class="co">#&gt;         0         NA NA       NA NA    NA     NA</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Term: age</span></span>
 <span><span class="co">#&gt; Type: response</span></span>
@@ -6908,20 +6910,20 @@ difference for an increase of 10 years:</p>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://marginaleffects.com/man/r/comparisons.html" class="external-link">avg_comparisons</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;    Term        Contrast Estimate Std. Error      z Pr(&gt;|z|)   S    2.5 %</span></span>
-<span><span class="co">#&gt;  age    +1               0.00399    0.00239  1.667   0.0954 3.4 -0.00070</span></span>
-<span><span class="co">#&gt;  marker +1               0.07470    0.04150  1.800   0.0719 3.8 -0.00664</span></span>
-<span><span class="co">#&gt;  stage  T2 - T1         -0.16378    0.09252 -1.770   0.0767 3.7 -0.34511</span></span>
-<span><span class="co">#&gt;  stage  T3 - T1         -0.03509    0.10646 -0.330   0.7417 0.4 -0.24374</span></span>
-<span><span class="co">#&gt;  stage  T4 - T1         -0.08947    0.10037 -0.891   0.3727 1.4 -0.28620</span></span>
-<span><span class="co">#&gt;  trt    Drug B - Drug A  0.06006    0.06893  0.871   0.3836 1.4 -0.07504</span></span>
+<span><span class="co">#&gt;    Term        Contrast Estimate Std. Error      z Pr(&gt;|z|)   S     2.5 %</span></span>
+<span><span class="co">#&gt;  age    +1               0.00136   0.000826  1.651   0.0987 3.3 -0.000255</span></span>
+<span><span class="co">#&gt;  marker +1               0.07525   0.042004  1.791   0.0732 3.8 -0.007078</span></span>
+<span><span class="co">#&gt;  stage  T2 - T1         -0.16517   0.093213 -1.772   0.0764 3.7 -0.347865</span></span>
+<span><span class="co">#&gt;  stage  T3 - T1         -0.03580   0.107722 -0.332   0.7396 0.4 -0.246928</span></span>
+<span><span class="co">#&gt;  stage  T4 - T1         -0.09064   0.101313 -0.895   0.3710 1.4 -0.289212</span></span>
+<span><span class="co">#&gt;  trt    Drug B - Drug A  0.06033   0.069547  0.868   0.3857 1.4 -0.075977</span></span>
 <span><span class="co">#&gt;   97.5 %</span></span>
-<span><span class="co">#&gt;  0.00868</span></span>
-<span><span class="co">#&gt;  0.15604</span></span>
-<span><span class="co">#&gt;  0.01755</span></span>
-<span><span class="co">#&gt;  0.17356</span></span>
-<span><span class="co">#&gt;  0.10726</span></span>
-<span><span class="co">#&gt;  0.19517</span></span>
+<span><span class="co">#&gt;  0.00298</span></span>
+<span><span class="co">#&gt;  0.15758</span></span>
+<span><span class="co">#&gt;  0.01752</span></span>
+<span><span class="co">#&gt;  0.17533</span></span>
+<span><span class="co">#&gt;  0.10793</span></span>
+<span><span class="co">#&gt;  0.19664</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Type: response</span></span></code></pre></div>
 <p>It should be noted that column names are not consistent with other
@@ -6934,12 +6936,12 @@ tidiers used by <code>broom.helpers</code>. Therefore, a
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 9</span></span></span>
 <span><span class="co">#&gt;   variable term  estimate std.error statistic p.value s.value conf.low conf.high</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> age      +1     0.003<span style="text-decoration: underline;">99</span>   0.002<span style="text-decoration: underline;">39</span>     1.67   0.095<span style="text-decoration: underline;">4</span>   3.39  -<span style="color: #BB0000;">7.00</span><span style="color: #949494;">e</span><span style="color: #BB0000;">-4</span>   0.008<span style="text-decoration: underline;">68</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> marker   +1     0.074<span style="text-decoration: underline;">7</span>    0.041<span style="text-decoration: underline;">5</span>      1.80   0.071<span style="text-decoration: underline;">9</span>   3.80  -<span style="color: #BB0000;">6.64</span><span style="color: #949494;">e</span><span style="color: #BB0000;">-3</span>   0.156  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> stage    T2 -… -<span style="color: #BB0000;">0.164</span>     0.092<span style="text-decoration: underline;">5</span>     -<span style="color: #BB0000;">1.77</span>   0.076<span style="text-decoration: underline;">7</span>   3.71  -<span style="color: #BB0000;">3.45</span><span style="color: #949494;">e</span><span style="color: #BB0000;">-1</span>   0.017<span style="text-decoration: underline;">5</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> stage    T3 -… -<span style="color: #BB0000;">0.035</span><span style="color: #BB0000; text-decoration: underline;">1</span>    0.106      -<span style="color: #BB0000;">0.330</span>  0.742    0.431 -<span style="color: #BB0000;">2.44</span><span style="color: #949494;">e</span><span style="color: #BB0000;">-1</span>   0.174  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> stage    T4 -… -<span style="color: #BB0000;">0.089</span><span style="color: #BB0000; text-decoration: underline;">5</span>    0.100      -<span style="color: #BB0000;">0.891</span>  0.373    1.42  -<span style="color: #BB0000;">2.86</span><span style="color: #949494;">e</span><span style="color: #BB0000;">-1</span>   0.107  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> trt      Drug…  0.060<span style="text-decoration: underline;">1</span>    0.068<span style="text-decoration: underline;">9</span>      0.871  0.384    1.38  -<span style="color: #BB0000;">7.50</span><span style="color: #949494;">e</span><span style="color: #BB0000;">-2</span>   0.195</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> age      +1     0.001<span style="text-decoration: underline;">36</span>  0.000<span style="text-decoration: underline;">826</span>     1.65   0.098<span style="text-decoration: underline;">7</span>   3.34  -<span style="color: #BB0000;">2.55</span><span style="color: #949494;">e</span><span style="color: #BB0000;">-4</span>   0.002<span style="text-decoration: underline;">98</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> marker   +1     0.075<span style="text-decoration: underline;">2</span>   0.042<span style="text-decoration: underline;">0</span>       1.79   0.073<span style="text-decoration: underline;">2</span>   3.77  -<span style="color: #BB0000;">7.08</span><span style="color: #949494;">e</span><span style="color: #BB0000;">-3</span>   0.158  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> stage    T2 -… -<span style="color: #BB0000;">0.165</span>    0.093<span style="text-decoration: underline;">2</span>      -<span style="color: #BB0000;">1.77</span>   0.076<span style="text-decoration: underline;">4</span>   3.71  -<span style="color: #BB0000;">3.48</span><span style="color: #949494;">e</span><span style="color: #BB0000;">-1</span>   0.017<span style="text-decoration: underline;">5</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> stage    T3 -… -<span style="color: #BB0000;">0.035</span><span style="color: #BB0000; text-decoration: underline;">8</span>   0.108       -<span style="color: #BB0000;">0.332</span>  0.740    0.435 -<span style="color: #BB0000;">2.47</span><span style="color: #949494;">e</span><span style="color: #BB0000;">-1</span>   0.175  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> stage    T4 -… -<span style="color: #BB0000;">0.090</span><span style="color: #BB0000; text-decoration: underline;">6</span>   0.101       -<span style="color: #BB0000;">0.895</span>  0.371    1.43  -<span style="color: #BB0000;">2.89</span><span style="color: #949494;">e</span><span style="color: #BB0000;">-1</span>   0.108  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> trt      Drug…  0.060<span style="text-decoration: underline;">3</span>   0.069<span style="text-decoration: underline;">5</span>       0.868  0.386    1.37  -<span style="color: #BB0000;">7.60</span><span style="color: #949494;">e</span><span style="color: #BB0000;">-2</span>   0.197</span></span></code></pre></div>
 <p>This custom tidier is compatible with <code><a href="../reference/tidy_plus_plus.html">tidy_plus_plus()</a></code>
 and the suit of other functions provided by
 <a href="https://larmarange.github.io/broom.helpers/">broom.helpers</a>.</p>
@@ -7434,8 +7436,8 @@ and the suit of other functions provided by
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    +1</td>
-<td headers="estimate" class="gt_row gt_center">+0.4%</td>
-<td headers="conf.low" class="gt_row gt_center">-0.07%, +0.87%</td>
+<td headers="estimate" class="gt_row gt_center">+0.1%</td>
+<td headers="conf.low" class="gt_row gt_center">-0.03%, +0.3%</td>
 <td headers="p.value" class="gt_row gt_center">0.10</td>
 </tr>
 <tr>
@@ -7447,8 +7449,8 @@ and the suit of other functions provided by
 <tr>
 <td headers="label" class="gt_row gt_left">    +1</td>
 <td headers="estimate" class="gt_row gt_center">+7.5%</td>
-<td headers="conf.low" class="gt_row gt_center">-0.66%, +15.60%</td>
-<td headers="p.value" class="gt_row gt_center">0.072</td>
+<td headers="conf.low" class="gt_row gt_center">-0.71%, +15.8%</td>
+<td headers="p.value" class="gt_row gt_center">0.073</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left" style="font-weight: bold;">T Stage</td>
@@ -7458,20 +7460,20 @@ and the suit of other functions provided by
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    T2 - T1</td>
-<td headers="estimate" class="gt_row gt_center">-16.4%</td>
-<td headers="conf.low" class="gt_row gt_center">-34.51%, +1.75%</td>
-<td headers="p.value" class="gt_row gt_center">0.077</td>
+<td headers="estimate" class="gt_row gt_center">-16.5%</td>
+<td headers="conf.low" class="gt_row gt_center">-34.79%, +1.8%</td>
+<td headers="p.value" class="gt_row gt_center">0.076</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    T3 - T1</td>
-<td headers="estimate" class="gt_row gt_center">-3.5%</td>
-<td headers="conf.low" class="gt_row gt_center">-24.37%, +17.36%</td>
+<td headers="estimate" class="gt_row gt_center">-3.6%</td>
+<td headers="conf.low" class="gt_row gt_center">-24.69%, +17.5%</td>
 <td headers="p.value" class="gt_row gt_center">0.7</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    T4 - T1</td>
-<td headers="estimate" class="gt_row gt_center">-8.9%</td>
-<td headers="conf.low" class="gt_row gt_center">-28.62%, +10.73%</td>
+<td headers="estimate" class="gt_row gt_center">-9.1%</td>
+<td headers="conf.low" class="gt_row gt_center">-28.92%, +10.8%</td>
 <td headers="p.value" class="gt_row gt_center">0.4</td>
 </tr>
 <tr>
@@ -7483,7 +7485,7 @@ and the suit of other functions provided by
 <tr>
 <td headers="label" class="gt_row gt_left">    Drug B - Drug A</td>
 <td headers="estimate" class="gt_row gt_center">+6.0%</td>
-<td headers="conf.low" class="gt_row gt_center">-7.50%, +19.52%</td>
+<td headers="conf.low" class="gt_row gt_center">-7.60%, +19.7%</td>
 <td headers="p.value" class="gt_row gt_center">0.4</td>
 </tr>
 </tbody>
@@ -7502,7 +7504,9 @@ and the suit of other functions provided by
 <span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span></span>
 <span>    labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>style_positive <span class="op">=</span> <span class="st">"plus"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span></code></pre></div>
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; Scale for <span style="color: #00BB00;">x</span> is already present.</span></span>
+<span><span class="co">#&gt; Adding another scale for <span style="color: #00BB00;">x</span>, which will replace the existing scale.</span></span></code></pre></div>
 <p><img src="marginal_tidiers_files/figure-html/unnamed-chunk-44-1.png" width="700"></p>
 </div>
 <div class="section level3">
@@ -8082,7 +8086,9 @@ to pass <code>newdata = "mean"</code>.</p>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span></span>
 <span>    labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>style_positive <span class="op">=</span> <span class="st">"plus"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span></code></pre></div>
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; Scale for <span style="color: #00BB00;">x</span> is already present.</span></span>
+<span><span class="co">#&gt; Adding another scale for <span style="color: #00BB00;">x</span>, which will replace the existing scale.</span></span></code></pre></div>
 <p><img src="marginal_tidiers_files/figure-html/unnamed-chunk-47-1.png" width="700"></p>
 </div>
 <div class="section level3">
@@ -8632,7 +8638,9 @@ the documentation of <code><a href="https://marginaleffects.com/man/r/comparison
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span></span>
 <span>    labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>style_positive <span class="op">=</span> <span class="st">"plus"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span></code></pre></div>
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; Scale for <span style="color: #00BB00;">x</span> is already present.</span></span>
+<span><span class="co">#&gt; Adding another scale for <span style="color: #00BB00;">x</span>, which will replace the existing scale.</span></span></code></pre></div>
 <p><img src="marginal_tidiers_files/figure-html/unnamed-chunk-49-1.png" width="700"></p>
 </div>
 <div class="section level3">
@@ -8653,8 +8661,8 @@ contrast of <code>marker</code> for each value of <code>trt</code>.</p>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;     trt Estimate Std. Error     z Pr(&gt;|z|)   S   2.5 % 97.5 %</span></span>
-<span><span class="co">#&gt;  Drug A   0.0472     0.0573 0.824   0.4101 1.3 -0.0651  0.159</span></span>
-<span><span class="co">#&gt;  Drug B   0.1004     0.0590 1.703   0.0887 3.5 -0.0152  0.216</span></span>
+<span><span class="co">#&gt;  Drug A   0.0474     0.0576 0.823   0.4104 1.3 -0.0655  0.160</span></span>
+<span><span class="co">#&gt;  Drug B   0.1012     0.0595 1.701   0.0889 3.5 -0.0154  0.218</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Term: marker</span></span>
 <span><span class="co">#&gt; Type: response</span></span>
@@ -9151,19 +9159,19 @@ in a unique tibble.</p>
 <tr>
 <td headers="label" class="gt_row gt_left">    T2 - T1</td>
 <td headers="estimate" class="gt_row gt_center">-16.4%</td>
-<td headers="conf.low" class="gt_row gt_center">-34.5%, +1.75%</td>
+<td headers="conf.low" class="gt_row gt_center">-34.5%, +1.8%</td>
 <td headers="p.value" class="gt_row gt_center">0.077</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    T3 - T1</td>
 <td headers="estimate" class="gt_row gt_center">-3.5%</td>
-<td headers="conf.low" class="gt_row gt_center">-24.4%, +17.36%</td>
+<td headers="conf.low" class="gt_row gt_center">-24.4%, +17.4%</td>
 <td headers="p.value" class="gt_row gt_center">0.7</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    T4 - T1</td>
 <td headers="estimate" class="gt_row gt_center">-8.9%</td>
-<td headers="conf.low" class="gt_row gt_center">-28.6%, +10.73%</td>
+<td headers="conf.low" class="gt_row gt_center">-28.6%, +10.7%</td>
 <td headers="p.value" class="gt_row gt_center">0.4</td>
 </tr>
 <tr>
@@ -9174,9 +9182,9 @@ in a unique tibble.</p>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    +1</td>
-<td headers="estimate" class="gt_row gt_center">+0.4%</td>
-<td headers="conf.low" class="gt_row gt_center">-0.1%, +0.87%</td>
-<td headers="p.value" class="gt_row gt_center">0.10</td>
+<td headers="estimate" class="gt_row gt_center">0.0%</td>
+<td headers="conf.low" class="gt_row gt_center"><br></td>
+<td headers="p.value" class="gt_row gt_center"><br></td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left" style="font-weight: bold;">Chemotherapy Treatment * Marker Level (ng/mL)</td>
@@ -9187,13 +9195,13 @@ in a unique tibble.</p>
 <tr>
 <td headers="label" class="gt_row gt_left">    Drug A * +1</td>
 <td headers="estimate" class="gt_row gt_center">+4.7%</td>
-<td headers="conf.low" class="gt_row gt_center">-6.5%, +15.95%</td>
+<td headers="conf.low" class="gt_row gt_center">-6.6%, +16.0%</td>
 <td headers="p.value" class="gt_row gt_center">0.4</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    Drug B * +1</td>
-<td headers="estimate" class="gt_row gt_center">+10.0%</td>
-<td headers="conf.low" class="gt_row gt_center">-1.5%, +21.61%</td>
+<td headers="estimate" class="gt_row gt_center">+10.1%</td>
+<td headers="conf.low" class="gt_row gt_center">-1.5%, +21.8%</td>
 <td headers="p.value" class="gt_row gt_center">0.089</td>
 </tr>
 </tbody>
@@ -9690,19 +9698,19 @@ Tukey’s five numbers).</p>
 <tr>
 <td headers="label" class="gt_row gt_left">    T2 - T1</td>
 <td headers="estimate" class="gt_row gt_center">-16.4%</td>
-<td headers="conf.low" class="gt_row gt_center">-34.5%, +1.75%</td>
+<td headers="conf.low" class="gt_row gt_center">-34.5%, +1.8%</td>
 <td headers="p.value" class="gt_row gt_center">0.077</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    T3 - T1</td>
 <td headers="estimate" class="gt_row gt_center">-3.5%</td>
-<td headers="conf.low" class="gt_row gt_center">-24.4%, +17.36%</td>
+<td headers="conf.low" class="gt_row gt_center">-24.4%, +17.4%</td>
 <td headers="p.value" class="gt_row gt_center">0.7</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    T4 - T1</td>
 <td headers="estimate" class="gt_row gt_center">-8.9%</td>
-<td headers="conf.low" class="gt_row gt_center">-28.6%, +10.73%</td>
+<td headers="conf.low" class="gt_row gt_center">-28.6%, +10.7%</td>
 <td headers="p.value" class="gt_row gt_center">0.4</td>
 </tr>
 <tr>
@@ -9713,9 +9721,9 @@ Tukey’s five numbers).</p>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    +1</td>
-<td headers="estimate" class="gt_row gt_center">+0.4%</td>
-<td headers="conf.low" class="gt_row gt_center">-0.1%, +0.87%</td>
-<td headers="p.value" class="gt_row gt_center">0.10</td>
+<td headers="estimate" class="gt_row gt_center">0.0%</td>
+<td headers="conf.low" class="gt_row gt_center"><br></td>
+<td headers="p.value" class="gt_row gt_center"><br></td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left" style="font-weight: bold;">Chemotherapy Treatment * Marker Level (ng/mL)</td>
@@ -9726,7 +9734,7 @@ Tukey’s five numbers).</p>
 <tr>
 <td headers="label" class="gt_row gt_left">    +1 * Drug B - Drug A</td>
 <td headers="estimate" class="gt_row gt_center">+16.1%</td>
-<td headers="conf.low" class="gt_row gt_center">-2.7%, +34.84%</td>
+<td headers="conf.low" class="gt_row gt_center">-2.7%, +34.8%</td>
 <td headers="p.value" class="gt_row gt_center">0.094</td>
 </tr>
 </tbody>
@@ -10213,7 +10221,7 @@ considering interactions.</p>
 <tr>
 <td headers="label" class="gt_row gt_left">    Drug B - Drug A</td>
 <td headers="estimate" class="gt_row gt_center">+6.0%</td>
-<td headers="conf.low" class="gt_row gt_center">-7.50%, +19.52%</td>
+<td headers="conf.low" class="gt_row gt_center">-7.5%, +19.5%</td>
 <td headers="p.value" class="gt_row gt_center">0.4</td>
 </tr>
 <tr>
@@ -10225,7 +10233,7 @@ considering interactions.</p>
 <tr>
 <td headers="label" class="gt_row gt_left">    +1</td>
 <td headers="estimate" class="gt_row gt_center">+7.5%</td>
-<td headers="conf.low" class="gt_row gt_center">-0.66%, +15.60%</td>
+<td headers="conf.low" class="gt_row gt_center">-0.7%, +15.6%</td>
 <td headers="p.value" class="gt_row gt_center">0.072</td>
 </tr>
 <tr>
@@ -10237,19 +10245,19 @@ considering interactions.</p>
 <tr>
 <td headers="label" class="gt_row gt_left">    T2 - T1</td>
 <td headers="estimate" class="gt_row gt_center">-16.4%</td>
-<td headers="conf.low" class="gt_row gt_center">-34.51%, +1.75%</td>
+<td headers="conf.low" class="gt_row gt_center">-34.5%, +1.8%</td>
 <td headers="p.value" class="gt_row gt_center">0.077</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    T3 - T1</td>
 <td headers="estimate" class="gt_row gt_center">-3.5%</td>
-<td headers="conf.low" class="gt_row gt_center">-24.37%, +17.36%</td>
+<td headers="conf.low" class="gt_row gt_center">-24.4%, +17.4%</td>
 <td headers="p.value" class="gt_row gt_center">0.7</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    T4 - T1</td>
 <td headers="estimate" class="gt_row gt_center">-8.9%</td>
-<td headers="conf.low" class="gt_row gt_center">-28.62%, +10.73%</td>
+<td headers="conf.low" class="gt_row gt_center">-28.6%, +10.7%</td>
 <td headers="p.value" class="gt_row gt_center">0.4</td>
 </tr>
 <tr>
@@ -10260,9 +10268,9 @@ considering interactions.</p>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    +1</td>
-<td headers="estimate" class="gt_row gt_center">+0.4%</td>
-<td headers="conf.low" class="gt_row gt_center">-0.07%, +0.87%</td>
-<td headers="p.value" class="gt_row gt_center">0.10</td>
+<td headers="estimate" class="gt_row gt_center">0.0%</td>
+<td headers="conf.low" class="gt_row gt_center"><br></td>
+<td headers="p.value" class="gt_row gt_center"><br></td>
 </tr>
 </tbody>
 <tfoot class="gt_sourcenotes"><tr>
@@ -10314,19 +10322,19 @@ being averaged with <code><a href="https://marginaleffects.com/man/r/slopes.html
 <code class="sourceCode R"><span><span class="fu"><a href="https://marginaleffects.com/man/r/slopes.html" class="external-link">avg_slopes</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;    Term        Contrast Estimate Std. Error      z Pr(&gt;|z|)   S     2.5 %</span></span>
-<span><span class="co">#&gt;  age    dY/dX            0.00397    0.00237  1.679   0.0932 3.4 -0.000666</span></span>
-<span><span class="co">#&gt;  marker dY/dX            0.07104    0.03818  1.861   0.0628 4.0 -0.003781</span></span>
-<span><span class="co">#&gt;  stage  T2 - T1         -0.16378    0.09252 -1.770   0.0767 3.7 -0.345109</span></span>
-<span><span class="co">#&gt;  stage  T3 - T1         -0.03509    0.10646 -0.330   0.7417 0.4 -0.243740</span></span>
-<span><span class="co">#&gt;  stage  T4 - T1         -0.08947    0.10037 -0.891   0.3727 1.4 -0.286204</span></span>
-<span><span class="co">#&gt;  trt    Drug B - Drug A  0.06006    0.06893  0.871   0.3836 1.4 -0.075043</span></span>
+<span><span class="co">#&gt;  age    dY/dX            0.00136   0.000825  1.652   0.0986 3.3 -0.000254</span></span>
+<span><span class="co">#&gt;  marker dY/dX            0.06627   0.038681  1.713   0.0867 3.5 -0.009547</span></span>
+<span><span class="co">#&gt;  stage  T2 - T1         -0.16495   0.093234 -1.769   0.0769 3.7 -0.347685</span></span>
+<span><span class="co">#&gt;  stage  T3 - T1         -0.03551   0.107731 -0.330   0.7417 0.4 -0.246655</span></span>
+<span><span class="co">#&gt;  stage  T4 - T1         -0.09037   0.101341 -0.892   0.3725 1.4 -0.289000</span></span>
+<span><span class="co">#&gt;  trt    Drug B - Drug A  0.06061   0.069557  0.871   0.3835 1.4 -0.075716</span></span>
 <span><span class="co">#&gt;   97.5 %</span></span>
-<span><span class="co">#&gt;  0.00861</span></span>
-<span><span class="co">#&gt;  0.14587</span></span>
-<span><span class="co">#&gt;  0.01755</span></span>
-<span><span class="co">#&gt;  0.17356</span></span>
-<span><span class="co">#&gt;  0.10726</span></span>
-<span><span class="co">#&gt;  0.19517</span></span>
+<span><span class="co">#&gt;  0.00298</span></span>
+<span><span class="co">#&gt;  0.14208</span></span>
+<span><span class="co">#&gt;  0.01779</span></span>
+<span><span class="co">#&gt;  0.17564</span></span>
+<span><span class="co">#&gt;  0.10825</span></span>
+<span><span class="co">#&gt;  0.19694</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Type: response</span></span></code></pre></div>
 <p>Column names are not consistent with other tidiers used by
@@ -10805,9 +10813,9 @@ instead.</p>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    dY/dX</td>
-<td headers="estimate" class="gt_row gt_center">+0.4%</td>
-<td headers="conf.low" class="gt_row gt_center">-0.07%, +0.86%</td>
-<td headers="p.value" class="gt_row gt_center">0.093</td>
+<td headers="estimate" class="gt_row gt_center">+0.14%</td>
+<td headers="conf.low" class="gt_row gt_center">-0.03%, +0.3%</td>
+<td headers="p.value" class="gt_row gt_center">0.10</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left" style="font-weight: bold;">Marker Level (ng/mL)</td>
@@ -10817,9 +10825,9 @@ instead.</p>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    dY/dX</td>
-<td headers="estimate" class="gt_row gt_center">+7.1%</td>
-<td headers="conf.low" class="gt_row gt_center">-0.38%, +14.59%</td>
-<td headers="p.value" class="gt_row gt_center">0.063</td>
+<td headers="estimate" class="gt_row gt_center">+6.63%</td>
+<td headers="conf.low" class="gt_row gt_center">-0.95%, +14.2%</td>
+<td headers="p.value" class="gt_row gt_center">0.087</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left" style="font-weight: bold;">T Stage</td>
@@ -10829,20 +10837,20 @@ instead.</p>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    T2 - T1</td>
-<td headers="estimate" class="gt_row gt_center">-16.4%</td>
-<td headers="conf.low" class="gt_row gt_center">-34.51%, +1.75%</td>
+<td headers="estimate" class="gt_row gt_center">-16.49%</td>
+<td headers="conf.low" class="gt_row gt_center">-34.77%, +1.8%</td>
 <td headers="p.value" class="gt_row gt_center">0.077</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    T3 - T1</td>
-<td headers="estimate" class="gt_row gt_center">-3.5%</td>
-<td headers="conf.low" class="gt_row gt_center">-24.37%, +17.36%</td>
+<td headers="estimate" class="gt_row gt_center">-3.55%</td>
+<td headers="conf.low" class="gt_row gt_center">-24.67%, +17.6%</td>
 <td headers="p.value" class="gt_row gt_center">0.7</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    T4 - T1</td>
-<td headers="estimate" class="gt_row gt_center">-8.9%</td>
-<td headers="conf.low" class="gt_row gt_center">-28.62%, +10.73%</td>
+<td headers="estimate" class="gt_row gt_center">-9.04%</td>
+<td headers="conf.low" class="gt_row gt_center">-28.90%, +10.8%</td>
 <td headers="p.value" class="gt_row gt_center">0.4</td>
 </tr>
 <tr>
@@ -10853,8 +10861,8 @@ instead.</p>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">    Drug B - Drug A</td>
-<td headers="estimate" class="gt_row gt_center">+6.0%</td>
-<td headers="conf.low" class="gt_row gt_center">-7.50%, +19.52%</td>
+<td headers="estimate" class="gt_row gt_center">+6.06%</td>
+<td headers="conf.low" class="gt_row gt_center">-7.57%, +19.7%</td>
 <td headers="p.value" class="gt_row gt_center">0.4</td>
 </tr>
 </tbody>
@@ -10871,7 +10879,9 @@ instead.</p>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span></span>
 <span>    labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>style_positive <span class="op">=</span> <span class="st">"plus"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span></code></pre></div>
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; Scale for <span style="color: #00BB00;">x</span> is already present.</span></span>
+<span><span class="co">#&gt; Adding another scale for <span style="color: #00BB00;">x</span>, which will replace the existing scale.</span></span></code></pre></div>
 <p><img src="marginal_tidiers_files/figure-html/unnamed-chunk-59-1.png" width="700"></p>
 <p>Please note that for categorical variables, marginal contrasts are
 returned.</p>
@@ -11977,7 +11987,9 @@ continuous variables and the mode of categorical variables.&lt;/p&gt;"><sup>2</s
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span></span>
 <span>    labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>style_positive <span class="op">=</span> <span class="st">"plus"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span></code></pre></div>
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; Scale for <span style="color: #00BB00;">x</span> is already present.</span></span>
+<span><span class="co">#&gt; Adding another scale for <span style="color: #00BB00;">x</span>, which will replace the existing scale.</span></span></code></pre></div>
 <p><img src="marginal_tidiers_files/figure-html/unnamed-chunk-63-1.png" width="700"></p>
 </div>
 <div class="section level3">
@@ -12525,7 +12537,9 @@ continuous variables and the mode of categorical variables.&lt;/p&gt;"><sup>2</s
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span></span>
 <span>    labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>style_positive <span class="op">=</span> <span class="st">"plus"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span></code></pre></div>
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; Scale for <span style="color: #00BB00;">x</span> is already present.</span></span>
+<span><span class="co">#&gt; Adding another scale for <span style="color: #00BB00;">x</span>, which will replace the existing scale.</span></span></code></pre></div>
 <p><img src="marginal_tidiers_files/figure-html/unnamed-chunk-65-1.png" width="700"></p>
 </div>
 </div>
