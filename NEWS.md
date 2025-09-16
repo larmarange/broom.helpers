@@ -7,7 +7,7 @@
   
 **Fixes**
 
-- bug fix for `fixest` models when using a sub-setted data frame (#301)
+- bug fix for `fixest` models when using a subsetted data frame (#301)
 - bug fix for `fixest` models when computing the number of observations (#303)
 
 # broom.helpers 1.21.0
