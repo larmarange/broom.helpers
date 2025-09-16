@@ -10,6 +10,11 @@
 - bug fix for `fixest` models when using a subsetted data frame (#301)
 - bug fix for `fixest` models when computing the number of observations (#303)
 
+**Removed functions**
+
+- `.select_to_varnames()`, `.formula_list_to_named_list()`,
+  `.generic_selector()` and `.is_selector_scoped()` have now been removed
+
 # broom.helpers 1.21.0
 
 **New supported models**
