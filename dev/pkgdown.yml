@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   broom-helpers: broom-helpers.html
   articles/marginal_tidiers: marginal_tidiers.html
-last_built: 2025-09-17T09:00Z
+last_built: 2025-09-17T10:22Z
 urls:
   reference: https://larmarange.github.io/broom.helpers/reference
   article: https://larmarange.github.io/broom.helpers/articles
