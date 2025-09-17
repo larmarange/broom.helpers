@@ -1,12 +1,85 @@
+# bregr
+
+<details>
+
+* Version: 
+* GitHub: https://github.com/larmarange/broom.helpers
+* Source code: NA
+* Number of recursive dependencies: 0
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+  Des versions binaires sont disponibles mais les versions des sources
+  sont plus récentes:
+            binary source needs_compilation
+broom        1.0.9 1.0.10             FALSE
+ggalign      1.0.2  1.1.0             FALSE
+ggside       0.3.2  0.4.0             FALSE
+ggstats     0.10.0 0.11.0             FALSE
+ggstatsplot 0.13.1 0.13.2             FALSE
+labelled    2.14.1 2.15.0             FALSE
+...
+magrittr     2.0.3  2.0.4              TRUE
+
+  Binaries will be installed
+le package 'abind' a été décompressé et les sommes MD5 ont été vérifiées avec succés
+le package 'afex' a été décompressé et les sommes MD5 ont été vérifiées avec succés
+le package 'askpass' a été décompressé et les sommes MD5 ont été vérifiées avec succés
+le package 'backports' a été décompressé et les sommes MD5 ont été vérifiées avec succés
+le package 'base64enc' a été décompressé et les sommes MD5 ont été vérifiées avec succés
+le package 'BayesFactor' a été décompressé et les sommes MD5 ont été vérifiées avec succés
+le package 'bayestestR' a été décompressé et les sommes MD5 ont été vérifiées avec succés
+
+
+
+
+
+```
+### CRAN
+
+```
+
+  Des versions binaires sont disponibles mais les versions des sources
+  sont plus récentes:
+            binary source needs_compilation
+broom        1.0.9 1.0.10             FALSE
+ggalign      1.0.2  1.1.0             FALSE
+ggside       0.3.2  0.4.0             FALSE
+ggstats     0.10.0 0.11.0             FALSE
+ggstatsplot 0.13.1 0.13.2             FALSE
+labelled    2.14.1 2.15.0             FALSE
+...
+magrittr     2.0.3  2.0.4              TRUE
+
+  Binaries will be installed
+le package 'abind' a été décompressé et les sommes MD5 ont été vérifiées avec succés
+le package 'afex' a été décompressé et les sommes MD5 ont été vérifiées avec succés
+le package 'askpass' a été décompressé et les sommes MD5 ont été vérifiées avec succés
+le package 'backports' a été décompressé et les sommes MD5 ont été vérifiées avec succés
+le package 'base64enc' a été décompressé et les sommes MD5 ont été vérifiées avec succés
+le package 'BayesFactor' a été décompressé et les sommes MD5 ont été vérifiées avec succés
+le package 'bayestestR' a été décompressé et les sommes MD5 ont été vérifiées avec succés
+
+
+
+
+
+```
 # mmrm
 
 <details>
 
-* Version: 0.3.14
+* Version: 0.3.15
 * GitHub: https://github.com/openpharma/mmrm
 * Source code: https://github.com/cran/mmrm
-* Date/Publication: 2024-09-27 23:30:01 UTC
-* Number of recursive dependencies: 177
+* Date/Publication: 2025-06-10 10:50:02 UTC
+* Number of recursive dependencies: 173
 
 Run `revdepcheck::revdep_details(, "mmrm")` for more info
 
@@ -16,14 +89,6 @@ Run `revdepcheck::revdep_details(, "mmrm")` for more info
 
 *   R CMD check timed out
     
-
-*   checking DESCRIPTION meta-information ... NOTE
-    ```
-      Missing dependency on R >= 4.1.0 because package code uses the pipe
-      |> or function shorthand \(...) syntax added in R 4.1.0.
-      File(s) using such syntax:
-        'interop-car.R' 'mmrm_tidiers.Rd'
-    ```
 
 # simstudy
 
@@ -42,26 +107,18 @@ Run `revdepcheck::revdep_details(, "mmrm")` for more info
 
 ```
 
-  Une version binaire est disponible mais la version du source est plus
-  récente:
-    binary source needs_compilation
-cli  3.6.4  3.6.5              TRUE
+  Des versions binaires sont disponibles mais les versions des sources
+  sont plus récentes:
+         binary source needs_compilation
+broom     1.0.9 1.0.10             FALSE
+labelled 2.14.1 2.15.0             FALSE
+magrittr  2.0.3  2.0.4              TRUE
 
   Binaries will be installed
 le package 'abind' a été décompressé et les sommes MD5 ont été vérifiées avec succés
 le package 'askpass' a été décompressé et les sommes MD5 ont été vérifiées avec succés
 le package 'backports' a été décompressé et les sommes MD5 ont été vérifiées avec succés
-...
-le package 'microbenchmark' a été décompressé et les sommes MD5 ont été vérifiées avec succés
-le package 'mime' a été décompressé et les sommes MD5 ont été vérifiées avec succés
-le package 'minqa' a été décompressé et les sommes MD5 ont été vérifiées avec succés
-le package 'modelr' a été décompressé et les sommes MD5 ont été vérifiées avec succés
-le package 'multcomp' a été décompressé et les sommes MD5 ont été vérifiées avec succés
-le package 'munsell' a été décompressé et les sommes MD5 ont été vérifiées avec succés
-le package 'mvnfast' a été décompressé et les sommes MD5 ont été vérifiées avec succés
-le package 'mvtnorm' a été décompressé et les sommes MD5 ont été vérifiées avec succés
-le package 'nlme' a été décompressé et les sommes MD5 ont été vérifiées avec succés
-le package 'nloptr' a été décompressé et les sommes MD5 ont été vérifiées avec succés
+le package 'base64enc' a été décompressé et les sommes MD5 ont été vérifiées avec succés
 
 
 
@@ -72,29 +129,65 @@ le package 'nloptr' a été décompressé et les sommes MD5 ont été vérifiée
 
 ```
 
-  Une version binaire est disponible mais la version du source est plus
-  récente:
-    binary source needs_compilation
-cli  3.6.4  3.6.5              TRUE
+  Des versions binaires sont disponibles mais les versions des sources
+  sont plus récentes:
+         binary source needs_compilation
+broom     1.0.9 1.0.10             FALSE
+labelled 2.14.1 2.15.0             FALSE
+magrittr  2.0.3  2.0.4              TRUE
 
   Binaries will be installed
 le package 'abind' a été décompressé et les sommes MD5 ont été vérifiées avec succés
 le package 'askpass' a été décompressé et les sommes MD5 ont été vérifiées avec succés
 le package 'backports' a été décompressé et les sommes MD5 ont été vérifiées avec succés
-...
-le package 'microbenchmark' a été décompressé et les sommes MD5 ont été vérifiées avec succés
-le package 'mime' a été décompressé et les sommes MD5 ont été vérifiées avec succés
-le package 'minqa' a été décompressé et les sommes MD5 ont été vérifiées avec succés
-le package 'modelr' a été décompressé et les sommes MD5 ont été vérifiées avec succés
-le package 'multcomp' a été décompressé et les sommes MD5 ont été vérifiées avec succés
-le package 'munsell' a été décompressé et les sommes MD5 ont été vérifiées avec succés
-le package 'mvnfast' a été décompressé et les sommes MD5 ont été vérifiées avec succés
-le package 'mvtnorm' a été décompressé et les sommes MD5 ont été vérifiées avec succés
-le package 'nlme' a été décompressé et les sommes MD5 ont été vérifiées avec succés
-le package 'nloptr' a été décompressé et les sommes MD5 ont été vérifiées avec succés
+le package 'base64enc' a été décompressé et les sommes MD5 ont été vérifiées avec succés
 
 
 
 
 
 ```
+# smdi
+
+<details>
+
+* Version: 0.3.1
+* GitHub: NA
+* Source code: https://github.com/cran/smdi
+* Date/Publication: 2024-10-04 07:10:02 UTC
+* Number of recursive dependencies: 220
+
+Run `revdepcheck::revdep_details(, "smdi")` for more info
+
+</details>
+
+## In both
+
+*   checking running R code from vignettes ...
+    ```
+      'a_data_generation.Rmd' using 'UTF-8'... failed
+      'b_routine_diagnostics.Rmd' using 'UTF-8'... failed
+      'c_multivariate_missingness.Rmd' using 'UTF-8'... OK
+      'd_narfcs_sensitivity_analysis.Rmd' using 'UTF-8'... OK
+      'smdi.Rmd' using 'UTF-8'... OK
+     ERROR
+    Errors in running code in vignettes:
+    when running code in 'a_data_generation.Rmd'
+      ...
+      redémarrage de l'évaluation d'une promesse interrompue
+    ...
+    > library(here)
+    here() starts at C:/Users/josep/AppData/Local/Temp/RtmpEfQVV1/filea85464dd75f/vignettes
+    
+    > library(knitr)
+    
+    > include_graphics(here("vignettes", "smdi_diagnose_table.png"))
+    
+      When sourcing 'b_routine_diagnostics.R':
+    Erreur : Cannot find the file(s): "C:/Users/josep/AppData/Local/Temp/RtmpEfQVV1/filea85464dd75f/vignettes/vignettes/smdi_diagnose_table.png"
+    Exécution arrêtée
+    ```
+
+*   R CMD check timed out
+    
+
