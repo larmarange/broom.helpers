@@ -140,6 +140,15 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
     return(tidy_vgam(x, conf.int = conf.int, conf.level = conf.level, ...))
   }
 
+  if (inherits(x, "svy_vglm")) {
+    cli::cli_alert_info("{.cls svy_vglm} model detected.")
+    cli::cli_alert_success("{.fn tidy_svy_vglm} used instead.")
+    cli::cli_alert_info(
+      "Add {.code tidy_fun = broom.helpers::tidy_svy_vglm} to quiet these messages."
+    )
+    return(tidy_svy_vglm(x, conf.int = conf.int, conf.level = conf.level, ...))
+  }
+
   if (inherits(x, "coxphms")) {
     cli::cli_alert_info("{.cls coxphms} model detected.")
     cli::cli_alert_success("{.fn tidy_coxphms} used instead.")
@@ -147,15 +156,6 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
       "Add {.code tidy_fun = broom.helpers::tidy_coxphms} to quiet these messages."
     )
     return(tidy_coxphms(x, conf.int = conf.int, conf.level = conf.level, ...))
-  }
-
-  if (inherits(x, "vglm")) {
-    cli::cli_alert_info("{.cls vglm} model detected.")
-    cli::cli_alert_success("{.fn tidy_vgam} used instead.")
-    cli::cli_alert_info(
-      "Add {.code tidy_fun = broom.helpers::tidy_vgam} to quiet these messages."
-    )
-    return(tidy_vgam(x, conf.int = conf.int, conf.level = conf.level, ...))
   }
 
   tidy_args <- list(...)
