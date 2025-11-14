@@ -43,6 +43,7 @@ added to the results.
 \seealso{
 Other custom_tidiers: 
 \code{\link{tidy_broom}()},
+\code{\link{tidy_coxphms}()},
 \code{\link{tidy_multgee}()},
 \code{\link{tidy_parameters}()},
 \code{\link{tidy_vgam}()},

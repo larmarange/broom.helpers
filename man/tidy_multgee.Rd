@@ -60,6 +60,7 @@ latest modality of \code{y}.
 \seealso{
 Other custom_tidiers: 
 \code{\link{tidy_broom}()},
+\code{\link{tidy_coxphms}()},
 \code{\link{tidy_parameters}()},
 \code{\link{tidy_svy_vglm}()},
 \code{\link{tidy_vgam}()},

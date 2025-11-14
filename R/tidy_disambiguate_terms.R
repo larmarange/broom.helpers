@@ -45,7 +45,8 @@ tidy_disambiguate_terms <- function(x, sep = ".", model = tidy_get_model(x), qui
         !inherits(model, "hurdle") &&
         !inherits(model, "vgam") && # vgam models
         !inherits(model, "vglm") &&
-        !inherits(model, "svy_vglm")
+        !inherits(model, "svy_vglm") &&
+        !inherits(model, "coxphms")
     ) {
       cli_alert_danger(paste(
         "{.code tidy_disambiguate_terms()} has already been applied.",

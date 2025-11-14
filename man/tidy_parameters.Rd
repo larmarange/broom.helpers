@@ -37,6 +37,7 @@ standardized with \code{\link[broom:reexports]{broom::tidy()}}, using \code{"mea
 \seealso{
 Other custom_tidiers: 
 \code{\link{tidy_broom}()},
+\code{\link{tidy_coxphms}()},
 \code{\link{tidy_multgee}()},
 \code{\link{tidy_svy_vglm}()},
 \code{\link{tidy_vgam}()},

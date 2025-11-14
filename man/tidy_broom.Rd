@@ -17,6 +17,7 @@ Tidy with \code{broom::tidy()} and checks that all arguments are used
 }
 \seealso{
 Other custom_tidiers: 
+\code{\link{tidy_coxphms}()},
 \code{\link{tidy_multgee}()},
 \code{\link{tidy_parameters}()},
 \code{\link{tidy_svy_vglm}()},

@@ -1,5 +1,10 @@
 # broom.helpers (development version)
 
+**New supported models**
+
+- support for `survival::coxphms.object` models, see the
+  experimental tidier `tidy_coxphms()` (#308)
+
 # broom.helpers 1.22.0
 
 **New supported models**
