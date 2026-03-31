@@ -1,5 +1,10 @@
 # broom.helpers (development version)
 
+**Fixes**
+
+- `.clean_backticks()` fixed when variable names contain `$` 
+  (#311, @NourEdinDarwish)
+
 # broom.helpers 1.22.0
 
 **New supported models**
