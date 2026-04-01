@@ -1016,3 +1016,11 @@ test_that("tidy_plus_plus() works with quantreg::rq() models", {
   )
   expect_equal(nrow(res), 12)
 })
+
+test_that("tidy_plus_plus() does not crash if a variable name contain $", {
+  df <- data.frame(age = rnorm(50), x = rnorm(50))
+  names(df)[2] <- "income ($)"
+
+  model <- lm(age ~ `income ($)`, data = df)
+  expect_no_error(tidy_plus_plus(model))
+})
