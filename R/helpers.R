@@ -28,13 +28,12 @@
 
   variable_names <- variable_names |>
     stats::na.omit() |>
-    unique() |>
-    .escape_regex()
+    unique()
 
   # cleaning existing backticks in variable_names
   variable_names <- ifelse(
     # does string starts and ends with backticks
-    stringr::str_detect(variable_names, "^`.*`$"),
+    startsWith(variable_names, "`") & endsWith(variable_names, "`"),
     # if yes remove first and last character of string
     stringr::str_sub(variable_names, 2, -2),
     # otherwise, return original string
@@ -45,7 +44,7 @@
   for (v in variable_names) {
     x <- stringr::str_replace_all(
       x,
-      paste0("`", v, "`"),
+      stringr::fixed(paste0("`", v, "`")),
       v
     )
   }

@@ -381,16 +381,14 @@ tidy_multgee <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 
     res$term <- rep.int(t, times = length(y.levels))
     res$y.level <- rep(y.levels, each = length(t))
-
-    return(res)
   } else {
     mm <- x |> model_get_model_matrix()
     t <- colnames(mm)
     t <- t[t != "(Intercept)"]
     b <- res$term[stringr::str_starts(res$term, "beta")]
     res$term <- c(b, t)
-    return(res)
   }
+  res
 }
 
 #' Tidy a `zeroinfl` or a `hurdle` model
