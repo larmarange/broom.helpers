@@ -9,6 +9,8 @@
 
 - `.clean_backticks()` fixed when variable names contain `$` 
   (#311, @NourEdinDarwish)
+- fix in variable identification when `I()` is used with non standard
+  variable names (#313, @NourEdinDarwish)
 
 # broom.helpers 1.22.0
 

@@ -219,7 +219,7 @@ model_list_variables.logitr <- function(model,
   x |>
     dplyr::left_join(
       tibble::tibble(
-        variable = names(dataClasses),
+        variable = .clean_backticks(names(dataClasses)),
         var_class = dataClasses
       ),
       by = "variable"
@@ -232,7 +232,7 @@ model_list_variables.logitr <- function(model,
     x |>
       dplyr::left_join(
         dplyr::tibble(
-          variable = names(labels),
+          variable = .clean_backticks(names(labels)),
           label_attr = labels
         ),
         by = "variable"
