@@ -8,6 +8,11 @@
   fixed when variable names contain `$`
   ([\#311](https://github.com/larmarange/broom.helpers/issues/311),
   [@NourEdinDarwish](https://github.com/NourEdinDarwish))
+- fix in variable identification when
+  [`I()`](https://rdrr.io/r/base/AsIs.html) is used with non standard
+  variable names
+  ([\#313](https://github.com/larmarange/broom.helpers/issues/313),
+  [@NourEdinDarwish](https://github.com/NourEdinDarwish))
 
 ## broom.helpers 1.22.0
 
