@@ -1024,3 +1024,17 @@ test_that("tidy_plus_plus() does not crash if a variable name contain $", {
   model <- lm(age ~ `income ($)`, data = df)
   expect_no_error(tidy_plus_plus(model))
 })
+
+test_that("tidy_plus_plus() handles I() with non standard names", {
+  skip_if_not_installed("gtsummary")
+  skip_if_not_installed("labelled")
+  df <-
+    gtsummary::trial |>
+    dplyr::rename(`Marker Level` = marker) |>
+    labelled::remove_labels()
+
+
+  model <- lm(age ~ `Marker Level` + I(`Marker Level`^2), data = df)
+  expect_no_error(res <- tidy_plus_plus(model))
+  expect_equal(nrow(res), 2)
+})
