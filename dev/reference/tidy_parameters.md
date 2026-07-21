@@ -38,13 +38,14 @@ tidy_parameters(x, conf.int = TRUE, conf.level = 0.95, ...)
 
 For [`betareg::betareg()`](https://rdrr.io/pkg/betareg/man/betareg.html)
 models, the component column in the results is standardized with
-[`broom::tidy()`](https://broom.tidymodels.org/reference/reexports.html),
-using `"mean"` and `"precision"` values.
+[`broom::tidy()`](https://generics.r-lib.org/reference/tidy.html), using
+`"mean"` and `"precision"` values.
 
 ## See also
 
 Other custom_tidiers:
 [`tidy_broom()`](https://larmarange.github.io/broom.helpers/dev/reference/tidy_broom.md),
+[`tidy_coxphms()`](https://larmarange.github.io/broom.helpers/dev/reference/tidy_coxphms.md),
 [`tidy_multgee()`](https://larmarange.github.io/broom.helpers/dev/reference/tidy_multgee.md),
 [`tidy_svy_vglm()`](https://larmarange.github.io/broom.helpers/dev/reference/tidy_svy_vglm.md),
 [`tidy_vgam()`](https://larmarange.github.io/broom.helpers/dev/reference/tidy_vgam.md),

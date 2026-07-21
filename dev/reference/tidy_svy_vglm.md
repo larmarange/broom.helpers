@@ -42,6 +42,7 @@ tidy_svy_vglm(x, conf.int = TRUE, conf.level = 0.95, ...)
 
 Other custom_tidiers:
 [`tidy_broom()`](https://larmarange.github.io/broom.helpers/dev/reference/tidy_broom.md),
+[`tidy_coxphms()`](https://larmarange.github.io/broom.helpers/dev/reference/tidy_coxphms.md),
 [`tidy_multgee()`](https://larmarange.github.io/broom.helpers/dev/reference/tidy_multgee.md),
 [`tidy_parameters()`](https://larmarange.github.io/broom.helpers/dev/reference/tidy_parameters.md),
 [`tidy_vgam()`](https://larmarange.github.io/broom.helpers/dev/reference/tidy_vgam.md),
@@ -59,7 +60,6 @@ Other custom_tidiers:
 #> Loading required package: survey
 #> Loading required package: grid
 #> Loading required package: Matrix
-#> Loading required package: survival
 #> 
 #> Attaching package: ‘survey’
 #> The following object is masked from ‘package:VGAM’:

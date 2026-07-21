@@ -79,6 +79,9 @@
 
   Tidy a `svy_vglm` model
 
+- [`tidy_coxphms()`](https://larmarange.github.io/broom.helpers/dev/reference/tidy_coxphms.md)
+  **\[experimental\]** : Tidy a multi-state survival model
+
 ## Tidiers for marginal predictions, contrasts, and effects
 
 - [`tidy_marginal_predictions()`](https://larmarange.github.io/broom.helpers/dev/reference/tidy_marginal_predictions.md)

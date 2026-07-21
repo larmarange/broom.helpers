@@ -31,7 +31,7 @@ tidy_add_estimate_to_reference_rows(
   (`logical`)  
   Whether or not to exponentiate the coefficient estimates. It should be
   consistent with the original call to
-  [`broom::tidy()`](https://broom.tidymodels.org/reference/reexports.html)
+  [`broom::tidy()`](https://generics.r-lib.org/reference/tidy.html)
 
 - conf.level:
 

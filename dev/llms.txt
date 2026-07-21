@@ -23,6 +23,7 @@ coefficients](https://larmarange.github.io/ggstats/articles/ggcoef_model.html).
 To install **stable version**:
 
 ``` r
+
 install.packages("broom.helpers")
 ```
 
@@ -32,6 +33,7 @@ Documentation of stable version:
 To install **development version**:
 
 ``` r
+
 remotes::install_github("larmarange/broom.helpers")
 ```
 
@@ -43,6 +45,7 @@ Documentation of development version:
 ### all-in-one wrapper
 
 ``` r
+
 mod1 <- lm(Sepal.Length ~ Sepal.Width + Species, data = iris)
 library(broom.helpers)
 ex1 <- mod1 |> tidy_plus_plus()
@@ -145,6 +148,7 @@ dplyr::glimpse(ex2)
 ### fine control
 
 ``` r
+
 ex3 <- mod1 |>
   # perform initial tidying of model
   tidy_and_attach() |>
@@ -325,6 +329,9 @@ dplyr::glimpse(ex4)
   **\[experimental\]** :
 
   Tidy a `svy_vglm` model
+
+- [`tidy_coxphms()`](https://larmarange.github.io/broom.helpers/dev/reference/tidy_coxphms.md)
+  **\[experimental\]** : Tidy a multi-state survival model
 
 ## Tidiers for marginal predictions, contrasts, and effects
 

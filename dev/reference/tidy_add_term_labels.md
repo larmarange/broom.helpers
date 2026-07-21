@@ -154,6 +154,7 @@ mod |>
 #> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
 #> Warning: glm.fit: algorithm did not converge
 #> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+#> Warning: glm.fit: algorithm did not converge
 #> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
 #> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
 #> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
@@ -168,6 +169,9 @@ mod |>
 #> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
 #> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
 #> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+#> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+#> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+#> Warning: glm.fit: algorithm did not converge
 #> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
 #> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
 #> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
@@ -213,7 +217,6 @@ mod |>
 #> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
 #> Warning: glm.fit: algorithm did not converge
 #> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-#> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
 #> Warning: glm.fit: algorithm did not converge
 #> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
 #> Warning: glm.fit: algorithm did not converge
@@ -230,10 +233,7 @@ mod |>
 #> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
 #> Warning: glm.fit: algorithm did not converge
 #> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-#> Warning: glm.fit: algorithm did not converge
-#> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-#> Warning: glm.fit: algorithm did not converge
-#> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+#> Warning: collapsing to unique 'x' values
 #> # A tibble: 16 × 15
 #>    term              variable var_label var_class var_type var_nlevels contrasts
 #>    <chr>             <chr>    <chr>     <chr>     <chr>          <int> <chr>    
@@ -294,6 +294,7 @@ mod |>
 #> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
 #> Warning: glm.fit: algorithm did not converge
 #> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+#> Warning: glm.fit: algorithm did not converge
 #> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
 #> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
 #> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
@@ -308,6 +309,9 @@ mod |>
 #> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
 #> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
 #> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+#> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+#> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+#> Warning: glm.fit: algorithm did not converge
 #> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
 #> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
 #> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
@@ -353,7 +357,6 @@ mod |>
 #> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
 #> Warning: glm.fit: algorithm did not converge
 #> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-#> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
 #> Warning: glm.fit: algorithm did not converge
 #> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
 #> Warning: glm.fit: algorithm did not converge
@@ -370,10 +373,7 @@ mod |>
 #> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
 #> Warning: glm.fit: algorithm did not converge
 #> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-#> Warning: glm.fit: algorithm did not converge
-#> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-#> Warning: glm.fit: algorithm did not converge
-#> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+#> Warning: collapsing to unique 'x' values
 #> # A tibble: 16 × 15
 #>    term              variable var_label var_class var_type var_nlevels contrasts
 #>    <chr>             <chr>    <chr>     <chr>     <chr>          <int> <chr>    

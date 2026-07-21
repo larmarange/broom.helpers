@@ -50,6 +50,7 @@ the baseline `y` category is the latest modality of `y`.
 
 Other custom_tidiers:
 [`tidy_broom()`](https://larmarange.github.io/broom.helpers/dev/reference/tidy_broom.md),
+[`tidy_coxphms()`](https://larmarange.github.io/broom.helpers/dev/reference/tidy_coxphms.md),
 [`tidy_parameters()`](https://larmarange.github.io/broom.helpers/dev/reference/tidy_parameters.md),
 [`tidy_svy_vglm()`](https://larmarange.github.io/broom.helpers/dev/reference/tidy_svy_vglm.md),
 [`tidy_vgam()`](https://larmarange.github.io/broom.helpers/dev/reference/tidy_vgam.md),

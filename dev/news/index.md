@@ -2,6 +2,14 @@
 
 ## broom.helpers (development version)
 
+**New supported models**
+
+- support for
+  [`survival::coxphms.object`](https://rdrr.io/pkg/survival/man/coxphms.object.html)
+  models, see the experimental tidier
+  [`tidy_coxphms()`](https://larmarange.github.io/broom.helpers/dev/reference/tidy_coxphms.md)
+  ([\#308](https://github.com/larmarange/broom.helpers/issues/308))
+
 **Fixes**
 
 - [`.clean_backticks()`](https://larmarange.github.io/broom.helpers/dev/reference/dot-clean_backticks.md)
@@ -151,9 +159,9 @@ CRAN release: 2024-08-28
 - `.select_to_varnames()`, `.formula_list_to_named_list()`,
   `.generic_selector()` and `.is_selector_scoped()` are now deprecated
   and will be removed in a future release: you may consider
-  [`cards::process_selectors()`](https://insightsengineering.github.io/cards/latest-tag/reference/process_selectors.html)
+  [`cards::process_selectors()`](https://rdrr.io/pkg/cards/man/process_selectors.html)
   and
-  [`cards::process_formula_selectors()`](https://insightsengineering.github.io/cards/latest-tag/reference/process_selectors.html)
+  [`cards::process_formula_selectors()`](https://rdrr.io/pkg/cards/man/process_selectors.html)
   as alternatives
   ([\#270](https://github.com/larmarange/broom.helpers/issues/270))
 
@@ -411,7 +419,7 @@ CRAN release: 2022-11-30
 **New supported models**
 
 - Support for
-  [`logitr::logitr()`](https://rdrr.io/pkg/logitr/man/logitr.html)
+  [`logitr::logitr()`](https://jhelvy.github.io/logitr/reference/logitr.html)
   models
   ([\#179](https://github.com/larmarange/broom.helpers/issues/179))
 - Experimental support for

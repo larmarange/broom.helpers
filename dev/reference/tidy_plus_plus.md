@@ -92,7 +92,7 @@ tidy_plus_plus(
 
   (`logical`)  
   Should confidence intervals be computed? (see
-  [`broom::tidy()`](https://broom.tidymodels.org/reference/reexports.html))
+  [`broom::tidy()`](https://generics.r-lib.org/reference/tidy.html))
 
 - conf.level:
 
