@@ -637,6 +637,25 @@ tidy_svy_vglm <- function(
 #' @param ... Additional parameters passed to `parameters::model_parameters()`.
 #' @export
 #' @family custom_tidiers
+#' @examplesIf .assert_package("survival", boolean = TRUE)
+#' \donttest{
+#'   library(survival)
+#'   # dataset with competing-risk-style status
+#'   df <- MASS::Melanoma
+#'   df$id <-
+#'     df |>
+#'     row.names()
+#'   df$sex <-
+#'     df$sex |>
+#'     factor(0:1, c("male", "female"))
+#'   df$status <-
+#'     df$status |>
+#'     factor(c(2, 1, 3), c("alive", "died from melanoma", "dead from other causes"))
+#'
+#'   mstate_model <- coxph(Surv(time, status) ~ sex, data = df, id = id)
+#'   mstate_model |> tidy_coxphms()
+#'   mstate_model |> tidy_plus_plus()
+#' }
 tidy_coxphms <- function(
     x,
     conf.int = TRUE,
