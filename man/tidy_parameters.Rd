@@ -24,7 +24,7 @@ Use \code{\link[parameters:model_parameters]{parameters::model_parameters()}} to
 }
 \note{
 For \code{\link[betareg:betareg]{betareg::betareg()}} models, the component column in the results is
-standardized with \code{\link[broom:reexports]{broom::tidy()}}, using \code{"mean"} and \code{"precision"} values.
+standardized with \code{\link[broom:tidy]{broom::tidy()}}, using \code{"mean"} and \code{"precision"} values.
 }
 \examples{
 \dontshow{if (.assert_package("parameters", boolean = TRUE)) withAutoprint(\{ # examplesIf}
@@ -35,12 +35,13 @@ standardized with \code{\link[broom:reexports]{broom::tidy()}}, using \code{"mea
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other custom_tidiers: 
-\code{\link{tidy_broom}()},
-\code{\link{tidy_multgee}()},
-\code{\link{tidy_svy_vglm}()},
-\code{\link{tidy_vgam}()},
-\code{\link{tidy_with_broom_or_parameters}()},
-\code{\link{tidy_zeroinfl}()}
+Other custom_tidiers:
+\code{\link[=tidy_broom]{tidy_broom()}},
+\code{\link[=tidy_coxphms]{tidy_coxphms()}},
+\code{\link[=tidy_multgee]{tidy_multgee()}},
+\code{\link[=tidy_svy_vglm]{tidy_svy_vglm()}},
+\code{\link[=tidy_vgam]{tidy_vgam()}},
+\code{\link[=tidy_with_broom_or_parameters]{tidy_with_broom_or_parameters()}},
+\code{\link[=tidy_zeroinfl]{tidy_zeroinfl()}}
 }
 \concept{custom_tidiers}

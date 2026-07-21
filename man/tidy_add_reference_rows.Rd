@@ -28,8 +28,8 @@ cannot be generated. Default is \code{FALSE}.}
 }
 \description{
 For categorical variables with a treatment contrast
-(\code{\link[stats:contrast]{stats::contr.treatment()}}), a SAS contrast (\code{\link[stats:contrast]{stats::contr.SAS()}})
-a sum contrast (\code{\link[stats:contrast]{stats::contr.sum()}}), or successive differences contrast
+(\code{\link[stats:contr.treatment]{stats::contr.treatment()}}), a SAS contrast (\code{\link[stats:contr.SAS]{stats::contr.SAS()}})
+a sum contrast (\code{\link[stats:contr.sum]{stats::contr.sum()}}), or successive differences contrast
 (\code{\link[MASS:contr.sdif]{MASS::contr.sdif()}}) add a reference row.
 }
 \details{
@@ -83,21 +83,21 @@ rather than before. Similarly, it is better to apply
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other tidy_helpers: 
-\code{\link{tidy_add_coefficients_type}()},
-\code{\link{tidy_add_contrasts}()},
-\code{\link{tidy_add_estimate_to_reference_rows}()},
-\code{\link{tidy_add_header_rows}()},
-\code{\link{tidy_add_n}()},
-\code{\link{tidy_add_pairwise_contrasts}()},
-\code{\link{tidy_add_term_labels}()},
-\code{\link{tidy_add_variable_labels}()},
-\code{\link{tidy_attach_model}()},
-\code{\link{tidy_disambiguate_terms}()},
-\code{\link{tidy_group_by}()},
-\code{\link{tidy_identify_variables}()},
-\code{\link{tidy_plus_plus}()},
-\code{\link{tidy_remove_intercept}()},
-\code{\link{tidy_select_variables}()}
+Other tidy_helpers:
+\code{\link[=tidy_add_coefficients_type]{tidy_add_coefficients_type()}},
+\code{\link[=tidy_add_contrasts]{tidy_add_contrasts()}},
+\code{\link[=tidy_add_estimate_to_reference_rows]{tidy_add_estimate_to_reference_rows()}},
+\code{\link[=tidy_add_header_rows]{tidy_add_header_rows()}},
+\code{\link[=tidy_add_n]{tidy_add_n()}},
+\code{\link[=tidy_add_pairwise_contrasts]{tidy_add_pairwise_contrasts()}},
+\code{\link[=tidy_add_term_labels]{tidy_add_term_labels()}},
+\code{\link[=tidy_add_variable_labels]{tidy_add_variable_labels()}},
+\code{\link[=tidy_attach_model]{tidy_attach_model()}},
+\code{\link[=tidy_disambiguate_terms]{tidy_disambiguate_terms()}},
+\code{\link[=tidy_group_by]{tidy_group_by()}},
+\code{\link[=tidy_identify_variables]{tidy_identify_variables()}},
+\code{\link[=tidy_plus_plus]{tidy_plus_plus()}},
+\code{\link[=tidy_remove_intercept]{tidy_remove_intercept()}},
+\code{\link[=tidy_select_variables]{tidy_select_variables()}}
 }
 \concept{tidy_helpers}

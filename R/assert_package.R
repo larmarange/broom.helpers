@@ -45,7 +45,12 @@ NULL
 
 #' @rdname assert_package
 #' @export
-.assert_package <- function(pkg, fn = NULL, pkg_search = "broom.helpers", boolean = FALSE) {
+.assert_package <- function(
+  pkg,
+  fn = NULL,
+  pkg_search = "broom.helpers",
+  boolean = FALSE
+) {
   # check if min version is required -------------------------------------------
   version <- .get_min_version_required(pkg, pkg_search)
   compare <- purrr::attr_getter("compare")(version)
@@ -112,9 +117,10 @@ NULL
 #' @rdname assert_package
 #' @export
 .get_all_packages_dependencies <- function(
-    pkg_search = NULL,
-    remove_duplicates = FALSE,
-    lib.loc = NULL) {
+  pkg_search = NULL,
+  remove_duplicates = FALSE,
+  lib.loc = NULL
+) {
   deps <-
     utils::installed.packages(lib.loc = lib.loc) |>
     tibble::as_tibble() |>

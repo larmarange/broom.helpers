@@ -60,6 +60,8 @@ supported_models <-
     "`survival::cch()`", "Experimental support.",
     "`glmtoolbox::glmgee()`", "",
     "`quantreg::rq()`", "If several quantiles are estimated, use `tidy_with_broom_or_parameters()` tidier, the default tidier used by `tidy_plus_plus()`.", # nolint
+    "`survival::coxphms.object`",
+    "Experimental support. It is recommended to use `tidy_coxphms()` as `tidy_fun`.",
   ) |>
   dplyr::arrange(.data$model, .locale = "en")
 

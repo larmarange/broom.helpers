@@ -149,6 +149,15 @@ tidy_with_broom_or_parameters <- function(x, conf.int = TRUE, conf.level = .95, 
     return(tidy_svy_vglm(x, conf.int = conf.int, conf.level = conf.level, ...))
   }
 
+  if (inherits(x, "coxphms")) {
+    cli::cli_alert_info("{.cls coxphms} model detected.")
+    cli::cli_alert_success("{.fn tidy_coxphms} used instead.")
+    cli::cli_alert_info(
+      "Add {.code tidy_fun = broom.helpers::tidy_coxphms} to quiet these messages."
+    )
+    return(tidy_coxphms(x, conf.int = conf.int, conf.level = conf.level, ...))
+  }
+
   tidy_args <- list(...)
   tidy_args$x <- x
   tidy_args$conf.int <- conf.int
@@ -409,11 +418,12 @@ tidy_multgee <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 #'   mod |> tidy_zeroinfl(exponentiate = TRUE)
 #' }
 tidy_zeroinfl <- function(
-    x,
-    conf.int = TRUE,
-    conf.level = .95,
-    component = NULL,
-    ...) {
+  x,
+  conf.int = TRUE,
+  conf.level = .95,
+  component = NULL,
+  ...
+) {
   if (!inherits(x, "zeroinfl") && !inherits(x, "hurdle")) {
     cli::cli_abort("{.arg x} should be of class {.cls zeroinfl} or {.cls hurdle}")
   } # nolint
@@ -476,10 +486,11 @@ tidy_zeroinfl <- function(
 #'   mod |> tidy_vgam(exponentiate = TRUE)
 #' }
 tidy_vgam <- function(
-    x,
-    conf.int = TRUE,
-    conf.level = .95,
-    ...) {
+  x,
+  conf.int = TRUE,
+  conf.level = .95,
+  ...
+) {
   if (!inherits(x, "vgam") && !inherits(x, "vglm")) {
     cli::cli_abort("{.arg x} should be of class {.cls vglm} or {.cls vgam}")
   } # nolint
@@ -589,10 +600,11 @@ tidy_vgam <- function(
 #'   mod |> tidy_svy_vglm(exponentiate = TRUE)
 #' }
 tidy_svy_vglm <- function(
-    x,
-    conf.int = TRUE,
-    conf.level = .95,
-    ...) {
+  x,
+  conf.int = TRUE,
+  conf.level = .95,
+  ...
+) {
   if (!inherits(x, "svy_vglm")) {
     cli::cli_abort("{.arg x} should be of class {.cls svy_vglm}.")
   } # nolint
@@ -605,4 +617,85 @@ tidy_svy_vglm <- function(
   )
 
   .process_vgam_tidy_tbl(res, x$fit)
+}
+
+
+#' Tidy a multi-state survival model
+#'
+#' `r lifecycle::badge("experimental")`
+#' A tidier for multi-state models (`survival::coxphms.object`) generated
+#' with `survival::coxph()`.
+#' Term names will be updated to be consistent with generic models. The original
+#' term names are preserved in an `"original_term"` column. An additional column
+#' `"state"` will be added to provide status detail (i.e. the right part of
+#' original terms) and a column `"y.level"` will be populated by using values
+#' stored in `x$states`.
+#' @param x (`coxphms`)\cr
+#' A `survival::coxphms.object` model.
+#' @param conf.int (`logical`)\cr
+#' Whether or not to include a confidence interval in the tidied output.
+#' @param conf.level (`numeric`)\cr
+#' The confidence level to use for the confidence interval
+#' (between `0` ans `1`).
+#' @param ... Additional parameters passed to `parameters::model_parameters()`.
+#' @export
+#' @family custom_tidiers
+#' @examplesIf .assert_package("survival", boolean = TRUE)
+#' \donttest{
+#'   library(survival)
+#'   # dataset with competing-risk-style status
+#'   df <- MASS::Melanoma
+#'   df$id <-
+#'     df |>
+#'     row.names()
+#'   df$sex <-
+#'     df$sex |>
+#'     factor(0:1, c("male", "female"))
+#'   df$status <-
+#'     df$status |>
+#'     factor(c(2, 1, 3), c("alive", "died from melanoma", "dead from other causes"))
+#'
+#'   mstate_model <- coxph(Surv(time, status) ~ sex, data = df, id = id)
+#'   mstate_model |> tidy_coxphms()
+#'   mstate_model |> tidy_plus_plus()
+#' }
+tidy_coxphms <- function(
+  x,
+  conf.int = TRUE,
+  conf.level = .95,
+  ...
+) {
+  if (!inherits(x, "coxphms")) {
+    cli::cli_abort("{.arg x} should be of class {.cls coxphms}.")
+  } # nolint
+
+  res <- tidy_parameters(
+    x,
+    conf.int = conf.int,
+    conf.level = conf.level,
+    ...
+  )
+
+  res <-
+    res |>
+    dplyr::mutate(
+      original_term = .data$term
+    ) |>
+    tidyr::separate(
+      col = dplyr::all_of("original_term"),
+      into = c("term", "state"),
+      sep = "_",
+      remove = FALSE
+    ) |>
+    tidyr::separate(
+      col = dplyr::all_of("state"),
+      into = c(NA, "y.level"),
+      sep = ":",
+      remove = FALSE
+    ) |>
+    dplyr::mutate(
+      y.level = x$states[as.integer(.data$y.level)]
+    )
+
+  res
 }

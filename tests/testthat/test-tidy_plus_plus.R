@@ -1038,3 +1038,23 @@ test_that("tidy_plus_plus() handles I() with non standard names", {
   expect_no_error(res <- tidy_plus_plus(model))
   expect_equal(nrow(res), 2)
 })
+
+test_that("tidy_plus_plus() works with survival::coxphms.object models", {
+  skip_if_not_installed("MASS")
+  skip_if_not_installed("survival")
+
+  df <- MASS::Melanoma
+  df$id <-
+    df |>
+    row.names()
+  df$sex <-
+    df$sex |>
+    factor(0:1, c("male", "female"))
+  df$status <-
+    df$status |>
+    factor(c(2, 1, 3), c("alive", "died from melanoma", "dead from other causes"))
+
+  mstate_model <- coxph(Surv(time, status) ~ sex, data = df, id = id)
+
+  expect_no_error(mstate_model |> tidy_plus_plus())
+})

@@ -32,10 +32,11 @@
 #'   tidy_group_by(group_by = variable)
 #' @family tidy_helpers
 tidy_group_by <- function(
-    x,
-    group_by = auto_group_by(),
-    group_labels = NULL,
-    model = tidy_get_model(x)) {
+  x,
+  group_by = auto_group_by(),
+  group_labels = NULL,
+  model = tidy_get_model(x)
+) {
   if (is.null(model)) {
     cli::cli_abort(c(
       "{.arg model} is not provided.",

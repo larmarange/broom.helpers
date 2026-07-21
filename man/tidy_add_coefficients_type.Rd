@@ -16,7 +16,7 @@ A tidy tibble as produced by \verb{tidy_*()} functions.}
 
 \item{exponentiate}{(\code{logical})\cr
 Whether or not to exponentiate the coefficient estimates. It should be
-consistent with the original call to \code{\link[broom:reexports]{broom::tidy()}}.}
+consistent with the original call to \code{\link[broom:tidy]{broom::tidy()}}.}
 
 \item{model}{(a model object, e.g. \code{glm})\cr
 The corresponding model, if not attached to \code{x}.}
@@ -49,21 +49,21 @@ attr(ex2, "coefficients_type")
 attr(ex2, "coefficients_label")
 }
 \seealso{
-Other tidy_helpers: 
-\code{\link{tidy_add_contrasts}()},
-\code{\link{tidy_add_estimate_to_reference_rows}()},
-\code{\link{tidy_add_header_rows}()},
-\code{\link{tidy_add_n}()},
-\code{\link{tidy_add_pairwise_contrasts}()},
-\code{\link{tidy_add_reference_rows}()},
-\code{\link{tidy_add_term_labels}()},
-\code{\link{tidy_add_variable_labels}()},
-\code{\link{tidy_attach_model}()},
-\code{\link{tidy_disambiguate_terms}()},
-\code{\link{tidy_group_by}()},
-\code{\link{tidy_identify_variables}()},
-\code{\link{tidy_plus_plus}()},
-\code{\link{tidy_remove_intercept}()},
-\code{\link{tidy_select_variables}()}
+Other tidy_helpers:
+\code{\link[=tidy_add_contrasts]{tidy_add_contrasts()}},
+\code{\link[=tidy_add_estimate_to_reference_rows]{tidy_add_estimate_to_reference_rows()}},
+\code{\link[=tidy_add_header_rows]{tidy_add_header_rows()}},
+\code{\link[=tidy_add_n]{tidy_add_n()}},
+\code{\link[=tidy_add_pairwise_contrasts]{tidy_add_pairwise_contrasts()}},
+\code{\link[=tidy_add_reference_rows]{tidy_add_reference_rows()}},
+\code{\link[=tidy_add_term_labels]{tidy_add_term_labels()}},
+\code{\link[=tidy_add_variable_labels]{tidy_add_variable_labels()}},
+\code{\link[=tidy_attach_model]{tidy_attach_model()}},
+\code{\link[=tidy_disambiguate_terms]{tidy_disambiguate_terms()}},
+\code{\link[=tidy_group_by]{tidy_group_by()}},
+\code{\link[=tidy_identify_variables]{tidy_identify_variables()}},
+\code{\link[=tidy_plus_plus]{tidy_plus_plus()}},
+\code{\link[=tidy_remove_intercept]{tidy_remove_intercept()}},
+\code{\link[=tidy_select_variables]{tidy_select_variables()}}
 }
 \concept{tidy_helpers}

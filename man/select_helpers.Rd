@@ -33,7 +33,7 @@ all_contrasts(
 \arguments{
 \item{continuous2}{(\code{logical})\cr
 Whether to include continuous2 variables, default is \code{TRUE}.
-For compatibility with \code{{gtsummary}}), see \code{\link[gtsummary:select_helpers]{gtsummary::all_continuous2()}}.}
+For compatibility with \code{{gtsummary}}), see \code{\link[gtsummary:all_continuous2]{gtsummary::all_continuous2()}}.}
 
 \item{dichotomous}{(\code{logical})\cr
 Whether to include dichotomous variables, default is \code{TRUE}.}

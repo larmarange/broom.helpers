@@ -42,7 +42,7 @@ A tibble with four columns:
 \itemize{
 \item \code{term}: coefficients of the model
 \item \code{variable}: the corresponding variable
-\item \code{var_class}: class of the variable (cf. \code{\link[stats:checkMFClasses]{stats::.MFclass()}})
+\item \code{var_class}: class of the variable (cf. \code{\link[stats:.MFclass]{stats::.MFclass()}})
 \item \code{var_type}: \code{"continuous"}, \code{"dichotomous"} (categorical variable with 2 levels),
 \code{"categorical"} (categorical variable with 3 or more levels), \code{"intercept"}
 or \code{"interaction"}
@@ -73,26 +73,26 @@ lm(
 \seealso{
 \code{\link[=tidy_identify_variables]{tidy_identify_variables()}}
 
-Other model_helpers: 
-\code{\link{model_compute_terms_contributions}()},
-\code{\link{model_get_assign}()},
-\code{\link{model_get_coefficients_type}()},
-\code{\link{model_get_contrasts}()},
-\code{\link{model_get_model}()},
-\code{\link{model_get_model_frame}()},
-\code{\link{model_get_model_matrix}()},
-\code{\link{model_get_n}()},
-\code{\link{model_get_nlevels}()},
-\code{\link{model_get_offset}()},
-\code{\link{model_get_pairwise_contrasts}()},
-\code{\link{model_get_response}()},
-\code{\link{model_get_response_variable}()},
-\code{\link{model_get_terms}()},
-\code{\link{model_get_weights}()},
-\code{\link{model_get_xlevels}()},
-\code{\link{model_list_contrasts}()},
-\code{\link{model_list_higher_order_variables}()},
-\code{\link{model_list_terms_levels}()},
-\code{\link{model_list_variables}()}
+Other model_helpers:
+\code{\link[=model_compute_terms_contributions]{model_compute_terms_contributions()}},
+\code{\link[=model_get_assign]{model_get_assign()}},
+\code{\link[=model_get_coefficients_type]{model_get_coefficients_type()}},
+\code{\link[=model_get_contrasts]{model_get_contrasts()}},
+\code{\link[=model_get_model]{model_get_model()}},
+\code{\link[=model_get_model_frame]{model_get_model_frame()}},
+\code{\link[=model_get_model_matrix]{model_get_model_matrix()}},
+\code{\link[=model_get_n]{model_get_n()}},
+\code{\link[=model_get_nlevels]{model_get_nlevels()}},
+\code{\link[=model_get_offset]{model_get_offset()}},
+\code{\link[=model_get_pairwise_contrasts]{model_get_pairwise_contrasts()}},
+\code{\link[=model_get_response]{model_get_response()}},
+\code{\link[=model_get_response_variable]{model_get_response_variable()}},
+\code{\link[=model_get_terms]{model_get_terms()}},
+\code{\link[=model_get_weights]{model_get_weights()}},
+\code{\link[=model_get_xlevels]{model_get_xlevels()}},
+\code{\link[=model_list_contrasts]{model_list_contrasts()}},
+\code{\link[=model_list_higher_order_variables]{model_list_higher_order_variables()}},
+\code{\link[=model_list_terms_levels]{model_list_terms_levels()}},
+\code{\link[=model_list_variables]{model_list_variables()}}
 }
 \concept{model_helpers}

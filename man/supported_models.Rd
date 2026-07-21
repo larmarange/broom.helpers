@@ -64,6 +64,7 @@ Listing of Supported Models
    \code{survival::cch()} \tab Experimental support. \cr
    \code{survival::clogit()} \tab  \cr
    \code{survival::coxph()} \tab  \cr
+   \code{survival::coxphms.object} \tab Experimental support. It is recommended to use \code{tidy_coxphms()} as \code{tidy_fun}. \cr
    \code{survival::survreg()} \tab  \cr
    \code{svyVGAM::svy_vglm()} \tab Experimental support. It is recommended to use \code{tidy_svy_vglm()} as \code{tidy_fun}. \cr
    \code{tidycmprsk::crr()} \tab  \cr

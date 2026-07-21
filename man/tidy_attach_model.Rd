@@ -37,7 +37,7 @@ Named list of additional attributes to be attached to \code{x}.}
 Option to specify a custom tidier function.}
 
 \item{conf.int}{(\code{logical})\cr
-Should confidence intervals be computed? (see \code{\link[broom:reexports]{broom::tidy()}})}
+Should confidence intervals be computed? (see \code{\link[broom:tidy]{broom::tidy()}})}
 
 \item{conf.level}{(\code{numeric})\cr
 Level of confidence for confidence intervals (default: 95\%).}
@@ -74,21 +74,21 @@ tt
 tidy_get_model(tt)
 }
 \seealso{
-Other tidy_helpers: 
-\code{\link{tidy_add_coefficients_type}()},
-\code{\link{tidy_add_contrasts}()},
-\code{\link{tidy_add_estimate_to_reference_rows}()},
-\code{\link{tidy_add_header_rows}()},
-\code{\link{tidy_add_n}()},
-\code{\link{tidy_add_pairwise_contrasts}()},
-\code{\link{tidy_add_reference_rows}()},
-\code{\link{tidy_add_term_labels}()},
-\code{\link{tidy_add_variable_labels}()},
-\code{\link{tidy_disambiguate_terms}()},
-\code{\link{tidy_group_by}()},
-\code{\link{tidy_identify_variables}()},
-\code{\link{tidy_plus_plus}()},
-\code{\link{tidy_remove_intercept}()},
-\code{\link{tidy_select_variables}()}
+Other tidy_helpers:
+\code{\link[=tidy_add_coefficients_type]{tidy_add_coefficients_type()}},
+\code{\link[=tidy_add_contrasts]{tidy_add_contrasts()}},
+\code{\link[=tidy_add_estimate_to_reference_rows]{tidy_add_estimate_to_reference_rows()}},
+\code{\link[=tidy_add_header_rows]{tidy_add_header_rows()}},
+\code{\link[=tidy_add_n]{tidy_add_n()}},
+\code{\link[=tidy_add_pairwise_contrasts]{tidy_add_pairwise_contrasts()}},
+\code{\link[=tidy_add_reference_rows]{tidy_add_reference_rows()}},
+\code{\link[=tidy_add_term_labels]{tidy_add_term_labels()}},
+\code{\link[=tidy_add_variable_labels]{tidy_add_variable_labels()}},
+\code{\link[=tidy_disambiguate_terms]{tidy_disambiguate_terms()}},
+\code{\link[=tidy_group_by]{tidy_group_by()}},
+\code{\link[=tidy_identify_variables]{tidy_identify_variables()}},
+\code{\link[=tidy_plus_plus]{tidy_plus_plus()}},
+\code{\link[=tidy_remove_intercept]{tidy_remove_intercept()}},
+\code{\link[=tidy_select_variables]{tidy_select_variables()}}
 }
 \concept{tidy_helpers}

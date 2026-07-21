@@ -64,11 +64,12 @@
 #'     tidy_add_estimate_to_reference_rows()
 #' }
 tidy_add_estimate_to_reference_rows <- function(
-    x,
-    exponentiate = attr(x, "exponentiate"),
-    conf.level = attr(x, "conf.level"),
-    model = tidy_get_model(x),
-    quiet = FALSE) {
+  x,
+  exponentiate = attr(x, "exponentiate"),
+  conf.level = attr(x, "conf.level"),
+  model = tidy_get_model(x),
+  quiet = FALSE
+) {
   if (is.null(exponentiate) || !is.logical(exponentiate)) {
     cli::cli_abort("{.arg exponentiate} is not provided. You need to pass it explicitely.")
   }

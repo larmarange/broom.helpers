@@ -61,7 +61,7 @@ Suffix added to variable labels for instrumental variables (\code{fixest} models
 A tibble with three columns:
 \itemize{
 \item \code{variable}: the corresponding variable
-\item \code{var_class}: class of the variable (cf. \code{\link[stats:checkMFClasses]{stats::.MFclass()}})
+\item \code{var_class}: class of the variable (cf. \code{\link[stats:.MFclass]{stats::.MFclass()}})
 \item \code{label_attr}: variable label defined in the original data frame
 with the label attribute (cf. \code{\link[labelled:var_label]{labelled::var_label()}})
 \item \code{var_label}: a variable label (by priority, \code{labels} if defined,
@@ -109,26 +109,26 @@ glm(
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other model_helpers: 
-\code{\link{model_compute_terms_contributions}()},
-\code{\link{model_get_assign}()},
-\code{\link{model_get_coefficients_type}()},
-\code{\link{model_get_contrasts}()},
-\code{\link{model_get_model}()},
-\code{\link{model_get_model_frame}()},
-\code{\link{model_get_model_matrix}()},
-\code{\link{model_get_n}()},
-\code{\link{model_get_nlevels}()},
-\code{\link{model_get_offset}()},
-\code{\link{model_get_pairwise_contrasts}()},
-\code{\link{model_get_response}()},
-\code{\link{model_get_response_variable}()},
-\code{\link{model_get_terms}()},
-\code{\link{model_get_weights}()},
-\code{\link{model_get_xlevels}()},
-\code{\link{model_identify_variables}()},
-\code{\link{model_list_contrasts}()},
-\code{\link{model_list_higher_order_variables}()},
-\code{\link{model_list_terms_levels}()}
+Other model_helpers:
+\code{\link[=model_compute_terms_contributions]{model_compute_terms_contributions()}},
+\code{\link[=model_get_assign]{model_get_assign()}},
+\code{\link[=model_get_coefficients_type]{model_get_coefficients_type()}},
+\code{\link[=model_get_contrasts]{model_get_contrasts()}},
+\code{\link[=model_get_model]{model_get_model()}},
+\code{\link[=model_get_model_frame]{model_get_model_frame()}},
+\code{\link[=model_get_model_matrix]{model_get_model_matrix()}},
+\code{\link[=model_get_n]{model_get_n()}},
+\code{\link[=model_get_nlevels]{model_get_nlevels()}},
+\code{\link[=model_get_offset]{model_get_offset()}},
+\code{\link[=model_get_pairwise_contrasts]{model_get_pairwise_contrasts()}},
+\code{\link[=model_get_response]{model_get_response()}},
+\code{\link[=model_get_response_variable]{model_get_response_variable()}},
+\code{\link[=model_get_terms]{model_get_terms()}},
+\code{\link[=model_get_weights]{model_get_weights()}},
+\code{\link[=model_get_xlevels]{model_get_xlevels()}},
+\code{\link[=model_identify_variables]{model_identify_variables()}},
+\code{\link[=model_list_contrasts]{model_list_contrasts()}},
+\code{\link[=model_list_higher_order_variables]{model_list_higher_order_variables()}},
+\code{\link[=model_list_terms_levels]{model_list_terms_levels()}}
 }
 \concept{model_helpers}

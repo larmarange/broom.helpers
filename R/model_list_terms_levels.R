@@ -55,19 +55,21 @@
 #'   "{ifelse(reference, level, paste(level, '-', reference_level))}"
 #' )
 model_list_terms_levels <- function(
-    model,
-    label_pattern = "{level}",
-    variable_labels = NULL,
-    sdif_term_level = c("diff", "ratio")) {
+  model,
+  label_pattern = "{level}",
+  variable_labels = NULL,
+  sdif_term_level = c("diff", "ratio")
+) {
   UseMethod("model_list_terms_levels")
 }
 
 #' @export
 #' @rdname model_list_terms_levels
 model_list_terms_levels.default <- function(
-    model, label_pattern = "{level}",
-    variable_labels = NULL,
-    sdif_term_level = c("diff", "ratio")) {
+  model, label_pattern = "{level}",
+  variable_labels = NULL,
+  sdif_term_level = c("diff", "ratio")
+) {
   contrasts_list <- model_list_contrasts(model)
   if (is.null(contrasts_list)) {
     return(NULL)

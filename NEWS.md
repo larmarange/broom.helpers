@@ -1,5 +1,10 @@
 # broom.helpers (development version)
 
+**New supported models**
+
+- support for `survival::coxphms.object` models, see the
+  experimental tidier `tidy_coxphms()` (#308)
+
 **Fixes**
 
 - `.clean_backticks()` fixed when variable names contain `$` 
