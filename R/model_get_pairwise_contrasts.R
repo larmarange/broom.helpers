@@ -34,23 +34,25 @@
 #'     )
 #' }
 model_get_pairwise_contrasts <- function(
-    model,
-    variables,
-    pairwise_reverse = TRUE,
-    contrasts_adjust = NULL,
-    conf.level = .95,
-    emmeans_args = list()) {
+  model,
+  variables,
+  pairwise_reverse = TRUE,
+  contrasts_adjust = NULL,
+  conf.level = .95,
+  emmeans_args = list()
+) {
   UseMethod("model_get_pairwise_contrasts")
 }
 
 #' @export
 model_get_pairwise_contrasts.default <- function(
-    model,
-    variables,
-    pairwise_reverse = TRUE,
-    contrasts_adjust = NULL,
-    conf.level = .95,
-    emmeans_args = list()) {
+  model,
+  variables,
+  pairwise_reverse = TRUE,
+  contrasts_adjust = NULL,
+  conf.level = .95,
+  emmeans_args = list()
+) {
   purrr::map_df(
     variables,
     .get_pairwise_contrasts_one_var,
@@ -63,12 +65,13 @@ model_get_pairwise_contrasts.default <- function(
 }
 
 .get_pairwise_contrasts_one_var <- function(
-    model,
-    variable,
-    pairwise_reverse = TRUE,
-    contrasts_adjust = NULL,
-    conf.level = .95,
-    emmeans_args = list()) {
+  model,
+  variable,
+  pairwise_reverse = TRUE,
+  contrasts_adjust = NULL,
+  conf.level = .95,
+  emmeans_args = list()
+) {
   .assert_package(
     "emmeans",
     fn = "broom.helpers::model_get_pairwise_contrasts()"

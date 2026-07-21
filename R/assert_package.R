@@ -112,9 +112,10 @@ NULL
 #' @rdname assert_package
 #' @export
 .get_all_packages_dependencies <- function(
-    pkg_search = NULL,
-    remove_duplicates = FALSE,
-    lib.loc = NULL) {
+  pkg_search = NULL,
+  remove_duplicates = FALSE,
+  lib.loc = NULL
+) {
   deps <-
     utils::installed.packages(lib.loc = lib.loc) |>
     tibble::as_tibble() |>

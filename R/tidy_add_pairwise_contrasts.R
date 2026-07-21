@@ -63,15 +63,16 @@
 #'   }
 #' }
 tidy_add_pairwise_contrasts <- function(
-    x,
-    variables = all_categorical(),
-    keep_model_terms = FALSE,
-    pairwise_reverse = TRUE,
-    contrasts_adjust = NULL,
-    conf.level = attr(x, "conf.level"),
-    emmeans_args = list(),
-    model = tidy_get_model(x),
-    quiet = FALSE) {
+  x,
+  variables = all_categorical(),
+  keep_model_terms = FALSE,
+  pairwise_reverse = TRUE,
+  contrasts_adjust = NULL,
+  conf.level = attr(x, "conf.level"),
+  emmeans_args = list(),
+  model = tidy_get_model(x),
+  quiet = FALSE
+) {
   if (is.null(model)) {
     cli::cli_abort(c(
       "{.arg model} is not provided.",

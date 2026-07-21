@@ -60,9 +60,10 @@
 #'     tidy_add_reference_rows()
 #' }
 tidy_add_reference_rows <- function(
-    x, no_reference_row = NULL,
-    model = tidy_get_model(x),
-    quiet = FALSE) {
+  x, no_reference_row = NULL,
+  model = tidy_get_model(x),
+  quiet = FALSE
+) {
   if (is.null(model)) {
     cli::cli_abort(c(
       "{.arg model} is not provided.",

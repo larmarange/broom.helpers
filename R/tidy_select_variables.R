@@ -40,7 +40,10 @@
 #'   include = c("Age", all_categorical(dichotomous = FALSE), all_interaction())
 #' )
 tidy_select_variables <- function(
-    x, include = everything(), model = tidy_get_model(x)) {
+  x,
+  include = everything(),
+  model = tidy_get_model(x)
+) {
   if (is.null(model)) {
     cli::cli_abort(c(
       "{.arg model} is not provided.",

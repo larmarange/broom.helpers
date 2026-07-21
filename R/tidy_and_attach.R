@@ -53,9 +53,14 @@ tidy_attach_model <- function(x, model, .attributes = NULL) {
 #' @rdname tidy_attach_model
 #' @export
 tidy_and_attach <- function(
-    model, tidy_fun = tidy_with_broom_or_parameters,
-    conf.int = TRUE, conf.level = .95, exponentiate = FALSE,
-    model_matrix_attr = TRUE, ...) {
+  model,
+  tidy_fun = tidy_with_broom_or_parameters,
+  conf.int = TRUE,
+  conf.level = .95,
+  exponentiate = FALSE,
+  model_matrix_attr = TRUE,
+  ...
+) {
   # exponentiate cannot be used with lm models
   # but broom will not produce an error and will return unexponentiated estimates
   if (identical(class(model), "lm") && exponentiate) {

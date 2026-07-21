@@ -418,11 +418,12 @@ tidy_multgee <- function(x, conf.int = TRUE, conf.level = .95, ...) {
 #'   mod |> tidy_zeroinfl(exponentiate = TRUE)
 #' }
 tidy_zeroinfl <- function(
-    x,
-    conf.int = TRUE,
-    conf.level = .95,
-    component = NULL,
-    ...) {
+  x,
+  conf.int = TRUE,
+  conf.level = .95,
+  component = NULL,
+  ...
+) {
   if (!inherits(x, "zeroinfl") && !inherits(x, "hurdle")) {
     cli::cli_abort("{.arg x} should be of class {.cls zeroinfl} or {.cls hurdle}")
   } # nolint
@@ -485,10 +486,11 @@ tidy_zeroinfl <- function(
 #'   mod |> tidy_vgam(exponentiate = TRUE)
 #' }
 tidy_vgam <- function(
-    x,
-    conf.int = TRUE,
-    conf.level = .95,
-    ...) {
+  x,
+  conf.int = TRUE,
+  conf.level = .95,
+  ...
+) {
   if (!inherits(x, "vgam") && !inherits(x, "vglm")) {
     cli::cli_abort("{.arg x} should be of class {.cls vglm} or {.cls vgam}")
   } # nolint
@@ -598,10 +600,11 @@ tidy_vgam <- function(
 #'   mod |> tidy_svy_vglm(exponentiate = TRUE)
 #' }
 tidy_svy_vglm <- function(
-    x,
-    conf.int = TRUE,
-    conf.level = .95,
-    ...) {
+  x,
+  conf.int = TRUE,
+  conf.level = .95,
+  ...
+) {
   if (!inherits(x, "svy_vglm")) {
     cli::cli_abort("{.arg x} should be of class {.cls svy_vglm}.")
   } # nolint
@@ -657,10 +660,11 @@ tidy_svy_vglm <- function(
 #'   mstate_model |> tidy_plus_plus()
 #' }
 tidy_coxphms <- function(
-    x,
-    conf.int = TRUE,
-    conf.level = .95,
-    ...) {
+  x,
+  conf.int = TRUE,
+  conf.level = .95,
+  ...
+) {
   if (!inherits(x, "coxphms")) {
     cli::cli_abort("{.arg x} should be of class {.cls coxphms}.")
   } # nolint

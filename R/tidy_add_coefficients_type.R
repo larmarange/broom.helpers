@@ -35,8 +35,10 @@
 #' attr(ex2, "coefficients_type")
 #' attr(ex2, "coefficients_label")
 tidy_add_coefficients_type <- function(
-    x, exponentiate = attr(x, "exponentiate"),
-    model = tidy_get_model(x)) {
+  x,
+  exponentiate = attr(x, "exponentiate"),
+  model = tidy_get_model(x)
+) {
   if (is.null(exponentiate) || !is.logical(exponentiate)) {
     cli::cli_abort("'exponentiate' is not provided. You need to pass it explicitely.")
   }
