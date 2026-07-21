@@ -19,7 +19,7 @@ to properly take into account interaction only terms/variables.}
 Remove backticks around variable names
 }
 \seealso{
-Other other_helpers: 
-\code{\link{.escape_regex}()}
+Other other_helpers:
+\code{\link[=.escape_regex]{.escape_regex()}}
 }
 \concept{other_helpers}

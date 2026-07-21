@@ -58,13 +58,13 @@ latest modality of \code{y}.
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other custom_tidiers: 
-\code{\link{tidy_broom}()},
-\code{\link{tidy_coxphms}()},
-\code{\link{tidy_parameters}()},
-\code{\link{tidy_svy_vglm}()},
-\code{\link{tidy_vgam}()},
-\code{\link{tidy_with_broom_or_parameters}()},
-\code{\link{tidy_zeroinfl}()}
+Other custom_tidiers:
+\code{\link[=tidy_broom]{tidy_broom()}},
+\code{\link[=tidy_coxphms]{tidy_coxphms()}},
+\code{\link[=tidy_parameters]{tidy_parameters()}},
+\code{\link[=tidy_svy_vglm]{tidy_svy_vglm()}},
+\code{\link[=tidy_vgam]{tidy_vgam()}},
+\code{\link[=tidy_with_broom_or_parameters]{tidy_with_broom_or_parameters()}},
+\code{\link[=tidy_zeroinfl]{tidy_zeroinfl()}}
 }
 \concept{custom_tidiers}

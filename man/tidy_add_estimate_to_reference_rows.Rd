@@ -18,7 +18,7 @@ A tidy tibble as produced by \verb{tidy_*()} functions.}
 
 \item{exponentiate}{(\code{logical})\cr
 Whether or not to exponentiate the coefficient estimates. It should be
-consistent with the original call to \code{\link[broom:reexports]{broom::tidy()}}}
+consistent with the original call to \code{\link[broom:tidy]{broom::tidy()}}}
 
 \item{conf.level}{(\code{numeric})\cr
 Confidence level, by default use the value indicated
@@ -33,12 +33,12 @@ cannot be generated. Default is \code{FALSE}.}
 }
 \description{
 For categorical variables with a treatment contrast
-(\code{\link[stats:contrast]{stats::contr.treatment()}}) or a SAS contrast (\code{\link[stats:contrast]{stats::contr.SAS()}}),
+(\code{\link[stats:contr.treatment]{stats::contr.treatment()}}) or a SAS contrast (\code{\link[stats:contr.SAS]{stats::contr.SAS()}}),
 will add an estimate equal to \code{0} (or \code{1} if \code{exponentiate = TRUE})
 to the reference row.
 }
 \details{
-For categorical variables with a sum contrast (\code{\link[stats:contrast]{stats::contr.sum()}}),
+For categorical variables with a sum contrast (\code{\link[stats:contr.sum]{stats::contr.sum()}}),
 the estimate value of the reference row will be equal to the sum of
 all other coefficients multiplied by \code{-1} (eventually exponentiated if
 \code{exponentiate = TRUE}), and obtained with \code{emmeans::emmeans()}.
@@ -86,21 +86,21 @@ If the \code{reference_row} column is not yet available in \code{x},
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other tidy_helpers: 
-\code{\link{tidy_add_coefficients_type}()},
-\code{\link{tidy_add_contrasts}()},
-\code{\link{tidy_add_header_rows}()},
-\code{\link{tidy_add_n}()},
-\code{\link{tidy_add_pairwise_contrasts}()},
-\code{\link{tidy_add_reference_rows}()},
-\code{\link{tidy_add_term_labels}()},
-\code{\link{tidy_add_variable_labels}()},
-\code{\link{tidy_attach_model}()},
-\code{\link{tidy_disambiguate_terms}()},
-\code{\link{tidy_group_by}()},
-\code{\link{tidy_identify_variables}()},
-\code{\link{tidy_plus_plus}()},
-\code{\link{tidy_remove_intercept}()},
-\code{\link{tidy_select_variables}()}
+Other tidy_helpers:
+\code{\link[=tidy_add_coefficients_type]{tidy_add_coefficients_type()}},
+\code{\link[=tidy_add_contrasts]{tidy_add_contrasts()}},
+\code{\link[=tidy_add_header_rows]{tidy_add_header_rows()}},
+\code{\link[=tidy_add_n]{tidy_add_n()}},
+\code{\link[=tidy_add_pairwise_contrasts]{tidy_add_pairwise_contrasts()}},
+\code{\link[=tidy_add_reference_rows]{tidy_add_reference_rows()}},
+\code{\link[=tidy_add_term_labels]{tidy_add_term_labels()}},
+\code{\link[=tidy_add_variable_labels]{tidy_add_variable_labels()}},
+\code{\link[=tidy_attach_model]{tidy_attach_model()}},
+\code{\link[=tidy_disambiguate_terms]{tidy_disambiguate_terms()}},
+\code{\link[=tidy_group_by]{tidy_group_by()}},
+\code{\link[=tidy_identify_variables]{tidy_identify_variables()}},
+\code{\link[=tidy_plus_plus]{tidy_plus_plus()}},
+\code{\link[=tidy_remove_intercept]{tidy_remove_intercept()}},
+\code{\link[=tidy_select_variables]{tidy_select_variables()}}
 }
 \concept{tidy_helpers}

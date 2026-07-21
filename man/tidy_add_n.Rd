@@ -25,7 +25,7 @@ For categorical variables coded with treatment or sum contrasts,
 each model term could be associated to only one level of the original
 categorical variable. Therefore, \code{n_obs} will correspond to the number of
 observations associated with that level. \code{n_obs} will also be computed for
-reference rows. For polynomial contrasts (defined with \code{\link[stats:contrast]{stats::contr.poly()}}),
+reference rows. For polynomial contrasts (defined with \code{\link[stats:contr.poly]{stats::contr.poly()}}),
 all levels will contribute to the computation of each model term. Therefore,
 \code{n_obs} will be equal to the total number of observations. For Helmert and custom
 contrasts, only rows contributing positively (i.e. with a positive contrast)
@@ -124,21 +124,21 @@ glm(
 }
 }
 \seealso{
-Other tidy_helpers: 
-\code{\link{tidy_add_coefficients_type}()},
-\code{\link{tidy_add_contrasts}()},
-\code{\link{tidy_add_estimate_to_reference_rows}()},
-\code{\link{tidy_add_header_rows}()},
-\code{\link{tidy_add_pairwise_contrasts}()},
-\code{\link{tidy_add_reference_rows}()},
-\code{\link{tidy_add_term_labels}()},
-\code{\link{tidy_add_variable_labels}()},
-\code{\link{tidy_attach_model}()},
-\code{\link{tidy_disambiguate_terms}()},
-\code{\link{tidy_group_by}()},
-\code{\link{tidy_identify_variables}()},
-\code{\link{tidy_plus_plus}()},
-\code{\link{tidy_remove_intercept}()},
-\code{\link{tidy_select_variables}()}
+Other tidy_helpers:
+\code{\link[=tidy_add_coefficients_type]{tidy_add_coefficients_type()}},
+\code{\link[=tidy_add_contrasts]{tidy_add_contrasts()}},
+\code{\link[=tidy_add_estimate_to_reference_rows]{tidy_add_estimate_to_reference_rows()}},
+\code{\link[=tidy_add_header_rows]{tidy_add_header_rows()}},
+\code{\link[=tidy_add_pairwise_contrasts]{tidy_add_pairwise_contrasts()}},
+\code{\link[=tidy_add_reference_rows]{tidy_add_reference_rows()}},
+\code{\link[=tidy_add_term_labels]{tidy_add_term_labels()}},
+\code{\link[=tidy_add_variable_labels]{tidy_add_variable_labels()}},
+\code{\link[=tidy_attach_model]{tidy_attach_model()}},
+\code{\link[=tidy_disambiguate_terms]{tidy_disambiguate_terms()}},
+\code{\link[=tidy_group_by]{tidy_group_by()}},
+\code{\link[=tidy_identify_variables]{tidy_identify_variables()}},
+\code{\link[=tidy_plus_plus]{tidy_plus_plus()}},
+\code{\link[=tidy_remove_intercept]{tidy_remove_intercept()}},
+\code{\link[=tidy_select_variables]{tidy_select_variables()}}
 }
 \concept{tidy_helpers}

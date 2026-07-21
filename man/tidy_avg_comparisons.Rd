@@ -71,12 +71,12 @@ tidy_plus_plus(mod, tidy_fun = tidy_avg_comparisons, newdata = "mean")
 \seealso{
 \code{marginaleffects::avg_comparisons()}
 
-Other marginal_tieders: 
-\code{\link{tidy_all_effects}()},
-\code{\link{tidy_avg_slopes}()},
-\code{\link{tidy_ggpredict}()},
-\code{\link{tidy_marginal_contrasts}()},
-\code{\link{tidy_marginal_predictions}()},
-\code{\link{tidy_margins}()}
+Other marginal_tieders:
+\code{\link[=tidy_all_effects]{tidy_all_effects()}},
+\code{\link[=tidy_avg_slopes]{tidy_avg_slopes()}},
+\code{\link[=tidy_ggpredict]{tidy_ggpredict()}},
+\code{\link[=tidy_marginal_contrasts]{tidy_marginal_contrasts()}},
+\code{\link[=tidy_marginal_predictions]{tidy_marginal_predictions()}},
+\code{\link[=tidy_margins]{tidy_margins()}}
 }
 \concept{marginal_tieders}

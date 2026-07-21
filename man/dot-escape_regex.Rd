@@ -15,7 +15,7 @@ A character vector.}
 This functions has been adapted from \code{Hmisc::escapeRegex()}
 }
 \seealso{
-Other other_helpers: 
-\code{\link{.clean_backticks}()}
+Other other_helpers:
+\code{\link[=.clean_backticks]{.clean_backticks()}}
 }
 \concept{other_helpers}

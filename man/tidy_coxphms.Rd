@@ -29,14 +29,36 @@ term names are preserved in an \code{"original_term"} column. An additional colu
 original terms) and a column \code{"y.level"} will be populated by using values
 stored in \code{x$states}.
 }
+\examples{
+\dontshow{if (.assert_package("survival", boolean = TRUE)) withAutoprint(\{ # examplesIf}
+\donttest{
+  library(survival)
+  # dataset with competing-risk-style status
+  df <- MASS::Melanoma
+  df$id <-
+    df |>
+    row.names()
+  df$sex <-
+    df$sex |>
+    factor(0:1, c("male", "female"))
+  df$status <-
+    df$status |>
+    factor(c(2, 1, 3), c("alive", "died from melanoma", "dead from other causes"))
+
+  mstate_model <- coxph(Surv(time, status) ~ sex, data = df, id = id)
+  mstate_model |> tidy_coxphms()
+  mstate_model |> tidy_plus_plus()
+}
+\dontshow{\}) # examplesIf}
+}
 \seealso{
-Other custom_tidiers: 
-\code{\link{tidy_broom}()},
-\code{\link{tidy_multgee}()},
-\code{\link{tidy_parameters}()},
-\code{\link{tidy_svy_vglm}()},
-\code{\link{tidy_vgam}()},
-\code{\link{tidy_with_broom_or_parameters}()},
-\code{\link{tidy_zeroinfl}()}
+Other custom_tidiers:
+\code{\link[=tidy_broom]{tidy_broom()}},
+\code{\link[=tidy_multgee]{tidy_multgee()}},
+\code{\link[=tidy_parameters]{tidy_parameters()}},
+\code{\link[=tidy_svy_vglm]{tidy_svy_vglm()}},
+\code{\link[=tidy_vgam]{tidy_vgam()}},
+\code{\link[=tidy_with_broom_or_parameters]{tidy_with_broom_or_parameters()}},
+\code{\link[=tidy_zeroinfl]{tidy_zeroinfl()}}
 }
 \concept{custom_tidiers}
