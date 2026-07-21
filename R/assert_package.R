@@ -45,7 +45,12 @@ NULL
 
 #' @rdname assert_package
 #' @export
-.assert_package <- function(pkg, fn = NULL, pkg_search = "broom.helpers", boolean = FALSE) {
+.assert_package <- function(
+  pkg,
+  fn = NULL,
+  pkg_search = "broom.helpers",
+  boolean = FALSE
+) {
   # check if min version is required -------------------------------------------
   version <- .get_min_version_required(pkg, pkg_search)
   compare <- purrr::attr_getter("compare")(version)
