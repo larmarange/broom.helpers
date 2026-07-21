@@ -60,7 +60,8 @@
 #'     tidy_add_reference_rows()
 #' }
 tidy_add_reference_rows <- function(
-  x, no_reference_row = NULL,
+  x,
+  no_reference_row = NULL,
   model = tidy_get_model(x),
   quiet = FALSE
 ) {
