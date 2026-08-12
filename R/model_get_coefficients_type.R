@@ -204,3 +204,89 @@ model_get_coefficients_type.vgam <- model_get_coefficients_type.vglm
 model_get_coefficients_type.svy_vglm <- function(model) {
   model_get_coefficients_type(model$fit)
 }
+
+#' @export
+#' @rdname model_get_coefficients_type
+model_get_coefficients_type.brmsfit <- function(model) {
+  if (!is.null(model$family)) {
+    if (model$family$family == "binomial" && model$family$link == "logit") {
+      return("logistic")
+    }
+    if (model$family$family == "binomial" && model$family$link == "log") {
+      return("relative_risk")
+    }
+    if (model$family$family == "binomial" && model$family$link == "cloglog") {
+      return("prop_hazard")
+    }
+    if (model$family$family == "bernoulli" && model$family$link == "logit") {
+      return("logistic")
+    }
+    if (model$family$family == "bernoulli" && model$family$link == "log") {
+      return("relative_risk")
+    }
+    if (model$family$family == "bernoulli" && model$family$link == "cloglog") {
+      return("prop_hazard")
+    }
+    if (model$family$family == "beta_binomial" && model$family$link == "logit") {
+      return("logistic")
+    }
+    if (model$family$family == "beta_binomial" && model$family$link == "log") {
+      return("relative_risk")
+    }
+    if (model$family$family == "beta_binomial" && model$family$link == "cloglog") {
+      return("prop_hazard")
+    }
+    if (model$family$family == "cumulative" && model$family$link == "logit") {
+      return("logistic")
+    }
+    if (model$family$family == "sratio" && model$family$link == "logit") {
+      return("logistic")
+    }
+    if (model$family$family == "cratio" && model$family$link == "logit") {
+      return("logistic")
+    }
+    if (model$family$family == "acat" && model$family$link == "logit") {
+      return("logistic")
+    }
+    if (model$family$family == "categorical" && model$family$link == "logit") {
+      return("logistic")
+    }
+    if (model$family$family == "multinomial" && model$family$link == "logit") {
+      return("logistic")
+    }
+    if (model$family$family == " dirichlet_multinomial" && model$family$link == "logit") { # nolint
+      return("logistic")
+    }
+    if (model$family$family == "poisson" && model$family$link == "log") {
+      return("poisson")
+    }
+    if (model$family$family == "negbinomial" && model$family$link == "log") {
+      return("poisson")
+    }
+    if (model$family$family == "geometric" && model$family$link == "log") {
+      return("poisson")
+    }
+    if (model$family$family == "quasibinomial" && model$family$link == "logit") {
+      return("logistic")
+    }
+    if (model$family$family == "quasipoisson" && model$family$link == "log") {
+      return("poisson")
+    }
+    if (model$family$family == "Gamma" && model$family$link == "log") {
+      return("prop_hazard")
+    }
+    if (model$family$family == "weibull" && model$family$link == "log") {
+      return("prop_hazard")
+    }
+    if (model$family$family == "exponential" && model$family$link == "log") {
+      return("prop_hazard")
+    }
+    if (model$family$family == "frechet" && model$family$link == "log") {
+      return("prop_hazard")
+    }
+    if (model$family$family == "cox" && model$family$link == "log") {
+      return("prop_hazard")
+    }
+  }
+  "generic"
+}
