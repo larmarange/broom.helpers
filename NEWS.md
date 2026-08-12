@@ -4,6 +4,10 @@
 
 - support for `survival::coxphms.object` models, see the
   experimental tidier `tidy_coxphms()` (#308)
+  
+**New features**
+
+- `model_get_coefficients_type()` for `brmsfit` models (#316)
 
 **Fixes**
 
