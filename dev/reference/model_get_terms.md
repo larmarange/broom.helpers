@@ -103,7 +103,7 @@ lm(hp ~ mpg + factor(cyl), mtcars) |>
 #> attr(,"response")
 #> [1] 1
 #> attr(,".Environment")
-#> <environment: 0x55806444cbe0>
+#> <environment: 0x55bc5acb0748>
 #> attr(,"predvars")
 #> list(hp, mpg, factor(cyl))
 #> attr(,"dataClasses")

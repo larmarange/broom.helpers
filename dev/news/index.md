@@ -10,6 +10,12 @@
   [`tidy_coxphms()`](https://larmarange.github.io/broom.helpers/dev/reference/tidy_coxphms.md)
   ([\#308](https://github.com/larmarange/broom.helpers/issues/308))
 
+**New features**
+
+- [`model_get_coefficients_type()`](https://larmarange.github.io/broom.helpers/dev/reference/model_get_coefficients_type.md)
+  for `brmsfit` models
+  ([\#316](https://github.com/larmarange/broom.helpers/issues/316))
+
 **Fixes**
 
 - [`.clean_backticks()`](https://larmarange.github.io/broom.helpers/dev/reference/dot-clean_backticks.md)
