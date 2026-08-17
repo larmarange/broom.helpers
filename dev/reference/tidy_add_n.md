@@ -287,25 +287,28 @@ glm(
 #> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
 #> Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
 #> Warning: collapsing to unique 'x' values
+#> Warning: collapsing to unique 'x' values
+#> Warning: collapsing to unique 'x' values
+#> Warning: collapsing to unique 'x' values
 #> # A tibble: 20 × 9
 #>    term    n_obs n_event estimate std.error statistic p.value conf.low conf.high
 #>    <chr>   <dbl>   <dbl>    <dbl>     <dbl>     <dbl>   <dbl>    <dbl>     <dbl>
-#>  1 (Inter…  2201     711  1.03e+1  294.       3.52e-2  0.972  -4.52e+0    94.4  
-#>  2 Class1    285     118  3.33e-1  440.       7.57e-4  0.999  -1.30e+1   104.   
-#>  3 Class2    706     178 -5.62e+0  147.      -3.83e-2  0.969  NA           5.23 
+#>  1 (Inter…  2201     711  1.03e+1  294.       3.52e-2  0.972  -1.14e+1    NA    
+#>  2 Class1    285     118  3.33e-1  440.       7.57e-4  0.999  -9.87e+0    11.3  
+#>  3 Class2    706     178 -5.62e+0  147.      -3.83e-2  0.969  NA           5.22 
 #>  4 Class3    885     212  8.48e-2    0.0354   2.40e+0  0.0166  1.67e-2     0.156
-#>  5 AgeAdu…   425     316 -8.56e+0  294.      -2.92e-2  0.977  NA          31.1  
-#>  6 AgeChi…    45      28 -7.90e-3  461.      -1.71e-5  1.000  -4.58e+0     3.33 
-#>  7 AgeAdu…  1667     338 -1.18e+1  294.      -4.03e-2  0.968  NA           9.85 
+#>  5 AgeAdu…   425     316 -8.56e+0  294.      -2.92e-2  0.977  NA          30.7  
+#>  6 AgeChi…    45      28 -7.90e-3  461.      -1.71e-5  1.000  -6.52e+0     5.51 
+#>  7 AgeAdu…  1667     338 -1.18e+1  294.      -4.03e-2  0.968  NA           9.55 
 #>  8 AgeChi…    64      29 NA         NA       NA       NA      NA          NA    
-#>  9 Class1…    93      80 -1.20e+0  440.      -2.73e-3  0.998  -1.01e+2    10.2  
-#> 10 Class2…   165      76  4.67e+0  147.       3.18e-2  0.975  -1.10e+1    NA    
+#>  9 Class1…    93      80 -1.20e+0  440.      -2.73e-3  0.998  -1.73e+2     6.47 
+#> 10 Class2…   165      76  4.67e+0  147.       3.18e-2  0.975  -1.15e+1    NA    
 #> 11 Class3…    23      20 -4.50e-2    0.167   -2.70e-1  0.787  -3.43e-1     0.333
-#> 12 Class1…    13      13  5.60e-1  692.       8.10e-4  0.999  -1.01e+1     9.47 
-#> 13 Class2…    31      14  4.02e-1  231.       1.74e-3  0.999  -3.94e+0     4.95 
+#> 12 Class1…    13      13  5.60e-1  692.       8.10e-4  0.999  -1.72e+1    16.7  
+#> 13 Class2…    31      14  4.02e-1  231.       1.74e-3  0.999  -3.97e+0     5.57 
 #> 14 Class3…     0       0 NA         NA       NA       NA      NA          NA    
-#> 15 Class1…   168      14 -1.17e+0  440.      -2.65e-3  0.998  -7.09e+1     6.53 
-#> 16 Class2…   462      75  5.59e+0  147.       3.81e-2  0.970  -2.56e+0    NA    
+#> 15 Class1…   168      14 -1.17e+0  440.      -2.65e-3  0.998  -9.86e+1     1.62 
+#> 16 Class2…   462      75  5.59e+0  147.       3.81e-2  0.970  -8.68e+0    NA    
 #> 17 Class3…   862     192 NA         NA       NA       NA      NA          NA    
 #> 18 Class1…    11      11 NA         NA       NA       NA      NA          NA    
 #> 19 Class2…    48      13 NA         NA       NA       NA      NA          NA    

@@ -105,7 +105,7 @@ tidy_avg_slopes(mod2)
 #> # A tibble: 3 × 9
 #>   variable    term        estimate std.error statistic  p.value s.value conf.low
 #>   <chr>       <chr>          <dbl>     <dbl>     <dbl>    <dbl>   <dbl>    <dbl>
-#> 1 Petal.Width dY/dX           1.20     0.197      6.12 9.65e-10    29.9    0.818
+#> 1 Petal.Width dY/dX           1.20     0.197      6.11 9.70e-10    29.9    0.818
 #> 2 Species     versicolor…     1.32     0.315      4.19 2.83e- 5    15.1    0.700
 #> 3 Species     virginica …     1.91     0.373      5.12 3.02e- 7    21.7    1.18 
 #> # ℹ 1 more variable: conf.high <dbl>
