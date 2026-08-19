@@ -1,13 +1,20 @@
 ## revdepcheck results
 
-We checked 17 reverse dependencies (15 from CRAN + 2 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
+We checked 24 reverse dependencies (22 from CRAN + 2 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
 
  * We saw 0 new problems
- * We failed to check 2 packages
+ * We failed to check 9 packages
 
 Issues with CRAN packages are summarised below.
 
 ### Failed to check
 
-* mmrm (NA)
-* smdi (NA)
+* crane     (NA)
+* GGally    (NA)
+* ggstats   (NA)
+* gtsummary (NA)
+* logitr    (NA)
+* mmrm      (NA)
+* simstudy  (NA)
+* smdi      (NA)
+* sumExtras (NA)
