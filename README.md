@@ -10,7 +10,7 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 [![R-CMD-check](https://github.com/larmarange/broom.helpers/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/larmarange/broom.helpers/actions/workflows/R-CMD-check.yaml)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/broom.helpers)](https://CRAN.R-project.org/package=broom.helpers)
-[![DOI](https://zenodo.org/badge/286680847.svg)](https://zenodo.org/badge/latestdoi/286680847)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4036273.svg)](https://doi.org/10.5281/zenodo.4036273)
 [![Codecov test
 coverage](https://codecov.io/gh/larmarange/broom.helpers/graph/badge.svg)](https://app.codecov.io/gh/larmarange/broom.helpers)
 <!-- badges: end -->
