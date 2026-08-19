@@ -16,21 +16,7 @@ cf. https://github.com/larmarange/broom.helpers/actions/workflows/R-CMD-check.ya
 We checked 24 reverse dependencies (22 from CRAN + 2 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
 
  * We saw 0 new problems
- * We failed to check 9 packages
-
-Issues with CRAN packages are summarised below.
-
-### Failed to check
-
-* crane     (NA)
-* GGally    (NA)
-* ggstats   (NA)
-* gtsummary (NA)
-* logitr    (NA)
-* mmrm      (NA)
-* simstudy  (NA)
-* smdi      (NA)
-* sumExtras (NA)
+ * We failed to check 0 packages
 
 ## recheck GitHub action
 

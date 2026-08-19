@@ -59,19 +59,10 @@
 
 # Revdeps
 
-## Failed to check (11)
+## Failed to check (2)
 
-|package   |version |error |warning |note |
-|:---------|:-------|:-----|:-------|:----|
-|bregr     |?       |      |        |     |
-|crane     |0.3.2   |1     |        |     |
-|GGally    |2.4.0   |1     |        |     |
-|ggstats   |0.13.0  |1     |        |     |
-|gtsummary |2.5.1   |1     |        |     |
-|logitr    |1.2.0   |2     |        |     |
-|mmrm      |0.3.18  |1     |        |     |
-|parglm    |?       |      |        |     |
-|simstudy  |0.9.2   |1     |        |     |
-|smdi      |0.3.2   |2     |        |     |
-|sumExtras |1.0.0   |1     |        |     |
+|package |version |error |warning |note |
+|:-------|:-------|:-----|:-------|:----|
+|bregr   |?       |      |        |     |
+|parglm  |?       |      |        |     |
 
