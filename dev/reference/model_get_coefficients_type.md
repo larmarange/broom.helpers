@@ -73,6 +73,9 @@ model_get_coefficients_type(model)
 
 # S3 method for class 'svy_vglm'
 model_get_coefficients_type(model)
+
+# S3 method for class 'brmsfit'
+model_get_coefficients_type(model)
 ```
 
 ## Arguments
