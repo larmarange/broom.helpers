@@ -24,6 +24,7 @@
 \alias{model_get_coefficients_type.vglm}
 \alias{model_get_coefficients_type.vgam}
 \alias{model_get_coefficients_type.svy_vglm}
+\alias{model_get_coefficients_type.brmsfit}
 \title{Get coefficient type}
 \usage{
 model_get_coefficients_type(model)
@@ -71,6 +72,8 @@ model_get_coefficients_type(model)
 \method{model_get_coefficients_type}{vgam}(model)
 
 \method{model_get_coefficients_type}{svy_vglm}(model)
+
+\method{model_get_coefficients_type}{brmsfit}(model)
 }
 \arguments{
 \item{model}{(a model object, e.g. \code{glm})\cr

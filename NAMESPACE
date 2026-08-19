@@ -8,6 +8,7 @@ S3method(model_get_assign,svy_vglm)
 S3method(model_get_assign,vglm)
 S3method(model_get_coefficients_type,LORgee)
 S3method(model_get_coefficients_type,biglm)
+S3method(model_get_coefficients_type,brmsfit)
 S3method(model_get_coefficients_type,cch)
 S3method(model_get_coefficients_type,clm)
 S3method(model_get_coefficients_type,clmm)
@@ -206,23 +207,29 @@ export(variables_to_contrast)
 export(variables_to_predict)
 export(vars)
 export(where)
-importFrom(cli,cli_alert_danger)
-importFrom(cli,cli_alert_info)
-importFrom(cli,cli_code)
-importFrom(cli,cli_ul)
-importFrom(dplyr,add_row)
-importFrom(dplyr,all_of)
-importFrom(dplyr,any_of)
-importFrom(dplyr,contains)
-importFrom(dplyr,ends_with)
-importFrom(dplyr,everything)
-importFrom(dplyr,last_col)
-importFrom(dplyr,matches)
-importFrom(dplyr,num_range)
-importFrom(dplyr,one_of)
-importFrom(dplyr,starts_with)
-importFrom(dplyr,vars)
-importFrom(dplyr,where)
+importFrom(cli,
+  cli_alert_danger,
+  cli_alert_info,
+  cli_code,
+  cli_ul
+)
+importFrom(dplyr,
+  add_row,
+  all_of,
+  any_of,
+  contains,
+  ends_with,
+  everything,
+  last_col,
+  matches,
+  num_range,
+  one_of,
+  starts_with,
+  vars,
+  where
+)
 importFrom(purrr,"%||%")
-importFrom(rlang,.data)
-importFrom(rlang,.env)
+importFrom(rlang,
+  .data,
+  .env
+)
