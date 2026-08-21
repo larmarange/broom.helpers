@@ -1,0 +1,77 @@
+# Listing of Supported Models
+
+Listing of Supported Models
+
+## Usage
+
+``` r
+supported_models
+```
+
+## Format
+
+A data frame with one row per supported model
+
+- model:
+
+  Model
+
+- notes:
+
+  Notes
+
+## Supported models
+
+|  |  |
+|----|----|
+| model | notes |
+| [`betareg::betareg()`](https://rdrr.io/pkg/betareg/man/betareg.html) | Use [`tidy_parameters()`](https://larmarange.github.io/broom.helpers/reference/tidy_parameters.md) as `tidy_fun` with `component` argument to control with coefficients to return. [`broom::tidy()`](https://generics.r-lib.org/reference/tidy.html) does not support the `exponentiate` argument for betareg models, use [`tidy_parameters()`](https://larmarange.github.io/broom.helpers/reference/tidy_parameters.md) instead. |
+| [`biglm::bigglm()`](https://rdrr.io/pkg/biglm/man/bigglm.html) |  |
+| [`brms::brm()`](https://paulbuerkner.com/brms/reference/brm.html) | `broom.mixed` package required |
+| [`cmprsk::crr()`](https://rdrr.io/pkg/cmprsk/man/crr.html) | Limited support. It is recommended to use [`tidycmprsk::crr()`](https://mskcc-epi-bio.github.io/tidycmprsk/reference/crr.html) instead. |
+| [`fixest::feglm()`](https://lrberge.github.io/fixest/reference/feglm.html) | May fail with R \<= 4.0. |
+| [`fixest::femlm()`](https://lrberge.github.io/fixest/reference/femlm.html) | May fail with R \<= 4.0. |
+| [`fixest::feNmlm()`](https://lrberge.github.io/fixest/reference/feNmlm.html) | May fail with R \<= 4.0. |
+| [`fixest::feols()`](https://lrberge.github.io/fixest/reference/feols.html) | May fail with R \<= 4.0. |
+| [`gam::gam()`](https://rdrr.io/pkg/gam/man/gam.html) |  |
+| [`geepack::geeglm()`](https://rdrr.io/pkg/geepack/man/geeglm.html) |  |
+| [`glmmTMB::glmmTMB()`](https://rdrr.io/pkg/glmmTMB/man/glmmTMB.html) | `broom.mixed` package required |
+| [`glmtoolbox::glmgee()`](https://rdrr.io/pkg/glmtoolbox/man/glmgee.html) |  |
+| [`lavaan::lavaan()`](https://rdrr.io/pkg/lavaan/man/lavaan.html) | Limited support for categorical variables |
+| [`lfe::felm()`](https://rdrr.io/pkg/lfe/man/felm.html) |  |
+| [`lme4::glmer.nb()`](https://rdrr.io/pkg/lme4/man/glmer.nb.html) | `broom.mixed` package required |
+| [`lme4::glmer()`](https://rdrr.io/pkg/lme4/man/glmer.html) | `broom.mixed` package required |
+| [`lme4::lmer()`](https://rdrr.io/pkg/lme4/man/lmer.html) | `broom.mixed` package required |
+| [`logitr::logitr()`](https://jhelvy.github.io/logitr/reference/logitr.html) | Requires logitr \>= 0.8.0 |
+| [`MASS::glm.nb()`](https://rdrr.io/pkg/MASS/man/glm.nb.html) |  |
+| [`MASS::polr()`](https://rdrr.io/pkg/MASS/man/polr.html) |  |
+| [`mgcv::gam()`](https://rdrr.io/pkg/mgcv/man/gam.html) | Use default tidier [`broom::tidy()`](https://generics.r-lib.org/reference/tidy.html) for smooth terms only, or [`gtsummary::tidy_gam()`](https://www.danieldsjoberg.com/gtsummary/reference/custom_tidiers.html) to include parametric terms |
+| [`mice::mira`](https://amices.org/mice/reference/mira.html) | Limited support. If `mod` is a `mira` object, use `tidy_fun = function(x, ...) {mice::pool(x) &#124;> mice::tidy(...)}` |
+| [`mmrm::mmrm()`](https://openpharma.github.io/mmrm/latest-tag/reference/mmrm.html) |  |
+| [`multgee::nomLORgee()`](https://rdrr.io/pkg/multgee/man/nomLORgee.html) | Use [`tidy_multgee()`](https://larmarange.github.io/broom.helpers/reference/tidy_multgee.md) as `tidy_fun`. |
+| [`multgee::ordLORgee()`](https://rdrr.io/pkg/multgee/man/ordLORgee.html) | Use [`tidy_multgee()`](https://larmarange.github.io/broom.helpers/reference/tidy_multgee.md) as `tidy_fun`. |
+| [`nnet::multinom()`](https://rdrr.io/pkg/nnet/man/multinom.html) |  |
+| [`ordinal::clm()`](https://rdrr.io/pkg/ordinal/man/clm.html) | Limited support for models with nominal predictors. |
+| [`ordinal::clmm()`](https://rdrr.io/pkg/ordinal/man/clmm.html) | Limited support for models with nominal predictors. |
+| [`parsnip::model_fit`](https://parsnip.tidymodels.org/reference/model_fit.html) | Supported as long as the type of model and the engine is supported. |
+| [`plm::plm()`](https://rdrr.io/pkg/plm/man/plm.html) |  |
+| [`pscl::hurdle()`](https://rdrr.io/pkg/pscl/man/hurdle.html) | Use [`tidy_zeroinfl()`](https://larmarange.github.io/broom.helpers/reference/tidy_zeroinfl.md) as `tidy_fun`. |
+| [`pscl::zeroinfl()`](https://rdrr.io/pkg/pscl/man/zeroinfl.html) | Use [`tidy_zeroinfl()`](https://larmarange.github.io/broom.helpers/reference/tidy_zeroinfl.md) as `tidy_fun`. |
+| [`quantreg::rq()`](https://rdrr.io/pkg/quantreg/man/rq.html) | If several quantiles are estimated, use [`tidy_with_broom_or_parameters()`](https://larmarange.github.io/broom.helpers/reference/tidy_with_broom_or_parameters.md) tidier, the default tidier used by [`tidy_plus_plus()`](https://larmarange.github.io/broom.helpers/reference/tidy_plus_plus.md). |
+| [`rstanarm::stan_glm()`](https://mc-stan.org/rstanarm/reference/stan_glm.html) | `broom.mixed` package required |
+| [`stats::aov()`](https://rdrr.io/r/stats/aov.html) | Reference rows are not relevant for such models. |
+| [`stats::glm()`](https://rdrr.io/r/stats/glm.html) |  |
+| [`stats::lm()`](https://rdrr.io/r/stats/lm.html) |  |
+| [`stats::nls()`](https://rdrr.io/r/stats/nls.html) | Limited support |
+| [`survey::svycoxph()`](https://rdrr.io/pkg/survey/man/svycoxph.html) |  |
+| [`survey::svyglm()`](https://rdrr.io/pkg/survey/man/svyglm.html) |  |
+| [`survey::svyolr()`](https://rdrr.io/pkg/survey/man/svyolr.html) |  |
+| [`survival::cch()`](https://rdrr.io/pkg/survival/man/cch.html) | Experimental support. |
+| [`survival::clogit()`](https://rdrr.io/pkg/survival/man/clogit.html) |  |
+| [`survival::coxph()`](https://rdrr.io/pkg/survival/man/coxph.html) |  |
+| [`survival::coxphms.object`](https://rdrr.io/pkg/survival/man/coxphms.object.html) | Experimental support. It is recommended to use [`tidy_coxphms()`](https://larmarange.github.io/broom.helpers/reference/tidy_coxphms.md) as `tidy_fun`. |
+| [`survival::survreg()`](https://rdrr.io/pkg/survival/man/survreg.html) |  |
+| [`svyVGAM::svy_vglm()`](https://rdrr.io/pkg/svyVGAM/man/svy_vglm.html) | Experimental support. It is recommended to use [`tidy_svy_vglm()`](https://larmarange.github.io/broom.helpers/reference/tidy_svy_vglm.md) as `tidy_fun`. |
+| [`tidycmprsk::crr()`](https://mskcc-epi-bio.github.io/tidycmprsk/reference/crr.html) |  |
+| [`VGAM::vgam()`](https://rdrr.io/pkg/VGAM/man/vgam.html) | Experimental support. It is recommended to use [`tidy_vgam()`](https://larmarange.github.io/broom.helpers/reference/tidy_vgam.md) as `tidy_fun`. |
+| [`VGAM::vglm()`](https://rdrr.io/pkg/VGAM/man/vglm.html) | Experimental support. It is recommended to use [`tidy_vgam()`](https://larmarange.github.io/broom.helpers/reference/tidy_vgam.md) as `tidy_fun`. |
