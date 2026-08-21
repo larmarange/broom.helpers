@@ -2,6 +2,10 @@
 
 ## broom.helpers (development version)
 
+## broom.helpers 1.23.0
+
+CRAN release: 2026-08-20
+
 **New supported models**
 
 - support for

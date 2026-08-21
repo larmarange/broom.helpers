@@ -84,16 +84,16 @@ dependencies of all installed packages.
 #> # A tibble: 66 × 6
 #>    pkg_search    pkg_search_version dependency_type pkg       version compare
 #>    <chr>         <chr>              <chr>           <chr>     <chr>   <chr>  
-#>  1 broom.helpers 1.22.0.9000        Imports         broom     0.8     >=     
-#>  2 broom.helpers 1.22.0.9000        Imports         cards     NA      NA     
-#>  3 broom.helpers 1.22.0.9000        Imports         cli       NA      NA     
-#>  4 broom.helpers 1.22.0.9000        Imports         dplyr     1.1.0   >=     
-#>  5 broom.helpers 1.22.0.9000        Imports         labelled  NA      NA     
-#>  6 broom.helpers 1.22.0.9000        Imports         lifecycle NA      NA     
-#>  7 broom.helpers 1.22.0.9000        Imports         purrr     NA      NA     
-#>  8 broom.helpers 1.22.0.9000        Imports         rlang     1.0.1   >=     
-#>  9 broom.helpers 1.22.0.9000        Imports         stats     NA      NA     
-#> 10 broom.helpers 1.22.0.9000        Imports         stringr   NA      NA     
+#>  1 broom.helpers 1.23.0.9000        Imports         broom     0.8     >=     
+#>  2 broom.helpers 1.23.0.9000        Imports         cards     NA      NA     
+#>  3 broom.helpers 1.23.0.9000        Imports         cli       NA      NA     
+#>  4 broom.helpers 1.23.0.9000        Imports         dplyr     1.1.0   >=     
+#>  5 broom.helpers 1.23.0.9000        Imports         labelled  NA      NA     
+#>  6 broom.helpers 1.23.0.9000        Imports         lifecycle NA      NA     
+#>  7 broom.helpers 1.23.0.9000        Imports         purrr     NA      NA     
+#>  8 broom.helpers 1.23.0.9000        Imports         rlang     1.0.1   >=     
+#>  9 broom.helpers 1.23.0.9000        Imports         stats     NA      NA     
+#> 10 broom.helpers 1.23.0.9000        Imports         stringr   NA      NA     
 #> # ℹ 56 more rows
 .get_min_version_required("brms")
 #> Suggests 
